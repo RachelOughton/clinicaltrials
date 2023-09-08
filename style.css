@@ -5,3 +5,11 @@
   margin-bottom: 10px; 
   text-indent: 0px;
 }
+
+.theorem {
+  padding: 1em 1em 1em 1em;
+  background: #fbec5d 5px center/3em no-repeat;
+    border-radius: 15px;    
+  margin-bottom: 10px; 
+  text-indent: 0px;
+}
