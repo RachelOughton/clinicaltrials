@@ -1,0 +1,58 @@
+--- 
+title: "Clinical Trials 4H"
+author: "Rachel Oughton"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: 
+  bookdown::gitbook:
+    highlight: tango
+    css: "style.css"
+documentclass: book
+bibliography: [ct4h.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "These notes mirror what we'll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)."
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo=FALSE, message = FALSE, warning = FALSE)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r, echo=F}
+library(medicaldata)
+library(ggplot2)
+library(gridExtra)
+library(knitr)
+library(magick)
+```
+
+# Course Information {-}
+
+Welcome to Clinical Trials 4H!
+
+This is a 10 credit module, open to fourth year students. 
+An overview of what we'll cover is
+
+An introduction to clinical trials - part 1
+Designing and planning a randomised clinical trial - parts 2 and 3
+
+## Lectures {-}
+
+
+## Computer classes {-}
+
+
+## Assessment {-}
+
+This module is assessed through two equally weighted pieces of coursework. I'll give you more details nearer the time, but one will be assigned around half way through the term, the second towards the end of term.
+
+## Books {-}
+
+The main reference for the first half of the course is @matthews2006introduction. There are a couple of copies in the Bill Bryson Library.
+
+Some other books we will make use of are @hulley2013designing, @hayes2017cluster
+
+
+

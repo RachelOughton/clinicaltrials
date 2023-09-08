@@ -1,0 +1,58 @@
+# Introduction to Clinical Trials {#rct-intro}
+
+A clinical trial is an experiment, usually performed on human subjects, to test the effect of some sort of treatment or intervention. 
+
+In a clinical trial, we will have two groups [is this true!?]:
+
+  1. The **treatment group** or **intervention group**: this group of people will be subject to the new treatment.
+  2. The **control group**: this group of people will be subject to the status quo - the 'standard' or most widely used treatment path for their cohort.
+  
+These groups are usually, though not always, of the same size. Which group each patient is assigned to is usually decided by randomization, which is something we will go on to explore in later lectures.
+
+The goal of the RCT is to estimate the **treatment effect**, with some specified level of confidence. This short description raises lots of statistical issues, which will take up the next few weeks! 
+
+Before we get into the theory, we'll think about some of the background to clinical trials, and introduce some key ideas.
+
+## A brief history of RCTs
+
+Put (very!) simply, the goal of a clinical trial is to determine what works to make people better. Although clinical trials as we know them now have only been around since the Second World War, similar sorts of experiments can be seen from much longer ago.
+
+[some examples from agriculture and from further back? Check Spiegelhalter]
+
+::: {.example}
+**Scurvy (James Lind, 1757)**
+Scurvy was a serious disease, particularly affecting seamen on long voyages. Symptoms were unpleasant (mouth sores, skin lesions etc.) and it could often be fatal. Lind was the ship's surgeon  on board the HMS Salisbury, and had several patients with scurvy. Many remedies were proposed and in popular use at the time (with only anecdotal evidence, if any, to support them), and in 1757 Lind decided to test six of them, on two patients each:
+
+  * cider
+  * dilute sulfuric acid
+  * vinegar
+  * sea water
+  * citrus (oranges and lemons)
+  * purgative mixture (a paste of garlic, mustard seed, horseradish, balsam of Peru, and gum myrrh)
+  
+Lind chose twelve seamen with similar severity of symptoms, and subjected them to their assigned treatment for 6 days. They were kept in the same quarters, and fed the same diet apart from their treatment. Unsurprisingly (to us!) "The most sudden and visible good effects were perceived from the use of oranges and lemons,"
+
+
+```{r, echo=FALSE, fig.width=10, fig.height=4}
+data(scurvy)
+
+ggplot(data=scurvy, aes(x=skin_sores_d6, fill = treatment)) + geom_bar()+
+  xlab("Severity of skin sores (day 6)")
+```
+
+:::
+
+## The structure of a clinical trial
+
+Research questions, relating real world problem / question to trial, causal analysis. Stuff from @hulley2013designing.
+Causal inference, relating study to the real world etc. Brief overview of less statistical issues.
+
+
+
+### The primary outcome {#primout}
+
+In an RCT, there are usually many measurements performed on patients, and possibly at various different points throughout the trial. However, for the sake of the analysis, we usually determine one to be the **primary outcome variable**. The research questions should be phrased in terms of this variable, and the goal of our design should be to be able to answer questions about this variable. 
+
+[examples of primary outcome variables]
+
+

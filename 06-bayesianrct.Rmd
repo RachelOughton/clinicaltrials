@@ -1,0 +1,3 @@
+# RCTs - a Bayesian approach
+
+## Bayesian hierarchical models

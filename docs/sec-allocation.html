@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Allocation | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Allocation | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Allocation | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2023-09-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bias.html"/>
+<link rel="next" href="the-intervention.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#a-brief-history-of-rcts"><i class="fa fa-check"></i><b>1.1</b> A brief history of RCTs</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.2.1</b> The primary outcome</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Designing and planning a randomised controlled trial (RCT)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#ss-norm"><i class="fa fa-check"></i><b>2.1</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.1.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.1.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.1.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.1.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.1.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.1.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.1.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#ss-bin"><i class="fa fa-check"></i><b>2.2</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-delta-method"><i class="fa fa-check"></i><b>2.2.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#a-sample-size-formula"><i class="fa fa-check"></i><b>2.2.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sample-size-by-simulation"><i class="fa fa-check"></i><b>2.3</b> Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rct-plan.html"><a href="rct-plan.html#the-simulation-method"><i class="fa fa-check"></i><b>2.3.1</b> The simulation method</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bias.html"><a href="bias.html"><i class="fa fa-check"></i><b>3</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="bias.html"><a href="bias.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1</b> Where does bias come from?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="bias.html"><a href="bias.html#selection-bias"><i class="fa fa-check"></i><b>3.1.1</b> Selection bias</a></li>
+<li class="chapter" data-level="3.1.2" data-path="bias.html"><a href="bias.html#allocation-bias"><i class="fa fa-check"></i><b>3.1.2</b> Allocation bias</a></li>
+<li class="chapter" data-level="3.1.3" data-path="bias.html"><a href="bias.html#assessment-bias"><i class="fa fa-check"></i><b>3.1.3</b> Assessment bias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sec-allocation.html"><a href="sec-allocation.html"><i class="fa fa-check"></i><b>4</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#allocation-methods"><i class="fa fa-check"></i><b>4.1</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>4.1.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="sec-allocation.html"><a href="sec-allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>4.1.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="4.1.3" data-path="sec-allocation.html"><a href="sec-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>4.1.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="sec-allocation.html"><a href="sec-allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>4.2</b> Problems with allocation</a></li>
+<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="sec-allocation.html"><a href="sec-allocation.html#restricted-randomization"><i class="fa fa-check"></i><b>4.3.1</b> Restricted randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>4.4</b> Minimization</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm-from-pocock1975sequential"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm from <span class="citation">Pocock and Simon (1975)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="sec-allocation.html"><a href="sec-allocation.html#some-simulated-examples"><i class="fa fa-check"></i><b>4.5</b> Some simulated examples</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>4.5.1</b> Simple random allocation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-intervention.html"><a href="the-intervention.html"><i class="fa fa-check"></i><b>5</b> The intervention</a></li>
+<li class="chapter" data-level="6" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>6</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="rct-analysis.html"><a href="rct-analysis.html#continuous-outcome-variable"><i class="fa fa-check"></i><b>6.1</b> Continuous outcome variable</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-simplest-case---comparing-means"><i class="fa fa-check"></i><b>6.1.1</b> The simplest case - comparing means</a></li>
+<li class="chapter" data-level="6.1.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-to-use-baseline-measurements"><i class="fa fa-check"></i><b>6.1.2</b> How to use baseline measurements</a></li>
+<li class="chapter" data-level="6.1.3" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova"><i class="fa fa-check"></i><b>6.1.3</b> ANCOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="rct-analysis.html"><a href="rct-analysis.html#binary-data"><i class="fa fa-check"></i><b>6.2</b> Binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-for-binary-data"><i class="fa fa-check"></i><b>6.2.1</b> Confidence intervals for binary data</a></li>
+<li class="chapter" data-level="6.2.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-measurements"><i class="fa fa-check"></i><b>6.2.2</b> Using baseline measurements</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#categorical-data"><i class="fa fa-check"></i><b>6.3</b> Categorical data?</a></li>
+<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#survival-data"><i class="fa fa-check"></i><b>6.4</b> Survival data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>7</b> Cluster randomised controlled trials</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>7.1</b> What is a cluster RCT?</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>7.1.1</b> Intracluster correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>7.2</b> Designing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>7.2.1</b> Sample size</a></li>
+<li class="chapter" data-level="7.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>7.2.2</b> Allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.3</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.3.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="7.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.3.2</b> At the individual level</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>8</b> RCTs - a Bayesian approach</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html#bayesian-hierarchical-models"><i class="fa fa-check"></i><b>8.1</b> Bayesian hierarchical models</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sec-allocation" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Allocation<a href="sec-allocation.html#sec-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. <span class="citation">Altman and Bland (<a href="#ref-altman1999treatment" role="doc-biblioref">1999b</a>)</span> gives an overview of why this has led to bias, and gives some examples. <span class="citation">Altman and Bland (<a href="#ref-altman1999randomise" role="doc-biblioref">1999a</a>)</span> and <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span></p>
+<p>Sometimes analyses compare groups in serial, so that <span class="math inline">\(N_A\)</span> patients one year (say) form the control group, and <span class="math inline">\(n_B\)</span> patients in a subsequent year, who are given treatment <span class="math inline">\(B\)</span>, form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment <span class="math inline">\(B\)</span>.</p>
+<p>Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.</p>
+<p>There are two important aspects to the allocation being <em>random</em> that we will draw attention to.</p>
+<ol style="list-style-type: decimal">
+<li>Every patient should have the same probability of being assigned to each treatment group.</li>
+<li>The treatment group for a particular patient should not be able to be predicted.</li>
+</ol>
+<p>Point 1 is important because, as we have already mentioned, the statistical theory we use to plan and analyse the trial is based on the groups being random samples from the population.</p>
+<p>Point 2 is important to avoid biases that come through the assignment of a particular patient being known either in advance or after the fact. There are some approaches that ‘pass’ the first point, but fail at the second. As well as strict alternation (<span class="math inline">\(ABABAB\ldots\)</span>), some such methods use patient characteristics such as date of birth or first letter of surname, which is not related to the trial outcome, but which enables allocations to be predicted.</p>
+<p>We will now explore some commonly used methods of allocation. We will usually assume two equally sized groups, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but it is simple to generalize to three or more groups, or to unequal allocation.</p>
+<div id="allocation-methods" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Allocation methods<a href="sec-allocation.html#allocation-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="simple-random-allocation" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Simple random allocation<a href="sec-allocation.html#simple-random-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Perhaps intuitively the most simple method would be a ‘toin coss’, where each participant has a probability 0.5 of being placed in each group. As participants arrive, assignment <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> is generated (with equal probability). Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn’t require a ‘master’ randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained.</p>
+<p>This method is, effectively, used in many large trials, but for small trials it can be statistically problematic. The main reason for this is chance imbalance of group sizes.</p>
+<p>Suppose we have two groups, <span class="math inline">\(A\)</span> of size <span class="math inline">\(N_A\)</span> and <span class="math inline">\(B\)</span> of size <span class="math inline">\(N_B\)</span>, with <span class="math inline">\(N_A + N_B = 2n\)</span>. Patients are allocated independently with equal probability, which means</p>
+<p><span class="math display">\[N_A \sim \operatorname{Bi}\left(2n,\frac{1}{2}\right), \]</span>
+and similar for <span class="math inline">\(N_B\)</span>. If the two groups are of unequal size, the larger will be of some size <span class="math inline">\(N_{max}\)</span> between <span class="math inline">\(n\)</span> and <span class="math inline">\(2n\)</span>, such that for <span class="math inline">\(r = n+1,\,\ldots,\,2n,\)</span></p>
+<p><span class="math display">\[\begin{align*}
+P\left(N_{max} = r\right) &amp; = P\left(N_A = r\right) + P\left(N_B = r\right) \\
+&amp; = 2{2n \choose r}\left(\frac{1}{2}\right)^{2n}.
+\end{align*}\]</span>
+The probability that <span class="math inline">\(N_A = N_B = n\)</span> is</p>
+<p><span class="math display">\[ P\left(N_A = N_B = n\right)= {2n \choose n}\left(\frac{1}{2}\right)^{2n}. \]</span>
+These probabilities are shown in Figure <a href="sec-allocation.html#fig:srs-alloc">4.1</a>. We can see that this method leads to very unequal groups relatively easily; with <span class="math inline">\(n=15\)</span>, <span class="math inline">\(P\left(N_{max}\geq 20\right) = 0.099\)</span>, so there is around a one in ten chance that one group will be double or more the size of the other.</p>
+<div class="figure"><span style="display:block;" id="fig:srs-alloc"></span>
+<img src="CT4H_notes_files/figure-html/srs-alloc-1.png" alt="The probability distribution of largest group size for n=15." width="672" />
+<p class="caption">
+Figure 4.1: The probability distribution of largest group size for n=15.
+</p>
+</div>
+<p>As we have seen when thinking about sample sizes in Section <a href="rct-plan.html#sec-power">2.1.4</a>, this will reduce the power <span class="math inline">\(\Psi\)</span> of the trial, since it depends on <span class="math inline">\(\lambda\left(N_A,\,N_B\right) = \sqrt{\frac{1}{N_A} + \frac{1}{N_B}}\)</span>.</p>
+<p>For larger trials, this imbalance will be less pronounced, for example Figure <a href="sec-allocation.html#fig:srsalloc200">4.2</a> shows the same for <span class="math inline">\(n=200\)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:srsalloc200"></span>
+<img src="CT4H_notes_files/figure-html/srsalloc200-1.png" alt="The probability distribution of largest group size for n=200." width="672" />
+<p class="caption">
+Figure 4.2: The probability distribution of largest group size for n=200.
+</p>
+</div>
+<p>In this case the <span class="math inline">\(P\left(N_{max} \geq 220\right)=0.051\)</span>, so the chance of highly imbalanced groups is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.</p>
+</div>
+<div id="random-permuted-blocks" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Random permuted blocks<a href="sec-allocation.html#random-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One commonly used method to randomly allocate participants while avoiding too much imbalance is to use <em>random permuted blocks</em> (RPBs). If the blocks have size <span class="math inline">\(m\)</span>, and there are two groups then there are <span class="math display">\[{2m\choose m},\]</span> but this method can be adapted to more than two groups and to unequal group size.</p>
+<p>If we have two groups, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then there are six <em>blocks</em> of length containing two <span class="math inline">\(A\)</span>s and two <span class="math inline">\(Bs\)</span></p>
+<p>\begin{align*}
+1.&amp; AABB\
+2.&amp; ABAB\
+3.&amp; ABBA\
+4.&amp; BAAB\
+5.&amp; BABA\
+6.&amp; BBAA.
+\end{align}</p>
+<p>We can also randomly generate a sequence of numbers from <span class="math inline">\(\left\lbrace 1, 2, 3, 4, 5, 6 \right\rbrace\)</span>, where each number has equal probability. This sequence will correspond to a sequence in <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> with four times the length. In this method, each patient is equally likely to receive <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but there will never be a difference of more than two between the size of the two groups.</p>
+<p>For example, suppose the sequence begins <span class="math inline">\(2,1,3,6,\ldots\)</span>. Replacing each number by its block, we have <span class="math inline">\(ABAB\;AABB\;ABBA\;BBAA\;\ldots\)</span>.</p>
+<p>One serious disadvantage of this method is that if the block size is fixed, and the doctors involved in the trial know which participants have received which treatments (which is unavoidable in cases such as surgery), then the allocation for some patients can be perfectly predicted. This is true for the fourth in every block, and for the third and fourth if the first two were the same. This means that selection bias may be a problem in more than 25% of participants, which is deemed unacceptable; indeed, it fails our second point about randomization.</p>
+<div id="rpbs-with-random-block-length" class="section level4 hasAnchor" number="4.1.2.1">
+<h4><span class="header-section-number">4.1.2.1</span> RPBs with random block length<a href="sec-allocation.html#rpbs-with-random-block-length" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The issue above can be circumvented by not only randomly choosing from a selection of blocks, but also randomly choosing the length of the block. For example, there are
+<span class="math display">\[ {6 \choose 3} = 20\]</span>
+possible blocks of size 6. Instead of always selecting from the six possible 4-blocks, a sampling scheme can be as follows.</p>
+<ol style="list-style-type: decimal">
+<li>A random number <span class="math inline">\(X\)</span> is drawn from <span class="math inline">\(\left\lbrace 4,6\right\rbrace\)</span> to select the block length.</li>
+<li>A second random number <span class="math inline">\(Y\)</span> is drawn from 1 to 6 (if the block length is four) or 1 to 20 (if the block length is 6).</li>
+<li>The block corresponding to <span class="math inline">\(Y\)</span> is chosen and participants assigned accordingly.</li>
+<li>If more participants are needed, go back to step 1.</li>
+</ol>
+<p>As well as ensuring that patients are equally likely to receive treatments <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, and that <span class="math inline">\(N_A\)</span> and <span class="math inline">\(N_B\)</span> can never differ by more than three, this method hugely reduces the possibility of enabling selection bias. The assignment of a patient can only be perfectly predicted if the difference is three, and this happens only for two of the twenty blocks of length six.</p>
+</div>
+</div>
+<div id="biased-coin-designs-and-urn-schemes" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Biased coin designs and urn schemes<a href="sec-allocation.html#biased-coin-designs-and-urn-schemes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse’s station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available.</p>
+<p>Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.</p>
+<div id="biased-coin-designs" class="section level4 hasAnchor" number="4.1.3.1">
+<h4><span class="header-section-number">4.1.3.1</span> Biased coin designs<a href="sec-allocation.html#biased-coin-designs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Suppose we are using a biased coin design for a trial to compare two treatments, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. At the point where some number <span class="math inline">\(n\)</span> (not the total trial cohort) have been allocated, we can use the notation <span class="math inline">\(N_A\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(A\)</span>, and <span class="math inline">\(N_B\left(B\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(B\)</span>. Using these, we can denote the <em>imbalance</em> in treatment numbers as</p>
+<p><span class="math display">\[ D\left(n\right) = N_A\left(n\right) - N_B\left(n\right) = 2N_A\left(n\right) - n.\]</span>
+We use the imbalance <span class="math inline">\(D\left(n\right)\)</span> to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:</p>
+<ul>
+<li>If <span class="math inline">\(D\left(n\right)=0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(A\)</span> with probability <span class="math inline">\(\frac{1}{2}\)</span>.</li>
+<li>If <span class="math inline">\(D\left(n\right)&lt;0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(A\)</span> with probability <span class="math inline">\(P\)</span>.</li>
+<li>If <span class="math inline">\(D\left(n\right)&gt;0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(A\)</span> with probability <span class="math inline">\(1-P\)</span>.</li>
+</ul>
+<p>where <span class="math inline">\(P\in\left(\frac{1}{2}, 1\right)\)</span>.</p>
+<blockquote>
+<p>Question: What would happen if <span class="math inline">\(P=\frac{1}{2}\)</span> or <span class="math inline">\(P=1\)</span>?</p>
+</blockquote>
+<p>If, at some point in the trial, we have <span class="math inline">\(\lvert D\left(n\right)\rvert = j\)</span>, for some <span class="math inline">\(j&gt;0\)</span>, then we must have either</p>
+<p><span class="math display">\[ \lvert D\left(n+1\right)\rvert = j+1 \]</span>
+or
+<span class="math display">\[ \lvert D\left(n+1\right)\rvert = j-1 .\]</span>
+Because of the way we have set up the scheme,</p>
+<p><span class="math display">\[ p\big(\lvert D\left(n+1\right)\rvert = j+1\big) = 1-P \]</span>
+and</p>
+<p><span class="math display">\[ p\big(\lvert D\left(n+1\right)\rvert = j-1\big) = P.\]</span>
+If <span class="math inline">\(\lvert D\left(n\right) \rvert = 0\)</span>, ie. the scheme is in exact balance after <span class="math inline">\(n\)</span> allocations, then we must have <span class="math inline">\(\lvert D\left(n\right)\rvert = 1\)</span>.</p>
+<p>The absolute imbalances therefore form a simple random walk on the non-negative integers, with transition probabilities</p>
+<p><span class="math display">\[
+  \begin{aligned}
+P\big(\lvert D\left(n+1\right) \rvert = 1 \mid \lvert D\left(n\right)=0\big)&amp; = 1\\
+P\big(\lvert D\left(n+1\right) \rvert = j+ 1 \mid \lvert D\left(n\right)=j\big)&amp; = 1 - P\\
+P\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right)=j\big)&amp; = P
+\end{aligned}
+\]</span>
+Figure <a href="sec-allocation.html#fig:biasedcoin-p2thirds">4.3</a> shows four realisations of this random walk with <span class="math inline">\(P=0.667\)</span>. We see that sometimes the imbalance gets quite high, but in general it isn’t too far from 0.</p>
+<div class="figure"><span style="display:block;" id="fig:biasedcoin-p2thirds"></span>
+<img src="CT4H_notes_files/figure-html/biasedcoin-p2thirds-1.png" alt="Absolute imbalance for a biased-coin scheme  with $P=0.667$." width="672" />
+<p class="caption">
+Figure 4.3: Absolute imbalance for a biased-coin scheme with <span class="math inline">\(P=0.667\)</span>.
+</p>
+</div>
+<p>Figure <a href="sec-allocation.html#fig:p-nearlyhalf">4.4</a> shows four realisations of the random walk with <span class="math inline">\(P=0.55\)</span>. Here, the imbalance is able to get very high (note the change in <span class="math inline">\(y\)</span>-axis); for example in the first plot, if we stopped the trial at <span class="math inline">\(n=50\)</span> we would have 34 participants in one arm and only 16 in the other.</p>
+<div class="figure"><span style="display:block;" id="fig:p-nearlyhalf"></span>
+<img src="CT4H_notes_files/figure-html/p-nearlyhalf-1.png" alt="Absolute imbalance for a biased-coin scheme  with $P = 0.55$." width="672" />
+<p class="caption">
+Figure 4.4: Absolute imbalance for a biased-coin scheme with <span class="math inline">\(P = 0.55\)</span>.
+</p>
+</div>
+<p>By contrast, with <span class="math inline">\(P=0.9\)</span> as in Figure <a href="sec-allocation.html#fig:p-nearlyone">4.5</a>, there is much less imbalance. However, this brings with it greater predictability. Although allocation is always random, given some degree of imbalance (likely to be known about by those executing the trial), the probability of guessing the next allocation correctly is high (0.9). This invites the biases we have been trying to avoid, albeit in an imperfect form.</p>
+<div class="figure"><span style="display:block;" id="fig:p-nearlyone"></span>
+<img src="CT4H_notes_files/figure-html/p-nearlyone-1.png" alt="Absolute imbalance for a biased-coin scheme  with $P = 0.9$." width="672" />
+<p class="caption">
+Figure 4.5: Absolute imbalance for a biased-coin scheme with <span class="math inline">\(P = 0.9\)</span>.
+</p>
+</div>
+<p>A big disadvantage to the biased coin scheme is that the same probability is used regardless of the size of the imbalance (assuming it isn’t zero). In the next section, we introduce a method where the probability of allocating the next patient to the underrepresented treatment gets larger as the imbalance grows.</p>
+</div>
+<div id="urn-models" class="section level4 hasAnchor" number="4.1.3.2">
+<h4><span class="header-section-number">4.1.3.2</span> Urn models<a href="sec-allocation.html#urn-models" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><em>Urn models</em> for treatment allocation use urns in the way that you might well remember from school probability (or indeed often we had drawers of socks). In this setting, the urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant <strong>did not</strong> receive.</p>
+<p>To allocate the next participant, a ball is drawn from the urn. If the allocations at this point are balanced, then the participant has equal probability of being allocated to each treatment. If there is imbalance, there will be more balls labelled by the underrepresented treatment, and so the participant is more likely to be allocated to that one. The greater the imbalance, the higher the probability of reducing it.</p>
+<p>The process described so far is a <span class="math inline">\(UD\left(1,1\right)\)</span>; there is one ball for each treatment to start with, and one ball is added to the urn after each allocation. To be more general, we can assume a <span class="math inline">\(UD\left(r,s\right)\)</span> scheme. Now, there are <span class="math inline">\(r\)</span> balls for each treatment in the urn to begin with, and <span class="math inline">\(s\)</span> are added after each allocation.</p>
+<p>Near the start of the allocation, the probabilities are likely to change a lot to address imbalance, but once a ‘reasonable number’ of allocations have been made it is likely to settle into simple random sampling (or very close).</p>
+<p>Once again, we can find the transition probabilities by considering the absolute imbalance <span class="math inline">\(\lvert D\left(n\right) \rvert\)</span>.</p>
+<p>Suppose that after participant <span class="math inline">\(n\)</span>, <span class="math inline">\(N_A\left(n\right)\)</span> participants have been allocated to treatment <span class="math inline">\(A\)</span>, and <span class="math inline">\(N_B\left(n\right) = n - N_A\left(n\right)\)</span> to treatment <span class="math inline">\(B\)</span>. The imbalance is therefore</p>
+<p><span class="math display">\[D\left(n\right) = N_A\left(n\right) - N_B\left(n\right) = 2N_A\left(n\right) - n.\]</span>
+After <span class="math inline">\(n\)</span> allocations there will be <span class="math inline">\(2r + ns\)</span> balls in the urn: <span class="math inline">\(r\)</span> for each treatment at the start, and <span class="math inline">\(s\)</span> added after each allocation. Of these, <span class="math inline">\(r + N_B\left(n\right)s\)</span> will be labelled by treatment <span class="math inline">\(A\)</span> and <span class="math inline">\(r + N_A\left(n\right)s\)</span> by treatment <span class="math inline">\(B\)</span>.</p>
+<p>To think about the probabilities for the absolute imbalance <span class="math inline">\(\lvert D\left(n\right)\rvert\)</span>, we have to be careful now about which direction it is in. If the trial currently (after allocation <span class="math inline">\(n\)</span>) has an imbalance of participants in favour of treatment <span class="math inline">\(A\)</span>, then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment <span class="math inline">\(B\)</span>, which is</p>
+<p><span class="math display">\[
+  \begin{aligned}
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j&gt;0\right) &amp; = \frac{r + N_A\left(n\right)s}{2r + ns} \\
+&amp; = \frac{r + \frac{1}{2}\left(n + D\left(n\right)\right)s}{2r + ns} \\
+&amp; = \frac{1}{2} + \frac{D\left(n\right)s}{2\left(2r + ns\right)} \\
+&amp; = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
+\end{aligned}
+\]</span>
+Similarly, if there is currently an excess of patients allocated to treatment <span class="math inline">\(B\)</span>, then the imbalance will be reduced if the next allocation is to treatment <span class="math inline">\(A\)</span>, and so the conditional probability is</p>
+<p><span class="math display">\[
+  \begin{aligned}
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j&lt;0\right) &amp; = \frac{r + N_B\left(n\right)s}{2r + ns} \\
+&amp; = \frac{r + \frac{1}{2}\left(n - D\left(n\right)\right)s}{2r + ns} \\
+&amp; = \frac{1}{2} - \frac{D\left(n\right)s}{2\left(2r + ns\right)}\\
+&amp; = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
+\end{aligned}
+\]</span></p>
+<p>Because the process is symmetrical, an imbalance of a given magnitude (say <span class="math inline">\(\lvert D\left(n\right)\rvert=j\)</span>) is equally likely to be in either direction. That is</p>
+<p><span class="math display">\[p\big(D\left(n\right) &lt; 0 \mid \lvert D\left(n\right)\rvert =j \big)= p\big(D\left(n\right) &gt; 0 \mid \lvert D\left(n\right)\rvert =j \big) = \frac{1}{2}.\]</span></p>
+<p>Therefore we can use the law of total probability (or partition theorem) to find that</p>
+<p><span class="math display">\[
+  p\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right) \rvert = j \big) = \frac{1}{2}  + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
+\]</span>
+Since the two probabilities are equal this is trivial. Since the only other possibility is that the imbalance is increased by one, we also have</p>
+<p><span class="math display">\[p\big(\lvert D\left(n+1\right) \rvert = j+1 \mid \lvert D\left(n\right) \rvert = j \big) = \frac{1}{2}  - \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}. \]</span>
+As with the biased coin design, we also have the possibility that the imbalance after <span class="math inline">\(n\)</span> allocations is zero, in which case the absolute imbalance after the next allocation will definitely be one. This gives us another simple random walk, with</p>
+<p><span class="math display">\[
+  \begin{aligned}
+P\big(\lvert D\left(n+1\right) \rvert = 1 \mid \lvert D\left(n\right)=0\big)&amp; = 1\\
+P\big(\lvert D\left(n+1\right) \rvert = j+ 1 \mid \lvert D\left(n\right)=j\big)&amp; = \frac{1}{2}  - \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}\\
+P\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right)=j\big)&amp; = \frac{1}{2}  + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}
+\end{aligned}
+\]</span></p>
+<div class="figure"><span style="display:block;" id="fig:urn11"></span>
+<img src="CT4H_notes_files/figure-html/urn11-1.png" alt="Four realisations of absolute imbalance for r=1, s=1, N=50." width="672" />
+<p class="caption">
+Figure 4.6: Four realisations of absolute imbalance for r=1, s=1, N=50.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:urn18"></span>
+<img src="CT4H_notes_files/figure-html/urn18-1.png" alt="Four realisations of absolute imbalance for r=1, s=8, N=50." width="672" />
+<p class="caption">
+Figure 4.7: Four realisations of absolute imbalance for r=1, s=8, N=50.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:urn81"></span>
+<img src="CT4H_notes_files/figure-html/urn81-1.png" alt="Four realisations of absolute imbalance for r=8, s=1, N=50." width="672" />
+<p class="caption">
+Figure 4.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
+</p>
+</div>
+<p>We see that imbalance is reduced, particularly for small <span class="math inline">\(n\)</span>. A small <span class="math inline">\(r\)</span> and large <span class="math inline">\(s\)</span> enhance this, since the large number (<span class="math inline">\(s\)</span>) of balls added to the urn with each allocation weight the probabilities more heavily, as in Figure <a href="sec-allocation.html#fig:urn18">4.7</a>. By contrast, if <span class="math inline">\(r\)</span> is large and <span class="math inline">\(s\)</span> is small, as in Figure <a href="sec-allocation.html#fig:urn81">4.8</a>, the probabilities stay closer to <span class="math inline">\(\left(\frac{1}{2}, \frac{1}{2}\right)\)</span> and so more imbalance occurs early on.</p>
+</div>
+</div>
+</div>
+<div id="problems-with-allocation" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Problems with allocation<a href="sec-allocation.html#problems-with-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="sec-allocation.html#fig:licorice-participants">4.9</a> shows an example.</p>
+<div class="figure"><span style="display:block;" id="fig:licorice-participants"></span>
+<img src="images/licorice.jpg" alt="Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized" width="60%" />
+<p class="caption">
+Figure 4.9: Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized" role="doc-biblioref">2013</a>)</span>
+</p>
+</div>
+<p>The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Control (n=100)</th>
+<th align="left">Intervention (n=100)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gender (female, %)</td>
+<td align="left">50</td>
+<td align="left">50</td>
+</tr>
+<tr class="even">
+<td align="left">Age, y (mean +/- SD)</td>
+<td align="left">50 +/- 10</td>
+<td align="left">50 +/- 10</td>
+</tr>
+</tbody>
+</table>
+<p>This appears to be a perfectly balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Male
+</th>
+<th style="text-align:left;">
+Female
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Control
+</td>
+<td style="text-align:left;">
+59.4 (7.37)
+</td>
+<td style="text-align:left;">
+44.02 (5.49)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Intervention
+</td>
+<td style="text-align:left;">
+42.22 (7.2)
+</td>
+<td style="text-align:left;">
+57.84 (6.7)
+</td>
+</tr>
+</tbody>
+</table>
+<p>If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.</p>
+<p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
+<blockquote>
+<p>Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation—exclusion of confounding factors—has failed. … If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.</p>
+</blockquote>
+</div>
+<div id="stratified-sampling" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Stratified sampling<a href="sec-allocation.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-10" class="example"><strong>Example 4.1  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
+<p>For sex, we use the levels ‘male’ and ‘female’, and for age we split the range into 50-65, 66-80 and 81 or over. We therefore have six strata, and we use an allocation strategy independently in each stratum. For example, below we have used randomly permuted blocks of length four.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Male
+</th>
+<th style="text-align:left;">
+Female
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+50-65
+</td>
+<td style="text-align:left;">
+ABAB BBAA …
+</td>
+<td style="text-align:left;">
+ABBA BBAA …
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+66-80
+</td>
+<td style="text-align:left;">
+BAAB AABB …
+</td>
+<td style="text-align:left;">
+BABA BAAB …
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+81 and over
+</td>
+<td style="text-align:left;">
+ABAB ABBA …
+</td>
+<td style="text-align:left;">
+ABBA BAAB …
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each time a new participant arrives, we follow the randomization pattern for their stratum. We could use another allocation scheme within each stratum, for example an urn model or a biased coin. It is important that we use one that aims to conserve balance, or else the benefits of stratification are lost.</p>
+</div>
+<p>A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are <span class="math inline">\(3^4=81\)</span> strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic).</p>
+<div id="restricted-randomization" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Restricted randomization<a href="sec-allocation.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>READ UP ON THIS!</p>
+</div>
+</div>
+<div id="minimization" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Minimization<a href="sec-allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="citation">Altman and Bland (<a href="#ref-altman1999randomise" role="doc-biblioref">1999a</a>)</span> tees up minimization.
+<span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span> a good source.</p>
+<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization" role="doc-biblioref">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use" role="doc-biblioref">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. The people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre" role="doc-biblioref">1994</a>)</span> chose age, sex, operating surgeon, number of coronary arteries affected and left ventricular function.</p>
+<p>When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
+<ul>
+<li>Whether continuous variables have to be binned</li>
+<li>Whether there is any randomness</li>
+</ul>
+<p>It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.</p>
+<div id="minimization-algorithm-from-pocock1975sequential" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Minimization algorithm from <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span><a href="sec-allocation.html#minimization-algorithm-from-pocock1975sequential" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm. Suppose there are <span class="math inline">\(N\)</span> treatment arms and <span class="math inline">\(M\)</span> prognostic factors over which we require balance, and that these <span class="math inline">\(M\)</span> factors have <span class="math inline">\(n_1,\ldots,n_M\)</span> levels.</p>
+<p>We describe the minimization allocation procedure by considering an arbitrary point in the trial, at which a patient has just materialised with levels <span class="math inline">\(r_1,\ldots,r_M\)</span> of the <span class="math inline">\(M\)</span> prognostic factors. At this point we use <span class="math inline">\(x_{ijk}\)</span> to denote the number of patients with level <span class="math inline">\(j\)</span> of factor <span class="math inline">\(i\)</span> who have been assigned treatment <span class="math inline">\(k\)</span>, for <span class="math inline">\(j=1,2,\ldots,n_i;\,i=1,2,\ldots,M\)</span> and <span class="math inline">\(k=1,\ldots,N\)</span>.</p>
+<p>For each treatment <span class="math inline">\(k\)</span>, we consider the new <span class="math inline">\(\left\lbrace x_{ijl}\right\rbrace,\)</span> which we write as <span class="math inline">\(\left\lbrace x_{ijl}^k\right\rbrace\)</span>, that we would have if we assigned this patient to treatment arm <span class="math inline">\(k\)</span>. That is</p>
+<p><span class="math display">\[
+\begin{aligned}
+x_{ijl}^k &amp; = x_{ijl}   \text{ for }j\neq{r_i}\text{ or }l\neq{k}\\
+x_{i{r_i}k}^k &amp; = x_{i{r_i}k}+1
+\end{aligned}
+\]</span>
+Now imagine we have some function</p>
+<p><span class="math display">\[\operatorname{D}\left(\left\lbrace z_l\right\rbrace_{l=1}^N\right)\]</span> that measures the ``amount of variation’’ in any set of non-negative integers <span class="math inline">\((\left\lbrace z_l\right\rbrace_{l=1}^N\)</span>, so that</p>
+<p><span class="math display">\[d_{ik} = \operatorname{D}\left(\left\lbrace x_{i{r_i}l}^k\right\rbrace_{l=1}^N\right) \]</span>
+is the `lack of balance’ of treatment assignments for patients with level <span class="math inline">\(r_i\)</span> of factor <span class="math inline">\(i\)</span>. Next we need some function</p>
+<p><span class="math display">\[\operatorname{G}:\mathbb{R}^M \rightarrow \mathbb{R}\]</span>
+so that</p>
+<p><span class="math display">\[G_k = \operatorname{G}\left(d_{1k},\ldots,d_{Mk}\right) \]</span>
+represents the ``total amount of imbalance’’ in treatments numbers over all factor levels, if treatment <span class="math inline">\(k\)</span> were assigned to this new patient.</p>
+</div>
+</div>
+<div id="some-simulated-examples" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Some simulated examples<a href="sec-allocation.html#some-simulated-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To conclude this section we will demonstrate methods using simulated datasets with the same underlying probability distributions. We consider four factors:</p>
+<ul>
+<li>Age: 44 and under, 45 - 54, 55-64, 65-74 and 75 and over (5 levels)</li>
+<li>Sex: M or F</li>
+<li>Smoking: current, past or never</li>
+<li>Hypertension: Yes or no</li>
+</ul>
+<p>These will be generated using the following distributions:</p>
+<ul>
+<li>Age: <span class="math inline">\(N\left(60, 10^2\right)\)</span> (then binned as above)</li>
+<li>Sex: <span class="math inline">\(p\left(M\right)= p\left(F\right) = 0.5\)</span>
+<ul>
+<li>Smoking: <span class="math inline">\(p\left(\text{Current}\right)=0.4,\,p\left(\text{Past}\right) = p\left(\text{Never}\right) = 0.3\)</span></li>
+<li>Hypertension:<br />
+<span class="math inline">\(p(Y) = \begin{cases} 0.25 &amp; \text{Age under 45} \\ 0.55 &amp; \text{Age 45 to 74}\\ 0.75 &amp; \text{Age 75 and over} \end{cases}\)</span></li>
+</ul>
+To demonstrate our allocation methods, we simulate one dataset from the distribution described, containing 100 participants. This dataset is shown in the Table below, and in Figures <a href="sec-allocation.html#fig:part-gen1a">4.10</a> and <a href="sec-allocation.html#fig:part-gen1b">4.11</a>.</li>
+</ul>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["ID"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sex"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["fct"],"align":["left"]},{"label":["Smoking"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hypertension"],"name":[5],"type":["fct"],"align":["left"]}],"data":[{"1":"1","2":"Male","3":"65 to 74","4":"Never","5":"Yes"},{"1":"2","2":"Male","3":"75 and over","4":"Current","5":"No"},{"1":"3","2":"Male","3":"75 and over","4":"Past","5":"Yes"},{"1":"4","2":"Female","3":"55 to 64","4":"Current","5":"Yes"},{"1":"5","2":"Male","3":"55 to 64","4":"Never","5":"Yes"},{"1":"6","2":"Male","3":"75 and over","4":"Never","5":"No"},{"1":"7","2":"Male","3":"45 to 54","4":"Never","5":"Yes"},{"1":"8","2":"Male","3":"55 to 64","4":"Past","5":"No"},{"1":"9","2":"Female","3":"75 and over","4":"Current","5":"No"},{"1":"10","2":"Female","3":"55 to 64","4":"Past","5":"Yes"},{"1":"11","2":"Male","3":"45 to 54","4":"Never","5":"No"},{"1":"12","2":"Female","3":"44 and under","4":"Never","5":"No"},{"1":"13","2":"Female","3":"55 to 64","4":"Current","5":"Yes"},{"1":"14","2":"Female","3":"45 to 54","4":"Current","5":"Yes"},{"1":"15","2":"Male","3":"65 to 74","4":"Never","5":"Yes"},{"1":"16","2":"Male","3":"65 to 74","4":"Current","5":"No"},{"1":"17","2":"Female","3":"55 to 64","4":"Current","5":"No"},{"1":"18","2":"Female","3":"65 to 74","4":"Current","5":"Yes"},{"1":"19","2":"Male","3":"55 to 64","4":"Past","5":"Yes"},{"1":"20","2":"Male","3":"55 to 64","4":"Current","5":"Yes"},{"1":"21","2":"Female","3":"65 to 74","4":"Past","5":"No"},{"1":"22","2":"Female","3":"45 to 54","4":"Past","5":"Yes"},{"1":"23","2":"Male","3":"55 to 64","4":"Past","5":"Yes"},{"1":"24","2":"Female","3":"55 to 64","4":"Current","5":"No"},{"1":"25","2":"Female","3":"65 to 74","4":"Current","5":"No"},{"1":"26","2":"Male","3":"45 to 54","4":"Never","5":"Yes"},{"1":"27","2":"Male","3":"55 to 64","4":"Current","5":"Yes"},{"1":"28","2":"Female","3":"45 to 54","4":"Never","5":"No"},{"1":"29","2":"Female","3":"55 to 64","4":"Past","5":"Yes"},{"1":"30","2":"Female","3":"45 to 54","4":"Never","5":"No"},{"1":"31","2":"Female","3":"55 to 64","4":"Current","5":"Yes"},{"1":"32","2":"Male","3":"44 and under","4":"Never","5":"Yes"},{"1":"33","2":"Female","3":"65 to 74","4":"Past","5":"No"},{"1":"34","2":"Female","3":"55 to 64","4":"Never","5":"No"},{"1":"35","2":"Female","3":"65 to 74","4":"Current","5":"Yes"},{"1":"36","2":"Male","3":"65 to 74","4":"Past","5":"Yes"},{"1":"37","2":"Male","3":"55 to 64","4":"Current","5":"No"},{"1":"38","2":"Female","3":"45 to 54","4":"Current","5":"Yes"},{"1":"39","2":"Male","3":"45 to 54","4":"Current","5":"Yes"},{"1":"40","2":"Female","3":"45 to 54","4":"Current","5":"Yes"},{"1":"41","2":"Female","3":"55 to 64","4":"Current","5":"No"},{"1":"42","2":"Female","3":"75 and over","4":"Past","5":"Yes"},{"1":"43","2":"Male","3":"45 to 54","4":"Past","5":"Yes"},{"1":"44","2":"Female","3":"45 to 54","4":"Never","5":"Yes"},{"1":"45","2":"Male","3":"75 and over","4":"Never","5":"Yes"},{"1":"46","2":"Male","3":"45 to 54","4":"Never","5":"Yes"},{"1":"47","2":"Female","3":"55 to 64","4":"Past","5":"Yes"},{"1":"48","2":"Male","3":"65 to 74","4":"Current","5":"Yes"},{"1":"49","2":"Male","3":"65 to 74","4":"Never","5":"No"},{"1":"50","2":"Male","3":"65 to 74","4":"Never","5":"Yes"},{"1":"51","2":"Male","3":"55 to 64","4":"Past","5":"No"},{"1":"52","2":"Male","3":"65 to 74","4":"Never","5":"No"},{"1":"53","2":"Male","3":"55 to 64","4":"Never","5":"No"},{"1":"54","2":"Female","3":"55 to 64","4":"Past","5":"Yes"},{"1":"55","2":"Female","3":"44 and under","4":"Never","5":"No"},{"1":"56","2":"Male","3":"75 and over","4":"Past","5":"No"},{"1":"57","2":"Female","3":"65 to 74","4":"Current","5":"Yes"},{"1":"58","2":"Female","3":"55 to 64","4":"Current","5":"No"},{"1":"59","2":"Male","3":"55 to 64","4":"Current","5":"Yes"},{"1":"60","2":"Male","3":"55 to 64","4":"Current","5":"Yes"},{"1":"61","2":"Male","3":"65 to 74","4":"Current","5":"Yes"},{"1":"62","2":"Male","3":"55 to 64","4":"Current","5":"No"},{"1":"63","2":"Female","3":"55 to 64","4":"Never","5":"Yes"},{"1":"64","2":"Male","3":"45 to 54","4":"Past","5":"Yes"},{"1":"65","2":"Male","3":"65 to 74","4":"Past","5":"Yes"},{"1":"66","2":"Female","3":"75 and over","4":"Current","5":"Yes"},{"1":"67","2":"Male","3":"75 and over","4":"Current","5":"Yes"},{"1":"68","2":"Female","3":"55 to 64","4":"Past","5":"Yes"},{"1":"69","2":"Female","3":"75 and over","4":"Current","5":"No"},{"1":"70","2":"Female","3":"75 and over","4":"Current","5":"Yes"},{"1":"71","2":"Female","3":"45 to 54","4":"Current","5":"No"},{"1":"72","2":"Male","3":"55 to 64","4":"Never","5":"Yes"},{"1":"73","2":"Female","3":"75 and over","4":"Current","5":"Yes"},{"1":"74","2":"Female","3":"55 to 64","4":"Past","5":"No"},{"1":"75","2":"Female","3":"44 and under","4":"Current","5":"No"},{"1":"76","2":"Male","3":"65 to 74","4":"Never","5":"Yes"},{"1":"77","2":"Male","3":"55 to 64","4":"Current","5":"No"},{"1":"78","2":"Female","3":"65 to 74","4":"Current","5":"No"},{"1":"79","2":"Female","3":"55 to 64","4":"Past","5":"No"},{"1":"80","2":"Female","3":"45 to 54","4":"Never","5":"Yes"},{"1":"81","2":"Male","3":"44 and under","4":"Never","5":"No"},{"1":"82","2":"Female","3":"65 to 74","4":"Past","5":"No"},{"1":"83","2":"Female","3":"65 to 74","4":"Past","5":"Yes"},{"1":"84","2":"Female","3":"65 to 74","4":"Past","5":"Yes"},{"1":"85","2":"Male","3":"55 to 64","4":"Current","5":"Yes"},{"1":"86","2":"Male","3":"65 to 74","4":"Current","5":"No"},{"1":"87","2":"Male","3":"55 to 64","4":"Current","5":"Yes"},{"1":"88","2":"Female","3":"44 and under","4":"Past","5":"No"},{"1":"89","2":"Male","3":"75 and over","4":"Never","5":"No"},{"1":"90","2":"Male","3":"55 to 64","4":"Never","5":"Yes"},{"1":"91","2":"Female","3":"65 to 74","4":"Never","5":"Yes"},{"1":"92","2":"Female","3":"55 to 64","4":"Past","5":"No"},{"1":"93","2":"Male","3":"55 to 64","4":"Never","5":"Yes"},{"1":"94","2":"Female","3":"55 to 64","4":"Current","5":"No"},{"1":"95","2":"Male","3":"55 to 64","4":"Current","5":"No"},{"1":"96","2":"Female","3":"55 to 64","4":"Past","5":"Yes"},{"1":"97","2":"Female","3":"65 to 74","4":"Current","5":"No"},{"1":"98","2":"Female","3":"65 to 74","4":"Never","5":"Yes"},{"1":"99","2":"Male","3":"55 to 64","4":"Current","5":"No"},{"1":"100","2":"Female","3":"55 to 64","4":"Current","5":"No"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="figure"><span style="display:block;" id="fig:part-gen1a"></span>
+<img src="CT4H_notes_files/figure-html/part-gen1a-1.png" alt="A simulated dataset of 100 participants, using the distributions described above, split by hypertension, age and sex." width="672" />
+<p class="caption">
+Figure 4.10: A simulated dataset of 100 participants, using the distributions described above, split by hypertension, age and sex.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:part-gen1b"></span>
+<img src="CT4H_notes_files/figure-html/part-gen1b-1.png" alt="A simulated dataset of 100 participants, using the distributions described above, split by smoking history, age and sex." width="672" />
+<p class="caption">
+Figure 4.11: A simulated dataset of 100 participants, using the distributions described above, split by smoking history, age and sex.
+</p>
+</div>
+<div id="simple-random-allocation-1" class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Simple random allocation<a href="sec-allocation.html#simple-random-allocation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. In terms of our allocation,</p>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-altman1999randomise" class="csl-entry">
+Altman, Douglas G, and J Martin Bland. 1999a. <span>“How to Randomise.”</span> <em>Bmj</em> 319 (7211): 703–4.
+</div>
+<div id="ref-altman1999treatment" class="csl-entry">
+———. 1999b. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
+</div>
+<div id="ref-freedman1976use" class="csl-entry">
+Freedman, LS, and Susan J White. 1976. <span>“On the Use of Pocock and Simon’s Method for Balancing Treatment Numbers over Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 691–94.
+</div>
+<div id="ref-kallis1994pre" class="csl-entry">
+Kallis, P, JA Tooze, S Talbot, D Cowans, DH Bevan, and T Treasure. 1994. <span>“Pre-Operative Aspirin Decreases Platelet Aggregation and Increases Post-Operative Blood Loss–a Prospective, Randomised, Placebo Controlled, Double-Blind Clinical Trial in 100 Patients with Chronic Stable Angina.”</span> <em>European Journal of Cardio-Thoracic Surgery: Official Journal of the European Association for Cardio-Thoracic Surgery</em> 8 (8): 404–9.
+</div>
+<div id="ref-pocock1975sequential" class="csl-entry">
+Pocock, Stuart J, and Richard Simon. 1975. <span>“Sequential Treatment Assignment with Balancing for Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 103–15.
+</div>
+<div id="ref-ruetzler2013randomized" class="csl-entry">
+Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskron, Andrea Lassnigg, Jing You, and Daniel I Sessler. 2013. <span>“A Randomized, Double-Blind Comparison of Licorice Versus Sugar-Water Gargle for Prevention of Postoperative Sore Throat and Postextubation Coughing.”</span> <em>Anesthesia &amp; Analgesia</em> 117 (3): 614–21.
+</div>
+<div id="ref-taves1974minimization" class="csl-entry">
+Taves, Donald R. 1974. <span>“Minimization: A New Method of Assigning Patients to Treatment and Control Groups.”</span> <em>Clinical Pharmacology &amp; Therapeutics</em> 15 (5): 443–53.
+</div>
+<div id="ref-treasure1998minimisation" class="csl-entry">
+Treasure, Tom, and Kenneth D MacRae. 1998. <span>“Minimisation: The Platinum Standard for Trials?: Randomisation Doesn’t Guarantee Similarity of Groups; Minimisation Does.”</span> <em>Bmj</em>. British Medical Journal Publishing Group.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bias.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-intervention.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

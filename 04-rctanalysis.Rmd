@@ -1,0 +1,26 @@
+# Analyzing RCT data {#rct-analysis}
+
+We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what affect the treatment or intervention has had.
+
+We'll first focus on the scenario where the trial outcome is measured on a continuous scale, and then we'll go on to look at other types of data.
+
+## Continuous outcome variable
+
+### The simplest case - comparing means
+
+### How to use baseline measurements
+
+### ANCOVA
+
+## Binary data
+
+### Confidence intervals for binary data
+
+### Using baseline measurements
+
+## Categorical data?
+
+Could mention Fisher's exact test, as demonstrated in the indo_rct data in the medicaldata package.
+
+## Survival data
+
