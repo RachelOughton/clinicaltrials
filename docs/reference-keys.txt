@@ -32,6 +32,7 @@ exm:unlabeled-div-10
 fig:part-gen1a
 fig:part-gen1b
 exm:unlabeled-div-11
+exm:unlabeled-div-12
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -73,6 +74,7 @@ simple-random-allocation-1
 the-intervention
 rct-analysis
 confidence-intervals-and-p-values
+what-do-we-do-with-this-outcome
 bonferroni-correction
 using-baseline-values
 analysis-of-covariance

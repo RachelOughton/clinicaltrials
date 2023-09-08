@@ -7,12 +7,107 @@ We'll first focus on the scenario where the trial outcome is measured on a conti
 ::: {.example} 
 To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
 
+The baseline and outcome blood pressure measurements are shown below, in mmHg. We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. @hommel1986effect say that the patients were 'randomly allocated' to their group.
+
+
+```{r}
+df_hommel = data.frame(
+  patient = c(1:9, 1:7),
+  baseline = c(147, 129, 158, 164, 134, 155, 151, 141, 153, 133, 129, 152, 161, 154, 141, 156),
+  outcome = c(137, 120, 141, 137, 140, 144, 134, 123, 142, 139, 134, 136, 151, 147, 137, 149),
+  arm = c(rep("Captopril", 9), rep("Placebo", 7))
+)
+df_hommel_print = df_hommel
+names(df_hommel_print) = c("Patient (ID)", "Basline (B)", "Outcome at 1 week (X)", "Trial Arm")
+
+knitr::kable(df_hommel_print)
+
+```
+
+
 This is very small dataset, and so in that respect it is quite unusual, but its structure is similar to many other trials.
+
 :::
 
 We will build up from the simplest type of analysis to some more complicated / sophisticated approaches.
 
 ## Confidence intervals and P-values
+
+Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (often referred to as $X$) between the groups.
+
+::: {.example}
+Summary statistics of the outcome for each group are shown below.
+
+```{r}
+df_hommel1 = data.frame(
+  Sam = c(9,7),
+  Mean = c(
+    mean(df_hommel$outcome[df_hommel$arm=="Captopril"]),
+    mean(df_hommel$outcome[df_hommel$arm=="Placebo"])),
+  SD = c(
+    sd(df_hommel$outcome[df_hommel$arm=="Captopril"]),
+    sd(df_hommel$outcome[df_hommel$arm=="Placebo"]))
+)
+df_hommel1$SEmean = df_hommel1$SD / sqrt(df_hommel1$Sam) 
+df_hommel1_print=  round(df_hommel1,2)
+names(df_hommel1_print) = c("Sample Size", "Mean (mmHg)", "SD (mmHg)", "SE of mean (mmHg)")
+
+knitr::kable(df_hommel1_print)
+
+```
+
+We see that the difference in mean outcome (systolic blood pressure) between the two groups is $141.86 - 135.33 = 6.52 \text{mmHg}$. Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for some hypothetical population) there is no reduction, and we have just been 'lucky',
+
+The variances within the two groups are fairly close, so we can use the pooled estimate of standard deviation:
+
+$$
+s_p = \sqrt{\frac{\sum\limits_{i=1}^N\left(n_i-1\right)s_i^2}{\sum\limits_{i-1}^N\left(n_i-1\right)}}.
+$$
+
+In our case 
+
+$$ 
+\begin{aligned}
+s_p&= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
+& = 7.82\text{ mmHg.}
+\end{aligned}
+$$
+This enables us to do an independent two-sample $t$-test, and we can find the $t$ statistic
+
+$$
+\begin{aligned}
+t & = \frac{\bar{X_1} - \bar{X_2}}{s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\\
+& = \frac{6.53}{7.82\sqrt{\frac{1}{9} + \frac{1}{7}}} \\
+& = 1.65.
+\end{aligned}
+$$
+Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a $t$ distribution with 14 degrees of freedom ($n_i-1$ for each group). 
+
+```{r}
+x1 = seq(-4, -1.65, by=0.01)
+px1 = dt(x1, df=14)
+x2 = seq(1.65,4, by=0.01)
+px2 = dt(x2, df=14)
+
+ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
+         stat_function(fun=dt, args=list(df=14))+
+  geom_ribbon(data=data.frame(x=x1, y=px1), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + 
+  geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) +xlab("Test statistic (t)") + ylab("Density") +
+  geom_vline(xintercept = 1.65, lty=2)
+```
+
+The dashed line is at $t=1.65$, and the red shaded areas show anywhere 'at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by 
+```{r echo=T}
+2*(1-pt(1.65, df=14))
+```
+This is the value we know as 'the P value'. We see that in this case our results are not statistically significant, under this model.
+:::
+
+#### What do we do with this outcome?
+
+The outcome of this Captopril study is in some ways the worst case scenario. The difference in means is large enough to be compelling, but our dataset is too small for it to be statistically significant, and so we can't confidently conclude that Captopril has any effect on blood pressure. However, we also can't say that there is no effect. This is exactly the sort of scenario we hoped to avoid when planning our study.
+
+One way to reframe the question is to consider the range of treatment effects that are compatible with our result - see p75.
 
 ### Bonferroni correction
 
