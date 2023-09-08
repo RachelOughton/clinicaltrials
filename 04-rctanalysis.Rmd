@@ -1,12 +1,33 @@
 # Analyzing RCT data {#rct-analysis}
 
-We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what affect the treatment or intervention has had.
+We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had.
 
 We'll first focus on the scenario where the trial outcome is measured on a continuous scale, and then we'll go on to look at other types of data.
+
+::: {.example} 
+To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
+
+This is very small dataset, and so in that respect it is quite unusual, but its structure is similar to many other trials.
+:::
+
+We will build up from the simplest type of analysis to some more complicated / sophisticated approaches.
+
+## Confidence intervals and P-values
+
+### Bonferroni correction
+
+(and possibly other types of adjustment?)
+
+## Using baseline values
+
+
+## Analysis of covariance
 
 ## Continuous outcome variable
 
 ### The simplest case - comparing means
+
+If our allocation was well-balanced
 
 ### How to use baseline measurements
 

@@ -166,19 +166,25 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="the-intervention.html"><a href="the-intervention.html"><i class="fa fa-check"></i><b>5</b> The intervention</a></li>
 <li class="chapter" data-level="6" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>6</b> Analyzing RCT data</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="rct-analysis.html"><a href="rct-analysis.html#continuous-outcome-variable"><i class="fa fa-check"></i><b>6.1</b> Continuous outcome variable</a>
+<li class="chapter" data-level="6.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-and-p-values"><i class="fa fa-check"></i><b>6.1</b> Confidence intervals and P-values</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-simplest-case---comparing-means"><i class="fa fa-check"></i><b>6.1.1</b> The simplest case - comparing means</a></li>
-<li class="chapter" data-level="6.1.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-to-use-baseline-measurements"><i class="fa fa-check"></i><b>6.1.2</b> How to use baseline measurements</a></li>
-<li class="chapter" data-level="6.1.3" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova"><i class="fa fa-check"></i><b>6.1.3</b> ANCOVA</a></li>
+<li class="chapter" data-level="6.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>6.1.1</b> Bonferroni correction</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="rct-analysis.html"><a href="rct-analysis.html#binary-data"><i class="fa fa-check"></i><b>6.2</b> Binary data</a>
+<li class="chapter" data-level="6.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-values"><i class="fa fa-check"></i><b>6.2</b> Using baseline values</a></li>
+<li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance"><i class="fa fa-check"></i><b>6.3</b> Analysis of covariance</a></li>
+<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#continuous-outcome-variable"><i class="fa fa-check"></i><b>6.4</b> Continuous outcome variable</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-for-binary-data"><i class="fa fa-check"></i><b>6.2.1</b> Confidence intervals for binary data</a></li>
-<li class="chapter" data-level="6.2.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-measurements"><i class="fa fa-check"></i><b>6.2.2</b> Using baseline measurements</a></li>
+<li class="chapter" data-level="6.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-simplest-case---comparing-means"><i class="fa fa-check"></i><b>6.4.1</b> The simplest case - comparing means</a></li>
+<li class="chapter" data-level="6.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-to-use-baseline-measurements"><i class="fa fa-check"></i><b>6.4.2</b> How to use baseline measurements</a></li>
+<li class="chapter" data-level="6.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova"><i class="fa fa-check"></i><b>6.4.3</b> ANCOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#categorical-data"><i class="fa fa-check"></i><b>6.3</b> Categorical data?</a></li>
-<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#survival-data"><i class="fa fa-check"></i><b>6.4</b> Survival data</a></li>
+<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#binary-data"><i class="fa fa-check"></i><b>6.5</b> Binary data</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-for-binary-data"><i class="fa fa-check"></i><b>6.5.1</b> Confidence intervals for binary data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-measurements"><i class="fa fa-check"></i><b>6.5.2</b> Using baseline measurements</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="rct-analysis.html"><a href="rct-analysis.html#categorical-data"><i class="fa fa-check"></i><b>6.6</b> Categorical data?</a></li>
+<li class="chapter" data-level="6.7" data-path="rct-analysis.html"><a href="rct-analysis.html#survival-data"><i class="fa fa-check"></i><b>6.7</b> Survival data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>7</b> Cluster randomised controlled trials</a>
 <ul>
@@ -220,36 +226,64 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="rct-analysis" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">6</span> Analyzing RCT data<a href="rct-analysis.html#rct-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We’re now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what affect the treatment or intervention has had.</p>
+<p>We’re now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had.</p>
 <p>We’ll first focus on the scenario where the trial outcome is measured on a continuous scale, and then we’ll go on to look at other types of data.</p>
-<div id="continuous-outcome-variable" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Continuous outcome variable<a href="rct-analysis.html#continuous-outcome-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="the-simplest-case---comparing-means" class="section level3 hasAnchor" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> The simplest case - comparing means<a href="rct-analysis.html#the-simplest-case---comparing-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="example">
+<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 6.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect" role="doc-biblioref">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction" role="doc-biblioref">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
+<p>This is very small dataset, and so in that respect it is quite unusual, but its structure is similar to many other trials.</p>
 </div>
-<div id="how-to-use-baseline-measurements" class="section level3 hasAnchor" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> How to use baseline measurements<a href="rct-analysis.html#how-to-use-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="ancova" class="section level3 hasAnchor" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> ANCOVA<a href="rct-analysis.html#ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-</div>
-<div id="binary-data" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Binary data<a href="rct-analysis.html#binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="confidence-intervals-for-binary-data" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Confidence intervals for binary data<a href="rct-analysis.html#confidence-intervals-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="using-baseline-measurements" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Using baseline measurements<a href="rct-analysis.html#using-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will build up from the simplest type of analysis to some more complicated / sophisticated approaches.</p>
+<div id="confidence-intervals-and-p-values" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Confidence intervals and P-values<a href="rct-analysis.html#confidence-intervals-and-p-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bonferroni-correction" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Bonferroni correction<a href="rct-analysis.html#bonferroni-correction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>(and possibly other types of adjustment?)</p>
 </div>
 </div>
-<div id="categorical-data" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Categorical data?<a href="rct-analysis.html#categorical-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="using-baseline-values" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Using baseline values<a href="rct-analysis.html#using-baseline-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="analysis-of-covariance" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Analysis of covariance<a href="rct-analysis.html#analysis-of-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="continuous-outcome-variable" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Continuous outcome variable<a href="rct-analysis.html#continuous-outcome-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-simplest-case---comparing-means" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> The simplest case - comparing means<a href="rct-analysis.html#the-simplest-case---comparing-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If our allocation was well-balanced</p>
+</div>
+<div id="how-to-use-baseline-measurements" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> How to use baseline measurements<a href="rct-analysis.html#how-to-use-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="ancova" class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> ANCOVA<a href="rct-analysis.html#ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="binary-data" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Binary data<a href="rct-analysis.html#binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="confidence-intervals-for-binary-data" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Confidence intervals for binary data<a href="rct-analysis.html#confidence-intervals-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="using-baseline-measurements" class="section level3 hasAnchor" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Using baseline measurements<a href="rct-analysis.html#using-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="categorical-data" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Categorical data?<a href="rct-analysis.html#categorical-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Could mention Fisher’s exact test, as demonstrated in the indo_rct data in the medicaldata package.</p>
 </div>
-<div id="survival-data" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Survival data<a href="rct-analysis.html#survival-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="survival-data" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Survival data<a href="rct-analysis.html#survival-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hommel1986effect" class="csl-entry">
+Hommel, EHEBMJ, Hans-Henrik Parving, Elisabeth Mathiesen, Berit Edsberg, M Damkjaer Nielsen, and Jørn Giese. 1986. <span>“Effect of Captopril on Kidney Function in Insulin-Dependent Diabetic Patients with Nephropathy.”</span> <em>Br Med J (Clin Res Ed)</em> 293 (6545): 467–70.
+</div>
+<div id="ref-matthews2006introduction" class="csl-entry">
+Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
 </div>
 </div>
             </section>

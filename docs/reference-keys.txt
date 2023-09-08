@@ -31,6 +31,7 @@ fig:licorice-participants
 exm:unlabeled-div-10
 fig:part-gen1a
 fig:part-gen1b
+exm:unlabeled-div-11
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -71,6 +72,10 @@ some-simulated-examples
 simple-random-allocation-1
 the-intervention
 rct-analysis
+confidence-intervals-and-p-values
+bonferroni-correction
+using-baseline-values
+analysis-of-covariance
 continuous-outcome-variable
 the-simplest-case---comparing-means
 how-to-use-baseline-measurements
