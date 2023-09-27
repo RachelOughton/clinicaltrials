@@ -26,6 +26,8 @@ library(ggplot2)
 library(gridExtra)
 library(knitr)
 library(magick)
+library(htmlTable)
+library(magrittr)
 ```
 
 # Course Information {-}

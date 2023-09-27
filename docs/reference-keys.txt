@@ -29,10 +29,11 @@ fig:urn18
 fig:urn81
 fig:licorice-participants
 exm:unlabeled-div-10
+exm:unlabeled-div-11
 fig:part-gen1a
 fig:part-gen1b
-exm:unlabeled-div-11
 exm:unlabeled-div-12
+exm:unlabeled-div-13
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -68,7 +69,7 @@ problems-with-allocation
 stratified-sampling
 restricted-randomization
 minimization
-minimization-algorithm-from-pocock1975sequential
+minimization-algorithm
 some-simulated-examples
 simple-random-allocation-1
 the-intervention

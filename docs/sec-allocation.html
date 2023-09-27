@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Allocation | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Allocation | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-09-08" />
+<meta name="date" content="2023-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -219,7 +219,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>4.4</b> Minimization</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm-from-pocock1975sequential"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm from <span class="citation">Pocock and Simon (1975)</span></a></li>
+<li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="sec-allocation.html"><a href="sec-allocation.html#some-simulated-examples"><i class="fa fa-check"></i><b>4.5</b> Some simulated examples</a>
 <ul>
@@ -535,7 +535,7 @@ Age, y (mean +/- SD)
 </tbody>
 </table>
 <p>This appears to be a perfectly balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <table>
 <thead>
 <tr>
@@ -647,32 +647,202 @@ ABBA BAAB …
 <h2><span class="header-section-number">4.4</span> Minimization<a href="sec-allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="citation">Altman and Bland (<a href="#ref-altman1999randomise" role="doc-biblioref">1999a</a>)</span> tees up minimization.
 <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span> a good source.</p>
-<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization" role="doc-biblioref">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use" role="doc-biblioref">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. The people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre" role="doc-biblioref">1994</a>)</span> chose age, sex, operating surgeon, number of coronary arteries affected and left ventricular function.</p>
+<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization" role="doc-biblioref">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use" role="doc-biblioref">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
+<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre" role="doc-biblioref">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
 <p>When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
 <ul>
 <li>Whether continuous variables have to be binned</li>
 <li>Whether there is any randomness</li>
 </ul>
 <p>It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.</p>
-<div id="minimization-algorithm-from-pocock1975sequential" class="section level3 hasAnchor" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Minimization algorithm from <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span><a href="sec-allocation.html#minimization-algorithm-from-pocock1975sequential" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm. Suppose there are <span class="math inline">\(N\)</span> treatment arms and <span class="math inline">\(M\)</span> prognostic factors over which we require balance, and that these <span class="math inline">\(M\)</span> factors have <span class="math inline">\(n_1,\ldots,n_M\)</span> levels.</p>
-<p>We describe the minimization allocation procedure by considering an arbitrary point in the trial, at which a patient has just materialised with levels <span class="math inline">\(r_1,\ldots,r_M\)</span> of the <span class="math inline">\(M\)</span> prognostic factors. At this point we use <span class="math inline">\(x_{ijk}\)</span> to denote the number of patients with level <span class="math inline">\(j\)</span> of factor <span class="math inline">\(i\)</span> who have been assigned treatment <span class="math inline">\(k\)</span>, for <span class="math inline">\(j=1,2,\ldots,n_i;\,i=1,2,\ldots,M\)</span> and <span class="math inline">\(k=1,\ldots,N\)</span>.</p>
-<p>For each treatment <span class="math inline">\(k\)</span>, we consider the new <span class="math inline">\(\left\lbrace x_{ijl}\right\rbrace,\)</span> which we write as <span class="math inline">\(\left\lbrace x_{ijl}^k\right\rbrace\)</span>, that we would have if we assigned this patient to treatment arm <span class="math inline">\(k\)</span>. That is</p>
+<div id="minimization-algorithm" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Minimization algorithm<a href="sec-allocation.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
+<p>Suppose there are several prognostic factors over which we require balance, and that these factors have <span class="math inline">\(I, J, K, ...\)</span> levels. In our example above, there would be <span class="math inline">\(I=2,\; J=2,\; K=3,\; L=2\)</span>. Note that this equates to 24 strata.</p>
+<p>At some point in the trial, suppose we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with levels <span class="math inline">\(i,\,j,\,k,\,l\)</span> of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, <span class="math inline">\(n^A_{ijkl}\)</span> have been assigned to treatment arm <span class="math inline">\(A\)</span>, and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>. So we have</p>
+<p><span class="math display">\[ n^A_{ijkl} + n^B_{ijkl} = n_{ijkl} .\]</span></p>
+<p>If we were to use random permuted blocks within each stratum, then we would be assured that</p>
+<p><span class="math display">\[\lvert n^A_{ijkl} - n^B_{ijkl} \rvert \leq{\frac{1}{2}b},\]</span>
+where <span class="math inline">\(b\)</span> is the block length. However, there are two issues with this:</p>
+<ul>
+<li>There may be very few patients in some strata, in which case RPBs will fail to provide adequate balance.</li>
+<li>It is unlikely that we actually need this level of balance.</li>
+</ul>
+<p>The first point is a pragmatic one - the method usually guaranteed to achieve good balance is likely to fail, at least for some strata. The second is more theoretical. In general, we require that groups be balanced according to each individual prognostic factor, but not to interactions. For example, it is often believed that younger patients would have generally better outcomes, but that other factors do not systematically affect this difference.</p>
+<p>Therefore, it is enough to make sure that the following are all small:</p>
 <p><span class="math display">\[
 \begin{aligned}
-x_{ijl}^k &amp; = x_{ijl}   \text{ for }j\neq{r_i}\text{ or }l\neq{k}\\
-x_{i{r_i}k}^k &amp; = x_{i{r_i}k}+1
+\lvert n^A_{i+++} - n^B_{i+++} \rvert&amp;\text{ for each }i=1,\ldots,I\\
+\lvert n^A_{+j++} - n^B_{+j++} \rvert&amp;\text{ for each }j=1,\ldots,J\\
+\ldots&amp;
 \end{aligned}
 \]</span>
-Now imagine we have some function</p>
-<p><span class="math display">\[\operatorname{D}\left(\left\lbrace z_l\right\rbrace_{l=1}^N\right)\]</span> that measures the ``amount of variation’’ in any set of non-negative integers <span class="math inline">\((\left\lbrace z_l\right\rbrace_{l=1}^N\)</span>, so that</p>
-<p><span class="math display">\[d_{ik} = \operatorname{D}\left(\left\lbrace x_{i{r_i}l}^k\right\rbrace_{l=1}^N\right) \]</span>
-is the `lack of balance’ of treatment assignments for patients with level <span class="math inline">\(r_i\)</span> of factor <span class="math inline">\(i\)</span>. Next we need some function</p>
-<p><span class="math display">\[\operatorname{G}:\mathbb{R}^M \rightarrow \mathbb{R}\]</span>
-so that</p>
-<p><span class="math display">\[G_k = \operatorname{G}\left(d_{1k},\ldots,d_{Mk}\right) \]</span>
-represents the ``total amount of imbalance’’ in treatments numbers over all factor levels, if treatment <span class="math inline">\(k\)</span> were assigned to this new patient.</p>
+where <span class="math inline">\(+\)</span> represents summation over the other factors, so that for exammple</p>
+<p><span class="math display">\[n^A_{++k+} = \sum\limits_{i,j,l}{n^A_{ijkl}}\]</span>
+is the total number of patients with level <span class="math inline">\(k\)</span> of that factor assigned to treatment arm <span class="math inline">\(A\)</span>.</p>
+<p>Therefore, instead of having <span class="math inline">\(IJKL\)</span> constraints constraints, as we would with using randomly permuted blocks within each stratum, we have <span class="math inline">\(I+J+K+L\)</span> constraints, one for each level of each factor. In our example this is 9 constraints rather than 24.</p>
+<p>In order to implement minimisation, we follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Allocate the first patient by simple randomisation.</li>
+<li>Suppose that at some point in the trial we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with prognostic factors <span class="math inline">\(i,\,j,\,k,\,l\)</span>. Of these <span class="math inline">\(n^A_{ijkl}\)</span> are allocated to treatment arm <span class="math inline">\(A\)</span> and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>.</li>
+<li>A new patient enters the trial. They have prognostic factors at levels <span class="math inline">\(w,\,x,\,y,\,z\)</span>.</li>
+<li>We form the sum
+<span class="math display">\[\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).\]</span></li>
+<li>If the sum from step 4 is negative (that is, allocation to arm <span class="math inline">\(B\)</span> as dominated up to now) then we allocate the new patient to arm <span class="math inline">\(A\)</span> with probability <span class="math inline">\(P\)</span>, with <span class="math inline">\(P&gt;0.5\)</span>. If the sum is positive, they are allocated to arm <span class="math inline">\(B\)</span> with probability <span class="math inline">\(P\)</span>. If the sum is zero, they are allocated to arm <span class="math inline">\(A\)</span> with probability .</li>
+</ol>
+<p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 4.2  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical" role="doc-biblioref">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control" role="doc-biblioref">1983</a>)</span>).
+In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
+<p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table @ref(tab:minim_eg).</p>
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<th style="border-top: 2px solid grey;">
+</th>
+<th colspan="2" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center; margin: 0; padding: 0; vertical-align: middle;">
+Example after 15 allocations
+</th>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey;">
+</th>
+<th style="margin: 0; padding: 0; font-weight: 900; vertical-align: middle; border-bottom: 1px solid grey; text-align: center;">
+Mustine (A)
+</th>
+<th style="margin: 0; padding: 0; font-weight: 900; vertical-align: middle; border-bottom: 1px solid grey; text-align: center;">
+Talc (B)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
+Age
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; text-align: left;">
+  1.≤50
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+3
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+4
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; text-align: left;">
+  2. &gt;50
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+4
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+4
+</td>
+</tr>
+<tr>
+<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
+Stage
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; text-align: left;">
+  1. I or II
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+1
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+2
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; text-align: left;">
+  2. III or IV
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+6
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+6
+</td>
+</tr>
+<tr>
+<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
+Time interval
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; text-align: left;">
+  1. ≤30 months
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+4
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+2
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; text-align: left;">
+  2. &gt;30 months
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+4
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+5
+</td>
+</tr>
+<tr>
+<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
+Menopausal Status
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; text-align: left;">
+  1. Pre
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+4
+</td>
+<td style="margin: 0; padding: 0; text-align: center;">
+3
+</td>
+</tr>
+<tr>
+<td style="margin: 0; padding: 0; border-bottom: 2px solid grey; text-align: left;">
+  2. Post
+</td>
+<td style="margin: 0; padding: 0; border-bottom: 2px solid grey; text-align: center;">
+5
+</td>
+<td style="margin: 0; padding: 0; border-bottom: 2px solid grey; text-align: center;">
+3
+</td>
+</tr>
+</tbody>
+<tr>
+<td colspan="3" style="text-align: left;">
+Allocations of first 15 patients, divided by diagnostic factor
+</td>
+</tr>
+</table>
+<p>Suppose our sixteenth patient is under 50, has is at stage III, has less than 30 months between diagnoses and is pre-menopausal.
+Our calculation from step 4 of the minimisation algorithm is therefore</p>
+<p><span class="math display">\[
+\begin{aligned}
+\left(n^A_{1+++} - n^B_{1+++}\right) + \left(n^A_{+2++} - n^B_{+2++}\right) + \left(n^A_{++1+} &amp;- n^B_{++1+}\right) + \left(n^A_{+++1} - n^B_{+++1}\right) \\
+&amp; = \left(3-4\right) + \left(6-6\right) + \left(4-2\right) + \left(4-3\right) \\
+&amp; = -1 + 0 + 2 + 1\\
+&amp; = 2 .
+\end{aligned}
+\]</span>
+Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability <span class="math inline">\(P\in\left(0.5,1\right)\)</span> and update the table before allocating patient 17.</p>
+</div>
 </div>
 </div>
 <div id="some-simulated-examples" class="section level2 hasAnchor" number="4.5">
@@ -720,11 +890,17 @@ Figure 4.11: A simulated dataset of 100 participants, using the distributions de
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-altman1990practical" class="csl-entry">
+Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC press.
+</div>
 <div id="ref-altman1999randomise" class="csl-entry">
 Altman, Douglas G, and J Martin Bland. 1999a. <span>“How to Randomise.”</span> <em>Bmj</em> 319 (7211): 703–4.
 </div>
 <div id="ref-altman1999treatment" class="csl-entry">
 ———. 1999b. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
+</div>
+<div id="ref-fentiman1983control" class="csl-entry">
+Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
 </div>
 <div id="ref-freedman1976use" class="csl-entry">
 Freedman, LS, and Susan J White. 1976. <span>“On the Use of Pocock and Simon’s Method for Balancing Treatment Numbers over Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 691–94.

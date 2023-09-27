@@ -700,7 +700,9 @@ READ UP ON THIS!
 @altman1999randomise tees up minimization.
 @treasure1998minimisation a good source.
 
-Minimization was first proposed by @taves1974minimization, then shortly after by @pocock1975sequential and @freedman1976use. The aim of minimization is to minimize the difference between the two groups. The people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, @kallis1994pre chose age, sex, operating surgeon, number of coronary arteries affected and left ventricular function.
+Minimization was first proposed by @taves1974minimization, then shortly after by @pocock1975sequential and @freedman1976use. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
+
+To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, @kallis1994pre chose age ($\leq{50}$ or $50$), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).
 
 When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
 
@@ -709,32 +711,104 @@ When a patient enters the trial, these factors are listed. The patient is then a
   
 It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.
 
-### Minimization algorithm from @pocock1975sequential
+### Minimization algorithm 
 
-Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm. Suppose there are $N$ treatment arms and $M$ prognostic factors over which we require balance, and that these $M$ factors have $n_1,\ldots,n_M$ levels. 
+Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). @pocock1975sequential give an algorithm in the general case of $N$ treatment arms, but we will not do that here. 
 
-We describe the minimization allocation procedure by considering an arbitrary point in the trial, at which a patient has just materialised with levels $r_1,\ldots,r_M$ of the $M$ prognostic factors. At this point we use $x_{ijk}$ to denote the number of patients with level $j$ of factor $i$ who have been assigned treatment $k$, for $j=1,2,\ldots,n_i;\,i=1,2,\ldots,M$ and $k=1,\ldots,N$.
+Suppose there are several prognostic factors over which we require balance, and that these factors have $I, J, K, ...$ levels. In our example above, there would be $I=2,\; J=2,\; K=3,\; L=2$. Note that this equates to 24 strata.
 
-For each treatment $k$, we consider the new $\left\lbrace x_{ijl}\right\rbrace,$ which we write as $\left\lbrace x_{ijl}^k\right\rbrace$, that we would have if we assigned this patient to treatment arm $k$. That is
+At some point in the trial, suppose we have recruited $n_{ijkl}$ patients with levels $i,\,j,\,k,\,l$ of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, $n^A_{ijkl}$ have been assigned to treatment arm $A$, and $n^B_{ijkl}$ to arm $B$. So we have
+
+$$ n^A_{ijkl} + n^B_{ijkl} = n_{ijkl} .$$
+
+If we were to use random permuted blocks within each stratum, then we would be assured that 
+
+$$\lvert n^A_{ijkl} - n^B_{ijkl} \rvert \leq{\frac{1}{2}b},$$
+where $b$ is the block length. However, there are two issues with this:
+
+  * There may be very few patients in some strata, in which case RPBs will fail to provide adequate balance.
+  * It is unlikely that we actually need this level of balance. 
+  
+The first point is a pragmatic one - the method usually guaranteed to achieve good balance is likely to fail, at least for some strata. The second is more theoretical. In general, we require that groups be balanced according to each individual prognostic factor, but not to interactions. For example, it is often believed that younger patients would have generally better outcomes, but that other factors do not systematically affect this difference.
+
+Therefore, it is enough to make sure that the following are all small:
 
 $$
 \begin{aligned}
-x_{ijl}^k & = x_{ijl}   \text{ for }j\neq{r_i}\text{ or }l\neq{k}\\
-x_{i{r_i}k}^k & = x_{i{r_i}k}+1
+\lvert n^A_{i+++} - n^B_{i+++} \rvert&\text{ for each }i=1,\ldots,I\\
+\lvert n^A_{+j++} - n^B_{+j++} \rvert&\text{ for each }j=1,\ldots,J\\
+\ldots&
 \end{aligned}
 $$
-Now imagine we have some function 
+where $+$ represents summation over the other factors, so that for exammple
 
-$$\operatorname{D}\left(\left\lbrace z_l\right\rbrace_{l=1}^N\right)$$ that measures the ``amount of variation'' in any set of non-negative integers $(\left\lbrace z_l\right\rbrace_{l=1}^N$, so that
+$$n^A_{++k+} = \sum\limits_{i,j,l}{n^A_{ijkl}}$$
+is the total number of patients with level $k$ of that factor assigned to treatment arm $A$.
 
-$$d_{ik} = \operatorname{D}\left(\left\lbrace x_{i{r_i}l}^k\right\rbrace_{l=1}^N\right) $$
-is the `lack of balance' of treatment assignments for patients with level $r_i$ of factor $i$. Next we need some function 
+Therefore, instead of having $IJKL$ constraints constraints, as we would with using randomly permuted blocks within each stratum, we have $I+J+K+L$ constraints, one for each level of each factor. In our example this is 9 constraints rather than 24.
 
-$$\operatorname{G}:\mathbb{R}^M \rightarrow \mathbb{R}$$
-  so that 
+In order to implement minimisation, we follow these steps:
 
-$$G_k = \operatorname{G}\left(d_{1k},\ldots,d_{Mk}\right) $$
-  represents the ``total amount of imbalance'' in treatments numbers over all factor levels, if treatment $k$ were assigned to this new patient.
+  1. Allocate the first patient by simple randomisation.
+  2. Suppose that at some point in the trial we have recruited $n_{ijkl}$ patients with prognostic factors $i,\,j,\,k,\,l$. Of these $n^A_{ijkl}$ are allocated to treatment arm $A$ and $n^B_{ijkl}$ to arm $B$.
+  3. A new patient enters the trial. They have prognostic factors at levels $w,\,x,\,y,\,z$.
+  4. We form the sum 
+  $$\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).$$
+  5. If the sum from step 4 is negative (that is, allocation to arm $B$ as dominated up to now) then we allocate the new patient to arm $A$ with probability $P$, with $P>0.5$. If the sum is positive, they are allocated to arm $B$ with probability $P$. If the sum is zero, they are allocated to arm $A$ with probability \frac{1}{2}.
+  
+Some people set $P=1$, whereas others would set $\frac{1}{2}<P<1$ to retain some randomness.  Although setting $P=1$ makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know $n^A_{i+++}$ and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set $P<1$.
+
+:::{.example}
+
+From @altman1990practical (citing @fentiman1983control).
+In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age ($\leq{50}$ or $>50$), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions ($\leq{30}$ or $>30$)  and menopausal status (Pre or post). 
+
+Let's suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table \@ref(tab:minim_eg).
+
+
+```{r}
+
+setHtmlTableTheme(theme = "Google docs")
+
+output <- 
+  matrix(c(
+    3,4,4,4,
+    1,2,6,6,
+    4,2,4,5,
+    4,3,5,3), 
+         ncol = 2, byrow = TRUE)
+
+output %>% 
+  htmlTable(header = c("Mustine (A)", "Talc (B)"),
+            rnames = c(paste0("1.",intToUtf8(8804),"50"), "2. >50",
+                       "1. I or II", "2. III or IV",
+                       paste0("1. ",intToUtf8(8804),"30 months"),
+                       "2. >30 months",
+                       "1. Pre", "2. Post"),
+            rgroup = c("Age", "Stage", "Time interval", "Menopausal Status"),
+            n.rgroup = rep(2,4),
+            cgroup = c("Example after 15 allocations"),
+            n.cgroup = 2, 
+            caption = "Allocations of first 15 patients, divided by diagnostic factor")
+
+```
+Suppose our sixteenth patient is under 50, has is at stage III, has less than 30 months between diagnoses and is pre-menopausal.
+Our calculation from step 4 of the minimisation algorithm is therefore
+
+$$
+\begin{aligned}
+\left(n^A_{1+++} - n^B_{1+++}\right) + \left(n^A_{+2++} - n^B_{+2++}\right) + \left(n^A_{++1+} &- n^B_{++1+}\right) + \left(n^A_{+++1} - n^B_{+++1}\right) \\
+& = \left(3-4\right) + \left(6-6\right) + \left(4-2\right) + \left(4-3\right) \\
+& = -1 + 0 + 2 + 1\\
+& = 2 .
+\end{aligned}
+$$
+Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability $P\in\left(0.5,1\right)$ and update the table before allocating patient 17. 
+:::
+
+
+
+
 
 
 ## Some simulated examples

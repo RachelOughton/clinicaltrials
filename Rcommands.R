@@ -9,6 +9,8 @@ bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ### for github:
 # home laptop
 setwd("C:/Users/Rachel Oughton/GitRepos/clinicaltrials")
+# work laptop
+setwd("J:/Documents/GitRepos/clinicaltrials")
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 
 

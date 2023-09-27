@@ -1,9 +1,5 @@
 # Introduction to Clinical Trials {#rct-intro}
 
-```{r}
-library(ggpattern)
-```
-
 A clinical trial is an experiment, usually performed on human subjects, to test the effect of some sort of treatment or intervention. 
 
 In a clinical trial, we will have two groups [is this true!?]:
