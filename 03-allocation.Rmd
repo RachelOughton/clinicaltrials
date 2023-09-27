@@ -797,7 +797,7 @@ Our calculation from step 4 of the minimisation algorithm is therefore
 
 $$
 \begin{aligned}
-\left(n^A_{1+++} - n^B_{1+++}\right) + \left(n^A_{+2++} - n^B_{+2++}\right) + \left(n^A_{++1+} &- n^B_{++1+}\right) + \left(n^A_{+++1} - n^B_{+++1}\right) \\
+\left(n^A_{1+++} - n^B_{1+++}\right) + \left(n^A_{+2++} - n^B_{+2++}\right) + \left(n^A_{++1+} \right.& \left.- n^B_{++1+}\right) + \left(n^A_{+++1} - n^B_{+++1}\right) \\
 & = \left(3-4\right) + \left(6-6\right) + \left(4-2\right) + \left(4-3\right) \\
 & = -1 + 0 + 2 + 1\\
 & = 2 .
