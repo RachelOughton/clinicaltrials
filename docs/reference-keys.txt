@@ -33,7 +33,13 @@ exm:unlabeled-div-11
 fig:part-gen1a
 fig:part-gen1b
 exm:unlabeled-div-12
+tab:captoprildata
 exm:unlabeled-div-13
+tab:unnamed-chunk-10
+exm:unlabeled-div-14
+exm:unlabeled-div-15
+tab:captoprildiff
+tab:captoprildiffsumm
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -67,7 +73,6 @@ biased-coin-designs
 urn-models
 problems-with-allocation
 stratified-sampling
-restricted-randomization
 minimization
 minimization-algorithm
 some-simulated-examples
@@ -94,6 +99,8 @@ intracluster-correlation
 designing-a-cluster-rct
 sample-size
 allocation
+allocating-everyone-at-once
+restricted-randomization
 analysing-a-cluster-rct
 at-the-cluster-level
 at-the-individual-level

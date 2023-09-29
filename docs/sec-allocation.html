@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-09-27" />
+<meta name="date" content="2023-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -213,10 +213,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.3" data-path="sec-allocation.html"><a href="sec-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>4.1.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="sec-allocation.html"><a href="sec-allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>4.2</b> Problems with allocation</a></li>
-<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="sec-allocation.html"><a href="sec-allocation.html#restricted-randomization"><i class="fa fa-check"></i><b>4.3.1</b> Restricted randomization</a></li>
-</ul></li>
+<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a></li>
 <li class="chapter" data-level="4.4" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>4.4</b> Minimization</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm</a></li>
@@ -260,10 +257,14 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>7.2.1</b> Sample size</a></li>
 <li class="chapter" data-level="7.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>7.2.2</b> Allocation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.3</b> Analysing a cluster RCT</a>
+<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>7.3</b> Allocating everyone at once</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.3.1</b> At the cluster level</a></li>
-<li class="chapter" data-level="7.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.3.2</b> At the individual level</a></li>
+<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>7.3.1</b> Restricted randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="7.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.4.2</b> At the individual level</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>8</b> RCTs - a Bayesian approach</a>
@@ -638,10 +639,6 @@ ABBA BAAB …
 <p>Each time a new participant arrives, we follow the randomization pattern for their stratum. We could use another allocation scheme within each stratum, for example an urn model or a biased coin. It is important that we use one that aims to conserve balance, or else the benefits of stratification are lost.</p>
 </div>
 <p>A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are <span class="math inline">\(3^4=81\)</span> strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic).</p>
-<div id="restricted-randomization" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Restricted randomization<a href="sec-allocation.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>READ UP ON THIS!</p>
-</div>
 </div>
 <div id="minimization" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Minimization<a href="sec-allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>

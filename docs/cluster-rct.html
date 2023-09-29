@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-09-27" />
+<meta name="date" content="2023-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -213,10 +213,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.3" data-path="sec-allocation.html"><a href="sec-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>4.1.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="sec-allocation.html"><a href="sec-allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>4.2</b> Problems with allocation</a></li>
-<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="sec-allocation.html"><a href="sec-allocation.html#restricted-randomization"><i class="fa fa-check"></i><b>4.3.1</b> Restricted randomization</a></li>
-</ul></li>
+<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a></li>
 <li class="chapter" data-level="4.4" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>4.4</b> Minimization</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm</a></li>
@@ -260,10 +257,14 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>7.2.1</b> Sample size</a></li>
 <li class="chapter" data-level="7.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>7.2.2</b> Allocation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.3</b> Analysing a cluster RCT</a>
+<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>7.3</b> Allocating everyone at once</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.3.1</b> At the cluster level</a></li>
-<li class="chapter" data-level="7.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.3.2</b> At the individual level</a></li>
+<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>7.3.1</b> Restricted randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="7.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.4.2</b> At the individual level</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>8</b> RCTs - a Bayesian approach</a>
@@ -304,13 +305,23 @@ div.csl-indent {
 <h3><span class="header-section-number">7.2.2</span> Allocation<a href="cluster-rct.html#allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="at-the-cluster-level" class="section level3 hasAnchor" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="allocating-everyone-at-once" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Allocating everyone at once<a href="cluster-rct.html#allocating-everyone-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Should this be in the cluster RCT section?</p>
+<p>The methods we’ve covered so far assume that participants are recruited sequentially, and begin the intervention at different points in time. In this scenario, when a particular participant (participant <span class="math inline">\(n\)</span>) is allocated we only know the allocation for the previous <span class="math inline">\(n-1\)</span> participants. It is very likely that we don’t know the details of the following participants, in particular their values of any prognostic variables. This makes sense in many medical settings, where a patient would want to begin treatment as soon as possible, and there may be a limited number of patients with particular criteria at any one time.</p>
+<p>In some trials, the whole group of participants is recruited over some preliminary phase, and they are all allocated at the same time, in order for the trial to run over some set time period. This is particularly common with interventions that take place in groups (we will think about this later).</p>
+<div id="restricted-randomization" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Restricted randomization<a href="cluster-rct.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>READ UP ON THIS!</p>
 </div>
-<div id="at-the-individual-level" class="section level3 hasAnchor" number="7.3.2">
-<h3><span class="header-section-number">7.3.2</span> At the individual level<a href="cluster-rct.html#at-the-individual-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="at-the-cluster-level" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="at-the-individual-level" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> At the individual level<a href="cluster-rct.html#at-the-individual-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>

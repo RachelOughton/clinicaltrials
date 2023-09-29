@@ -691,9 +691,6 @@ Each time a new participant arrives, we follow the randomization pattern for the
 
 A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are $3^4=81$ strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic). 
 
-### Restricted randomization
-
-READ UP ON THIS!
 
 ## Minimization
 
@@ -805,9 +802,6 @@ $$
 $$
 Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability $P\in\left(0.5,1\right)$ and update the table before allocating patient 17. 
 :::
-
-
-
 
 
 

@@ -1,6 +1,6 @@
 # Analyzing RCT data {#rct-analysis}
 
-We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had.
+We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation $\tau$ to denote the treatment effect.
 
 We'll first focus on the scenario where the trial outcome is measured on a continuous scale, and then we'll go on to look at other types of data.
 
@@ -10,7 +10,7 @@ To illustrate the theory and methods, we'll use an example dataset from @hommel1
 The baseline and outcome blood pressure measurements are shown below, in mmHg. We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. @hommel1986effect say that the patients were 'randomly allocated' to their group.
 
 
-```{r}
+```{r captoprildata}
 df_hommel = data.frame(
   patient = c(1:9, 1:7),
   baseline = c(147, 129, 158, 164, 134, 155, 151, 141, 153, 133, 129, 152, 161, 154, 141, 156),
@@ -18,9 +18,9 @@ df_hommel = data.frame(
   arm = c(rep("Captopril", 9), rep("Placebo", 7))
 )
 df_hommel_print = df_hommel
-names(df_hommel_print) = c("Patient (ID)", "Basline (B)", "Outcome at 1 week (X)", "Trial Arm")
+names(df_hommel_print) = c("Patient (ID)", "Baseline (B)", "Outcome at 1 week (X)", "Trial Arm")
 
-knitr::kable(df_hommel_print)
+knitr::kable(df_hommel_print, caption = "Data for the Captopril trial from @hommel1986effect.")
 
 ```
 
@@ -28,8 +28,8 @@ knitr::kable(df_hommel_print)
 This is very small dataset, and so in that respect it is quite unusual, but its structure is similar to many other trials.
 
 :::
-
-We will build up from the simplest type of analysis to some more complicated / sophisticated approaches.
+  
+  We will build up from the simplest type of analysis to some more complicated / sophisticated approaches.
 
 ## Confidence intervals and P-values
 
@@ -51,37 +51,40 @@ df_hommel1 = data.frame(
 df_hommel1$SEmean = df_hommel1$SD / sqrt(df_hommel1$Sam) 
 df_hommel1_print=  round(df_hommel1,2)
 names(df_hommel1_print) = c("Sample Size", "Mean (mmHg)", "SD (mmHg)", "SE of mean (mmHg)")
+row.names(df_hommel1_print) = c("Captopril", "Placebo")
 
-knitr::kable(df_hommel1_print)
+knitr::kable(df_hommel1_print, caption = "Summary statistics for each group.")
 
 ```
 
-We see that the difference in mean outcome (systolic blood pressure) between the two groups is $141.86 - 135.33 = 6.52 \text{mmHg}$. Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for some hypothetical population) there is no reduction, and we have just been 'lucky',
+We see that the difference in mean outcome (systolic blood pressure) between the two groups is $141.86 - 135.33 = 6.53 \text{mmHg}$. Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for the hypothetical population) there is no reduction, and we have just been 'lucky'. 
 
 The variances within the two groups are fairly close, so we can use the pooled estimate of standard deviation:
-
+  
 $$
-s_p = \sqrt{\frac{\sum\limits_{i=1}^N\left(n_i-1\right)s_i^2}{\sum\limits_{i-1}^N\left(n_i-1\right)}}.
+  s_p = \sqrt{\frac{\sum\limits_{i=1}^N\left(n_i-1\right)s_i^2}{\sum\limits_{i-1}^N\left(n_i-1\right)}}.
 $$
-
-In our case 
+  
+  In our case 
 
 $$ 
-\begin{aligned}
+  \begin{aligned}
 s_p&= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
 & = 7.82\text{ mmHg.}
 \end{aligned}
 $$
-This enables us to do an independent two-sample $t$-test, and we can find the $t$ statistic
+  This enables us to do an independent two-sample $t$-test, and we can find the $t$ statistic
 
 $$
-\begin{aligned}
+  \begin{aligned}
 t & = \frac{\bar{X_1} - \bar{X_2}}{s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\\
 & = \frac{6.53}{7.82\sqrt{\frac{1}{9} + \frac{1}{7}}} \\
 & = 1.65.
 \end{aligned}
 $$
-Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a $t$ distribution with 14 degrees of freedom ($n_i-1$ for each group). 
+Note that here we are taking the placebo group to be group 1, and the Captopril group to be group 2.
+
+  Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a $t$ distribution with 14 degrees of freedom ($n_i-1$ for each group). 
 
 ```{r}
 x1 = seq(-4, -1.65, by=0.01)
@@ -90,7 +93,7 @@ x2 = seq(1.65,4, by=0.01)
 px2 = dt(x2, df=14)
 
 ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
-         stat_function(fun=dt, args=list(df=14))+
+  stat_function(fun=dt, args=list(df=14))+
   geom_ribbon(data=data.frame(x=x1, y=px1), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + 
   geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) +xlab("Test statistic (t)") + ylab("Density") +
   geom_vline(xintercept = 1.65, lty=2)
@@ -100,20 +103,103 @@ The dashed line is at $t=1.65$, and the red shaded areas show anywhere 'at least
 ```{r echo=T}
 2*(1-pt(1.65, df=14))
 ```
-This is the value we know as 'the P value'. We see that in this case our results are not statistically significant, under this model.
+This is the value we know as 'the P value'. We see that in this case our results are not statistically significant (at the 0.10 level), under this model.
+:::
+  
+#### What do we do with this outcome?
+  
+  The outcome of this Captopril study is in some ways the worst case scenario. The difference in means is large enough to be compelling, but our dataset is too small for it to be statistically significant, and so we can't confidently conclude that Captopril has any effect on blood pressure. However, we also can't say that there is no effect. This is exactly the sort of scenario we hoped to avoid when planning our study.
+
+One way to reframe the question is to consider the range of treatment effects that are compatible with our trial data. That is, we find the set
+
+$$\left\lbrace \tau \mid \frac{\lvert \bar{x}_1 - \bar{x}_2 - \tau \rvert}{s\sqrt{n_1^{-1} + n_2^{-1}}} \leq t_{n_1+n_2-2;\,0.975} \right\rbrace, $$
+which contains all possible values of treatment effect $\tau$ that are compatible with our data. That is, suppose the true treatment effect is  $\tau^*$, and we test the hypothesis that $\tau = \tau^*$. For all values of $\tau^*$ inside this range, our data are not sufficiently unlikely to reject the hypothesis at the 0.05 level. However, for all values of $\tau^*$ outside this range, our data are sufficiently unlikely to reject that hypothesis. We can rearrange this to give a 95% confidence interval for $\tau$,
+
+$$\left\lbrace \tau \mid \bar{x}_1 - \bar{x}_2 - t_{n_1+n_2-2;\,0.975}\,s\sqrt{n_1^{-1} + n_2^{-1}} \leq \tau \leq \bar{x}_1 - \bar{x}_2 + t_{n_1+n_2-2;\,0.975}\,s\sqrt{n_1^{-1} + n_2^{-1}}  \right\rbrace $$
+
+::: {.example}
+
+Continuing our example, we have
+
+$$\left\lbrace \tau \mid \frac{\lvert 6.53 - \tau \rvert}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \leq t_{14;0.975} = 2.145 \right\rbrace $$
+  
+  Here, $t_{14;0.975} = 2.145$ is the $t$-value for a significance level of $0.05$, so if we were working to a different significance level we would change this.
+
+Rearranging as above, this works out to be the interval
+
+$$
+-1.92 \leq  \tau \leq 14.98.
+$$
+
+Notice that zero is in this interval, consistent with the fact that we failed to reject the null hypothesis.
 :::
 
-#### What do we do with this outcome?
+Some things to note
 
-The outcome of this Captopril study is in some ways the worst case scenario. The difference in means is large enough to be compelling, but our dataset is too small for it to be statistically significant, and so we can't confidently conclude that Captopril has any effect on blood pressure. However, we also can't say that there is no effect. This is exactly the sort of scenario we hoped to avoid when planning our study.
+  * We can compute this confidence interval whether or not we failed to reject the null hypothesis that $\tau=0$, and for significance levels other than 0.05.
+  * In most cases, reporting the confidence interval is much more informative than simply reporting the $P$-value. In our Captopril example, we found that a negative treatment effect (ie. Captopril reducing blood pressure less than the placebo) of more than 2 mmHg was very unlikely, whereas a positive effective (Captopril reducing blood pressure) of up to 15 mmHg was plausible. If Captopril were inexpensive and had very limited side effects (sadly neither of which is true) it may still be an attractive drug.
+  * These confidence intervals are exactly the same as you have learned before, but we emphasise them because they are very informative in randomised controlled trials (but not so often used!).
 
-One way to reframe the question is to consider the range of treatment effects that are compatible with our result - see p75.
+At the post trial stage, when we have data, the confidence interval is the most useful link to the concept of *power*, which we thought about at the planning stage. Remember that the power function is defined as 
+
+$$\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),$$ that is, the probability that we successfully reject $H_0$ (that $\tau=0$) given that there is a non-zero treatment effect $\tau\neq 0$. This was calculated in terms of the theoretical model of the trial, and in terms of some minimum detectable effect size $\tau_M$ that we wanted to be able to correctly detect with probability $1-\beta$ (the power). Sometimes people attempt to re-calculate the power after the trial, to detect whether the trial was underpowered. However, now we have actual data. If we failed to reject $H_0$ and $\tau_M$ is in the confidence interval for $\tau$, then that is a good indication that our trial was indeed underpowered.
 
 ### Bonferroni correction
 
-(and possibly other types of adjustment?)
+(and possibly other types of adjustment? - where to put this?!)
 
 ## Using baseline values
+
+In our example above, our primary outcome variable $X$ was the systolic blood pressure of each participant at the end of the intervention period. However, we see in Table \@ref(tab:captoprildata) that we also have *baseline* measurements: measurements of systolic blood pressure for each patient from before the intervention period. Baseline measurements are useful primarily for two reasons:
+
+  1. They can be used to assess the balance of the design. 
+  2. They can be used in the analysis.
+  
+We will demonstrate these by returning to our Captopril example.
+
+::: {.example}
+
+Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren't identical, they are sufficiently similar to think they wouldn't affect our analysis. 
+
+Secondly, since we are interested in whether the use of Captopril has reduced blood pressure for each individual, and these individuals had different baseline values, it makes sense to compare not just the outcome but the difference from baseline to outcome for each individual. We can see individual data in Table \@ref(tab:captoprildiff) and summary statistics in Table \@ref(tab:captoprildiffsumm).
+
+```{r captoprildiff}
+df_hommel_diff = df_hommel
+df_hommel_diff$diff = df_hommel_diff$outcome - df_hommel_diff$baseline
+df_hommel_diff_print = df_hommel_diff
+names(df_hommel_diff_print) = c("Patient (ID)", "Baseline (B)", "Outcome at 1 week (X)", "Trial Arm", "Difference")
+
+knitr::kable(df_hommel_diff_print, caption = "Data for the Captopril trial from @hommel1986effect, with differences shown.")
+```
+
+```{r captoprildiffsumm}
+df_hommel2 = data.frame(
+  Sam = c(9,7),
+  Mean = c(
+    mean(df_hommel_diff$diff[df_hommel_diff$arm=="Captopril"]),
+    mean(df_hommel_diff$diff[df_hommel_diff$arm=="Placebo"])),
+  SD = c(
+    sd(df_hommel_diff$diff[df_hommel_diff$arm=="Captopril"]),
+    sd(df_hommel_diff$diff[df_hommel_diff$arm=="Placebo"]))
+)
+df_hommel2$SEmean = df_hommel2$SD / sqrt(df_hommel2$Sam) 
+df_hommel2_print=  round(df_hommel2,2)
+names(df_hommel2_print) = c("Sample Size", "Mean (mmHg)", "SD (mmHg)", "SE of mean (mmHg)")
+row.names(df_hommel2_print) = c("Captopril", "Placebo")
+
+knitr::kable(df_hommel2_print, caption = "Summary statistics for each group.")
+```
+
+Now we can perform our test as before, in which case we find
+
+$$ t = \frac{-4.71 - (-12.67)}{8.54\sqrt{\frac{1}{7}+\frac{1}{9}}} = 1.850 $$
+where 8.54 is the pooled standard deviation (as before). Under the null distribution of no difference, this has a $t$-distribution with 14 degrees of freedom, and so we have a $P$-value of 0.086. Our 0.95 confidence interval is 
+
+$$ -4.71 - (-12.67) \pm t_{14;\,0.975}\times 8.54\sqrt{\frac{1}{7}+\frac{1}{9}} = \left[-1.3,\,17.2\right].$$
+We see that taking into account the baseline values in this way has slightly reduced the $P$-value and shifted the confidence interval slightly higher. Though at the $\alpha = 0.05$ level we still don't have significance.
+:::
+
+We will now look into why the confidence interval and $P$-value changed in this way, before going on to another way of taking into account the baseline value.
 
 
 ## Analysis of covariance

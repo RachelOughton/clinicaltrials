@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-09-27" />
+<meta name="date" content="2023-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -213,10 +213,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.3" data-path="sec-allocation.html"><a href="sec-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>4.1.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="sec-allocation.html"><a href="sec-allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>4.2</b> Problems with allocation</a></li>
-<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="sec-allocation.html"><a href="sec-allocation.html#restricted-randomization"><i class="fa fa-check"></i><b>4.3.1</b> Restricted randomization</a></li>
-</ul></li>
+<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a></li>
 <li class="chapter" data-level="4.4" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>4.4</b> Minimization</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm</a></li>
@@ -260,10 +257,14 @@ div.csl-indent {
 <li class="chapter" data-level="7.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>7.2.1</b> Sample size</a></li>
 <li class="chapter" data-level="7.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>7.2.2</b> Allocation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.3</b> Analysing a cluster RCT</a>
+<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>7.3</b> Allocating everyone at once</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.3.1</b> At the cluster level</a></li>
-<li class="chapter" data-level="7.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.3.2</b> At the individual level</a></li>
+<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>7.3.1</b> Restricted randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="7.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.4.2</b> At the individual level</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>8</b> RCTs - a Bayesian approach</a>
@@ -289,19 +290,22 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="rct-analysis" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">6</span> Analyzing RCT data<a href="rct-analysis.html#rct-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We’re now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had.</p>
+<p>We’re now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation <span class="math inline">\(\tau\)</span> to denote the treatment effect.</p>
 <p>We’ll first focus on the scenario where the trial outcome is measured on a continuous scale, and then we’ll go on to look at other types of data.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-12" class="example"><strong>Example 6.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect" role="doc-biblioref">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction" role="doc-biblioref">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
 <p>The baseline and outcome blood pressure measurements are shown below, in mmHg. We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect" role="doc-biblioref">1986</a>)</span> say that the patients were ‘randomly allocated’ to their group.</p>
 <table>
+<caption>
+<span id="tab:captoprildata">Table 6.1: </span>Data for the Captopril trial from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect" role="doc-biblioref">1986</a>)</span>.
+</caption>
 <thead>
 <tr>
 <th style="text-align:right;">
 Patient (ID)
 </th>
 <th style="text-align:right;">
-Basline (B)
+Baseline (B)
 </th>
 <th style="text-align:right;">
 Outcome at 1 week (X)
@@ -547,8 +551,13 @@ Placebo
 <div class="example">
 <p><span id="exm:unlabeled-div-13" class="example"><strong>Example 6.2  </strong></span>Summary statistics of the outcome for each group are shown below.</p>
 <table>
+<caption>
+<span id="tab:unnamed-chunk-10">Table 6.2: </span>Summary statistics for each group.
+</caption>
 <thead>
 <tr>
+<th style="text-align:left;">
+</th>
 <th style="text-align:right;">
 Sample Size
 </th>
@@ -565,6 +574,9 @@ SE of mean (mmHg)
 </thead>
 <tbody>
 <tr>
+<td style="text-align:left;">
+Captopril
+</td>
 <td style="text-align:right;">
 9
 </td>
@@ -579,6 +591,9 @@ SE of mean (mmHg)
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Placebo
+</td>
 <td style="text-align:right;">
 7
 </td>
@@ -594,45 +609,434 @@ SE of mean (mmHg)
 </tr>
 </tbody>
 </table>
-<p>We see that the difference in mean outcome (systolic blood pressure) between the two groups is <span class="math inline">\(141.86 - 135.33 = 6.52 \text{mmHg}\)</span>. Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for some hypothetical population) there is no reduction, and we have just been ‘lucky’,</p>
+<p>We see that the difference in mean outcome (systolic blood pressure) between the two groups is <span class="math inline">\(141.86 - 135.33 = 6.53 \text{mmHg}\)</span>. Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for the hypothetical population) there is no reduction, and we have just been ‘lucky’.</p>
 <p>The variances within the two groups are fairly close, so we can use the pooled estimate of standard deviation:</p>
 <p><span class="math display">\[
-s_p = \sqrt{\frac{\sum\limits_{i=1}^N\left(n_i-1\right)s_i^2}{\sum\limits_{i-1}^N\left(n_i-1\right)}}.
+  s_p = \sqrt{\frac{\sum\limits_{i=1}^N\left(n_i-1\right)s_i^2}{\sum\limits_{i-1}^N\left(n_i-1\right)}}.
 \]</span></p>
 <p>In our case</p>
 <p><span class="math display">\[
-\begin{aligned}
+  \begin{aligned}
 s_p&amp;= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
 &amp; = 7.82\text{ mmHg.}
 \end{aligned}
 \]</span>
 This enables us to do an independent two-sample <span class="math inline">\(t\)</span>-test, and we can find the <span class="math inline">\(t\)</span> statistic</p>
 <p><span class="math display">\[
-\begin{aligned}
+  \begin{aligned}
 t &amp; = \frac{\bar{X_1} - \bar{X_2}}{s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\\
 &amp; = \frac{6.53}{7.82\sqrt{\frac{1}{9} + \frac{1}{7}}} \\
 &amp; = 1.65.
 \end{aligned}
 \]</span>
-Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a <span class="math inline">\(t\)</span> distribution with 14 degrees of freedom (<span class="math inline">\(n_i-1\)</span> for each group).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+Note that here we are taking the placebo group to be group 1, and the Captopril group to be group 2.</p>
+<p>Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a <span class="math inline">\(t\)</span> distribution with 14 degrees of freedom (<span class="math inline">\(n_i-1\)</span> for each group).</p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>The dashed line is at <span class="math inline">\(t=1.65\)</span>, and the red shaded areas show anywhere ‘at least as extreme’. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rct-analysis.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fl">1.65</span>, <span class="at">df=</span><span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## [1] 0.1211902</code></pre>
-<p>This is the value we know as ‘the P value’. We see that in this case our results are not statistically significant, under this model.</p>
+<p>This is the value we know as ‘the P value’. We see that in this case our results are not statistically significant (at the 0.10 level), under this model.</p>
 </div>
 <div id="what-do-we-do-with-this-outcome" class="section level4 hasAnchor" number="6.1.0.1">
 <h4><span class="header-section-number">6.1.0.1</span> What do we do with this outcome?<a href="rct-analysis.html#what-do-we-do-with-this-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The outcome of this Captopril study is in some ways the worst case scenario. The difference in means is large enough to be compelling, but our dataset is too small for it to be statistically significant, and so we can’t confidently conclude that Captopril has any effect on blood pressure. However, we also can’t say that there is no effect. This is exactly the sort of scenario we hoped to avoid when planning our study.</p>
-<p>One way to reframe the question is to consider the range of treatment effects that are compatible with our result - see p75.</p>
+<p>One way to reframe the question is to consider the range of treatment effects that are compatible with our trial data. That is, we find the set</p>
+<p><span class="math display">\[\left\lbrace \tau \mid \frac{\lvert \bar{x}_1 - \bar{x}_2 - \tau \rvert}{s\sqrt{n_1^{-1} + n_2^{-1}}} \leq t_{n_1+n_2-2;\,0.975} \right\rbrace, \]</span>
+which contains all possible values of treatment effect <span class="math inline">\(\tau\)</span> that are compatible with our data. That is, suppose the true treatment effect is <span class="math inline">\(\tau^*\)</span>, and we test the hypothesis that <span class="math inline">\(\tau = \tau^*\)</span>. For all values of <span class="math inline">\(\tau^*\)</span> inside this range, our data are not sufficiently unlikely to reject the hypothesis at the 0.05 level. However, for all values of <span class="math inline">\(\tau^*\)</span> outside this range, our data are sufficiently unlikely to reject that hypothesis. We can rearrange this to give a 95% confidence interval for <span class="math inline">\(\tau\)</span>,</p>
+<p><span class="math display">\[\left\lbrace \tau \mid \bar{x}_1 - \bar{x}_2 - t_{n_1+n_2-2;\,0.975}\,s\sqrt{n_1^{-1} + n_2^{-1}} \leq \tau \leq \bar{x}_1 - \bar{x}_2 + t_{n_1+n_2-2;\,0.975}\,s\sqrt{n_1^{-1} + n_2^{-1}}  \right\rbrace \]</span></p>
+<div class="example">
+<p><span id="exm:unlabeled-div-14" class="example"><strong>Example 6.3  </strong></span>Continuing our example, we have</p>
+<p><span class="math display">\[\left\lbrace \tau \mid \frac{\lvert 6.53 - \tau \rvert}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \leq t_{14;0.975} = 2.145 \right\rbrace \]</span></p>
+<p>Here, <span class="math inline">\(t_{14;0.975} = 2.145\)</span> is the <span class="math inline">\(t\)</span>-value for a significance level of <span class="math inline">\(0.05\)</span>, so if we were working to a different significance level we would change this.</p>
+<p>Rearranging as above, this works out to be the interval</p>
+<p><span class="math display">\[
+-1.92 \leq  \tau \leq 14.98.
+\]</span></p>
+<p>Notice that zero is in this interval, consistent with the fact that we failed to reject the null hypothesis.</p>
+</div>
+<p>Some things to note</p>
+<ul>
+<li>We can compute this confidence interval whether or not we failed to reject the null hypothesis that <span class="math inline">\(\tau=0\)</span>, and for significance levels other than 0.05.</li>
+<li>In most cases, reporting the confidence interval is much more informative than simply reporting the <span class="math inline">\(P\)</span>-value. In our Captopril example, we found that a negative treatment effect (ie. Captopril reducing blood pressure less than the placebo) of more than 2 mmHg was very unlikely, whereas a positive effective (Captopril reducing blood pressure) of up to 15 mmHg was plausible. If Captopril were inexpensive and had very limited side effects (sadly neither of which is true) it may still be an attractive drug.</li>
+<li>These confidence intervals are exactly the same as you have learned before, but we emphasise them because they are very informative in randomised controlled trials (but not so often used!).</li>
+</ul>
+<p>At the post trial stage, when we have data, the confidence interval is the most useful link to the concept of <em>power</em>, which we thought about at the planning stage. Remember that the power function is defined as</p>
+<p><span class="math display">\[\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),\]</span> that is, the probability that we successfully reject <span class="math inline">\(H_0\)</span> (that <span class="math inline">\(\tau=0\)</span>) given that there is a non-zero treatment effect <span class="math inline">\(\tau\neq 0\)</span>. This was calculated in terms of the theoretical model of the trial, and in terms of some minimum detectable effect size <span class="math inline">\(\tau_M\)</span> that we wanted to be able to correctly detect with probability <span class="math inline">\(1-\beta\)</span> (the power). Sometimes people attempt to re-calculate the power after the trial, to detect whether the trial was underpowered. However, now we have actual data. If we failed to reject <span class="math inline">\(H_0\)</span> and <span class="math inline">\(\tau_M\)</span> is in the confidence interval for <span class="math inline">\(\tau\)</span>, then that is a good indication that our trial was indeed underpowered.</p>
 </div>
 <div id="bonferroni-correction" class="section level3 hasAnchor" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Bonferroni correction<a href="rct-analysis.html#bonferroni-correction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>(and possibly other types of adjustment?)</p>
+<p>(and possibly other types of adjustment? - where to put this?!)</p>
 </div>
 </div>
 <div id="using-baseline-values" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Using baseline values<a href="rct-analysis.html#using-baseline-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In our example above, our primary outcome variable <span class="math inline">\(X\)</span> was the systolic blood pressure of each participant at the end of the intervention period. However, we see in Table <a href="rct-analysis.html#tab:captoprildata">6.1</a> that we also have <em>baseline</em> measurements: measurements of systolic blood pressure for each patient from before the intervention period. Baseline measurements are useful primarily for two reasons:</p>
+<ol style="list-style-type: decimal">
+<li>They can be used to assess the balance of the design.</li>
+<li>They can be used in the analysis.</li>
+</ol>
+<p>We will demonstrate these by returning to our Captopril example.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 6.4  </strong></span>Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren’t identical, they are sufficiently similar to think they wouldn’t affect our analysis.</p>
+<p>Secondly, since we are interested in whether the use of Captopril has reduced blood pressure for each individual, and these individuals had different baseline values, it makes sense to compare not just the outcome but the difference from baseline to outcome for each individual. We can see individual data in Table <a href="rct-analysis.html#tab:captoprildiff">6.3</a> and summary statistics in Table <a href="rct-analysis.html#tab:captoprildiffsumm">6.4</a>.</p>
+<table>
+<caption>
+<span id="tab:captoprildiff">Table 6.3: </span>Data for the Captopril trial from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect" role="doc-biblioref">1986</a>)</span>, with differences shown.
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Patient (ID)
+</th>
+<th style="text-align:right;">
+Baseline (B)
+</th>
+<th style="text-align:right;">
+Outcome at 1 week (X)
+</th>
+<th style="text-align:left;">
+Trial Arm
+</th>
+<th style="text-align:right;">
+Difference
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+147
+</td>
+<td style="text-align:right;">
+137
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-10
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+120
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+158
+</td>
+<td style="text-align:right;">
+141
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+164
+</td>
+<td style="text-align:right;">
+137
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-27
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+134
+</td>
+<td style="text-align:right;">
+140
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+155
+</td>
+<td style="text-align:right;">
+144
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-11
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+151
+</td>
+<td style="text-align:right;">
+134
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+141
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-18
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+153
+</td>
+<td style="text-align:right;">
+142
+</td>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+-11
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+133
+</td>
+<td style="text-align:right;">
+139
+</td>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+134
+</td>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+152
+</td>
+<td style="text-align:right;">
+136
+</td>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+-16
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+161
+</td>
+<td style="text-align:right;">
+151
+</td>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+-10
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+154
+</td>
+<td style="text-align:right;">
+147
+</td>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+-7
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+141
+</td>
+<td style="text-align:right;">
+137
+</td>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+-4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+156
+</td>
+<td style="text-align:right;">
+149
+</td>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+-7
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:captoprildiffsumm">Table 6.4: </span>Summary statistics for each group.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Sample Size
+</th>
+<th style="text-align:right;">
+Mean (mmHg)
+</th>
+<th style="text-align:right;">
+SD (mmHg)
+</th>
+<th style="text-align:right;">
+SE of mean (mmHg)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Captopril
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+-12.67
+</td>
+<td style="text-align:right;">
+8.99
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Placebo
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+-4.71
+</td>
+<td style="text-align:right;">
+7.91
+</td>
+<td style="text-align:right;">
+2.99
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="analysis-of-covariance" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Analysis of covariance<a href="rct-analysis.html#analysis-of-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h2>

@@ -11,6 +11,22 @@
 
 ### Allocation
 
+## Allocating everyone at once
+
+Should this be in the cluster RCT section?
+
+The methods we've covered so far assume that participants are recruited sequentially, and begin the intervention at different points in time. In this scenario, when a particular participant (participant $n$) is allocated we only know the allocation for the previous $n-1$ participants. It is very likely that we don't know the details of the following participants, in particular their values of any prognostic variables. This makes sense in many medical settings, where a patient would want to begin treatment as soon as possible, and there may be a limited number of patients with particular criteria at any one time.
+
+In some trials, the whole group of participants is recruited over some preliminary phase, and they are all allocated at the same time, in order for the trial to run over some set time period. This is particularly common with interventions that take place in groups (we will think about this later).
+
+
+
+### Restricted randomization
+
+READ UP ON THIS!
+
+
+
 ## Analysing a cluster RCT
 
 ### At the cluster level
