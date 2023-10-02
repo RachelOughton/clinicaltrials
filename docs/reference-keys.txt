@@ -40,6 +40,8 @@ exm:unlabeled-div-14
 exm:unlabeled-div-15
 tab:captoprildiff
 tab:captoprildiffsumm
+fig:hommel
+eq:diffexp
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -82,12 +84,9 @@ rct-analysis
 confidence-intervals-and-p-values
 what-do-we-do-with-this-outcome
 bonferroni-correction
-using-baseline-values
-analysis-of-covariance
-continuous-outcome-variable
-the-simplest-case---comparing-means
-how-to-use-baseline-measurements
-ancova
+baseline
+analysis-of-covariance-ancova
+the-theory
 binary-data
 confidence-intervals-for-binary-data
 using-baseline-measurements

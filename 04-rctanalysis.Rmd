@@ -148,7 +148,7 @@ $$\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),$$ tha
 
 (and possibly other types of adjustment? - where to put this?!)
 
-## Using baseline values
+## Using baseline values {#baseline}
 
 In our example above, our primary outcome variable $X$ was the systolic blood pressure of each participant at the end of the intervention period. However, we see in Table \@ref(tab:captoprildata) that we also have *baseline* measurements: measurements of systolic blood pressure for each patient from before the intervention period. Baseline measurements are useful primarily for two reasons:
 
@@ -201,18 +201,103 @@ We see that taking into account the baseline values in this way has slightly red
 
 We will now look into why the confidence interval and $P$-value changed in this way, before going on to another way of taking into account the baseline value.
 
+Let's label the baseline measurement for each group $B_1$ and $B_2$, and the outcome measurements $X_1,\,X_2$, where we will take group 1 to be the placebo group and group 2 to be the treatment group. Because all participants have been randomised from the same population, we have 
 
-## Analysis of covariance
+$$\operatorname{E}\left(B_1\right) = \operatorname{E}\left(B_2\right) = \mu_B.$$
+Assuming some treatment effect $\tau$ (which could still be zero) we have
 
-## Continuous outcome variable
+$$
+\begin{aligned}
+\operatorname{E}\left(X_1\right) & = \mu\\
+\operatorname{E}\left(X_2\right) & = \mu + \tau.
+\end{aligned}
+$$
+Usually we will assume that
 
-### The simplest case - comparing means
+$$\operatorname{Var}\left(X_1\right) = \operatorname{Var}\left(X_2\right) = \operatorname{Var}\left(B_1\right) = \operatorname{Var}\left(B_2\right) = \sigma^2,$$
+and this is generally fairly reasonable in practice. 
 
-If our allocation was well-balanced
+Notice that for the two analyses we have performed so far (comparing outcomes and comparing differences) we have
 
-### How to use baseline measurements
+$$
+\begin{aligned}
+\operatorname{E}\left(X_2\right) - \operatorname{E}\left(X_1\right) & = \left(\mu + \tau\right) - \mu = \tau\\
+\operatorname{E}\left(X_2 - B_2\right) - \operatorname{E}\left(X_1 - B_1\right) & = \left(\mu - \mu_B + \tau\right) - \left(\mu - \mu_B\right) = \tau,
+\end{aligned}
+$$
+that is, both are unbiased estimators of $\tau$.
 
-### ANCOVA
+However, whereas the first is based on data with variance $\sigma^2$, the second has
+
+$$
+\begin{aligned}
+\operatorname{Var}\left(X_2-B_2\right) & = \operatorname{Var}\left(X_2\right) + \operatorname{Var}\left(B_2\right) - 2\operatorname{cov}\left(X_2,B_2\right)\\
+& = \sigma^2 + \sigma^2 - 2\rho\sigma^2 \\
+& = 2\sigma^2\left(1-\rho\right),
+\end{aligned}
+$$
+where $\rho$ is the true correlation between $X$ and $B$, and is assumed to be the same in either group. Therefore, if $\frac{1}{2}<\rho\leq 1$ there will be a smaller variance when comparing differences. However, if $0\leq\rho<\frac{1}{2}$, the variance will be smaller when comparing outcome variables.
+
+Intuitively, this seems reasonable: if the correlation between baseline and outcome measurements is very strong, then we can remove some of the variability between participants by taking into account their baseline measurement. However, if the correlation is weak, then by including the baseline in the analysis we are essentially just introducing noise.
+
+For our Captopril example, the sample correlation between baseline and outcome is 0.63 in the Captopril group and 0.80 in the Placebo group. This fits with the $P$-value having reduced slightly.
+
+## Analysis of covariance (ANCOVA)
+
+In the previous section we based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance. 
+
+However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).
+
+
+```{r hommel, fig.cap = "Data from the Captopril trial @hommel1986effect."}
+
+ggplot(data = df_hommel, aes(x=baseline, y=outcome, col = arm, pch=arm)) +
+  geom_point() +
+  xlab("Baseline (mmHg)") + ylab("Outcome (mmHg)")
+
+```
+The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn't a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference. 
+
+If there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if $\tau=0$). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples? 
+
+This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements. 
+
+### The theory
+
+Suppose the outcome for a clinical trial is $X$ and the baseline is $B$. $X$ has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the test group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
+
+The same quantity is measured at the start of the trial, and this is the baseline $B$, which we can assume to have true mean $\mu_B$ in both groups (because of randomisation) and variance $\sigma^2$. We also assume that the true correlation between $B$ and $X$ is $\rho$ in each group. Finally, we assume that both treatment groups are of size $N$.
+
+We therefore have $2N$ patients, and so we observe baseline measurements $b_1,\,b_2,\ldots,b_{2N}$. Given these values, we have
+
+$$
+\begin{aligned}
+\operatorname{E}\left(X_i\mid{b_i}\right) &= \mu + \rho\left(b_i - \mu_B\right)\text{ in the control group}\\
+\operatorname{E}\left(X_i\mid{b_i}\right) &= \mu +\tau + \rho\left(b_i - \mu_B\right)\text{ in the test group.}
+\end{aligned}
+$$
+
+From this, we find that
+
+\begin{equation}
+\operatorname{E}\left(\bar{X}_T - \bar{X}_C\mid{\bar{b}_T,\,\bar{b}_C}\right) = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right). 
+(\#eq:diffexp)
+\end{equation}
+That is, if there is a difference in the baseline mean between the control and test groups, then the difference in outcome means is not an unbiased estimator of the treatment effect $\tau$. Assuming $\rho>0$ (which is almost always the case) then if $\bar{b}_T>\bar{b}_C$ the difference in outcome means overestimates $\tau$. Conversely, if $\bar{b}_T<\bar{b}_C$, the difference in outcome means underestimates $\tau$. The only situation in which the difference in outcome means is an unbiased estimator is when $\rho=0$, however this is not common in practice.
+
+Comparing the difference between outcome and baseline, as we did in \@ref(baseline), does not solve this problem, since we have
+
+$$\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),$$ 
+which is similarly unbiased (unless $\rho=1$, which is never the case).
+
+Notice, however, that if we use as our estimator 
+
+$$\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)$$ then, following from Equation \@ref(eq:diffexp) we have
+
+$$\operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. $$
+
+
+
 
 ## Binary data
 

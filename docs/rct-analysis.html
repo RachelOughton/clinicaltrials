@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-09-29" />
+<meta name="date" content="2023-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -230,21 +230,18 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>6.1.1</b> Bonferroni correction</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-values"><i class="fa fa-check"></i><b>6.2</b> Using baseline values</a></li>
-<li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance"><i class="fa fa-check"></i><b>6.3</b> Analysis of covariance</a></li>
-<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#continuous-outcome-variable"><i class="fa fa-check"></i><b>6.4</b> Continuous outcome variable</a>
+<li class="chapter" data-level="6.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>6.2</b> Using baseline values</a></li>
+<li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>6.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-simplest-case---comparing-means"><i class="fa fa-check"></i><b>6.4.1</b> The simplest case - comparing means</a></li>
-<li class="chapter" data-level="6.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-to-use-baseline-measurements"><i class="fa fa-check"></i><b>6.4.2</b> How to use baseline measurements</a></li>
-<li class="chapter" data-level="6.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova"><i class="fa fa-check"></i><b>6.4.3</b> ANCOVA</a></li>
+<li class="chapter" data-level="6.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>6.3.1</b> The theory</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#binary-data"><i class="fa fa-check"></i><b>6.5</b> Binary data</a>
+<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#binary-data"><i class="fa fa-check"></i><b>6.4</b> Binary data</a>
 <ul>
-<li class="chapter" data-level="6.5.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-for-binary-data"><i class="fa fa-check"></i><b>6.5.1</b> Confidence intervals for binary data</a></li>
-<li class="chapter" data-level="6.5.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-measurements"><i class="fa fa-check"></i><b>6.5.2</b> Using baseline measurements</a></li>
+<li class="chapter" data-level="6.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-for-binary-data"><i class="fa fa-check"></i><b>6.4.1</b> Confidence intervals for binary data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-measurements"><i class="fa fa-check"></i><b>6.4.2</b> Using baseline measurements</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="rct-analysis.html"><a href="rct-analysis.html#categorical-data"><i class="fa fa-check"></i><b>6.6</b> Categorical data?</a></li>
-<li class="chapter" data-level="6.7" data-path="rct-analysis.html"><a href="rct-analysis.html#survival-data"><i class="fa fa-check"></i><b>6.7</b> Survival data</a></li>
+<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#categorical-data"><i class="fa fa-check"></i><b>6.5</b> Categorical data?</a></li>
+<li class="chapter" data-level="6.6" data-path="rct-analysis.html"><a href="rct-analysis.html#survival-data"><i class="fa fa-check"></i><b>6.6</b> Survival data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>7</b> Cluster randomised controlled trials</a>
 <ul>
@@ -668,8 +665,8 @@ which contains all possible values of treatment effect <span class="math inline"
 <p>(and possibly other types of adjustment? - where to put this?!)</p>
 </div>
 </div>
-<div id="using-baseline-values" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Using baseline values<a href="rct-analysis.html#using-baseline-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="baseline" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Using baseline values<a href="rct-analysis.html#baseline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In our example above, our primary outcome variable <span class="math inline">\(X\)</span> was the systolic blood pressure of each participant at the end of the intervention period. However, we see in Table <a href="rct-analysis.html#tab:captoprildata">6.1</a> that we also have <em>baseline</em> measurements: measurements of systolic blood pressure for each patient from before the intervention period. Baseline measurements are useful primarily for two reasons:</p>
 <ol style="list-style-type: decimal">
 <li>They can be used to assess the balance of the design.</li>
@@ -1036,39 +1033,98 @@ Placebo
 </tr>
 </tbody>
 </table>
+<p>Now we can perform our test as before, in which case we find</p>
+<p><span class="math display">\[ t = \frac{-4.71 - (-12.67)}{8.54\sqrt{\frac{1}{7}+\frac{1}{9}}} = 1.850 \]</span>
+where 8.54 is the pooled standard deviation (as before). Under the null distribution of no difference, this has a <span class="math inline">\(t\)</span>-distribution with 14 degrees of freedom, and so we have a <span class="math inline">\(P\)</span>-value of 0.086. Our 0.95 confidence interval is</p>
+<p><span class="math display">\[ -4.71 - (-12.67) \pm t_{14;\,0.975}\times 8.54\sqrt{\frac{1}{7}+\frac{1}{9}} = \left[-1.3,\,17.2\right].\]</span>
+We see that taking into account the baseline values in this way has slightly reduced the <span class="math inline">\(P\)</span>-value and shifted the confidence interval slightly higher. Though at the <span class="math inline">\(\alpha = 0.05\)</span> level we still don’t have significance.</p>
+</div>
+<p>We will now look into why the confidence interval and <span class="math inline">\(P\)</span>-value changed in this way, before going on to another way of taking into account the baseline value.</p>
+<p>Let’s label the baseline measurement for each group <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span>, and the outcome measurements <span class="math inline">\(X_1,\,X_2\)</span>, where we will take group 1 to be the placebo group and group 2 to be the treatment group. Because all participants have been randomised from the same population, we have</p>
+<p><span class="math display">\[\operatorname{E}\left(B_1\right) = \operatorname{E}\left(B_2\right) = \mu_B.\]</span>
+Assuming some treatment effect <span class="math inline">\(\tau\)</span> (which could still be zero) we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\left(X_1\right) &amp; = \mu\\
+\operatorname{E}\left(X_2\right) &amp; = \mu + \tau.
+\end{aligned}
+\]</span>
+Usually we will assume that</p>
+<p><span class="math display">\[\operatorname{Var}\left(X_1\right) = \operatorname{Var}\left(X_2\right) = \operatorname{Var}\left(B_1\right) = \operatorname{Var}\left(B_2\right) = \sigma^2,\]</span>
+and this is generally fairly reasonable in practice.</p>
+<p>Notice that for the two analyses we have performed so far (comparing outcomes and comparing differences) we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\left(X_2\right) - \operatorname{E}\left(X_1\right) &amp; = \left(\mu + \tau\right) - \mu = \tau\\
+\operatorname{E}\left(X_2 - B_2\right) - \operatorname{E}\left(X_1 - B_1\right) &amp; = \left(\mu - \mu_B + \tau\right) - \left(\mu - \mu_B\right) = \tau,
+\end{aligned}
+\]</span>
+that is, both are unbiased estimators of <span class="math inline">\(\tau\)</span>.</p>
+<p>However, whereas the first is based on data with variance <span class="math inline">\(\sigma^2\)</span>, the second has</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}\left(X_2-B_2\right) &amp; = \operatorname{Var}\left(X_2\right) + \operatorname{Var}\left(B_2\right) - 2\operatorname{cov}\left(X_2,B_2\right)\\
+&amp; = \sigma^2 + \sigma^2 - 2\rho\sigma^2 \\
+&amp; = 2\sigma^2\left(1-\rho\right),
+\end{aligned}
+\]</span>
+where <span class="math inline">\(\rho\)</span> is the true correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(B\)</span>, and is assumed to be the same in either group. Therefore, if <span class="math inline">\(\frac{1}{2}&lt;\rho\leq 1\)</span> there will be a smaller variance when comparing differences. However, if <span class="math inline">\(0\leq\rho&lt;\frac{1}{2}\)</span>, the variance will be smaller when comparing outcome variables.</p>
+<p>Intuitively, this seems reasonable: if the correlation between baseline and outcome measurements is very strong, then we can remove some of the variability between participants by taking into account their baseline measurement. However, if the correlation is weak, then by including the baseline in the analysis we are essentially just introducing noise.</p>
+<p>For our Captopril example, the sample correlation between baseline and outcome is 0.63 in the Captopril group and 0.80 in the Placebo group. This fits with the <span class="math inline">\(P\)</span>-value having reduced slightly.</p>
+</div>
+<div id="analysis-of-covariance-ancova" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Analysis of covariance (ANCOVA)<a href="rct-analysis.html#analysis-of-covariance-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the previous section we based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance.</p>
+<p>However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure <a href="rct-analysis.html#fig:hommel">6.1</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:hommel"></span>
+<img src="CT4H_notes_files/figure-html/hommel-1.png" alt="Data from the Captopril trial @hommel1986effect." width="672" />
+<p class="caption">
+Figure 6.1: Data from the Captopril trial <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect" role="doc-biblioref">1986</a>)</span>.
+</p>
+</div>
+<p>The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn’t a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference.</p>
+<p>If there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if <span class="math inline">\(\tau=0\)</span>). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples?</p>
+<p>This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements.</p>
+<div id="the-theory" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> The theory<a href="rct-analysis.html#the-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose the outcome for a clinical trial is <span class="math inline">\(X\)</span> and the baseline is <span class="math inline">\(B\)</span>. <span class="math inline">\(X\)</span> has mean <span class="math inline">\(\mu\)</span> in the control group (C) and mean <span class="math inline">\(\mu+\tau\)</span> in the test group (T), and as usual our aim is to determine the extent of <span class="math inline">\(\tau\)</span>, the treatment effect. We suppose also that <span class="math inline">\(X\)</span> has variance <span class="math inline">\(\sigma^2\)</span> in both groups.</p>
+<p>The same quantity is measured at the start of the trial, and this is the baseline <span class="math inline">\(B\)</span>, which we can assume to have true mean <span class="math inline">\(\mu_B\)</span> in both groups (because of randomisation) and variance <span class="math inline">\(\sigma^2\)</span>. We also assume that the true correlation between <span class="math inline">\(B\)</span> and <span class="math inline">\(X\)</span> is <span class="math inline">\(\rho\)</span> in each group. Finally, we assume that both treatment groups are of size <span class="math inline">\(N\)</span>.</p>
+<p>We therefore have <span class="math inline">\(2N\)</span> patients, and so we observe baseline measurements <span class="math inline">\(b_1,\,b_2,\ldots,b_{2N}\)</span>. Given these values, we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\left(X_i\mid{b_i}\right) &amp;= \mu + \rho\left(b_i - \mu_B\right)\text{ in the control group}\\
+\operatorname{E}\left(X_i\mid{b_i}\right) &amp;= \mu +\tau + \rho\left(b_i - \mu_B\right)\text{ in the test group.}
+\end{aligned}
+\]</span></p>
+<p>From this, we find that</p>
+<p><span class="math display" id="eq:diffexp">\[\begin{equation}
+\operatorname{E}\left(\bar{X}_T - \bar{X}_C\mid{\bar{b}_T,\,\bar{b}_C}\right) = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right).
+\tag{6.1}
+\end{equation}\]</span>
+That is, if there is a difference in the baseline mean between the control and test groups, then the difference in outcome means is not an unbiased estimator of the treatment effect <span class="math inline">\(\tau\)</span>. Assuming <span class="math inline">\(\rho&gt;0\)</span> (which is almost always the case) then if <span class="math inline">\(\bar{b}_T&gt;\bar{b}_C\)</span> the difference in outcome means overestimates <span class="math inline">\(\tau\)</span>. Conversely, if <span class="math inline">\(\bar{b}_T&lt;\bar{b}_C\)</span>, the difference in outcome means underestimates <span class="math inline">\(\tau\)</span>. The only situation in which the difference in outcome means is an unbiased estimator is when <span class="math inline">\(\rho=0\)</span>, however this is not common in practice.</p>
+<p>Comparing the difference between outcome and baseline, as we did in <a href="rct-analysis.html#baseline">6.2</a>, does not solve this problem, since we have</p>
+<p><span class="math display">\[\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),\]</span>
+which is similarly unbiased (unless <span class="math inline">\(\rho=1\)</span>, which is never the case).</p>
+<p>Notice, however, that if we use as our estimator</p>
+<p><span class="math display">\[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\]</span> then, following from Equation <a href="rct-analysis.html#eq:diffexp">(6.1)</a> we have</p>
+<p><span class="math display">\[\operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. \]</span></p>
 </div>
 </div>
-<div id="analysis-of-covariance" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Analysis of covariance<a href="rct-analysis.html#analysis-of-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="binary-data" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Binary data<a href="rct-analysis.html#binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="confidence-intervals-for-binary-data" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Confidence intervals for binary data<a href="rct-analysis.html#confidence-intervals-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="continuous-outcome-variable" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Continuous outcome variable<a href="rct-analysis.html#continuous-outcome-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="the-simplest-case---comparing-means" class="section level3 hasAnchor" number="6.4.1">
-<h3><span class="header-section-number">6.4.1</span> The simplest case - comparing means<a href="rct-analysis.html#the-simplest-case---comparing-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If our allocation was well-balanced</p>
-</div>
-<div id="how-to-use-baseline-measurements" class="section level3 hasAnchor" number="6.4.2">
-<h3><span class="header-section-number">6.4.2</span> How to use baseline measurements<a href="rct-analysis.html#how-to-use-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="ancova" class="section level3 hasAnchor" number="6.4.3">
-<h3><span class="header-section-number">6.4.3</span> ANCOVA<a href="rct-analysis.html#ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="using-baseline-measurements" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Using baseline measurements<a href="rct-analysis.html#using-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="binary-data" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Binary data<a href="rct-analysis.html#binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="confidence-intervals-for-binary-data" class="section level3 hasAnchor" number="6.5.1">
-<h3><span class="header-section-number">6.5.1</span> Confidence intervals for binary data<a href="rct-analysis.html#confidence-intervals-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="using-baseline-measurements" class="section level3 hasAnchor" number="6.5.2">
-<h3><span class="header-section-number">6.5.2</span> Using baseline measurements<a href="rct-analysis.html#using-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-</div>
-<div id="categorical-data" class="section level2 hasAnchor" number="6.6">
-<h2><span class="header-section-number">6.6</span> Categorical data?<a href="rct-analysis.html#categorical-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="categorical-data" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Categorical data?<a href="rct-analysis.html#categorical-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Could mention Fisher’s exact test, as demonstrated in the indo_rct data in the medicaldata package.</p>
 </div>
-<div id="survival-data" class="section level2 hasAnchor" number="6.7">
-<h2><span class="header-section-number">6.7</span> Survival data<a href="rct-analysis.html#survival-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="survival-data" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Survival data<a href="rct-analysis.html#survival-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
@@ -1102,9 +1158,9 @@ Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Tria
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
