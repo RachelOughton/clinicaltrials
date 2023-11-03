@@ -11,6 +11,11 @@ bookdown::render_book("index.Rmd", "bookdown::gitbook")
 setwd("C:/Users/Rachel Oughton/GitRepos/clinicaltrials")
 # work laptop
 setwd("J:/Documents/GitRepos/clinicaltrials")
+# work macbook
+setwd("/Users/rachelo/Documents/GitRepos/clinicaltrials")
+
+
+
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 
 

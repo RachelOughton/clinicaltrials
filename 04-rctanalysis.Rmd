@@ -17,6 +17,7 @@ df_hommel = data.frame(
   outcome = c(137, 120, 141, 137, 140, 144, 134, 123, 142, 139, 134, 136, 151, 147, 137, 149),
   arm = c(rep("Captopril", 9), rep("Placebo", 7))
 )
+df_hommel$arm = as.factor(df_hommel$arm)
 df_hommel_print = df_hommel
 names(df_hommel_print) = c("Patient (ID)", "Baseline (B)", "Outcome at 1 week (X)", "Trial Arm")
 
@@ -296,7 +297,76 @@ $$\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)$$
 
 $$\operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. $$
 
+### The practice
 
+In the previous section we established an unbiased estimate of the treatment effect that takes into account the baseline measurements. However, we can't use it as a model, because there are a few practical barriers:
+
+  * Our estimate for $\tau$ relies on the correlation $\lambda$, which is unknown
+  * In real life, the groups are unlikely to have equal size and variance, so ideally we'd lose these constraints
+  
+We can solve both of these by fitting the following statistical model to the observed outcomes $x_i$:
+
+$$
+\begin{aligned}
+x_i & = \mu + \gamma b_i + \epsilon_i & \text{ in group C}\\
+x_i & = \mu + \tau + \gamma b_i + \epsilon_i & \text{ in group T}&.
+\end{aligned}
+$$
+Here, the $\epsilon_i$ are independent errors with distribution $N\left(0,\,\sigma^2\right)$, the $b_i$ are the baseline measurements for $i=1,\ldots,N_T+N_C$, for groups $T$ and $C$ with sizes $N_T$ and $N_C$ respectively. Sometimes this is written instead in the form 
+
+$$ x_i = \mu + \tau G_i+ \gamma b_i + \epsilon_i $$
+where $G_i$ is 1 if participant $i$ is in group $T$ and 0 if they're in group $C$.
+
+We now have four parameters to estimate: $\mu,\,\tau,\,\gamma$ and $\sigma^2$. For the first three we can use least squares (as you have probably seen for linear regression). Our aim is to minimise the sum of squares
+
+$$S\left(\mu,\, \tau,\,\gamma\right) = \sum\limits_{i\text{ in }T} \left(x_i - \mu - \tau - \gamma b_i\right)^2 + \sum\limits_{i\text{ in }C} \left(x_i - \mu - \gamma b_i\right)^2.$$
+
+This leads to estimates $\hat{\mu},\, \hat{\tau}$ and $\hat{\gamma}$. We won't worry about how this sum is minimised, since we'll always be using pre-written R functions. We can use the estimates $\hat{\mu},\, \hat{\tau}$ and $\hat{\gamma}$ to estimate $\sigma^2$, using
+
+$$\hat{\sigma}^2 = \frac{S\left(\hat{\mu},\hat{\tau}, \hat{\gamma}\right)}{N_T + N_C -3}.$$
+The general form for this is 
+
+$$ \hat{\sigma}^2 = \frac{SSE}{n-p},$$
+where $SSE$ is the residual sum of squares, $n$ is the number of data points and $p$ the number of parameters (apart from $\sigma^2$) being estimated. If you want to know why that is, you can find out [here](https://pages.stern.nyu.edu/~wgreene/MathStat/GreeneChapter4.pdf) (look particularly at page 62), but we will just take it as given!
+
+The technique described above is a well-established statistical method known as **ANCOVA** (short for the **An**alysis of **Cova**riance), which can be implemented in R and many other statistical software packages.
+
+::: {.example}
+Let's now implement ANCOVA on our Captopril data in R.
+
+We can also use the 'aov' function to fit the ANCOVA model, now including the baseline (our covariate) in the model formula
+
+```{r, echo=T}
+model_ancova_capt = anova_test(data=df_hommel, formula = outcome ~ arm + baseline)
+model_ancova_capt
+
+```
+
+:::
+
+
+
+### A few cautions
+
+There are some assumptions we're making here, and so we need to be careful when fitting an ANCOVA model.
+
+  * We're assuming that the residual variance is the same for both groups
+  * We're assuming that the coefficient of the baseline is the same for both groups: only the intercept is changing.
+  
+We can't check the first until after 
+
+::: {.example}
+
+Before fitting our ANCOVA model we should first have checked that there's no significant relationship between the covariate (in this case the baseline) and the treatment group, which we can do using ANOVA:
+
+```{r, echo=T}
+model_aov_capt = aov(baseline ~ arm, data = df_hommel)
+summary(model_capt)
+```
+
+If the experiment has been properly designed then there shouldn't be, but this is not always the case, and indeed depending on how we do the randomisation we could be unlucky. If baseline measurements are available before allocation, this can be checked before the trial is run.
+
+:::
 
 
 ## Binary data

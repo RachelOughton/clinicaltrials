@@ -35,13 +35,15 @@ fig:part-gen1b
 exm:unlabeled-div-12
 tab:captoprildata
 exm:unlabeled-div-13
-tab:unnamed-chunk-10
+tab:unnamed-chunk-12
 exm:unlabeled-div-14
 exm:unlabeled-div-15
 tab:captoprildiff
 tab:captoprildiffsumm
 fig:hommel
 eq:diffexp
+exm:unlabeled-div-16
+exm:unlabeled-div-17
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -87,6 +89,8 @@ bonferroni-correction
 baseline
 analysis-of-covariance-ancova
 the-theory
+the-practice
+a-few-cautions
 binary-data
 confidence-intervals-for-binary-data
 using-baseline-measurements

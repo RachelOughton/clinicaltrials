@@ -33,6 +33,7 @@ library(knitr)
 library(magick)
 library(htmlTable)
 library(magrittr)
+library(rstatix)
 ```
 
 # Course Information {-}

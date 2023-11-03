@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Allocation | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Allocation | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-10-02" />
+<meta name="date" content="2023-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,8 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
@@ -96,11 +96,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -109,14 +109,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -124,6 +124,10 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -234,6 +238,8 @@ div.csl-indent {
 <li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>6.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>6.3.1</b> The theory</a></li>
+<li class="chapter" data-level="6.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>6.3.2</b> The practice</a></li>
+<li class="chapter" data-level="6.3.3" data-path="rct-analysis.html"><a href="rct-analysis.html#a-few-cautions"><i class="fa fa-check"></i><b>6.3.3</b> A few cautions</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#binary-data"><i class="fa fa-check"></i><b>6.4</b> Binary data</a>
 <ul>
@@ -287,7 +293,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="sec-allocation" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Allocation<a href="sec-allocation.html#sec-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. <span class="citation">Altman and Bland (<a href="#ref-altman1999treatment" role="doc-biblioref">1999b</a>)</span> gives an overview of why this has led to bias, and gives some examples. <span class="citation">Altman and Bland (<a href="#ref-altman1999randomise" role="doc-biblioref">1999a</a>)</span> and <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span></p>
+<p>Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. <span class="citation">Altman and Bland (<a href="#ref-altman1999treatment">1999b</a>)</span> gives an overview of why this has led to bias, and gives some examples. <span class="citation">Altman and Bland (<a href="#ref-altman1999randomise">1999a</a>)</span> and <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span></p>
 <p>Sometimes analyses compare groups in serial, so that <span class="math inline">\(N_A\)</span> patients one year (say) form the control group, and <span class="math inline">\(n_B\)</span> patients in a subsequent year, who are given treatment <span class="math inline">\(B\)</span>, form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment <span class="math inline">\(B\)</span>.</p>
 <p>Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.</p>
 <p>There are two important aspects to the allocation being <em>random</em> that we will draw attention to.</p>
@@ -489,7 +495,7 @@ Figure 4.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 <div class="figure"><span style="display:block;" id="fig:licorice-participants"></span>
 <img src="images/licorice.jpg" alt="Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized" width="60%" />
 <p class="caption">
-Figure 4.9: Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized" role="doc-biblioref">2013</a>)</span>
+Figure 4.9: Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>
 </p>
 </div>
 <p>The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.</p>
@@ -533,7 +539,7 @@ Age, y (mean +/- SD)
 </tbody>
 </table>
 <p>This appears to be a perfectly balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <table>
 <thead>
 <tr>
@@ -573,7 +579,7 @@ Intervention
 </tbody>
 </table>
 <p>If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.</p>
-<p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
+<p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
 <blockquote>
 <p>Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation—exclusion of confounding factors—has failed. … If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.</p>
 </blockquote>
@@ -639,10 +645,10 @@ ABBA BAAB …
 </div>
 <div id="minimization" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Minimization<a href="sec-allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="citation">Altman and Bland (<a href="#ref-altman1999randomise" role="doc-biblioref">1999a</a>)</span> tees up minimization.
-<span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span> a good source.</p>
-<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization" role="doc-biblioref">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use" role="doc-biblioref">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
-<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre" role="doc-biblioref">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
+<p><span class="citation">Altman and Bland (<a href="#ref-altman1999randomise">1999a</a>)</span> tees up minimization.
+<span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span> a good source.</p>
+<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
+<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
 <p>When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
 <ul>
 <li>Whether continuous variables have to be binned</li>
@@ -651,7 +657,7 @@ ABBA BAAB …
 <p>It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.</p>
 <div id="minimization-algorithm" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Minimization algorithm<a href="sec-allocation.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
+<p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
 <p>Suppose there are several prognostic factors over which we require balance, and that these factors have <span class="math inline">\(I, J, K, ...\)</span> levels. In our example above, there would be <span class="math inline">\(I=2,\; J=2,\; K=3,\; L=2\)</span>. Note that this equates to 24 strata.</p>
 <p>At some point in the trial, suppose we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with levels <span class="math inline">\(i,\,j,\,k,\,l\)</span> of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, <span class="math inline">\(n^A_{ijkl}\)</span> have been assigned to treatment arm <span class="math inline">\(A\)</span>, and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>. So we have</p>
 <p><span class="math display">\[ n^A_{ijkl} + n^B_{ijkl} = n_{ijkl} .\]</span></p>
@@ -686,7 +692,7 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 4.2  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical" role="doc-biblioref">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control" role="doc-biblioref">1983</a>)</span>).
+<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 4.2  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
 <p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table @ref(tab:minim_eg).</p>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
