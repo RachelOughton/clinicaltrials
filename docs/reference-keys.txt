@@ -35,7 +35,7 @@ fig:part-gen1b
 exm:unlabeled-div-12
 tab:captoprildata
 exm:unlabeled-div-13
-tab:unnamed-chunk-12
+tab:unnamed-chunk-10
 exm:unlabeled-div-14
 exm:unlabeled-div-15
 tab:captoprildiff
@@ -90,6 +90,9 @@ baseline
 analysis-of-covariance-ancova
 the-theory
 the-practice
+some-follow-up-questions.
+how-is-this-related-to-anova
+what-if-the-lines-shouldnt-be-parallel
 a-few-cautions
 binary-data
 confidence-intervals-for-binary-data

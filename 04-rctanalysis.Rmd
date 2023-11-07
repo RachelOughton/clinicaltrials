@@ -160,7 +160,7 @@ We will demonstrate these by returning to our Captopril example.
 
 ::: {.example}
 
-Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren't identical, they are sufficiently similar to think they wouldn't affect our analysis. 
+Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren't identical, they are sufficiently similar to think they wouldn't affect our analysis. In a study this small there is likely to be some difference.
 
 Secondly, since we are interested in whether the use of Captopril has reduced blood pressure for each individual, and these individuals had different baseline values, it makes sense to compare not just the outcome but the difference from baseline to outcome for each individual. We can see individual data in Table \@ref(tab:captoprildiff) and summary statistics in Table \@ref(tab:captoprildiffsumm).
 
@@ -250,16 +250,14 @@ In the previous section we based our analysis on the baseline values being stati
 However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).
 
 
-```{r hommel, fig.cap = "Data from the Captopril trial @hommel1986effect."}
+```{r hommel, fig.cap = "Baseline measurements from the Captopril trial @hommel1986effect."}
 
-ggplot(data = df_hommel, aes(x=baseline, y=outcome, col = arm, pch=arm)) +
-  geom_point() +
-  xlab("Baseline (mmHg)") + ylab("Outcome (mmHg)")
+ggplot(data = df_hommel, aes(y=baseline, fill = arm)) + geom_boxplot() + ylab("Baseline (mmHg)")
 
 ```
 The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn't a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference. 
 
-If there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if $\tau=0$). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples? 
+The basic principle of ANCOVA is that if there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if $\tau=0$). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples? 
 
 This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements. 
 
@@ -315,7 +313,7 @@ $$
 Here, the $\epsilon_i$ are independent errors with distribution $N\left(0,\,\sigma^2\right)$, the $b_i$ are the baseline measurements for $i=1,\ldots,N_T+N_C$, for groups $T$ and $C$ with sizes $N_T$ and $N_C$ respectively. Sometimes this is written instead in the form 
 
 $$ x_i = \mu + \tau G_i+ \gamma b_i + \epsilon_i $$
-where $G_i$ is 1 if participant $i$ is in group $T$ and 0 if they're in group $C$.
+where $G_i$ is 1 if participant $i$ is in group $T$ and 0 if they're in group $C$. This is a factor variable, which you may remember from Stats Modelling II (if you took it).
 
 We now have four parameters to estimate: $\mu,\,\tau,\,\gamma$ and $\sigma^2$. For the first three we can use least squares (as you have probably seen for linear regression). Our aim is to minimise the sum of squares
 
@@ -333,18 +331,55 @@ The technique described above is a well-established statistical method known as 
 
 ::: {.example}
 Let's now implement ANCOVA on our Captopril data in R.
-
-We can also use the 'aov' function to fit the ANCOVA model, now including the baseline (our covariate) in the model formula
-
+We do this by first fitting a linear model using 'lm', with baseline measurement and arm as predictor variables and outcome as the predictand. 
 ```{r, echo=T}
-model_ancova_capt = anova_test(data=df_hommel, formula = outcome ~ arm + baseline)
-model_ancova_capt
+# Gives same answers as above, so use this!
+# Find out what the numbesrs mean
+# Background on ANOVA and factor models (SMII)
+# Where to include random effects models? Is it in Matthews?
+lm_capt = lm(outcome ~ baseline + arm, data = df_hommel)
+summary(lm_capt)
+```
 
+The variable 'arm' here is being included as a factor variable, so it behaves like
+
+$$
+\text{arm}_i =
+\begin{cases}
+0 & \text{ if participant }i\text{ is assigned Captopril}\\
+1 & \text{ if participant }i\text{ is assigned Placebo}.
+\end{cases}
+$$
+Therefore, for a patient assigned Placebo, a value of 7.1779 is added, as well as the intercept and baseline term. This results in a model with two parallel fitted lines.
+
+```{r}
+ggplot(data=df_hommel, aes(x=baseline, y=outcome, col = arm)) + 
+  geom_point() +
+  geom_abline(
+    slope = coef(lm_capt)[["baseline"]],
+    intercept = coef(lm_capt)[["(Intercept)"]],
+    colour = "red") +
+  geom_abline(
+    slope = coef(lm_capt)[["baseline"]],
+    intercept = coef(lm_capt)[["(Intercept)"]] + coef(lm_capt)[["armPlacebo"]],
+    colour = "darkturquoise")
+```
+
+We can then use the 'anova' function [to do what?!]
+```{r, echo=T}
+anova(lm_capt) # What is this doing?
 ```
 
 :::
 
+### Some follow-up questions....
 
+This might have raised a few questions, so we will address those now.
+
+#### How is this related to ANOVA?
+
+
+#### What if the lines shouldn't be parallel?
 
 ### A few cautions
 
@@ -360,8 +395,9 @@ We can't check the first until after
 Before fitting our ANCOVA model we should first have checked that there's no significant relationship between the covariate (in this case the baseline) and the treatment group, which we can do using ANOVA:
 
 ```{r, echo=T}
+# There's probably a better way to do this - check online articles
 model_aov_capt = aov(baseline ~ arm, data = df_hommel)
-summary(model_capt)
+summary(model_aov_capt)
 ```
 
 If the experiment has been properly designed then there shouldn't be, but this is not always the case, and indeed depending on how we do the randomisation we could be unlucky. If baseline measurements are available before allocation, this can be checked before the trial is run.
