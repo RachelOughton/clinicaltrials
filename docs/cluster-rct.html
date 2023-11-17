@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Cluster randomised controlled trials | Clinical Trials 4H</title>
+  <title>9 Cluster randomised controlled trials | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Cluster randomised controlled trials | Clinical Trials 4H" />
+  <meta property="og:title" content="9 Cluster randomised controlled trials | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Cluster randomised controlled trials | Clinical Trials 4H" />
+  <meta name="twitter:title" content="9 Cluster randomised controlled trials | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-11-06" />
+<meta name="date" content="2023-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rct-analysis.html"/>
+<link rel="prev" href="working-with-survival-data.html"/>
 <link rel="next" href="rcts---a-bayesian-approach.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -239,41 +239,41 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>6.3.1</b> The theory</a></li>
 <li class="chapter" data-level="6.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>6.3.2</b> The practice</a></li>
-<li class="chapter" data-level="6.3.3" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>6.3.3</b> Some follow-up questions….</a></li>
-<li class="chapter" data-level="6.3.4" data-path="rct-analysis.html"><a href="rct-analysis.html#a-few-cautions"><i class="fa fa-check"></i><b>6.3.4</b> A few cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#binary-data"><i class="fa fa-check"></i><b>6.4</b> Binary data</a>
+<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>6.4</b> Some follow-up questions….</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-for-binary-data"><i class="fa fa-check"></i><b>6.4.1</b> Confidence intervals for binary data</a></li>
-<li class="chapter" data-level="6.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#using-baseline-measurements"><i class="fa fa-check"></i><b>6.4.2</b> Using baseline measurements</a></li>
+<li class="chapter" data-level="6.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>6.4.1</b> How is this related to ANOVA?</a></li>
+<li class="chapter" data-level="6.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>6.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="6.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>6.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="6.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-covariates"><i class="fa fa-check"></i><b>6.4.4</b> Can we include any other covariates?</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#categorical-data"><i class="fa fa-check"></i><b>6.5</b> Categorical data?</a></li>
-<li class="chapter" data-level="6.6" data-path="rct-analysis.html"><a href="rct-analysis.html#survival-data"><i class="fa fa-check"></i><b>6.6</b> Survival data</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>7</b> Cluster randomised controlled trials</a>
+<li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a></li>
+<li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
+<li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>7.1</b> What is a cluster RCT?</a>
+<li class="chapter" data-level="9.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>9.1</b> What is a cluster RCT?</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>7.1.1</b> Intracluster correlation</a></li>
+<li class="chapter" data-level="9.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>9.1.1</b> Intracluster correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>7.2</b> Designing a cluster RCT</a>
+<li class="chapter" data-level="9.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>9.2</b> Designing a cluster RCT</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>7.2.1</b> Sample size</a></li>
-<li class="chapter" data-level="7.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>7.2.2</b> Allocation</a></li>
+<li class="chapter" data-level="9.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>9.2.1</b> Sample size</a></li>
+<li class="chapter" data-level="9.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>9.2.2</b> Allocation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>7.3</b> Allocating everyone at once</a>
+<li class="chapter" data-level="9.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>9.3</b> Allocating everyone at once</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>7.3.1</b> Restricted randomization</a></li>
+<li class="chapter" data-level="9.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>9.3.1</b> Restricted randomization</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.4</b> Analysing a cluster RCT</a>
+<li class="chapter" data-level="9.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>9.4</b> Analysing a cluster RCT</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.4.1</b> At the cluster level</a></li>
-<li class="chapter" data-level="7.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>7.4.2</b> At the individual level</a></li>
+<li class="chapter" data-level="9.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>9.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>8</b> RCTs - a Bayesian approach</a>
+<li class="chapter" data-level="10" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>10</b> RCTs - a Bayesian approach</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html#bayesian-hierarchical-models"><i class="fa fa-check"></i><b>8.1</b> Bayesian hierarchical models</a></li>
+<li class="chapter" data-level="10.1" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html#bayesian-hierarchical-models"><i class="fa fa-check"></i><b>10.1</b> Bayesian hierarchical models</a></li>
 </ul></li>
 </ul>
 
@@ -292,40 +292,40 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cluster-rct" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Cluster randomised controlled trials<a href="cluster-rct.html#cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="what-is-a-cluster-rct" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> What is a cluster RCT?<a href="cluster-rct.html#what-is-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="intracluster-correlation" class="section level3 hasAnchor" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Intracluster correlation<a href="cluster-rct.html#intracluster-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="cluster-rct" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Cluster randomised controlled trials<a href="cluster-rct.html#cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-a-cluster-rct" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> What is a cluster RCT?<a href="cluster-rct.html#what-is-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="intracluster-correlation" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Intracluster correlation<a href="cluster-rct.html#intracluster-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="designing-a-cluster-rct" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Designing a cluster RCT<a href="cluster-rct.html#designing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="sample-size" class="section level3 hasAnchor" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Sample size<a href="cluster-rct.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="designing-a-cluster-rct" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Designing a cluster RCT<a href="cluster-rct.html#designing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sample-size" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Sample size<a href="cluster-rct.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="allocation" class="section level3 hasAnchor" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> Allocation<a href="cluster-rct.html#allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="allocation" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Allocation<a href="cluster-rct.html#allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="allocating-everyone-at-once" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Allocating everyone at once<a href="cluster-rct.html#allocating-everyone-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="allocating-everyone-at-once" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Allocating everyone at once<a href="cluster-rct.html#allocating-everyone-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Should this be in the cluster RCT section?</p>
 <p>The methods we’ve covered so far assume that participants are recruited sequentially, and begin the intervention at different points in time. In this scenario, when a particular participant (participant <span class="math inline">\(n\)</span>) is allocated we only know the allocation for the previous <span class="math inline">\(n-1\)</span> participants. It is very likely that we don’t know the details of the following participants, in particular their values of any prognostic variables. This makes sense in many medical settings, where a patient would want to begin treatment as soon as possible, and there may be a limited number of patients with particular criteria at any one time.</p>
 <p>In some trials, the whole group of participants is recruited over some preliminary phase, and they are all allocated at the same time, in order for the trial to run over some set time period. This is particularly common with interventions that take place in groups (we will think about this later).</p>
-<div id="restricted-randomization" class="section level3 hasAnchor" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> Restricted randomization<a href="cluster-rct.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="restricted-randomization" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Restricted randomization<a href="cluster-rct.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>READ UP ON THIS!</p>
 </div>
 </div>
-<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="7.4">
-<h2><span class="header-section-number">7.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="at-the-cluster-level" class="section level3 hasAnchor" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="at-the-cluster-level" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="at-the-individual-level" class="section level3 hasAnchor" number="7.4.2">
-<h3><span class="header-section-number">7.4.2</span> At the individual level<a href="cluster-rct.html#at-the-individual-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="at-the-individual-level" class="section level3 hasAnchor" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> At the individual level<a href="cluster-rct.html#at-the-individual-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
@@ -335,7 +335,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="rct-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-survival-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="rcts---a-bayesian-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
