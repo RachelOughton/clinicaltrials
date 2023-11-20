@@ -531,7 +531,7 @@ that is 281 patients per trial arm.
 
 A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required.
 
-This approach has the following advantages over the formula-based methods presented in Sections \@ref(ss-norm) and \ref{ss-bin}:
+This approach has the following advantages over the formula-based methods presented in Sections \@ref(ss-norm) and \@ref(ss-bin):
 
   1. **Transparency**: If the data generating mechanism is made clear, then the assumptions behind the trial are also clear, and the simulation can be replicated by anyone. Reproducibility is a big issue in clinical trials.
   2. **Flexibility**: Whereas the methods above are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials.

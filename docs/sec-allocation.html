@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-11-17" />
+<meta name="date" content="2023-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -247,8 +247,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>6.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="6.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-covariates"><i class="fa fa-check"></i><b>6.4.4</b> Can we include any other covariates?</a></li>
 </ul></li>
+<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>6.5</b> Some general principles of Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a></li>
+<li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
 <li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
 <ul>
@@ -502,22 +506,40 @@ Figure 4.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 <p>The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.</p>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Variable</th>
-<th align="left">Control (n=100)</th>
-<th align="left">Intervention (n=100)</th>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Control (n=100)
+</th>
+<th style="text-align:left;">
+Intervention (n=100)
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Gender (female, %)</td>
-<td align="left">50</td>
-<td align="left">50</td>
+<tr>
+<td style="text-align:left;">
+Gender (female, %)
+</td>
+<td style="text-align:left;">
+50
+</td>
+<td style="text-align:left;">
+50
+</td>
 </tr>
-<tr class="even">
-<td align="left">Age, y (mean +/- SD)</td>
-<td align="left">50 +/- 10</td>
-<td align="left">50 +/- 10</td>
+<tr>
+<td style="text-align:left;">
+Age, y (mean +/- SD)
+</td>
+<td style="text-align:left;">
+50 +/- 10
+</td>
+<td style="text-align:left;">
+50 +/- 10
+</td>
 </tr>
 </tbody>
 </table>

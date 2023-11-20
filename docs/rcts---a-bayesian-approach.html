@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-11-17" />
+<meta name="date" content="2023-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -247,8 +247,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>6.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="6.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-covariates"><i class="fa fa-check"></i><b>6.4.4</b> Can we include any other covariates?</a></li>
 </ul></li>
+<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>6.5</b> Some general principles of Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a></li>
+<li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
 <li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
 <ul>
@@ -297,6 +301,130 @@ div.csl-indent {
 <div id="bayesian-hierarchical-models" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Bayesian hierarchical models<a href="rcts---a-bayesian-approach.html#bayesian-hierarchical-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
+<p>THIS IS NOW LIKELY TO FORM THE BASIS OF AN ASSIGNMENT OR A PRACTICAL</p>
+<p>The data for this example is taken from <span class="citation">Vickers et al. (<a href="#ref-vickers2004acupuncture">2004</a>)</span>.
+In this study, 401 participants were recruited, all of whom suffered from chronic headaches. Participants were randomly allocated, using minimisation, to two groups:</p>
+<ul>
+<li>Group <span class="math inline">\(T\)</span>: up to 12 acupuncture treatments over 3 months</li>
+<li>Group <span class="math inline">\(C\)</span>: usual care.</li>
+</ul>
+<p>The primary outcome was ‘headache score at 12 months’, though many secondary outcomes were also included. The variables used in the minimisation algorithm were age, sex, diagnosis (migraine or tension type), headache score at baseline and number of years of headache disorder. The ‘headache score’ was found by asking each participant to complete a daily diary of headache and medication use for four weeks around each of the time points (baseline, 3 months, 12 months).</p>
+<pre><code>## 
+## Call:
+## lm(formula = score_1year ~ age + sex + migraine + chronicity + 
+##     score_baseline + group, data = acu_df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -34.103  -6.233  -0.904   6.118  44.304 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     0.43938    4.36997   0.101 0.919980    
+## age             0.13848    0.06812   2.033 0.042951 *  
+## sex1           -1.57568    1.69622  -0.929 0.353685    
+## migraine1      -2.97277    2.72516  -1.091 0.276228    
+## chronicity      0.03441    0.05127   0.671 0.502713    
+## score_baseline  0.70766    0.04040  17.518  &lt; 2e-16 ***
+## group1         -4.63998    1.24044  -3.741 0.000221 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.69 on 294 degrees of freedom
+##   (100 observations deleted due to missingness)
+## Multiple R-squared:  0.5401, Adjusted R-squared:  0.5308 
+## F-statistic: 57.55 on 6 and 294 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+This model clearly has a large amount of heteroscedasticity. There must be something we aren’t capturing in our model. We can try a linear model with all interaction terms, to see if anything appears significant.</p>
+<pre><code>## 
+## Call:
+## lm(formula = score_1year ~ (age + sex + migraine + chronicity + 
+##     score_baseline + group) * (age + sex + migraine + chronicity + 
+##     score_baseline + group), data = acu_df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.004  -6.055  -0.836   5.937  46.927 
+## 
+## Coefficients:
+##                             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)               -16.766532  27.810605  -0.603  0.54708   
+## age                         0.186933   0.468963   0.399  0.69049   
+## sex1                        0.591636  11.536131   0.051  0.95913   
+## migraine1                  18.239364  26.302445   0.693  0.48861   
+## chronicity                  0.443580   0.415100   1.069  0.28617   
+## score_baseline              0.807876   0.341714   2.364  0.01875 * 
+## group1                     -1.070466   9.676014  -0.111  0.91199   
+## age:sex1                    0.004920   0.194696   0.025  0.97986   
+## age:migraine1              -0.189121   0.431721  -0.438  0.66168   
+## age:chronicity             -0.004301   0.005319  -0.809  0.41940   
+## age:score_baseline          0.006530   0.005531   1.181  0.23875   
+## age:group1                  0.060204   0.139788   0.431  0.66703   
+## sex1:migraine1             -2.637016   7.692680  -0.343  0.73201   
+## sex1:chronicity            -0.011509   0.142473  -0.081  0.93568   
+## sex1:score_baseline        -0.045500   0.108821  -0.418  0.67619   
+## sex1:group1                 4.021262   3.568172   1.127  0.26072   
+## migraine1:chronicity       -0.163444   0.279494  -0.585  0.55916   
+## migraine1:score_baseline   -0.235724   0.195911  -1.203  0.22991   
+## migraine1:group1           -4.909995   6.877006  -0.714  0.47584   
+## chronicity:score_baseline  -0.002013   0.003601  -0.559  0.57662   
+## chronicity:group1           0.044947   0.105214   0.427  0.66956   
+## score_baseline:group1      -0.228799   0.086221  -2.654  0.00842 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.64 on 279 degrees of freedom
+##   (100 observations deleted due to missingness)
+## Multiple R-squared:  0.5678, Adjusted R-squared:  0.5353 
+## F-statistic: 17.46 on 21 and 279 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = score_1year ~ age + score_baseline + group, data = acu_df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -34.449  -5.937  -0.947   6.016  43.378 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    -4.26187    3.10925  -1.371 0.171501    
+## age             0.16501    0.05939   2.779 0.005806 ** 
+## score_baseline  0.71046    0.04011  17.711  &lt; 2e-16 ***
+## group1         -4.61412    1.23793  -3.727 0.000232 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.69 on 297 degrees of freedom
+##   (100 observations deleted due to missingness)
+## Multiple R-squared:  0.5361, Adjusted R-squared:  0.5314 
+## F-statistic: 114.4 on 3 and 297 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = score_1year ~ (age + score_baseline + group) * (age + 
+##     score_baseline + group), data = acu_df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -31.069  -6.241  -0.947   5.736  45.931 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)            4.113563   6.647341   0.619   0.5365  
+## age                   -0.069562   0.135553  -0.513   0.6082  
+## score_baseline         0.497302   0.229577   2.166   0.0311 *
+## group1                -3.965370   6.032287  -0.657   0.5115  
+## age:score_baseline     0.006544   0.004557   1.436   0.1521  
+## age:group1             0.102186   0.118896   0.859   0.3908  
+## score_baseline:group1 -0.202583   0.082269  -2.462   0.0144 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.53 on 294 degrees of freedom
+##   (100 observations deleted due to missingness)
+## Multiple R-squared:  0.554,  Adjusted R-squared:  0.5449 
+## F-statistic: 60.86 on 6 and 294 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /><img src="CT4H_notes_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">
 Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC press.
@@ -306,6 +434,9 @@ Altman, Douglas G, and J Martin Bland. 1999a. <span>“How to Randomise.”</spa
 </div>
 <div class="csl-entry">
 ———. 1999b. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
+</div>
+<div class="csl-entry">
+De Backer, M, C De Vroey, Emmanuel Lesaffre, I Scheys, and P De Keyser. 1998. <span>“Twelve Weeks of Continuous Oral Therapy for Toenail Onychomycosis Caused by Dermatophytes: A Double-Blind Comparative Trial of Terbinafine 250 Mg/Day Versus Itraconazole 200 Mg/Day.”</span> <em>Journal of the American Academy of Dermatology</em> 38 (5): S57–63.
 </div>
 <div class="csl-entry">
 Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
@@ -324,6 +455,9 @@ Hulley, Stephen B, Steven R. Cummings, Warren S. Browner, Deborah G. Grady, and 
 </div>
 <div class="csl-entry">
 Kallis, P, JA Tooze, S Talbot, D Cowans, DH Bevan, and T Treasure. 1994. <span>“Pre-Operative Aspirin Decreases Platelet Aggregation and Increases Post-Operative Blood Loss–a Prospective, Randomised, Placebo Controlled, Double-Blind Clinical Trial in 100 Patients with Chronic Stable Angina.”</span> <em>European Journal of Cardio-Thoracic Surgery: Official Journal of the European Association for Cardio-Thoracic Surgery</em> 8 (8): 404–9.
+</div>
+<div class="csl-entry">
+Kassambara, Alboukadel. 2019. <em>Datarium: Data Bank for Statistical Analysis and Visualization</em>. <a href="https://CRAN.R-project.org/package=datarium">https://CRAN.R-project.org/package=datarium</a>.
 </div>
 <div class="csl-entry">
 Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
@@ -350,6 +484,12 @@ Vickers, Andrew J, Rebecca W Rees, Catherine E Zollman, Rob McCarney, Claire M S
 Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Controlled Trial?”</span> <em>Journal of Thoracic Disease</em> 1 (1): 51.
 </div>
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-vickers2004acupuncture" class="csl-entry">
+Vickers, Andrew J, Rebecca W Rees, Catherine E Zollman, Rob McCarney, Claire M Smith, Nadia Ellis, Peter Fisher, and Robbert Van Haselen. 2004. <span>“Acupuncture for Chronic Headache in Primary Care: Large, Pragmatic, Randomised Trial.”</span> <em>Bmj</em> 328 (7442): 744.
 </div>
 </div>
             </section>
