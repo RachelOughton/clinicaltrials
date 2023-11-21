@@ -66,7 +66,7 @@ $$Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C
 
 ::: {.example}
 
-The data in this example comes from @terbinafine, in which two new oral antifungal medicines were compared in terms of their effectiveness at treating toenail infections. The two treatments are terbinafine and itraconazole 
+The data in this example comes from @terbinafine, in which two new oral antifungal medicines were compared in terms of their effectiveness at treating toenail infections, with 107 participants. The two treatments are terbinafine and itraconazole 
 
 
 ```{r}
@@ -77,6 +77,16 @@ data(strep_tb)
 table(strep_tb[,c(2,13)])
 
 ```
+
+We therefore have
+
+$$
+\begin{aligned}
+p_C & = \frac{17}{17+35} & = 0.327\\
+p_T & = \frac{38}{38+17} & = 0.691\\
+p & = \frac{38+17}{107} &= 0.514. 
+\end{aligned}
+$$
 
 
 :::

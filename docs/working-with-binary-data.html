@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Working with binary data | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Working with binary data | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Working with binary data | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2023-11-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rct-analysis.html"/>
+<link rel="next" href="working-with-survival-data.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course Information</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#a-brief-history-of-rcts"><i class="fa fa-check"></i><b>1.1</b> A brief history of RCTs</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.2.1</b> The primary outcome</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Designing and planning a randomised controlled trial (RCT)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#ss-norm"><i class="fa fa-check"></i><b>2.1</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.1.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.1.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.1.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.1.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.1.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.1.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.1.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#ss-bin"><i class="fa fa-check"></i><b>2.2</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-delta-method"><i class="fa fa-check"></i><b>2.2.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#a-sample-size-formula"><i class="fa fa-check"></i><b>2.2.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sample-size-by-simulation"><i class="fa fa-check"></i><b>2.3</b> Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rct-plan.html"><a href="rct-plan.html#the-simulation-method"><i class="fa fa-check"></i><b>2.3.1</b> The simulation method</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bias.html"><a href="bias.html"><i class="fa fa-check"></i><b>3</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="bias.html"><a href="bias.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1</b> Where does bias come from?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="bias.html"><a href="bias.html#selection-bias"><i class="fa fa-check"></i><b>3.1.1</b> Selection bias</a></li>
+<li class="chapter" data-level="3.1.2" data-path="bias.html"><a href="bias.html#allocation-bias"><i class="fa fa-check"></i><b>3.1.2</b> Allocation bias</a></li>
+<li class="chapter" data-level="3.1.3" data-path="bias.html"><a href="bias.html#assessment-bias"><i class="fa fa-check"></i><b>3.1.3</b> Assessment bias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sec-allocation.html"><a href="sec-allocation.html"><i class="fa fa-check"></i><b>4</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#allocation-methods"><i class="fa fa-check"></i><b>4.1</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>4.1.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="sec-allocation.html"><a href="sec-allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>4.1.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="4.1.3" data-path="sec-allocation.html"><a href="sec-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>4.1.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="sec-allocation.html"><a href="sec-allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>4.2</b> Problems with allocation</a></li>
+<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="4.4" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>4.4</b> Minimization</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="sec-allocation.html"><a href="sec-allocation.html#some-simulated-examples"><i class="fa fa-check"></i><b>4.5</b> Some simulated examples</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>4.5.1</b> Simple random allocation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-intervention.html"><a href="the-intervention.html"><i class="fa fa-check"></i><b>5</b> The intervention</a></li>
+<li class="chapter" data-level="6" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>6</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-and-p-values"><i class="fa fa-check"></i><b>6.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>6.1.1</b> Bonferroni correction</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>6.2</b> Using baseline values</a></li>
+<li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>6.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>6.3.1</b> The theory</a></li>
+<li class="chapter" data-level="6.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>6.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>6.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>6.4.1</b> How is this related to ANOVA?</a></li>
+<li class="chapter" data-level="6.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>6.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="6.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>6.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="6.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-covariates"><i class="fa fa-check"></i><b>6.4.4</b> Can we include any other covariates?</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>6.5</b> Some general principles of Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
+<li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>9.1</b> What is a cluster RCT?</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>9.1.1</b> Intracluster correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>9.2</b> Designing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>9.2.1</b> Sample size</a></li>
+<li class="chapter" data-level="9.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>9.2.2</b> Allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>9.3</b> Allocating everyone at once</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>9.3.1</b> Restricted randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>9.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>9.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>10</b> RCTs - a Bayesian approach</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html#bayesian-hierarchical-models"><i class="fa fa-check"></i><b>10.1</b> Bayesian hierarchical models</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="working-with-binary-data" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Working with binary data<a href="working-with-binary-data.html#working-with-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>So far all everything we’ve covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the <span class="math inline">\(t\)</span>-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).</p>
+<p>The primary outcome of a trial will often be in the realm of ‘success’ or ‘fail’. Did the participant’s symptoms clear up? Did the participant survive? Was the baby born at full term? and so on. We’ve already covered sample size estimation in Section <a href="rct-plan.html#ss-bin">2.2</a>, where we set up the following binomial model.</p>
+<p>For a group <span class="math inline">\(n\)</span> of participants, we will have allocated <span class="math inline">\(n_C\)</span> to the control group (group <span class="math inline">\(C\)</span>), and <span class="math inline">\(n_T\)</span> to the treatment group (group <span class="math inline">\(T\)</span>). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group <span class="math inline">\(C\)</span> the number of ‘successes’ would be modelled by</p>
+<p><span class="math display">\[R_C \sim \operatorname{Bi}\left(n_C,\,\pi_C\right).\]</span></p>
+<p>Similarly the number of successes in the treatment group can be modelled as
+<span class="math display">\[R_T \sim\operatorname{Bi}\left(n_T,\,\pi_T\right),\]</span>
+and the focus of our analysis is on comparing <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span>. To do this we will require point estimates of both quantities and interval estimates for some measure of the discrepancy between them. We will also need ways to test the null hypothesis that <span class="math inline">\(\pi_C = \pi_T.\)</span></p>
+<div id="point-estimates-and-hypothesis-tests" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Point estimates and Hypothesis tests<a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First of all, we can tabulate the results of a trial with a binary outcome like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Successes</th>
+<th align="left">Failures</th>
+<th align="left">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Treatment</strong></td>
+<td align="left"><span class="math inline">\(r_T\)</span></td>
+<td align="left"><span class="math inline">\(n_T-r_T\)</span></td>
+<td align="left"><span class="math inline">\(n_T\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Control</strong></td>
+<td align="left"><span class="math inline">\(r_C\)</span></td>
+<td align="left"><span class="math inline">\(n_C-r_C\)</span></td>
+<td align="left"><span class="math inline">\(n_C\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td align="left"><span class="math inline">\(r\)</span></td>
+<td align="left"><span class="math inline">\(n - r\)</span></td>
+<td align="left"><span class="math inline">\(n\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Note that because this is a table of observed values, they are now all in lower case.</p>
+<p>We can estimate <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span> by the sample proportions</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_C &amp;= \frac{r_C}{n_C}\\
+p_T &amp;= \frac{r_T}{n_T}
+\end{aligned}.
+\]</span></p>
+<p>We know from the properties of the binomial distribtion that <span class="math inline">\(\operatorname{E}\left(p_C\right) = \pi_C\)</span> and
+<span class="math display">\[\operatorname{Var}\left(p_C\right) = \frac{\pi_C\left(1-\pi_C\right)}{n_C},\]</span>
+and similarly for <span class="math inline">\(\operatorname{E}\left(p_T\right)\)</span> and <span class="math inline">\(\operatorname{Var}\left(p_T\right)\)</span>.</p>
+<p>If we think in terms of individual participants, we have the variable <span class="math inline">\(y_{iC}\)</span> for the outcome of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span>, with <span class="math inline">\(y_{iC}=1\)</span> if the participant’s outcome is ‘success’ and <span class="math inline">\(y_{iC}=0\)</span> otherwise. Then we have</p>
+<p><span class="math display">\[r_C = \sum\limits_{i=1}^{n_C} y_{iC},\]</span>
+and similarly for group <span class="math inline">\(T\)</span>. Since <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span> are therefore sample means, we can apply the Central Limit Theorem to conclude that <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_P\)</span> can be approximated by normal distributions:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_C &amp; \sim N\left(\pi_C,\, \frac{\pi_C\left(1-\pi_c\right)}{n_C}\right)\\
+p_T &amp; \sim N\left(\pi_T,\, \frac{\pi_T\left(1-\pi_T\right)}{n_T}\right).
+\end{aligned}
+\]</span></p>
+<p>This means we can test the null hypothesis that <span class="math inline">\(\pi_C = \pi_T\)</span> by referring our observed value of <span class="math inline">\(p_T - p_C\)</span> to a normal distribution with mean 0 and variance</p>
+<p><span class="math display">\[ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\pi_c\right)}{n_C},\]</span></p>
+<p>which we can approximate by substituting in <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span>.</p>
+<p>However, since under the null hypothesis <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, it would be more appropriate to use this as the common variance. In this case, the variance of <span class="math inline">\(p_T - p_C\)</span> becomes</p>
+<p><span class="math display">\[\pi\left(1-\pi\right)\left(\frac{1}{n_C} + \frac{1}{n_T}\right), \]</span>
+and in calculations we replace <span class="math inline">\(\pi\)</span> with <span class="math inline">\(p = r/n\)</span>.</p>
+<p>Putting all this together, our test statistic is</p>
+<p><span class="math display">\[Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.\]</span></p>
+<div class="example">
+<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 7.1  </strong></span>The data in this example comes from <span class="citation">De Backer et al. (<a href="#ref-terbinafine">1998</a>)</span>, in which two new oral antifungal medicines were compared in terms of their effectiveness at treating toenail infections. The two treatments are terbinafine and itraconazole</p>
+<pre><code>##               improved
+## arm            FALSE TRUE
+##   Streptomycin    17   38
+##   Control         35   17</code></pre>
+</div>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-terbinafine" class="csl-entry">
+De Backer, M, C De Vroey, Emmanuel Lesaffre, I Scheys, and P De Keyser. 1998. <span>“Twelve Weeks of Continuous Oral Therapy for Toenail Onychomycosis Caused by Dermatophytes: A Double-Blind Comparative Trial of Terbinafine 250 Mg/Day Versus Itraconazole 200 Mg/Day.”</span> <em>Journal of the American Academy of Dermatology</em> 38 (5): S57–63.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rct-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-survival-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
