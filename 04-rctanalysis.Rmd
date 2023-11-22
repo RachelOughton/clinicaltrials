@@ -440,9 +440,10 @@ library(datarium)
 paged_table(stress)
 ```
 
-The table below shows the mean and standard deviation of age for each combination of treatment and exercise level.
+The table below shows the mean and standard deviation of age for each combination of treatment and exercise level. If we were being picky / thorough, we might note that (perhaps unsurprisingly!) the mean and standard deviation of age are both lower in the high exercise groups. This might well affect our analysis, but we won't go into this now.
 
 ```{r}
+library(dplyr)
 summary_stress = stress %>% group_by(treatment, exercise) %>% summarize(mean = mean(age), sd= sd(age))
 knitr::kable(summary_stress)
 ```

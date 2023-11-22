@@ -39,7 +39,9 @@ data("supraclavicular") # survival (with some censoring)
 # Also 
 library(HSAUR)
 
-data("respiratory", package = "HSAUR") # cluster RCT with only two clusters
+data("respiratory", package = "HSAUR") # cluster RCT with only two clusters. Binary outcome I think?
+
+data(mastectomy)  # Survival Times after Mastectomy of Breast Cancer Patients
 
 library(faraway)
 data(toenail) # probably very good for introductory binary stuff!
@@ -53,3 +55,13 @@ library(datarium) # quite a few!
 data(stress) # ideal for ANCOVA with covariates!
 lm_stresslin = lm(score ~ treatment + exercise + age, data = stress)
 lm_sressint
+
+
+library(MASS)
+
+data(Melanoma) # Survival from Malignant Melanoma - no treatment but could still be good?
+data(VA) # Veteran's Administration lung cancer trial from Kalbfleisch & Prentice. Survival data.
+data(anorexia) # The anorexia data frame has 72 rows and 3 columns. Weight change data for young female anorexia patients. Continuous. Three treatments.
+data(gehan) # A data frame from a trial of 42 leukaemia patients. Some were treated with the drug 6-mercaptopurine and the rest are controls. The trial was designed as matched pairs, both withdrawn from the trial when either came out of remission.
+
+library(survival) # lots of data in here!

@@ -514,7 +514,7 @@ N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\s
 
 Because $\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}$ is not a function of $\pi_A - \pi_B$, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group $\left(\pi_A\right)$ is well understood, and the probability for the intervention group $\left(\pi_B\right)$ can be specified by using the nearest clinically important value of $\pi_B$.
 
-:::{.example # samplesize1}
+:::{.example #samplesize1}
 [From @smith1994randomised]
 This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was 'Did the patient die within 30d of the procedure?', and the trial was designed to have $\alpha=0.05,\,\beta=0.95$, which gives $z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65$. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation \@ref(eq:ssbinary)) gives us
 

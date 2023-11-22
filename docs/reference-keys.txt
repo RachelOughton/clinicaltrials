@@ -17,6 +17,7 @@ eq:delta1
 eq:delta2
 eq:delta3
 eq:ssbinary
+exm:samplesize1
 def:unlabeled-div-8
 exm:unlabeled-div-9
 fig:srs-alloc
@@ -47,6 +48,8 @@ exm:unlabeled-div-17
 exm:unlabeled-div-18
 exm:unlabeled-div-19
 exm:unlabeled-div-20
+exm:unlabeled-div-21
+exm:unlabeled-div-22
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -101,6 +104,12 @@ can-we-include-any-other-covariates
 some-general-principles-of-analysis
 working-with-binary-data
 point-estimates-and-hypothesis-tests
+an-alternative-approach-chi-squared
+likelihood-a-more-rigorous-way
+measures-of-difference-for-binary-data
+absolute-risk-difference-and-number-needed-to-treat
+risk-ratio-rr
+odds-ratio-or
 working-with-survival-data
 cluster-rct
 what-is-a-cluster-rct

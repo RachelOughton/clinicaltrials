@@ -66,7 +66,7 @@ $$Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C
 
 ::: {.example}
 
-The data in this example comes from @terbinafine, in which two new oral antifungal medicines were compared in terms of their effectiveness at treating toenail infections, with 107 participants. The two treatments are terbinafine and itraconazole 
+The data in this example comes from @strep_tb, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.
 
 
 ```{r}
@@ -74,7 +74,8 @@ The data in this example comes from @terbinafine, in which two new oral antifung
 # Maybe this is more complicated than I imagined!
 data(strep_tb)
 
-table(strep_tb[,c(2,13)])
+tab_obs = table(strep_tb[,c(2,13)])
+tab_obs
 
 ```
 
@@ -82,11 +83,184 @@ We therefore have
 
 $$
 \begin{aligned}
+n_C & = 52 \\
+n_T & = 55 \\
 p_C & = \frac{17}{17+35} & = 0.327\\
 p_T & = \frac{38}{38+17} & = 0.691\\
 p & = \frac{38+17}{107} &= 0.514. 
 \end{aligned}
+$$ 
+and can calculate our $Z$ statistic to be
+
+$$
+\begin{aligned}
+Z & = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52} + \frac{1}{55}\right)}}\\
+& = 3.765.
+\end{aligned}
 $$
 
+Finally, we can find the $p$-value of this test statistic (making sure to have two tails!)
+
+```{r, echo=T}
+2*(1-pnorm(3.765, mean=0, sd=1))
+```
+So we can reject the hypothesis that streptomycin has no effect on tuberculosis at the $\alpha=0.05$ level (and indeed many lower levels).
+:::
+
+### An alternative approach: chi-squared
+
+Another way to approach this would be to conduct a **chi-squared** test.
+
+In a chi-squared test, we first calculate the **expected** values $\left(E_i\right)$ in each box of the summary table, and compare them to the **observed** values $\left(O_i\right)$ by finding the summary statistic
+
+$$ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.$$
+
+Under the null hypothesis (that $p_C = p_T$) this has a $\chi^2$ distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the $\chi^2_1$ distribution.
+
+::: {.example}
+Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion $p=0.514$ of the total number of patients were improved. There are 52 in the control group, therefore we expect $0.514\times 52 = 26.73$ improved patients in the control group, and by the same logic $0.514\times 55 = 28.27$ in the treatment group. Our expected table is therefore 
+
+```{r}
+tab_exp = tab_obs
+tab_exp[1,1] = (1-0.514)*55
+tab_exp[1,2] = (0.514)*55
+tab_exp[2,1] = (1-0.514)*52
+tab_exp[2,2] = (0.514)*52
+tab_exp
+```
+
+We can therefore calculate the $\chi^2$ statistic by looping through the elements of the tables:
+
+```{r, echo=T}
+sum_chi_sq = 0 # set a running total going 
+# in the following, tab_obs is the table of observed values and
+# tab_exp is the table of expected values
+for (i in 1:2){
+  for (j in 1:2){
+    tmp = ((tab_obs[i,j] - tab_exp[i,j])^2)/tab_exp[i,j]
+    sum_chi_sq = sum_chi_sq + tmp
+  }
+}
+sum_chi_sq
+1-pchisq(sum_chi_sq, df=1)
+```
+and again we have a very significant result. 
+
+In fact, these two tests are almost equivalent, and we have that $\sqrt{X^2} = Z$:
+```{r, echo=T}
+sqrt(sum_chi_sq)
+```
+:::
+
+
+### Likelihood: A more rigorous way
+
+Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.
+
+Earlier we set up notation $y_{iC}$ to be outcome variable (0 or 1, in this case) of the $i$-th participant in the control group (and so on), and we will use that here.
+
+The contribution of the $i$-th patient in group $C$ to the likelihood is 
+
+$$\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{y_{iC}} $$
+(remember we can ignore multiplicative constant terms). Combining all $n_C$ patients in group $C$, their contribution will be 
+
+$$ \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C},$$
+where $r_C$ is the number of 'successes' in group $C$. Similarly for the treatment group we will have
+
+$$ \pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.$$
+Gathering these terms together we can find the complete likelihood function
+
+$$
+\begin{aligned}
+L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) &
+  L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
+  & = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
+\end{aligned}
+$$
+The log-likelihood is therefore
+
+$$ l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right) = r_C\log\pi_C + \left(n_C-r_C\right)\log\left(1-\pi_C\right) + r_T\log\pi_T + \left(n_T-r_T\right)\log\left(1-\pi_T\right).$$
+If we differentiate with respect to $\pi_C$, we find
+
+$$\frac{\mathrm{d} l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)}{\mathrm{d}\pi_C} = \frac{r_C}{\pi_C} - \frac{n_C-r_C}{1-\pi_C}.$$ 
+Setting this to zero we find (reassuringly!) that $\hat\pi_C = \frac{r_C}{n_C}$. We can repeat this exercise for $\pi_T$. If we assume that there is one common probability $\pi$ of success, we can find $\hat\pi$ by maximising
+$l\left(\pi,\pi \mid {n_C,n_T, r_C, r_T}\right)$ with respect to $\pi$, and again this works out to be $\frac{r_{C} + r_T}{n}$ as before.
+
+We can use these to construct a **likelihood ratio test**, by calculating
+
+$$
+\begin{aligned}
+\lambda_{LR} = & -2\left[l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right) - l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)\right]\\
+ =  & 2\left[\underbrace{r_C\log\frac{r_C}{n_C} + \left(n_C-r_C\right)\log\left(1-\frac{r_C}{n_C}\right) + r_T\log\frac{r_T}{n_T} + \left(n_T-r_T\right)\log\left(1-\frac{r_T}{n_T}\right) }_{l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)} \right. \\
+&\;\;\;\;\;\; \left. - \underbrace{\Big(r\log\left(p\right) + \left(n-r\right)\log\left(1-p\right)\Big)}_{l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right)}\right]\\
+ =& 2\left[\underbrace{r_C \log\left(\frac{r_C}{n_C p}\right)}_{\text{Group }C\text{ success}} + \underbrace{\left(n_C - r_C\right)\log\left(\frac{n_C - r_C}{n_C\left(1-p\right)}\right)}_{\text{Group }C\text{ fail}} \right.\\
+ & \;\;\;\;\;\; \left.+ \underbrace{r_T \log\left(\frac{r_T}{n_T p}\right)}_{\text{Group }T\text{ success}} + \underbrace{\left(n_T - r_T\right)\log\left(\frac{n_T - r_T}{n_T\left(1-p\right)}\right)}_{\text{Group }T\text{ fail}}\right]
+\end{aligned}
+$$
+where we use $p,\, r,\, n$ to denote the pooled values ($n = n_C + n_T$ etc.).
+
+Each term in the final line corresponds to a subgroup of the participants, as labelled, and if we rearrange them slightly we see that this can be re-written as
+
+$$\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),$$
+where $G$ is the set of subgroups (group $C$ success etc.). Under the null hypothesis that $\pi_C = \pi_T = \pi$, and for sufficiently large $n_C,\;n_T$, $\lambda_{LR}$ has a $\chi^2$ distribution with one degree of freedom.
+
+:::{.example}
+
+Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.
+
+```{r, echo=T}
+sum_LR = 0 # set a running total going 
+# in the following, tab_obs is the table of observed values and
+# tab_exp is the table of expected values
+for (i in 1:2){
+  for (j in 1:2){
+    tmp = tab_obs[i,j] * log(tab_obs[i,j]/tab_exp[i,j])
+    sum_LR = sum_LR + tmp
+  }
+}
+teststat_LR = 2*sum_LR
+teststat_LR
+1-pchisq(teststat_LR, df=1)
+
+```
+Not surprisingly, this value is quite close to the one we obtained earlier!
 
 :::
+
+## Measures of difference for binary data
+
+In the above example the question we were interested in was 'is what we've observed statistically significant?' and in our streptomycin example the answer was a resounding 'Yes!'. However, if we then ask questions like 'How big is the difference between the effects of each treatment?' or 'What is the treatment effect?', things get a bit less clear. 
+
+In the continuous case, it made sense to simply think about the treatment effect as the difference $\mu_T - \mu_C$ between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions $\pi_C$ and $\pi_T$, and each of them requires a different approach.
+
+### Absolute risk difference and Number Needed to Treat
+
+The **absolute risk difference** is 
+
+$$\text{ARD} = \pi_T - \pi_C,$$
+and is sometimes used. However, it loses a lot of information that we'd probably like to keep in some how. For example, suppose a treatment reduces the incidence of some terrible symptom from $\pi_C=0.03$ to $\pi_T=0.01$. The absolute risk difference is $0.02$ here. For some other treatment that results in a reduction from $\pi_C=0.57$ to $\pi_T = 0.55$ we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.
+
+It is useful though to remember that usually these numbers are about people. If the outcome is 'cured' or 'not cured', then for some cohort of $N$ patients, $N\times\text{ARD}$ is the number of extra patients you would expect to cure if you used treatment $T$ instead of treatment $C$ (which may be nothing or may some usual course of treatment).
+
+Linked to this is the **number needed to treat** (NNT), which is defined as
+
+$$ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. $$
+The NNT is the number of patients you'd need to treat (with treatment $T$ rather than $C$) before you would bring benefit to one extra patient. The website [TheNNT](https://thennt.com/) collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!
+
+The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if $\pi_T = 0.25,\,\pi_C=0.2$, then $\text{ARD} = 0.05$ and $\text{NNT} = 20.$ After treating 20 patients with treatment $C$ we expect to cure (say) 4, whereas treating 20 patients with treatment $T$ it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if $\pi_C=0.005$ and $\pi_T = 0.015$ then $\text{ARD}=0.01$ and $\text{NNT}=100$. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!
+
+### Risk Ratio (RR)
+
+The **risk ratio** is defined as 
+
+$$\text{RR} = \frac{\pi_C}{\pi_T}$$
+
+
+### Odds ratio (OR)
+
+The **odds ratio** is defined as 
+$$\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}$$
+
+
+
+

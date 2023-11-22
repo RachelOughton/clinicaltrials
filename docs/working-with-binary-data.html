@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-11-20" />
+<meta name="date" content="2023-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -251,7 +251,17 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a></li>
+<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>7.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="7.1.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>7.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>7.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>7.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#risk-ratio-rr"><i class="fa fa-check"></i><b>7.2.2</b> Risk Ratio (RR)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#odds-ratio-or"><i class="fa fa-check"></i><b>7.2.3</b> Odds ratio (OR)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
 <li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
@@ -367,19 +377,155 @@ and in calculations we replace <span class="math inline">\(\pi\)</span> with <sp
 <p>Putting all this together, our test statistic is</p>
 <p><span class="math display">\[Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 7.1  </strong></span>The data in this example comes from <span class="citation">De Backer et al. (<a href="#ref-terbinafine">1998</a>)</span>, in which two new oral antifungal medicines were compared in terms of their effectiveness at treating toenail infections. The two treatments are terbinafine and itraconazole</p>
+<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 7.1  </strong></span>The data in this example comes from <span class="citation">al (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
 <pre><code>##               improved
 ## arm            FALSE TRUE
 ##   Streptomycin    17   38
 ##   Control         35   17</code></pre>
+<p>We therefore have</p>
+<p><span class="math display">\[
+\begin{aligned}
+n_C &amp; = 52 \\
+n_T &amp; = 55 \\
+p_C &amp; = \frac{17}{17+35} &amp; = 0.327\\
+p_T &amp; = \frac{38}{38+17} &amp; = 0.691\\
+p &amp; = \frac{38+17}{107} &amp;= 0.514.
+\end{aligned}
+\]</span>
+and can calculate our <span class="math inline">\(Z\)</span> statistic to be</p>
+<p><span class="math display">\[
+\begin{aligned}
+Z &amp; = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52} + \frac{1}{55}\right)}}\\
+&amp; = 3.765.
+\end{aligned}
+\]</span></p>
+<p>Finally, we can find the <span class="math inline">\(p\)</span>-value of this test statistic (making sure to have two tails!)</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="working-with-binary-data.html#cb15-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">3.765</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## [1] 0.0001665491</code></pre>
+<p>So we can reject the hypothesis that streptomycin has no effect on tuberculosis at the <span class="math inline">\(\alpha=0.05\)</span> level (and indeed many lower levels).</p>
 </div>
+<div id="an-alternative-approach-chi-squared" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> An alternative approach: chi-squared<a href="working-with-binary-data.html#an-alternative-approach-chi-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another way to approach this would be to conduct a <strong>chi-squared</strong> test.</p>
+<p>In a chi-squared test, we first calculate the <strong>expected</strong> values <span class="math inline">\(\left(E_i\right)\)</span> in each box of the summary table, and compare them to the <strong>observed</strong> values <span class="math inline">\(\left(O_i\right)\)</span> by finding the summary statistic</p>
+<p><span class="math display">\[ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.\]</span></p>
+<p>Under the null hypothesis (that <span class="math inline">\(p_C = p_T\)</span>) this has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the <span class="math inline">\(\chi^2_1\)</span> distribution.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-21" class="example"><strong>Example 7.2  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
+<pre><code>##               improved
+## arm             FALSE   TRUE
+##   Streptomycin 26.730 28.270
+##   Control      25.272 26.728</code></pre>
+<p>We can therefore calculate the <span class="math inline">\(\chi^2\)</span> statistic by looping through the elements of the tables:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="working-with-binary-data.html#cb18-1" tabindex="-1"></a>sum_chi_sq <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
+<span id="cb18-2"><a href="working-with-binary-data.html#cb18-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
+<span id="cb18-3"><a href="working-with-binary-data.html#cb18-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
+<span id="cb18-4"><a href="working-with-binary-data.html#cb18-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb18-5"><a href="working-with-binary-data.html#cb18-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb18-6"><a href="working-with-binary-data.html#cb18-6" tabindex="-1"></a>    tmp <span class="ot">=</span> ((tab_obs[i,j] <span class="sc">-</span> tab_exp[i,j])<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>tab_exp[i,j]</span>
+<span id="cb18-7"><a href="working-with-binary-data.html#cb18-7" tabindex="-1"></a>    sum_chi_sq <span class="ot">=</span> sum_chi_sq <span class="sc">+</span> tmp</span>
+<span id="cb18-8"><a href="working-with-binary-data.html#cb18-8" tabindex="-1"></a>  }</span>
+<span id="cb18-9"><a href="working-with-binary-data.html#cb18-9" tabindex="-1"></a>}</span>
+<span id="cb18-10"><a href="working-with-binary-data.html#cb18-10" tabindex="-1"></a>sum_chi_sq</span></code></pre></div>
+<pre><code>## [1] 14.17595</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="working-with-binary-data.html#cb20-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(sum_chi_sq, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0001664847</code></pre>
+<p>and again we have a very significant result.</p>
+<p>In fact, these two tests are almost equivalent, and we have that <span class="math inline">\(\sqrt{X^2} = Z\)</span>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="working-with-binary-data.html#cb22-1" tabindex="-1"></a><span class="fu">sqrt</span>(sum_chi_sq)</span></code></pre></div>
+<pre><code>## [1] 3.765097</code></pre>
+</div>
+</div>
+<div id="likelihood-a-more-rigorous-way" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Likelihood: A more rigorous way<a href="working-with-binary-data.html#likelihood-a-more-rigorous-way" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.</p>
+<p>Earlier we set up notation <span class="math inline">\(y_{iC}\)</span> to be outcome variable (0 or 1, in this case) of the <span class="math inline">\(i\)</span>-th participant in the control group (and so on), and we will use that here.</p>
+<p>The contribution of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span> to the likelihood is</p>
+<p><span class="math display">\[\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{y_{iC}} \]</span>
+(remember we can ignore multiplicative constant terms). Combining all <span class="math inline">\(n_C\)</span> patients in group <span class="math inline">\(C\)</span>, their contribution will be</p>
+<p><span class="math display">\[ \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C},\]</span>
+where <span class="math inline">\(r_C\)</span> is the number of ‘successes’ in group <span class="math inline">\(C\)</span>. Similarly for the treatment group we will have</p>
+<p><span class="math display">\[ \pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.\]</span>
+Gathering these terms together we can find the complete likelihood function</p>
+<p><span class="math display">\[
+\begin{aligned}
+L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) &amp;
+  L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
+  &amp; = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
+\end{aligned}
+\]</span>
+The log-likelihood is therefore</p>
+<p><span class="math display">\[ l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right) = r_C\log\pi_C + \left(n_C-r_C\right)\log\left(1-\pi_C\right) + r_T\log\pi_T + \left(n_T-r_T\right)\log\left(1-\pi_T\right).\]</span>
+If we differentiate with respect to <span class="math inline">\(\pi_C\)</span>, we find</p>
+<p><span class="math display">\[\frac{\mathrm{d} l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)}{\mathrm{d}\pi_C} = \frac{r_C}{\pi_C} - \frac{n_C-r_C}{1-\pi_C}.\]</span>
+Setting this to zero we find (reassuringly!) that <span class="math inline">\(\hat\pi_C = \frac{r_C}{n_C}\)</span>. We can repeat this exercise for <span class="math inline">\(\pi_T\)</span>. If we assume that there is one common probability <span class="math inline">\(\pi\)</span> of success, we can find <span class="math inline">\(\hat\pi\)</span> by maximising
+<span class="math inline">\(l\left(\pi,\pi \mid {n_C,n_T, r_C, r_T}\right)\)</span> with respect to <span class="math inline">\(\pi\)</span>, and again this works out to be <span class="math inline">\(\frac{r_{C} + r_T}{n}\)</span> as before.</p>
+<p>We can use these to construct a <strong>likelihood ratio test</strong>, by calculating</p>
+<p><span class="math display">\[
+\begin{aligned}
+\lambda_{LR} = &amp; -2\left[l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right) - l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)\right]\\
+=  &amp; 2\left[\underbrace{r_C\log\frac{r_C}{n_C} + \left(n_C-r_C\right)\log\left(1-\frac{r_C}{n_C}\right) + r_T\log\frac{r_T}{n_T} + \left(n_T-r_T\right)\log\left(1-\frac{r_T}{n_T}\right) }_{l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)} \right. \\
+&amp;\;\;\;\;\;\; \left. - \underbrace{\Big(r\log\left(p\right) + \left(n-r\right)\log\left(1-p\right)\Big)}_{l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right)}\right]\\
+=&amp; 2\left[\underbrace{r_C \log\left(\frac{r_C}{n_C p}\right)}_{\text{Group }C\text{ success}} + \underbrace{\left(n_C - r_C\right)\log\left(\frac{n_C - r_C}{n_C\left(1-p\right)}\right)}_{\text{Group }C\text{ fail}} \right.\\
+&amp; \;\;\;\;\;\; \left.+ \underbrace{r_T \log\left(\frac{r_T}{n_T p}\right)}_{\text{Group }T\text{ success}} + \underbrace{\left(n_T - r_T\right)\log\left(\frac{n_T - r_T}{n_T\left(1-p\right)}\right)}_{\text{Group }T\text{ fail}}\right]
+\end{aligned}
+\]</span>
+where we use <span class="math inline">\(p,\, r,\, n\)</span> to denote the pooled values (<span class="math inline">\(n = n_C + n_T\)</span> etc.).</p>
+<p>Each term in the final line corresponds to a subgroup of the participants, as labelled, and if we rearrange them slightly we see that this can be re-written as</p>
+<p><span class="math display">\[\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),\]</span>
+where <span class="math inline">\(G\)</span> is the set of subgroups (group <span class="math inline">\(C\)</span> success etc.). Under the null hypothesis that <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, and for sufficiently large <span class="math inline">\(n_C,\;n_T\)</span>, <span class="math inline">\(\lambda_{LR}\)</span> has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-22" class="example"><strong>Example 7.3  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="working-with-binary-data.html#cb24-1" tabindex="-1"></a>sum_LR <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
+<span id="cb24-2"><a href="working-with-binary-data.html#cb24-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
+<span id="cb24-3"><a href="working-with-binary-data.html#cb24-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
+<span id="cb24-4"><a href="working-with-binary-data.html#cb24-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb24-5"><a href="working-with-binary-data.html#cb24-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb24-6"><a href="working-with-binary-data.html#cb24-6" tabindex="-1"></a>    tmp <span class="ot">=</span> tab_obs[i,j] <span class="sc">*</span> <span class="fu">log</span>(tab_obs[i,j]<span class="sc">/</span>tab_exp[i,j])</span>
+<span id="cb24-7"><a href="working-with-binary-data.html#cb24-7" tabindex="-1"></a>    sum_LR <span class="ot">=</span> sum_LR <span class="sc">+</span> tmp</span>
+<span id="cb24-8"><a href="working-with-binary-data.html#cb24-8" tabindex="-1"></a>  }</span>
+<span id="cb24-9"><a href="working-with-binary-data.html#cb24-9" tabindex="-1"></a>}</span>
+<span id="cb24-10"><a href="working-with-binary-data.html#cb24-10" tabindex="-1"></a>teststat_LR <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>sum_LR</span>
+<span id="cb24-11"><a href="working-with-binary-data.html#cb24-11" tabindex="-1"></a>teststat_LR</span></code></pre></div>
+<pre><code>## [1] 14.5028</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="working-with-binary-data.html#cb26-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(teststat_LR, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0001399516</code></pre>
+<p>Not surprisingly, this value is quite close to the one we obtained earlier!</p>
+</div>
+</div>
+</div>
+<div id="measures-of-difference-for-binary-data" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Measures of difference for binary data<a href="working-with-binary-data.html#measures-of-difference-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the above example the question we were interested in was ‘is what we’ve observed statistically significant?’ and in our streptomycin example the answer was a resounding ‘Yes!’. However, if we then ask questions like ‘How big is the difference between the effects of each treatment?’ or ‘What is the treatment effect?’, things get a bit less clear.</p>
+<p>In the continuous case, it made sense to simply think about the treatment effect as the difference <span class="math inline">\(\mu_T - \mu_C\)</span> between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span>, and each of them requires a different approach.</p>
+<div id="absolute-risk-difference-and-number-needed-to-treat" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Absolute risk difference and Number Needed to Treat<a href="working-with-binary-data.html#absolute-risk-difference-and-number-needed-to-treat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>absolute risk difference</strong> is</p>
+<p><span class="math display">\[\text{ARD} = \pi_T - \pi_C,\]</span>
+and is sometimes used. However, it loses a lot of information that we’d probably like to keep in some how. For example, suppose a treatment reduces the incidence of some terrible symptom from <span class="math inline">\(\pi_C=0.03\)</span> to <span class="math inline">\(\pi_T=0.01\)</span>. The absolute risk difference is <span class="math inline">\(0.02\)</span> here. For some other treatment that results in a reduction from <span class="math inline">\(\pi_C=0.57\)</span> to <span class="math inline">\(\pi_T = 0.55\)</span> we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.</p>
+<p>It is useful though to remember that usually these numbers are about people. If the outcome is ‘cured’ or ‘not cured’, then for some cohort of <span class="math inline">\(N\)</span> patients, <span class="math inline">\(N\times\text{ARD}\)</span> is the number of extra patients you would expect to cure if you used treatment <span class="math inline">\(T\)</span> instead of treatment <span class="math inline">\(C\)</span> (which may be nothing or may some usual course of treatment).</p>
+<p>Linked to this is the <strong>number needed to treat</strong> (NNT), which is defined as</p>
+<p><span class="math display">\[ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. \]</span>
+The NNT is the number of patients you’d need to treat (with treatment <span class="math inline">\(T\)</span> rather than <span class="math inline">\(C\)</span>) before you would bring benefit to one extra patient. The website <a href="https://thennt.com/">TheNNT</a> collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!</p>
+<p>The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if <span class="math inline">\(\pi_T = 0.25,\,\pi_C=0.2\)</span>, then <span class="math inline">\(\text{ARD} = 0.05\)</span> and <span class="math inline">\(\text{NNT} = 20.\)</span> After treating 20 patients with treatment <span class="math inline">\(C\)</span> we expect to cure (say) 4, whereas treating 20 patients with treatment <span class="math inline">\(T\)</span> it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if <span class="math inline">\(\pi_C=0.005\)</span> and <span class="math inline">\(\pi_T = 0.015\)</span> then <span class="math inline">\(\text{ARD}=0.01\)</span> and <span class="math inline">\(\text{NNT}=100\)</span>. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!</p>
+</div>
+<div id="risk-ratio-rr" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Risk Ratio (RR)<a href="working-with-binary-data.html#risk-ratio-rr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>risk ratio</strong> is defined as</p>
+<p><span class="math display">\[\text{RR} = \frac{\pi_C}{\pi_T}\]</span></p>
+</div>
+<div id="odds-ratio-or" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Odds ratio (OR)<a href="working-with-binary-data.html#odds-ratio-or" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>odds ratio</strong> is defined as
+<span class="math display">\[\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}\]</span></p>
 
+</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-terbinafine" class="csl-entry">
-De Backer, M, C De Vroey, Emmanuel Lesaffre, I Scheys, and P De Keyser. 1998. <span>“Twelve Weeks of Continuous Oral Therapy for Toenail Onychomycosis Caused by Dermatophytes: A Double-Blind Comparative Trial of Terbinafine 250 Mg/Day Versus Itraconazole 200 Mg/Day.”</span> <em>Journal of the American Academy of Dermatology</em> 38 (5): S57–63.
+<div id="ref-strep_tb" class="csl-entry">
+al, Geoffrey Marshall et. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUBERCULOSIS a MEDICAL RESEARCH COUNCIL INVESTIGATION.”</span> <em>British Medical Journal</em>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf</a>.
 </div>
 </div>
             </section>

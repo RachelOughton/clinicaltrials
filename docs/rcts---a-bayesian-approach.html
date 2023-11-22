@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-11-20" />
+<meta name="date" content="2023-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -251,7 +251,17 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a></li>
+<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>7.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="7.1.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>7.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>7.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>7.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#risk-ratio-rr"><i class="fa fa-check"></i><b>7.2.2</b> Risk Ratio (RR)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#odds-ratio-or"><i class="fa fa-check"></i><b>7.2.3</b> Odds ratio (OR)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
 <li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
@@ -334,7 +344,7 @@ In this study, 401 participants were recruited, all of whom suffered from chroni
 ##   (100 observations deleted due to missingness)
 ## Multiple R-squared:  0.5401, Adjusted R-squared:  0.5308 
 ## F-statistic: 57.55 on 6 and 294 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 This model clearly has a large amount of heteroscedasticity. There must be something we aren’t capturing in our model. We can try a linear model with all interaction terms, to see if anything appears significant.</p>
 <pre><code>## 
 ## Call:
@@ -423,9 +433,12 @@ This model clearly has a large amount of heteroscedasticity. There must be somet
 ##   (100 observations deleted due to missingness)
 ## Multiple R-squared:  0.554,  Adjusted R-squared:  0.5449 
 ## F-statistic: 60.86 on 6 and 294 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /><img src="CT4H_notes_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-29-1.png" width="672" /><img src="CT4H_notes_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+al, Geoffrey Marshall et. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUBERCULOSIS a MEDICAL RESEARCH COUNCIL INVESTIGATION.”</span> <em>British Medical Journal</em>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf</a>.
+</div>
 <div class="csl-entry">
 Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC press.
 </div>
@@ -434,9 +447,6 @@ Altman, Douglas G, and J Martin Bland. 1999a. <span>“How to Randomise.”</spa
 </div>
 <div class="csl-entry">
 ———. 1999b. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
-</div>
-<div class="csl-entry">
-De Backer, M, C De Vroey, Emmanuel Lesaffre, I Scheys, and P De Keyser. 1998. <span>“Twelve Weeks of Continuous Oral Therapy for Toenail Onychomycosis Caused by Dermatophytes: A Double-Blind Comparative Trial of Terbinafine 250 Mg/Day Versus Itraconazole 200 Mg/Day.”</span> <em>Journal of the American Academy of Dermatology</em> 38 (5): S57–63.
 </div>
 <div class="csl-entry">
 Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.

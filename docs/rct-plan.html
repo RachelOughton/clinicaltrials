@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-11-20" />
+<meta name="date" content="2023-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -251,7 +251,17 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a></li>
+<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>7.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="7.1.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>7.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>7.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>7.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#risk-ratio-rr"><i class="fa fa-check"></i><b>7.2.2</b> Risk Ratio (RR)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#odds-ratio-or"><i class="fa fa-check"></i><b>7.2.3</b> Odds ratio (OR)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
 <li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
@@ -593,15 +603,15 @@ N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\s
 \tag{2.8}
 \end{equation}\]</span></p>
 <p>Because <span class="math inline">\(\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}\)</span> is not a function of <span class="math inline">\(\pi_A - \pi_B\)</span>, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group <span class="math inline">\(\left(\pi_A\right)\)</span> is well understood, and the probability for the intervention group <span class="math inline">\(\left(\pi_B\right)\)</span> can be specified by using the nearest clinically important value of <span class="math inline">\(\pi_B\)</span>.</p>
-<p>:::{.example # samplesize1}
-<span class="citation">(From <a href="#ref-smith1994randomised">Smith et al. 1994</a>)</span>
+<div class="example">
+<p><span id="exm:samplesize1" class="example"><strong>Example 2.2  </strong></span><span class="citation">(From <a href="#ref-smith1994randomised">Smith et al. 1994</a>)</span>
 This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was ‘Did the patient die within 30d of the procedure?’, and the trial was designed to have <span class="math inline">\(\alpha=0.05,\,\beta=0.95\)</span>, which gives <span class="math inline">\(z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65\)</span>. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation <a href="rct-plan.html#eq:ssbinary">(2.8)</a>) gives us</p>
 <p><span class="math display">\[ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.2}\right)} - \arcsin{\left(\sqrt{0.05}\right)}\right)^2} = 114.9, \]</span>
 and so each group in our trial should contain 115 patients.</p>
 <p>If instead our aim had been to detect a change from around 0.5 to 0.35 (the same in terms of <span class="math inline">\(\pi_A - \pi_B\)</span>), we would instead have needed</p>
 <p><span class="math display">\[ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.5}\right)} - \arcsin{\left(\sqrt{0.35}\right)}\right)^2} = 280.8 ,\]</span>
-that is 281 patients per trial arm.
-:::</p>
+that is 281 patients per trial arm.</p>
+</div>
 </div>
 </div>
 <div id="sample-size-by-simulation" class="section level2 hasAnchor" number="2.3">
