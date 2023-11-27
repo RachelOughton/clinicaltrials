@@ -2,7 +2,126 @@
 
 So far all everything we've covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the $t$-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).
 
-The primary outcome of a trial will often be in the realm of 'success' or 'fail'. Did the participant's symptoms clear up? Did the participant survive? Was the baby born at full term? and so on. We've already covered sample size estimation in Section \@ref(ss-bin), where we set up the following binomial model.
+A binary outcome might be something like 'the patient was alive 2 years after the procedure' or not, or 'the patient was clear of eczema within a month' or not. Such variables are often coded as success or failure, or 0 or 1. 
+        
+## Sample size for a binary variable {#ss-bin}
+        
+For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter \@ref(rct-plan) will not work. 
+      
+Suppose we conduct a trial with a binary primary outcome variable and two groups, A and B, containing $n_A$ and $n_B$ participants respectively. The number of successes in each group, $R_A$ and $R_B$, will be Binomially distributed,
+      
+\begin{align*}
+      R_A &\sim{Bi\left(n_A,\, \pi_A\right)} \\
+      R_B &\sim{Bi\left(n_B,\,\pi_B\right)}.
+\end{align*}
+      
+  Our null hypothesis now is therefore that $\pi_A = \pi_B$, ie. that the probability of success is the same in each group, and we will need enough participants to test this hypothesis with sufficient power. With the trial data we will be able to produce estimates
+      
+\begin{align*}
+      p_A & = \frac{R_A}{n_A} \\
+      p_B & = \frac{R_B}{n_B}.
+\end{align*}
+    
+  Recall that the variance of $p_X$ (where $X$ is $A$ or $B$) is $\pi_X\left(1-\pi_X\right)$, such that the variance depends on the mean. This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate value of $\pi_A$ and $\pi_B$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.
+      
+### The Delta Method
+      
+  We start with a random variable $X$ that has mean $\mu$ and variance $\sigma^2 = \sigma^2\left(\mu\right)$, ie. its variance depends on its mean. If we have a 'well-behaved' (infinitely differentiable etc.) function $f\left(X\right)$, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.
+      
+First, we expand $f\left(X\right)$ in a first-order Taylor series about $\mu$, which gives us
+
+\begin{equation} 
+      f\left(X\right) \approx f\left(\mu\right) + \left(X-\mu\right)f'\left(\mu\right)
+(\#eq:delta1)
+\end{equation}
+
+and therefore
+
+\begin{equation} 
+\left(f\left(X\right) - f\left(\mu\right)\right)^2 \approx \left(X-\mu\right)^2\left[f'\left(\mu\right)\right]^2.
+(\#eq:delta2)
+\end{equation}
+  
+  If we take expectations of Equation \@ref(eq:delta1) we find $E\left(f\left(X\right)\right) \approx f\left(\mu\right)$. We can use this in the left-hand side of Equation \@ref(eq:delta2)  so that when we take expectations of Equation \@ref(eq:delta2) we find
+  
+  \begin{equation} 
+  \operatorname{var}\left(f\left(X\right)\right) = \sigma^2\left(\mu\right)\left[f'\left(\mu\right)\right]^2,
+(\#eq:delta3)
+\end{equation}
+
+where both sides come from 
+
+$$\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right] .$$ THis series of approximations, which generally works well, is the Delta method. 
+
+One way in which it is often used, and the way in which we will use it now, is to find a transformation $f\left(X\right)$ for which (at least approximately) the variance is unrelated to the mean. To do this, we solve the differential equation
+
+$$ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \left[f'\left(\mu\right)\right]^2 = \text{constant}. $$
+    In the case of proportions for a binary variable, this becomes
+  
+  $$ \frac{\pi\left(1-\pi\right)}{n} \left[f'\left(\pi\right)\right]^2 = K$$
+for some constant $K$. We can rearrange this to
+
+$$f\left(\pi\right) \propto{ \int{\frac{1}{\sqrt{\pi\left(1-\pi\right)}}d\pi}}$$
+and by substituting $\pi = u^2$ we find
+
+\begin{align*}
+f\left(\pi\right) & \propto \int{\frac{1}{\sqrt{u^2\left(1-u^2\right)}}2u\,du}\\
+&\propto \int{\frac{1}{\sqrt{1 - u^2}}}du\\
+& \propto \arcsin{\left(\sqrt{\pi}\right)}.
+\end{align*}
+
+Setting $u=\sqrt{\pi}$ again and $f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)$ and using the chain rule, we find
+
+$$\left[f'\left(\pi\right)\right]^2 = \frac{1}{\sqrt{4\pi\left(1-\pi\right)}} .$$
+    Finally, we can substitute this into Equation \@ref(eq:delta3), with $f\left(X\right) = \arcsin\left(\sqrt{X}\right)$ to find
+  
+  \begin{align*}
+  \operatorname{var}\left[f\left(X\right)\right] & \approx \sigma^2\left(\pi\right)\left[f'\left(\pi\right)\right]^2  \\
+& \approx{\frac{\pi\left(1-\pi\right)}{n}\cdot\frac{1}{4\pi\left(1-\pi\right)}}\\
+& \approx{\frac{1}{4n}},
+\end{align*}
+
+
+and we have achieved our aim of finding a transformation of $X$ whose variance is not related to the mean. This is sometimes called the *angular transformation*.
+
+### A sample size formula
+
+For a binary variable, our estimate $p_X$ (the proportion of successes in group $X$) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of $n$ (less than around 30, which is very small for a clinical trial) or for values of $\pi$ close to 0 or 1, say $\pi<0.15$ or $\pi>0.85$ (this is more likely to be an issue for some trials).
+
+The linear approximation in Equation \@ref(eq:delta1) shows us that if $p_X$ is normally distributed then $f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)$ will be [approximately] normally distributed too. In fact, $\arcsin\left(\sqrt{p_A}\right)$ is approximately normally distributed with mean $\arcsin{\left(\sqrt{\pi_A}\right)}$ and variance $1/\left(4\pi_A\right)$. Using this information, we can test $H_0:\,\pi_A =\pi_B$ at the 100$\alpha$% confidence level by using the variable 
+
+$$
+D =  \frac{\arcsin{\left(\sqrt{p_A}\right)} - \arcsin{\left(\sqrt{p_B}\right)}}{\frac{1}{\sqrt{4nA}} + \frac{1}{\sqrt{4n_B}}}=  \frac{\arcsin{\left(\sqrt{p_A}\right)} - \arcsin{\left(\sqrt{p_B}\right)}}{\frac{1}{2}\lambda\left(n_A,n_B\right)},
+$$
+which is analogous to the variable $D$ constructed in Section \@ref(sec-measDcont); the difference in $f\left(p_A\right)$ and $\f\left(p_B\right)$ divided by the standard error of the difference. 
+
+Using the same logic as in Sections  \@ref(sec-power) and \@ref(sec-ssformulacont), the starting place for a sample size formula to achieve significance level $\alpha$ and power $\beta$ is 
+
+$$
+\frac{2\left(\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}\right)}{\lambda\left(n_A,n_B\right)} = z_\beta + z_{\frac{\alpha}{2}}.
+$$
+For two groups of equal size $N$, this leads us to
+
+\begin{equation}
+N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}\right)^2}.
+(\#eq:ssbinary)
+\end{equation}
+
+Because $\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}$ is not a function of $\pi_A - \pi_B$, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group $\left(\pi_A\right)$ is well understood, and the probability for the intervention group $\left(\pi_B\right)$ can be specified by using the nearest clinically important value of $\pi_B$.
+
+:::{.example #samplesize1}
+[From @smith1994randomised]
+This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was 'Did the patient die within 30d of the procedure?', and the trial was designed to have $\alpha=0.05,\,\beta=0.95$, which gives $z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65$. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation \@ref(eq:ssbinary)) gives us
+
+$$ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.2}\right)} - \arcsin{\left(\sqrt{0.05}\right)}\right)^2} = 114.9, $$
+and so each group in our trial should contain 115 patients. 
+
+If instead our aim had been to detect a change from around 0.5 to 0.35 (the same in terms of $\pi_A - \pi_B$), we would instead have needed 
+
+$$ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.5}\right)} - \arcsin{\left(\sqrt{0.35}\right)}\right)^2} = 280.8 ,$$
+that is 281 patients per trial arm.
+:::
+
 
 For a group $n$ of participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group $C$ the number of 'successes' would be modelled by
 
@@ -227,6 +346,57 @@ Not surprisingly, this value is quite close to the one we obtained earlier!
 
 :::
 
+
+```{r}
+stent_obs = data.frame(survived = c(79,89), died = c(13,3))
+row.names(stent_obs) = c("Surgery", "Treatment")
+
+stent_exp = data.frame(survived = c(84,84), died = c(8,8))
+row.names(stent_exp) = c("Surgery", "Treatment")
+
+# First way
+pc_obs = 13/92
+pt_obs = 3/92
+p_null = 2/23
+
+num1 = pt_obs - pc_obs
+den1 = sqrt(p_null*(1-p_null)*(2/92))
+tstat1_stent = num1/den1
+
+2*(1-pnorm(q=tstat1_stent, lower.tail = F)) # 0.00889
+
+# Chi-sq
+
+sum_chi_sq_st = 0 # set a running total going 
+# in the following, tab_obs is the table of observed values and
+# tab_exp is the table of expected values
+for (i in 1:2){
+  for (j in 1:2){
+    tmp = ((stent_obs[i,j] - stent_exp[i,j])^2)/stent_exp[i,j]
+    sum_chi_sq_st = sum_chi_sq_st + tmp
+  }
+}
+sum_chi_sq_st
+1-pchisq(sum_chi_sq_st, df=1)
+
+## LR
+
+sum_LR_st = 0 # set a running total going 
+# in the following, tab_obs is the table of observed values and
+# tab_exp is the table of expected values
+for (i in 1:2){
+  for (j in 1:2){
+    tmp = stent_obs[i,j] * log(stent_obs[i,j]/stent_exp[i,j])
+    sum_LR_st = sum_LR_st + tmp
+  }
+}
+teststat_LR_st = 2*sum_LR_st
+teststat_LR_st
+1-pchisq(teststat_LR_st, df=1)
+
+
+```
+
 ## Measures of difference for binary data
 
 In the above example the question we were interested in was 'is what we've observed statistically significant?' and in our streptomycin example the answer was a resounding 'Yes!'. However, if we then ask questions like 'How big is the difference between the effects of each treatment?' or 'What is the treatment effect?', things get a bit less clear. 
@@ -260,6 +430,8 @@ $$\text{RR} = \frac{\pi_C}{\pi_T}$$
 
 The **odds ratio** is defined as 
 $$\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}$$
+
+## Accounting for covariates: logistic regression
 
 
 
