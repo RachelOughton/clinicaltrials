@@ -185,7 +185,7 @@ $$Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C
 
 ::: {.example}
 
-The data in this example comes from @strep_tb, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.
+The data in this example comes from @strep_tb, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.
 
 
 ```{r}
@@ -347,55 +347,7 @@ Not surprisingly, this value is quite close to the one we obtained earlier!
 :::
 
 
-```{r}
-stent_obs = data.frame(survived = c(79,89), died = c(13,3))
-row.names(stent_obs) = c("Surgery", "Treatment")
 
-stent_exp = data.frame(survived = c(84,84), died = c(8,8))
-row.names(stent_exp) = c("Surgery", "Treatment")
-
-# First way
-pc_obs = 13/92
-pt_obs = 3/92
-p_null = 2/23
-
-num1 = pt_obs - pc_obs
-den1 = sqrt(p_null*(1-p_null)*(2/92))
-tstat1_stent = num1/den1
-
-2*(1-pnorm(q=tstat1_stent, lower.tail = F)) # 0.00889
-
-# Chi-sq
-
-sum_chi_sq_st = 0 # set a running total going 
-# in the following, tab_obs is the table of observed values and
-# tab_exp is the table of expected values
-for (i in 1:2){
-  for (j in 1:2){
-    tmp = ((stent_obs[i,j] - stent_exp[i,j])^2)/stent_exp[i,j]
-    sum_chi_sq_st = sum_chi_sq_st + tmp
-  }
-}
-sum_chi_sq_st
-1-pchisq(sum_chi_sq_st, df=1)
-
-## LR
-
-sum_LR_st = 0 # set a running total going 
-# in the following, tab_obs is the table of observed values and
-# tab_exp is the table of expected values
-for (i in 1:2){
-  for (j in 1:2){
-    tmp = stent_obs[i,j] * log(stent_obs[i,j]/stent_exp[i,j])
-    sum_LR_st = sum_LR_st + tmp
-  }
-}
-teststat_LR_st = 2*sum_LR_st
-teststat_LR_st
-1-pchisq(teststat_LR_st, df=1)
-
-
-```
 
 ## Measures of difference for binary data
 
@@ -419,14 +371,84 @@ The NNT is the number of patients you'd need to treat (with treatment $T$ rather
 
 The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if $\pi_T = 0.25,\,\pi_C=0.2$, then $\text{ARD} = 0.05$ and $\text{NNT} = 20.$ After treating 20 patients with treatment $C$ we expect to cure (say) 4, whereas treating 20 patients with treatment $T$ it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if $\pi_C=0.005$ and $\pi_T = 0.015$ then $\text{ARD}=0.01$ and $\text{NNT}=100$. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!
 
-### Risk Ratio (RR)
+Let's suppose we want to work with the ARD, and to make a confidence interval for the treatment difference $\tau_{ARD} = \pi_T - \pi_C$. Using the same normal  approximation as before, we can estimate $\tau_{ARD}$ by $p_T - p_C$, and $\operatorname{var}\left(p_T - p_C\right)$ by 
+
+$$ \frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}.$$
+Our $100\left(1-\alpha\right)$% confidence interval is therefore given by
+
+$$\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right) $$
+
+:::{.example}
+Back to our streptomycin example, we can now construct a $100\left(1-\alpha\right)$% confidence interval for the ARD.
+
+Our estimated treatment effect is (to 3 decimal places)
+
+$$\hat\tau=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.$$
+Our estimate of the standard error of $\hat\tau$ is
+
+$$
+\begin{aligned}
+\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C} & = \frac{\frac{38}{55}\times \frac{17}{55}}{55} + \frac{\frac{17}{52}\times \frac{35}{52}}{52}\\
+& = 0.0811
+\end{aligned}
+$$
+and therefore a 95% confidence interval for $\tau_{ARD}$ is
+
+$$\left(0.364 - z_{0.975}\sqrt{0.0811},\; 0.364 + z_{0.975}\sqrt{0.0811}\right) = \left(0.187,\; 0.541\right). $$
+As we should expect from the very low $p$-value we saw, the 95% confidence interval does not contain zero.
+
+If we want to think instead in terms of NNT (the number needed to treat), then we need to find the reciprocal of our estimate of $\tau_{ARD}$:
+
+$$ \text{NNT} = \frac{1}{\tau_{ARD}} = \frac{1}{0.364} = 2.75.$$
+That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for $\tau_{ARD}$ to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get
+
+$$\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).$$
+Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
+
+```{r}
+plot_ard = ggplot(data=NULL) + geom_function(fun=dnorm, args = list(mean = tauhat, sd = sqrt(varhat)))+xlab("ARD - approximately normal") + ylab("Density") +
+  xlim(0,0.8) +
+  geom_vline(xintercept = tauhat, col = "blue")+
+  geom_vline(xintercept = c(0.187, 0.541), lty=2, col="blue")
+
+x_vec = rnorm(n=100000, mean = tauhat, sd = sqrt(varhat))
+nnt_df = data.frame(x = 1/x_vec)
+
+plot_nnt = ggplot(data=nnt_df, aes(x=x)) + geom_density() + xlim(0,8) + xlab("NNT") + ylab("Density")+
+  geom_vline(xintercept = 1/tauhat, col = "blue") +
+  geom_vline(xintercept = c(1.85,5.34), lty=2, col="blue")
+
+grid.arrange(plot_ard, plot_nnt)
+```
+:::
+
+#### What if the difference is not significant?
+
+In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will use the same data as for our streptomycin example, but will pretend that it was a smaller trial (about a quarter of the size). 
+
+:::{.example}
+
+Our new (quartered) dataset will be
+
+```{r}
+round(tab_obs/4)
+```
+
+                      Successes   Failures    Total     
+-----------------     ----------  ---------   --------------
+    **Streptomycin**  9           4           13     
+      **Control**     4           9           13     
+        **Total**     13          13          26     
+        
+The ARD is now
+$$ $$
+
+
+### Risk Ratio (RR) and Odds ratio (OR)
 
 The **risk ratio** is defined as 
 
 $$\text{RR} = \frac{\pi_C}{\pi_T}$$
-
-
-### Odds ratio (OR)
 
 The **odds ratio** is defined as 
 $$\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}$$

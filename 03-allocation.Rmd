@@ -245,16 +245,18 @@ In this case the $P\left(N_{max} \geq 220\right)=0.051$, so the chance of highly
 
 One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $m$, and there are two groups then there are $${2m\choose m},$$ but this method can be adapted to more than two groups and to unequal group size.
 
-If we have two groups, $A$ and $B$, then there are six *blocks* of length containing two $A$s and two $Bs$
+If we have two groups, $A$ and $B$, then there are six *blocks* of length containing two $A$s and two $B$s
 
-\begin{align*}
+$$
+\begin{aligned}
 1.& AABB\\
 2.& ABAB\\
 3.& ABBA\\
 4.& BAAB\\
 5.& BABA\\
 6.& BBAA.
-\end{align}
+\end{aligned}
+$$
 
 We can also randomly generate a sequence of numbers from $\left\lbrace 1, 2, 3, 4, 5, 6 \right\rbrace$, where each number has equal probability. This sequence will correspond to a sequence in $A$ and $B$ with four times the length. In this method, each patient is equally likely to receive $A$ and $B$, but there will never be a difference of more than two between the size of the two groups. 
 
