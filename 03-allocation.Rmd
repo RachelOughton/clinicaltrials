@@ -583,6 +583,8 @@ We see that imbalance is reduced, particularly for small $n$. A small $r$ and la
 
 ## Problems with allocation
 
+THIS SECTION PROBABLY NEEDS TO GO / BE CHANGED, AND I NEED TO MAKE SURE THEY CAN TAKE INTO ACCOUNT THE AGE VARIABLE IN THE ASSIGNMENT
+
 
 In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \@ref(fig:licorice-participants) shows an example.
 

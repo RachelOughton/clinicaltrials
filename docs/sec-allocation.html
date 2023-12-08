@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-11-27" />
+<meta name="date" content="2023-12-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -508,6 +508,7 @@ Figure 4.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 </div>
 <div id="problems-with-allocation" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Problems with allocation<a href="sec-allocation.html#problems-with-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>THIS SECTION PROBABLY NEEDS TO GO / BE CHANGED, AND I NEED TO MAKE SURE THEY CAN TAKE INTO ACCOUNT THE AGE VARIABLE IN THE ASSIGNMENT</p>
 <p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="sec-allocation.html#fig:licorice-participants">4.9</a> shows an example.</p>
 <div class="figure"><span style="display:block;" id="fig:licorice-participants"></span>
 <img src="images/licorice.jpg" alt="Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized" width="60%" />
@@ -518,45 +519,27 @@ Figure 4.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 <p>The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:left;">
-Control (n=100)
-</th>
-<th style="text-align:left;">
-Intervention (n=100)
-</th>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Control (n=100)</th>
+<th align="left">Intervention (n=100)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Gender (female, %)
-</td>
-<td style="text-align:left;">
-50
-</td>
-<td style="text-align:left;">
-50
-</td>
+<tr class="odd">
+<td align="left">Gender (female, %)</td>
+<td align="left">50</td>
+<td align="left">50</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Age, y (mean +/- SD)
-</td>
-<td style="text-align:left;">
-50 +/- 10
-</td>
-<td style="text-align:left;">
-50 +/- 10
-</td>
+<tr class="even">
+<td align="left">Age, y (mean +/- SD)</td>
+<td align="left">50 +/- 10</td>
+<td align="left">50 +/- 10</td>
 </tr>
 </tbody>
 </table>
 <p>This appears to be a perfectly balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <table>
 <thead>
 <tr>

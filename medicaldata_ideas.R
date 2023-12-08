@@ -39,7 +39,8 @@ data("supraclavicular") # survival (with some censoring)
 # Also 
 library(HSAUR)
 
-data("respiratory", package = "HSAUR") # cluster RCT with only two clusters. Binary outcome I think?
+data("respiratory", package = "HSAUR") # Not a cluster RCT, . Binary outcome I think?
+# Each patient recorded at months 0, 1, 2, 3, 4
 
 data(mastectomy)  # Survival Times after Mastectomy of Breast Cancer Patients
 

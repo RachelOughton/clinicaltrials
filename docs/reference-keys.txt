@@ -31,7 +31,7 @@ fig:part-gen1b
 exm:unlabeled-div-12
 tab:captoprildata
 exm:unlabeled-div-13
-tab:unnamed-chunk-13
+tab:unnamed-chunk-10
 exm:unlabeled-div-14
 exm:unlabeled-div-15
 tab:captoprildiff
@@ -51,6 +51,7 @@ exm:unlabeled-div-20
 exm:unlabeled-div-21
 exm:unlabeled-div-22
 exm:unlabeled-div-23
+exm:unlabeled-div-24
 rct-intro
 a-brief-history-of-rcts
 the-structure-of-a-clinical-trial
@@ -110,6 +111,7 @@ likelihood-a-more-rigorous-way
 measures-of-difference-for-binary-data
 absolute-risk-difference-and-number-needed-to-treat
 what-if-the-difference-is-not-significant
+problems-with-the-confidence-interval-for-the-ard
 risk-ratio-rr-and-odds-ratio-or
 accounting-for-covariates-logistic-regression
 working-with-survival-data

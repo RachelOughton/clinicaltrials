@@ -406,6 +406,8 @@ $$\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).$
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
 
 ```{r}
+tauhat = 38/55  - 17/52
+varhat = ((38/55)*(17/55))/55 + ((17/52)*(35/52))/52
 plot_ard = ggplot(data=NULL) + geom_function(fun=dnorm, args = list(mean = tauhat, sd = sqrt(varhat)))+xlab("ARD - approximately normal") + ylab("Density") +
   xlim(0,0.8) +
   geom_vline(xintercept = tauhat, col = "blue")+
@@ -424,24 +426,222 @@ grid.arrange(plot_ard, plot_nnt)
 
 #### What if the difference is not significant?
 
-In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will use the same data as for our streptomycin example, but will pretend that it was a smaller trial (about a quarter of the size). 
+In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will make up some data for a small trial. 
 
-:::{.example}
+The dataset for our made-up trial is
 
-Our new (quartered) dataset will be
-
-```{r}
-round(tab_obs/4)
-```
 
                       Successes   Failures    Total     
 -----------------     ----------  ---------   --------------
-    **Streptomycin**  9           4           13     
-      **Control**     4           9           13     
+    **Treatment**     9           5           14     
+      **Control**     4           8           12     
         **Total**     13          13          26     
         
 The ARD is now
-$$ $$
+$$\frac{9}{14} - \frac{4}{12} = \frac{3}{13} \approx 0.310 $$
+and our 95% confidence interval is $\left(-0.0567,\;0.676\right)$.
+
+```{r}
+p_q = 9/14 - 4/12
+
+varhat_q = ((9/14)*(5/14)) /14 + ((4/12)*(8/12)) /12  
+ci_lower = p_q - qnorm(0.975)*sqrt(varhat_q)
+ci_upper = p_q + qnorm(0.975)*sqrt(varhat_q)
+# c(ci_lower, ci_upper)
+
+```
+ Clearly because of the small size of the trial our confidence interval is very wide (this is not a very good trial!), but the important thing to note is that it now contains zero. It looks very likely that the treatment is effective (the interval only just contains zero) but how many patients might we need to treat before we expect to see an extra success? The expected value of NNT is 
+ 
+ $$ \frac{1}{0.310} = 3.23,$$
+ which does not pose a problem. However, as indicated by the 95% confidence interval, it is possible that the ARD is zero, and in this case the NNT is in some sense infinite: no matter how many patients we treat, we don't expect to see any extra improvements. Therefore, since our confidence interval for ARD contains zero it feels appropriate that our confidence interval for NNT should contain infinity.
+ 
+When thinking about a confidence interval for the NNT, we need to think about signs, and what negative and positive values mean. If both the lower and upper limits of the confidence interval for ARD are positive, there is no issue - the treatment is effective, and our NNT confidence interval is another entirely positive interval. If the confidence interval for ARD is entirely negative, we have an entirely negative interval for NNT. A negative value of NNT can be thought of as the 'number needed to treat to harm one extra person'.
+
+The tricky situation is when the confidence interval for the ARD is $\left(-L, U\right)$ with $L,U>0$, ie. an interval containing zero. As we approach zero from $U$, the upper limit of the CI for $\pi_T - \pi_C$, the number of patients we need to treat increases, since the treatment effect is getting smaller, until at $\pi_T - \pi_C=0$ the NNT is infinite. Therefore, the part of the CI for NNT corresponding to the positive part of the CI for ARD is 
+
+$$\left(\frac{1}{U},\; \infty\right)$$
+
+As we approach zero from the left in the interval (ie. from $-L$), the treatment gets less and less effective (and right now we mean effective in a bad way, likely doing harm to the patients compared to the control), and so we need to treat more and more patients to harm one extra patient compared to the control. In this region the NNT is negative, since if we deny some patients the treatment we will benefit a few. Therefore the CI for the NNT corresponding to the negative part of the CI for ARD is 
+
+$$\left(-\infty,\;-\frac{1}{L}\right), $$
+and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals.
+
+The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).
+
+```{r}
+xl = -0.0567
+xu = 0.676
+yl = 1/xl
+yu = 1/xu
+ard_vec = seq(from = -1, to = 1, len = 1000)
+inv_vec = 1/ard_vec
+inv_df = data.frame(x=ard_vec, y=inv_vec)
+inv_x = function(x){1/x}
+ggplot(data=inv_df, aes(x=x, y=y)) + geom_path() + xlim(-1,1) + ylim(-25,25) +
+  geom_hline(yintercept=0, size=0.3) +
+  geom_vline(xintercept=0, size=0.3) +
+  geom_segment(aes(x = xl, xend=xu, y=0, yend=0), linewidth=1) +
+  geom_segment(aes(x=xl, xend=xl, y=0, yend=yl), linewidth=0.3, lty=2) +
+  geom_segment(aes(x=xu, xend=xu, y=yu, yend=0), linewidth=0.3, lty=2) +
+  geom_segment(aes(x=0, xend=xl, y=yl, yend=yl), linewidth=0.3, lty=3) +
+  geom_segment(aes(x=0, xend=xu, y=yu, yend=yu), linewidth=0.3, lty=3) +
+  geom_segment(aes(x=0, xend=0, y=yl, yend = -25), linewidth=1) +
+  geom_segment(aes(x=0, xend=0, y=yu, yend=25)) +
+  xlab("ARD") + ylab("NNT") + theme_bw()
+```
+ 
+ @altman1998confidence ([available here](https://www.bmj.com/content/bmj/317/7168/1309.full.pdf)) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!
+ 
+#### Problems with the confidence interval for the ARD
+
+You may well remember from the dim and distant past that the method we have been using so far (which in this section we'll be calling the 'standard' method) is not so reliable if the proportion is close to zero or one. @newcombe1998interval compared eleven different methods for finding confidence intervals for the difference in proportions (as we are doing when we work with the ARD) and found the standard method to be the worst! The coverage probability turns out to be much lower than the nominal value, with a so-called 95% confidence interval being closer to 90% or even 85%. A further problem with this method (although it will rarely affect us in practice in this setting) is that the limits of the confidence interval aren't forced to be in $\left[-1,1\right]$.
+
+The preferred method from @newcombe1998interval, for its ease of implementation and its accuracy, is one that relies on *score statistics*. 
+
+The first step is to find an interval estimate for a single proportion $\pi$. As before, this can be written
+
+$$\left\lbrace \pi \mid \frac{\lvert p - \pi \rvert}{\sqrt{\pi\left(1-\pi\right)/n}} \leq z_{\frac{\alpha}{2}} \right\rbrace = \left\lbrace \pi \mid \left(p - \pi\right)^2 \leq z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n} \right\rbrace. $$
+We can find the limits of the confindence interval by changing the right hand side to an equality
+
+$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.$$
+
+In the standard method, we substitute $p$ (the estimated value of $\pi$ from our sample) into the right hand side for $\pi$, to get
+
+$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{p\left(1-p\right)}{n}$$
+
+which we solve to get the limits
+$$ \pi = p \pm z_{\frac{\alpha}{2}}\sqrt{\frac{p\left(1-p\right)}{n}}.$$
+In Newcombe's proposed method, we instead keep $\pi$ in the right hand side and solve the quadratic in terms of $\pi$,
+$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.$$
+The benefit of this new method will be most obvious for a probability that is close to 0 or 1. For example, suppose we have 1 success out of 50 patients, so $p=0.02,\;n=50$. 
+
+The limits of a standard 95% confidence interval will be 
+
+$$\left(0.02 - z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}},\; 0.02 + z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}}\right) = \left(-0.0188,\;0.0588\right),$$
+whereas the limits to the Newcombe 95% CI will be the roots of 
+
+$$\left(0.02-\pi\right)^2 = z^2_{\alpha/2}\frac{\pi\left(1-\pi\right)}{50}$$
+which work out to be
+
+```{r}
+quad_fun = function(a,b,c){
+  disc = b^2 - 4*a*c
+  lower = (-b - sqrt(disc))/(2*a)
+  upper = (-b + sqrt(disc))/(2*a)
+  c(lower, upper)
+}
+
+peg = 0.02
+qf_eg = quad_fun(
+  a = 1 + qnorm(0.975)^2/50,
+  b = -2*peg - qnorm(0.975)^2/50,
+  c = peg^2
+)
+qf_eg
+```
+
+Visually, we can represent this as below
+
+```{r}
+fun_LHSeg = function(x){(0.02 - x)^2}
+fun_RHSeg = function(x){qnorm(0.975)^2*(x*(1-x))/50}
+const_RHSeg = (qnorm(0.975)^2)*peg*(1-peg)/50
+
+ggplot() + geom_function(fun = fun_LHSeg, lty=2) + xlim(-0.1,0.2) +
+  geom_function(fun=fun_RHSeg) +
+  geom_hline(aes(yintercept = const_RHSeg), lty=3) +
+  xlab(expression(pi)) + ylab("") + theme_bw() +
+  geom_vline(xintercept = qf_eg, colour = "red", linewidth=0.4, lty=2) +
+  geom_vline(xintercept = peg, colour = "red", linewidth=0.8) +
+  geom_vline(xintercept = c(-0.0188, 0.0588), lty=3, col="red", linewidth=0.4)
+
+```
+
+:::{.example}
+Returning to our Captopril example, our estimate of the probability of success for the treatment group is $p_T = \frac{38}{55},\;n_T = 55$, and therefore our equation becomes
+
+$$\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.$$
+Solving this equation in the usual way (using the quadratic formula) we find the limits
+
+```{r}
+pT = 38/55
+quad_fun(
+  a = 1 + qnorm(0.975)^2/55,
+  b = -2*pT - qnorm(0.975)^2/55,
+  c = pT^2
+)
+```
+
+By contrast, in our standard method we have 
+$$\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\frac{38}{55}\left(1-\frac{38}{55}\right)}{55}$$
+which is
+
+```{r}
+fun_LHS = function(x){(38/55 - x)^2}
+fun_RHS = function(x){qnorm(0.975)^2*(x*(1-x))/55}
+const_RHS = (qnorm(0.975)^2)*pT*(1-pT)/55
+
+stand_CI = c(pT - qnorm(0.975)*sqrt(pT*(1-pT)/55), pT + qnorm(0.975)*sqrt(pT*(1-pT)/55)) 
+stand_CI
+```
+
+We can see this graphically by plotting the LHS (dashed) and RHS (solid for new method, dotted for standard method). The thick solid red line shows $p_T$, the estimated proportion, the thinner solid red lines show the Newcombe 95% CI and the dashed red lines show the standard 95% CI.
+
+```{r}
+qf_pt = quad_fun(
+  a = 1 + (qnorm(0.975)^2)/55,
+  b = -2*pT - (qnorm(0.975)^2)/55,
+  c = pT^2
+)
+ggplot() + geom_function(fun = fun_LHS, lty=2) + xlim(0.4,0.9) +
+  geom_function(fun=fun_RHS) +
+  geom_hline(aes(yintercept = const_RHS), lty=3) +
+  xlab(expression(pi)) + ylab("") + theme_bw() +
+  geom_vline(xintercept = qf_pt, colour = "red", linewidth=0.4, lty=2) +
+  geom_vline(xintercept = pT, colour = "red", linewidth=0.8) +
+  geom_vline(xintercept = stand_CI, lty=3, col="red", linewidth=0.4)
+
+```
+Notice that the interval with the new method is now asymmetrical, which is more realistic.
+
+Similarly for the control proportion $\pi_C$, we have $p_C = \frac{17}{52},\; n_C=52$, and our Newcombe interval is 
+
+```{r}
+pC = 17/52
+nC = 52
+
+fun_LHSc = function(x){(pC - x)^2}
+fun_RHSc = function(x){qnorm(0.975)^2*(x*(1-x))/nC}
+const_RHSc = (qnorm(0.975)^2)*pC*(1-pC)/nC
+
+stand_CIc = c(pC - qnorm(0.975)*sqrt(pC*(1-pC)/nC), pC + qnorm(0.975)*sqrt(pC*(1-pC)/nC))
+
+qf_ptc = quad_fun(
+  a = 1 + (qnorm(0.975)^2)/nC,
+  b = -2*pC - (qnorm(0.975)^2)/nC,
+  c = pC^2
+)
+qf_ptc
+```
+compared to the standard confidence interval
+```{r}
+stand_CIc
+```
+
+Again, we can see this graphically.
+
+```{r}
+ggplot() + geom_function(fun = fun_LHSc, lty=2) + xlim(0,0.6) +
+  geom_function(fun=fun_RHSc) +
+  geom_hline(aes(yintercept = const_RHSc), lty=3) +
+  xlab(expression(pi)) + ylab("") + theme_bw() +
+  geom_vline(xintercept = qf_ptc, colour = "red", linewidth=0.4, lty=2) +
+  geom_vline(xintercept = pC, colour = "red", linewidth=0.8) +
+  geom_vline(xintercept = stand_CIc, lty=3, col="red", linewidth=0.4)
+
+```
+
+:::
 
 
 ### Risk Ratio (RR) and Odds ratio (OR)
