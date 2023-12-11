@@ -1,4 +1,8 @@
-# Bias
+# Allocation {#sec-allocation}
+
+Once we've decided how many participants we need in our trial, and they've been recruited, we next need to determine which participants should be assigned to which trial arm. This is process is known as **allocation** (or sometimes as **randomization**). Before we think about methods for allocation, we are going to spend some time talking about bias.
+
+## Bias
 In statistics, *bias* is a systematic tendency for the results of our analysis to be different from the true value. We see this particularly when we are using sample data to estimate a parameter. We will revisit what we have learned in previous courses about bias before going on to see how it affects RCTs.
 
 ::: {.definition name="Bias of an estimate"}
@@ -24,11 +28,11 @@ Usually, what this comes down to is that the assumption that the data are indepe
                                                                                          
 Many of the ideas in this section are closely linked to the topic of **allocation**, which we will discuss in detail in Section \@ref(sec-allocation)).
 
-## Where does bias come from?
+### Where does bias come from?
 
 Having established that bias is a serious issue in clinical trials, we will think about several sources of bias. Some of these we will elaborate on as we get to the relevant part of methodology. Most sources of bias creep in during the allocation or selection phase.
 
-### Selection bias
+#### Selection bias
 
 Selection bias occurs when certain patients or subjects are systematically more (or less) likely be entered into the trial because of the treatment they will receive. This shouldn't be able to happen, because it is usually only after a participant has been recruited that 
 their treatment is chosen. If a medical professional is not comfortable with a particular patient potentially receiving one of the possible treatments, then that patient should not be entered into the trial at all. If there are many such [technically eligible] patients, then this might mean that the estimated treatment effect is worryingly far from the true population treatment effect (where the population is the group of all eligible patients), but this is not technically selection bias.
@@ -138,7 +142,7 @@ $$E\left(X\mid{A,N}\right)- E\left(X\mid{A,S}\right) < \tau_N - \tau_S.$$
 
 :::
   
-### Allocation bias
+#### Allocation bias
   
   Mathematically, allocation bias is similar to selection bias, but instead of coming from human 'error', it arises from the random process of allocation. 
 
@@ -146,15 +150,14 @@ Suppose a trial investigates a drug that is likely to have a much stronger effec
 
 We will investigate various strategies for randomization designed to address this issue for known factors.
 
-### Assessment bias
+#### Assessment bias
 
 Measurements are made on participants throughout (and often during) the trial. These measurements will often be objective, for example the patients' weight, or concentration of blood sugar. However, some types of measurement are much more subject to the individual practitioner assessing the patient. For example, many skin conditions are assessed visually, for example estimating the proportion of the body affected. Measuring quantities such as quality of life or psychological well-being involve many subjective judgements on the part of both patient and clinician.
 
 Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of. For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial 'blind', and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware.
 
 
-
-# Allocation {#sec-allocation}
+----
 
 Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. @altman1999treatment gives an overview of why this has led to bias, and gives some examples. @altman1999randomise and @treasure1998minimisation
 
@@ -174,10 +177,6 @@ Point 2 is important to avoid biases that come through the assignment of  a part
 We will now explore some commonly used methods of allocation. We will usually assume two equally sized groups, $A$  and $B$, but it is simple to generalize to three or more groups, or to unequal allocation.
 
 ## Allocation methods 
-
-
-
-
 
 ### Simple random allocation
 
@@ -755,7 +754,7 @@ In order to implement minimisation, we follow these steps:
   3. A new patient enters the trial. They have prognostic factors at levels $w,\,x,\,y,\,z$.
   4. We form the sum 
   $$\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).$$
-  5. If the sum from step 4 is negative (that is, allocation to arm $B$ as dominated up to now) then we allocate the new patient to arm $A$ with probability $P$, with $P>0.5$. If the sum is positive, they are allocated to arm $B$ with probability $P$. If the sum is zero, they are allocated to arm $A$ with probability \frac{1}{2}.
+  5. If the sum from step 4 is negative (that is, allocation to arm $B$ as dominated up to now) then we allocate the new patient to arm $A$ with probability $P$, with $P>0.5$. If the sum is positive, they are allocated to arm $B$ with probability $P$. If the sum is zero, they are allocated to arm $A$ with probability $\frac{1}{2}$.
   
 Some people set $P=1$, whereas others would set $\frac{1}{2}<P<1$ to retain some randomness.  Although setting $P=1$ makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know $n^A_{i+++}$ and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set $P<1$.
 
@@ -781,9 +780,9 @@ output <-
 
 output %>% 
   htmlTable(header = c("Mustine (A)", "Talc (B)"),
-            rnames = c(paste0("1.",intToUtf8(8804),"50"), "2. >50",
+            rnames = c(paste0("1. 50 or younger"), "2. >50",
                        "1. I or II", "2. III or IV",
-                       paste0("1. ",intToUtf8(8804),"30 months"),
+                       paste0("1. 30 months or less"),
                        "2. >30 months",
                        "1. Pre", "2. Post"),
             rgroup = c("Age", "Stage", "Time interval", "Menopausal Status"),

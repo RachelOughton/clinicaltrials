@@ -7,14 +7,27 @@ output:
   bookdown::gitbook:
     highlight: tango
     css: "style.css"
-    config:
+    config:bookdown:
       sharing:
         github: yes
         facebook: no
         twitter: no
+  bookdown::pdf_book:
+    highlight: tango
+    classoption:
+      - onecolumn
+      - portrait
+    extra_dependencies: 
+      geometry: ["margin = 1in"]
+    latex_engine: pdflatex
+    toc: true
+    keep_tex: yes
+    citation_package: natbib
+    df_print: kable
 documentclass: book
 bibliography: [ct4h.bib]
 biblio-style: apalike
+always_allow_html: true
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 description: "These notes mirror what we'll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)."
@@ -23,6 +36,11 @@ description: "These notes mirror what we'll follow in lectures for Clinical Tria
 ```{r setup, include = F}
 knitr::opts_chunk$set(echo=FALSE, message = FALSE, warning = FALSE)
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+# This line sometimes needs commenting out to first generate the html file
+options(knitr.table.format = function() {
+  if (knitr::is_latex_output())
+    "latex" else "pipe"
+ })
 ```
 
 ```{r, echo=F}
@@ -30,15 +48,14 @@ library(medicaldata)
 library(ggplot2)
 library(gridExtra)
 library(knitr)
+library(kableExtra)
 library(magick)
 library(htmlTable)
 library(magrittr)
 library(rstatix)
 ```
 
-# Course Information {-}
-
-Welcome to Clinical Trials 4H!
+# Welcome to Clinical Trials 4H! {-}
 
 This is a 10 credit module, open to fourth year students. 
 An overview of what we'll cover is
@@ -61,6 +78,8 @@ This module is assessed through two equally weighted pieces of coursework. I'll 
 The main reference for the first half of the course is @matthews2006introduction. There are a couple of copies in the Bill Bryson Library.
 
 Some other books we will make use of are @hulley2013designing, @hayes2017cluster
+
+
 
 
 

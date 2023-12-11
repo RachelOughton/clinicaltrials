@@ -3,45 +3,25 @@ title: "Clinical Trials 4H"
 author: "Rachel Oughton"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::gitbook:
+      config:
+      sharing:
+        github: yes
+        facebook: no
+        twitter: no
+  bookdown::pdf_book:
+    toc: false
+    keep_tex: yes
+    citation_package: natbib
+    df_print: kable
 documentclass: book
-bibliography: [ct4h.bib]
+bibliography: ["ct4h.bib"]
 biblio-style: apalike
 link-citations: yes
+always_allow_html: true
 github-repo: rstudio/bookdown-demo
 description: "These notes mirror what we'll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)."
 ---
 
-# Course Information
-
-Welcome to Clinical Trials 4H!
-
-This is a 10 credit module, open to fourth year students.
-
-## Lectures
-
-
-## Comuputer classes
-
-
-## Assessment
-
-This module is assessed through two equally weighted pieces of coursework. I'll give you more details nearer the time, but one will be assigned around half way through the term, the second towards the end of term.
-
-
-
-<!--chapter:end:index.Rmd-->
-
-# Background to RCTs
-
-In the first half of this module, we'll focus on randomised controlled trials. These have mainly been used for clinical applications (for example, to test a particular drug), but have also recently become popular ways to test interventions in areas such as education and policing. Before we get into the theory, we'll think about some of the background to RCTs.
-
-## RCTs - a brief history
-
-## Causal inference
-
-
-
-
-<!--chapter:end:01-rctbackground.Rmd-->
 

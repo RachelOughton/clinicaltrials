@@ -1,4 +1,6 @@
-# Working with binary data
+# (PART) Part II: Other sorts of outcome variables {-}
+
+# Binary outcome variable
 
 So far all everything we've covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the $t$-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).
 
@@ -540,15 +542,15 @@ qf_eg = quad_fun(
 qf_eg
 ```
 
-Visually, we can represent this as below
+Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows $p_T$, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).
 
 ```{r}
 fun_LHSeg = function(x){(0.02 - x)^2}
 fun_RHSeg = function(x){qnorm(0.975)^2*(x*(1-x))/50}
 const_RHSeg = (qnorm(0.975)^2)*peg*(1-peg)/50
 
-ggplot() + geom_function(fun = fun_LHSeg, lty=2) + xlim(-0.1,0.2) +
-  geom_function(fun=fun_RHSeg) +
+ggplot() + geom_function(fun = fun_LHSeg) + xlim(-0.1,0.2) +
+  geom_function(fun=fun_RHSeg, lty=2) +
   geom_hline(aes(yintercept = const_RHSeg), lty=3) +
   xlab(expression(pi)) + ylab("") + theme_bw() +
   geom_vline(xintercept = qf_eg, colour = "red", linewidth=0.4, lty=2) +
@@ -585,7 +587,7 @@ stand_CI = c(pT - qnorm(0.975)*sqrt(pT*(1-pT)/55), pT + qnorm(0.975)*sqrt(pT*(1-
 stand_CI
 ```
 
-We can see this graphically by plotting the LHS (dashed) and RHS (solid for new method, dotted for standard method). The thick solid red line shows $p_T$, the estimated proportion, the thinner solid red lines show the Newcombe 95% CI and the dashed red lines show the standard 95% CI.
+We can see this graphically 
 
 ```{r}
 qf_pt = quad_fun(
@@ -593,8 +595,8 @@ qf_pt = quad_fun(
   b = -2*pT - (qnorm(0.975)^2)/55,
   c = pT^2
 )
-ggplot() + geom_function(fun = fun_LHS, lty=2) + xlim(0.4,0.9) +
-  geom_function(fun=fun_RHS) +
+ggplot() + geom_function(fun = fun_LHS) + xlim(0.4,0.9) +
+  geom_function(fun=fun_RHS, lty=2) +
   geom_hline(aes(yintercept = const_RHS), lty=3) +
   xlab(expression(pi)) + ylab("") + theme_bw() +
   geom_vline(xintercept = qf_pt, colour = "red", linewidth=0.4, lty=2) +
@@ -631,8 +633,8 @@ stand_CIc
 Again, we can see this graphically.
 
 ```{r}
-ggplot() + geom_function(fun = fun_LHSc, lty=2) + xlim(0,0.6) +
-  geom_function(fun=fun_RHSc) +
+ggplot() + geom_function(fun = fun_LHSc) + xlim(0,0.6) +
+  geom_function(fun=fun_RHSc, lty=2) +
   geom_hline(aes(yintercept = const_RHSc), lty=3) +
   xlab(expression(pi)) + ylab("") + theme_bw() +
   geom_vline(xintercept = qf_ptc, colour = "red", linewidth=0.4, lty=2) +
@@ -653,7 +655,58 @@ $$\text{RR} = \frac{\pi_C}{\pi_T}$$
 The **odds ratio** is defined as 
 $$\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}$$
 
-## Accounting for covariates: logistic regression
+## Accounting for baseline observations: logistic regression
+
+We saw with the continuous outcomes that it is often advantageous to include baseline measurements of the outcome (if they are known) in our analysis, and this is the same for binary outcomes. 
+
+In this section we use the term 'baseline observations' to mean any measurement that was known before the trial started. Unlike with continuous measurements, with a binary outcome, there is not usually a pre-trial value of the primary outcome. A binary outcome is often already relative to pre-trial (for example 'Have the patient's symptoms improved?') or refers to an event that definitely wouldn't have happened pre-trial (for example 'Did the patient die within the next 6 months?' or 'Was the patient cured?'). However, as we saw with ANCOVA, we can include other sorts of covariates in a linear model, so this is fine.
+
+The general form of model that we would like for patient $i$ is
+
+$$\text{outcome}_i = \mu + \tau I_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}} + \text{error}_i,$$
+where $I_i$ is an indicator function taking values 1 if patient $i$ was in group $T$ and 0 if they were in group $C$, and $\text{baseline}_1,\;\ldots,\;\text{baseline}_p$ are $p$ baseline measurements that we would like to take into account.
+
+However, this actually creates quite a few problems with binary variables. The outcome for patient $i$ will be either 0 or 1, but the terms in the model above do not guarantee this at all. Adding a normally distributed error term doesn't really make sense in this context, so we will remove it. We can also make the LHS more continuous by thinking of the mean outcome rather than a single outcome. This makes sense, since if several patients were identical to patient $i$ (in the sense of having the same baseline covariate values and being allocated to the same treatment), we probably wouldn't expect them all to have exactly the same outcome. Therefore we might instead think in terms of mean outcome, in which case our model becomes
+
+$$\text{mean outcome}_i = \mu + \tau I_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}.$$
+
+There is one final problem to overcome, which is that the LHS will certainly be in $\left[0,\;1\right]$, but the RHS could take any value. To address this we need to use a transformation, to take the mean outcome from $\left[0,1\right]$ to $\mathbb{R}$.
+
+The transformation that is usually used for a binary variable is the **logit** function
+
+$$\operatorname{logit}\left(\pi\right) = \log\frac{\pi}{1-\pi}.$$
+
+As $\pi$ tends to zero, $\operatorname{logit}\left(\pi\right)$ tends to $-\infty$, and as $\pi$ tends to one, $\operatorname{logit}\left(\pi\right)$ tends to $\infty$. The derivative of the $\operatorname{logit}$ function is
+
+$$ \frac{d\operatorname{logit}\left(\pi\right)}{d\pi} = \frac{1}{\pi\left(1-\pi\right)}$$
+which is always positive for $\pi\in\left[0,1\right]$. This means that we can use it to transform our mean outcome (which we will now call $\pi$, since the mean outcome is the estimate of the probability of success) in the model
+
+$$ \operatorname{logit}\left(\pi\right) = \mu + \tau I_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}$$
+and any value in $\mathbb{R}$ is allowed on both sides. This model is known as **logistic regression**, and belongs to a class of models called **Generalized Linear Models**. If you did Advanced Statistical Modelling III you'll have seen these before. If you haven't seen them, and want to know more, [this article](https://www.r-bloggers.com/2015/08/generalised-linear-models-in-r/) gives a nice introduction (and some useful R tips!).
+
+### What does this model tell us?
+
+We now have an equation for a model that makes sense, but what is it actually modelling? And what does it tell us about the effect of the treatment?
+Consider the difference between two patients who are the same in every respect except one is assigned to group $C$ (so $I=0$) and the other to group $T$ (so $I=1$). The model gives:
+
+$$
+\begin{aligned}
+\operatorname{logit}\left(\pi\right) = \log\left(\frac{\pi}{1-\pi}\right) = \log\left(\text{Odds of success}\right) & = \mu + \tau + \beta_1x_1 + \ldots + \beta_px_p & \text{ (group T)}\\
+\operatorname{logit}\left(\pi\right) = \log\left(\frac{\pi}{1-\pi}\right) = \log\left(\text{Odds of success}\right) & = \mu + \beta_1x_1 + \ldots + \beta_px_p & \text{ (group C)}
+\end{aligned}
+$$
+Subtracting one from the other, we find
+
+$$
+\begin{gather}
+\log(\text{Odds of success for group T}) - \log(\text{Odds of success for group C})\\ = 
+\log\left(\frac{\text{Odds of success for group T}}{\text{Odds of success for group C}}\right) = \log\left(OR\right) = \tau.
+\end{gather}
+$$
+
+That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values.
+
+### Fitting a logistic regression model
 
 
 

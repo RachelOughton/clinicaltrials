@@ -1,3 +1,8 @@
+---
+always_allow_html: true
+---
+
+
 # Analyzing RCT data {#rct-analysis}
 
 We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation $\tau$ to denote the treatment effect.
@@ -21,7 +26,9 @@ df_hommel$arm = as.factor(df_hommel$arm)
 df_hommel_print = df_hommel
 names(df_hommel_print) = c("Patient (ID)", "Baseline (B)", "Outcome at 1 week (X)", "Trial Arm")
 
-knitr::kable(df_hommel_print, caption = "Data for the Captopril trial from @hommel1986effect.")
+knitr::kable(df_hommel_print,  
+             booktabs = TRUE, 
+             caption = "Data for the Captopril trial from @hommel1986effect.")
 
 ```
 
@@ -97,7 +104,7 @@ ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
   stat_function(fun=dt, args=list(df=14))+
   geom_ribbon(data=data.frame(x=x1, y=px1), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + 
   geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) +xlab("Test statistic (t)") + ylab("Density") +
-  geom_vline(xintercept = 1.65, lty=2)
+  geom_vline(xintercept = 1.65, lty=2) + theme_bw()
 ```
 
 The dashed line is at $t=1.65$, and the red shaded areas show anywhere 'at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by 
@@ -247,12 +254,12 @@ For our Captopril example, the sample correlation between baseline and outcome i
 
 In the previous section we based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance. 
 
-However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).
+However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).\@ref(fig:t31-onesided)
 
 
-```{r hommel, fig.cap = "Baseline measurements from the Captopril trial @hommel1986effect."}
+```{r hommel, echo=F, fig.cap = "Baseline measurements from the Captopril trial @hommel1986effect."}
 
-ggplot(data = df_hommel, aes(y=baseline, fill = arm)) + geom_boxplot() + ylab("Baseline (mmHg)")
+ggplot(data = df_hommel, aes(y=baseline, fill = arm)) + geom_boxplot() + ylab("Baseline (mmHg)")+theme_bw()
 
 ```
 The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn't a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference. 
@@ -364,7 +371,7 @@ ggplot(data=df_hommel, aes(x=baseline, y=outcome, col = arm)) +
   geom_abline(
     slope = coef(lm_capt)[["baseline"]],
     intercept = coef(lm_capt)[["(Intercept)"]] + coef(lm_capt)[["armPlacebo"]],
-    colour = "darkturquoise")
+    colour = "darkturquoise")+theme_bw()
 ```
 
 For our previous methods we have calculated a confidence interval for the treatment effect $\tau$, and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of $\hat{\tau}$ is 2.9636. Therefore, to construct a 95/% confidence interval for $\hat{\tau}$, we use (to 3 decimal places)
@@ -386,7 +393,7 @@ ggplot(data = df_hommel, aes(x=baseline, y=resid, col=arm)) +
   geom_point() +
   geom_hline(yintercept=0)+
   xlab("Baseline")+
-  ylab("Residual")
+  ylab("Residual")+theme_bw()
 ```
 These look pretty good, no clear patterns and a similar distribution for each treatment group.
 
@@ -424,12 +431,12 @@ We see that the $p$-value for the coefficient $\lambda$ (seen in the `arm:baseli
 ### Didn't we say that $X_T - X_C$ was an unbiased estimator of $\tau$?
 
 
-### Can we include any other covariates?
+### Can we include any other baseline covariates?
 
 When our estimated treatment effect was $\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)$, we could the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome $X$. However, in ANCOVA, our treatment effect is 
 
 $$ \hat\tau = \left(\bar{x}_T - \bar{x}_C\right) - \hat\gamma\left(\bar{b}_T - \bar{b}_C\right), $$
-and the inclusion of the coefficient $\gamma$ means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation. This is because they cannot, at that point, have been affected by the treatment. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.
+and the inclusion of the coefficient $\gamma$ means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation (hence they are sometimes known as *baseline covariates*, not to be confused with 'the baseline', which would generally mean the same measurement as the primary outcome, but before treatment). This is because they cannot, at that point, have been affected by the treatment, or have had an influence on the post-trial outcome measurement. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.
 
 ::: {.example}
 The data for this example is taken from @datarium. In this study, 60 patients take part in a trial investigating the effect of a new treatment and exercise on their stress score, after adjusting for age.
@@ -470,7 +477,7 @@ ggplot(data=stress_sum, aes(x=fitted, y=resid, col=treatment)) +
   geom_point() +
   xlab("Fitted value") +
   ylab("Residual")+
-  geom_hline(yintercept=0, lty=2)
+  geom_hline(yintercept=0, lty=2)+theme_bw()
 
 
 ```

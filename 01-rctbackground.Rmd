@@ -1,3 +1,4 @@
+
 # Introduction to Clinical Trials {#rct-intro}
 
 A clinical trial is an experiment, usually performed on human subjects, to test the effect of some sort of treatment or intervention. 

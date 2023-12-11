@@ -1,3 +1,5 @@
+# (PART) Part I: Continuous outcome variables {-}
+
 # Designing and planning a randomised controlled trial (RCT) {#rct-plan}
 
 In the first half of this module, we'll focus on randomised controlled trials (RCTs). These have mainly been used for clinical applications (for example, to test a particular drug), but have also recently become popular ways to test interventions in areas such as education and policing. 
@@ -65,7 +67,7 @@ px2 = dt(x2, df=31)
 
 ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
          stat_function(fun=dt, args=list(df=31))+
-  geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + xlab("Test statistic (t)") + ylab("Density")
+  geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + xlab("Test statistic (t)") + ylab("Density") + theme_bw()
 
 ```
 
@@ -91,7 +93,7 @@ px2a = dt(x2a, df=31)
 ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
          stat_function(fun=dt, args=list(df=31))+
   geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4)+
-  geom_ribbon(data=data.frame(x=x2a, y=px2a), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + xlab("Test statistic (t)") + ylab("Density")
+  geom_ribbon(data=data.frame(x=x2a, y=px2a), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + xlab("Test statistic (t)") + ylab("Density") + theme_bw()
 
 ```
 
@@ -175,7 +177,7 @@ that is $X$ has a $t$ distribution with $n$ degrees of freedom.
 Plugging in our $N\left(0,1\right)$ variable for $Z$ and our $\chi^2_{n+m-2}$ variable for $Y$, we have
 
 \begin{align*}
-\frac{\frac{\bar{x}_B - \bar{x}_A}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}}}{\sqrt{\left(\frac{n+m-2}{\sigma^2}s^2\right) \bigg/\left(n+m-2\right)}} & = \frac{\bar{x}_B - \bar{x}_A}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}} \bigg/ \frac{s}{\sigma} \\
+\frac{\frac{\bar{x}_B - \bar{x}_A}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}}}{\sqrt{\left(\frac{n+m-2}{\sigma^2}s^2\right) \bigg/ \left(n+m-2\right)}} & = \frac{\bar{x}_B - \bar{x}_A}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}} \bigg/ \frac{s}{\sigma} \\
 & = \frac{\bar{x}_B - \bar{x}_A}{s\sqrt{\frac{1}{n} + \frac{1}{m}}} \\
 & = D
 \end{align*}
@@ -243,7 +245,7 @@ ggplot() +  stat_function(fun=dnorm) +
   annotate(geom= "text", x=c(-2.5, 5), y=c(0.35,0.35), label = c(expression('Distribution under H'[0]), expression('Distribution under H'[1]))) +
   geom_segment(aes(x=3, xend=3, y=0, yend=0.5), lty=2) +
   annotate(geom = "text", x=3, y=-0.025, label = expression(tau/(sigma*lambda))) +
-  scale_x_continuous(breaks=c(0), limits = c(-5,8))
+  scale_x_continuous(breaks=c(0), limits = c(-5,8)) + theme_bw()
 
 
 ```
@@ -277,7 +279,7 @@ ggplot() +  stat_function(fun=dnorm) +
   annotate(geom= "text", x=c(-2.5, 6), y=c(0.35,0.35), label = c(expression('Distribution under H'[0]), expression('Distribution under H'[1]))) +
   geom_segment(aes(x=4, xend=4, y=0, yend=0.5), lty=2) +
   annotate(geom = "text", x=4, y=-0.025, label = expression(tau/(sigma*lambda))) +
-  scale_x_continuous(breaks=c(0), limits = c(-5,9)) 
+  scale_x_continuous(breaks=c(0), limits = c(-5,9))  + theme_bw()
 
 ```
 
@@ -341,7 +343,7 @@ ggplot(data=df_full, aes(x=tau, y=power, col = SampleSize, lty=SampleSize)) +
   geom_path() + xlim(-1.5, 1.5) +
   xlab(expression(tau*' in units of '*sigma))+
   annotate(geom="text", x=c(-1,-0.75, -0.25), y=c(0.62, 0.8, 0.9),
-           label = parse(text = paste(expression(lambda*"="),  round(c(lambdafun(15,15), lambdafun(20,180), lambdafun(100,100)),3), sep = '*')))
+           label = parse(text = paste(expression(lambda*"="),  round(c(lambdafun(15,15), lambdafun(20,180), lambdafun(100,100)),3), sep = '*'))) + theme_bw()
 
 
 ```
@@ -365,7 +367,7 @@ The **minimum detectable effect size** $\tau_M$ for a particular trial is the sm
   
   Note that we will not *definitely* detect an effect of size $\tau_M$, if it exists; by construction, we will detect it with probability $\beta$. If $|\tau| > |\tau_M|$ (ie. the true effect size is further from zero than $\tau_M$ is) then the probability of detecting it will be greater than $\beta$. If $|\tau| < |\tau_M|$ then the probability of detecting it will be less than $\beta$.
 
-Although we could solve Equation \@ref(eq:powerfun) numerically, in practice we use an approximation. The second term, representing observed values of $D$ that are far enough away from 0 *in the opposite direction from the true \tau* to lead us to reject $H_0$ is so negligible as to be able to be discounted entirely. Indeed, if we were to observe such a value of $D$, we would come to the wrong conclusion about $\tau$.
+Although we could solve Equation \@ref(eq:powerfun) numerically, in practice we use an approximation. The second term, representing observed values of $D$ that are far enough away from 0 *in the opposite direction from the true $\tau$* to lead us to reject $H_0$ is so negligible as to be able to be discounted entirely. Indeed, if we were to observe such a value of $D$, we would come to the wrong conclusion about $\tau$.
 
 Therefore, Equation \@ref(eq:powerfun) becomes
 
