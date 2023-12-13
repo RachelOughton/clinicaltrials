@@ -25,6 +25,7 @@ output:
     citation_package: natbib
     df_print: kable
 documentclass: book
+classoption: openany
 bibliography: [ct4h.bib]
 biblio-style: apalike
 always_allow_html: true
@@ -57,27 +58,51 @@ library(rstatix)
 
 # Welcome to Clinical Trials 4H! {-}
 
-This is a 10 credit module, open to fourth year students. 
-An overview of what we'll cover is
+This page contains the notes for Clinical Trials IV. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
 
-An introduction to clinical trials - part 1
-Designing and planning a randomised clinical trial - parts 2 and 3
+## Practical details {-}
 
-## Lectures {-}
+### Lectures {-}
 
+Our lectures are 12 noon on Mondays and 9am on Wednesdays, all in ES231. This is in the Earth Sciences / Arthur Holmes building, which is behind (almost surrounding) the Calman Learning Centre.
 
-## Computer classes {-}
+### Computer classes {-}
 
+We have two 2-hour practicals for this module. They are 11am - 1pm on the Fridays of weeks 14 and 19 (2nd February and 8th March). These classes are in RH-0003. This is Rowan House, which is in Upper Mountjoy, across the pond from the MCS building. 
 
-## Assessment {-}
+```{r}
+knitr::include_graphics("images/rowanhouse_map.png")
+```
 
-This module is assessed through two equally weighted pieces of coursework. I'll give you more details nearer the time, but one will be assigned around half way through the term, the second towards the end of term.
+### Assessment {-}
 
-## Books {-}
+This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February, the second on Wednesday 13th March.
 
-The main reference for the first half of the course is @matthews2006introduction. There are a couple of copies in the Bill Bryson Library.
+There will also be some formative assignments throughout the course. More details on these to follow.
 
-Some other books we will make use of are @hulley2013designing, @hayes2017cluster
+### Books {-}
+
+The main reference for the first half of the course is @matthews2006introduction. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are @hulley2013designing, @hayes2017cluster. You shouldn't need to use any of these books, but of course you're welcome to if you want to read further.
+
+## What to expect from this module {-}
+
+Clinical Trials IV is somewhat different from the majority of statistics modules, because
+
+  * It is more focussed on application than on methodology
+  * It is assessed purely through coursework.
+  
+This means that your experience of it might be different from what you're used to
+
+  * We will cover quite a lot of different statistical methods (drawing on most of the 1H and 2H courses, and some 3H!) but not in great depth
+  * There is no pressure to memorize anything - indeed, if you really were a trial statistician, you would definitely have access to the internet, various textbooks and indeed these notes (should they prove useful!).
+  * There is an emphasis on understanding which method we use and why, and what it means. Hopefully this has been the case in some of your other modules too!
+  
+### What I expect from you {-}
+
+Because we will be covering quite a lot of different areas within statistics, there may be some things that you haven't seen before (or can't remember very well). I will try my best to explain them as clearly as I can, but there isn't time to go into the nuts and bolts of everything we come across. Therefore, if you do feel a bit rusty on some area, you may need to read up on that a bit, so that you're happy with it. I am very happy to suggest resources from time to time, and you're welcome to come to the office hour to talk about such things.
+
+This is the first year this course is running, and so I would also really appreciate your feedback. I may not be able to address everything (or I may only be able to implement things for following years), but if I can act on it quickly then I will!
+  
 
 
 

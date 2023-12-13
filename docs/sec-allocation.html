@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-12-11" />
+<meta name="date" content="2023-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,18 +164,31 @@ div.csl-indent {
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
 <ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#a-brief-history-of-rcts"><i class="fa fa-check"></i><b>1.1</b> A brief history of RCTs</a></li>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
 <li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.2.1</b> The primary outcome</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
 </ul></li>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
 </ul></li>
 <li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
 <li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Designing and planning a randomised controlled trial (RCT)</a>
@@ -259,7 +272,6 @@ div.csl-indent {
 <li class="chapter" data-level="6.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="6.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.4.1</b> What does this model tell us?</a></li>
-<li class="chapter" data-level="6.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.4.2</b> Fitting a logistic regression model</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -286,7 +298,7 @@ div.csl-indent {
 <h2><span class="header-section-number">3.1</span> Bias<a href="sec-allocation.html#bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In statistics, <em>bias</em> is a systematic tendency for the results of our analysis to be different from the true value. We see this particularly when we are using sample data to estimate a parameter. We will revisit what we have learned in previous courses about bias before going on to see how it affects RCTs.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-8" class="definition"><strong>Definition 3.1  (Bias of an estimate) </strong></span>Suppose that <span class="math inline">\(T\)</span> is a statistic calculated to estimate a parameter <span class="math inline">\(\theta\)</span>. The <strong>bias</strong> of <span class="math inline">\(T\)</span> is <span class="math display">\[E\left(T\right) - \theta.\]</span> If the bias of <span class="math inline">\(T\)</span> is zero, we say that <span class="math inline">\(T\)</span> is an <strong>unbiased estimator</strong> of <span class="math inline">\(\theta\)</span>.</p>
+<p><span id="def:unlabeled-div-10" class="definition"><strong>Definition 3.1  (Bias of an estimate) </strong></span>Suppose that <span class="math inline">\(T\)</span> is a statistic calculated to estimate a parameter <span class="math inline">\(\theta\)</span>. The <strong>bias</strong> of <span class="math inline">\(T\)</span> is <span class="math display">\[E\left(T\right) - \theta.\]</span> If the bias of <span class="math inline">\(T\)</span> is zero, we say that <span class="math inline">\(T\)</span> is an <strong>unbiased estimator</strong> of <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <p>An example you will have seen before is the standard deviation. If we have some data <span class="math inline">\(x_1,\,\ldots,x_n\)</span> that are IID <span class="math inline">\(N\left(\mu,\,\sigma^2\right)\)</span>, we can calculate the sample variance</p>
 <p><span class="math display">\[ s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 .\]</span></p>
@@ -308,7 +320,7 @@ where <span class="math inline">\(\tau\)</span> is our treatment effect, which w
 their treatment is chosen. If a medical professional is not comfortable with a particular patient potentially receiving one of the possible treatments, then that patient should not be entered into the trial at all. If there are many such [technically eligible] patients, then this might mean that the estimated treatment effect is worryingly far from the true population treatment effect (where the population is the group of all eligible patients), but this is not technically selection bias.</p>
 <p>It may happen that the doctor knows which treatment a patient would be given, for example if the allocation follows some deterministic pattern, or is fully known to the doctor in advance . Consciously or subconsciously this knowledge may influence the description they give to potential participants, and this in turn may affect which patients sign up, and the balance of the groups. In practice there should be various safeguards against this situation.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-9" class="example"><strong>Example 3.1  </strong></span>Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.</p>
+<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 3.1  </strong></span>Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.</p>
 <p>The severity of each participants disease is graded as 1 (less serious) or 2 (more serious). Across the full group of participants, proportion <span class="math inline">\(\lambda\)</span> have severity 1 and proportion <span class="math inline">\(1-\lambda\)</span> have severity 2.</p>
 <p>Our primary outcome is survival time, <span class="math inline">\(X\)</span>, which depends on the severity of disease:</p>
 <p><span class="math display">\[\begin{align*}
@@ -624,7 +636,7 @@ Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 </tbody>
 </table>
 <p>This appears to be a perfectly balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <table>
 <thead>
 <tr class="header">
@@ -656,7 +668,7 @@ Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 <h2><span class="header-section-number">3.4</span> Stratified sampling<a href="sec-allocation.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-10" class="example"><strong>Example 3.2  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
+<p><span id="exm:unlabeled-div-12" class="example"><strong>Example 3.2  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
 <p>For sex, we use the levels ‘male’ and ‘female’, and for age we split the range into 50-65, 66-80 and 81 or over. We therefore have six strata, and we use an allocation strategy independently in each stratum. For example, below we have used randomly permuted blocks of length four.</p>
 <table>
 <thead>
@@ -737,7 +749,7 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 3.3  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
+<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 3.3  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
 <p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table @ref(tab:minim_eg).</p>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">

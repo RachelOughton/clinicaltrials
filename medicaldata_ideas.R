@@ -41,6 +41,7 @@ library(HSAUR)
 
 data("respiratory", package = "HSAUR") # Not a cluster RCT, . Binary outcome I think?
 # Each patient recorded at months 0, 1, 2, 3, 4
+# Works but not a super proper trial I don't think.
 
 data(mastectomy)  # Survival Times after Mastectomy of Breast Cancer Patients
 

@@ -1,28 +1,24 @@
 
 # Introduction to Clinical Trials {#rct-intro}
 
-A clinical trial is an experiment, usually performed on human subjects, to test the effect of some sort of treatment or intervention. 
+A clinical trial is an experiment, usually performed on human subjects, to test the effect of some sort of treatment or intervention. We may also use the term **Randomised controlled trial** (RCT). These are not fully the same thing; a clinical trial may not have been randomised, for example if it follows a pre-determined cohort through some sort of process. Likewise, an RCT may not be clinical, but instead may be about an intervention in some other setting like agriculture or education. For this module, we are really focussing on RCTs, and almost all of our examples will be clinical.
 
-In a clinical trial, we will have two groups [is this true!?]:
+For the purposes of this module, a clinical trial will have two groups:
 
   1. The **treatment group** or **intervention group**: this group of people will be subject to the new treatment.
-  2. The **control group**: this group of people will be subject to the status quo - the 'standard' or most widely used treatment path for their cohort.
+  2. The **control group**: this group of people will be subject to the status quo - the 'standard' or most widely used treatment path for their cohort (sometimes this is no treatment).
   
-These groups are usually, though not always, of the same size. Which group each patient is assigned to is usually decided by randomization, which is something we will go on to explore in later lectures.
+These groups are usually, though not always, of the same size. Which group each patient is assigned to is usually decided by randomization, which is something we will go on to explore in later lectures. In reality, trials can have more than two groups, and many statistical methods extend quite naturally to this. 
 
-The goal of the RCT is to estimate the **treatment effect**, with some specified level of confidence. This short description raises lots of statistical issues, which will take up the next few weeks! 
+The goal of the trial is to estimate the **treatment effect**: is the treatment better than the control, and if so, how much? This short description raises lots of statistical issues, which will take up the next few weeks! 
 
 Before we get into the theory, we'll think about some of the background to clinical trials, and introduce some key ideas.
 
-## A brief history of RCTs
-
-Put (very!) simply, the goal of a clinical trial is to determine what works to make people better. Although clinical trials as we know them now have only been around since the Second World War, similar sorts of experiments can be seen from much longer ago.
-
-[some examples from agriculture and from further back? Check Spiegelhalter]
+Put (very!) simply, the goal of a clinical trial is to determine what works to make people better. Although clinical trials as we know them now have only been around since the Second World War, similar sorts of experiments can be seen from much longer ago. If you're interested in learning about the evolution of clinical trials from Biblical times to now, [the James Lind Library](https://www.jameslindlibrary.org/) has some fascinating resources and articles.
 
 ::: {.example}
 **Scurvy (James Lind, 1757)**
-Scurvy was a serious disease, particularly affecting seamen on long voyages. Symptoms were unpleasant (mouth sores, skin lesions etc.) and it could often be fatal. Lind was the ship's surgeon  on board the HMS Salisbury, and had several patients with scurvy. Many remedies were proposed and in popular use at the time (with only anecdotal evidence, if any, to support them), and in 1757 Lind decided to test six of them, on two patients each:
+Scurvy was a serious disease, particularly affecting seamen on long voyages. Symptoms were unpleasant (mouth sores, skin lesions etc.) and it could often be fatal. Lind was the ship's surgeon  on board the HMS Salisbury, and had several patients with scurvy. Many remedies were proposed and in popular use at the time (with only anecdotal evidence, if any, to support them). In 1757 Lind decided to test six such treatments, on two patients each:
 
   * cider
   * dilute sulfuric acid
@@ -43,17 +39,81 @@ ggplot(data=scurvy, aes(x=skin_sores_d6, fill = treatment)) + geom_bar()+
 
 :::
 
+A key thing to notice about the Scurvy example is that Lind went to great lengths to ensure that the treatment was the only thing affecting these 12 sailors: they all started with a similar severity of symptoms, they were kept in the same place and their diet was identical apart from their treatment. This links to one of the foundational principles of clinical trials: causal inference.
+
+## Causal inference and clinical trials
+
+You're probably familiar with the mantra that **"correlation does not imply causation"**: just because two things are correlated, it doesn't mean we can conclude that one causes the other. If you're not convinced, [here](https://www.tylervigen.com/spurious-correlations) are some humorous (and slightly macabre) examples. Causal inference is concerned with the design and analysis of data for uncovering causal relationships.
+
+This is important for us, because we really want to be able to conclude that a treatment works (or doesn't) - that it *causes* recovery, or a reduction in symptoms, or helps the patient in some way. 
+If we were experimental scientists in some laboratory, we could conduct some controlled experiment in which everything was kept under very specific conditions, and could fairly easily make conclusions about the treatment we were testing, and how it behaved in a range of conditions. However, testing treatments on real people is different: we don't have several identical versions of the same person to test the treatment on, and even if we did, as Gwyneth Paltrow shows us it doesn't take very much to completely alter the conditions of someone's existence!
+
+```{r}
+knitr::include_graphics("images/sliding_doors.jpeg")
+```
+
+Neither can we just base our conclusion of whether a treatment works on lab-based tests or theory (although undoubtedly these will both play a part in developing the treatment in the first place). The treatment needs to be tested on actual people. 
+
+Because, as we noted, people are all different, and living different lives (and unlike James Lind we can't force them all to live in the same part of a ship and eat the same food!) we will need to test the treatment on lots of people in order to gather empirical evidence. This is why statistics is so important in the design and analysis of clinical trials. The results of the trial must concluded beyond reasonable doubt, and must be able to be generalized to as-yet-untreated patients. We want to avoid any spurious correlations that are down to chance, or to associations we haven't taken into account. For example, what if the two seamen given citrus were also much younger and generally healthier than the other ten? Maybe they would have recovered quickly anyway? Or what if another treatment was actually much better than citrus, but just happened to have been given to two sailors who had some other pre-existing illness, causing them to suffer much worse with scurvy?
+
+Clinical trials are therefore crucial for modern medicine, and statistics is crucial to clinical trials. But why exactly are clinical trials given this position of importance? Do we really have to do things this way? 
+
 ## The structure of a clinical trial
 
-Research questions, relating real world problem / question to trial, causal analysis. Stuff from @hulley2013designing.
-Causal inference, relating study to the real world etc. Brief overview of less statistical issues.
+In a clinical trial, people are grouped and subdivided in various ways.
 
+### The population of eligible patients {-}
 
+One of the first steps in conducting a trial is to specify exactly what sort of person you want to test the treatment on, and where these people will be found. They may be of a certain sex and/or age range, they may have (or definitely not have) certain conditions. They may suffer from some particular symptom, or be at a particular stage of an illness.
 
-### The primary outcome {#primout}
+A clear set of criteria is key to consistency. Patients are usually recruited as they present (eg. to hospital or a GP centre) and may be being recruited over several years, or by several different clinicians, so it is important that everyone is sticking to the same plan. 
 
-In an RCT, there are usually many measurements performed on patients, and possibly at various different points throughout the trial. However, for the sake of the analysis, we usually determine one to be the **primary outcome variable**. The research questions should be phrased in terms of this variable, and the goal of our design should be to be able to answer questions about this variable. 
+:::{.example}
+In a study by @hjalmas1998enuresis of the use of desmopressin in children with nocturnal enuresis (bed-wetting), children had to be aged 6 - 12 with a history of PMNE (primary monosymptomatic nocturnal enuresis) and no organic pathology (no disease that alters the structure or function of organs). The children had to be free of other urinary problems (such as frequency, urgency or daytime incontinence) and not to have received any treatment for nocturnal enuresis during the 2 months before entering the trial. Children with clinically significant endocrine,
+metabolic, hepatic, psychiatric, neurological, musculoskeletal, cardiovascular, haematological, renal or genitourinary disease were excluded from the trial.
+:::
 
-[examples of primary outcome variables]
+Knowing exactly what type of patients were recruited into the trial is also key when generalizing the results to the population. If the trial recruited males aged 55-70, we cannot confidently conclude that the results will apply to a female aged 26. 
+
+### Entry to the trial {-}
+
+The group of patients recruited will be some subset of the possible population. Patients are allowed to refuse consent to take part, or individual patients may be judged unsuitable despite meeting the criteria. Knowing how many patients to recruit is a statistical question, which we will deal with soon.
+
+### Allocation to groups {-}
+
+These patients are then allocated to receive either the treatment, or to be part of the control group (or more, if there are more than two groups). These groups are often referred to as the **trial arms** - the treatment arm and the control arm. Deciding which patients should be allocated to which group is another statistical question. Once the patients have been allocated, they will receive the treatment (or not) and important measurements will be taken during the trial period.
+
+### Comparing results {-}
+
+Now that the trial has been run, we have two sets of measurements: one for the treatment group and one for the control group. But guess what?! Comparing these and coming to a conclusion about the effect of the treatment is a statistical question.
+
+### Why bother with a control group? {-}
+
+Surely if we want to see whether a treatment works, we should just give it to a patient and see if they get better? Why do we need to also have a group of people not receiving the treatment?
+
+In rare and extreme cases, this is a decent strategy: if a disease has always been fatal, but we start giving patients the treatment and some live, that is pretty solid evidence that the treatment works. This was the case with tuberculous meningitis, until the introduction of Streptomycin in 1944. 
+
+However, most diseases have a fairly uncertain and variable trajectory. If we give a group of patients the treatment, we can't know what would have happened to them if they hadn't received the treatment, or had received a different treatment. Comparing them to patients the past is dodgy because lots of other things may have changed since even the recent past. This is why we have a *concurrent control group* (usually known as just the *control group*). These patients do not receive the new treatment, but instead carry on as usual. The aim is to make the control and treatment groups as similar as possible in all other respects (especially those we deem important) so that at the end we can attribute the difference between the two groups to the treatment.
+
+## The primary outcome {#primout}
+
+In a clinical trial, there are usually many measurements performed on patients, and possibly at various different points throughout the trial. However, for the sake of the analysis, we usually determine one to be the **primary outcome variable**. The research questions should be phrased in terms of this variable, and the goal of our design should be to be able to answer questions about this variable. 
+
+:::{.example}
+In a trial by @villar2020dexamethasone investigating the use of Dexamethasone treatment for acute respiratory distress syndrome , the primary outcome was the 'number of ventilator free days up to 28 days', while other outcomes included 'all-cause mortality after 60 days' and 'incidence of infections in ICU'. 
+:::
+
+## Ethical issues
+
+Clinical trials differ from most scientific experiments in that they are experimenting on people. This means that the team designing, conducting and analysing the trial have various ethical responsibilities. This is a huge area; we will touch on it from time to time but will not go into anywhere near enough detail! Some key things to note though are....
+
+  * A patient must never be given a treatment that is known to be inferior.
+  * Patients must be fully informed about the trial, the treatments used, possible adverse effects and side-effects and so on. Patients should only be recruited into the trial if, after being given all this information (and having had it communicated clearly and at an appropriate level) they give their consent.
+  * After entering a trial, a patient has the right to withdraw at any point, and should then receive whatever treatment is most appropriate for them. They should not face any negative repurcussions for withdrawing.
+  
+The patients' interests are safeguarded by the [Declaration of Helsinki](https://www.wma.net/policies-post/wma-declaration-of-helsinki-ethical-principles-for-medical-research-involving-human-subjects/). This statement is implemented differently by different countries. In the UK, health authorities each have their own ethics committee, by which proposals for experiments involving human subjects must be approved.
+  
+You might think that these ethical issues largely concern the clinicians, and that we statisticians don't need to worry too much about the ethics of clinical trials. After all, we are likely never to meet any patients or to get our hands dirty in any way! But as we will see, at each stage the choices made by the statistician can in fact have serious ethical implications.
+
 
 

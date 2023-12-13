@@ -2,7 +2,7 @@
 
 # Binary outcome variable
 
-So far all everything we've covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the $t$-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).
+So far almost everything we've covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the $t$-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).
 
 A binary outcome might be something like 'the patient was alive 2 years after the procedure' or not, or 'the patient was clear of eczema within a month' or not. Such variables are often coded as success or failure, or 0 or 1. 
         
@@ -704,9 +704,149 @@ $$
 \end{gather}
 $$
 
-That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values.
+That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. The coefficients are estimated using maximum likelihood, but since we will generally be using R (which will fit them for us!) we won't go into the details. 
 
-### Fitting a logistic regression model
+One thing that is quite tricky with logistic regression is diagnosing whether the model is appropriate. In theory there are two main places where the logistic regression model could fall down:
+
+  * The link function - we've used the logit function, but others that map $\left[0,1\right]$ to $\mathbb{R}$ are available.
+  * The linear model function - if we include variables that shouldn't be there, or exclude variables or interaction terms that should be included, the model will not fit well.
+  
+It is the second that is likely to be the most problematic, and we will explore now a couple of ways to check.
+
+#### Separation plots
+
+In a linear regression, we can plot the residual (the true value minus the fitted value) to see whether it fits our modelling assumptions that it should be normally distributed and independent of the fitted values and of all covariates. In a logistic regression model, our actual values are 0 and 1, and we have no error term. The uncertainty in the model comes from the fact that it is estimating probabilities (via the logit link function) rather than directly modelling the outcome.
+
+Separation plots are an attempt to visualise each piece of data against the model. The dataset is reordered according to the fitted value of the probability, and the fitted probability is plotted as a line. A vertical line (red, in the `separationplot` package) is drawn for every point where the outcome is 1, and a different coloured line (beige in `separationplot`) for every outcome that is 0. There are two main useful things the plot can show you:
+
+  1. **The better the separation, the better the model**. The first plot shows a reasonably good model, where the density of red lines approximately follows the line of fitted probability. However, the line is fairly shallow, and the red lines are fairly scattered. The second plot shows a perfect model. The fitted probability jumps from 0 to 1 at around 0.7 (shown by the black triangle), and there is perfect separation between the ones and zeroes.
+  
+```{r}
+library(separationplot)
+fit1 <- glm(inmetro ~ percollege, data = midwest, family = binomial)
+midwest$f1 <- predict(fit1, midwest, type = "response")
+separationplot(pred = midwest$f1, actual = midwest$inmetro, show.expected = T)
+```
+
+```{r}
+fit3 <- glm(inmetro ~ category, data = midwest, family = binomial)
+midwest$f3 <- predict(fit3, midwest, type = "response")
+separationplot(midwest$f3, midwest$inmetro, show.expected = T)
+
+```
+
+  2. **If the data doesn't follow the line, the fit is off**. 
+  
+```{r}
+mw_eg = data.frame(
+  inmetro = midwest$inmetro,
+  percollege = midwest$percollege,
+  unif1 = runif(n=nrow(midwest), min=0, max=1),
+  cat1 = sample(c(0,1,2,3), size=nrow(midwest), replace=T)
+  
+)
+glm_eg = glm(inmetro ~ ., data=mw_eg, family=binomial(link = 'logit'))
+mw_eg$fit <- predict(glm_eg, mw_eg, type = "response")
+separationplot(mw_eg$fit, mw_eg$inmetro, show.expected = T)
+summary(glm_eg)
+```
+  
+You can see a nice example of using separation plots [here](https://www.ndrewwm.com/post/20191023-separation-plots/) (note that they don't use the library we'll use though). 
+
+For the effect of a binary variable on the log of the odds ratio, we have
+$$\hat{\beta_i} \pm z_{\alpha/2}\sqrt{\hat{v_i}},$$
+where $\hat\beta_i$ is the estimated coefficient of covariate $i$, and $\sqrt{\hat{v}_i}$ is the standard error of the estimate. This can then be transformed into a confidence interval for the odds ratio.
+
+
+
+:::{.example}
+```{r}
+library(HSAUR)
+data("respiratory")
+resp_04 = respiratory[respiratory$month %in% c(0,4),]
+resp_4 = respiratory[respiratory$month %in% c(4),]
+resp_4$status0 = resp_04$status[resp_04$month==0]
+```
+The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:
+
+  * sex 
+  * age 
+  * treatment centre (centre 1 or centre 2)
+  * age 
+  * symptom status (poor = 0, good = 1).
+  
+The outcome variable is whether the status of the patient's symptoms are poor (0) or good (1) after four months of the trial. The first model we fit involves all covariates:
+
+```{r, echo=T}
+model1 = glm(status ~ centre + treatment + sex + age + status0, 
+             family = binomial(link='logit'), data=resp_4)
+summary(model1)
+```
+And we can plot the separation plot.
+```{r, echo=T}
+fit1 = predict(model1, resp_4, type = "response")
+separationplot(fit1, (as.numeric(resp_4$status)-1) )
+```
+
+Having done this we can fit a second model with only those covariates that appear to be significantly active:
+
+```{r, echo=T}
+model2 = glm(status ~ centre + treatment +  status0, 
+             family = binomial(link='logit'), data=resp_4)
+summary(model2)
+```
+The separation plot shows that the model is OK (though certainly not brilliant).
+```{r}
+fit2 = predict(model2, resp_4, type = "response")
+separationplot(fit2, (as.numeric(resp_4$status)-1) )
+
+```
+
+First of all, we see that the treatment is significant, and that all other things being equal, being in the treatment group increases the log of the odds ratio by around 1.024. We can construst a 95% confidence interval for this using the estimate and standard error of the coefficient (shown in the R output above), 
+
+$$1.024 \pm 1.96 \times{0.453} = \left(0.136,\; 1.912\right).$$
+Taking the exponent, the 95% confidence interval for the effect of the treatment on the **odds** of 'good' symptom status at 4 months is
+$$\left(\exp(0.136),\; \exp(1.912)\right) = \left(1.145,\;6.768\right).$$
+
+Using the coefficient estimates from `model2` above, we see 
+
+$$\log\frac{\pi}{1-\pi} = -1.643 + 1.101\left(\text{centre}=2\right) + 1.024\left(\text{treatment}=1\right) + 1.729\left(\text{baseline status}=1\right), $$
+where $\pi$ is the probability of the symptom status being 'good' (1) at four months.
+The odds of the outcome being 1 can be estimated from this equation by taking the exponent. For example, for a patient at treatment centre 2, in the treatment group, with 'good' baseline status, the odds of a 'good' status at 4 months are approximately
+
+$$
+\begin{aligned}
+\frac{\pi}{1-\pi} & =\exp\left[ -1.643 + 1.101 + 1.024 + 1.729\right] \\
+& = \exp\left(2.211\right)\\
+& = 9.125
+\end{aligned}
+$$
+which corresponds to a probability of a 'good' status at four months of 0.901. 
+
+By contrast, for a patient in the treatment group at treatment centre 1, who had 'poor' symptoms at baseline, the odds of a 'good' status at 4 months are approximately
+
+$$
+\begin{aligned}
+\frac{\pi}{1-\pi} & =\exp\left[ -1.643 + 1.024 \right] \\
+& = \exp\left(-0.619\right) \\
+& = 0.538.
+\end{aligned}
+$$
+Rearranging this for probability we find $\pi = 0.350$.
+
+However, if that same participant had been in the control group instead, we would have
+
+$$
+\begin{aligned}
+\frac{\pi}{1-\pi}& = \exp\left(-1.643\right)\\
+& = 0.193
+\end{aligned}
+$$
+and the estimated probability of having 'good' symptom status at four months would be 0.162.
+
+:::
+
+
 
 
 

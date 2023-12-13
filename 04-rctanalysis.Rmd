@@ -451,7 +451,7 @@ The table below shows the mean and standard deviation of age for each combinatio
 
 ```{r}
 library(dplyr)
-summary_stress = stress %>% group_by(treatment, exercise) %>% summarize(mean = mean(age), sd= sd(age))
+summary_stress = stress %>% group_by(treatment, exercise) %>% dplyr::summarize(mean = mean(age), sd= sd(age))
 knitr::kable(summary_stress)
 ```
 
