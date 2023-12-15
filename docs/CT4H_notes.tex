@@ -80,7 +80,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2023-12-13}
+\date{2023-12-15}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -320,6 +320,64 @@ Clinical trials differ from most scientific experiments in that they are experim
 The patients' interests are safeguarded by the \href{https://www.wma.net/policies-post/wma-declaration-of-helsinki-ethical-principles-for-medical-research-involving-human-subjects/}{Declaration of Helsinki}. This statement is implemented differently by different countries. In the UK, health authorities each have their own ethics committee, by which proposals for experiments involving human subjects must be approved.
 
 You might think that these ethical issues largely concern the clinicians, and that we statisticians don't need to worry too much about the ethics of clinical trials. After all, we are likely never to meet any patients or to get our hands dirty in any way! But as we will see, at each stage the choices made by the statistician can in fact have serious ethical implications.
+
+\hypertarget{phases-of-clinical-trials}{%
+\section{Phases of clinical trials}\label{phases-of-clinical-trials}}
+
+If you read about clinical trials (or hear about them in the news), you'll hear talk of a `phase 3 trial' or similar. Broadly speaking, clinical trials follow a progression from phase one (or sometimes zero) to phase four. These phases apply to most countries, and any for any drug to be licensed multinationally it must get through phase III.
+
+\hypertarget{phase-zero}{%
+\subsection{Phase zero}\label{phase-zero}}
+
+The first step is to test a low dose of the treatment on a small number of people, to check that it isn't harmful. The dose is too low to have any medicinal effect, but is designed to verify that the drug behaves as expected from laboratory studies, and doesn't have any harmful effects. There may only be 10-20 participants, and there is no randomisation (or control group).
+
+\hypertarget{phase-one}{%
+\subsection{Phase one}\label{phase-one}}
+
+Phase one trials are also quite small (around 20-50 participants) and are designed to find the best dose of the treatment and what any side effects are. Phase one trials tend to be recruited very slowly: a small group will be recruited onto a low dose and monitored closely. If all goes well, another small group will be recruited on a slightly higher dose, and so on. This is known as a \emph{dose escalation study}. Participants at this phase are monitored very closely, for example through regular blood tests and recording daily symptoms.
+
+\hypertarget{phase-two}{%
+\subsection{Phase two}\label{phase-two}}
+
+If the drug makes it through the phase one trial, it can progress to phase two (often written as `phase II'). These involve more people than phase one, possibly up to 100. The cohort may now be restricted to people with a particular version of a condition (eg. a particular type of cancer), but it may still be broader than the sorts of trials we will be looking at. Now the aim is to find out if the new treatment works well enough to progress to a large phase three (phase III) trial:
+
+\begin{itemize}
+\tightlist
+\item
+  Exactly what conditions (or versions of a condition) does this treatment work for?
+\item
+  What are the side effects and can they be managed?
+\item
+  What is the best dose to administer?
+\end{itemize}
+
+Phase II trials sometimes compare the treatment to a placebo, and sometimes use randomisation to group participants.
+
+This is the stage at which most drugs fail, for a multitude of reasons (cost, safety, efficacy,\ldots).
+
+\hypertarget{phase-three}{%
+\subsection{Phase three}\label{phase-three}}
+
+Phase III trials are much bigger, often involving hundreds or thousands of participants, and aim to compare the new treatment to the best currently available treatment (which may be another treatment, or may be nothing). Side effects are still monitored, as some of the rarer ones may not show themselves at the smaller phases, because there are fewer participants.
+
+In phase III trials, the aim is to find out if the new treatment is better, and if so by how much. Phase III trials almost always use randomisation to allocate participants to groups, and go to great lengths to make the trial as reliable as possible, for example using a placebo for the control group (who aren't getting the real treatment) that looks identical to the real drug. These are the sorts of trials we will mainly be concerned with in this course.
+
+To be licensed, a treatment has to get through phase III and be foud to be effective (and of course safe).
+
+\hypertarget{phase-four}{%
+\subsection{Phase four}\label{phase-four}}
+
+Phase IV trials happen after the treatment has been found to work, has been licensed and is in use. The aims of phase IV trials are
+
+\begin{itemize}
+\tightlist
+\item
+  to find out more about the rarer side effects
+\item
+  to investigate the long term risks and benefits
+\item
+  to find out how well the treatment works when given to a broader group of people than in phase III.
+\end{itemize}
 
   \bibliography{ct4h.bib}
 
