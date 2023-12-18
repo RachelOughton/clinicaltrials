@@ -1,0 +1,98 @@
+# Computer Practical 1
+
+## Some simulated examples
+
+In this practical we will compare different allocation methods using simulated datasets with the same underlying probability distributions. We consider four factors:
+  
+  * Age: 44 and under, 45 - 54, 55-64, 65-74 and 75 and over (5 levels)
+  * Sex: M or F
+  * Smoking: current, past or never
+  * Hypertension: Yes or no
+
+These will be generated using the following distributions:
+  
+  * Age: $N\left(60, 10^2\right)$ (then binned as above)
+* Sex: $p\left(M\right)= p\left(F\right) = 0.5$
+  * Smoking: $p\left(\text{Current}\right)=0.4,\,p\left(\text{Past}\right) = p\left(\text{Never}\right) = 0.3$
+  * Hypertension: 	
+  $p(Y) = \begin{cases}
+0.25  & \text{Age under 45} \\
+0.55 & \text{Age 45 to 74}\\
+0.75 & \text{Age 75 and over}
+\end{cases}$
+  
+  To demonstrate our allocation methods, we simulate one dataset from the distribution described, containing 100 participants. This dataset is shown in the Table below, and in Figures \@ref(fig:part-gen1a) and \@ref(fig:part-gen1b).
+
+
+```{r, echo=T}
+library(rmarkdown)
+participant_gen = function(n, seed = 4468){
+  set.seed(seed)
+  data_df = data.frame(matrix(NA, nrow=n, ncol=5))
+  names(data_df) = c("ID", "Sex", "Age", "Smoking", "Hypertension")
+  Age_raw = rnorm(n, mean=60, sd=10)
+  age_binned = sapply(1:n, function(i){
+    if(Age_raw[i] < 45){
+      "44 and under"
+    } else if (Age_raw[i] < 55){
+      "45 to 54"
+    } else if (Age_raw[i] < 65){
+      "55 to 64"
+    } else if (Age_raw[i] < 75){
+      "65 to 74"
+    } else {"75 and over"}
+  })
+  data_df$Age = as.factor(age_binned)
+  data_df$Sex = as.factor(sample(c("Female", "Male"), size=n, replace=T))
+  
+  smoking_raw = runif(n=n)
+  smoking_cat = rep(NA, n)
+  smoking_cat[smoking_raw<0.4] = "Current"
+  smoking_cat[smoking_raw >=0.4 & smoking_raw < 0.7] = "Past"
+  smoking_cat[smoking_raw>=0.7] = "Never"
+  
+  data_df$Smoking = as.factor(smoking_cat)
+  
+  hypertension = sapply(
+    1:n,
+    function(i){
+      if(Age_raw[i]<45){
+        sample(c("Yes", "No"), size=1, prob=c(0.25, 0.75))  
+      } else if(Age_raw[i] < 75){
+        sample(c("Yes", "No"), size=1, prob=c(0.55, 0.45))
+      } else {
+        sample(c("Yes", "No"), size=1, prob=c(0.75, 0.25))
+      }
+    })
+  
+  data_df$Hypertension = as.factor(hypertension)
+  data_df$ID = 1:n
+  
+  data_df
+  
+}
+
+test_df = participant_gen(100)
+
+```
+
+
+```{r part-gen1a, echo=F, fig.cap = "A simulated dataset of 100 participants, using the distributions described above, split by hypertension, age and sex."}
+
+ggplot(data=test_df, aes(x=Hypertension, fill=Sex)) + geom_bar(col=1) + facet_wrap(~Age, nrow=1) +
+  theme(legend.position = "bottom")
+
+```
+
+
+
+```{r part-gen1b,  echo=F,  fig.cap = "A simulated dataset of 100 participants, using the distributions described above, split by smoking history, age and sex."}
+
+ggplot(data=test_df, aes(x=Smoking, fill=Sex)) + geom_bar(col=1) + facet_wrap(~Age, nrow=1) +
+  theme(legend.position = "bottom")
+
+```
+
+### Simple random allocation
+
+In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. In terms of our allocation, 

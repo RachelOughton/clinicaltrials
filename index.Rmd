@@ -5,9 +5,13 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
+
     highlight: tango
     css: "style.css"
-    config:bookdown:
+    config:
+      toc:
+        collapse: section
+      bookdown:
       sharing:
         github: yes
         facebook: no
@@ -64,7 +68,7 @@ This page contains the notes for Clinical Trials IV. As we progress through the 
 
 ### Lectures {-}
 
-Our lectures are 12 noon on Mondays and 9am on Wednesdays, all in ES231. This is in the Earth Sciences / Arthur Holmes building, which is behind (almost surrounding) the Calman Learning Centre.
+Our lectures are 12 noon on Mondays and 9am on Wednesdays, all in ES231. This is in the Earth Sciences / Arthur Holmes building, which is behind (almost surrounding) the Calman Learning Centre. The door of this room is actually labelled 'Teaching Room 4'.
 
 ### Computer classes {-}
 

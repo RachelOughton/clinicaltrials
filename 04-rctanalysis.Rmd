@@ -444,6 +444,7 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 
 ```{r}
 library(datarium)
+library(rmarkdown)
 paged_table(stress)
 ```
 

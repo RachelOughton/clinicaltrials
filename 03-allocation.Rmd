@@ -1,4 +1,4 @@
-# Allocation {#sec-allocation}
+# Allocation 
 
 Once we've decided how many participants we need in our trial, and they've been recruited, we next need to determine which participants should be assigned to which trial arm. This is process is known as **allocation** (or sometimes as **randomization**). Before we think about methods for allocation, we are going to spend some time talking about bias.
 
@@ -13,31 +13,38 @@ Suppose that $T$ is a statistic calculated to estimate a parameter $\theta$. The
 
 $$ s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 .$$
   
-  In this case, $E\left(s^2\right) \neq {\sigma^2}$, and $s^2$ is an biased estimator. However, we know that
+  In this case, $E\left(s^2\right) \neq {\sigma^2}$ (you've probably seen this proved so we're not going to prove it now), and $s^2$ is an biased estimator of $\sigma^2$. However, we know that
 
 $$E \left(\frac{n}{n-1}s^2\right) = \sigma^2,$$
   and therefore we can apply this correction to the sample variance $s^2$ to produce an unbiased estimate of the population variance $\sigma^2$.
 
-However, suppose our sample $x_1,\ldots,x_n$ were drawn from $N\left(\mu,\sigma^2\right)$, but were not independent of one another. Then, neither our estimator $s^2$, nor our bias-corrected estimator $\frac{n}{n-1}s^2$ would have expected value $\sigma^2$. Furthermore, we cannot use our sample $x_1,\ldots,x_n$ to produce an unbiased estimator of $\sigma^2$, or even of the mean $\mu$.
+Now, suppose our sample $x_1,\ldots,x_n$ were drawn from $N\left(\mu,\sigma^2\right)$, but were **not** independent of one another. Then, neither our estimator $s^2$, nor our bias-corrected estimator $\frac{n}{n-1}s^2$ would have expected value $\sigma^2$. Furthermore, we cannot use our sample $x_1,\ldots,x_n$ to produce an unbiased estimator of $\sigma^2$, or even of the mean $\mu$.
 
-This scenario is much closer to what we mean when we talk about *bias* in a clinical trial setting. Suppose we are testing some new treatment $A$ against the standard $B$. We measure some outcome $X$ for each patient, and our hypothesis is that $X$ behaves differently for those in the treatment group than for those in the control group. It is common practice to express this additively, 
+This scenario is much closer to what we mean when we talk about *bias* in a clinical trial setting. Suppose we are testing some new treatment $T$ against the standard $C$. We measure some outcome $X$ for each patient, and our hypothesis is that $X$ behaves differently for those in the treatment group than for those in the control group. It is common practice to express this additively, 
 $$E\left(X\right) = \mu + \tau,$$
-  where $\tau$ is our treatment effect, which we can estimate using the difference in the groups' means, $\bar{X}_B - \bar{X}_A$. Our null hypothesis is that $\tau = 0$, and our alternative hypothesis is that $\tau\neq{0}$, and therefore an estimate of $\tau$ from our data is very important! Put equivalently, it is important that there is no bias in our estimates of $\bar{X}_A$ and $\bar{X}_B$.
+  where $\tau$ is our treatment effect, which we can estimate using the difference in the groups' means, $\bar{X}_T - \bar{X}_C$. Our null hypothesis is that $\tau = 0$, and our alternative hypothesis is that $\tau\neq{0}$, and therefore an estimate of $\tau$ from our data is very important! Put equivalently, it is important that there is no bias in our estimates of $\bar{X}_C$ and $\bar{X}_T$.
                                                                                          
 Usually, what this comes down to is that the assumption that the data are independent, identically distributed random variables from the relevant distributions (which we have already relied on a lot for our sample size calculations) has been violated in some way. 
-                                                                                         
-Many of the ideas in this section are closely linked to the topic of **allocation**, which we will discuss in detail in Section \@ref(sec-allocation)).
+
+:::{.example}
+Historically, women and the elderly are underrepresented in clinical trials (@cottingham2022gendered) and results are often translated from young or middle aged healthy men to these other groups (@vitale2017under). This isn't reasonable, since women have very different hormonal activity from men, causing them to often react differently to drugs compared to men involved in the trial. The standard dose (based on trials with mostly male participants) can also be too high for many women. The complicated nature of women's hormones is sometimes even given as a reason for not including them in the trial. Women and elderly people are also both more likely to have adverse effects to drugs in some fields.
+
+There are also ethical reasons behind the low numbers of women in trials, especially phase I and phase II trials. If a woman is possibly pregnant (and trials tend to be extremely cautious in deciding who might be pregnant!) then they are quite often excluded, in order to protect the (actual or hypothetical) fetus. Indeed, in 1977 the Food and Drug Administration (FDA) in the US recommended that women be excluded from phase I and II trials (@nationalhistory) as a result of some severe cases of fetuses being harmed by drugs (especially Thalidamide) . This means that even some very mainstream drugs, for example antihistamines (@kar2012review), haven't been tested for safety/efficacy during pregnancy, as well as some (for example HIV treatments) that would be of huge benefit to many many pregnant women. [This article](https://www.politico.eu/article/telescope-hiv-aids-unitaid-gender-pregnant-trials/) is an interesting read if you would like to know more. 
+
+
+
+:::
 
 ### Where does bias come from?
 
 Having established that bias is a serious issue in clinical trials, we will think about several sources of bias. Some of these we will elaborate on as we get to the relevant part of methodology. Most sources of bias creep in during the allocation or selection phase.
 
-#### Selection bias
+#### Selection bias {-}
 
-Selection bias occurs when certain patients or subjects are systematically more (or less) likely be entered into the trial because of the treatment they will receive. This shouldn't be able to happen, because it is usually only after a participant has been recruited that 
-their treatment is chosen. If a medical professional is not comfortable with a particular patient potentially receiving one of the possible treatments, then that patient should not be entered into the trial at all. If there are many such [technically eligible] patients, then this might mean that the estimated treatment effect is worryingly far from the true population treatment effect (where the population is the group of all eligible patients), but this is not technically selection bias.
+Selection bias occurs when certain patients or subjects are systematically more (or less) likely be entered into the trial because of the treatment they will receive. In a properly run trial this isn't possible, because it is only after a participant has been recruited that 
+their treatment is chosen. If a medical professional is not comfortable with a particular patient potentially receiving one of the possible treatments, then that patient should not be entered into the trial at all. If there are many such [technically eligible] patients, then this might cause the estimated treatment effect to be worryingly far from the true population treatment effect, since the recruited group of participants would not be very representative of the true population (this is not technically selection bias, but it comes from the same problem).
 
-It may happen that the doctor knows which treatment a patient would be given, for example if the allocation follows some deterministic pattern, or is fully known to the doctor in advance . Consciously or subconsciously this knowledge may influence the description they give to potential participants, and this in turn may affect which patients sign up, and the balance of the groups. In practice there should be various safeguards against this situation.
+It may happen that the doctor knows which treatment a patient would be given, for example if the allocation follows some deterministic pattern, or is fully known to the doctor in advance. Consciously or subconsciously this knowledge may influence the description they give to potential participants, and this in turn may affect which patients sign up, and the balance of the groups. In practice there should be various safeguards against this situation.
 
 :::{.example}
 
@@ -66,7 +73,7 @@ E\left(X\mid{S,1}\right) & = \mu_1 + \tau_S\\
 E\left(X\mid{S,2}\right) & = \mu_2 + \tau_S.
 \end{align*}
 
-If all patients were admitted with equal probability to the trial (ie. independent of the severity of their disease) then the expected survival time for group $N$, $E\left(X\mid{S}\right)$,  would be
+If all patients were admitted with equal probability to the trial (ie. independent of the severity of their disease) then the expected survival time for group $N$, $E\left(X\mid{N}\right)$,  would be
 
 \begin{align*}
 E\left(X\mid{1,N}\right)P\left(1\mid{N}\right) +  E\left(X\mid{2,N}\right)P\left(2\mid{N}\right)& = \left(\mu_1 + \tau_N\right)\lambda + \left(\mu_2+\tau_N\right)\left(1-\lambda\right)\\
@@ -142,7 +149,7 @@ $$E\left(X\mid{A,N}\right)- E\left(X\mid{A,S}\right) < \tau_N - \tau_S.$$
 
 :::
   
-#### Allocation bias
+#### Allocation bias {-}
   
   Mathematically, allocation bias is similar to selection bias, but instead of coming from human 'error', it arises from the random process of allocation. 
 
@@ -150,7 +157,7 @@ Suppose a trial investigates a drug that is likely to have a much stronger effec
 
 We will investigate various strategies for randomization designed to address this issue for known factors.
 
-#### Assessment bias
+#### Assessment bias {-}
 
 Measurements are made on participants throughout (and often during) the trial. These measurements will often be objective, for example the patients' weight, or concentration of blood sugar. However, some types of measurement are much more subject to the individual practitioner assessing the patient. For example, many skin conditions are assessed visually, for example estimating the proportion of the body affected. Measuring quantities such as quality of life or psychological well-being involve many subjective judgements on the part of both patient and clinician.
 
@@ -159,7 +166,7 @@ Clearly it is ideal for both the patient and the clinician not to know which arm
 
 ----
 
-Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. @altman1999treatment gives an overview of why this has led to bias, and gives some examples. @altman1999randomise and @treasure1998minimisation
+Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. @altman1999treatment gives an overview of why this has led to bias, and gives some examples. 
 
 Sometimes analyses compare groups in serial, so that $N_A$ patients one year (say) form the control group, and $n_B$ patients in a subsequent year, who are given treatment $B$, form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment $B$.
 
@@ -176,26 +183,26 @@ Point 2 is important to avoid biases that come through the assignment of  a part
 
 We will now explore some commonly used methods of allocation. We will usually assume two equally sized groups, $A$  and $B$, but it is simple to generalize to three or more groups, or to unequal allocation.
 
-## Allocation methods 
+## Allocation methods {#sec-allocation}
 
 ### Simple random allocation
 
-Perhaps intuitively the most simple method would be a 'toin coss', where each participant has a probability 0.5 of being placed in each group. As participants arrive, assignment $A$ or $B$ is generated (with equal probability). Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn't require a 'master' randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained. 
+Perhaps intuitively the most simple method is a 'toin coss', where each participant has a probability 0.5 of being placed in each group. As participants arrive, assignment $C$ or $T$ is generated (with equal probability). Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn't require a 'master' randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained. 
 
 This method is, effectively, used in many large trials, but for small trials it can be statistically problematic. The main reason for this is chance imbalance of group sizes.
 
-Suppose we have two groups, $A$ of size $N_A$ and $B$ of size $N_B$, with $N_A + N_B = 2n$. Patients are allocated independently with equal probability, which means
+Suppose we have two groups, $T$ of size $N_T$ and $C$ of size $N_C$, with $N_T + N_C = 2n$. Patients are allocated independently with equal probability, which means
 
-$$N_A \sim \operatorname{Bi}\left(2n,\frac{1}{2}\right), $$
-  and similar for $N_B$. If the two groups are of unequal size, the larger will be of some size $N_{max}$ between $n$ and $2n$, such that for $r = n+1,\,\ldots,\,2n,$
+$$N_C \sim \operatorname{Bi}\left(2n,\frac{1}{2}\right), $$
+  and similar for $N_T$. If the two groups are of unequal size, the larger will be of some size $N_{max}$ between $n$ and $2n$, such that for $r = n+1,\,\ldots,\,2n,$
   
   \begin{align*}
-P\left(N_{max} = r\right) & = P\left(N_A = r\right) + P\left(N_B = r\right) \\
+P\left(N_{max} = r\right) & = P\left(N_C = r\right) + P\left(N_T = r\right) \\
 & = 2{2n \choose r}\left(\frac{1}{2}\right)^{2n}.
 \end{align*}
-The probability that $N_A = N_B = n$ is 
+The probability that $N_C = N_T = n$ is 
 
-$$ P\left(N_A = N_B = n\right)= {2n \choose n}\left(\frac{1}{2}\right)^{2n}. $$
+$$ P\left(N_T = N_C = n\right)= {2n \choose n}\left(\frac{1}{2}\right)^{2n}. $$
   These probabilities are shown in Figure \@ref(fig:srs-alloc). We can see that  this method leads to very unequal groups relatively easily; with $n=15$, $P\left(N_{max}\geq 20\right) = 0.099$, so there is around a one in ten chance that one group will be double or more the size of the other. 
 
 ```{r srs-alloc, echo=F, fig.cap= "The probability distribution of largest group size for n=15."}
@@ -216,7 +223,7 @@ df1 = data.frame(r=rvec, p=pvec)
 barplot(p~r, data=df1, xlab = "Size of largest group", ylab = "Probability")
 ```
 
-As we have seen when thinking about sample sizes in Section \@ref(sec-power), this will reduce the power $\Psi$ of the trial, since it depends on $\lambda\left(N_A,\,N_B\right) = \sqrt{\frac{1}{N_A} + \frac{1}{N_B}}$. 
+As we have seen when thinking about sample sizes in Section \@ref(sec-power), this will reduce the power $\Psi$ of the trial, since it depends on $\lambda\left(N_C,\,N_T\right) = \sqrt{\frac{1}{N_C} + \frac{1}{N_T}}$. 
 
 For larger trials, this imbalance will be less pronounced, for example Figure \@ref(fig:srsalloc200) shows the same for $n=200$.
 
@@ -242,7 +249,7 @@ In this case the $P\left(N_{max} \geq 220\right)=0.051$, so the chance of highly
 
 ### Random permuted blocks
 
-One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $m$, and there are two groups then there are $${2m\choose m},$$ but this method can be adapted to more than two groups and to unequal group size.
+One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $${2m\choose m},$$ but this method can be adapted to more than two groups and to unequal group size.
 
 If we have two groups, $A$ and $B$, then there are six *blocks* of length containing two $A$s and two $B$s
 
@@ -278,20 +285,20 @@ As well as ensuring that patients are equally likely to receive treatments $A$ a
 
 ### Biased coin designs and urn schemes
 
-It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available.
+It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.
 
 Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.
 
 #### Biased coin designs
 
-Suppose we are using a biased coin design for a trial to compare two treatments, $A$ and $B$. At the point where some number $n$ (not the total trial cohort) have been allocated, we can use the notation $N_A\left(n\right)$ for the number of participants allocated to treatment $A$, and $N_B\left(B\right)$ for the number of participants allocated to treatment $B$. Using these, we can denote the *imbalance* in treatment numbers as 
+Suppose we are using a biased coin design for a trial to compare two treatments, $T$ and $C$. At the point where some number $n$ (not the total trial cohort) have been allocated, we can use the notation $N_T\left(n\right)$ for the number of participants allocated to treatment $T$, and $N_C\left(n\right)$ for the number of participants allocated to treatment $C$. Using these, we can denote the *imbalance* in treatment numbers as 
 
-$$ D\left(n\right) = N_A\left(n\right) - N_B\left(n\right) = 2N_A\left(n\right) - n.$$
+$$ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.$$
   We use the imbalance $D\left(n\right)$ to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:
   
-  - If $D\left(n\right)=0$, allocate patient $n+1$ to treatment $A$ with probability $\frac{1}{2}$.
-- If $D\left(n\right)<0$, allocate patient $n+1$ to treatment $A$ with probability $P$.
-- If $D\left(n\right)>0$, allocate patient $n+1$ to treatment $A$ with probability $1-P$.
+  - If $D\left(n\right)=0$, allocate patient $n+1$ to treatment $T$ with probability $\frac{1}{2}$.
+- If $D\left(n\right)<0$, allocate patient $n+1$ to treatment $T$ with probability $P$.
+- If $D\left(n\right)>0$, allocate patient $n+1$ to treatment $T$ with probability $1-P$.
 
 where $P\in\left(\frac{1}{2}, 1\right)$.
 
@@ -315,9 +322,9 @@ The absolute imbalances therefore form a simple random walk on the non-negative 
 
 $$
   \begin{aligned}
-P\big(\lvert D\left(n+1\right) \rvert = 1 \mid \lvert D\left(n\right)=0\big)& = 1\\
-P\big(\lvert D\left(n+1\right) \rvert = j+ 1 \mid \lvert D\left(n\right)=j\big)& = 1 - P\\
-P\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right)=j\big)& = P
+P\bigg(\lvert D\left(n+1\right) \rvert = 1 \; \bigg| \;\lvert D\left(n\right)\rvert=0\bigg)& = 1\\
+P\bigg(\lvert D\left(n+1\right) \rvert = j+ 1 \; \bigg| \; \lvert D\left(n\right)\rvert=j\bigg)& = 1 - P\\
+P\bigg(\lvert D\left(n+1\right) \rvert = j-1 \; \bigg| \; \lvert D\left(n\right)\rvert=j\bigg)& = P
 \end{aligned}
 $$
   Figure \@ref(fig:biasedcoin-p2thirds) shows four realisations of this random walk with $P=0.667$. We see that sometimes the imbalance gets quite high, but in general it isn't too far from 0.
@@ -431,26 +438,26 @@ Near the start of the allocation, the probabilities are likely to change a lot t
 
 Once again, we can find the transition probabilities by considering the absolute imbalance $\lvert D\left(n\right) \rvert$.
 
-Suppose that after participant $n$, $N_A\left(n\right)$ participants have been allocated to treatment $A$, and $N_B\left(n\right) = n - N_A\left(n\right)$ to treatment $B$. The imbalance is therefore
+Suppose that after participant $n$, $N_T\left(n\right)$ participants have been allocated to group $T$, and $N_C\left(n\right) = n - N_T\left(n\right)$ to group $C$. The imbalance is therefore
 
-$$D\left(n\right) = N_A\left(n\right) - N_B\left(n\right) = 2N_A\left(n\right) - n.$$
-  After $n$ allocations there will be $2r + ns$ balls in the urn: $r$ for each treatment at the start, and $s$ added after each allocation. Of these, $r + N_B\left(n\right)s$ will be labelled by treatment $A$ and $r + N_A\left(n\right)s$ by treatment $B$.
+$$D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.$$
+  After $n$ allocations there will be $2r + ns$ balls in the urn: $r$ for each treatment at the start, and $s$ added after each allocation. Of these, $r + N_C\left(n\right)s$ will be labelled by treatment $T$ and $r + N_T\left(n\right)s$ by treatment $C$.
 
-To think about the probabilities for the absolute imbalance $\lvert D\left(n\right)\rvert$, we have to be careful now about which direction it is in. If the trial currently (after allocation $n$) has an imbalance of participants in favour of treatment $A$, then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment $B$, which is
+To think about the probabilities for the absolute imbalance $\lvert D\left(n\right)\rvert$, we have to be careful now about which direction it is in. If the trial currently (after allocation $n$) has an imbalance of participants in favour of treatment $C$, then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment $T$, which is
 
 $$
   \begin{aligned}
-p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j>0\right) & = \frac{r + N_A\left(n\right)s}{2r + ns} \\
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j>0\right) & = \frac{r + N_C\left(n\right)s}{2r + ns} \\
 & = \frac{r + \frac{1}{2}\left(n + D\left(n\right)\right)s}{2r + ns} \\
 & = \frac{1}{2} + \frac{D\left(n\right)s}{2\left(2r + ns\right)} \\
 & = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
 \end{aligned}
 $$
-  Similarly, if there is currently an excess of patients allocated to treatment $B$, then the imbalance will be reduced if the next allocation is to treatment $A$, and so the conditional probability is
+  Similarly, if there is currently an excess of patients allocated to treatment $T$, then the imbalance will be reduced if the next allocation is to treatment $C$, and so the conditional probability is
 
 $$
   \begin{aligned}
-p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j<0\right) & = \frac{r + N_B\left(n\right)s}{2r + ns} \\
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j<0\right) & = \frac{r + N_T\left(n\right)s}{2r + ns} \\
 & = \frac{r + \frac{1}{2}\left(n - D\left(n\right)\right)s}{2r + ns} \\
 & = \frac{1}{2} - \frac{D\left(n\right)s}{2\left(2r + ns\right)}\\
 & = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
@@ -580,93 +587,6 @@ grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 We see that imbalance is reduced, particularly for small $n$. A small $r$ and large $s$ enhance this, since the large number ($s$) of balls added to the urn with each allocation weight the probabilities more heavily, as in Figure \@ref(fig:urn18). By contrast, if $r$ is large and $s$ is small, as in Figure \@ref(fig:urn81), the probabilities stay closer to $\left(\frac{1}{2}, \frac{1}{2}\right)$ and so more imbalance occurs early on.
 
 
-## Problems with allocation
-
-THIS SECTION PROBABLY NEEDS TO GO / BE CHANGED, AND I NEED TO MAKE SURE THEY CAN TAKE INTO ACCOUNT THE AGE VARIABLE IN THE ASSIGNMENT
-
-
-In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \@ref(fig:licorice-participants) shows an example.
-
-```{r licorice-participants, echo=FALSE, out.width="60%", fig.cap = "Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized"}
-include_graphics("images/licorice.jpg")
-```
-
-The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.
-
-```{r}
-
-tab = data.frame(
-  Variable = c("Gender (female, %)", "Age, y (mean +/- SD)"),
-  Control  = c("50", "50 +/- 10"),
-  Intervention = c("50", "50 +/- 10")
-)
-
-names(tab) = c("Variable", "Control (n=100)", "Intervention (n=100)")
-
-knitr::kable(tab)
-
-```
-
-This appears to be a perfectly balanced design. However, if we look at the joint distribution, we see that there are problems.
-
-
-```{r}
-set.seed(60103)
-control_df = data.frame(
-  id = 1:100,
-  Gender = as.factor(c(rep("Female",50), rep("Male",50))),
-  Age = sort(rnorm(100, mean=50, sd=10))
-)
-
-intervention_df = data.frame(
-  id = 1:100,
-  Gender = as.factor(c(rep("Male",50), rep("Female",50))),
-  Age = sort(rnorm(100, mean=50, sd=10))
-)
-
-plot_control  = ggplot(data=control_df, aes(x=Age, fill=Gender)) + 
-  geom_histogram(position = "dodge") + ggtitle("Control group") +
-  theme(legend.position="bottom")
-plot_intervention  = ggplot(data=intervention_df, aes(x=Age, fill=Gender)) +
-  geom_histogram(position = "dodge") + ggtitle("Intervention group") +
-  theme(legend.position="bottom")
-
-grid.arrange(plot_control, plot_intervention, nrow=1)
-```
-
-
-```{r}
-
-mean_male_cont = round(mean(control_df$Age[control_df$Gender == "Male"]),2)
-mean_male_int = round(mean(intervention_df$Age[intervention_df$Gender == "Male"]),2)
-mean_female_cont = round(mean(control_df$Age[control_df$Gender == "Female"]),2)
-mean_female_int = round(mean(intervention_df$Age[intervention_df$Gender == "Female"]),2)
-
-sd_male_cont = round(sd(control_df$Age[control_df$Gender == "Male"]),2)
-sd_male_int = round(sd(intervention_df$Age[intervention_df$Gender == "Male"]),2)
-sd_female_cont = round(sd(control_df$Age[control_df$Gender == "Female"]),2)
-sd_female_int = round(sd(intervention_df$Age[intervention_df$Gender == "Female"]),2)
-
-
-df = data.frame(
-  Male = c(
-    sprintf("%s (%s)", mean_male_cont, sd_male_cont), 
-    sprintf("%s (%s)", mean_male_int, sd_male_int)),
-  Female = c(
-    sprintf("%s (%s)", mean_female_cont, sd_female_cont), 
-    sprintf("%s (%s)", mean_female_int, sd_female_int))
-)
-row.names(df) = c("Control", "Intervention")
-
-knitr::kable(df)%>%kableExtra::column_spec(1, bold = TRUE)
-
-```
-
-If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.
-
-Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn't aimed for. @treasure1998minimisation give an example in relation to a hypothetical study on heart disease 
-
-> Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation—exclusion of confounding factors—has failed. ... If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.
 
 
 ## Stratified sampling
@@ -806,114 +726,81 @@ $$
 Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability $P\in\left(0.5,1\right)$ and update the table before allocating patient 17. 
 :::
 
+## Problems with allocation
+
+In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \@ref(fig:licorice-participants) shows an example.
+
+```{r licorice-participants, echo=FALSE, out.width="60%", fig.cap = "Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized"}
+include_graphics("images/licorice.jpg")
+```
+
+The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.
+
+```{r}
+set.seed(6063)
+control_df = data.frame(
+  id = 1:100,
+  Gender = as.factor(c(rep("Female",50), rep("Male",50))),
+  Age = sort(rnorm(100, mean=50, sd=10))
+)
+
+intervention_df = data.frame(
+  id = 1:100,
+  Gender = as.factor(c(rep("Male",50), rep("Female",50))),
+  Age = sort(rnorm(100, mean=50, sd=10))
+)
+
+mean_male_cont = round(mean(control_df$Age[control_df$Gender == "Male"]),2)
+mean_male_int = round(mean(intervention_df$Age[intervention_df$Gender == "Male"]),2)
+mean_female_cont = round(mean(control_df$Age[control_df$Gender == "Female"]),2)
+mean_female_int = round(mean(intervention_df$Age[intervention_df$Gender == "Female"]),2)
+
+sd_male_cont = round(sd(control_df$Age[control_df$Gender == "Male"]),2)
+sd_male_int = round(sd(intervention_df$Age[intervention_df$Gender == "Male"]),2)
+sd_female_cont = round(sd(control_df$Age[control_df$Gender == "Female"]),2)
+sd_female_int = round(sd(intervention_df$Age[intervention_df$Gender == "Female"]),2)
 
 
-## Some simulated examples
+df = data.frame(
+  Male = c(
+    sprintf("%s (%s)", mean_male_cont, sd_male_cont), 
+    sprintf("%s (%s)", mean_male_int, sd_male_int)),
+  Female = c(
+    sprintf("%s (%s)", mean_female_cont, sd_female_cont), 
+    sprintf("%s (%s)", mean_female_int, sd_female_int))
+)
+row.names(df) = c("Control", "Intervention")
 
-To conclude this section we will demonstrate methods using simulated datasets with the same underlying probability distributions. We consider four factors:
-  
-  * Age: 44 and under, 45 - 54, 55-64, 65-74 and 75 and over (5 levels)
-* Sex: M or F
-* Smoking: current, past or never
-* Hypertension: Yes or no
+knitr::kable(df)%>%kableExtra::column_spec(1, bold = TRUE)
 
-These will be generated using the following distributions:
-  
-  * Age: $N\left(60, 10^2\right)$ (then binned as above)
-* Sex: $p\left(M\right)= p\left(F\right) = 0.5$
-  * Smoking: $p\left(\text{Current}\right)=0.4,\,p\left(\text{Past}\right) = p\left(\text{Never}\right) = 0.3$
-  * Hypertension: 	
-  $p(Y) = \begin{cases}
-0.25  & \text{Age under 45} \\
-0.55 & \text{Age 45 to 74}\\
-0.75 & \text{Age 75 and over}
-\end{cases}$
-  
-  To demonstrate our allocation methods, we simulate one dataset from the distribution described, containing 100 participants. This dataset is shown in the Table below, and in Figures \@ref(fig:part-gen1a) and \@ref(fig:part-gen1b).
+```
+
+This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.
 
 
 ```{r}
-library(rmarkdown)
-participant_gen = function(n, seed = 4468){
-  set.seed(seed)
-  data_df = data.frame(matrix(NA, nrow=n, ncol=5))
-  names(data_df) = c("ID", "Sex", "Age", "Smoking", "Hypertension")
-  Age_raw = rnorm(n, mean=60, sd=10)
-  age_binned = sapply(1:n, function(i){
-    if(Age_raw[i] < 45){
-      "44 and under"
-    } else if (Age_raw[i] < 55){
-      "45 to 54"
-    } else if (Age_raw[i] < 65){
-      "55 to 64"
-    } else if (Age_raw[i] < 75){
-      "65 to 74"
-    } else {"75 and over"}
-  })
-  data_df$Age = as.factor(age_binned)
-  data_df$Sex = as.factor(sample(c("Female", "Male"), size=n, replace=T))
-  
-  smoking_raw = runif(n=n)
-  smoking_cat = rep(NA, n)
-  smoking_cat[smoking_raw<0.4] = "Current"
-  smoking_cat[smoking_raw >=0.4 & smoking_raw < 0.7] = "Past"
-  smoking_cat[smoking_raw>=0.7] = "Never"
-  
-  data_df$Smoking = as.factor(smoking_cat)
-  
-  hypertension = sapply(
-    1:n,
-    function(i){
-      if(Age_raw[i]<45){
-        sample(c("Yes", "No"), size=1, prob=c(0.25, 0.75))  
-      } else if(Age_raw[i] < 75){
-        sample(c("Yes", "No"), size=1, prob=c(0.55, 0.45))
-      } else {
-        sample(c("Yes", "No"), size=1, prob=c(0.75, 0.25))
-      }
-    })
-  
-  data_df$Hypertension = as.factor(hypertension)
-  data_df$ID = 1:n
-  
-  data_df
-  
-}
 
-test_df = participant_gen(100)
 
-paged_table(test_df)
+plot_control  = ggplot(data=control_df, aes(x=Age, fill=Gender)) + 
+  geom_histogram(position = "dodge") + ggtitle("Control group") +
+  theme(legend.position="bottom")
+plot_intervention  = ggplot(data=intervention_df, aes(x=Age, fill=Gender)) +
+  geom_histogram(position = "dodge") + ggtitle("Intervention group") +
+  theme(legend.position="bottom")
 
+grid.arrange(plot_control, plot_intervention, nrow=1)
 ```
 
 
-```{r part-gen1a, echo=F, fig.cap = "A simulated dataset of 100 participants, using the distributions described above, split by hypertension, age and sex."}
+If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.
 
-ggplot(data=test_df, aes(x=Hypertension, fill=Sex)) + geom_bar(col=1) + facet_wrap(~Age, nrow=1) +
-  theme(legend.position = "bottom")
+Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn't aimed for. @treasure1998minimisation give an example in relation to a hypothetical study on heart disease 
 
-```
+> Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation—exclusion of confounding factors—has failed. ... If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.
 
-
-
-```{r part-gen1b,  echo=F,  fig.cap = "A simulated dataset of 100 participants, using the distributions described above, split by smoking history, age and sex."}
-
-ggplot(data=test_df, aes(x=Smoking, fill=Sex)) + geom_bar(col=1) + facet_wrap(~Age, nrow=1) +
-  theme(legend.position = "bottom")
-
-```
-
-### Simple random allocation
-
-In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. In terms of our allocation, 
+However, this issue is rarely addressed in clinical trials: a lot of faith is placed (with reasonable justification) in the likely balance achieved by random sampling, whatever method is used. We will also see in Chapter \@ref(rct-analysis) that we can account for some degree of imbalance at the analysis stage.
 
 
-
-
-# The intervention
-
-
-Having settled on a sample size and an allocation strategy, the trial can now be run.
 
 
 

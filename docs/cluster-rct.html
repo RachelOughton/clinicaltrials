@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Cluster randomised controlled trials | Clinical Trials 4H</title>
+  <title>8 Cluster randomised controlled trials | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Cluster randomised controlled trials | Clinical Trials 4H" />
+  <meta property="og:title" content="8 Cluster randomised controlled trials | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Cluster randomised controlled trials | Clinical Trials 4H" />
+  <meta name="twitter:title" content="8 Cluster randomised controlled trials | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-12-08" />
+<meta name="date" content="2023-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="working-with-survival-data.html"/>
-<link rel="next" href="rcts---a-bayesian-approach.html"/>
+<link rel="prev" href="survival-distributed-data.html"/>
+<link rel="next" href="practical-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,8 +54,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -164,130 +162,154 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course Information</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#a-brief-history-of-rcts"><i class="fa fa-check"></i><b>1.1</b> A brief history of RCTs</a></li>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
 <li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.2.1</b> The primary outcome</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Designing and planning a randomised controlled trial (RCT)</a>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#ss-norm"><i class="fa fa-check"></i><b>2.1</b> Sample size for a normally distributed primary outcome variable</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1.1</b> The treatment effect</a></li>
-<li class="chapter" data-level="2.1.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.1.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a></li>
-<li class="chapter" data-level="2.1.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.1.3</b> Constructing a measure of effect size</a></li>
-<li class="chapter" data-level="2.1.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.1.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
-<li class="chapter" data-level="2.1.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.1.5</b> A sample size formula</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#sample-size-by-simulation"><i class="fa fa-check"></i><b>2.2</b> Sample size by simulation</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-simulation-method"><i class="fa fa-check"></i><b>2.2.1</b> The simulation method</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="bias.html"><a href="bias.html"><i class="fa fa-check"></i><b>3</b> Bias</a>
+<li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="bias.html"><a href="bias.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1</b> Where does bias come from?</a>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="bias.html"><a href="bias.html#selection-bias"><i class="fa fa-check"></i><b>3.1.1</b> Selection bias</a></li>
-<li class="chapter" data-level="3.1.2" data-path="bias.html"><a href="bias.html#allocation-bias"><i class="fa fa-check"></i><b>3.1.2</b> Allocation bias</a></li>
-<li class="chapter" data-level="3.1.3" data-path="bias.html"><a href="bias.html#assessment-bias"><i class="fa fa-check"></i><b>3.1.3</b> Assessment bias</a></li>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-sided-or-two-sided"><i class="fa fa-check"></i><b>2.2.2</b> One-sided or two-sided?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="allocation.html"><a href="allocation.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="allocation.html"><a href="allocation.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="allocation.html"><a href="allocation.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="allocation.html"><a href="allocation.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="allocation.html"><a href="allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="allocation.html"><a href="allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="allocation.html"><a href="allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="allocation.html"><a href="allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.4" data-path="allocation.html"><a href="allocation.html#minimization"><i class="fa fa-check"></i><b>3.4</b> Minimization</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="allocation.html"><a href="allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.4.1</b> Minimization algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="allocation.html"><a href="allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>3.5</b> Problems with allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-and-p-values"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>4.1.1</b> Bonferroni correction</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a></li>
+<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.1</b> How is this related to ANOVA?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
+</ul></li>
+<li class="part"><span><b>II Computer practicals</b></span></li>
+<li class="chapter" data-level="5" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i><b>5</b> Practical 1</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="practical-1.html"><a href="practical-1.html#some-simulated-examples"><i class="fa fa-check"></i><b>5.1</b> Some simulated examples</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="practical-1.html"><a href="practical-1.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>5.1.1</b> Simple random allocation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="sec-allocation.html"><a href="sec-allocation.html"><i class="fa fa-check"></i><b>4</b> Allocation</a>
+<li class="part"><span><b>III Part II: Other sorts of outcome variables</b></span></li>
+<li class="chapter" data-level="6" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html"><i class="fa fa-check"></i><b>6</b> Binary outcome variable</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#allocation-methods"><i class="fa fa-check"></i><b>4.1</b> Allocation methods</a>
+<li class="chapter" data-level="6.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ss-bin"><i class="fa fa-check"></i><b>6.1</b> Sample size for a binary variable</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>4.1.1</b> Simple random allocation</a></li>
-<li class="chapter" data-level="4.1.2" data-path="sec-allocation.html"><a href="sec-allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>4.1.2</b> Random permuted blocks</a></li>
-<li class="chapter" data-level="4.1.3" data-path="sec-allocation.html"><a href="sec-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>4.1.3</b> Biased coin designs and urn schemes</a></li>
+<li class="chapter" data-level="6.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#the-delta-method"><i class="fa fa-check"></i><b>6.1.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="6.1.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#a-sample-size-formula"><i class="fa fa-check"></i><b>6.1.2</b> A sample size formula</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="sec-allocation.html"><a href="sec-allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>4.2</b> Problems with allocation</a></li>
-<li class="chapter" data-level="4.3" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>4.3</b> Stratified sampling</a></li>
-<li class="chapter" data-level="4.4" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>4.4</b> Minimization</a>
+<li class="chapter" data-level="6.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.2</b> Point estimates and Hypothesis tests</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>4.4.1</b> Minimization algorithm</a></li>
+<li class="chapter" data-level="6.2.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.2.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.2.2</b> Likelihood: A more rigorous way</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="sec-allocation.html"><a href="sec-allocation.html#some-simulated-examples"><i class="fa fa-check"></i><b>4.5</b> Some simulated examples</a>
+<li class="chapter" data-level="6.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.3</b> Measures of difference for binary data</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>4.5.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="6.3.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>6.3.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.3.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.3.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="the-intervention.html"><a href="the-intervention.html"><i class="fa fa-check"></i><b>5</b> The intervention</a></li>
-<li class="chapter" data-level="6" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>6</b> Analyzing RCT data</a>
+<li class="chapter" data-level="6.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Accounting for baseline observations: logistic regression</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-and-p-values"><i class="fa fa-check"></i><b>6.1</b> Confidence intervals and P-values</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>6.1.1</b> Bonferroni correction</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>6.2</b> Using baseline values</a></li>
-<li class="chapter" data-level="6.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>6.3</b> Analysis of covariance (ANCOVA)</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>6.3.1</b> The theory</a></li>
-<li class="chapter" data-level="6.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>6.3.2</b> The practice</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>6.4</b> Some follow-up questions….</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>6.4.1</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="6.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>6.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="6.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>6.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="6.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-covariates"><i class="fa fa-check"></i><b>6.4.4</b> Can we include any other covariates?</a></li>
-</ul></li>
-<li class="chapter" data-level="6.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>6.5</b> Some general principles of Analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html"><i class="fa fa-check"></i><b>7</b> Working with binary data</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#ss-bin"><i class="fa fa-check"></i><b>7.1</b> Sample size for a binary variable</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#the-delta-method"><i class="fa fa-check"></i><b>7.1.1</b> The Delta Method</a></li>
-<li class="chapter" data-level="7.1.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#a-sample-size-formula"><i class="fa fa-check"></i><b>7.1.2</b> A sample size formula</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>7.2</b> Point estimates and Hypothesis tests</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>7.2.1</b> An alternative approach: chi-squared</a></li>
-<li class="chapter" data-level="7.2.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>7.2.2</b> Likelihood: A more rigorous way</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>7.3</b> Measures of difference for binary data</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>7.3.1</b> Absolute risk difference and Number Needed to Treat</a></li>
-<li class="chapter" data-level="7.3.2" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>7.3.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="working-with-binary-data.html"><a href="working-with-binary-data.html#accounting-for-covariates-logistic-regression"><i class="fa fa-check"></i><b>7.4</b> Accounting for covariates: logistic regression</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="working-with-survival-data.html"><a href="working-with-survival-data.html"><i class="fa fa-check"></i><b>8</b> Working with survival data</a></li>
-<li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised controlled trials</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>9.1</b> What is a cluster RCT?</a>
-<ul>
-<li class="chapter" data-level="9.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>9.1.1</b> Intracluster correlation</a></li>
-</ul></li>
-<li class="chapter" data-level="9.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>9.2</b> Designing a cluster RCT</a>
-<ul>
-<li class="chapter" data-level="9.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>9.2.1</b> Sample size</a></li>
-<li class="chapter" data-level="9.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>9.2.2</b> Allocation</a></li>
-</ul></li>
-<li class="chapter" data-level="9.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>9.3</b> Allocating everyone at once</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>9.3.1</b> Restricted randomization</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>9.4</b> Analysing a cluster RCT</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>9.4.1</b> At the cluster level</a></li>
-<li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level</a></li>
+<li class="chapter" data-level="6.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.4.1</b> What does this model tell us?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html"><i class="fa fa-check"></i><b>10</b> RCTs - a Bayesian approach</a>
+<li class="chapter" data-level="7" data-path="survival-distributed-data.html"><a href="survival-distributed-data.html"><i class="fa fa-check"></i><b>7</b> Survival distributed data</a></li>
+<li class="chapter" data-level="8" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>8</b> Cluster randomised controlled trials</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="rcts---a-bayesian-approach.html"><a href="rcts---a-bayesian-approach.html#bayesian-hierarchical-models"><i class="fa fa-check"></i><b>10.1</b> Bayesian hierarchical models</a></li>
+<li class="chapter" data-level="8.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>8.1</b> What is a cluster RCT?</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>8.1.1</b> Intracluster correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>8.2</b> Designing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>8.2.1</b> Sample size</a></li>
+<li class="chapter" data-level="8.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation-1"><i class="fa fa-check"></i><b>8.2.2</b> Allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>8.3</b> Allocating everyone at once</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>8.3.1</b> Restricted randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>8.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>8.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="8.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>8.4.2</b> At the individual level</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i><b>9</b> Practical 2</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="practical-2.html"><a href="practical-2.html#sample-size-by-simulation"><i class="fa fa-check"></i><b>9.1</b> Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="practical-2.html"><a href="practical-2.html#the-simulation-method"><i class="fa fa-check"></i><b>9.1.1</b> The simulation method</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -306,40 +328,40 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cluster-rct" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">9</span> Cluster randomised controlled trials<a href="cluster-rct.html#cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="what-is-a-cluster-rct" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> What is a cluster RCT?<a href="cluster-rct.html#what-is-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="intracluster-correlation" class="section level3 hasAnchor" number="9.1.1">
-<h3><span class="header-section-number">9.1.1</span> Intracluster correlation<a href="cluster-rct.html#intracluster-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="cluster-rct" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Cluster randomised controlled trials<a href="cluster-rct.html#cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-a-cluster-rct" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> What is a cluster RCT?<a href="cluster-rct.html#what-is-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="intracluster-correlation" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Intracluster correlation<a href="cluster-rct.html#intracluster-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="designing-a-cluster-rct" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Designing a cluster RCT<a href="cluster-rct.html#designing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="sample-size" class="section level3 hasAnchor" number="9.2.1">
-<h3><span class="header-section-number">9.2.1</span> Sample size<a href="cluster-rct.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="designing-a-cluster-rct" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Designing a cluster RCT<a href="cluster-rct.html#designing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sample-size" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Sample size<a href="cluster-rct.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="allocation" class="section level3 hasAnchor" number="9.2.2">
-<h3><span class="header-section-number">9.2.2</span> Allocation<a href="cluster-rct.html#allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="allocation-1" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Allocation<a href="cluster-rct.html#allocation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="allocating-everyone-at-once" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> Allocating everyone at once<a href="cluster-rct.html#allocating-everyone-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="allocating-everyone-at-once" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Allocating everyone at once<a href="cluster-rct.html#allocating-everyone-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Should this be in the cluster RCT section?</p>
 <p>The methods we’ve covered so far assume that participants are recruited sequentially, and begin the intervention at different points in time. In this scenario, when a particular participant (participant <span class="math inline">\(n\)</span>) is allocated we only know the allocation for the previous <span class="math inline">\(n-1\)</span> participants. It is very likely that we don’t know the details of the following participants, in particular their values of any prognostic variables. This makes sense in many medical settings, where a patient would want to begin treatment as soon as possible, and there may be a limited number of patients with particular criteria at any one time.</p>
 <p>In some trials, the whole group of participants is recruited over some preliminary phase, and they are all allocated at the same time, in order for the trial to run over some set time period. This is particularly common with interventions that take place in groups (we will think about this later).</p>
-<div id="restricted-randomization" class="section level3 hasAnchor" number="9.3.1">
-<h3><span class="header-section-number">9.3.1</span> Restricted randomization<a href="cluster-rct.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="restricted-randomization" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Restricted randomization<a href="cluster-rct.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>READ UP ON THIS!</p>
 </div>
 </div>
-<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="9.4">
-<h2><span class="header-section-number">9.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="at-the-cluster-level" class="section level3 hasAnchor" number="9.4.1">
-<h3><span class="header-section-number">9.4.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="at-the-cluster-level" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="at-the-individual-level" class="section level3 hasAnchor" number="9.4.2">
-<h3><span class="header-section-number">9.4.2</span> At the individual level<a href="cluster-rct.html#at-the-individual-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="at-the-individual-level" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> At the individual level<a href="cluster-rct.html#at-the-individual-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
@@ -349,8 +371,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="working-with-survival-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rcts---a-bayesian-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="survival-distributed-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="practical-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -392,14 +414,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["CT4H_notes.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
-"collapse": "subsection"
-}
+"collapse": "section"
+},
+"bookdown": null
 });
 });
 </script>

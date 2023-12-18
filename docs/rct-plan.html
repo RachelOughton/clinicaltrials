@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Designing and planning a randomised controlled trial (RCT) | Clinical Trials 4H</title>
+  <title>2 Sample size for a normally distributed primary outcome variable | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Designing and planning a randomised controlled trial (RCT) | Clinical Trials 4H" />
+  <meta property="og:title" content="2 Sample size for a normally distributed primary outcome variable | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Designing and planning a randomised controlled trial (RCT) | Clinical Trials 4H" />
+  <meta name="twitter:title" content="2 Sample size for a normally distributed primary outcome variable | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-12-13" />
+<meta name="date" content="2023-12-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="rct-intro.html"/>
-<link rel="next" href="sec-allocation.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,73 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  background-color: #f8f8f8; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #204a87; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #8f5902; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #204a87; font-weight: bold; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
   
@@ -189,90 +124,27 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
 <li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
-<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Designing and planning a randomised controlled trial (RCT)</a>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#ss-norm"><i class="fa fa-check"></i><b>2.1</b> Sample size for a normally distributed primary outcome variable</a>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1.1</b> The treatment effect</a></li>
-<li class="chapter" data-level="2.1.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.1.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a></li>
-<li class="chapter" data-level="2.1.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.1.3</b> Constructing a measure of effect size</a></li>
-<li class="chapter" data-level="2.1.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.1.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
-<li class="chapter" data-level="2.1.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.1.5</b> A sample size formula</a></li>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-sided-or-two-sided"><i class="fa fa-check"></i><b>2.2.2</b> One-sided or two-sided?</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#sample-size-by-simulation"><i class="fa fa-check"></i><b>2.2</b> Sample size by simulation</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-simulation-method"><i class="fa fa-check"></i><b>2.2.1</b> The simulation method</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="sec-allocation.html"><a href="sec-allocation.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="sec-allocation.html"><a href="sec-allocation.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="sec-allocation.html"><a href="sec-allocation.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="sec-allocation.html"><a href="sec-allocation.html#allocation-methods"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
-<li class="chapter" data-level="3.2.2" data-path="sec-allocation.html"><a href="sec-allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
-<li class="chapter" data-level="3.2.3" data-path="sec-allocation.html"><a href="sec-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="sec-allocation.html"><a href="sec-allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>3.3</b> Problems with allocation</a></li>
-<li class="chapter" data-level="3.4" data-path="sec-allocation.html"><a href="sec-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
-<li class="chapter" data-level="3.5" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization"><i class="fa fa-check"></i><b>3.5</b> Minimization</a>
-<ul>
-<li class="chapter" data-level="3.5.1" data-path="sec-allocation.html"><a href="sec-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="sec-allocation.html"><a href="sec-allocation.html#some-simulated-examples"><i class="fa fa-check"></i><b>3.6</b> Some simulated examples</a>
-<ul>
-<li class="chapter" data-level="3.6.1" data-path="sec-allocation.html"><a href="sec-allocation.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>3.6.1</b> Simple random allocation</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="the-intervention.html"><a href="the-intervention.html"><i class="fa fa-check"></i><b>4</b> The intervention</a></li>
-<li class="chapter" data-level="5" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>5</b> Analyzing RCT data</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-and-p-values"><i class="fa fa-check"></i><b>5.1</b> Confidence intervals and P-values</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>5.1.1</b> Bonferroni correction</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>5.2</b> Using baseline values</a></li>
-<li class="chapter" data-level="5.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>5.3</b> Analysis of covariance (ANCOVA)</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>5.3.1</b> The theory</a></li>
-<li class="chapter" data-level="5.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>5.3.2</b> The practice</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>5.4</b> Some follow-up questions….</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>5.4.1</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="5.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>5.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="5.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>5.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="5.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>5.4.4</b> Can we include any other baseline covariates?</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>5.5</b> Some general principles of Analysis</a></li>
-</ul></li>
-<li class="part"><span><b>II Part II: Other sorts of outcome variables</b></span></li>
-<li class="chapter" data-level="6" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html"><i class="fa fa-check"></i><b>6</b> Binary outcome variable</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ss-bin"><i class="fa fa-check"></i><b>6.1</b> Sample size for a binary variable</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#the-delta-method"><i class="fa fa-check"></i><b>6.1.1</b> The Delta Method</a></li>
-<li class="chapter" data-level="6.1.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#a-sample-size-formula"><i class="fa fa-check"></i><b>6.1.2</b> A sample size formula</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.2</b> Point estimates and Hypothesis tests</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.2.1</b> An alternative approach: chi-squared</a></li>
-<li class="chapter" data-level="6.2.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.2.2</b> Likelihood: A more rigorous way</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.3</b> Measures of difference for binary data</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>6.3.1</b> Absolute risk difference and Number Needed to Treat</a></li>
-<li class="chapter" data-level="6.3.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.3.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Accounting for baseline observations: logistic regression</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.4.1</b> What does this model tell us?</a></li>
-</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
 </ul></li>
 </ul>
 
@@ -292,40 +164,38 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="rct-plan" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Designing and planning a randomised controlled trial (RCT)<a href="rct-plan.html#rct-plan" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In the first half of this module, we’ll focus on randomised controlled trials (RCTs). These have mainly been used for clinical applications (for example, to test a particular drug), but have also recently become popular ways to test interventions in areas such as education and policing.</p>
-<p>Having laid the groundwork in Chapter <a href="rct-intro.html#rct-intro">1</a>, we now go on to some more technical details. In this Chapter, we focus on the ‘vanilla’ scenario, where we have a trial with two arms, and our unit of randomization is individuals. At first we will focus only on continuous outcomes, but we will go on to think about binary variables and survival times.</p>
+<h1><span class="header-section-number">2</span> Sample size for a normally distributed primary outcome variable<a href="rct-plan.html#rct-plan" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For most of this module, we’ll focus on randomised controlled trials (RCTs). These have mainly been used for clinical applications (for example, to test a particular drug), but have also recently become popular ways to test interventions in areas such as education and policing.</p>
+<p>Having laid the groundwork in Chapter <a href="rct-intro.html#rct-intro">1</a>, we now go on to some more technical details. In this Chapter, we focus on the ‘vanilla’ scenario, where we have a trial with two arms, and our unit of randomization is individuals. At first we will focus only on continuous outcomes, but we will go on to think about binary variables and survival data.</p>
 <p>Broadly speaking, the topics we cover fall into the categories of ‘before the trial’ (design and planning) or ‘after the trial’ (analysis), although as we’ll see there is some interaction between these stages.</p>
-<div id="ss-norm" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Sample size for a normally distributed primary outcome variable<a href="rct-plan.html#ss-norm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The first big question asked of a trial statistician is usually how many participants does the trial need in order to be viable: the sample size. We will clarify what is meant by ‘viable’ later in this section.</p>
 <p>Broadly speaking, there are two (opposing) ethical issues around sample size:</p>
 <ol style="list-style-type: decimal">
 <li>If we don’t recruit enough patients, then we may not gather enough evidence to draw any conclusion about the research question (eg. whether there is a treatment effect). As well as being scientifically disappointing, this is unethical. To conduct the trial, some of the patients will have been subject to an inferior treatment (assuming one treatment was actually better), and if there is no conclusion then this was effectively for no purpose.</li>
 <li>If we recruit too many patients (ie. we would be sufficiently likely to reach a conclusion with many fewer) then we have subjected more patients than necessary to an inferior treatment, and possibly also taken up more time and resources than was necessary.</li>
 </ol>
-<div id="the-treatment-effect" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> The treatment effect<a href="rct-plan.html#the-treatment-effect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In Section <a href="rct-intro.html#primout">1.3</a> we discussed the need to settle on a <strong>primary outcome variable</strong>. A further reason this is important is that we base our sample size calculations on the primary outcome variable.</p>
+<p>Therefore it is important to think about this issue carefully. We’ve framed the question in quite a woolly way so far, but now we’ll start to think more carefully.</p>
+<div id="the-treatment-effect" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> The treatment effect<a href="rct-plan.html#the-treatment-effect" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In Section <a href="rct-intro.html#primout">1.3</a> we discussed the need to settle on a <strong>primary outcome variable</strong>. One reason this is important is that we base our sample size calculations on the primary outcome variable.</p>
 <p>Suppose our primary outcome variable is <span class="math inline">\(X\)</span>, which has mean <span class="math inline">\(\mu\)</span> in the control group and mean <span class="math inline">\(\mu + \tau\)</span> in the treatment group, where <span class="math inline">\(\tau\)</span> is the <strong>treatment effect</strong>. The goal of our RCT is to learn about <span class="math inline">\(\tau\)</span>. The larger <span class="math inline">\(\tau\)</span> is, the more pronounced the effect of the intervention.</p>
 <p>This problem is usually framed as a <strong>hypothesis test</strong>, where the null hypothesis is that <span class="math inline">\(\tau=0\)</span>.</p>
 </div>
-<div id="reminder-hypothesis-tests-with-a-focus-on-rcts" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Reminder: hypothesis tests (with a focus on RCTs)<a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="reminder-hypothesis-tests-with-a-focus-on-rcts" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Reminder: hypothesis tests (with a focus on RCTs)<a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When performing a hypothesis test, what we are aiming to find is the <strong>P-value</strong>.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-4" class="definition"><strong>Definition 2.1  </strong></span>The <strong>P-value</strong> is the probability of obtaining a result as extreme or more extreme (ie. further away from the null hypothesis value) than the one obtained <em>given that the null hypothesis is true</em>.</p>
 </div>
-<p>Put simply, it is a measure of the probability of obtaining whatever result (eg. treatment effect) we have have found simply by random chance, when in fact there is no treatment effect. Generally, a P-value of 0.05 is accepted as sufficient evidence to reject the null hypothesis, although in clinical settings it can often be smaller (eg. 0.01). It is conventional to present the P-value by simply saying whether it is smaller than some threshold (often 0.05), rather than giving the exact value. This is a legacy from early days when computers were rare and values were looked up in <span class="math inline">\(t\)</span>-tables (or similar). Now that it is very simple to find the exact P-value, it is becoming more and more common to report the actual number. Indeed, there is a big difference between <span class="math inline">\(p=0.049\)</span> and <span class="math inline">\(p=0.000049\)</span>.</p>
-<div id="insignificant-results" class="section level4 hasAnchor" number="2.1.2.1">
-<h4><span class="header-section-number">2.1.2.1</span> Insignificant results<a href="rct-plan.html#insignificant-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Put simply, it is a measure of the probability of obtaining whatever result (eg. treatment effect) we have have found simply by random chance, when in fact there is no treatment effect (ie. <span class="math inline">\(\tau=0\)</span>). Generally, a P-value of 0.05 is accepted as sufficient evidence to reject the null hypothesis, although in clinical settings it can often be smaller (eg. 0.01). It is conventional to present the P-value by simply saying whether it is smaller than some threshold (often 0.05), rather than giving the exact value. This is a legacy from early days when computers were rare and values were looked up in <span class="math inline">\(t\)</span>-tables (or similar). Now that it is very simple to find the exact P-value, it is becoming more and more common to report the actual number. Indeed, there is a big difference between <span class="math inline">\(p=0.049\)</span> and <span class="math inline">\(p=0.000049\)</span>.</p>
+<div id="insignificant-results" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Insignificant results<a href="rct-plan.html#insignificant-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If our P-value is relatively large, say 0.3 or 0.5, then our result is not at all unlikely under the null hypothesis, and provides no evidence to reject <span class="math inline">\(H_0\)</span>. However, it is not inconsistent with the existence of a treatment effect, so we don’t say there is evidence to accept <span class="math inline">\(H_0\)</span>. One can imagine that if the true treatment effect <span class="math inline">\(\tau\)</span> were tiny, many trials would fail to find evidence to reject <span class="math inline">\(H_0\)</span>. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if <span class="math inline">\(\tau\)</span> is very large, even a relatively small sample size is likely to provide enough evidence to reject <span class="math inline">\(H_0\)</span>.</p>
 <p>A non-significant P-value means that our results are consistent with the null hypothesis <span class="math inline">\(\tau=0\)</span>, but they are also consistent with some small treatment effect, and therefore we can’t conclude very much. The key issue is, what size of treatment effect do we care about? We must ensure that our sample size is sufficiently large to be sufficiently likely to detect a clinically meaningful treatment effect.</p>
-<p>[link to examples of primary outcome variables in section <a href="rct-intro.html#primout">1.3</a>]</p>
 <p>We are being vague for now, but this is a key issue in determining an appropriate sample size.</p>
 </div>
-<div id="one-sided-or-two-sided" class="section level4 hasAnchor" number="2.1.2.2">
-<h4><span class="header-section-number">2.1.2.2</span> One-sided or two-sided?<a href="rct-plan.html#one-sided-or-two-sided" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="one-sided-or-two-sided" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> One-sided or two-sided?<a href="rct-plan.html#one-sided-or-two-sided" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is highly likely that the scientists running the trial will have a strong idea of the likely ‘direction’ of the treatment effect. Assuming that a larger value of the primary outcome variable <span class="math inline">\(X\)</span> is good, they will expect a positive value of the treatment effect <span class="math inline">\(\tau\)</span> (or be prepared to accept a possible value of zero for no effect).</p>
 <p>It would therefore be tempting to perform a one-sided test, with</p>
 <p><span class="math display">\[\begin{align*}
@@ -333,7 +203,7 @@ div.csl-indent {
   H_1\,&amp;:\, \tau&gt;0.
 \end{align*}\]</span></p>
 <p>For example, suppose our test statistic <span class="math inline">\(t\)</span> has a <span class="math inline">\(t\)</span> distribution with 31 degrees of freedom and we obtain a value of 2, as shown in Figure <a href="rct-plan.html#fig:t31-onesided">2.1</a>.
-In this case our P-value is <span class="math inline">\(1 - F\left(2, df=31\right)= 0.0272\)</span> (where <span class="math inline">\(F\left(\cdot\right)\)</span> is the cumulative distribution function of the <span class="math inline">\(t\)</span> distribution) , and the result would be considered significant at the 0.05 level.</p>
+In this case our P-value is <span class="math inline">\(1 - F_t\left(2, df=31\right)= 0.0272\)</span> (where <span class="math inline">\(F_t\left(\cdot\right)\)</span> is the cumulative distribution function of the <span class="math inline">\(t\)</span> distribution) , and the result would be considered significant at the 0.05 level.</p>
 <div class="figure"><span style="display:block;" id="fig:t31-onesided"></span>
 <img src="CT4H_notes_files/figure-html/t31-onesided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $t > 2$ shaded.” width=“672” /&gt;
 <p class="caption">
@@ -346,7 +216,7 @@ Figure 2.1: The distribution <span class="math inline">\(t_{31}\)</span>, with t
   H_0\,&amp;:\, \tau=0\\
   H_1\,&amp;:\, \tau\neq 0.
 \end{align*}\]</span></p>
-<p>In this scenario, Figure <a href="rct-plan.html#fig:t31-onesided">2.1</a> is replaced by the plot shown in Figure <a href="rct-plan.html#fig:t31-twosided">2.2</a>, where value of <span class="math inline">\(t\)</span> with <span class="math inline">\(t&lt;-2\)</span> are considered ‘equivalent’ to those with <span class="math inline">\(t&gt;2\)</span>, in the sense of how unlikely they are under <span class="math inline">\(H_0\)</span>.</p>
+<p>In this scenario, Figure <a href="rct-plan.html#fig:t31-onesided">2.1</a> is replaced by the plot shown in Figure <a href="rct-plan.html#fig:t31-twosided">2.2</a>, where values of <span class="math inline">\(t\)</span> with <span class="math inline">\(t&lt;-2\)</span> are considered ‘equivalent’ to those with <span class="math inline">\(t&gt;2\)</span>, in the sense of how unlikely they are under <span class="math inline">\(H_0\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:t31-twosided"></span>
 <img src="CT4H_notes_files/figure-html/t31-twosided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $|t| > 2$ shaded.” width=“672” /&gt;
 <p class="caption">
@@ -355,27 +225,33 @@ Figure 2.2: The distribution <span class="math inline">\(t_{31}\)</span>, with t
 </div>
 <p>The P-value for the two-sided test as shown in Figure <a href="rct-plan.html#fig:t31-twosided">2.2</a> is</p>
 <p><span class="math display">\[ F\left(-2, df=31\right) + \left[1 - F\left(2, df=31\right)\right] = 2\times{0.0272} = 0.0543\]</span>
-and the result is no longer significant at the 0.05 level. Throughout this course, we will always assume two-sided tests.</p>
+and the result is no longer significant at the 0.05 level. Throughout this course, we will always assume two-tailed tests.</p>
+<div class="figure"><span style="display:block;" id="fig:starbucks"></span>
+<img src="images/starbucks.jpg" alt="A rather infamous two-tailed mermaid"  />
+<p class="caption">
+Figure 2.3: A rather infamous two-tailed mermaid
+</p>
 </div>
 </div>
-<div id="sec-measDcont" class="section level3 hasAnchor" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Constructing a measure of effect size<a href="rct-plan.html#sec-measDcont" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To understand the theory behind calculating an appropriate sample size, we will initially consider just the scenario in which our primary outcome variable <span class="math inline">\(X\)</span> is normally distributed.</p>
-<p>Suppose that we have <span class="math inline">\(n\)</span> patients in treatment group A, and <span class="math inline">\(m\)</span> in treatment group B. The primary outcome variable <span class="math inline">\(X\)</span> is normally distributed with mean <span class="math inline">\(\mu\)</span> in group A (the control group) and mean <span class="math inline">\(\mu+\tau\)</span> in group B (the intervention group), and common standard deviation <span class="math inline">\(\sigma\)</span>. So</p>
+</div>
+<div id="sec-measDcont" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Constructing a measure of effect size<a href="rct-plan.html#sec-measDcont" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s say we are recruiting participants into two groups: group <span class="math inline">\(T\)</span> will be given the new treatment (they will sometimes be referred to as the <em>treatment group</em> or <em>treatment arm</em>) and group <span class="math inline">\(C\)</span> will be given the control (they are the <em>control group</em> or <em>control arm</em>).</p>
+<p>Suppose that we have <span class="math inline">\(n\)</span> patients in group <span class="math inline">\(C\)</span>, and <span class="math inline">\(m\)</span> in group <span class="math inline">\(T\)</span>. The primary outcome variable <span class="math inline">\(X\)</span> is normally distributed with mean <span class="math inline">\(\mu\)</span> in group C (the control group) and mean <span class="math inline">\(\mu+\tau\)</span> in group T (the intervention group), and common standard deviation <span class="math inline">\(\sigma\)</span>. So</p>
 <p><span class="math display">\[\begin{align*}
-X &amp; \sim N\left(\mu, \sigma^2\right) \text{ in group A}\\
-X &amp; \sim N\left(\mu + \tau, \sigma^2\right) \text{ in group B}.
+X &amp; \sim N\left(\mu, \sigma^2\right) \text{ in group }C\\
+X &amp; \sim N\left(\mu + \tau, \sigma^2\right) \text{ in group }T.
 \end{align*}\]</span></p>
 <p>We are testing the null hypothesis <span class="math inline">\(H_0: \tau=0\)</span> against the alternative hypothesis <span class="math inline">\(H_1: \tau\neq{0}\)</span>.</p>
-<p>Using the data obtained in the trial, we will be able to obtain sample means <span class="math inline">\(\bar{x}_A\)</span> and <span class="math inline">\(\bar{x}_B\)</span> from each group, and a pooled estimate of the standard deviation</p>
-<p><span class="math display">\[ s = \sqrt{\frac{\left(n-1\right)s_A^2 + (m-1)s_B^2}{n+m - 2}},
+<p>Using the data obtained in the trial, we will be able to obtain sample means <span class="math inline">\(\bar{x}_C\)</span> and <span class="math inline">\(\bar{x}_T\)</span> from each group, and a pooled estimate of the standard deviation</p>
+<p><span class="math display">\[ s = \sqrt{\frac{\left(n-1\right)s_C^2 + (m-1)s_T^2}{n+m - 2}},
 \]</span>
-where <span class="math inline">\(s_A\)</span> and <span class="math inline">\(s_B\)</span> are the sample standard deviations for groups A and B respectively, for example</p>
+where <span class="math inline">\(s_C\)</span> and <span class="math inline">\(s_T\)</span> are the sample standard deviations for groups <span class="math inline">\(C\)</span> and <span class="math inline">\(T\)</span> respectively, for example</p>
 <p><span class="math display">\[
-s_A = \sqrt{\frac{\sum\limits_{i=1}^n{\left(x_i - \bar{x}_A\right)^2}}{n-1}}.
+s_C = \sqrt{\frac{\sum\limits_{i=1}^n{\left(x_i - \bar{x}_C\right)^2}}{n-1}}.
 \]</span></p>
 <p>Using these values we can compute</p>
-<p><span class="math display">\[D = \frac{\bar{x}_B - \bar{x}_A}{\frac{s}{\sqrt{n}} + \frac{s}{\sqrt{m}}} = \frac{\bar{x}_B - \bar{x}_A}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}\]</span>
+<p><span class="math display">\[D = \frac{\bar{x}_T - \bar{x}_C}{\frac{s}{\sqrt{n}} + \frac{s}{\sqrt{m}}} = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}\]</span>
 as a standardised measure of the effect <span class="math inline">\(\tau\)</span>.</p>
 <div class="theorem">
 <p><span id="thm:unlabeled-div-5" class="theorem"><strong>Theorem 2.1  </strong></span>Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(D\)</span> has a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n+m-2\)</span> degrees of freedom.</p>
@@ -383,23 +259,23 @@ as a standardised measure of the effect <span class="math inline">\(\tau\)</span
 <div class="proof">
 <p><span id="unlabeled-div-6" class="proof"><em>Proof</em>. </span>Under <span class="math inline">\(H_0\)</span>,</p>
 <p><span class="math display">\[\begin{align*}
-\bar{x}_A &amp; \sim{N\left(\mu, \frac{\sigma^2}{n}\right)}\\
-\bar{x}_B &amp; \sim{N\left(\mu, \frac{\sigma^2}{m}\right)}
+\bar{x}_C &amp; \sim{N\left(\mu, \frac{\sigma^2}{n}\right)}\\
+\bar{x}_T &amp; \sim{N\left(\mu, \frac{\sigma^2}{m}\right)}
 \end{align*}\]</span></p>
 <p>and therefore</p>
 <p><span class="math display">\[
-\bar{x}_B - \bar{x}_A \sim{N \left(0, \sigma^2\left[\frac{1}{n} + \frac{1}{m}\right] \right)}\]</span></p>
+\bar{x}_T - \bar{x}_C \sim{N \left(0, \sigma^2\left[\frac{1}{n} + \frac{1}{m}\right] \right)}\]</span></p>
 <p>and
 <span class="math display">\[
-\frac{\bar{x}_B - \bar{x}_B}{\sigma \sqrt{\frac{1}{n}+\frac{1}{m}}} \sim{N\left(0,1\right)}.\]</span></p>
+\frac{\bar{x}_T - \bar{x}_C}{\sigma \sqrt{\frac{1}{n}+\frac{1}{m}}} \sim{N\left(0,1\right)}.\]</span></p>
 <p>We know that for <span class="math inline">\(x_1,\ldots,x_n,\sim N\left(\mu,\sigma^2\right)\)</span> for some arbitrary <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>,</p>
 <p><span class="math display">\[\frac{1}{\sigma^2}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 \sim{\chi^2_{n-1}},\]</span>
 and so we have</p>
 <p><span class="math display">\[\begin{align*}
-\frac{n-1}{\sigma^2}s_A^2 &amp; \sim \chi^2_{n-1}\\
-\frac{m-1}{\sigma^2}s_B^2 &amp; \sim \chi^2_{m-1}\\
+\frac{n-1}{\sigma^2}s_C^2 &amp; \sim \chi^2_{n-1}\\
+\frac{m-1}{\sigma^2}s_T^2 &amp; \sim \chi^2_{m-1}\\
 \text{and} &amp;\\
-\frac{1}{\sigma^2}\left[\left(n-1\right)s_A^2 + \left(m-1\right)s_B^2\right] &amp; = \frac{n+m-2}{\sigma^2}s^2\\
+\frac{1}{\sigma^2}\left[\left(n-1\right)s_C^2 + \left(m-1\right)s_T^2\right] &amp; = \frac{n+m-2}{\sigma^2}s^2\\
 &amp;\sim \chi^2_{n+m-2}.
 \end{align*}\]</span></p>
 <p>The definition of a <span class="math inline">\(t\)</span>-distribution is that if <span class="math inline">\(Z\sim N\left(0,1\right)\)</span> and <span class="math inline">\(Y \sim{\chi^2_n}\)</span> then</p>
@@ -407,24 +283,24 @@ and so we have</p>
 that is <span class="math inline">\(X\)</span> has a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n\)</span> degrees of freedom.</p>
 <p>Plugging in our <span class="math inline">\(N\left(0,1\right)\)</span> variable for <span class="math inline">\(Z\)</span> and our <span class="math inline">\(\chi^2_{n+m-2}\)</span> variable for <span class="math inline">\(Y\)</span>, we have</p>
 <p><span class="math display">\[\begin{align*}
-\frac{\frac{\bar{x}_B - \bar{x}_A}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}}}{\sqrt{\left(\frac{n+m-2}{\sigma^2}s^2\right) \bigg/ \left(n+m-2\right)}} &amp; = \frac{\bar{x}_B - \bar{x}_A}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}} \bigg/ \frac{s}{\sigma} \\
-&amp; = \frac{\bar{x}_B - \bar{x}_A}{s\sqrt{\frac{1}{n} + \frac{1}{m}}} \\
+\frac{\frac{\bar{x}_T - \bar{x}_C}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}}}{\sqrt{\left(\frac{n+m-2}{\sigma^2}s^2\right) \bigg/ \left(n+m-2\right)}} &amp; = \frac{\bar{x}_T - \bar{x}_C}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}} \bigg/ \frac{s}{\sigma} \\
+&amp; = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}} \\
 &amp; = D
 \end{align*}\]</span></p>
 <p>and therefore <span class="math inline">\(D\)</span> has a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n+m-2\)</span> degrees of freedom.</p>
 </div>
-<p>We can therefore use <span class="math inline">\(D\)</span> to test our hypotheses; if <span class="math inline">\(D\)</span> is such that</p>
+<p>We can therefore use <span class="math inline">\(D\)</span> as our test statistic; if <span class="math inline">\(D\)</span> is such that</p>
 <p><span class="math display">\[ |D| &gt; t_{n+m-2}\left(\alpha/2\right)\]</span>
 where
 <span class="math inline">\(t_{n+m-2}\left(\cdot\right)\)</span> is the function such that <span class="math inline">\(P\left(T&gt;t_{df}\left(\xi\right)\right) = \xi\)</span> when <span class="math inline">\(T \sim{t_{df}}\)</span>.</p>
 <p>In practical terms, for more than around 40 degrees of freedom, the <span class="math inline">\(t\)</span> distribution is indistinguishable from the normal distribution, and since it is rare to have fewer than 40 participants in an RCT, we use a normal approximation in what follows, and a difference is significant at the <span class="math inline">\(100\alpha \%\)</span> level if <span class="math inline">\(|D| &gt; z_{\alpha/2}\)</span>, where <span class="math inline">\(z\)</span> are standard normal values.</p>
-<p>So, if we have run a trial, and have obtained <span class="math inline">\(n\)</span> values of <span class="math inline">\(X\)</span> from group A and <span class="math inline">\(m\)</span> values of <span class="math inline">\(X\)</span> from group B, we can compute <span class="math inline">\(D\)</span>. If <span class="math inline">\(D\)</span> lies outside the interval <span class="math inline">\(\left[-z_{\alpha/2}, z_{\alpha/2}\right]\)</span> then we reject <span class="math inline">\(H_0\)</span>.</p>
-<p>This is equivalent to <span class="math inline">\(\bar{x}_B - \bar{x}_A\)</span> falling outside the interval</p>
+<p>So, if we have run a trial, and have obtained <span class="math inline">\(n\)</span> values of <span class="math inline">\(X\)</span> from group C and <span class="math inline">\(m\)</span> values of <span class="math inline">\(X\)</span> from group T, we can compute <span class="math inline">\(D\)</span>. If <span class="math inline">\(D\)</span> lies outside the interval <span class="math inline">\(\left[-z_{\alpha/2}, z_{\alpha/2}\right]\)</span> then we reject <span class="math inline">\(H_0\)</span>.</p>
+<p>This is equivalent to <span class="math inline">\(\bar{x}_T - \bar{x}_C\)</span> falling outside the interval</p>
 <p><span class="math display">\[\left[-z_{\alpha/2}s\sqrt{\frac{1}{n} + \frac{1}{m}}, z_{\alpha/2}s\sqrt{\frac{1}{n} + \frac{1}{m}}  \right]. \]</span>
 We have constructed our whole argument under the assumption that <span class="math inline">\(H_0\)</span> is true, and that the probability of such a value is therefore <span class="math inline">\(\alpha\)</span>. We want this probability to be small, since it constitutes an error; <span class="math inline">\(H_0\)</span> is true, but our value of <span class="math inline">\(D\)</span> (or the difference in means) leads us to reject <span class="math inline">\(H_0\)</span>. This is sometimes called the ‘type I’ error rate. But what if <span class="math inline">\(H_0\)</span> is false?</p>
 </div>
-<div id="sec-power" class="section level3 hasAnchor" number="2.1.4">
-<h3><span class="header-section-number">2.1.4</span> Power: If <span class="math inline">\(H_0\)</span> is false<a href="rct-plan.html#sec-power" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sec-power" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Power: If <span class="math inline">\(H_0\)</span> is false<a href="rct-plan.html#sec-power" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We have constructed things so that if <span class="math inline">\(H_0\)</span> is true, we have a small probability of rejecting <span class="math inline">\(H_0\)</span>. But if <span class="math inline">\(H_0\)</span> is false, and <span class="math inline">\(\tau\neq{0}\)</span>, we want a high probability of rejecting <span class="math inline">\(H_0\)</span>.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-7" class="definition"><strong>Definition 2.2  </strong></span>The <strong>power function</strong> of a test is the probability that we reject <span class="math inline">\(H_0\)</span>, given that <span class="math inline">\(H_0\)</span> is false. The notation we will use is</p>
@@ -434,19 +310,19 @@ The quantity <span class="math inline">\(\beta\)</span> therefore represents <sp
 <p>Under <span class="math inline">\(H_1\)</span>, we have (approximately)</p>
 <p><span class="math display">\[D \sim{N\left(\frac{\tau}{\sigma\lambda\left(n,m\right)}, 1\right)},\]</span>
 where <span class="math inline">\(\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}\)</span>.</p>
-<p>Figure <a href="rct-plan.html#fig:accepth0">2.3</a> shows the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary (non-zero) effect size <span class="math inline">\(\tau\)</span>. The turquoise bar shows the acceptance region of <span class="math inline">\(H_0\)</span>, ie. the range of observed values of <span class="math inline">\(D\)</span> for which we will fail to reject <span class="math inline">\(H_0\)</span>. We see that this contains 95% of the area of the <span class="math inline">\(H_0\)</span> distribution (we are assuming <span class="math inline">\(\alpha = 0.05\)</span> here), so under <span class="math inline">\(H_0\)</span>, we have a 0.95 probability of observing a value of <span class="math inline">\(D\)</span> that is consistent with <span class="math inline">\(H_0\)</span>.</p>
+<p>Figure <a href="rct-plan.html#fig:accepth0">2.4</a> shows the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary (non-zero) effect size <span class="math inline">\(\tau\)</span>. The turquoise bar shows the acceptance region of <span class="math inline">\(H_0\)</span>, ie. the range of observed values of <span class="math inline">\(D\)</span> for which we will fail to reject <span class="math inline">\(H_0\)</span>. We see that this contains 95% of the area of the <span class="math inline">\(H_0\)</span> distribution (we have set <span class="math inline">\(\alpha = 0.05\)</span> here), so under <span class="math inline">\(H_0\)</span>, we have a 0.95 probability of observing a value of <span class="math inline">\(D\)</span> that is consistent with <span class="math inline">\(H_0\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:accepth0"></span>
-<img src="CT4H_notes_files/figure-html/accepth0-1.png" alt="The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the acceptance region of $H_0$ shown by the turquoise bar." width="672" />
+<img src="CT4H_notes_files/figure-html/accepth0-1.png" alt="The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading." width="672" />
 <p class="caption">
-Figure 2.3: The distribution of D under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the acceptance region of <span class="math inline">\(H_0\)</span> shown by the turquoise bar.
+Figure 2.4: The distribution of D under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
 </p>
 </div>
-<p>However, if <span class="math inline">\(H_1\)</span> is true, and <span class="math inline">\(\tau\neq{0}\)</span>, there is a non-zero probability of observing a value of <span class="math inline">\(D\)</span> that would lead us to fail to reject <span class="math inline">\(H_0\)</span>. This is shown by the area shaded in red. One minus this area (ie. the area under <span class="math inline">\(H_1\)</span> that leads us to accept <span class="math inline">\(H_1\)</span>) is the power.</p>
-<p>We can see that if the distributions have better separation, as in Figure <a href="rct-plan.html#fig:accepth0-1">2.4</a>, the power becomes greater.</p>
+<p>However, if <span class="math inline">\(H_1\)</span> is true, and <span class="math inline">\(\tau\neq{0}\)</span>, there is a non-zero probability of observing a value of <span class="math inline">\(D\)</span> that would lead us to fail to reject <span class="math inline">\(H_0\)</span>. This is shown by the area shaded in red, and it has area <span class="math inline">\(\beta\)</span>. One minus this area (ie. the area under <span class="math inline">\(H_1\)</span> that leads us to accept <span class="math inline">\(H_1\)</span>) is the power, <span class="math inline">\(1-\beta\)</span>.</p>
+<p>We can see that if the distributions have better separation, as in Figure <a href="rct-plan.html#fig:accepth0-1">2.5</a>, the power becomes greater.</p>
 <div class="figure"><span style="display:block;" id="fig:accepth0-1"></span>
-<img src="CT4H_notes_files/figure-html/accepth0-1-1.png" alt="The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the acceptance region of $H_0$ shown by the turquoise bar." width="672" />
+<img src="CT4H_notes_files/figure-html/accepth0-1-1.png" alt="The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading." width="672" />
 <p class="caption">
-Figure 2.4: The distribution of D under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the acceptance region of <span class="math inline">\(H_0\)</span> shown by the turquoise bar.
+Figure 2.5: The distribution of D under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
 </p>
 </div>
 <p>For given values of <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\lambda\left(n,m\right)\)</span>, we can calculate the power function in terms of <span class="math inline">\(\tau\)</span> by finding the area of the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_1\)</span> for which we accept <span class="math inline">\(H_1\)</span>.</p>
@@ -454,24 +330,24 @@ Figure 2.4: The distribution of D under both <span class="math inline">\(H_0\)</
 \Psi\left(\tau\right) = 1-\beta = \left[1 - \operatorname{\Phi}\left(z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)\right] + \operatorname{\Phi}\left(-z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)
 \tag{2.1}
 \end{equation}\]</span></p>
-<p>The first term in Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> is the area in the direction of <span class="math inline">\(\tau\)</span>. In Figures <a href="rct-plan.html#fig:accepth0">2.3</a> and <a href="rct-plan.html#fig:accepth0-1">2.4</a> this is the region to the right of the interval for which we fail to reject <span class="math inline">\(H_0\)</span>, ie. where <span class="math display">\[D &gt; z_{\frac{\alpha}{2}}.\]</span></p>
+<p>The first term in Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> is the area in the direction of <span class="math inline">\(\tau\)</span>. In Figures <a href="rct-plan.html#fig:accepth0">2.4</a> and <a href="rct-plan.html#fig:accepth0-1">2.5</a> this is the region to the right of the interval for which we fail to reject <span class="math inline">\(H_0\)</span>, ie. where <span class="math display">\[D &gt; z_{\frac{\alpha}{2}}.\]</span></p>
 <p>The second term in Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> represents the area away from the direction of <span class="math inline">\(\tau\)</span>, ie. a value of <span class="math inline">\(D\)</span> such that</p>
 <p><span class="math display">\[ D &lt; - z_{\frac{\alpha}{2}},\]</span>
 assuming without loss of generality that <span class="math inline">\(\tau&gt;0\)</span>.</p>
-<p>Figure <a href="rct-plan.html#fig:powercurve">2.5</a> shows the power function <span class="math inline">\(\Psi\left(\tau\right)\)</span> for <span class="math inline">\(\tau\)</span> in units of <span class="math inline">\(\sigma\)</span> (or you could think of this as for <span class="math inline">\(\sigma=1\)</span>), for three different pairs of values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>. We see that in general the power is higher for larger sample sizes, and that of the two designs where <span class="math inline">\(n+m=200\)</span>, the balanced one with <span class="math inline">\(n=m=100\)</span> achieves the greatest power.</p>
+<p>Figure <a href="rct-plan.html#fig:powercurve">2.6</a> shows the power function <span class="math inline">\(\Psi\left(\tau\right)\)</span> for <span class="math inline">\(\tau\)</span> in units of <span class="math inline">\(\sigma\)</span> (or you could think of this as for <span class="math inline">\(\sigma=1\)</span>), for three different pairs of values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>. We see that in general the power is higher for larger sample sizes, and that of the two designs where <span class="math inline">\(n+m=200\)</span>, the balanced one with <span class="math inline">\(n=m=100\)</span> achieves the greatest power.</p>
 <p>In general, the probability of rejecting <span class="math inline">\(H_0\)</span> increases as <span class="math inline">\(\tau\)</span> moves away from zero.</p>
 <p>Notice also that all the curves pass through the point <span class="math inline">\(\tau=0,\,\beta=0.05\)</span>. Since <span class="math inline">\(\tau=0\)</span> corresponds to <span class="math inline">\(H_0\)</span> being true, it makes sense that the probability of rejecting the <span class="math inline">\(H_0\)</span> is the significance level <span class="math inline">\(\alpha\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:powercurve"></span>
 <img src="CT4H_notes_files/figure-html/powercurve-1.png" alt="Power curves for various values of $n$ and $m$, with effect size in units of standard deviation, given a type I error rate of 0.05." width="768" />
 <p class="caption">
-Figure 2.5: Power curves for various values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with effect size in units of standard deviation, given a type I error rate of 0.05.
+Figure 2.6: Power curves for various values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with effect size in units of standard deviation, given a type I error rate of 0.05.
 </p>
 </div>
 <p>It is common to think of the effect size in units of <span class="math inline">\(\sigma\)</span>, as we have done here. This makes results more intuitive, since we don’t need to have a good knowledge of the actual outcome variable to know what is a small or large effect size. It is also helpful in situations where the population standard deviation is not well understood, since the trial can be planned with this sort of effect size in mind. To denote the effect size in units of <span class="math inline">\(\sigma\)</span>, we will write <span class="math inline">\(\tau_\sigma\)</span>, although in practice it is more usual to give both the same notation.</p>
 </div>
-<div id="sec-ssformulacont" class="section level3 hasAnchor" number="2.1.5">
-<h3><span class="header-section-number">2.1.5</span> A sample size formula<a href="rct-plan.html#sec-ssformulacont" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> allows us to find any one of <span class="math inline">\(\tau_\sigma,\,\alpha,\,\beta\)</span> and <span class="math inline">\(\lambda\left(n,m\right)\)</span> given values for the others. Values for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are often specified by those planning the trial as around <span class="math inline">\(\alpha \in \left[0.01,0.05\right],\,\beta\in\left[0.8,0.9\right]\)</span>.</p>
+<div id="sec-ssformulacont" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> A sample size formula<a href="rct-plan.html#sec-ssformulacont" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> allows us to find any one of <span class="math inline">\(\tau_\sigma,\,\alpha,\,\beta\)</span> and <span class="math inline">\(\lambda\left(n,m\right)\)</span> given values for the others. Values for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are often specified by those planning the trial as around <span class="math inline">\(\alpha \in \left[0.01,0.05\right],\,1-\beta\in\left[0.8,0.9\right]\)</span>.</p>
 <p>The remaining two variables, <span class="math inline">\(\tau_\sigma\)</span> and <span class="math inline">\(\lambda\left(n,m\right)\)</span> are generally settled using one or both of the following questions:</p>
 <ul>
 <li>Given our budget constraints, and their implications for <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, what is the smallest value of <span class="math inline">\(\tau_\sigma\)</span> we can achieve?</li>
@@ -479,9 +355,9 @@ Figure 2.5: Power curves for various values of <span class="math inline">\(n\)</
 </ul>
 <p>In a medical setting, an estimate of <span class="math inline">\(\sigma\)</span> is usually available, and so we will return to thinking in terms of <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\sigma\)</span>. In this equation, the value we use (or find) for <span class="math inline">\(\tau\)</span> is the <strong>minimum detectable effect size</strong>, which we will denote <span class="math inline">\(\tau_M\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-8" class="definition"><strong>Definition 2.3  </strong></span>The <strong>minimum detectable effect size</strong> <span class="math inline">\(\tau_M\)</span> for a particular trial is the smallest value of effect size that is able to be detected with power <span class="math inline">\(\beta\)</span> (for some specified value of <span class="math inline">\(\beta\)</span>).</p>
+<p><span id="def:unlabeled-div-8" class="definition"><strong>Definition 2.3  </strong></span>The <strong>minimum detectable effect size</strong> <span class="math inline">\(\tau_M\)</span> for a particular trial is the smallest value of effect size that is able to be detected with power <span class="math inline">\(1-\beta\)</span> (for some specified value of <span class="math inline">\(\beta\)</span>).</p>
 </div>
-<p>Note that we will not <em>definitely</em> detect an effect of size <span class="math inline">\(\tau_M\)</span>, if it exists; by construction, we will detect it with probability <span class="math inline">\(\beta\)</span>. If <span class="math inline">\(|\tau| &gt; |\tau_M|\)</span> (ie. the true effect size is further from zero than <span class="math inline">\(\tau_M\)</span> is) then the probability of detecting it will be greater than <span class="math inline">\(\beta\)</span>. If <span class="math inline">\(|\tau| &lt; |\tau_M|\)</span> then the probability of detecting it will be less than <span class="math inline">\(\beta\)</span>.</p>
+<p>Note that we will not <em>definitely</em> detect an effect of size <span class="math inline">\(\tau_M\)</span>, if it exists; by construction, we will detect it with probability <span class="math inline">\(1-\beta\)</span>. If <span class="math inline">\(|\tau| &gt; |\tau_M|\)</span> (ie. the true effect size is further from zero than <span class="math inline">\(\tau_M\)</span> is) then the probability of detecting it will be greater than <span class="math inline">\(1-\beta\)</span>. If <span class="math inline">\(|\tau| &lt; |\tau_M|\)</span> then the probability of detecting it will be less than <span class="math inline">\(1-\beta\)</span>.</p>
 <p>Although we could solve Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> numerically, in practice we use an approximation. The second term, representing observed values of <span class="math inline">\(D\)</span> that are far enough away from 0 <em>in the opposite direction from the true <span class="math inline">\(\tau\)</span></em> to lead us to reject <span class="math inline">\(H_0\)</span> is so negligible as to be able to be discounted entirely. Indeed, if we were to observe such a value of <span class="math inline">\(D\)</span>, we would come to the wrong conclusion about <span class="math inline">\(\tau\)</span>.</p>
 <p>Therefore, Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> becomes</p>
 <p><span class="math display" id="eq:powerfun2">\[\begin{equation}
@@ -505,29 +381,33 @@ where <span class="math inline">\(\tau_M\)</span> is our minimum detectable effe
 \end{equation}\]</span></p>
 <div class="example">
 <p><span id="exm:unlabeled-div-9" class="example"><strong>Example 2.1  </strong></span><span class="citation">(from <a href="#ref-zhong2009calculate">Zhong 2009</a>)</span>
-A trial is being planned to test whether there is a difference in the efficacy of ACEII antagonist (a new drug) and ACE inhibitor (the standard drug) for the treatment of primary hypertension (high blood pressure). The primary outcome variable is change in sitting diastolic blood pressure (SDBP, mmHg) compared to a baseline measurement taken at the start of the trial. The trial should have a significance level of <span class="math inline">\(\alpha=0.05\)</span> and a power of <span class="math inline">\(\beta = 0.8\)</span>, with the same number of participants in each group. The minimum clinically important difference is <span class="math inline">\(\tau_M = 3 \text{ mmHg}\)</span> and the pooled standard deviation is <span class="math inline">\(s = 8 \text{ mmHg}\)</span>. Therefore, using equation <a href="rct-plan.html#eq:sscont">(2.4)</a> the sample size should be at least</p>
+A trial is being planned to test whether there is a difference in the efficacy of ACEII antagonist (a new drug) and ACE inhibitor (the standard drug) for the treatment of primary hypertension (high blood pressure). The primary outcome variable is change in sitting diastolic blood pressure (SDBP, mmHg) compared to a baseline measurement taken at the start of the trial. The trial should have a significance level of <span class="math inline">\(\alpha=0.05\)</span> and a power of <span class="math inline">\(1-\beta = 0.8\)</span>, with the same number of participants in each group. The minimum clinically important difference is <span class="math inline">\(\tau_M = 3 \text{ mmHg}\)</span> and the pooled standard deviation is <span class="math inline">\(s = 8 \text{ mmHg}\)</span>. Therefore, using equation <a href="rct-plan.html#eq:sscont">(2.4)</a> the sample size should be at least</p>
 <p><span class="math display">\[\begin{align*}
-      N &amp; = \frac{2\times{6}^2\left(0.842 + 1.96\right)^2}{3^2}\\
+      N &amp; = \frac{2\times{8}^2\left(0.842 + 1.96\right)^2}{3^2}\\
       &amp; = 111.6,
 \end{align*}\]</span></p>
 <p>and therefore we need at least 112 participants in each trial arm.</p>
 </div>
-</div>
-</div>
-<div id="sample-size-by-simulation" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Sample size by simulation<a href="rct-plan.html#sample-size-by-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required.</p>
-<p>This approach has the following advantages over the formula-based methods presented in Section <a href="rct-plan.html#ss-norm">2.1</a>:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Transparency</strong>: If the data generating mechanism is made clear, then the assumptions behind the trial are also clear, and the simulation can be replicated by anyone. Reproducibility is a big issue in clinical trials.</li>
-<li><strong>Flexibility</strong>: Whereas the methods above are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials.</li>
-<li><strong>Practice</strong>: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the plan.</li>
-</ol>
-<p>Arguably the first and third advantages could be true of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.</p>
-<div id="the-simulation-method" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> The simulation method<a href="rct-plan.html#the-simulation-method" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The first step in the simulation method is to generate trial data. To do this, we use the underlying probabilistic model we have used (or would use) to develop a sample size formula.</p>
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Hayes, Richard J, and Lawrence H Moulton. 2017. <em>Cluster Randomised Trials</em>. CRC press.
+</div>
+<div class="csl-entry">
+Hjalmas, Hanson, and Kruse Hellstrom. 1998. <span>“Long‐term Treatment with Desmopressin in Children with Primary Monosymptomatic Nocturnal Enuresis: An Open Multicentre Study.”</span> <em>British Journal of Urology</em>.
+</div>
+<div class="csl-entry">
+Hulley, Stephen B, Steven R. Cummings, Warren S. Browner, Deborah G. Grady, and Thomas B. Newman. 2013. <em>Designing Clinical Research, Fourth Edition</em>. Lippincott Williams &amp; Wilkins.
+</div>
+<div class="csl-entry">
+Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
+</div>
+<div class="csl-entry">
+Villar, Jesús, Carlos Ferrando, Domingo Martı́nez, Alfonso Ambrós, Tomás Muñoz, Juan A Soler, Gerardo Aguilar, et al. 2020. <span>“Dexamethasone Treatment for the Acute Respiratory Distress Syndrome: A Multicentre, Randomised Controlled Trial.”</span> <em>The Lancet Respiratory Medicine</em> 8 (3): 267–76.
+</div>
+<div class="csl-entry">
+Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Controlled Trial?”</span> <em>Journal of Thoracic Disease</em> 1 (1): 51.
+</div>
 </div>
 </div>
 </div>
@@ -542,8 +422,8 @@ Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Contr
           </div>
         </div>
       </div>
-<a href="rct-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sec-allocation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rct-intro.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -558,9 +438,9 @@ Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Contr
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
@@ -591,8 +471,9 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
-}
+"collapse": "section"
+},
+"bookdown": null
 });
 });
 </script>
