@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-12-18" />
+<meta name="date" content="2024-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -232,21 +232,21 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-and-p-values"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>4.1.1</b> Bonferroni correction</a></li>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a></li>
 <li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
 <li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.1</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.2</b> How is this related to ANOVA?</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.3</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
 <li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
@@ -275,7 +275,7 @@ div.csl-indent {
 <h2><span class="header-section-number">3.1</span> Bias<a href="allocation.html#bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In statistics, <em>bias</em> is a systematic tendency for the results of our analysis to be different from the true value. We see this particularly when we are using sample data to estimate a parameter. We will revisit what we have learned in previous courses about bias before going on to see how it affects RCTs.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-10" class="definition"><strong>Definition 3.1  (Bias of an estimate) </strong></span>Suppose that <span class="math inline">\(T\)</span> is a statistic calculated to estimate a parameter <span class="math inline">\(\theta\)</span>. The <strong>bias</strong> of <span class="math inline">\(T\)</span> is <span class="math display">\[E\left(T\right) - \theta.\]</span> If the bias of <span class="math inline">\(T\)</span> is zero, we say that <span class="math inline">\(T\)</span> is an <strong>unbiased estimator</strong> of <span class="math inline">\(\theta\)</span>.</p>
+<p><span id="def:unlabeled-div-12" class="definition"><strong>Definition 3.1  (Bias of an estimate) </strong></span>Suppose that <span class="math inline">\(T\)</span> is a statistic calculated to estimate a parameter <span class="math inline">\(\theta\)</span>. The <strong>bias</strong> of <span class="math inline">\(T\)</span> is <span class="math display">\[E\left(T\right) - \theta.\]</span> If the bias of <span class="math inline">\(T\)</span> is zero, we say that <span class="math inline">\(T\)</span> is an <strong>unbiased estimator</strong> of <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <p>An example you will have seen before is the standard deviation. If we have some data <span class="math inline">\(x_1,\,\ldots,x_n\)</span> that are IID <span class="math inline">\(N\left(\mu,\,\sigma^2\right)\)</span>, we can calculate the sample variance</p>
 <p><span class="math display">\[ s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 .\]</span></p>
@@ -288,7 +288,7 @@ and therefore we can apply this correction to the sample variance <span class="m
 where <span class="math inline">\(\tau\)</span> is our treatment effect, which we can estimate using the difference in the groups’ means, <span class="math inline">\(\bar{X}_T - \bar{X}_C\)</span>. Our null hypothesis is that <span class="math inline">\(\tau = 0\)</span>, and our alternative hypothesis is that <span class="math inline">\(\tau\neq{0}\)</span>, and therefore an estimate of <span class="math inline">\(\tau\)</span> from our data is very important! Put equivalently, it is important that there is no bias in our estimates of <span class="math inline">\(\bar{X}_C\)</span> and <span class="math inline">\(\bar{X}_T\)</span>.</p>
 <p>Usually, what this comes down to is that the assumption that the data are independent, identically distributed random variables from the relevant distributions (which we have already relied on a lot for our sample size calculations) has been violated in some way.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 3.1  </strong></span>Historically, women and the elderly are underrepresented in clinical trials (<span class="citation">Cottingham and Fisher (<a href="#ref-cottingham2022gendered">2022</a>)</span>) and results are often translated from young or middle aged healthy men to these other groups (<span class="citation">Vitale et al. (<a href="#ref-vitale2017under">2017</a>)</span>). This isn’t reasonable, since women have very different hormonal activity from men, causing them to often react differently to drugs compared to men involved in the trial. The standard dose (based on trials with mostly male participants) can also be too high for many women. The complicated nature of women’s hormones is sometimes even given as a reason for not including them in the trial. Women and elderly people are also both more likely to have adverse effects to drugs in some fields.</p>
+<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 3.1  </strong></span>Historically, women and the elderly are underrepresented in clinical trials (<span class="citation">Cottingham and Fisher (<a href="#ref-cottingham2022gendered">2022</a>)</span>) and results are often translated from young or middle aged healthy men to these other groups (<span class="citation">Vitale et al. (<a href="#ref-vitale2017under">2017</a>)</span>). This isn’t reasonable, since women have very different hormonal activity from men, causing them to often react differently to drugs compared to men involved in the trial. The standard dose (based on trials with mostly male participants) can also be too high for many women. The complicated nature of women’s hormones is sometimes even given as a reason for not including them in the trial. Women and elderly people are also both more likely to have adverse effects to drugs in some fields.</p>
 <p>There are also ethical reasons behind the low numbers of women in trials, especially phase I and phase II trials. If a woman is possibly pregnant (and trials tend to be extremely cautious in deciding who might be pregnant!) then they are quite often excluded, in order to protect the (actual or hypothetical) fetus. Indeed, in 1977 the Food and Drug Administration (FDA) in the US recommended that women be excluded from phase I and II trials (<span class="citation">Health (<a href="#ref-nationalhistory">2023</a>)</span>) as a result of some severe cases of fetuses being harmed by drugs (especially Thalidamide) . This means that even some very mainstream drugs, for example antihistamines (<span class="citation">Kar et al. (<a href="#ref-kar2012review">2012</a>)</span>), haven’t been tested for safety/efficacy during pregnancy, as well as some (for example HIV treatments) that would be of huge benefit to many many pregnant women. <a href="https://www.politico.eu/article/telescope-hiv-aids-unitaid-gender-pregnant-trials/">This article</a> is an interesting read if you would like to know more.</p>
 </div>
 <div id="where-does-bias-come-from" class="section level3 hasAnchor" number="3.1.1">
@@ -300,7 +300,7 @@ where <span class="math inline">\(\tau\)</span> is our treatment effect, which w
 their treatment is chosen. If a medical professional is not comfortable with a particular patient potentially receiving one of the possible treatments, then that patient should not be entered into the trial at all. If there are many such [technically eligible] patients, then this might cause the estimated treatment effect to be worryingly far from the true population treatment effect, since the recruited group of participants would not be very representative of the true population (this is not technically selection bias, but it comes from the same problem).</p>
 <p>It may happen that the doctor knows which treatment a patient would be given, for example if the allocation follows some deterministic pattern, or is fully known to the doctor in advance. Consciously or subconsciously this knowledge may influence the description they give to potential participants, and this in turn may affect which patients sign up, and the balance of the groups. In practice there should be various safeguards against this situation.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-12" class="example"><strong>Example 3.2  </strong></span>Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.</p>
+<p><span id="exm:unlabeled-div-14" class="example"><strong>Example 3.2  </strong></span>Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.</p>
 <p>The severity of each participants disease is graded as 1 (less serious) or 2 (more serious). Across the full group of participants, proportion <span class="math inline">\(\lambda\)</span> have severity 1 and proportion <span class="math inline">\(1-\lambda\)</span> have severity 2.</p>
 <p>Our primary outcome is survival time, <span class="math inline">\(X\)</span>, which depends on the severity of disease:</p>
 <p><span class="math display">\[\begin{align*}
@@ -382,7 +382,7 @@ If <span class="math inline">\(N\)</span> is the better treatment, then <span cl
 <p>Measurements are made on participants throughout (and often during) the trial. These measurements will often be objective, for example the patients’ weight, or concentration of blood sugar. However, some types of measurement are much more subject to the individual practitioner assessing the patient. For example, many skin conditions are assessed visually, for example estimating the proportion of the body affected. Measuring quantities such as quality of life or psychological well-being involve many subjective judgements on the part of both patient and clinician.</p>
 <p>Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of. For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial ‘blind’, and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware.</p>
 <hr />
-<p>Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. <span class="citation">Altman and Bland (<a href="#ref-altman1999treatment">1999b</a>)</span> gives an overview of why this has led to bias, and gives some examples.</p>
+<p>Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. <span class="citation">Altman and Bland (<a href="#ref-altman1999treatment">1999</a>)</span> gives an overview of why this has led to bias, and gives some examples.</p>
 <p>Sometimes analyses compare groups in serial, so that <span class="math inline">\(N_A\)</span> patients one year (say) form the control group, and <span class="math inline">\(n_B\)</span> patients in a subsequent year, who are given treatment <span class="math inline">\(B\)</span>, form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment <span class="math inline">\(B\)</span>.</p>
 <p>Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.</p>
 <p>There are two important aspects to the allocation being <em>random</em> that we will draw attention to.</p>
@@ -587,7 +587,7 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 <h2><span class="header-section-number">3.3</span> Stratified sampling<a href="allocation.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 3.3  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
+<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 3.3  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
 <p>For sex, we use the levels ‘male’ and ‘female’, and for age we split the range into 50-65, 66-80 and 81 or over. We therefore have six strata, and we use an allocation strategy independently in each stratum. For example, below we have used randomly permuted blocks of length four.</p>
 <table>
 <thead>
@@ -621,8 +621,6 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 </div>
 <div id="minimization" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Minimization<a href="allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="citation">Altman and Bland (<a href="#ref-altman1999randomise">1999a</a>)</span> tees up minimization.
-<span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span> a good source.</p>
 <p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
 <p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
 <p>When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
@@ -668,144 +666,68 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-14" class="example"><strong>Example 3.4  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
+<p><span id="exm:unlabeled-div-16" class="example"><strong>Example 3.4  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
 <p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table @ref(tab:minim_eg).</p>
-<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<table>
 <thead>
-<tr>
-<th style="border-top: 2px solid grey;">
-</th>
-<th colspan="2" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center; margin: 0; padding: 0; vertical-align: middle;">
-Example after 15 allocations
-</th>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey;">
-</th>
-<th style="margin: 0; padding: 0; font-weight: 900; vertical-align: middle; border-bottom: 1px solid grey; text-align: center;">
-Mustine (A)
-</th>
-<th style="margin: 0; padding: 0; font-weight: 900; vertical-align: middle; border-bottom: 1px solid grey; text-align: center;">
-Talc (B)
-</th>
+<tr class="header">
+<th align="left">factor</th>
+<th align="left">level</th>
+<th align="right">Mustine (A)</th>
+<th align="right">Talc (B)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
-Age
-</td>
+<tr class="odd">
+<td align="left">Age</td>
+<td align="left">1. 50 or younger</td>
+<td align="right">3</td>
+<td align="right">4</td>
 </tr>
-<tr>
-<td style="margin: 0; padding: 0; text-align: left;">
-  1. 50 or younger
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-3
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-4
-</td>
+<tr class="even">
+<td align="left">Age</td>
+<td align="left">2. &gt;50</td>
+<td align="right">4</td>
+<td align="right">4</td>
 </tr>
-<tr>
-<td style="margin: 0; padding: 0; text-align: left;">
-  2. &gt;50
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-4
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-4
-</td>
+<tr class="odd">
+<td align="left">Stage</td>
+<td align="left">1. I or II</td>
+<td align="right">1</td>
+<td align="right">2</td>
 </tr>
-<tr>
-<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
-Stage
-</td>
+<tr class="even">
+<td align="left">Stage</td>
+<td align="left">2. III or IV</td>
+<td align="right">6</td>
+<td align="right">6</td>
 </tr>
-<tr>
-<td style="margin: 0; padding: 0; text-align: left;">
-  1. I or II
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-1
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-2
-</td>
+<tr class="odd">
+<td align="left">Time interval</td>
+<td align="left">1. 30 months or less</td>
+<td align="right">4</td>
+<td align="right">2</td>
 </tr>
-<tr>
-<td style="margin: 0; padding: 0; text-align: left;">
-  2. III or IV
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-6
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-6
-</td>
+<tr class="even">
+<td align="left">Time interval</td>
+<td align="left">2. &gt;30 months</td>
+<td align="right">4</td>
+<td align="right">5</td>
 </tr>
-<tr>
-<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
-Time interval
-</td>
+<tr class="odd">
+<td align="left">Menopausal status</td>
+<td align="left">1. Pre</td>
+<td align="right">4</td>
+<td align="right">3</td>
 </tr>
-<tr>
-<td style="margin: 0; padding: 0; text-align: left;">
-  1. 30 months or less
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-4
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-2
-</td>
-</tr>
-<tr>
-<td style="margin: 0; padding: 0; text-align: left;">
-  2. &gt;30 months
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-4
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-5
-</td>
-</tr>
-<tr>
-<td colspan="3" style="margin: 0; padding: 0; font-weight: normal;">
-Menopausal Status
-</td>
-</tr>
-<tr>
-<td style="margin: 0; padding: 0; text-align: left;">
-  1. Pre
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-4
-</td>
-<td style="margin: 0; padding: 0; text-align: center;">
-3
-</td>
-</tr>
-<tr>
-<td style="margin: 0; padding: 0; border-bottom: 2px solid grey; text-align: left;">
-  2. Post
-</td>
-<td style="margin: 0; padding: 0; border-bottom: 2px solid grey; text-align: center;">
-5
-</td>
-<td style="margin: 0; padding: 0; border-bottom: 2px solid grey; text-align: center;">
-3
-</td>
+<tr class="even">
+<td align="left">Menopausal status</td>
+<td align="left">2. Post</td>
+<td align="right">5</td>
+<td align="right">3</td>
 </tr>
 </tbody>
-<tr>
-<td colspan="3" style="text-align: left;">
-Allocations of first 15 patients, divided by diagnostic factor
-</td>
-</tr>
 </table>
 <p>Suppose our sixteenth patient is under 50, has is at stage III, has less than 30 months between diagnoses and is pre-menopausal.
 Our calculation from step 4 of the minimisation algorithm is therefore</p>
@@ -853,7 +775,7 @@ Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 </tbody>
 </table>
 <p>This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.</p>
 <p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
 <blockquote>
@@ -868,11 +790,8 @@ Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 <div id="ref-altman1990practical" class="csl-entry">
 Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC press.
 </div>
-<div id="ref-altman1999randomise" class="csl-entry">
-Altman, Douglas G, and J Martin Bland. 1999a. <span>“How to Randomise.”</span> <em>Bmj</em> 319 (7211): 703–4.
-</div>
 <div id="ref-altman1999treatment" class="csl-entry">
-———. 1999b. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
+Altman, Douglas G, and J Martin Bland. 1999. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
 </div>
 <div id="ref-cottingham2022gendered" class="csl-entry">
 Cottingham, Marci D, and Jill A Fisher. 2022. <span>“Gendered Logics of Biomedical Research: Women in US Phase i Clinical Trials.”</span> <em>Social Problems</em> 69 (2): 492–509.

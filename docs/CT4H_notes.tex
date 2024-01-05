@@ -64,6 +64,7 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage[margin = 1in]{geometry}
+\usepackage[breaklinks=true]{hyperref}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -80,7 +81,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2023-12-18}
+\date{2024-01-05}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -165,7 +166,7 @@ This means that your experience of it might be different from what you're used t
 \item
   We will cover quite a lot of different statistical methods (drawing on most of the 1H and 2H courses, and some 3H!) but not in great depth
 \item
-  There is no pressure to memorize anything - indeed, if you really were a trial statistician, you would definitely have access to the internet, various textbooks and indeed these notes (should they prove useful!).
+  There is no pressure to memorize anything - indeed, if you really were a trial statistician, you would definitely have access to the internet, various textbooks and even these notes (should they prove useful!).
 \item
   There is an emphasis on understanding which method we use and why, and what it means. Hopefully this has been the case in some of your other modules too!
 \end{itemize}
@@ -385,6 +386,347 @@ Phase IV trials happen after the treatment has been found to work, has been lice
 \item
   to find out how well the treatment works when given to a broader group of people than in phase III.
 \end{itemize}
+
+\hypertarget{part-part-i-continuous-outcome-variables}{%
+\part{Part I: Continuous outcome variables}\label{part-part-i-continuous-outcome-variables}}
+
+\hypertarget{rct-plan}{%
+\chapter{Sample size for a normally distributed primary outcome variable}\label{rct-plan}}
+
+For most of this module, we'll focus on randomised controlled trials (RCTs). These have mainly been used for clinical applications (for example, to test a particular drug), but have also recently become popular ways to test interventions in areas such as education and policing.
+
+Having laid the groundwork in Chapter \ref{rct-intro}, we now go on to some more technical details. In this Chapter, we focus on the `vanilla' scenario, where we have a trial with two arms, and our unit of randomization is individuals. At first we will focus only on continuous outcomes, but in later weeks we will go on to think about binary and time-to-event data.
+
+Broadly speaking, the topics we cover fall into the categories of `before the trial' (design and planning) or `after the trial' (analysis), although as we'll see there is some interaction between these stages.
+
+The first big question asked of a trial statistician is usually how many participants does the trial need in order to be viable: the sample size. We will clarify what is meant by `viable' later in this section.
+
+Broadly speaking, there are two (opposing) ethical issues around sample size:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If we don't recruit enough patients, then we may not gather enough evidence to draw any conclusion about the research question (eg. whether there is a treatment effect). As well as being scientifically disappointing, this is unethical. To conduct the trial, some of the patients will have been subject to an inferior treatment (assuming one treatment was actually better), and if there is no conclusion then this was effectively for no purpose.
+\item
+  If we recruit too many patients (ie. we would be sufficiently likely to reach a conclusion with many fewer) then we have subjected more patients than necessary to an inferior treatment, and possibly also taken up more time and resources than was necessary.
+\end{enumerate}
+
+Therefore it is important to think about this issue carefully. We've framed the question in quite a woolly way so far, but now we'll start to think more carefully.
+
+\hypertarget{the-treatment-effect}{%
+\section{The treatment effect}\label{the-treatment-effect}}
+
+In Section \ref{primout} we discussed the need to settle on a \textbf{primary outcome variable}. One reason this is important is that we base our sample size calculations on the primary outcome variable.
+
+\begin{definition}
+Suppose our primary outcome variable is \(X\), which has mean \(\mu\) in the control group and mean \(\mu + \tau\) in the treatment group. The variable \(\tau\) is the \textbf{treatment effect}. The goal of our RCT is to learn about \(\tau\). The larger \(\tau\) is (in magnitude), the more pronounced the effect of the intervention.
+\end{definition}
+
+This problem is usually framed as a \textbf{hypothesis test}, where the null hypothesis is that \(\tau=0\).
+
+\hypertarget{reminder-hypothesis-tests-with-a-focus-on-rcts}{%
+\section{Reminder: hypothesis tests (with a focus on RCTs)}\label{reminder-hypothesis-tests-with-a-focus-on-rcts}}
+
+When performing a hypothesis test, what we are aiming to find is the \textbf{P-value}.
+
+\begin{definition}
+The \textbf{P-value} is the probability of obtaining a result as extreme or more extreme (ie. further away from the null hypothesis value) than the one obtained \emph{given that the null hypothesis is true}.
+\end{definition}
+
+Put simply, it is a measure of the probability of obtaining whatever result (eg. treatment effect) we have have found simply by random chance, when in fact there is no treatment effect (ie. \(\tau=0\)). Generally, a P-value of \(\alpha = 0.05\) is accepted as sufficient evidence to reject the null hypothesis, although in clinical settings it can often be smaller (eg. \(\alpha = 0.01\)). It is conventional to present the P-value by simply saying whether it is smaller than some threshold (often 0.05), rather than giving the exact value.
+
+\begin{definition}
+The threshold for the p-value below which the results are considered `significant' is known as the \textbf{significance level} of the test, and is generally written \(\alpha\) (as above).
+\end{definition}
+
+This use of a significance level is (in part) a legacy from early days when computers were rare and values were looked up in \(t\)-tables (or similar). Now that it is very simple to find the exact P-value, it is becoming more and more common to report the actual number. Indeed, there is a big difference between \(p=0.049\) and \(p=0.000049\).
+
+\hypertarget{insignificant-results}{%
+\subsection{Insignificant results}\label{insignificant-results}}
+
+If our P-value is relatively large, say 0.3 or 0.5, then our result is not at all unlikely under the null hypothesis, and provides no evidence to reject \(H_0\). However, it is not inconsistent with the existence of a treatment effect, so we don't say there is evidence to accept \(H_0\). One can imagine that if the true treatment effect \(\tau\) were tiny, many trials would fail to find evidence to reject \(H_0\). However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if \(\tau\) is very large, even a relatively small sample size is likely to provide enough evidence to reject \(H_0\).
+
+A non-significant P-value means that our results are consistent with the null hypothesis \(\tau=0\), but they are also consistent with some small treatment effect, and therefore we can't conclude very much. The key issue is, what size of treatment effect do we care about? We must ensure that our sample size is sufficiently large to be sufficiently likely to detect a clinically meaningful treatment effect.
+
+We are being vague for now, but this is a key issue in determining an appropriate sample size.
+
+\hypertarget{one-sided-or-two-sided}{%
+\subsection{One-sided or two-sided?}\label{one-sided-or-two-sided}}
+
+It is highly likely that the scientists running the trial will have a strong idea of the likely `direction' of the treatment effect. Assuming that a larger value of the primary outcome variable \(X\) is good, they will expect a positive value of the treatment effect \(\tau\) (or be prepared to accept a possible value of zero for no effect).
+
+It would therefore be tempting to perform a one-sided test, with
+
+\begin{align*}
+  H_0\,&:\, \tau=0\\
+  H_1\,&:\, \tau>0.
+\end{align*}
+
+For example, suppose our test statistic \(t\) has a \(t\) distribution with 31 degrees of freedom and we obtain a value of 2, as shown in Figure \ref{fig:t31-onesided}.
+In this case our P-value is \(1 - F_t\left(2, df=31\right)= 0.0272\) (where \(F_t\left(\cdot\right)\) is the cumulative distribution function of the \(t\) distribution) , and the result would be considered significant at the 0.05 level.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/t31-onesided-1.pdf}
+\caption{\label{fig:t31-onesided}The distribution \(t_{31}\), with the area corresponding to \(t > 2\) shaded.}
+\end{figure}
+
+For a large positive value of \(t\), we obtain a small P-value, and reject \(H_0\), concluding that the intervention is effective (in a good way). However, what if we obtain a large negative value of \(t\)? In this one-sided set-up, there is no value of \(t<0\) that would give a significant result; negative values of \(t\) are simply considered consistent with \(H_0\), and there is no mechanism to conclude that an intervention has a significantly negative effect.
+
+For this reason, we always conduct two sided hypothesis tests, with
+
+\begin{align*}
+  H_0\,&:\, \tau=0\\
+  H_1\,&:\, \tau\neq 0.
+\end{align*}
+
+In this scenario, Figure \ref{fig:t31-onesided} is replaced by the plot shown in Figure \ref{fig:t31-twosided}, where values of \(t\) with \(t<-2\) are considered `equivalent' to those with \(t>2\), in the sense of how unlikely they are under \(H_0\).
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/t31-twosided-1.pdf}
+\caption{\label{fig:t31-twosided}The distribution \(t_{31}\), with the area corresponding to \(|t| > 2\) shaded.}
+\end{figure}
+
+The P-value for the two-sided test as shown in Figure \ref{fig:t31-twosided} is
+
+\[ F\left(-2, df=31\right) + \left[1 - F\left(2, df=31\right)\right] = 2\times{0.0272} = 0.0543\]
+and the result is no longer significant at the 0.05 level. Throughout this course, we will always assume two-tailed tests.
+
+\begin{figure}
+\centering
+\includegraphics{images/starbucks.jpg}
+\caption{\label{fig:starbucks}A rather ubiquitous two-tailed mermaid}
+\end{figure}
+
+\hypertarget{sec-measDcont}{%
+\section{Constructing a measure of effect size}\label{sec-measDcont}}
+
+Let's say we are recruiting participants into two groups: group \(T\) will be given the new treatment (they will sometimes be referred to as the \emph{treatment group} or \emph{treatment arm}) and group \(C\) will be given the control (they are the \emph{control group} or \emph{control arm}).
+
+Suppose that we have \(n\) patients in group \(C\), and \(m\) in group \(T\). The primary outcome variable \(X\) is normally distributed with mean \(\mu\) in group C (the control group) and mean \(\mu+\tau\) in group T (the intervention group), and common standard deviation \(\sigma\). So
+
+\begin{align*}
+X & \sim N\left(\mu, \sigma^2\right) \text{ in group }C\\
+X & \sim N\left(\mu + \tau, \sigma^2\right) \text{ in group }T.
+\end{align*}
+
+We are testing the null hypothesis \(H_0: \tau=0\) against the alternative hypothesis \(H_1: \tau\neq{0}\).
+
+Using the data obtained in the trial, we will be able to obtain sample means \(\bar{x}_C\) and \(\bar{x}_T\) from each group, and a pooled estimate of the standard deviation
+
+\[ s = \sqrt{\frac{\left(n-1\right)s_C^2 + (m-1)s_T^2}{n+m - 2}},
+\]
+where \(s_C\) and \(s_T\) are the sample standard deviations for groups \(C\) and \(T\) respectively, for example
+
+\[
+s_C = \sqrt{\frac{\sum\limits_{i=1}^n{\left(x_i - \bar{x}_C\right)^2}}{n-1}}.
+\]
+
+Using these values we can compute
+
+\[D = \frac{\bar{x}_T - \bar{x}_C}{\frac{s}{\sqrt{n}} + \frac{s}{\sqrt{m}}} = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}\]
+as a standardised measure of the effect \(\tau\).
+
+\begin{theorem}
+Under \(H_0\), \(D\) has a \(t\)-distribution with \(n+m-2\) degrees of freedom.
+\end{theorem}
+
+\begin{proof}
+Under \(H_0\) the \(x_i\) are iid \(N\left(\mu,\;\sigma^2\right)\), and so
+
+\begin{align*}
+\bar{x}_C & \sim{N\left(\mu, \frac{\sigma^2}{n}\right)}\\
+\bar{x}_T & \sim{N\left(\mu, \frac{\sigma^2}{m}\right)}
+\end{align*}
+
+and therefore
+
+\[
+\bar{x}_T - \bar{x}_C \sim{N \left(0, \sigma^2\left[\frac{1}{n} + \frac{1}{m}\right] \right)}\]
+
+and
+\[
+\frac{\bar{x}_T - \bar{x}_C}{\sigma \sqrt{\frac{1}{n}+\frac{1}{m}}} \sim{N\left(0,1\right)}.\]
+
+We know that for \(x_1,\ldots,x_n,\sim N\left(\mu,\sigma^2\right)\) for some arbitrary \(\mu\) and \(\sigma^2\),
+
+\[\frac{1}{\sigma^2}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 \sim{\chi^2_{n-1}},\]
+and so we have
+
+\begin{align*}
+\frac{n-1}{\sigma^2}s_C^2 & \sim \chi^2_{n-1}\\
+\frac{m-1}{\sigma^2}s_T^2 & \sim \chi^2_{m-1}\\
+\text{and} &\\
+\frac{1}{\sigma^2}\left[\left(n-1\right)s_C^2 + \left(m-1\right)s_T^2\right] & = \frac{n+m-2}{\sigma^2}s^2\\
+&\sim \chi^2_{n+m-2}.
+\end{align*}
+
+The definition of a \(t\)-distribution is that if \(Z\sim N\left(0,1\right)\) and \(Y \sim{\chi^2_n}\) then
+
+\[X = \frac{Z} {\sqrt{\frac{Y}{n}}} \sim{t_n},\]
+that is \(X\) has a \(t\) distribution with \(n\) degrees of freedom.
+
+Plugging in our \(N\left(0,1\right)\) variable for \(Z\) and our \(\chi^2_{n+m-2}\) variable for \(Y\), we have
+
+\begin{align*}
+\frac{\frac{\bar{x}_T - \bar{x}_C}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}}}{\sqrt{\left(\frac{n+m-2}{\sigma^2}s^2\right) \bigg/ \left(n+m-2\right)}} & = \frac{\bar{x}_T - \bar{x}_C}{\sigma\sqrt{\frac{1}{n} + \frac{1}{m}}} \bigg/ \frac{s}{\sigma} \\
+& = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}} \\
+& = D
+\end{align*}
+
+and therefore \(D\) has a \(t\) distribution with \(n+m-2\) degrees of freedom.
+\end{proof}
+
+We can therefore use \(D\) as our test statistic; if \(D\) is such that
+
+\[ |D| > t_{n+m-2}\left(\alpha/2\right)\]
+where
+\(t_{n+m-2}\left(\cdot\right)\) is the function such that \(P\left(T>t_{df}\left(\xi\right)\right) = \xi\) when \(T \sim{t_{df}}\).
+
+In practical terms, for more than around 40 degrees of freedom, the \(t\) distribution is indistinguishable from the normal distribution, and since it is rare to have fewer than 40 participants in an RCT, we use a normal approximation in what follows, and a difference is significant at the \(100\left(1-\alpha\right) \%\) level if \(|D| > z_{\alpha/2}\), where \(z\) are standard normal quantile values. For example, for \(\alpha=0.05\) have \(z_{\alpha/2} = 1.960\), since the probability of a standard normal variable exceeding this value is 0.025.
+
+So, if we have run a trial, and have obtained \(n\) values of \(X\) from group \(C\) and \(m\) values of \(X\) from group \(T\), we can compute \(D\). If \(D\) lies outside the interval \(\left[-z_{\alpha/2}, z_{\alpha/2}\right]\) then we reject \(H_0\).
+
+This is equivalent to \(\bar{x}_T - \bar{x}_C\) falling outside the interval
+
+\[\left[-z_{\alpha/2}s\sqrt{\frac{1}{n} + \frac{1}{m}}, z_{\alpha/2}s\sqrt{\frac{1}{n} + \frac{1}{m}}  \right]. \]
+We have constructed our whole argument under the assumption that \(H_0\) is true, and that the probability of such a value is therefore \(\alpha\). We want this probability to be small, since it constitutes an error; \(H_0\) is true, but our value of \(D\) (or the difference in means) leads us to reject \(H_0\). This is sometimes called the `type I' error rate. But what if \(H_0\) is false?
+
+\hypertarget{sec-power}{%
+\section{\texorpdfstring{Power: If \(H_0\) is false}{Power: If H\_0 is false}}\label{sec-power}}
+
+We have constructed things so that if \(H_0\) is true, we have a small probability of rejecting \(H_0\). But if \(H_0\) is false, and \(\tau\neq{0}\), we want our test to have a high probability of rejecting \(H_0\).
+
+\begin{definition}
+The \textbf{power} of a test is the probability that we reject \(H_0\), given that \(H_0\) is false. The \textbf{power function} depends on the value of \(\tau\) and is
+
+\[\Psi\left(\tau\right) = \Pr\left(\text{Reject } H_0\mid{\tau\neq{0}}\right) = 1 - \beta.\]
+The quantity \(\beta\) therefore represents \(\Pr\left(\text{Accept } H_0\mid{\tau\neq{0}}\right)\), which is the \textbf{type II error rate}.
+\end{definition}
+
+If you find the notation confusing (as I do!) then it might be helpful to remember that both \(\alpha\) and \(\beta\) are \textbf{error rates} - probabilities of coming to the wrong conclusion. It is common to talk in terms of \(\alpha\), the significance level, (which will be a low number, often 0.05) and of \(1-\beta\), the power (which will be a high number, often 0.8). I've found though that it is not uncommon to find people refer to \(\beta\) (rather than \(1-\beta\)) as the power. If in doubt, keep in mind that we require \(\alpha,\;\beta \ll 0.5\). It is also common to use percentages: a significance level of \(\alpha=0.05\) can also be referred to as ``the 95\% level'', and \(\beta=0.2\) is the same as a ``power of 80\%''. When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.
+
+If you notice any mistakes in these notes along these (or other!) lines, please point them out.
+
+Under \(H_1\), we have (approximately)
+
+\[D \sim{N\left(\frac{\tau}{\sigma\lambda\left(n,m\right)}, 1\right)},\]
+where \(\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}\) and
+\[D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}.\]
+
+Figure \ref{fig:accepth0} shows the distribution of \(D\) under \(H_0\) and \(H_1\) for some arbitrary (non-zero) effect size \(\tau\). The turquoise bar shows the acceptance region of \(H_0\), ie. the range of observed values of \(D\) for which we will fail to reject \(H_0\). We see that this contains 95\% of the area of the \(H_0\) distribution (we have set \(\alpha = 0.05\) here), so under \(H_0\), we have a 0.95 probability of observing a value of \(D\) that is consistent with \(H_0\).
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/accepth0-1.pdf}
+\caption{\label{fig:accepth0}The distribution of D under both \(H_0\) and \(H_1\) for some arbitrary values of effect size, population variance, \(n\) and \(m\), with the region in which we fail to reject \(H_0\) shown by the turquoise bar and the red shading.}
+\end{figure}
+
+However, if \(H_1\) is true, and \(\tau\neq{0}\), there is a non-zero probability of observing a value of \(D\) that would lead us to fail to reject \(H_0\). This is shown by the area shaded in red, and it has area \(\beta\). One minus this area (ie. the area under \(H_1\) that leads us to accept \(H_1\)) is the power, \(1-\beta\).
+
+We can see that if the distributions have better separation, as in Figure \ref{fig:accepth0-1}, the power becomes greater. This can be as a result of a larger \(\tau\), a smaller \(\sigma\) or a smaller \(\lambda\) (therefore larger \(m\) and/or \(n\)).
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/accepth0-1-1.pdf}
+\caption{\label{fig:accepth0-1}The distribution of D under both \(H_0\) and \(H_1\) for some arbitrary values of effect size, population variance, \(n\) and \(m\), with the region in which we fail to reject \(H_0\) shown by the turquoise bar and the red shading.}
+\end{figure}
+
+For given values of \(\alpha\), \(\sigma\) and \(\lambda\left(n,m\right)\), we can calculate the power function in terms of \(\tau\) by finding the area of the distribution of \(D\) under \(H_1\) for which we accept \(H_1\).
+
+\begin{equation}
+\Psi\left(\tau\right) = 1-\beta = \left[1 - \operatorname{\Phi}\left(z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)\right] + \operatorname{\Phi}\left(-z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)
+\label{eq:powerfun}
+\end{equation}
+
+The first term in Equation \eqref{eq:powerfun} is the area in the direction of \(\tau\). In Figures \ref{fig:accepth0} and \ref{fig:accepth0-1} this is the region to the right of the interval for which we fail to reject \(H_0\), ie. where \[D > z_{\frac{\alpha}{2}}.\]
+
+The second term in Equation \eqref{eq:powerfun} represents the area away from the direction of \(\tau\), ie. a value of \(D\) such that
+
+\[ D < - z_{\frac{\alpha}{2}},\]
+assuming without loss of generality that \(\tau>0\).
+
+Figure \ref{fig:powercurve} shows the power function \(\Psi\left(\tau\right)\) for \(\tau\) in units of \(\sigma\) (or you could think of this as for \(\sigma=1\)), for three different pairs of values of \(n\) and \(m\) (remember that these enter the power function via \(\lambda\)) with \(\alpha=0.05\). We see that in general the power is higher for larger sample sizes, and that of the two designs where \(n+m=200\), the balanced one with \(n=m=100\) achieves the greatest power.
+
+In general, the probability of rejecting \(H_0\) increases as \(\tau\) moves away from zero.
+
+Notice also that all the curves pass through the point \(\tau=0,\,\beta=0.05\). Since \(\tau=0\) corresponds to \(H_0\) being true, it makes sense that the probability of rejecting the \(H_0\) is the significance level \(\alpha\).
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/powercurve-1.pdf}
+\caption{\label{fig:powercurve}Power curves for various values of \(n\) and \(m\), with effect size in units of standard deviation, given a type I error rate of 0.05.}
+\end{figure}
+
+It is common to think of the effect size in units of \(\sigma\), as we have done here. This makes results more intuitive, since we don't need to have a good knowledge of the actual outcome variable to know what is a small or large effect size. It is also helpful in situations where the population standard deviation is not well understood, since the trial can be planned with this sort of effect size in mind. To denote the effect size in units of \(\sigma\), we will write \(\tau_\sigma\), although in practice it is more usual to give both the same notation.
+
+\hypertarget{sec-ssformulacont}{%
+\section{A sample size formula}\label{sec-ssformulacont}}
+
+Equation \eqref{eq:powerfun} allows us to find any one of \(\tau_\sigma,\,\alpha,\,\beta\) and \(\lambda\left(n,m\right)\) given values for the others. Values for \(\alpha\) and \(\beta\) are often specified by those planning the trial as around \(\alpha \in \left[0.01,0.05\right],\,1-\beta\in\left[0.8,0.9\right]\).
+
+The remaining two variables, \(\tau_\sigma\) and \(\lambda\left(n,m\right)\) are generally settled using one or both of the following questions:
+
+\begin{itemize}
+\tightlist
+\item
+  Given our budget constraints, and their implications for \(n\) and \(m\), what is the smallest value of \(\tau_\sigma\) we can achieve?
+\item
+  What is the smallest value of \(\tau_\sigma\) that would be clinically useful to detect, and what value of \(\lambda\left(n,m\right)\) do we need in order to achieve it?
+\end{itemize}
+
+In a medical setting, an estimate of \(\sigma\) is usually available, and so we will return to thinking in terms of \(\tau\) and \(\sigma\). In this equation, the value we use (or find) for \(\tau\) is the \textbf{minimum detectable effect size}, which we will denote \(\tau_M\).
+
+\begin{definition}
+The \textbf{minimum detectable effect size} \(\tau_M\) for a particular trial is the smallest value of effect size that is able to be detected with power \(1-\beta\) and at significance level \(\alpha\) (for some specified values of \(\alpha,\;\beta\)).
+\end{definition}
+
+Note that we will not \emph{definitely} detect an effect of size \(\tau_M\), if it exists; by construction, we will detect it with probability \(1-\beta\). If \(|\tau| > |\tau_M|\) (ie. the true effect size is further from zero than \(\tau_M\) is) then the probability of detecting it will be greater than \(1-\beta\). If \(|\tau| < |\tau_M|\) then the probability of detecting it will be less than \(1-\beta\).
+
+Although we could solve Equation \eqref{eq:powerfun} numerically, in practice we use an approximation. The second term, representing observed values of \(D\) that are far enough away from 0 \emph{in the opposite direction from the true \(\tau\)} to lead us to reject \(H_0\) is so negligible as to be able to be discounted entirely. Indeed, if we were to observe such a value of \(D\), we would come to the wrong conclusion about \(\tau\).
+
+Therefore, Equation \eqref{eq:powerfun} becomes
+
+\begin{equation}
+\Psi\left(\tau\right) = 1-\beta = \left[1 - \operatorname{\Phi}\left(z_{\frac{\alpha}{2}} - \frac{\tau_M}{\sigma\lambda}\right)\right].
+\label{eq:powerfun2}
+\end{equation}
+
+Because \(\operatorname{\Phi}\left(z_\beta\right) = 1 - \beta\) (by definition) and \(\operatorname{\Phi}\left(-z\right) = 1 - \operatorname{\Phi}\left(z\right)\) we can write this as
+
+\[ \operatorname{\Phi}\left(z_\beta\right) = \operatorname{\Phi}\left(\frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}}\right), \]
+where \(\tau_M\) is our minimum detectable effect size. Because of the monotonicity of \(\operatorname{\Phi}\left(\cdot\right)\), this becomes
+
+\begin{align*}
+  z_\beta & = \frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}} \\
+  z_\beta + z_{\frac{\alpha}{2}} & = \frac{\tau_M}{\sigma\lambda}.
+  \label{eq:powerfun3}
+\end{align*}
+
+Because we want to think about sample sizes, we rewrite this further. It is most common to perform trials with \(n=m=N\) participants in each group, in which case
+
+\[ \lambda\left(n,m\right) = \sqrt{\frac{2}{N}}\]
+
+and Equation \eqref{eq:powerfun3} rearranges to
+
+\begin{equation}
+    N = \frac{2\sigma^2\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{\tau_M^2}.
+    \label{eq:sscont}
+\end{equation}
+
+\begin{example}
+\citep[from][]{zhong2009calculate}
+A trial is being planned to test whether there is a difference in the efficacy of ACEII antagonist (a new drug) and ACE inhibitor (the standard drug) for the treatment of primary hypertension (high blood pressure). The primary outcome variable is change in sitting diastolic blood pressure (SDBP, mmHg) compared to a baseline measurement taken at the start of the trial. The trial should have a significance level of \(\alpha=0.05\) and a power of \(1-\beta = 0.8\), with the same number of participants in each group. The minimum clinically important difference is \(\tau_M = 3 \text{ mmHg}\) and the pooled standard deviation is \(s = 8 \text{ mmHg}\). Therefore, using equation \eqref{eq:sscont} the sample size should be at least
+
+\begin{align*}
+      N & = \frac{2\times{8}^2\left(0.842 + 1.96\right)^2}{3^2}\\
+      & = 111.6,
+\end{align*}
+
+and therefore we need at least 112 participants in each trial arm.
+\end{example}
 
   \bibliography{ct4h.bib}
 

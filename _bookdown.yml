@@ -1,6 +1,6 @@
 book_filename: "CT4H_notes.Rmd"
 delete_merged_file: true
 output_dir: "docs"
-rmd_files: ["index.Rmd", "01-rctbackground.Rmd"]
-#, "02-samplesize.Rmd", "03-allocation.Rmd", "04-rctanalysis.Rmd", "07-practical1.Rmd", "04a-binary.Rmd", "05-survival.Rmd", "06-furtherdesigns.Rmd", "08-practical2.Rmd"]
+rmd_files: ["index.Rmd", "01-rctbackground.Rmd", "02-samplesize.Rmd"] #, "03-allocation.Rmd", "04-rctanalysis.Rmd"]
+#, "07-practical1.Rmd", "04a-binary.Rmd", "05-survival.Rmd", "06-furtherdesigns.Rmd", "08-practical2.Rmd"]
 always_allow_html: true

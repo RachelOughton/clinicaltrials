@@ -23,6 +23,7 @@ output:
       - portrait
     extra_dependencies: 
       geometry: ["margin = 1in"]
+      hyperref: ["breaklinks=true"]
     latex_engine: pdflatex
     toc: true
     keep_tex: yes
@@ -98,7 +99,7 @@ Clinical Trials IV is somewhat different from the majority of statistics modules
 This means that your experience of it might be different from what you're used to
 
   * We will cover quite a lot of different statistical methods (drawing on most of the 1H and 2H courses, and some 3H!) but not in great depth
-  * There is no pressure to memorize anything - indeed, if you really were a trial statistician, you would definitely have access to the internet, various textbooks and indeed these notes (should they prove useful!).
+  * There is no pressure to memorize anything - indeed, if you really were a trial statistician, you would definitely have access to the internet, various textbooks and even these notes (should they prove useful!).
   * There is an emphasis on understanding which method we use and why, and what it means. Hopefully this has been the case in some of your other modules too!
   
 ### What I expect from you {-}

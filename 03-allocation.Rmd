@@ -617,9 +617,6 @@ A difficulty with stratified sampling is that the number of strata can quickly b
 
 ## Minimization
 
-@altman1999randomise tees up minimization.
-@treasure1998minimisation a good source.
-
 Minimization was first proposed by @taves1974minimization, then shortly after by @pocock1975sequential and @freedman1976use. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
 
 To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, @kallis1994pre chose age ($\leq{50}$ or $50$), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).
@@ -686,9 +683,7 @@ In this trial, 46 patients with breast cancer were allocated to receive either M
 Let's suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table \@ref(tab:minim_eg).
 
 
-```{r}
-
-setHtmlTableTheme(theme = "Google docs")
+```{r tab:minim_eg, fig.cap = "Allocations of first 15 patients, divided by diagnostic factor"}
 
 output <- 
   matrix(c(
@@ -698,18 +693,18 @@ output <-
     4,3,5,3), 
          ncol = 2, byrow = TRUE)
 
-output %>% 
-  htmlTable(header = c("Mustine (A)", "Talc (B)"),
-            rnames = c(paste0("1. 50 or younger"), "2. >50",
+df_out = data.frame(output)
+names(df_out) = c("Mustine (A)", "Talc (B)")
+df_out$level = c(paste0("1. 50 or younger"), "2. >50",
                        "1. I or II", "2. III or IV",
                        paste0("1. 30 months or less"),
                        "2. >30 months",
-                       "1. Pre", "2. Post"),
-            rgroup = c("Age", "Stage", "Time interval", "Menopausal Status"),
-            n.rgroup = rep(2,4),
-            cgroup = c("Example after 15 allocations"),
-            n.cgroup = 2, 
-            caption = "Allocations of first 15 patients, divided by diagnostic factor")
+                       "1. Pre", "2. Post")
+df_out$factor = c("Age", "Age", "Stage", "Stage", "Time interval", "Time interval", "Menopausal status", "Menopausal status")
+
+df_out = df_out[,c(4,3,1,2)]
+
+knitr::kable(df_out)%>%kableExtra::column_spec(1, bold = TRUE)
 
 ```
 Suppose our sixteenth patient is under 50, has is at stage III, has less than 30 months between diagnoses and is pre-menopausal.

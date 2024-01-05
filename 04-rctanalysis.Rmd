@@ -7,7 +7,7 @@ always_allow_html: true
 
 We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation $\tau$ to denote the treatment effect.
 
-We'll first focus on the scenario where the trial outcome is measured on a continuous scale, and then we'll go on to look at other types of data.
+In this chapter we'll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we'll go on to look at other types of data.
 
 ::: {.example} 
 To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
@@ -39,7 +39,7 @@ This is very small dataset, and so in that respect it is quite unusual, but its 
   
   We will build up from the simplest type of analysis to some more complicated / sophisticated approaches.
 
-## Confidence intervals and P-values
+## Confidence intervals and P-values {#ttest}
 
 Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (often referred to as $X$) between the groups.
 
@@ -85,12 +85,12 @@ $$
 
 $$
   \begin{aligned}
-t & = \frac{\bar{X_1} - \bar{X_2}}{s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\\
-& = \frac{6.53}{7.82\sqrt{\frac{1}{9} + \frac{1}{7}}} \\
+t & = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
+& = \frac{6.53}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \\
 & = 1.65.
 \end{aligned}
 $$
-Note that here we are taking the placebo group to be group 1, and the Captopril group to be group 2.
+Note that here the placebo group is group $C$, and the Captopril group is group $T$.
 
   Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a $t$ distribution with 14 degrees of freedom ($n_i-1$ for each group). 
 
@@ -114,16 +114,16 @@ The dashed line is at $t=1.65$, and the red shaded areas show anywhere 'at least
 This is the value we know as 'the P value'. We see that in this case our results are not statistically significant (at the 0.10 level), under this model.
 :::
   
-#### What do we do with this outcome?
+### What do we do with this outcome?
   
   The outcome of this Captopril study is in some ways the worst case scenario. The difference in means is large enough to be compelling, but our dataset is too small for it to be statistically significant, and so we can't confidently conclude that Captopril has any effect on blood pressure. However, we also can't say that there is no effect. This is exactly the sort of scenario we hoped to avoid when planning our study.
 
 One way to reframe the question is to consider the range of treatment effects that are compatible with our trial data. That is, we find the set
 
-$$\left\lbrace \tau \mid \frac{\lvert \bar{x}_1 - \bar{x}_2 - \tau \rvert}{s\sqrt{n_1^{-1} + n_2^{-1}}} \leq t_{n_1+n_2-2;\,0.975} \right\rbrace, $$
+$$\left\lbrace \tau \mid \frac{\lvert \bar{x}_C - \bar{x}_T - \tau \rvert}{s\sqrt{n_C^{-1} + n_T^{-1}}} \leq t_{n_C+n_T-2;\,0.975} \right\rbrace, $$
 which contains all possible values of treatment effect $\tau$ that are compatible with our data. That is, suppose the true treatment effect is  $\tau^*$, and we test the hypothesis that $\tau = \tau^*$. For all values of $\tau^*$ inside this range, our data are not sufficiently unlikely to reject the hypothesis at the 0.05 level. However, for all values of $\tau^*$ outside this range, our data are sufficiently unlikely to reject that hypothesis. We can rearrange this to give a 95% confidence interval for $\tau$,
 
-$$\left\lbrace \tau \mid \bar{x}_1 - \bar{x}_2 - t_{n_1+n_2-2;\,0.975}\,s\sqrt{n_1^{-1} + n_2^{-1}} \leq \tau \leq \bar{x}_1 - \bar{x}_2 + t_{n_1+n_2-2;\,0.975}\,s\sqrt{n_1^{-1} + n_2^{-1}}  \right\rbrace $$
+$$\left\lbrace \tau \mid \bar{x}_C - \bar{x}_T - t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}} \leq \tau \leq \bar{x}_C - \bar{x}_T + t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}}  \right\rbrace $$
 
 ::: {.example}
 
@@ -151,10 +151,6 @@ Some things to note
 At the post trial stage, when we have data, the confidence interval is the most useful link to the concept of *power*, which we thought about at the planning stage. Remember that the power function is defined as 
 
 $$\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),$$ that is, the probability that we successfully reject $H_0$ (that $\tau=0$) given that there is a non-zero treatment effect $\tau\neq 0$. This was calculated in terms of the theoretical model of the trial, and in terms of some minimum detectable effect size $\tau_M$ that we wanted to be able to correctly detect with probability $1-\beta$ (the power). Sometimes people attempt to re-calculate the power after the trial, to detect whether the trial was underpowered. However, now we have actual data. If we failed to reject $H_0$ and $\tau_M$ is in the confidence interval for $\tau$, then that is a good indication that our trial was indeed underpowered.
-
-### Bonferroni correction
-
-(and possibly other types of adjustment? - where to put this?!)
 
 ## Using baseline values {#baseline}
 
@@ -209,28 +205,28 @@ We see that taking into account the baseline values in this way has slightly red
 
 We will now look into why the confidence interval and $P$-value changed in this way, before going on to another way of taking into account the baseline value.
 
-Let's label the baseline measurement for each group $B_1$ and $B_2$, and the outcome measurements $X_1,\,X_2$, where we will take group 1 to be the placebo group and group 2 to be the treatment group. Because all participants have been randomised from the same population, we have 
+Let's label the baseline measurement for each group $B_C$ and $B_T$, and the outcome measurements $X_C,\,X_T$, where we will take group $C$ to be the placebo/control group and group $T$ to be the treatment group. Because all participants have been randomised from the same population, we have 
 
-$$\operatorname{E}\left(B_1\right) = \operatorname{E}\left(B_2\right) = \mu_B.$$
+$$\operatorname{E}\left(B_C\right) = \operatorname{E}\left(B_T\right) = \mu_B.$$
 Assuming some treatment effect $\tau$ (which could still be zero) we have
 
 $$
 \begin{aligned}
-\operatorname{E}\left(X_1\right) & = \mu\\
-\operatorname{E}\left(X_2\right) & = \mu + \tau.
+\operatorname{E}\left(X_C\right) & = \mu\\
+\operatorname{E}\left(X_T\right) & = \mu + \tau.
 \end{aligned}
 $$
 Usually we will assume that
 
-$$\operatorname{Var}\left(X_1\right) = \operatorname{Var}\left(X_2\right) = \operatorname{Var}\left(B_1\right) = \operatorname{Var}\left(B_2\right) = \sigma^2,$$
+$$\operatorname{Var}\left(X_C\right) = \operatorname{Var}\left(X_T\right) = \operatorname{Var}\left(B_C\right) = \operatorname{Var}\left(B_T\right) = \sigma^2,$$
 and this is generally fairly reasonable in practice. 
 
 Notice that for the two analyses we have performed so far (comparing outcomes and comparing differences) we have
 
 $$
 \begin{aligned}
-\operatorname{E}\left(X_2\right) - \operatorname{E}\left(X_1\right) & = \left(\mu + \tau\right) - \mu = \tau\\
-\operatorname{E}\left(X_2 - B_2\right) - \operatorname{E}\left(X_1 - B_1\right) & = \left(\mu - \mu_B + \tau\right) - \left(\mu - \mu_B\right) = \tau,
+\operatorname{E}\left(X_T\right) - \operatorname{E}\left(X_C\right) & = \left(\mu + \tau\right) - \mu = \tau\\
+\operatorname{E}\left(X_T - B_T\right) - \operatorname{E}\left(X_C - B_C\right) & = \left(\mu - \mu_B + \tau\right) - \left(\mu - \mu_B\right) = \tau,
 \end{aligned}
 $$
 that is, both are unbiased estimators of $\tau$.
@@ -239,7 +235,7 @@ However, whereas the first is based on data with variance $\sigma^2$, the second
 
 $$
 \begin{aligned}
-\operatorname{Var}\left(X_2-B_2\right) & = \operatorname{Var}\left(X_2\right) + \operatorname{Var}\left(B_2\right) - 2\operatorname{cov}\left(X_2,B_2\right)\\
+\operatorname{Var}\left(X_T-B_T\right) & = \operatorname{Var}\left(X_T\right) + \operatorname{Var}\left(B_T\right) - 2\operatorname{cov}\left(X_T,B_T\right)\\
 & = \sigma^2 + \sigma^2 - 2\rho\sigma^2 \\
 & = 2\sigma^2\left(1-\rho\right),
 \end{aligned}
@@ -268,7 +264,7 @@ The basic principle of ANCOVA is that if there is some correlation between the b
 
 This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements. 
 
-### The theory
+### The theory {#ancovatheory}
 
 Suppose the outcome for a clinical trial is $X$ and the baseline is $B$. $X$ has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the test group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
 
@@ -395,13 +391,36 @@ ggplot(data = df_hommel, aes(x=baseline, y=resid, col=arm)) +
   xlab("Baseline")+
   ylab("Residual")+theme_bw()
 ```
-These look pretty good, no clear patterns and a similar distribution for each treatment group.
+
+These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it's difficult really to assess the fit of the model. In our practical, we'll work with a more realistic dataset.
 
 :::
 
 ## Some follow-up questions....
 
 This might have raised a few questions, so we will address those now.
+
+### Didn't we say that $X_T - X_C$ was an unbiased estimator of $\tau$?
+
+In Sections \@ref(ttest) and \@ref(baseline) we used both $\bar{X}_T - \bar{X}_C$ and $\left(\bar{X}_T - \bar{B}_T\right) - \left(\bar{X}_C - \bar{B}_C\right)$ as unbiased estimators of $\tau$.
+Then, in Section \@ref(ancovatheory) we showed that 
+
+$$
+\begin{aligned}
+\operatorname{E}\left(\bar{X}_T - \bar{X}_C\mid{\bar{b}_T,\;\bar{b}_C}\right)& = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)\\
+\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] &= \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),
+\end{aligned}
+$$
+that is, neither of these quantities are unbiased estimators of $\tau$ (except in very specific circumstances). 
+
+Is this a contradiction? 
+
+You'll be relieved to hear (and may already have realised) that it isn't; the first pair of equations are blind to the baseline values $B_T$ and $B_C$, and are using their statistical properties. Because of the randomisation procedure, a priori they can be treated the same. However, once we have observed values for the baseline, $b_T$ and $b_C$, they are very unlikely to be exactly the same. They are also (along with all other baseline measurements, often things like age, sex, height etc.) definitely not affected by the trial, since they are taken before any placebo or treatment has been administered, and often even before allocation. However, conditioning on their observed values can reduce the variance of our estimate of $\tau$, as we have seen.
+
+In this sense, the observed baseline means $\bar{b}_T$ and $\bar{b}_C$ are known as **ancillary statistics**; they contain no direct information about the parameter we are interested in (in this case the treatment effect $\tau$), but our inferences can be improved by conditioning on the observed values of the ancillary statistics.
+
+
+
 
 ### How is this related to ANOVA?
 
@@ -428,12 +447,10 @@ We see that the $p$-value for the coefficient $\lambda$ (seen in the `arm:baseli
 :::
 
 
-### Didn't we say that $X_T - X_C$ was an unbiased estimator of $\tau$?
-
 
 ### Can we include any other baseline covariates?
 
-When our estimated treatment effect was $\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)$, we could the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome $X$. However, in ANCOVA, our treatment effect is 
+In Section \@ref(baseline) when our estimated treatment effect was $\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)$, we could the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome $X$. However, in ANCOVA, our treatment effect is 
 
 $$ \hat\tau = \left(\bar{x}_T - \bar{x}_C\right) - \hat\gamma\left(\bar{b}_T - \bar{b}_C\right), $$
 and the inclusion of the coefficient $\gamma$ means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation (hence they are sometimes known as *baseline covariates*, not to be confused with 'the baseline', which would generally mean the same measurement as the primary outcome, but before treatment). This is because they cannot, at that point, have been affected by the treatment, or have had an influence on the post-trial outcome measurement. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.
