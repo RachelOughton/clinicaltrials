@@ -95,7 +95,7 @@ The linear approximation in Equation \@ref(eq:delta1) shows us that if $p_X$ is 
 $$
 D =  \frac{\arcsin{\left(\sqrt{p_A}\right)} - \arcsin{\left(\sqrt{p_B}\right)}}{\frac{1}{\sqrt{4nA}} + \frac{1}{\sqrt{4n_B}}}=  \frac{\arcsin{\left(\sqrt{p_A}\right)} - \arcsin{\left(\sqrt{p_B}\right)}}{\frac{1}{2}\lambda\left(n_A,n_B\right)},
 $$
-which is analogous to the variable $D$ constructed in Section \@ref(sec-measDcont); the difference in $f\left(p_A\right)$ and $\f\left(p_B\right)$ divided by the standard error of the difference. 
+which is analogous to the variable $D$ constructed in Section \@ref(sec-measDcont); the difference in $f\left(p_A\right)$ and $f\left(p_B\right)$ divided by the standard error of the difference. 
 
 Using the same logic as in Sections  \@ref(sec-power) and \@ref(sec-ssformulacont), the starting place for a sample size formula to achieve significance level $\alpha$ and power $\beta$ is 
 
@@ -698,10 +698,12 @@ $$
 Subtracting one from the other, we find
 
 $$
-\begin{gather}
-\log(\text{Odds of success for group T}) - \log(\text{Odds of success for group C})\\ = 
-\log\left(\frac{\text{Odds of success for group T}}{\text{Odds of success for group C}}\right) = \log\left(OR\right) = \tau.
-\end{gather}
+\begin{aligned}
+\log(\text{Odds of success for group T}) - & \log(\text{Odds of success for group C})\\
+&= 
+\log\left(\frac{\text{Odds of success for group T}}{\text{Odds of success for group C}}\right) = \log\left(OR\right) \\
+&= \tau.
+\end{aligned}
 $$
 
 That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. The coefficients are estimated using maximum likelihood, but since we will generally be using R (which will fit them for us!) we won't go into the details. 

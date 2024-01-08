@@ -1,1 +1,87 @@
-# Survival distributed data
+# Time-to-event data and Survival Analysis
+
+A data type that is commonly found in clinical trials is **time to event data**. This type of data deals with the amount of time that elapses before a particular event happens. Unlike continuous and binary random variables, this is a fairly recent branch of statistics, which developed rapidly during the many cancer related clinical trials of the 1960s and 1970s. In these cases, the event in question was very often death, and so this branch of statistics came to be known as **survival analysis**. However, the event can be many other things, and indeed can be a positive outcome (for example being cured of some condition).
+
+Usually, survival data is given in terms of time, but it can also be the number of times something happens (for example, the number of clinic appointments attended) before the event in question occurs.
+
+Survival data is trickier to handle than the data types we have seen so far, for two main reasons. Firstly (and simply) survival data is very often skewed, so even though it is (usually) continuous, we can't just treat it as normally distributed. Secondly (and more complicatedly, if that's a word) with time-to-event data we don't usually observe the full dataset. 
+
+## Censored times 
+
+If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won't observe the event. This could be because it doesn't happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal). For these participants, we do know that they had not experienced the event up to some time $t$, but we don't know what happened next. All we know is that their time-to-event or **survival time** is greater than that time $t$. These partial observations are known as **censored** times.
+
+```{r censor, fig.cap = "An example of some censored data."}
+df_cens = data.frame(
+  id = as.factor(1:10),
+  out = c(8,7,6,12,12,3,4,3,8,7),
+  Type = as.factor(c("Event","Event","Censored", "Censored", "Censored", "Censored", "Censored", "Censored","Event","Censored"))
+)
+
+ggplot(data=df_cens) + 
+  geom_segment(aes(x=0, xend=out, y=id, yend=id)) + 
+  geom_point(aes(x=out, y=id, pch=Type, col=Type), size=4) +
+  ylab("Participant") +
+  geom_vline(xintercept=10, lty=2) +
+  xlab("Time") +
+  theme_bw()
+
+```
+
+If we were to treat censored times as observations, ie. as though the event had happened at time $t$, we would bias the results of the trial very seriously. The survival times reported would be systematically shorter than the true ones. For example, in the dataset shown in Figure \@ref(fig:censor), we would estimate the survival probability at time 10 as 0.2, since only two of the 10 participants were still in the trial after time 10.
+
+If we were to remove the censored times, and only analyse the data in which the event was observed during the linespan of the trial, we would be losing data and therefore valuable information. This approach may well also lead to bias, for example if some subset of patients died quite soon into the trial, but the remainder lived a long time (past the end of the trial). If our analysis ignores the survivors, we are likely to underestimate the general survival time. In the dataset in Figure \@ref(fig:censor) there are five participants (3,6,7,8,10) whom we are no longer able to observe at time 10, but of whom none had experienced the event by the point at which they were censored.
+
+So we know that we need to somehow include these censored times in our analysis. How we do so will depend on our approach.
+
+## The Survival Curve and the Hazard function
+
+The field of survival analysis is relatively unusual in statistics, in that it isn't treated predominantly parametrically. For most continuous data, it is overwhelmingly common to work with the normal distribution and its friends (eg. the student's t distribution). Similarly binary data is dominated by the binomial distribution. Inference therefore is often focussed on the parameters $\mu,\;\sigma$ or $p$, as an adequate summary of the truth given whatever parameteric assumption has been made. 
+
+However, in survival analysis, it is often the case that we focus on the whole shape of the data; there isn't an accepted dominating probability distribution. So that we can deal with time-to-event data, we need to introduce some key ways of working with such data. 
+
+:::{.definition}
+The **survival function**, $\operatorname{S}\left(t\right)$, is the probability that some individual (in our context a participant) survives longer than time $t$. 
+Conventionally we plot $\operatorname{S}\left(t\right)$ against $t$ and this gives us a **survival curve**.
+:::
+
+We can immediately say two things about the survival curve:
+
+  1. Since all participants must be alive (or equivalent) at the start of the trial, $\operatorname{S}\left(0\right)=1$.
+  2. Since it's impossible to survive past $t_2>t_1$ but not past time $t_1$, $\operatorname{S}\left(t\right)$ we must have $\frac{d\operatorname{S}}{dt}\leq{0}$, ie. $\operatorname{S}\left(t\right)$ is non-increasing.
+  
+Figure \@ref(fig:egsurvival) shows two survival curves, comparing different therapies. We see that the hormonal therapy reduces the survival time slightly compared to no hormonal therapy.  
+  
+```{r egsurvival, fig.cap = "An example of two survival curves, taken from @syriopoulou2022standardised."}
+knitr::include_graphics("images/survival_eg.png")
+```
+
+The Survival function is fairly intuitive, but the **Hazard function** $h(t)$ is less so.
+
+:::{.definition}
+The **Hazard function** $h(t)$ is the probability that an individual who has survived up to time $t$ fails just after time $t$; in other words, the instantaneous failure probability at time $t$.
+:::
+
+If we use $T$ to denote the random variable of survival time (or time-to-event) then $\operatorname{S}\left(t\right)$ and $h(t)$ are defined by
+
+$$
+\begin{aligned}
+\operatorname{S}\left(t\right)&= \operatorname{Pr}\left(T>t\right)\\
+h\left(t\right) & = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\left(t<T<t+s\mid{T>t}\right)}{s}.
+\end{aligned}
+$$
+Using the definition of conditional probability, we can rewrite $h(t)$ as 
+
+$$
+\begin{aligned}
+h\left(t\right) & = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\left(t<T<t+s\mid{T>t}\right)}{s} \\
+ & = \lim\limits_{s\rightarrow{0+}}\left[\frac{1}{\operatorname{Pr}\left(T>t\right)}\cdot\frac{\operatorname{Pr}\left(\left(t<T<t+s\right)\cap\left(T>t\right)\right)}{s}\right] \\
+ & = \lim\limits_{s\rightarrow{0+}}\left[\frac{1}{\operatorname{Pr}\left(T>t\right)}\cdot\frac{\operatorname{Pr}\left(t<T<t+s\right)}{s}\right]\\
+ & = \frac{f\left(t\right)}{\operatorname{S}\left(t\right)},
+\end{aligned}
+$$
+where $f\left(\cdot\right)$ is the probability density of $T$. The hazard function can take any positive value (unlike the survival function), and for this reason $\log\left(h\left(t\right)\right)$ often used to transform it to the real line.
+
+As we hinted before, there are fundamentally two ways to deal with survival data, and in particular to estimate the survival function and hazard function: we can either go about things parametrically or non-parametrically.
+
+
+
