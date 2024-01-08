@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  8 JAN 2024 15:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  8 JAN 2024 15:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -583,21 +583,17 @@ File: CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf
 <use CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 602.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 603.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 604.
 (/Users/rachelo/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Underfull \hbox (badness 10000) in paragraph at lines 602--604
-[][]
- []
-
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 608.
+(Font)              <14.4> on input line 609.
 [21 <./CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf>]
 <CT4H_notes_files/figure-latex/accepth0-1.pdf, id=324, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/accepth0-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/accepth0-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/accepth0-1.pdf  used on input line 633.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/accepth0-1.pdf  used on input line 634.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 Overfull \hbox (1.94731pt too wide) has occurred while \output is active
@@ -608,13 +604,13 @@ Overfull \hbox (1.94731pt too wide) has occurred while \output is active
 <CT4H_notes_files/figure-latex/accepth0-1-1.pdf, id=340, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/accepth0-1-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/accepth0-1-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/accepth0-1-1.pdf  used on input line 643.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/accepth0-1-1.pdf  used on input line 644.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [23 <./CT4H_notes_files/figure-latex/accepth0-1-1.pdf>]
 <CT4H_notes_files/figure-latex/powercurve-1.pdf, id=361, 578.16pt x 289.08pt>
 File: CT4H_notes_files/figure-latex/powercurve-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/powercurve-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/powercurve-1.pdf  used on input line 669.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/powercurve-1.pdf  used on input line 670.
 (pdftex.def)             Requested size: 469.75385pt x 234.8769pt.
 
 Overfull \hbox (1.94731pt too wide) has occurred while \output is active
@@ -623,7 +619,7 @@ Overfull \hbox (1.94731pt too wide) has occurred while \output is active
 
 [24 <./CT4H_notes_files/figure-latex/powercurve-1.pdf>]
 
-LaTeX Warning: Reference `eq:powerfun3' on page 25 undefined on input line 722.
+LaTeX Warning: Reference `eq:powerfun3' on page 25 undefined on input line 723.
 
 [25] (./CT4H_notes.bbl
 Overfull \hbox (1.94731pt too wide) has occurred while \output is active
@@ -652,7 +648,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  75i,14n,79p,1061b,598s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on CT4H_notes.pdf (27 pages, 1867292 bytes).
+Output written on CT4H_notes.pdf (27 pages, 1867295 bytes).
 PDF statistics:
  511 PDF objects out of 1000 (max. 8388607)
  423 compressed objects within 5 object streams

@@ -600,6 +600,7 @@ This is equivalent to \(\bar{x}_T - \bar{x}_C\) falling outside the interval
 \emph{We'll see a lot of the notation \(z_{\alpha/2}\) and similar, so to clarify:}
 
 \includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf}
+
 \emph{In R, we have \(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\) and \(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\). \texttt{qnorm} is the quantile and \texttt{pnorm} is the cumulative distribution function.}
 
 We have constructed our whole argument under the assumption that \(H_0\) is true, and that the probability of such a value is therefore \(\alpha\). We want this probability to be small, since it constitutes an error; \(H_0\) is true, but our value of \(D\) (or the difference in means) leads us to reject \(H_0\). This is sometimes called the `type I' error rate. But what if \(H_0\) is false?

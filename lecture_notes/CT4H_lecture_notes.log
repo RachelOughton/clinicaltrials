@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  8 JAN 2024 15:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  8 JAN 2024 15:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -529,10 +529,10 @@ File: CT4H_lecture_notes_files/figure-latex/t31-twosided-1.pdf Graphic file (typ
 Package pdftex.def Info: CT4H_lecture_notes_files/figure-latex/t31-twosided-1.pdf  used on input line 258.
 (pdftex.def)             Requested size: 443.57677pt x 307.0916pt.
 [8 <./CT4H_lecture_notes_files/figure-latex/t31-twosided-1.pdf>] [9{/Users/rachelo/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [10]
-<CT4H_lecture_notes_files/figure-latex/unnamed-chunk-2-1.pdf, id=147, 469.755pt x 325.215pt>
-File: CT4H_lecture_notes_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
-<use CT4H_lecture_notes_files/figure-latex/unnamed-chunk-2-1.pdf>
-Package pdftex.def Info: CT4H_lecture_notes_files/figure-latex/unnamed-chunk-2-1.pdf  used on input line 370.
+<CT4H_lecture_notes_files/figure-latex/unnamed-chunk-5-1.pdf, id=147, 469.755pt x 325.215pt>
+File: CT4H_lecture_notes_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
+<use CT4H_lecture_notes_files/figure-latex/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: CT4H_lecture_notes_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 370.
 (pdftex.def)             Requested size: 443.57677pt x 307.0916pt.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 371.
 (/Users/rachelo/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
@@ -542,7 +542,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 370--372
 [][]
  []
 
-[11 <./CT4H_lecture_notes_files/figure-latex/unnamed-chunk-2-1.pdf>]
+[11 <./CT4H_lecture_notes_files/figure-latex/unnamed-chunk-5-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <14.4> on input line 390.
 [12

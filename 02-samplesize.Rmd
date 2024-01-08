@@ -225,6 +225,7 @@ ggplot(data=data.frame(x=c(-3,3)), aes(x)) +
    scale_x_continuous(breaks=c(0, 1.96), label = c(0, expression(z[alpha/2])), limits = c(-5,5)) + theme_bw()
 
 ```
+
 *In R, we have $\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)$ and $z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)$. `qnorm` is the quantile and `pnorm` is the cumulative distribution function.*
 
 
