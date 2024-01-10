@@ -255,7 +255,7 @@ $$D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}.$$
 
 Figure \@ref(fig:accepth0) shows the distribution of $D$ under $H_0$ and $H_1$ for some arbitrary (non-zero) effect size $\tau$. The turquoise bar shows the acceptance region of $H_0$, ie. the range of observed values of $D$ for which we will fail to reject $H_0$. We see that this contains 95% of the area of the $H_0$ distribution (we have set $\alpha = 0.05$ here), so under $H_0$, we have a 0.95 probability of observing a value of $D$ that is consistent with $H_0$. 
 
-```{r accepth0, echo=F, fig.cap = "The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading."}
+```{r accepth0, echo=F, fig.cap = "The distribution of $D$ under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading."}
 tau = 2
 xvec = seq(-1,qnorm(0.975), length=100)
 ## This needs x axis labels changing
@@ -278,16 +278,11 @@ ggplot() +  stat_function(fun=dnorm) +
   annotate(geom  = "text", x=0, y=0.045, label = expression('Fail to reject H'[0])) +
   annotate(geom= "text", x=c(-2.5, 5), y=c(0.35,0.35), label = c(expression('Distribution under H'[0]), expression('Distribution under H'[1]))) +
   geom_segment(aes(x=3, xend=3, y=0, yend=0.5), lty=2) +
-  annotate(geom = "text", x=3, y=-0.025, label = expression(tau/(sigma*lambda))) +
-  annotate(geom = "text", x=qnorm(0.975), y=-0.025, label = expression(z[alpha/2]))+
-  annotate(geom = "text", x=-qnorm(0.975), y=-0.025, label = expression(-z[alpha/2]))+
     geom_segment(aes(x=qnorm(0.975), xend=qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=-qnorm(0.975), xend=-qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=3, xend=3, y=0, yend=-0.01), lty=1)+
 
-  scale_x_continuous(breaks=c(0), limits = c(-5,8)) + theme_bw()
-
-
+  scale_x_continuous(breaks=c(-qnorm(0.975), 0, qnorm(0.975), 3), label = c(expression(-z[alpha/2]), 0, expression(z[alpha/2]), expression(tau/(sigma*lambda))), limits = c(-5,8)) + theme_bw()
 ```
 
 However, if $H_1$ is true, and $\tau\neq{0}$, there is a non-zero probability of observing a value of $D$ that would lead us to fail to reject $H_0$. This is shown by the area shaded in red, and it has area $\beta$. One minus this area (ie. the area under $H_1$ that leads us to accept $H_1$) is the power, $1-\beta$. 
@@ -318,13 +313,10 @@ ggplot() +  stat_function(fun=dnorm) +
   annotate(geom  = "text", x=0, y=0.045, label = expression('Fail to reject H'[0])) +
   annotate(geom= "text", x=c(-2.5, 6), y=c(0.35,0.35), label = c(expression('Distribution under H'[0]), expression('Distribution under H'[1]))) +
   geom_segment(aes(x=4, xend=4, y=0, yend=0.5), lty=2) +
-  annotate(geom = "text", x=4, y=-0.025, label = expression(tau/(sigma*lambda))) +
-    annotate(geom = "text", x=qnorm(0.975), y=-0.025, label = expression(z[alpha/2]))+
-  annotate(geom = "text", x=-qnorm(0.975), y=-0.025, label = expression(-z[alpha/2]))+
   geom_segment(aes(x=qnorm(0.975), xend=qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=-qnorm(0.975), xend=-qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=4, xend=4, y=0, yend=-0.01), lty=1)+
-  scale_x_continuous(breaks=c(0), limits = c(-5,9))  + theme_bw()
+  scale_x_continuous(breaks=c(-qnorm(0.975), 0, qnorm(0.975), 4), label = c(expression(-z[alpha/2]), 0, expression(z[alpha/2]), expression(tau/(sigma*lambda))), limits = c(-5,9))  + theme_bw()
 
 ```
 
@@ -379,16 +371,22 @@ df_20_180 = data.frame(
   power = powerfun(tauvec, 20, 180),
   SampleSize = rep("n=20, m=180", 100)
 )
+df_67_133 = data.frame(
+  tau = tauvec,
+  power = powerfun(tauvec, 67, 133),
+  SampleSize = rep("n=67, m=133", 100)
+)
 
-df_full = rbind(df_15_15, df_100_100, df_20_180)
+df_full = rbind(df_15_15, df_100_100, df_67_133, df_20_180)
 
 df_full$SampleSize = as.factor(df_full$SampleSize)
 
 ggplot(data=df_full, aes(x=tau, y=power, col = SampleSize, lty=SampleSize)) + 
   geom_path() + xlim(-1.5, 1.5) +
   xlab(expression(tau*' in units of '*sigma))+
-  annotate(geom="text", x=c(-1,-0.75, -0.25), y=c(0.62, 0.8, 0.9),
-           label = parse(text = paste(expression(lambda*"="),  round(c(lambdafun(15,15), lambdafun(20,180), lambdafun(100,100)),3), sep = '*'))) + theme_bw()
+  annotate(geom="text", x=c(-1,-0.75, -0.6, -0.25), y=c(0.62, 0.8, 0.95, 0.9),
+           label = parse(text = paste(expression(lambda*"="),  round(c(lambdafun(15,15), lambdafun(20,180), lambdafun(67,133), lambdafun(100,100)),3), sep = '*'))) + theme_bw()
+
 
 
 ```
@@ -426,12 +424,15 @@ Therefore, Equation \@ref(eq:powerfun) becomes
   $$ \operatorname{\Phi}\left(z_\beta\right) = \operatorname{\Phi}\left(\frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}}\right), $$
     where $\tau_M$ is our minimum detectable effect size. Because of the monotonicity of $\operatorname{\Phi}\left(\cdot\right)$, this becomes
   
-\begin{align*}
+\begin{equation}
+\begin{aligned}
   z_\beta & = \frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}} \\
   z_\beta + z_{\frac{\alpha}{2}} & = \frac{\tau_M}{\sigma\lambda}.
   (\#eq:powerfun3)
-\end{align*}
-    
+  \end{aligned}
+\end{equation}
+
+
 Because we want to think about sample sizes, we rewrite this further. It is most common to perform trials with $n=m=N$ participants in each group, in which case
     
 $$ \lambda\left(n,m\right) = \sqrt{\frac{2}{N}}$$

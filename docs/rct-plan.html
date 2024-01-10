@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-08" />
+<meta name="date" content="2024-01-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -327,9 +327,9 @@ where <span class="math inline">\(\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\f
 <span class="math display">\[D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}.\]</span></p>
 <p>Figure <a href="rct-plan.html#fig:accepth0">2.4</a> shows the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary (non-zero) effect size <span class="math inline">\(\tau\)</span>. The turquoise bar shows the acceptance region of <span class="math inline">\(H_0\)</span>, ie. the range of observed values of <span class="math inline">\(D\)</span> for which we will fail to reject <span class="math inline">\(H_0\)</span>. We see that this contains 95% of the area of the <span class="math inline">\(H_0\)</span> distribution (we have set <span class="math inline">\(\alpha = 0.05\)</span> here), so under <span class="math inline">\(H_0\)</span>, we have a 0.95 probability of observing a value of <span class="math inline">\(D\)</span> that is consistent with <span class="math inline">\(H_0\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:accepth0"></span>
-<img src="CT4H_notes_files/figure-html/accepth0-1.png" alt="The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading." width="672" />
+<img src="CT4H_notes_files/figure-html/accepth0-1.png" alt="The distribution of $D$ under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading." width="672" />
 <p class="caption">
-Figure 2.4: The distribution of D under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
+Figure 2.4: The distribution of <span class="math inline">\(D\)</span> under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
 </p>
 </div>
 <p>However, if <span class="math inline">\(H_1\)</span> is true, and <span class="math inline">\(\tau\neq{0}\)</span>, there is a non-zero probability of observing a value of <span class="math inline">\(D\)</span> that would lead us to fail to reject <span class="math inline">\(H_0\)</span>. This is shown by the area shaded in red, and it has area <span class="math inline">\(\beta\)</span>. One minus this area (ie. the area under <span class="math inline">\(H_1\)</span> that leads us to accept <span class="math inline">\(H_1\)</span>) is the power, <span class="math inline">\(1-\beta\)</span>.</p>
@@ -382,11 +382,13 @@ Figure 2.6: Power curves for various values of <span class="math inline">\(n\)</
 <p>Because <span class="math inline">\(\operatorname{\Phi}\left(z_\beta\right) = 1 - \beta\)</span> (by definition) and <span class="math inline">\(\operatorname{\Phi}\left(-z\right) = 1 - \operatorname{\Phi}\left(z\right)\)</span> we can write this as</p>
 <p><span class="math display">\[ \operatorname{\Phi}\left(z_\beta\right) = \operatorname{\Phi}\left(\frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}}\right), \]</span>
 where <span class="math inline">\(\tau_M\)</span> is our minimum detectable effect size. Because of the monotonicity of <span class="math inline">\(\operatorname{\Phi}\left(\cdot\right)\)</span>, this becomes</p>
-<p><span class="math display" id="eq:powerfun3">\[\begin{align*}
+<p><span class="math display" id="eq:powerfun3">\[\begin{equation}
+\begin{aligned}
   z_\beta &amp; = \frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}} \\
   z_\beta + z_{\frac{\alpha}{2}} &amp; = \frac{\tau_M}{\sigma\lambda}.
   \tag{2.3}
-\end{align*}\]</span></p>
+  \end{aligned}
+\end{equation}\]</span></p>
 <p>Because we want to think about sample sizes, we rewrite this further. It is most common to perform trials with <span class="math inline">\(n=m=N\)</span> participants in each group, in which case</p>
 <p><span class="math display">\[ \lambda\left(n,m\right) = \sqrt{\frac{2}{N}}\]</span></p>
 <p>and Equation <a href="rct-plan.html#eq:powerfun3">(2.3)</a> rearranges to</p>

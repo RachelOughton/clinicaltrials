@@ -254,11 +254,11 @@ Our argument is based on $H_0$ being true - but what if it isn't?
 
 Recap: 
 
-  * We constructed a measure $D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}$ that we can use to test $H_0:\; \tau=0$, since [approximately] $D\sim N\left(0,1\right)$.
+  * We constructed a measure $D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}$ that we can use to test $H_0:\; \tau=0$, since $D\sim{t_{n+m-2}}$ (and approximately $D\sim N\left(0,1\right)$).
 
 ## Power: If $H_0$ is false {#sec-power}
 
-So far, if $H_0$ is true, we have a small probability of rejecting $H_0$. 
+So far, if $H_0$ is true, we have a small probability of rejecting $H_0$ (type I error rate). 
 
 Flip side: if $H_0$ is false, and $\tau\neq{0}$, we want a high probability of rejecting $H_0$.
 
@@ -269,20 +269,21 @@ $$\Psi\left(\tau\right) = \Pr\left(\text{Reject } H_0\mid{\tau\neq{0}}\right) = 
 The quantity $\beta$ therefore represents $\Pr\left(\text{Accept } H_0\mid{\tau\neq{0}}\right)$, which is the **type II error rate**.
 :::
 
-If you find the notation confusing (as I do!) then it might be helpful to remember that both $\alpha$ and $\beta$ are **error rates** - probabilities of coming to the wrong conclusion. It is common to talk in terms of $\alpha$, the significance level, (which will be a low number, often 0.05) and of $1-\beta$, the power (which will be a high number, often 0.8). I've found though that it is not uncommon to find people refer to $\beta$ (rather than $1-\beta$) as the power. If in doubt, keep in mind that we require $\alpha,\;\beta \ll 0.5$. It is also common to use percentages: a significance level of $\alpha=0.05$ can also be referred to as "the 95% level", and $\beta=0.2$ is the same as a "power of 80%". When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.
 
-If you notice any mistakes in these notes along these (or other!) lines, please point them out.
+\textit{If you find the notation confusing (as I do!) then it might be helpful to remember that both $\alpha$ and $\beta$ are \textbf{error rates} - probabilities of coming to the wrong conclusion. It is common to talk in terms of $\alpha$, the significance level, (which will be a low number, often 0.05) and of $1-\beta$, the power (which will be a high number, often 0.8). I've found though that it is not uncommon to find people refer to $\beta$ (rather than $1-\beta$) as the power. If in doubt, keep in mind that we require $\alpha,\;\beta \ll 0.5$. It is also common to use percentages: a significance level of $\alpha=0.05$ can also be referred to as "the 95% level", and $\beta=0.2$ is the same as a "power of 80%". When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.}
+
+\textit{If you notice any mistakes in these notes along these (or other!) lines, please point them out.}
 
 
 Under $H_1$, we have (approximately)
 
 $$D \sim{N\left(\frac{\tau}{\sigma\lambda\left(n,m\right)}, 1\right)},$$
 where $\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}$ and 
-$$D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}.$$
+$$D = \frac{\bar{x}_T - \bar{x}_C}{s\lambda\left(n,m\right)}.$$
 
 Figure \@ref(fig:accepth0) shows the distribution of $D$ under $H_0$ and $H_1$ for some arbitrary (non-zero) effect size $\tau$. The turquoise bar shows the acceptance region of $H_0$, ie. the range of observed values of $D$ for which we will fail to reject $H_0$. We see that this contains 95% of the area of the $H_0$ distribution (we have set $\alpha = 0.05$ here), so under $H_0$, we have a 0.95 probability of observing a value of $D$ that is consistent with $H_0$. 
 
-```{r accepth0, echo=F, fig.cap = "The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading."}
+```{r accepth0, echo=F, fig.cap = "The distribution of $D$ under both $H_0$ and $H_1$ for some arbitrary values of treatment effect, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading."}
 tau = 2
 xvec = seq(-1,qnorm(0.975), length=100)
 ## This needs x axis labels changing
@@ -305,22 +306,20 @@ ggplot() +  stat_function(fun=dnorm) +
   annotate(geom  = "text", x=0, y=0.045, label = expression('Fail to reject H'[0])) +
   annotate(geom= "text", x=c(-2.5, 5), y=c(0.35,0.35), label = c(expression('Distribution under H'[0]), expression('Distribution under H'[1]))) +
   geom_segment(aes(x=3, xend=3, y=0, yend=0.5), lty=2) +
-  annotate(geom = "text", x=3, y=-0.025, label = expression(tau/(sigma*lambda))) +
-  annotate(geom = "text", x=qnorm(0.975), y=-0.025, label = expression(z[alpha/2]))+
-  annotate(geom = "text", x=-qnorm(0.975), y=-0.025, label = expression(-z[alpha/2]))+
     geom_segment(aes(x=qnorm(0.975), xend=qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=-qnorm(0.975), xend=-qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=3, xend=3, y=0, yend=-0.01), lty=1)+
 
-  scale_x_continuous(breaks=c(0), limits = c(-5,8)) + theme_bw()
+  scale_x_continuous(breaks=c(-qnorm(0.975), 0, qnorm(0.975), 3), label = c(expression(-z[alpha/2]), 0, expression(z[alpha/2]), expression(tau/(sigma*lambda))), limits = c(-5,8)) + theme_bw()
 
 
 ```
 
 However, if $H_1$ is true, and $\tau\neq{0}$, there is a non-zero probability of observing a value of $D$ that would lead us to fail to reject $H_0$. This is shown by the area shaded in red, and it has area $\beta$. One minus this area (ie. the area under $H_1$ that leads us to accept $H_1$) is the power, $1-\beta$. 
 
-We can see that if the distributions have better separation, as in Figure \@ref(fig:accepth0-1), the power becomes greater. This can be as a result of a larger $\tau$, a smaller $\sigma$ or a smaller $\lambda$ (therefore larger $m$ and/or $n$).
+\textit{We can see that if the distributions have better separation, as in Figure 2.3, the power becomes greater. This can be as a result of a larger $\tau$, a smaller $\sigma$ or a smaller $\lambda$ (therefore larger $m$ and/or $n$).}
 
+[FIGURE!!]
 
 ```{r accepth0-1, echo=F, fig.cap = "The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading."}
 
@@ -345,13 +344,10 @@ ggplot() +  stat_function(fun=dnorm) +
   annotate(geom  = "text", x=0, y=0.045, label = expression('Fail to reject H'[0])) +
   annotate(geom= "text", x=c(-2.5, 6), y=c(0.35,0.35), label = c(expression('Distribution under H'[0]), expression('Distribution under H'[1]))) +
   geom_segment(aes(x=4, xend=4, y=0, yend=0.5), lty=2) +
-  annotate(geom = "text", x=4, y=-0.025, label = expression(tau/(sigma*lambda))) +
-    annotate(geom = "text", x=qnorm(0.975), y=-0.025, label = expression(z[alpha/2]))+
-  annotate(geom = "text", x=-qnorm(0.975), y=-0.025, label = expression(-z[alpha/2]))+
   geom_segment(aes(x=qnorm(0.975), xend=qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=-qnorm(0.975), xend=-qnorm(0.975), y=0, yend=-0.01), lty=1)+
   geom_segment(aes(x=4, xend=4, y=0, yend=-0.01), lty=1)+
-  scale_x_continuous(breaks=c(0), limits = c(-5,9))  + theme_bw()
+  scale_x_continuous(breaks=c(-qnorm(0.975), 0, qnorm(0.975), 4), label = c(expression(-z[alpha/2]), 0, expression(z[alpha/2]), expression(tau/(sigma*lambda))), limits = c(-5,9))  + theme_bw()
 
 ```
 
@@ -370,7 +366,10 @@ The second term in Equation \@ref(eq:powerfun) represents the area away from the
 $$ D < - z_{\frac{\alpha}{2}},$$
 assuming without loss of generality that $\tau>0$. 
 
-Figure \@ref(fig:powercurve) shows the power function $\Psi\left(\tau\right)$ for $\tau$ in units of $\sigma$ (or you could think of this as for $\sigma=1$), for three different pairs of values of $n$ and $m$ (remember that these enter the power function via $\lambda$) with $\alpha=0.05$. We see that in general the power is higher for larger sample sizes, and that of the two designs where $n+m=200$, the balanced one with $n=m=100$ achieves the greatest power. 
+\textit{Figure \@ref(fig:powercurve) shows the power function $\Psi\left(\tau\right)$ for $\tau$ in units of $\sigma$ (or you could think of this as for $\sigma=1$), for three different pairs of values of $n$ and $m$ (remember that these enter the power function via $\lambda$) with $\alpha=0.05$. We see that in general the power is higher for larger sample sizes, and that of the two designs where $n+m=200$, the balanced one with $n=m=100$ achieves the greatest power. }
+
+  * Larger sample size $\rightarrow$ greater power
+  * Equal groups $\rightarrow$ greater power
 
 In general, the probability of rejecting $H_0$ increases as $\tau$ moves away from zero.
 
@@ -406,25 +405,38 @@ df_20_180 = data.frame(
   power = powerfun(tauvec, 20, 180),
   SampleSize = rep("n=20, m=180", 100)
 )
+df_67_133 = data.frame(
+  tau = tauvec,
+  power = powerfun(tauvec, 67, 133),
+  SampleSize = rep("n=67, m=133", 100)
+)
 
-df_full = rbind(df_15_15, df_100_100, df_20_180)
+df_full = rbind(df_15_15, df_100_100, df_67_133, df_20_180)
 
 df_full$SampleSize = as.factor(df_full$SampleSize)
 
 ggplot(data=df_full, aes(x=tau, y=power, col = SampleSize, lty=SampleSize)) + 
   geom_path() + xlim(-1.5, 1.5) +
   xlab(expression(tau*' in units of '*sigma))+
-  annotate(geom="text", x=c(-1,-0.75, -0.25), y=c(0.62, 0.8, 0.9),
-           label = parse(text = paste(expression(lambda*"="),  round(c(lambdafun(15,15), lambdafun(20,180), lambdafun(100,100)),3), sep = '*'))) + theme_bw()
+  annotate(geom="text", x=c(-1,-0.75, -0.6, -0.25), y=c(0.62, 0.8, 0.95, 0.9),
+           label = parse(text = paste(expression(lambda*"="),  round(c(lambdafun(15,15), lambdafun(20,180), lambdafun(67,133), lambdafun(100,100)),3), sep = '*'))) + theme_bw()
 
 
 ```
  
-It is common to think of the effect size in units of $\sigma$, as we have done here. This makes results more intuitive, since we don't need to have a good knowledge of the actual outcome variable to know what is a small or large effect size. It is also helpful in situations where the population standard deviation is not well understood, since the trial can be planned with this sort of effect size in mind. To denote the effect size in units of $\sigma$, we will write $\tau_\sigma$, although in practice it is more usual to give both the same notation.
+It is common to think of the effect size in units of $\sigma$, as we have done here. 
+
+\textit{This makes results more intuitive, since we don't need to have a good knowledge of the actual outcome variable to know what is a small or large effect size. It is also helpful in situations where the population standard deviation is not well understood, since the trial can be planned with this sort of effect size in mind. To denote the effect size in units of $\sigma$, we will write $\tau_\sigma$, although in practice it is more usual to give both the same notation.}
 
 ## A sample size formula {#sec-ssformulacont}
 
-Equation \@ref(eq:powerfun) allows us to find any one of $\tau_\sigma,\,\alpha,\,\beta$ and $\lambda\left(n,m\right)$ given values for the others. Values for $\alpha$ and $\beta$ are often specified by those planning the trial as around $\alpha \in \left[0.01,0.05\right],\,1-\beta\in\left[0.8,0.9\right]$.
+Equation \@ref(eq:powerfun) allows us to find any one of $\tau_\sigma,\,\alpha,\,\beta$ and $\lambda\left(n,m\right)$ given values for the others. 
+
+\begin{equation}
+\Psi\left(\tau\right) = 1-\beta = \left[1 - \operatorname{\Phi}\left(z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)\right] + \operatorname{\Phi}\left(-z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)
+\end{equation}
+
+Values for $\alpha$ and $\beta$ are often specified by those planning the trial as around $\alpha \in \left[0.01,0.05\right],\,1-\beta\in\left[0.8,0.9\right]$.
 
 The remaining two variables, $\tau_\sigma$ and $\lambda\left(n,m\right)$ are generally settled using one or both of the following questions:
   
@@ -437,9 +449,9 @@ The remaining two variables, $\tau_\sigma$ and $\lambda\left(n,m\right)$ are gen
 The **minimum detectable effect size** $\tau_M$ for a particular trial is the smallest value of effect size that is able to be detected with power $1-\beta$ and at significance level $\alpha$ (for some specified values of $\alpha,\;\beta$).
 :::
   
-  Note that we will not *definitely* detect an effect of size $\tau_M$, if it exists; by construction, we will detect it with probability $1-\beta$. If $|\tau| > |\tau_M|$ (ie. the true effect size is further from zero than $\tau_M$ is) then the probability of detecting it will be greater than $1-\beta$. If $|\tau| < |\tau_M|$ then the probability of detecting it will be less than $1-\beta$.
+\textit{Note that we will not *definitely* detect an effect of size $\tau_M$, if it exists; by construction, we will detect it with probability $1-\beta$. If $|\tau| > |\tau_M|$ (ie. the true effect size is further from zero than $\tau_M$ is) then the probability of detecting it will be greater than $1-\beta$. If $|\tau| < |\tau_M|$ then the probability of detecting it will be less than $1-\beta$.}
 
-Although we could solve Equation \@ref(eq:powerfun) numerically, in practice we use an approximation. The second term, representing observed values of $D$ that are far enough away from 0 *in the opposite direction from the true $\tau$* to lead us to reject $H_0$ is so negligible as to be able to be discounted entirely. Indeed, if we were to observe such a value of $D$, we would come to the wrong conclusion about $\tau$.
+\textit{Although we could solve Equation \@ref(eq:powerfun) numerically, in practice we use an approximation. The second term, representing observed values of $D$ that are far enough away from 0 *in the opposite direction from the true $\tau$* to lead us to reject $H_0$ is so negligible as to be able to be discounted entirely. Indeed, if we were to observe such a value of $D$, we would come to the wrong conclusion about $\tau$.}
 
 Therefore, Equation \@ref(eq:powerfun) becomes
 
@@ -451,13 +463,15 @@ Therefore, Equation \@ref(eq:powerfun) becomes
   Because $\operatorname{\Phi}\left(z_\beta\right) = 1 - \beta$ (by definition) and $\operatorname{\Phi}\left(-z\right) = 1 - \operatorname{\Phi}\left(z\right)$ we can write this as
   
   $$ \operatorname{\Phi}\left(z_\beta\right) = \operatorname{\Phi}\left(\frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}}\right), $$
-    where $\tau_M$ is our minimum detectable effect size. Because of the monotonicity of $\operatorname{\Phi}\left(\cdot\right)$, this becomes
+    where $\tau_M$ is our minimum detectable effect size. Because of the monotonicity of $\operatorname{\Phi}\left(\cdot\right)$, we can write
   
-\begin{align*}
+\begin{equation}
+\begin{aligned}
   z_\beta & = \frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}} \\
   z_\beta + z_{\frac{\alpha}{2}} & = \frac{\tau_M}{\sigma\lambda}.
   (\#eq:powerfun3)
-\end{align*}
+  \end{aligned}
+\end{equation}
     
 Because we want to think about sample sizes, we rewrite this further. It is most common to perform trials with $n=m=N$ participants in each group, in which case
     

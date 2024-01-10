@@ -17,3 +17,8 @@ setwd("/Users/rachelo/Documents/GitRepos/clinicaltrials")
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 
+
+# for lecture notes
+setwd("/Users/rachelo/Documents/GitRepos/clinicaltrials/lecture_notes")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+
