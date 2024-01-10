@@ -423,14 +423,16 @@ Therefore, Equation \@ref(eq:powerfun) becomes
   
   $$ \operatorname{\Phi}\left(z_\beta\right) = \operatorname{\Phi}\left(\frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}}\right), $$
     where $\tau_M$ is our minimum detectable effect size. Because of the monotonicity of $\operatorname{\Phi}\left(\cdot\right)$, this becomes
-  
+
+ 
 \begin{equation}
 \begin{aligned}
   z_\beta & = \frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}} \\
   z_\beta + z_{\frac{\alpha}{2}} & = \frac{\tau_M}{\sigma\lambda}.
-  (\#eq:powerfun3)
-  \end{aligned}
+\end{aligned}
+(\#eq:powerfun3)
 \end{equation}
+
 
 
 Because we want to think about sample sizes, we rewrite this further. It is most common to perform trials with $n=m=N$ participants in each group, in which case
