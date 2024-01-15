@@ -34,7 +34,7 @@ data("strep_tb") # binary outcome. Also ethical issues!
 # Results of a randomized, placebo-controlled, prospective 2-arm trial of streptomycin 2 grams daily (arm A2) vs. placebo (arm A1) to treat tuberculosis in 107 young patients, as reported by the Streptomycin in Tuberculosis Trials Committee in 1948 in the British Medical Journal
 
 
-data("supraclavicular") # survival (with some censoring)
+data("supraclavicular") # survival (with some censoring, but rather simple)
 
 # Also 
 library(HSAUR)
@@ -67,3 +67,18 @@ data(anorexia) # The anorexia data frame has 72 rows and 3 columns. Weight chang
 data(gehan) # A data frame from a trial of 42 leukaemia patients. Some were treated with the drug 6-mercaptopurine and the rest are controls. The trial was designed as matched pairs, both withdrawn from the trial when either came out of remission.
 
 library(survival) # lots of data in here!
+
+diabetic #  
+cgd # Data are from a placebo controlled trial of gamma interferon in chronic granulotomous disease (CGD). Contains the data on time to serious infections observed through end of study for each patient.
+
+flchain # stratified sample - useful for modelling?
+
+gbsg # breast cancer. Lots of data, various covariates
+
+lung # Survival in patients with advanced lung cancer from the North Central Cancer Treatment Group. Performance scores rate how well the patient can perform usual daily activities.
+
+myeloma # Survival times of 3882 subjects with multiple myeloma, seen at Mayo Clinic from 1947–1996.
+
+ovarian # simple trial, with two arms
+
+## Haven't finished looking, but these are in the datasets part of the index of the survival manual

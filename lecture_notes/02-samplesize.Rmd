@@ -1,6 +1,4 @@
-# Lecture 2 {-}
-
-# Sample size {#rct-plan}
+# (Lecture 2) Sample size {#rct-plan}
 
 For most of this course, our trial will have two arms and our unit of randomization will be individual participants. In this section we'll focus on continuous primary outcome variables. 
 
@@ -254,7 +252,7 @@ Our argument is based on $H_0$ being true - but what if it isn't?
 
 Recap: 
 
-  * We constructed a measure $D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}$ that we can use to test $H_0:\; \tau=0$, since $D\sim{t_{n+m-2}}$ (and approximately $D\sim N\left(0,1\right)$).
+  * We constructed a measure $D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}$ that we can use to test $H_0:\; \tau=0$, since under $H_0$, $D\sim{t_{n+m-2}}$ (and approximately $D\sim N\left(0,1\right)$).
 
 ## Power: If $H_0$ is false {#sec-power}
 
@@ -270,7 +268,7 @@ The quantity $\beta$ therefore represents $\Pr\left(\text{Accept } H_0\mid{\tau\
 :::
 
 
-\textit{If you find the notation confusing (as I do!) then it might be helpful to remember that both $\alpha$ and $\beta$ are \textbf{error rates} - probabilities of coming to the wrong conclusion. It is common to talk in terms of $\alpha$, the significance level, (which will be a low number, often 0.05) and of $1-\beta$, the power (which will be a high number, often 0.8). I've found though that it is not uncommon to find people refer to $\beta$ (rather than $1-\beta$) as the power. If in doubt, keep in mind that we require $\alpha,\;\beta \ll 0.5$. It is also common to use percentages: a significance level of $\alpha=0.05$ can also be referred to as "the 95% level", and $\beta=0.2$ is the same as a "power of 80%". When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.}
+*If you find the notation confusing (as I do!) then it might be helpful to remember that both $\alpha$ and $\beta$ are \textbf{error rates} - probabilities of coming to the wrong conclusion. It is common to talk in terms of $\alpha$, the significance level, (which will be a low number, often 0.05) and of $1-\beta$, the power (which will be a high number, often 0.8). I've found though that it is not uncommon to find people refer to $\beta$ (rather than $1-\beta$) as the power. If in doubt, keep in mind that we require $\alpha,\;\beta \ll 0.5$. It is also common to use percentages: a significance level of $\alpha=0.05$ can also be referred to as "the 95% level", and $\beta=0.2$ is the same as a "power of 80%". When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.*
 
 \textit{If you notice any mistakes in these notes along these (or other!) lines, please point them out.}
 

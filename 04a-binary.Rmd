@@ -357,7 +357,7 @@ In the above example the question we were interested in was 'is what we've obser
 
 In the continuous case, it made sense to simply think about the treatment effect as the difference $\mu_T - \mu_C$ between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions $\pi_C$ and $\pi_T$, and each of them requires a different approach.
 
-### Absolute risk difference and Number Needed to Treat
+### Absolute risk difference and Number Needed to Treat {#ard-and-nnt}
 
 The **absolute risk difference** is 
 
@@ -494,7 +494,7 @@ ggplot(data=inv_df, aes(x=x, y=y)) + geom_path() + xlim(-1,1) + ylim(-25,25) +
  
  @altman1998confidence ([available here](https://www.bmj.com/content/bmj/317/7168/1309.full.pdf)) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!
  
-#### Problems with the confidence interval for the ARD
+#### Problems with the confidence interval for the ARD {-}
 
 You may well remember from the dim and distant past that the method we have been using so far (which in this section we'll be calling the 'standard' method) is not so reliable if the proportion is close to zero or one. @newcombe1998interval compared eleven different methods for finding confidence intervals for the difference in proportions (as we are doing when we work with the ARD) and found the standard method to be the worst! The coverage probability turns out to be much lower than the nominal value, with a so-called 95% confidence interval being closer to 90% or even 85%. A further problem with this method (although it will rarely affect us in practice in this setting) is that the limits of the confidence interval aren't forced to be in $\left[-1,1\right]$.
 
@@ -560,7 +560,7 @@ ggplot() + geom_function(fun = fun_LHSeg) + xlim(-0.1,0.2) +
 ```
 
 :::{.example}
-Returning to our Captopril example, our estimate of the probability of success for the treatment group is $p_T = \frac{38}{55},\;n_T = 55$, and therefore our equation becomes
+Returning to our streptomycin example, our estimate of the probability of success for the treatment group is $p_T = \frac{38}{55},\;n_T = 55$, and therefore our equation becomes
 
 $$\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.$$
 Solving this equation in the usual way (using the quadratic formula) we find the limits
@@ -604,6 +604,7 @@ ggplot() + geom_function(fun = fun_LHS) + xlim(0.4,0.9) +
   geom_vline(xintercept = stand_CI, lty=3, col="red", linewidth=0.4)
 
 ```
+
 Notice that the interval with the new method is now asymmetrical, which is more realistic.
 
 Similarly for the control proportion $\pi_C$, we have $p_C = \frac{17}{52},\; n_C=52$, and our Newcombe interval is 
@@ -646,6 +647,59 @@ ggplot() + geom_function(fun = fun_LHSc) + xlim(0,0.6) +
 :::
 
 
+
+#### Generalising this to two cases
+
+What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calcualting a confidence interval for the difference in two proportions. You'll be relieved to hear that there is such a method, and we'll give a sketch here of how it works.
+
+
+\begin{equation}
+\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right).
+(\#eq:ardci)
+\end{equation}
+
+We can rewrite this as 
+
+\begin{equation}
+\left(p_T - p_C - \sqrt{\omega^2_T + \omega^2_C},\; p_T - p_C + \sqrt{\omega^2_T + \omega^2_C}\right)
+\end{equation}
+
+where $\omega_T$ and $\omega_C$ are the widths of the separate single-sample 'standard' confidence intervals for $p_T$ and $p_C$. In Newcombe's method, we proceed in the same way, but instead use the widths of the Newcombe confidence intervals for the individual probabilities $p_T$ and $p_C$. This is obviously a little more complicated, since the widths (eg. $p_T - l_T$ and $u_T - p_T$) will now not be the same, since the Newcombe CI is not symmetrical. So, we have
+
+$$
+\left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2},\; p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right).
+$$
+These differences must be calculated using the individual sample confidence interval method.
+
+:::{.example}
+Applying this Newcombe method to our Streptomycin example, recall that we have
+
+$$
+\begin{aligned}
+p_T & = \frac{38}{55}\\
+p_T - l_T & = \frac{38}{55} - 0.5597 = 0.1312\\
+u_T - p_T & = 0.7972 - \frac{38}{55} = 0.1064\\
+p_C & = \frac{17}{52} \\
+p_C - l_C & = \frac{17}{52}  - 0.2152 = 0.1117\\
+u_C - p_C & = 0.4624 - \frac{17}{52} = 0.1355.
+\end{aligned}
+$$
+Our $95\%$ confidence interval is therefore
+
+$$
+\begin{aligned}
+\left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2}\right.&,\left. p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right)\\
+\left(\frac{38}{55}-\frac{17}{52} - \sqrt{0.1312^2 + 0.1355^2}\right.&,\left.\frac{38}{55}-\frac{17}{52} + \sqrt{0.1064^2 + 0.1117^2}\right)\\
+\left(0.3640 - 0.1886 \right.&,\left. 0.3640+ 0.1543\right)\\
+\left(0.157 \right.&,\left.0.500\right).
+\end{aligned}
+$$
+This is skewed somewhat lower than our standard CI of $\left(0.187,\;0.541\right).$
+
+
+
+:::
+
 ### Risk Ratio (RR) and Odds ratio (OR)
 
 The **risk ratio** is defined as 
@@ -654,6 +708,8 @@ $$\text{RR} = \frac{\pi_C}{\pi_T}$$
 
 The **odds ratio** is defined as 
 $$\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}$$
+
+[say more here! Look at 7.3.2.3 in Matthews. Need something else before log reg. But not loads. Then Hantschel Meier after]
 
 ## Accounting for baseline observations: logistic regression
 

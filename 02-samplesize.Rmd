@@ -226,7 +226,8 @@ ggplot(data=data.frame(x=c(-3,3)), aes(x)) +
 
 ```
 
-*In R, we have $\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)$ and $z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)$. `qnorm` is the quantile and `pnorm` is the cumulative distribution function.*
+*In R, we have $\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)$ and $z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)$. `qnorm` is the quantile and `pnorm` is the cumulative distribution function. So, for example*
+$$\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)$$
 
 
 We have constructed our whole argument under the assumption that $H_0$ is true, and that the probability of such a value is therefore $\alpha$. We want this probability to be small, since it constitutes an error; $H_0$ is true, but our value of $D$ (or the difference in means) leads us to reject $H_0$. This is sometimes called the 'type I' error rate. But what if $H_0$ is false?
@@ -239,7 +240,7 @@ We have constructed things so that if $H_0$ is true, we have a small probability
 The **power** of a test is the probability that we reject $H_0$, given that $H_0$ is false. The **power function** depends on the value of $\tau$ and is
 
 $$\Psi\left(\tau\right) = \Pr\left(\text{Reject } H_0\mid{\tau\neq{0}}\right) = 1 - \beta.$$
-The quantity $\beta$ therefore represents $\Pr\left(\text{Accept } H_0\mid{\tau\neq{0}}\right)$, which is the **type II error rate**.
+The quantity $\beta$ therefore represents $\Pr\left(\text{Fail to reject } H_0\mid{\tau\neq{0}}\right)$, which is the **type II error rate**.
 :::
 
 If you find the notation confusing (as I do!) then it might be helpful to remember that both $\alpha$ and $\beta$ are **error rates** - probabilities of coming to the wrong conclusion. It is common to talk in terms of $\alpha$, the significance level, (which will be a low number, often 0.05) and of $1-\beta$, the power (which will be a high number, often 0.8). I've found though that it is not uncommon to find people refer to $\beta$ (rather than $1-\beta$) as the power. If in doubt, keep in mind that we require $\alpha,\;\beta \ll 0.5$. It is also common to use percentages: a significance level of $\alpha=0.05$ can also be referred to as "the 95% level", and $\beta=0.2$ is the same as a "power of 80%". When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.

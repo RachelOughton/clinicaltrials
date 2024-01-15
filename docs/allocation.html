@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-08" />
+<meta name="date" content="2024-01-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="rct-plan.html"/>
-<link rel="next" href="rct-analysis.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,73 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  background-color: #f8f8f8; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #204a87; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #8f5902; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #204a87; font-weight: bold; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
   
@@ -223,61 +158,13 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.2" data-path="allocation.html"><a href="allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
 <li class="chapter" data-level="3.2.3" data-path="allocation.html"><a href="allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="allocation.html"><a href="allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3</b> Stratified sampling</a></li>
-<li class="chapter" data-level="3.4" data-path="allocation.html"><a href="allocation.html#minimization"><i class="fa fa-check"></i><b>3.4</b> Minimization</a>
+<li class="chapter" data-level="3.3" data-path="allocation.html"><a href="allocation.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
+<li class="chapter" data-level="3.4" data-path="allocation.html"><a href="allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.5" data-path="allocation.html"><a href="allocation.html#minimization"><i class="fa fa-check"></i><b>3.5</b> Minimization</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="allocation.html"><a href="allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.4.1</b> Minimization algorithm</a></li>
+<li class="chapter" data-level="3.5.1" data-path="allocation.html"><a href="allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="allocation.html"><a href="allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>3.5</b> Problems with allocation</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a></li>
-<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
-<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.2</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.3</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
-</ul></li>
-<li class="part"><span><b>II Part II: Other sorts of outcome variables</b></span></li>
-<li class="chapter" data-level="5" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html"><i class="fa fa-check"></i><b>5</b> Binary outcome variable</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ss-bin"><i class="fa fa-check"></i><b>5.1</b> Sample size for a binary variable</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#the-delta-method"><i class="fa fa-check"></i><b>5.1.1</b> The Delta Method</a></li>
-<li class="chapter" data-level="5.1.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.1.2</b> A sample size formula</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Point estimates and Hypothesis tests</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>5.2.1</b> An alternative approach: chi-squared</a></li>
-<li class="chapter" data-level="5.2.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>5.2.2</b> Likelihood: A more rigorous way</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>5.3</b> Measures of difference for binary data</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>5.3.1</b> Absolute risk difference and Number Needed to Treat</a></li>
-<li class="chapter" data-level="5.3.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>5.3.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>5.4</b> Accounting for baseline observations: logistic regression</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>5.4.1</b> What does this model tell us?</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html"><i class="fa fa-check"></i><b>6</b> Time-to-event data and Survival Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#censored-times"><i class="fa fa-check"></i><b>6.1</b> Censored times</a></li>
-<li class="chapter" data-level="6.2" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#the-survival-curve-and-the-hazard-function"><i class="fa fa-check"></i><b>6.2</b> The Survival Curve and the Hazard function</a></li>
+<li class="chapter" data-level="3.6" data-path="allocation.html"><a href="allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>3.6</b> Problems with allocation</a></li>
 </ul></li>
 </ul>
 
@@ -307,7 +194,7 @@ div.csl-indent {
 </div>
 <p>An example you will have seen before is the standard deviation. If we have some data <span class="math inline">\(x_1,\,\ldots,x_n\)</span> that are IID <span class="math inline">\(N\left(\mu,\,\sigma^2\right)\)</span>, we can calculate the sample variance</p>
 <p><span class="math display">\[ s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 .\]</span></p>
-<p>In this case, <span class="math inline">\(E\left(s^2\right) \neq {\sigma^2}\)</span> (you’ve probably seen this proved so we’re not going to prove it now), and <span class="math inline">\(s^2\)</span> is an biased estimator of <span class="math inline">\(\sigma^2\)</span>. However, we know that</p>
+<p>In this case, <span class="math inline">\(E\left(s^2\right) \neq {\sigma^2}\)</span> (you’ve probably seen this proved so we’re not going to prove it now), and <span class="math inline">\(s^2\)</span> is a biased estimator of <span class="math inline">\(\sigma^2\)</span>. However, we know that</p>
 <p><span class="math display">\[E \left(\frac{n}{n-1}s^2\right) = \sigma^2,\]</span>
 and therefore we can apply this correction to the sample variance <span class="math inline">\(s^2\)</span> to produce an unbiased estimate of the population variance <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>Now, suppose our sample <span class="math inline">\(x_1,\ldots,x_n\)</span> were drawn from <span class="math inline">\(N\left(\mu,\sigma^2\right)\)</span>, but were <strong>not</strong> independent of one another. Then, neither our estimator <span class="math inline">\(s^2\)</span>, nor our bias-corrected estimator <span class="math inline">\(\frac{n}{n-1}s^2\)</span> would have expected value <span class="math inline">\(\sigma^2\)</span>. Furthermore, we cannot use our sample <span class="math inline">\(x_1,\ldots,x_n\)</span> to produce an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>, or even of the mean <span class="math inline">\(\mu\)</span>.</p>
@@ -373,8 +260,9 @@ Therefore we also have <span class="math inline">\(P\left(2\mid{A,N}\right) = 1 
 <p><span class="math display">\[\begin{align*}
 P\left(1\mid{A,S}\right) &amp; =  \frac{P\left(A\mid{1,S}\right)P\left(1\mid{S}\right)}{P\left(A\mid{S}\right)}\\
 &amp; = \frac{P\left(A\mid{1,S}\right)P\left(1\mid{S}\right)}{P\left(A\mid{S,1}\right)P\left(1\mid{S}\right) + P\left(A\mid{S,2}\right)P\left(2\mid{S}\right)} \\
-&amp; = \frac{\lambda}{\lambda + q\left(1-\lambda\right)}
-\end{align*}\]</span>.</p>
+&amp; = \frac{\lambda}{\lambda + q\left(1-\lambda\right)},
+\end{align*}\]</span></p>
+<p>which we will call <span class="math inline">\(b\)</span>.</p>
 <p>Notice that <span class="math inline">\(P\left(2\mid{S}\right)= 1-\lambda\)</span>, since it is not conditional on actually participating in the trial. Therefore,</p>
 <p><span class="math display">\[\begin{align*}
 E\left(X\mid{A,N}\right) &amp; = E \left(X\mid{N,1}\right)P\left(1\mid{A,N}\right) + E \left(X\mid{N,2}\right)P\left(2\mid{A,N}\right) \\
@@ -435,10 +323,10 @@ If <span class="math inline">\(N\)</span> is the better treatment, then <span cl
 and similar for <span class="math inline">\(N_T\)</span>. If the two groups are of unequal size, the larger will be of some size <span class="math inline">\(N_{max}\)</span> between <span class="math inline">\(n\)</span> and <span class="math inline">\(2n\)</span>, such that for <span class="math inline">\(r = n+1,\,\ldots,\,2n,\)</span></p>
 <p><span class="math display">\[\begin{align*}
 P\left(N_{max} = r\right) &amp; = P\left(N_C = r\right) + P\left(N_T = r\right) \\
-&amp; = 2{2n \choose r}\left(\frac{1}{2}\right)^{2n}.
+&amp; = 2\binom{2n}{r}\left(\frac{1}{2}\right)^{2n}.
 \end{align*}\]</span>
 The probability that <span class="math inline">\(N_C = N_T = n\)</span> is</p>
-<p><span class="math display">\[ P\left(N_T = N_C = n\right)= {2n \choose n}\left(\frac{1}{2}\right)^{2n}. \]</span>
+<p><span class="math display">\[ P\left(N_T = N_C = n\right)= \binom{2n}{n}\left(\frac{1}{2}\right)^{2n}. \]</span>
 These probabilities are shown in Figure <a href="allocation.html#fig:srs-alloc">3.1</a>. We can see that this method leads to very unequal groups relatively easily; with <span class="math inline">\(n=15\)</span>, <span class="math inline">\(P\left(N_{max}\geq 20\right) = 0.099\)</span>, so there is around a one in ten chance that one group will be double or more the size of the other.</p>
 <div class="figure"><span style="display:block;" id="fig:srs-alloc"></span>
 <img src="CT4H_notes_files/figure-html/srs-alloc-1.png" alt="The probability distribution of largest group size for n=15." width="672" />
@@ -458,7 +346,7 @@ Figure 3.2: The probability distribution of largest group size for n=200.
 </div>
 <div id="random-permuted-blocks" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Random permuted blocks<a href="allocation.html#random-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>One commonly used method to randomly allocate participants while avoiding too much imbalance is to use <em>random permuted blocks</em> (RPBs). If the blocks have size <span class="math inline">\(2m\)</span>, and there are two groups then there are <span class="math display">\[{2m\choose m},\]</span> but this method can be adapted to more than two groups and to unequal group size.</p>
+<p>One commonly used method to randomly allocate participants while avoiding too much imbalance is to use <em>random permuted blocks</em> (RPBs). If the blocks have size <span class="math inline">\(2m\)</span>, and there are two groups then there are <span class="math display">\[\binom{2m}{m},\]</span> but this method can be adapted to more than two groups and to unequal group size.</p>
 <p>If we have two groups, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then there are six <em>blocks</em> of length containing two <span class="math inline">\(A\)</span>s and two <span class="math inline">\(B\)</span>s</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -476,7 +364,7 @@ Figure 3.2: The probability distribution of largest group size for n=200.
 <div id="rpbs-with-random-block-length" class="section level4 hasAnchor" number="3.2.2.1">
 <h4><span class="header-section-number">3.2.2.1</span> RPBs with random block length<a href="allocation.html#rpbs-with-random-block-length" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The issue above can be circumvented by not only randomly choosing from a selection of blocks, but also randomly choosing the length of the block. For example, there are
-<span class="math display">\[ {6 \choose 3} = 20\]</span>
+<span class="math display">\[ \binom{6}{3} = 20\]</span>
 possible blocks of size 6. Instead of always selecting from the six possible 4-blocks, a sampling scheme can be as follows.</p>
 <ol style="list-style-type: decimal">
 <li>A random number <span class="math inline">\(X\)</span> is drawn from <span class="math inline">\(\left\lbrace 4,6\right\rbrace\)</span> to select the block length.</li>
@@ -611,8 +499,13 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 </div>
 </div>
 </div>
-<div id="stratified-sampling" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Stratified sampling<a href="allocation.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="incorporating-baseline-measurements" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Incorporating baseline measurements<a href="allocation.html#incorporating-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At the start of the trial (ideally before allocation) various baseline measurements are usually taken. If the primary outcome variable is a continuous measurement (eg. blood pressure, weight,…) this same quantity will often be included, so that there is some measure of each participant’s condition/symptoms at the start of the trial. Factors such as age, sex, level of symptoms, things to do with treatment history and many others are included. Essentially, we include any variable we can that may lead to bias if not properly dealt with. The crucial thing is that none of these measurements (taken when they are) should be affected by the trial.</p>
+<p>Such baseline measurements can be used in allocation.</p>
+</div>
+<div id="stratified-sampling" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Stratified sampling<a href="allocation.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-15" class="example"><strong>Example 3.3  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
@@ -647,8 +540,8 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 </div>
 <p>A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are <span class="math inline">\(3^4=81\)</span> strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic).</p>
 </div>
-<div id="minimization" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Minimization<a href="allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="minimization" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Minimization<a href="allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
 <p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
 <p>When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
@@ -657,8 +550,8 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 <li>Whether there is any randomness</li>
 </ul>
 <p>It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.</p>
-<div id="minimization-algorithm" class="section level3 hasAnchor" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Minimization algorithm<a href="allocation.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="minimization-algorithm" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Minimization algorithm<a href="allocation.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
 <p>Suppose there are several prognostic factors over which we require balance, and that these factors have <span class="math inline">\(I, J, K, ...\)</span> levels. In our example above, there would be <span class="math inline">\(I=2,\; J=2,\; K=3,\; L=2\)</span>. Note that this equates to 24 strata.</p>
 <p>At some point in the trial, suppose we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with levels <span class="math inline">\(i,\,j,\,k,\,l\)</span> of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, <span class="math inline">\(n^A_{ijkl}\)</span> have been assigned to treatment arm <span class="math inline">\(A\)</span>, and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>. So we have</p>
@@ -696,8 +589,9 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 <div class="example">
 <p><span id="exm:unlabeled-div-16" class="example"><strong>Example 3.4  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
-<p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table @ref(tab:minim_eg).</p>
+<p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table <a href="allocation.html#tab:minimeg">3.1</a>.</p>
 <table>
+<caption><span id="tab:minimeg">Table 3.1: </span>Allocations of first 15 patients, divided by diagnostic factor</caption>
 <thead>
 <tr class="header">
 <th align="left">factor</th>
@@ -757,7 +651,7 @@ In this trial, 46 patients with breast cancer were allocated to receive either M
 </tr>
 </tbody>
 </table>
-<p>Suppose our sixteenth patient is under 50, has is at stage III, has less than 30 months between diagnoses and is pre-menopausal.
+<p>Suppose our sixteenth patient is under 50, has disease at stage III, has less than 30 months between diagnoses and is pre-menopausal.
 Our calculation from step 4 of the minimisation algorithm is therefore</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -771,9 +665,9 @@ Since our sum is greater than zero, we allocate the new patient to arm B (talc) 
 </div>
 </div>
 </div>
-<div id="problems-with-allocation" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Problems with allocation<a href="allocation.html#problems-with-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="allocation.html#fig:licorice-participants">3.9</a> shows an example.</p>
+<div id="problems-with-allocation" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Problems with allocation<a href="allocation.html#problems-with-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="allocation.html#fig:licorice-participants">3.9</a> shows an example, taken from <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:licorice-participants"></span>
 <img src="images/licorice.jpg" alt="Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized" width="60%" />
 <p class="caption">
@@ -809,8 +703,67 @@ Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 <blockquote>
 <p>Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation—exclusion of confounding factors—has failed. … If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.</p>
 </blockquote>
-<p>However, this issue is rarely addressed in clinical trials: a lot of faith is placed (with reasonable justification) in the likely balance achieved by random sampling, whatever method is used. We will also see in Chapter <a href="rct-analysis.html#rct-analysis">4</a> that we can account for some degree of imbalance at the analysis stage.</p>
+<p>However, this issue is rarely addressed in clinical trials: a lot of faith is placed (with reasonable justification) in the likely balance achieved by random sampling, whatever method is used. We will also see in the next Chapter that we can account for some degree of imbalance at the analysis stage.</p>
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC press.
+</div>
+<div class="csl-entry">
+Altman, Douglas G, and J Martin Bland. 1999. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
+</div>
+<div class="csl-entry">
+Cottingham, Marci D, and Jill A Fisher. 2022. <span>“Gendered Logics of Biomedical Research: Women in US Phase i Clinical Trials.”</span> <em>Social Problems</em> 69 (2): 492–509.
+</div>
+<div class="csl-entry">
+Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
+</div>
+<div class="csl-entry">
+Freedman, LS, and Susan J White. 1976. <span>“On the Use of Pocock and Simon’s Method for Balancing Treatment Numbers over Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 691–94.
+</div>
+<div class="csl-entry">
+Hayes, Richard J, and Lawrence H Moulton. 2017. <em>Cluster Randomised Trials</em>. CRC press.
+</div>
+<div class="csl-entry">
+Health, National Institute of. 2023. <span>“History of Women’s Participation in Clinical Research.”</span> Office of Research on Women’s Health. https://orwh. od. nih. gov/toolkit …. <a href="https://orwh.od.nih.gov/toolkit/recruitment/history">https://orwh.od.nih.gov/toolkit/recruitment/history</a>.
+</div>
+<div class="csl-entry">
+Hjalmas, Hanson, and Kruse Hellstrom. 1998. <span>“Long‐term Treatment with Desmopressin in Children with Primary Monosymptomatic Nocturnal Enuresis: An Open Multicentre Study.”</span> <em>British Journal of Urology</em>.
+</div>
+<div class="csl-entry">
+Hulley, Stephen B, Steven R. Cummings, Warren S. Browner, Deborah G. Grady, and Thomas B. Newman. 2013. <em>Designing Clinical Research, Fourth Edition</em>. Lippincott Williams &amp; Wilkins.
+</div>
+<div class="csl-entry">
+Kallis, P, JA Tooze, S Talbot, D Cowans, DH Bevan, and T Treasure. 1994. <span>“Pre-Operative Aspirin Decreases Platelet Aggregation and Increases Post-Operative Blood Loss–a Prospective, Randomised, Placebo Controlled, Double-Blind Clinical Trial in 100 Patients with Chronic Stable Angina.”</span> <em>European Journal of Cardio-Thoracic Surgery: Official Journal of the European Association for Cardio-Thoracic Surgery</em> 8 (8): 404–9.
+</div>
+<div class="csl-entry">
+Kar, Sumit, Ajay Krishnan, Preetha K, and Atul Mohankar. 2012. <span>“A Review of Antihistamines Used During Pregnancy.”</span> <em>Journal of Pharmacology and Pharmacotherapeutics</em> 3 (2): 105–8.
+</div>
+<div class="csl-entry">
+Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
+</div>
+<div class="csl-entry">
+Pocock, Stuart J, and Richard Simon. 1975. <span>“Sequential Treatment Assignment with Balancing for Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 103–15.
+</div>
+<div class="csl-entry">
+Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskron, Andrea Lassnigg, Jing You, and Daniel I Sessler. 2013. <span>“A Randomized, Double-Blind Comparison of Licorice Versus Sugar-Water Gargle for Prevention of Postoperative Sore Throat and Postextubation Coughing.”</span> <em>Anesthesia &amp; Analgesia</em> 117 (3): 614–21.
+</div>
+<div class="csl-entry">
+Taves, Donald R. 1974. <span>“Minimization: A New Method of Assigning Patients to Treatment and Control Groups.”</span> <em>Clinical Pharmacology &amp; Therapeutics</em> 15 (5): 443–53.
+</div>
+<div class="csl-entry">
+Treasure, Tom, and Kenneth D MacRae. 1998. <span>“Minimisation: The Platinum Standard for Trials?: Randomisation Doesn’t Guarantee Similarity of Groups; Minimisation Does.”</span> <em>Bmj</em>. British Medical Journal Publishing Group.
+</div>
+<div class="csl-entry">
+Villar, Jesús, Carlos Ferrando, Domingo Martı́nez, Alfonso Ambrós, Tomás Muñoz, Juan A Soler, Gerardo Aguilar, et al. 2020. <span>“Dexamethasone Treatment for the Acute Respiratory Distress Syndrome: A Multicentre, Randomised Controlled Trial.”</span> <em>The Lancet Respiratory Medicine</em> 8 (3): 267–76.
+</div>
+<div class="csl-entry">
+Vitale, Cristiana, Massimo Fini, Ilaria Spoletini, Mitja Lainscak, Petar Seferovic, and Giuseppe MC Rosano. 2017. <span>“Under-Representation of Elderly and Women in Clinical Trials.”</span> <em>International Journal of Cardiology</em> 232: 216–21.
+</div>
+<div class="csl-entry">
+Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Controlled Trial?”</span> <em>Journal of Thoracic Disease</em> 1 (1): 51.
+</div>
+</div>
 </div>
 </div>
 <h3>References</h3>
@@ -860,8 +813,8 @@ Vitale, Cristiana, Massimo Fini, Ilaria Spoletini, Mitja Lainscak, Petar Seferov
           </div>
         </div>
       </div>
-<a href="rct-plan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rct-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rct-plan.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

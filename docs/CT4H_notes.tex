@@ -81,7 +81,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-01-10}
+\date{2024-01-15}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -601,7 +601,8 @@ This is equivalent to \(\bar{x}_T - \bar{x}_C\) falling outside the interval
 
 \includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf}
 
-\emph{In R, we have \(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\) and \(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\). \texttt{qnorm} is the quantile and \texttt{pnorm} is the cumulative distribution function.}
+\emph{In R, we have \(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\) and \(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\). \texttt{qnorm} is the quantile and \texttt{pnorm} is the cumulative distribution function. So, for example}
+\[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)\]
 
 We have constructed our whole argument under the assumption that \(H_0\) is true, and that the probability of such a value is therefore \(\alpha\). We want this probability to be small, since it constitutes an error; \(H_0\) is true, but our value of \(D\) (or the difference in means) leads us to reject \(H_0\). This is sometimes called the `type I' error rate. But what if \(H_0\) is false?
 
@@ -614,7 +615,7 @@ We have constructed things so that if \(H_0\) is true, we have a small probabili
 The \textbf{power} of a test is the probability that we reject \(H_0\), given that \(H_0\) is false. The \textbf{power function} depends on the value of \(\tau\) and is
 
 \[\Psi\left(\tau\right) = \Pr\left(\text{Reject } H_0\mid{\tau\neq{0}}\right) = 1 - \beta.\]
-The quantity \(\beta\) therefore represents \(\Pr\left(\text{Accept } H_0\mid{\tau\neq{0}}\right)\), which is the \textbf{type II error rate}.
+The quantity \(\beta\) therefore represents \(\Pr\left(\text{Fail to reject } H_0\mid{\tau\neq{0}}\right)\), which is the \textbf{type II error rate}.
 \end{definition}
 
 If you find the notation confusing (as I do!) then it might be helpful to remember that both \(\alpha\) and \(\beta\) are \textbf{error rates} - probabilities of coming to the wrong conclusion. It is common to talk in terms of \(\alpha\), the significance level, (which will be a low number, often 0.05) and of \(1-\beta\), the power (which will be a high number, often 0.8). I've found though that it is not uncommon to find people refer to \(\beta\) (rather than \(1-\beta\)) as the power. If in doubt, keep in mind that we require \(\alpha,\;\beta \ll 0.5\). It is also common to use percentages: a significance level of \(\alpha=0.05\) can also be referred to as ``the 95\% level'', and \(\beta=0.2\) is the same as a ``power of 80\%''. When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.
@@ -714,8 +715,8 @@ where \(\tau_M\) is our minimum detectable effect size. Because of the monotonic
 \begin{aligned}
   z_\beta & = \frac{\tau_M}{\sigma\lambda} - z_{\frac{\alpha}{2}} \\
   z_\beta + z_{\frac{\alpha}{2}} & = \frac{\tau_M}{\sigma\lambda}.
-  \label{eq:powerfun3}
-  \end{aligned}
+\end{aligned}
+\label{eq:powerfun3}
 \end{equation}
 
 Because we want to think about sample sizes, we rewrite this further. It is most common to perform trials with \(n=m=N\) participants in each group, in which case
@@ -740,6 +741,648 @@ A trial is being planned to test whether there is a difference in the efficacy o
 
 and therefore we need at least 112 participants in each trial arm.
 \end{example}
+
+\hypertarget{allocation}{%
+\chapter{Allocation}\label{allocation}}
+
+Once we've decided how many participants we need in our trial, and they've been recruited, we next need to determine which participants should be assigned to which trial arm. This is process is known as \textbf{allocation} (or sometimes as \textbf{randomization}). Before we think about methods for allocation, we are going to spend some time talking about bias.
+
+\hypertarget{bias}{%
+\section{Bias}\label{bias}}
+
+In statistics, \emph{bias} is a systematic tendency for the results of our analysis to be different from the true value. We see this particularly when we are using sample data to estimate a parameter. We will revisit what we have learned in previous courses about bias before going on to see how it affects RCTs.
+
+\begin{definition}[Bias of an estimate]
+Suppose that \(T\) is a statistic calculated to estimate a parameter \(\theta\). The \textbf{bias} of \(T\) is \[E\left(T\right) - \theta.\] If the bias of \(T\) is zero, we say that \(T\) is an \textbf{unbiased estimator} of \(\theta\).
+\end{definition}
+
+An example you will have seen before is the standard deviation. If we have some data \(x_1,\,\ldots,x_n\) that are IID \(N\left(\mu,\,\sigma^2\right)\), we can calculate the sample variance
+
+\[ s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 .\]
+
+In this case, \(E\left(s^2\right) \neq {\sigma^2}\) (you've probably seen this proved so we're not going to prove it now), and \(s^2\) is a biased estimator of \(\sigma^2\). However, we know that
+
+\[E \left(\frac{n}{n-1}s^2\right) = \sigma^2,\]
+and therefore we can apply this correction to the sample variance \(s^2\) to produce an unbiased estimate of the population variance \(\sigma^2\).
+
+Now, suppose our sample \(x_1,\ldots,x_n\) were drawn from \(N\left(\mu,\sigma^2\right)\), but were \textbf{not} independent of one another. Then, neither our estimator \(s^2\), nor our bias-corrected estimator \(\frac{n}{n-1}s^2\) would have expected value \(\sigma^2\). Furthermore, we cannot use our sample \(x_1,\ldots,x_n\) to produce an unbiased estimator of \(\sigma^2\), or even of the mean \(\mu\).
+
+This scenario is much closer to what we mean when we talk about \emph{bias} in a clinical trial setting. Suppose we are testing some new treatment \(T\) against the standard \(C\). We measure some outcome \(X\) for each patient, and our hypothesis is that \(X\) behaves differently for those in the treatment group than for those in the control group. It is common practice to express this additively,
+\[E\left(X\right) = \mu + \tau,\]
+where \(\tau\) is our treatment effect, which we can estimate using the difference in the groups' means, \(\bar{X}_T - \bar{X}_C\). Our null hypothesis is that \(\tau = 0\), and our alternative hypothesis is that \(\tau\neq{0}\), and therefore an estimate of \(\tau\) from our data is very important! Put equivalently, it is important that there is no bias in our estimates of \(\bar{X}_C\) and \(\bar{X}_T\).
+
+Usually, what this comes down to is that the assumption that the data are independent, identically distributed random variables from the relevant distributions (which we have already relied on a lot for our sample size calculations) has been violated in some way.
+
+\begin{example}
+Historically, women and the elderly are underrepresented in clinical trials (\citet{cottingham2022gendered}) and results are often translated from young or middle aged healthy men to these other groups (\citet{vitale2017under}). This isn't reasonable, since women have very different hormonal activity from men, causing them to often react differently to drugs compared to men involved in the trial. The standard dose (based on trials with mostly male participants) can also be too high for many women. The complicated nature of women's hormones is sometimes even given as a reason for not including them in the trial. Women and elderly people are also both more likely to have adverse effects to drugs in some fields.
+
+There are also ethical reasons behind the low numbers of women in trials, especially phase I and phase II trials. If a woman is possibly pregnant (and trials tend to be extremely cautious in deciding who might be pregnant!) then they are quite often excluded, in order to protect the (actual or hypothetical) fetus. Indeed, in 1977 the Food and Drug Administration (FDA) in the US recommended that women be excluded from phase I and II trials (\citet{nationalhistory}) as a result of some severe cases of fetuses being harmed by drugs (especially Thalidamide) . This means that even some very mainstream drugs, for example antihistamines (\citet{kar2012review}), haven't been tested for safety/efficacy during pregnancy, as well as some (for example HIV treatments) that would be of huge benefit to many many pregnant women. \href{https://www.politico.eu/article/telescope-hiv-aids-unitaid-gender-pregnant-trials/}{This article} is an interesting read if you would like to know more.
+\end{example}
+
+\hypertarget{where-does-bias-come-from}{%
+\subsection{Where does bias come from?}\label{where-does-bias-come-from}}
+
+Having established that bias is a serious issue in clinical trials, we will think about several sources of bias. Some of these we will elaborate on as we get to the relevant part of methodology. Most sources of bias creep in during the allocation or selection phase.
+
+\hypertarget{selection-bias}{%
+\subsubsection*{Selection bias}\label{selection-bias}}
+\addcontentsline{toc}{subsubsection}{Selection bias}
+
+Selection bias occurs when certain patients or subjects are systematically more (or less) likely be entered into the trial because of the treatment they will receive. In a properly run trial this isn't possible, because it is only after a participant has been recruited that
+their treatment is chosen. If a medical professional is not comfortable with a particular patient potentially receiving one of the possible treatments, then that patient should not be entered into the trial at all. If there are many such {[}technically eligible{]} patients, then this might cause the estimated treatment effect to be worryingly far from the true population treatment effect, since the recruited group of participants would not be very representative of the true population (this is not technically selection bias, but it comes from the same problem).
+
+It may happen that the doctor knows which treatment a patient would be given, for example if the allocation follows some deterministic pattern, or is fully known to the doctor in advance. Consciously or subconsciously this knowledge may influence the description they give to potential participants, and this in turn may affect which patients sign up, and the balance of the groups. In practice there should be various safeguards against this situation.
+
+\begin{example}
+Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.
+
+The severity of each participants disease is graded as 1 (less serious) or 2 (more serious). Across the full group of participants, proportion \(\lambda\) have severity 1 and proportion \(1-\lambda\) have severity 2.
+
+Our primary outcome is survival time, \(X\), which depends on the severity of disease:
+
+\begin{align*}
+E\left(X\mid{1}\right) & = \mu_1\\
+E\left(X\mid{2}\right) & = \mu_2
+\end{align*}
+
+and we assume \(\mu_1>\mu_2\).
+
+For the overall trial group, for untreated patients we have
+
+\[ E\left(X\right) = \mu = \lambda \mu_1 + \left(1-\lambda\right)\mu_2.\]
+Suppose that for treatment group \(N\), the expected survival time increase by \(\tau_N\), and similarly for group \(S\), so that we have
+
+\begin{align*}
+E\left(X\mid{N,1}\right) & = \mu_1 + \tau_N\\
+E\left(X\mid{N,2}\right) & = \mu_2 + \tau_N\\
+E\left(X\mid{S,1}\right) & = \mu_1 + \tau_S\\
+E\left(X\mid{S,2}\right) & = \mu_2 + \tau_S.
+\end{align*}
+
+If all patients were admitted with equal probability to the trial (ie. independent of the severity of their disease) then the expected survival time for group \(N\), \(E\left(X\mid{N}\right)\), would be
+
+\begin{align*}
+E\left(X\mid{1,N}\right)P\left(1\mid{N}\right) +  E\left(X\mid{2,N}\right)P\left(2\mid{N}\right)& = \left(\mu_1 + \tau_N\right)\lambda + \left(\mu_2+\tau_N\right)\left(1-\lambda\right)\\
+& = \mu + \tau_N.
+\end{align*}
+
+Similarly, the expected survival time in group \(S\) would be \(\mu+\tau_S\), and the treatment effect difference between the two would be \(\tau = \tau_N - \tau_S\) and the trial is unbiased.
+
+Suppose that although all eligible patients are willing to enter the trial, the doctor is reticent to subject patients with more severe disease (severity 2) to the surgical procedure. This is reflected in the way they explain the trial to each patient, particularly those with severity 2 whom the doctor knows will be assigned to group \(S\). In turn this leads to a reduced proportion \(q = 1-p\) of those with severity 2 assigned to surgery entering the trial (event \(A\)):
+
+\begin{align*}
+P\left(A\mid{N,1}\right) = P\left(A\mid{S,1}\right) = P\left(A\mid{N,2}\right) & = 1 \\
+P\left(A\mid{S,2}\right) & = 1-p = q.
+\end{align*}
+
+Since our analysis is based only on those who enter the trial, our estimated treatment effect will be
+
+\[E\left(X\mid{A, N}\right) - E\left(X\mid{A, S}\right). \]
+We can split these according to disease severity, so that
+
+\[E\left(X\mid{A,N}\right) = E\left(X\mid{A,N,1}\right)P\left(1\mid{A,N}\right) + E\left(X\mid{A,N,2}\right)P\left(2\mid{A,N}\right) \]
+and similarly for group \(S\).
+
+We can calculate \(P\left(1\mid{A,N}\right)\) using Bayes' theorem,
+
+\begin{align*}
+P\left(1\mid{A,N}\right) & =  \frac{P\left(A\mid{1,N}\right)P\left(1\mid{N}\right)}{P\left(A\mid{N}\right)}\\
+& = \frac{P\left(A\mid{1,N}\right)P\left(1\mid{N}\right)}{P\left(A\mid{N,1}\right)P\left(1\mid{N}\right) + P\left(A\mid{N,2}\right)P\left(2\mid{N}\right)} \\
+&= \frac{1\times{\lambda}}{1\times {\lambda} + 1 \times{\left(1-\lambda\right)}}\\
+& = \lambda.
+\end{align*}
+Therefore we also have \(P\left(2\mid{A,N}\right) = 1 -P\left(1\mid{A,N}\right) = 1-\lambda\).
+
+Following the same process for group \(S\), we arrive at
+
+\begin{align*}
+P\left(1\mid{A,S}\right) & =  \frac{P\left(A\mid{1,S}\right)P\left(1\mid{S}\right)}{P\left(A\mid{S}\right)}\\
+& = \frac{P\left(A\mid{1,S}\right)P\left(1\mid{S}\right)}{P\left(A\mid{S,1}\right)P\left(1\mid{S}\right) + P\left(A\mid{S,2}\right)P\left(2\mid{S}\right)} \\
+& = \frac{\lambda}{\lambda + q\left(1-\lambda\right)},
+\end{align*}
+
+which we will call \(b\).
+
+Notice that \(P\left(2\mid{S}\right)= 1-\lambda\), since it is not conditional on actually participating in the trial. Therefore,
+
+\begin{align*}
+E\left(X\mid{A,N}\right) & = E \left(X\mid{N,1}\right)P\left(1\mid{A,N}\right) + E \left(X\mid{N,2}\right)P\left(2\mid{A,N}\right) \\
+& = \left(\mu_1 + \tau_N\right)\lambda + \left(\mu_2 + \tau_N\right)\left(1-\lambda\right) \\
+& = \lambda\mu_1 + \left(1-\lambda\right)\mu_2 + \tau_N
+\end{align*}
+
+and
+
+\begin{align*}
+E\left(X\mid{A,S}\right) & = E \left(X\mid{S,1}\right)P\left(1\mid{A,S}\right) + E \left(X\mid{S,2}\right)P\left(2\mid{A,S}\right) \\
+& = \left(\mu_1 + \tau_S\right)b + \left(\mu_2 + \tau_S\right)\left(1-b\right) \\
+& = b\mu_1 + \left(1-b\right)\mu_2 + \tau_S.
+\end{align*}
+
+From here, we can calculate the expected value of the treatment effect \(\tau\) as (substituting our equation for \(b\) and rearranging):
+
+\begin{align*}
+E\left(X\mid{A,N}\right) - E\left(X\mid{A,S}\right) & = \tau_N - \tau_S + \left(\lambda - b\right)\left(\mu_1 - \mu_2\right) \\
+& = \tau_N - \tau_S - \frac{p\lambda\left(1-\lambda\right)\left(\mu_1  - \mu_2\right)}{\lambda + q\left(1-\lambda\right)},
+\end{align*}
+
+where the third term represents the bias.
+
+Notice that if \(q=1-p = 1\), then there is no bias. There is also no bias if \(\mu_1 = \mu_2\), ie. if there is no difference between the disease severity groups in terms of survival time.
+
+Assuming \(\mu_1 - \mu_2 >0\), then the bias term is positive and
+
+\[E\left(X\mid{A,N}\right)- E\left(X\mid{A,S}\right) < \tau_N - \tau_S.\]
+If \(N\) is the better treatment, then \(\tau_N - \tau_S>0\) and the bias will cause the trial to underplay the treatment effect. Conversely, if \(S\) is better, then \(\tau_N-\tau_S<0\) and the trial will exaggerate the treatment effect. Essentially, this is because more severely ill patients have been assigned to \(N\) than to \(S\), which reduces the average survival time for those in group \(N\).
+\end{example}
+
+\hypertarget{allocation-bias}{%
+\subsubsection*{Allocation bias}\label{allocation-bias}}
+\addcontentsline{toc}{subsubsection}{Allocation bias}
+
+Mathematically, allocation bias is similar to selection bias, but instead of coming from human `error', it arises from the random process of allocation.
+
+Suppose a trial investigates a drug that is likely to have a much stronger effect on male patients than on female patients. The cohort of recruited participants are randomised into treatment and control groups, and it happens that there is a much smaller proportion of female patients in the treatment group than in the control group. This will distort the estimated treatment effect.
+
+We will investigate various strategies for randomization designed to address this issue for known factors.
+
+\hypertarget{assessment-bias}{%
+\subsubsection*{Assessment bias}\label{assessment-bias}}
+\addcontentsline{toc}{subsubsection}{Assessment bias}
+
+Measurements are made on participants throughout (and often during) the trial. These measurements will often be objective, for example the patients' weight, or concentration of blood sugar. However, some types of measurement are much more subject to the individual practitioner assessing the patient. For example, many skin conditions are assessed visually, for example estimating the proportion of the body affected. Measuring quantities such as quality of life or psychological well-being involve many subjective judgements on the part of both patient and clinician.
+
+Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of. For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial `blind', and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. \citet{altman1999treatment} gives an overview of why this has led to bias, and gives some examples.
+
+Sometimes analyses compare groups in serial, so that \(N_A\) patients one year (say) form the control group, and \(n_B\) patients in a subsequent year, who are given treatment \(B\), form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment \(B\).
+
+Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.
+
+There are two important aspects to the allocation being \emph{random} that we will draw attention to.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Every patient should have the same probability of being assigned to each treatment group.
+\item
+  The treatment group for a particular patient should not be able to be predicted.
+\end{enumerate}
+
+Point 1 is important because, as we have already mentioned, the statistical theory we use to plan and analyse the trial is based on the groups being random samples from the population.
+
+Point 2 is important to avoid biases that come through the assignment of a particular patient being known either in advance or after the fact. There are some approaches that `pass' the first point, but fail at the second. As well as strict alternation (\(ABABAB\ldots\)), some such methods use patient characteristics such as date of birth or first letter of surname, which is not related to the trial outcome, but which enables allocations to be predicted.
+
+We will now explore some commonly used methods of allocation. We will usually assume two equally sized groups, \(A\) and \(B\), but it is simple to generalize to three or more groups, or to unequal allocation.
+
+\hypertarget{sec-allocation}{%
+\section{Allocation methods}\label{sec-allocation}}
+
+\hypertarget{simple-random-allocation}{%
+\subsection{Simple random allocation}\label{simple-random-allocation}}
+
+Perhaps intuitively the most simple method is a `toin coss', where each participant has a probability 0.5 of being placed in each group. As participants arrive, assignment \(C\) or \(T\) is generated (with equal probability). Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn't require a `master' randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained.
+
+This method is, effectively, used in many large trials, but for small trials it can be statistically problematic. The main reason for this is chance imbalance of group sizes.
+
+Suppose we have two groups, \(T\) of size \(N_T\) and \(C\) of size \(N_C\), with \(N_T + N_C = 2n\). Patients are allocated independently with equal probability, which means
+
+\[N_C \sim \operatorname{Bi}\left(2n,\frac{1}{2}\right), \]
+and similar for \(N_T\). If the two groups are of unequal size, the larger will be of some size \(N_{max}\) between \(n\) and \(2n\), such that for \(r = n+1,\,\ldots,\,2n,\)
+
+\begin{align*}
+P\left(N_{max} = r\right) & = P\left(N_C = r\right) + P\left(N_T = r\right) \\
+& = 2\binom{2n}{r}\left(\frac{1}{2}\right)^{2n}.
+\end{align*}
+The probability that \(N_C = N_T = n\) is
+
+\[ P\left(N_T = N_C = n\right)= \binom{2n}{n}\left(\frac{1}{2}\right)^{2n}. \]
+These probabilities are shown in Figure \ref{fig:srs-alloc}. We can see that this method leads to very unequal groups relatively easily; with \(n=15\), \(P\left(N_{max}\geq 20\right) = 0.099\), so there is around a one in ten chance that one group will be double or more the size of the other.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/srs-alloc-1.pdf}
+\caption{\label{fig:srs-alloc}The probability distribution of largest group size for n=15.}
+\end{figure}
+
+As we have seen when thinking about sample sizes in Section \ref{sec-power}, this will reduce the power \(\Psi\) of the trial, since it depends on \(\lambda\left(N_C,\,N_T\right) = \sqrt{\frac{1}{N_C} + \frac{1}{N_T}}\).
+
+For larger trials, this imbalance will be less pronounced, for example Figure \ref{fig:srsalloc200} shows the same for \(n=200\).
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/srsalloc200-1.pdf}
+\caption{\label{fig:srsalloc200}The probability distribution of largest group size for n=200.}
+\end{figure}
+
+In this case the \(P\left(N_{max} \geq 220\right)=0.051\), so the chance of highly imbalanced groups is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.
+
+\hypertarget{random-permuted-blocks}{%
+\subsection{Random permuted blocks}\label{random-permuted-blocks}}
+
+One commonly used method to randomly allocate participants while avoiding too much imbalance is to use \emph{random permuted blocks} (RPBs). If the blocks have size \(2m\), and there are two groups then there are \[\binom{2m}{m},\] but this method can be adapted to more than two groups and to unequal group size.
+
+If we have two groups, \(A\) and \(B\), then there are six \emph{blocks} of length containing two \(A\)s and two \(B\)s
+
+\[
+\begin{aligned}
+1.& AABB\\
+2.& ABAB\\
+3.& ABBA\\
+4.& BAAB\\
+5.& BABA\\
+6.& BBAA.
+\end{aligned}
+\]
+
+We can also randomly generate a sequence of numbers from \(\left\lbrace 1, 2, 3, 4, 5, 6 \right\rbrace\), where each number has equal probability. This sequence will correspond to a sequence in \(A\) and \(B\) with four times the length. In this method, each patient is equally likely to receive \(A\) and \(B\), but there will never be a difference of more than two between the size of the two groups.
+
+For example, suppose the sequence begins \(2,1,3,6,\ldots\). Replacing each number by its block, we have \(ABAB\;AABB\;ABBA\;BBAA\;\ldots\).
+
+One serious disadvantage of this method is that if the block size is fixed, and the doctors involved in the trial know which participants have received which treatments (which is unavoidable in cases such as surgery), then the allocation for some patients can be perfectly predicted. This is true for the fourth in every block, and for the third and fourth if the first two were the same. This means that selection bias may be a problem in more than 25\% of participants, which is deemed unacceptable; indeed, it fails our second point about randomization.
+
+\hypertarget{rpbs-with-random-block-length}{%
+\subsubsection{RPBs with random block length}\label{rpbs-with-random-block-length}}
+
+The issue above can be circumvented by not only randomly choosing from a selection of blocks, but also randomly choosing the length of the block. For example, there are
+\[ \binom{6}{3} = 20\]
+possible blocks of size 6. Instead of always selecting from the six possible 4-blocks, a sampling scheme can be as follows.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A random number \(X\) is drawn from \(\left\lbrace 4,6\right\rbrace\) to select the block length.
+\item
+  A second random number \(Y\) is drawn from 1 to 6 (if the block length is four) or 1 to 20 (if the block length is 6).
+\item
+  The block corresponding to \(Y\) is chosen and participants assigned accordingly.
+\item
+  If more participants are needed, go back to step 1.
+\end{enumerate}
+
+As well as ensuring that patients are equally likely to receive treatments \(A\) and \(B\), and that \(N_A\) and \(N_B\) can never differ by more than three, this method hugely reduces the possibility of enabling selection bias. The assignment of a patient can only be perfectly predicted if the difference is three, and this happens only for two of the twenty blocks of length six.
+
+\hypertarget{biased-coin-designs-and-urn-schemes}{%
+\subsection{Biased coin designs and urn schemes}\label{biased-coin-designs-and-urn-schemes}}
+
+It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.
+
+Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.
+
+\hypertarget{biased-coin-designs}{%
+\subsubsection{Biased coin designs}\label{biased-coin-designs}}
+
+Suppose we are using a biased coin design for a trial to compare two treatments, \(T\) and \(C\). At the point where some number \(n\) (not the total trial cohort) have been allocated, we can use the notation \(N_T\left(n\right)\) for the number of participants allocated to treatment \(T\), and \(N_C\left(n\right)\) for the number of participants allocated to treatment \(C\). Using these, we can denote the \emph{imbalance} in treatment numbers as
+
+\[ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.\]
+We use the imbalance \(D\left(n\right)\) to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:
+
+\begin{itemize}
+\tightlist
+\item
+  If \(D\left(n\right)=0\), allocate patient \(n+1\) to treatment \(T\) with probability \(\frac{1}{2}\).
+\item
+  If \(D\left(n\right)<0\), allocate patient \(n+1\) to treatment \(T\) with probability \(P\).
+\item
+  If \(D\left(n\right)>0\), allocate patient \(n+1\) to treatment \(T\) with probability \(1-P\).
+\end{itemize}
+
+where \(P\in\left(\frac{1}{2}, 1\right)\).
+
+\begin{quote}
+Question: What would happen if \(P=\frac{1}{2}\) or \(P=1\)?
+\end{quote}
+
+If, at some point in the trial, we have \(\lvert D\left(n\right)\rvert = j\), for some \(j>0\), then we must have either
+
+\[ \lvert D\left(n+1\right)\rvert = j+1 \]
+or
+\[ \lvert D\left(n+1\right)\rvert = j-1 .\]
+Because of the way we have set up the scheme,
+
+\[ p\big(\lvert D\left(n+1\right)\rvert = j+1\big) = 1-P \]
+and
+
+\[ p\big(\lvert D\left(n+1\right)\rvert = j-1\big) = P.\]
+If \(\lvert D\left(n\right) \rvert = 0\), ie. the scheme is in exact balance after \(n\) allocations, then we must have \(\lvert D\left(n\right)\rvert = 1\).
+
+The absolute imbalances therefore form a simple random walk on the non-negative integers, with transition probabilities
+
+\[
+  \begin{aligned}
+P\bigg(\lvert D\left(n+1\right) \rvert = 1 \; \bigg| \;\lvert D\left(n\right)\rvert=0\bigg)& = 1\\
+P\bigg(\lvert D\left(n+1\right) \rvert = j+ 1 \; \bigg| \; \lvert D\left(n\right)\rvert=j\bigg)& = 1 - P\\
+P\bigg(\lvert D\left(n+1\right) \rvert = j-1 \; \bigg| \; \lvert D\left(n\right)\rvert=j\bigg)& = P
+\end{aligned}
+\]
+Figure \ref{fig:biasedcoin-p2thirds} shows four realisations of this random walk with \(P=0.667\). We see that sometimes the imbalance gets quite high, but in general it isn't too far from 0.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf}
+\caption{\label{fig:biasedcoin-p2thirds}Absolute imbalance for a biased-coin scheme with \(P=0.667\).}
+\end{figure}
+
+Figure \ref{fig:p-nearlyhalf} shows four realisations of the random walk with \(P=0.55\). Here, the imbalance is able to get very high (note the change in \(y\)-axis); for example in the first plot, if we stopped the trial at \(n=50\) we would have 34 participants in one arm and only 16 in the other.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf}
+\caption{\label{fig:p-nearlyhalf}Absolute imbalance for a biased-coin scheme with \(P = 0.55\).}
+\end{figure}
+
+By contrast, with \(P=0.9\) as in Figure \ref{fig:p-nearlyone}, there is much less imbalance. However, this brings with it greater predictability. Although allocation is always random, given some degree of imbalance (likely to be known about by those executing the trial), the probability of guessing the next allocation correctly is high (0.9). This invites the biases we have been trying to avoid, albeit in an imperfect form.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/p-nearlyone-1.pdf}
+\caption{\label{fig:p-nearlyone}Absolute imbalance for a biased-coin scheme with \(P = 0.9\).}
+\end{figure}
+
+A big disadvantage to the biased coin scheme is that the same probability is used regardless of the size of the imbalance (assuming it isn't zero). In the next section, we introduce a method where the probability of allocating the next patient to the underrepresented treatment gets larger as the imbalance grows.
+
+\hypertarget{urn-models}{%
+\subsubsection{Urn models}\label{urn-models}}
+
+\emph{Urn models} for treatment allocation use urns in the way that you might well remember from school probability (or indeed often we had drawers of socks). In this setting, the urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant \textbf{did not} receive.
+
+To allocate the next participant, a ball is drawn from the urn. If the allocations at this point are balanced, then the participant has equal probability of being allocated to each treatment. If there is imbalance, there will be more balls labelled by the underrepresented treatment, and so the participant is more likely to be allocated to that one. The greater the imbalance, the higher the probability of reducing it.
+
+The process described so far is a \(UD\left(1,1\right)\); there is one ball for each treatment to start with, and one ball is added to the urn after each allocation. To be more general, we can assume a \(UD\left(r,s\right)\) scheme. Now, there are \(r\) balls for each treatment in the urn to begin with, and \(s\) are added after each allocation.
+
+Near the start of the allocation, the probabilities are likely to change a lot to address imbalance, but once a `reasonable number' of allocations have been made it is likely to settle into simple random sampling (or very close).
+
+Once again, we can find the transition probabilities by considering the absolute imbalance \(\lvert D\left(n\right) \rvert\).
+
+Suppose that after participant \(n\), \(N_T\left(n\right)\) participants have been allocated to group \(T\), and \(N_C\left(n\right) = n - N_T\left(n\right)\) to group \(C\). The imbalance is therefore
+
+\[D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.\]
+After \(n\) allocations there will be \(2r + ns\) balls in the urn: \(r\) for each treatment at the start, and \(s\) added after each allocation. Of these, \(r + N_C\left(n\right)s\) will be labelled by treatment \(T\) and \(r + N_T\left(n\right)s\) by treatment \(C\).
+
+To think about the probabilities for the absolute imbalance \(\lvert D\left(n\right)\rvert\), we have to be careful now about which direction it is in. If the trial currently (after allocation \(n\)) has an imbalance of participants in favour of treatment \(C\), then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment \(T\), which is
+
+\[
+  \begin{aligned}
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j>0\right) & = \frac{r + N_C\left(n\right)s}{2r + ns} \\
+& = \frac{r + \frac{1}{2}\left(n + D\left(n\right)\right)s}{2r + ns} \\
+& = \frac{1}{2} + \frac{D\left(n\right)s}{2\left(2r + ns\right)} \\
+& = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
+\end{aligned}
+\]
+Similarly, if there is currently an excess of patients allocated to treatment \(T\), then the imbalance will be reduced if the next allocation is to treatment \(C\), and so the conditional probability is
+
+\[
+  \begin{aligned}
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j<0\right) & = \frac{r + N_T\left(n\right)s}{2r + ns} \\
+& = \frac{r + \frac{1}{2}\left(n - D\left(n\right)\right)s}{2r + ns} \\
+& = \frac{1}{2} - \frac{D\left(n\right)s}{2\left(2r + ns\right)}\\
+& = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
+\end{aligned}
+\]
+
+Because the process is symmetrical, an imbalance of a given magnitude (say \(\lvert D\left(n\right)\rvert=j\)) is equally likely to be in either direction. That is
+
+\[p\big(D\left(n\right) < 0 \mid \lvert D\left(n\right)\rvert =j \big)= p\big(D\left(n\right) > 0 \mid \lvert D\left(n\right)\rvert =j \big) = \frac{1}{2}.\]
+
+Therefore we can use the law of total probability (or partition theorem) to find that
+
+\[
+  p\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right) \rvert = j \big) = \frac{1}{2}  + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
+\]
+Since the two probabilities are equal this is trivial. Since the only other possibility is that the imbalance is increased by one, we also have
+
+\[p\big(\lvert D\left(n+1\right) \rvert = j+1 \mid \lvert D\left(n\right) \rvert = j \big) = \frac{1}{2}  - \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}. \]
+As with the biased coin design, we also have the possibility that the imbalance after \(n\) allocations is zero, in which case the absolute imbalance after the next allocation will definitely be one. This gives us another simple random walk, with
+
+\[
+  \begin{aligned}
+P\big(\lvert D\left(n+1\right) \rvert = 1 \mid \lvert D\left(n\right)=0\big)& = 1\\
+P\big(\lvert D\left(n+1\right) \rvert = j+ 1 \mid \lvert D\left(n\right)=j\big)& = \frac{1}{2}  - \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}\\
+P\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right)=j\big)& = \frac{1}{2}  + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}
+\end{aligned}
+\]
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/urn11-1.pdf}
+\caption{\label{fig:urn11}Four realisations of absolute imbalance for r=1, s=1, N=50.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/urn18-1.pdf}
+\caption{\label{fig:urn18}Four realisations of absolute imbalance for r=1, s=8, N=50.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/urn81-1.pdf}
+\caption{\label{fig:urn81}Four realisations of absolute imbalance for r=8, s=1, N=50.}
+\end{figure}
+
+We see that imbalance is reduced, particularly for small \(n\). A small \(r\) and large \(s\) enhance this, since the large number (\(s\)) of balls added to the urn with each allocation weight the probabilities more heavily, as in Figure \ref{fig:urn18}. By contrast, if \(r\) is large and \(s\) is small, as in Figure \ref{fig:urn81}, the probabilities stay closer to \(\left(\frac{1}{2}, \frac{1}{2}\right)\) and so more imbalance occurs early on.
+
+\hypertarget{incorporating-baseline-measurements}{%
+\section{Incorporating baseline measurements}\label{incorporating-baseline-measurements}}
+
+At the start of the trial (ideally before allocation) various baseline measurements are usually taken. If the primary outcome variable is a continuous measurement (eg. blood pressure, weight,\ldots) this same quantity will often be included, so that there is some measure of each participant's condition/symptoms at the start of the trial. Factors such as age, sex, level of symptoms, things to do with treatment history and many others are included. Essentially, we include any variable we can that may lead to bias if not properly dealt with. The crucial thing is that none of these measurements (taken when they are) should be affected by the trial.
+
+Such baseline measurements can be used in allocation.
+
+\hypertarget{stratified-sampling}{%
+\section{Stratified sampling}\label{stratified-sampling}}
+
+The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.
+
+\begin{example}
+Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.
+
+For sex, we use the levels `male' and `female', and for age we split the range into 50-65, 66-80 and 81 or over. We therefore have six strata, and we use an allocation strategy independently in each stratum. For example, below we have used randomly permuted blocks of length four.
+
+\begin{tabular}{>{}l|l|l}
+\hline
+  & Male & Female\\
+\hline
+\textbf{50-65} & ABAB BBAA ... & ABBA BBAA ...\\
+\hline
+\textbf{66-80} & BAAB AABB ... & BABA BAAB ...\\
+\hline
+\textbf{81 and over} & ABAB ABBA ... & ABBA BAAB ...\\
+\hline
+\end{tabular}
+
+Each time a new participant arrives, we follow the randomization pattern for their stratum. We could use another allocation scheme within each stratum, for example an urn model or a biased coin. It is important that we use one that aims to conserve balance, or else the benefits of stratification are lost.
+\end{example}
+
+A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are \(3^4=81\) strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic).
+
+\hypertarget{minimization}{%
+\section{Minimization}\label{minimization}}
+
+Minimization was first proposed by \citet{taves1974minimization}, then shortly after by \citet{pocock1975sequential} and \citet{freedman1976use}. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
+
+To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, \citet{kallis1994pre} chose age (\(\leq{50}\) or \(50\)), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).
+
+When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
+
+\begin{itemize}
+\tightlist
+\item
+  Whether continuous variables have to be binned
+\item
+  Whether there is any randomness
+\end{itemize}
+
+It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.
+
+\hypertarget{minimization-algorithm}{%
+\subsection{Minimization algorithm}\label{minimization-algorithm}}
+
+Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). \citet{pocock1975sequential} give an algorithm in the general case of \(N\) treatment arms, but we will not do that here.
+
+Suppose there are several prognostic factors over which we require balance, and that these factors have \(I, J, K, ...\) levels. In our example above, there would be \(I=2,\; J=2,\; K=3,\; L=2\). Note that this equates to 24 strata.
+
+At some point in the trial, suppose we have recruited \(n_{ijkl}\) patients with levels \(i,\,j,\,k,\,l\) of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, \(n^A_{ijkl}\) have been assigned to treatment arm \(A\), and \(n^B_{ijkl}\) to arm \(B\). So we have
+
+\[ n^A_{ijkl} + n^B_{ijkl} = n_{ijkl} .\]
+
+If we were to use random permuted blocks within each stratum, then we would be assured that
+
+\[\lvert n^A_{ijkl} - n^B_{ijkl} \rvert \leq{\frac{1}{2}b},\]
+where \(b\) is the block length. However, there are two issues with this:
+
+\begin{itemize}
+\tightlist
+\item
+  There may be very few patients in some strata, in which case RPBs will fail to provide adequate balance.
+\item
+  It is unlikely that we actually need this level of balance.
+\end{itemize}
+
+The first point is a pragmatic one - the method usually guaranteed to achieve good balance is likely to fail, at least for some strata. The second is more theoretical. In general, we require that groups be balanced according to each individual prognostic factor, but not to interactions. For example, it is often believed that younger patients would have generally better outcomes, but that other factors do not systematically affect this difference.
+
+Therefore, it is enough to make sure that the following are all small:
+
+\[
+\begin{aligned}
+\lvert n^A_{i+++} - n^B_{i+++} \rvert&\text{ for each }i=1,\ldots,I\\
+\lvert n^A_{+j++} - n^B_{+j++} \rvert&\text{ for each }j=1,\ldots,J\\
+\ldots&
+\end{aligned}
+\]
+where \(+\) represents summation over the other factors, so that for exammple
+
+\[n^A_{++k+} = \sum\limits_{i,j,l}{n^A_{ijkl}}\]
+is the total number of patients with level \(k\) of that factor assigned to treatment arm \(A\).
+
+Therefore, instead of having \(IJKL\) constraints constraints, as we would with using randomly permuted blocks within each stratum, we have \(I+J+K+L\) constraints, one for each level of each factor. In our example this is 9 constraints rather than 24.
+
+In order to implement minimisation, we follow these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Allocate the first patient by simple randomisation.
+\item
+  Suppose that at some point in the trial we have recruited \(n_{ijkl}\) patients with prognostic factors \(i,\,j,\,k,\,l\). Of these \(n^A_{ijkl}\) are allocated to treatment arm \(A\) and \(n^B_{ijkl}\) to arm \(B\).
+\item
+  A new patient enters the trial. They have prognostic factors at levels \(w,\,x,\,y,\,z\).
+\item
+  We form the sum
+  \[\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).\]
+\item
+  If the sum from step 4 is negative (that is, allocation to arm \(B\) as dominated up to now) then we allocate the new patient to arm \(A\) with probability \(P\), with \(P>0.5\). If the sum is positive, they are allocated to arm \(B\) with probability \(P\). If the sum is zero, they are allocated to arm \(A\) with probability \(\frac{1}{2}\).
+\end{enumerate}
+
+Some people set \(P=1\), whereas others would set \(\frac{1}{2}<P<1\) to retain some randomness. Although setting \(P=1\) makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know \(n^A_{i+++}\) and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set \(P<1\).
+
+\begin{example}
+From \citet{altman1990practical} (citing \citet{fentiman1983control}).
+In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (\(\leq{50}\) or \(>50\)), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (\(\leq{30}\) or \(>30\)) and menopausal status (Pre or post).
+
+Let's suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table \ref{tab:minimeg}.
+
+\begin{table}
+
+\caption{\label{tab:minimeg}Allocations of first 15 patients, divided by diagnostic factor}
+\centering
+\begin{tabular}[t]{>{}l|l|r|r}
+\hline
+factor & level & Mustine (A) & Talc (B)\\
+\hline
+\textbf{Age} & 1. 50 or younger & 3 & 4\\
+\hline
+\textbf{Age} & 2. >50 & 4 & 4\\
+\hline
+\textbf{Stage} & 1. I or II & 1 & 2\\
+\hline
+\textbf{Stage} & 2. III or IV & 6 & 6\\
+\hline
+\textbf{Time interval} & 1. 30 months or less & 4 & 2\\
+\hline
+\textbf{Time interval} & 2. >30 months & 4 & 5\\
+\hline
+\textbf{Menopausal status} & 1. Pre & 4 & 3\\
+\hline
+\textbf{Menopausal status} & 2. Post & 5 & 3\\
+\hline
+\end{tabular}
+\end{table}
+
+Suppose our sixteenth patient is under 50, has disease at stage III, has less than 30 months between diagnoses and is pre-menopausal.
+Our calculation from step 4 of the minimisation algorithm is therefore
+
+\[
+\begin{aligned}
+\left(n^A_{1+++} - n^B_{1+++}\right) + \left(n^A_{+2++} - n^B_{+2++}\right) + \left(n^A_{++1+} \right.& \left.- n^B_{++1+}\right) + \left(n^A_{+++1} - n^B_{+++1}\right) \\
+& = \left(3-4\right) + \left(6-6\right) + \left(4-2\right) + \left(4-3\right) \\
+& = -1 + 0 + 2 + 1\\
+& = 2 .
+\end{aligned}
+\]
+Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability \(P\in\left(0.5,1\right)\) and update the table before allocating patient 17.
+\end{example}
+
+\hypertarget{problems-with-allocation}{%
+\section{Problems with allocation}\label{problems-with-allocation}}
+
+In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \ref{fig:licorice-participants} shows an example, taken from \citet{ruetzler2013randomized}.
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{images/licorice} \caption{Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized}\label{fig:licorice-participants}
+\end{figure}
+
+The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.
+
+\begin{tabular}{>{}l|l|l}
+\hline
+  & Male & Female\\
+\hline
+\textbf{Control} & 57.51 (7.09) & 40.31 (5.83)\\
+\hline
+\textbf{Intervention} & 44.19 (5.96) & 60.03 (5.27)\\
+\hline
+\end{tabular}
+
+This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.
+
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.
+
+Although this example is highly manufactured and {[}hopefully!{]} unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn't aimed for. \citet{treasure1998minimisation} give an example in relation to a hypothetical study on heart disease
+
+\begin{quote}
+Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation---exclusion of confounding factors---has failed. \ldots{} If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.
+\end{quote}
+
+However, this issue is rarely addressed in clinical trials: a lot of faith is placed (with reasonable justification) in the likely balance achieved by random sampling, whatever method is used. We will also see in the next Chapter that we can account for some degree of imbalance at the analysis stage.
 
   \bibliography{ct4h.bib}
 

@@ -13,7 +13,7 @@ Suppose that $T$ is a statistic calculated to estimate a parameter $\theta$. The
 
 $$ s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 .$$
   
-  In this case, $E\left(s^2\right) \neq {\sigma^2}$ (you've probably seen this proved so we're not going to prove it now), and $s^2$ is an biased estimator of $\sigma^2$. However, we know that
+  In this case, $E\left(s^2\right) \neq {\sigma^2}$ (you've probably seen this proved so we're not going to prove it now), and $s^2$ is a biased estimator of $\sigma^2$. However, we know that
 
 $$E \left(\frac{n}{n-1}s^2\right) = \sigma^2,$$
   and therefore we can apply this correction to the sample variance $s^2$ to produce an unbiased estimate of the population variance $\sigma^2$.
@@ -112,8 +112,10 @@ Following the same process for group $S$, we arrive at
 \begin{align*}
 P\left(1\mid{A,S}\right) & =  \frac{P\left(A\mid{1,S}\right)P\left(1\mid{S}\right)}{P\left(A\mid{S}\right)}\\
 & = \frac{P\left(A\mid{1,S}\right)P\left(1\mid{S}\right)}{P\left(A\mid{S,1}\right)P\left(1\mid{S}\right) + P\left(A\mid{S,2}\right)P\left(2\mid{S}\right)} \\
-& = \frac{\lambda}{\lambda + q\left(1-\lambda\right)}
-\end{align*}.
+& = \frac{\lambda}{\lambda + q\left(1-\lambda\right)},
+\end{align*}
+
+which we will call $b$.
 
 Notice that $P\left(2\mid{S}\right)= 1-\lambda$, since it is not conditional on actually participating in the trial. Therefore,
 
@@ -198,11 +200,11 @@ $$N_C \sim \operatorname{Bi}\left(2n,\frac{1}{2}\right), $$
   
   \begin{align*}
 P\left(N_{max} = r\right) & = P\left(N_C = r\right) + P\left(N_T = r\right) \\
-& = 2{2n \choose r}\left(\frac{1}{2}\right)^{2n}.
+& = 2\binom{2n}{r}\left(\frac{1}{2}\right)^{2n}.
 \end{align*}
 The probability that $N_C = N_T = n$ is 
 
-$$ P\left(N_T = N_C = n\right)= {2n \choose n}\left(\frac{1}{2}\right)^{2n}. $$
+$$ P\left(N_T = N_C = n\right)= \binom{2n}{n}\left(\frac{1}{2}\right)^{2n}. $$
   These probabilities are shown in Figure \@ref(fig:srs-alloc). We can see that  this method leads to very unequal groups relatively easily; with $n=15$, $P\left(N_{max}\geq 20\right) = 0.099$, so there is around a one in ten chance that one group will be double or more the size of the other. 
 
 ```{r srs-alloc, echo=F, fig.cap= "The probability distribution of largest group size for n=15."}
@@ -249,7 +251,7 @@ In this case the $P\left(N_{max} \geq 220\right)=0.051$, so the chance of highly
 
 ### Random permuted blocks
 
-One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $${2m\choose m},$$ but this method can be adapted to more than two groups and to unequal group size.
+One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $$\binom{2m}{m},$$ but this method can be adapted to more than two groups and to unequal group size.
 
 If we have two groups, $A$ and $B$, then there are six *blocks* of length containing two $A$s and two $B$s
 
@@ -273,7 +275,7 @@ One serious disadvantage of this method is that if the block size is fixed, and 
 #### RPBs with random block length
 
 The issue above can be circumvented by not only randomly choosing from a selection of blocks, but also randomly choosing the length of the block. For example, there are 
-$$ {6 \choose 3} = 20$$
+$$ \binom{6}{3} = 20$$
 possible blocks of size 6. Instead of always selecting from the six possible 4-blocks, a sampling scheme can be as follows.
 
   1. A random number $X$ is drawn from $\left\lbrace 4,6\right\rbrace$ to select the block length. 
@@ -589,6 +591,13 @@ We see that imbalance is reduced, particularly for small $n$. A small $r$ and la
 
 
 
+
+## Incorporating baseline measurements
+
+At the start of the trial (ideally before allocation) various baseline measurements are usually taken. If the primary outcome variable is a continuous measurement (eg. blood pressure, weight,...) this same quantity will often be included, so that there is some measure of each participant's condition/symptoms at the start of the trial. Factors such as age, sex, level of symptoms, things to do with treatment history and many others are included. Essentially, we include any variable we can that may lead to bias if not properly dealt with. The crucial thing is that none of these measurements (taken when they are) should be affected by the trial.
+
+Such baseline measurements can be used in allocation.
+
 ## Stratified sampling
 
 The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.
@@ -680,10 +689,10 @@ Some people set $P=1$, whereas others would set $\frac{1}{2}<P<1$ to retain some
 From @altman1990practical (citing @fentiman1983control).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age ($\leq{50}$ or $>50$), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions ($\leq{30}$ or $>30$)  and menopausal status (Pre or post). 
 
-Let's suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table \@ref(tab:minim_eg).
+Let's suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table \@ref(tab:minimeg).
 
 
-```{r tab:minim_eg, fig.cap = "Allocations of first 15 patients, divided by diagnostic factor"}
+```{r minimeg}
 
 output <- 
   matrix(c(
@@ -704,10 +713,10 @@ df_out$factor = c("Age", "Age", "Stage", "Stage", "Time interval", "Time interva
 
 df_out = df_out[,c(4,3,1,2)]
 
-knitr::kable(df_out)%>%kableExtra::column_spec(1, bold = TRUE)
+knitr::kable(df_out, caption = "Allocations of first 15 patients, divided by diagnostic factor")%>%kableExtra::column_spec(1, bold = TRUE)
 
 ```
-Suppose our sixteenth patient is under 50, has is at stage III, has less than 30 months between diagnoses and is pre-menopausal.
+Suppose our sixteenth patient is under 50, has disease at stage III, has less than 30 months between diagnoses and is pre-menopausal.
 Our calculation from step 4 of the minimisation algorithm is therefore
 
 $$
@@ -723,7 +732,7 @@ Since our sum is greater than zero, we allocate the new patient to arm B (talc) 
 
 ## Problems with allocation
 
-In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \@ref(fig:licorice-participants) shows an example.
+In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \@ref(fig:licorice-participants) shows an example, taken from @ruetzler2013randomized.
 
 ```{r licorice-participants, echo=FALSE, out.width="60%", fig.cap = "Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized"}
 include_graphics("images/licorice.jpg")
@@ -793,7 +802,7 @@ Although this example is highly manufactured and [hopefully!] unlikely to take p
 
 > Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation—exclusion of confounding factors—has failed. ... If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.
 
-However, this issue is rarely addressed in clinical trials: a lot of faith is placed (with reasonable justification) in the likely balance achieved by random sampling, whatever method is used. We will also see in Chapter \@ref(rct-analysis) that we can account for some degree of imbalance at the analysis stage.
+However, this issue is rarely addressed in clinical trials: a lot of faith is placed (with reasonable justification) in the likely balance achieved by random sampling, whatever method is used. We will also see in the next Chapter that we can account for some degree of imbalance at the analysis stage.
 
 
 

@@ -59,6 +59,7 @@ library(magick)
 library(htmlTable)
 library(magrittr)
 library(rstatix)
+library(survival)
 ```
 
 # Welcome to Clinical Trials 4H! {-}
