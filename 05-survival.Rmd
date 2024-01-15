@@ -108,8 +108,9 @@ Notice that the number of people at risk at time $t_{j+1}$, $n_{j+1}$, will be t
 ```{r}
 ov_df = ovarian[order(ovarian$futime),1:2]
 names(ov_df) = c("FU_time", "FU_status")
-knitr::kable(ov_df, caption = "Ovarian cancer data. FU_time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.")
+knitr::kable(ov_df, caption = "Ovarian cancer data. $\texttt{FU_time}$ gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.")
 ```
+
 We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
 We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time $t_j$; number at risk $n_j$; number of events/deaths $d_j$; number of censorings in $\left[t_{j-1},\,t_j\right)$; estimate of survival curve.
 

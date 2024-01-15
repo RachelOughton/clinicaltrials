@@ -796,7 +796,7 @@ It may happen that the doctor knows which treatment a patient would be given, fo
 \begin{example}
 Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.
 
-The severity of each participants disease is graded as 1 (less serious) or 2 (more serious). Across the full group of participants, proportion \(\lambda\) have severity 1 and proportion \(1-\lambda\) have severity 2.
+The severity of the disease is graded as 1 (less serious) or 2 (more serious) for each patient. Across the full group of patients, proportion \(\lambda\) have severity 1 and proportion \(1-\lambda\) have severity 2.
 
 Our primary outcome is survival time, \(X\), which depends on the severity of disease:
 
@@ -912,13 +912,14 @@ We will investigate various strategies for randomization designed to address thi
 
 Measurements are made on participants throughout (and often during) the trial. These measurements will often be objective, for example the patients' weight, or concentration of blood sugar. However, some types of measurement are much more subject to the individual practitioner assessing the patient. For example, many skin conditions are assessed visually, for example estimating the proportion of the body affected. Measuring quantities such as quality of life or psychological well-being involve many subjective judgements on the part of both patient and clinician.
 
-Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of. For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial `blind', and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware.
+Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of (this is known as a \textbf{double blind trial}). For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial `blind', and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\hypertarget{implications-for-allocation}{%
+\subsection{Implications for allocation}\label{implications-for-allocation}}
 
 Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. \citet{altman1999treatment} gives an overview of why this has led to bias, and gives some examples.
 
-Sometimes analyses compare groups in serial, so that \(N_A\) patients one year (say) form the control group, and \(n_B\) patients in a subsequent year, who are given treatment \(B\), form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment \(B\).
+Sometimes analyses compare groups in serial, so that \(N_A\) patients one year (say) form the control group, and \(N_B\) patients in a subsequent year, who are given treatment \(B\), form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment \(B\).
 
 Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.
 
