@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-15" />
+<meta name="date" content="2024-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -247,9 +247,8 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.2</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.3</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
 </ul></li>
@@ -289,15 +288,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>6.3.1</b> Non-parametric: the log-rank test</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i>Computer Practical 1</a>
-<ul>
-<li class="chapter" data-level="6.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocation-1"><i class="fa fa-check"></i><b>6.4</b> Allocation</a>
-<ul>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#some-simulated-examples"><i class="fa fa-check"></i>Some simulated examples</a></li>
-<li class="chapter" data-level="6.4.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>6.4.1</b> Simple random allocation</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#analysis"><i class="fa fa-check"></i>Analysis</a></li>
 </ul></li>
 </ul>
 
@@ -472,7 +462,7 @@ and in calculations we replace <span class="math inline">\(\pi\)</span> with <sp
 <p>Putting all this together, our test statistic is</p>
 <p><span class="math display">\[Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 5.2  </strong></span>The data in this example comes from <span class="citation">al (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
+<p><span id="exm:unlabeled-div-26" class="example"><strong>Example 5.2  </strong></span>The data in this example comes from <span class="citation">al (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
 <pre><code>##               improved
 ## arm            FALSE TRUE
 ##   Streptomycin    17   38
@@ -506,7 +496,7 @@ Z &amp; = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52}
 <p><span class="math display">\[ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.\]</span></p>
 <p>Under the null hypothesis (that <span class="math inline">\(p_C = p_T\)</span>) this has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the <span class="math inline">\(\chi^2_1\)</span> distribution.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-26" class="example"><strong>Example 5.3  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
+<p><span id="exm:unlabeled-div-27" class="example"><strong>Example 5.3  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
 <pre><code>##               improved
 ## arm             FALSE   TRUE
 ##   Streptomycin 26.730 28.270
@@ -570,7 +560,7 @@ where we use <span class="math inline">\(p,\, r,\, n\)</span> to denote the pool
 <p><span class="math display">\[\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),\]</span>
 where <span class="math inline">\(G\)</span> is the set of subgroups (group <span class="math inline">\(C\)</span> success etc.). Under the null hypothesis that <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, and for sufficiently large <span class="math inline">\(n_C,\;n_T\)</span>, <span class="math inline">\(\lambda_{LR}\)</span> has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-27" class="example"><strong>Example 5.4  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
+<p><span id="exm:unlabeled-div-28" class="example"><strong>Example 5.4  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="binary-outcome-variable.html#cb24-1" tabindex="-1"></a>sum_LR <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
 <span id="cb24-2"><a href="binary-outcome-variable.html#cb24-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
 <span id="cb24-3"><a href="binary-outcome-variable.html#cb24-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
@@ -608,7 +598,7 @@ The NNT is the number of patients you’d need to treat (with treatment <span cl
 Our <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval is therefore given by</p>
 <p><span class="math display">\[\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right) \]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-28" class="example"><strong>Example 5.5  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
+<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 5.5  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
 <p>Our estimated treatment effect is (to 3 decimal places)</p>
 <p><span class="math display">\[\hat\tau=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.\]</span>
 Our estimate of the standard error of <span class="math inline">\(\hat\tau\)</span> is</p>
@@ -626,7 +616,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="5.3.1.1">
 <h4><span class="header-section-number">5.3.1.1</span> What if the difference is not significant?<a href="binary-outcome-variable.html#what-if-the-difference-is-not-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -675,7 +665,7 @@ which does not pose a problem. However, as indicated by the 95% confidence inter
 <p><span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right), \]</span>
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals.</p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p><span class="citation">Altman (<a href="#ref-altman1998confidence">1998</a>)</span> (<a href="https://www.bmj.com/content/bmj/317/7168/1309.full.pdf">available here</a>) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!</p>
 </div>
 <div id="problems-with-the-confidence-interval-for-the-ard" class="section level4 unnumbered hasAnchor">
@@ -700,9 +690,9 @@ whereas the limits to the Newcombe 95% CI will be the roots of</p>
 which work out to be</p>
 <pre><code>## [1] 0.003539259 0.104954436</code></pre>
 <p>Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 5.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
+<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 5.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
 <p><span class="math display">\[\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.\]</span>
 Solving this equation in the usual way (using the quadratic formula) we find the limits</p>
 <pre><code>## [1] 0.5597141 0.7971771</code></pre>
@@ -711,14 +701,14 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.5687797 0.8130385</code></pre>
 <p>We can see this graphically</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>Notice that the interval with the new method is now asymmetrical, which is more realistic.</p>
 <p>Similarly for the control proportion <span class="math inline">\(\pi_C\)</span>, we have <span class="math inline">\(p_C = \frac{17}{52},\; n_C=52\)</span>, and our Newcombe interval is</p>
 <pre><code>## [1] 0.2152207 0.4624381</code></pre>
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.1994256 0.4544205</code></pre>
 <p>Again, we can see this graphically.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 </div>
 <div id="generalising-this-to-two-cases" class="section level4 hasAnchor" number="5.3.1.2">
@@ -738,7 +728,7 @@ which is</p>
 \]</span>
 These differences must be calculated using the individual sample confidence interval method.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 5.7  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 5.7  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
 <p><span class="math display">\[
 \begin{aligned}
 p_T &amp; = \frac{38}{55}\\
@@ -848,7 +838,7 @@ Subtracting one from the other, we find</p>
 <span class="math display">\[\hat{\beta_i} \pm z_{\alpha/2}\sqrt{\hat{v_i}},\]</span>
 where <span class="math inline">\(\hat\beta_i\)</span> is the estimated coefficient of covariate <span class="math inline">\(i\)</span>, and <span class="math inline">\(\sqrt{\hat{v}_i}\)</span> is the standard error of the estimate. This can then be transformed into a confidence interval for the odds ratio.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 5.8  </strong></span>The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:</p>
+<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 5.8  </strong></span>The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:</p>
 <ul>
 <li>sex</li>
 <li>age</li>

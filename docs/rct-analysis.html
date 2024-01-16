@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-15" />
+<meta name="date" content="2024-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -247,9 +247,8 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.2</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.3</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
 </ul></li>
@@ -290,15 +289,6 @@ div.csl-indent {
 <li class="chapter" data-level="6.3.1" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>6.3.1</b> Non-parametric: the log-rank test</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i>Computer Practical 1</a>
-<ul>
-<li class="chapter" data-level="6.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocation-1"><i class="fa fa-check"></i><b>6.4</b> Allocation</a>
-<ul>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#some-simulated-examples"><i class="fa fa-check"></i>Some simulated examples</a></li>
-<li class="chapter" data-level="6.4.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>6.4.1</b> Simple random allocation</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#analysis"><i class="fa fa-check"></i>Analysis</a></li>
-</ul></li>
 </ul>
 
       </nav>
@@ -321,7 +311,7 @@ div.csl-indent {
 <p>We’re now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation <span class="math inline">\(\tau\)</span> to denote the treatment effect.</p>
 <p>In this chapter we’ll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we’ll go on to look at other types of data.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 4.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
+<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 4.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
 <p>The baseline and outcome blood pressure measurements are shown below, in mmHg. We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> say that the patients were ‘randomly allocated’ to their group.</p>
 <table>
 <caption><span id="tab:captoprildata">Table 4.1: </span>Data for the Captopril trial from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span>.</caption>
@@ -439,9 +429,9 @@ div.csl-indent {
 <h2><span class="header-section-number">4.1</span> Confidence intervals and P-values<a href="rct-analysis.html#ttest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (often referred to as <span class="math inline">\(X\)</span>) between the groups.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 4.2  </strong></span>Summary statistics of the outcome for each group are shown below.</p>
+<p><span id="exm:unlabeled-div-19" class="example"><strong>Example 4.2  </strong></span>Summary statistics of the outcome for each group are shown below.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-10">Table 4.2: </span>Summary statistics for each group.</caption>
+<caption><span id="tab:unnamed-chunk-11">Table 4.2: </span>Summary statistics for each group.</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -490,7 +480,7 @@ t &amp; = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\
 \]</span>
 Note that here the placebo group is group <span class="math inline">\(C\)</span>, and the Captopril group is group <span class="math inline">\(T\)</span>.</p>
 <p>Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a <span class="math inline">\(t\)</span> distribution with 14 degrees of freedom (<span class="math inline">\(n_i-1\)</span> for each group).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>The dashed line is at <span class="math inline">\(t=1.65\)</span>, and the red shaded areas show anywhere ‘at least as extreme’. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rct-analysis.html#cb1-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fl">1.65</span>, <span class="at">df=</span><span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## [1] 0.1211902</code></pre>
@@ -504,7 +494,7 @@ Note that here the placebo group is group <span class="math inline">\(C\)</span>
 which contains all possible values of treatment effect <span class="math inline">\(\tau\)</span> that are compatible with our data. That is, suppose the true treatment effect is <span class="math inline">\(\tau^*\)</span>, and we test the hypothesis that <span class="math inline">\(\tau = \tau^*\)</span>. For all values of <span class="math inline">\(\tau^*\)</span> inside this range, our data are not sufficiently unlikely to reject the hypothesis at the 0.05 level. However, for all values of <span class="math inline">\(\tau^*\)</span> outside this range, our data are sufficiently unlikely to reject that hypothesis. We can rearrange this to give a 95% confidence interval for <span class="math inline">\(\tau\)</span>,</p>
 <p><span class="math display">\[\left\lbrace \tau \mid \bar{x}_C - \bar{x}_T - t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}} \leq \tau \leq \bar{x}_C - \bar{x}_T + t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}}  \right\rbrace \]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-19" class="example"><strong>Example 4.3  </strong></span>Continuing our example, we have</p>
+<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 4.3  </strong></span>Continuing our example, we have</p>
 <p><span class="math display">\[\left\lbrace \tau \mid \frac{\lvert 6.53 - \tau \rvert}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \leq t_{14;0.975} = 2.145 \right\rbrace \]</span></p>
 <p>Here, <span class="math inline">\(t_{14;0.975} = 2.145\)</span> is the <span class="math inline">\(t\)</span>-value for a significance level of <span class="math inline">\(0.05\)</span>, so if we were working to a different significance level we would change this.</p>
 <p>Rearranging as above, this works out to be the interval</p>
@@ -532,7 +522,7 @@ which contains all possible values of treatment effect <span class="math inline"
 </ol>
 <p>We will demonstrate these by returning to our Captopril example.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 4.4  </strong></span>Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren’t identical, they are sufficiently similar to think they wouldn’t affect our analysis. In a study this small there is likely to be some difference.</p>
+<p><span id="exm:unlabeled-div-21" class="example"><strong>Example 4.4  </strong></span>Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren’t identical, they are sufficiently similar to think they wouldn’t affect our analysis. In a study this small there is likely to be some difference.</p>
 <p>Secondly, since we are interested in whether the use of Captopril has reduced blood pressure for each individual, and these individuals had different baseline values, it makes sense to compare not just the outcome but the difference from baseline to outcome for each individual. We can see individual data in Table <a href="rct-analysis.html#tab:captoprildiff">4.3</a> and summary statistics in Table <a href="rct-analysis.html#tab:captoprildiffsumm">4.4</a>.</p>
 <table>
 <caption><span id="tab:captoprildiff">Table 4.3: </span>Data for the Captopril trial from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span>, with differences shown.</caption>
@@ -737,11 +727,11 @@ where <span class="math inline">\(\rho\)</span> is the true correlation between 
 <div id="analysis-of-covariance-ancova" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Analysis of covariance (ANCOVA)<a href="rct-analysis.html#analysis-of-covariance-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the previous section we based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance.</p>
-<p>However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure <a href="rct-analysis.html#fig:hommel">4.1</a>.<a href="rct-plan.html#fig:t31-onesided">2.1</a></p>
+<p>However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure <a href="rct-analysis.html#fig:hommel">4.1</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:hommel"></span>
-<img src="CT4H_notes_files/figure-html/hommel-1.png" alt="Baseline measurements from the Captopril trial @hommel1986effect." width="672" />
+<img src="CT4H_notes_files/figure-html/hommel-1.png" alt="Baseline measurements from the Captopril trial." width="672" />
 <p class="caption">
-Figure 4.1: Baseline measurements from the Captopril trial <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span>.
+Figure 4.1: Baseline measurements from the Captopril trial.
 </p>
 </div>
 <p>The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn’t a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference.</p>
@@ -798,7 +788,7 @@ where <span class="math inline">\(SSE\)</span> is the residual sum of squares, <
 <p>As well as generating a fitted value <span class="math inline">\(\hat{\tau}\)</span>, we (or rather R!) will also find the standard error of <span class="math inline">\(\hat\tau\)</span>, and we can use this to generate a confidence interval for the treatment effect <span class="math inline">\(\tau\)</span>.</p>
 <p>The technique described above is a well-established statistical method known as <strong>ANCOVA</strong> (short for the <strong>An</strong>alysis of <strong>Cova</strong>riance), which can be implemented in R and many other statistical software packages.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-21" class="example"><strong>Example 4.5  </strong></span>Let’s now implement ANCOVA on our Captopril data in R.
+<p><span id="exm:unlabeled-div-22" class="example"><strong>Example 4.5  </strong></span>Let’s now implement ANCOVA on our Captopril data in R.
 We do this by first fitting a linear model using ‘lm’, with baseline measurement and arm as predictor variables and outcome as the predictand.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="rct-analysis.html#cb3-1" tabindex="-1"></a><span class="co"># Gives same answers as above, so use this!</span></span>
 <span id="cb3-2"><a href="rct-analysis.html#cb3-2" tabindex="-1"></a><span class="co"># Find out what the numbesrs mean</span></span>
@@ -834,7 +824,7 @@ We do this by first fitting a linear model using ‘lm’, with baseline measure
 \end{cases}
 \]</span>
 Therefore, for a patient assigned Placebo, a value of 7.1779 is added, as well as the intercept and baseline term. This results in a model with two parallel fitted lines.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>For our previous methods we have calculated a confidence interval for the treatment effect <span class="math inline">\(\tau\)</span>, and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of <span class="math inline">\(\hat{\tau}\)</span> is 2.9636. Therefore, to construct a 95/% confidence interval for <span class="math inline">\(\hat{\tau}\)</span>, we use (to 3 decimal places)</p>
 <p><span class="math inline">\(7.178\; \pm\; t_{0.975;13}\times{2.964} = \left(0.775,\; 13.580\right).\)</span></p>
 <p>The model has <span class="math inline">\(n-p=13\)</span> degrees of freedom because there are <span class="math inline">\(n=16\)</span> data points and are estimating <span class="math inline">\(p=3\)</span> parameters.
@@ -849,7 +839,7 @@ Notice that unlike our previous confidence intervals, this doesn’t contain zer
 <span id="cb5-6"><a href="rct-analysis.html#cb5-6" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>)<span class="sc">+</span></span>
 <span id="cb5-7"><a href="rct-analysis.html#cb5-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Baseline&quot;</span>)<span class="sc">+</span></span>
 <span id="cb5-8"><a href="rct-analysis.html#cb5-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Residual&quot;</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it’s difficult really to assess the fit of the model. In our practical, we’ll work with a more realistic dataset.</p>
 </div>
 </div>
@@ -872,17 +862,14 @@ that is, neither of these quantities are unbiased estimators of <span class="mat
 <p>You’ll be relieved to hear (and may already have realised) that it isn’t; the first pair of equations are blind to the baseline values <span class="math inline">\(B_T\)</span> and <span class="math inline">\(B_C\)</span>, and are using their statistical properties. Because of the randomisation procedure, a priori they can be treated the same. However, once we have observed values for the baseline, <span class="math inline">\(b_T\)</span> and <span class="math inline">\(b_C\)</span>, they are very unlikely to be exactly the same. They are also (along with all other baseline measurements, often things like age, sex, height etc.) definitely not affected by the trial, since they are taken before any placebo or treatment has been administered, and often even before allocation. However, conditioning on their observed values can reduce the variance of our estimate of <span class="math inline">\(\tau\)</span>, as we have seen.</p>
 <p>In this sense, the observed baseline means <span class="math inline">\(\bar{b}_T\)</span> and <span class="math inline">\(\bar{b}_C\)</span> are known as <strong>ancillary statistics</strong>; they contain no direct information about the parameter we are interested in (in this case the treatment effect <span class="math inline">\(\tau\)</span>), but our inferences can be improved by conditioning on the observed values of the ancillary statistics.</p>
 </div>
-<div id="how-is-this-related-to-anova" class="section level3 hasAnchor" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> How is this related to ANOVA?<a href="rct-analysis.html#how-is-this-related-to-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model" class="section level3 hasAnchor" number="4.4.3">
-<h3><span class="header-section-number">4.4.3</span> What if the lines shouldn’t be parallel? The unequal slopes model<a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> What if the lines shouldn’t be parallel? The unequal slopes model<a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the analysis above, we have assumed that the coefficient <span class="math inline">\(\gamma\)</span> of baseline (the estimate of the correlation between outcome and baseline) is the same in both groups; we have fitted an <strong>equal slopes model</strong>. It isn’t obvious that this should be the case, and indeed we can test for it.</p>
 <p>Allowing each group to have a different slope means including an interaction term between baseline and treatment group,</p>
 <p><span class="math display">\[ x_i = \mu + \tau G_i+ \gamma b_i + \lambda b_i G_i + \epsilon_i . \]</span>
 The term <span class="math inline">\(\lambda b_i G_i\)</span> is 0 if participant <span class="math inline">\(i\)</span> is in group <span class="math inline">\(C\)</span> and <span class="math inline">\(\lambda b_i\)</span> if participant <span class="math inline">\(i\)</span> is in group <span class="math inline">\(T\)</span>. Therefore, for participants in group <span class="math inline">\(C\)</span>, the gradient is still <span class="math inline">\(\gamma\)</span>, but for participants in group <span class="math inline">\(T\)</span> it is now <span class="math inline">\(\gamma + \lambda\)</span>. We can test whether this interaction term should be included (that is, whether we should fit an unequal slopes model) by including it in a model and analysing the results.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-22" class="example"><strong>Example 4.6  </strong></span>Continuing once again with the Captopril dataset, we now fit the model</p>
+<p><span id="exm:unlabeled-div-23" class="example"><strong>Example 4.6  </strong></span>Continuing once again with the Captopril dataset, we now fit the model</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="rct-analysis.html#cb6-1" tabindex="-1"></a>lm_capt_int <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> arm <span class="sc">+</span> baseline <span class="sc">+</span> baseline<span class="sc">:</span>arm, <span class="at">data =</span> df_hommel)</span>
 <span id="cb6-2"><a href="rct-analysis.html#cb6-2" tabindex="-1"></a><span class="fu">summary</span>(lm_capt_int)</span></code></pre></div>
 <pre><code>## 
@@ -919,13 +906,13 @@ The term <span class="math inline">\(\lambda b_i G_i\)</span> is 0 if participan
 <p>We see that the <span class="math inline">\(p\)</span>-value for the coefficient <span class="math inline">\(\lambda\)</span> (seen in the <code>arm:baseline</code> row) is not at all significant (0.97). Therefore we can be confident that there is no need to fit unequal slopes for this dataset. This fits with our earlier conclusion (from inspecting the residuals) that just including first order terms is fine.</p>
 </div>
 </div>
-<div id="can-we-include-any-other-baseline-covariates" class="section level3 hasAnchor" number="4.4.4">
-<h3><span class="header-section-number">4.4.4</span> Can we include any other baseline covariates?<a href="rct-analysis.html#can-we-include-any-other-baseline-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="can-we-include-any-other-baseline-covariates" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Can we include any other baseline covariates?<a href="rct-analysis.html#can-we-include-any-other-baseline-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In Section <a href="rct-analysis.html#baseline">4.2</a> when our estimated treatment effect was <span class="math inline">\(\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)\)</span>, we could the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome <span class="math inline">\(X\)</span>. However, in ANCOVA, our treatment effect is</p>
 <p><span class="math display">\[ \hat\tau = \left(\bar{x}_T - \bar{x}_C\right) - \hat\gamma\left(\bar{b}_T - \bar{b}_C\right), \]</span>
 and the inclusion of the coefficient <span class="math inline">\(\gamma\)</span> means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation (hence they are sometimes known as <em>baseline covariates</em>, not to be confused with ‘the baseline’, which would generally mean the same measurement as the primary outcome, but before treatment). This is because they cannot, at that point, have been affected by the treatment, or have had an influence on the post-trial outcome measurement. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-23" class="example"><strong>Example 4.7  </strong></span>The data for this example is taken from <span class="citation">Kassambara (<a href="#ref-datarium">2019</a>)</span>. In this study, 60 patients take part in a trial investigating the effect of a new treatment and exercise on their stress score, after adjusting for age.
+<p><span id="exm:unlabeled-div-24" class="example"><strong>Example 4.7  </strong></span>The data for this example is taken from <span class="citation">Kassambara (<a href="#ref-datarium">2019</a>)</span>. In this study, 60 patients take part in a trial investigating the effect of a new treatment and exercise on their stress score, after adjusting for age.
 There are two treatment levels (yes or no) and three exercise levels (low, moderate and high) and 10 participants for each combination of treatment and exercise levels. Because in ANCOVA we fit a coefficient to every covariate, we can include exercise (another factor variable) and age (a continuous variable) in this analysis.</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -1007,7 +994,7 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 ## F-statistic: 21.01 on 4 and 55 DF,  p-value: 1.473e-10</code></pre>
 <p>In particular, taking a high level of exercise reduced participants’ stress scores by around 9.6, and the treatment reduced stress scores by around 4.3. Participants’ stress scores increased slightly with age (just under half a point per year!).</p>
 <p>We can plot the residuals to check that the model is a reasonable fit</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -1020,7 +1007,7 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 </ul>
 <p>We can’t check the first until after</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-24" class="example"><strong>Example 4.8  </strong></span>Before fitting our ANCOVA model we should first have checked that there’s no significant relationship between the covariate (in this case the baseline) and the treatment group, which we can do using ANOVA:</p>
+<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 4.8  </strong></span>Before fitting our ANCOVA model we should first have checked that there’s no significant relationship between the covariate (in this case the baseline) and the treatment group, which we can do using ANOVA:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="rct-analysis.html#cb12-1" tabindex="-1"></a><span class="co"># There&#39;s probably a better way to do this - check online articles</span></span>
 <span id="cb12-2"><a href="rct-analysis.html#cb12-2" tabindex="-1"></a>model_aov_capt <span class="ot">=</span> <span class="fu">aov</span>(baseline <span class="sc">~</span> arm, <span class="at">data =</span> df_hommel)</span>
 <span id="cb12-3"><a href="rct-analysis.html#cb12-3" tabindex="-1"></a><span class="fu">summary</span>(model_aov_capt)</span></code></pre></div>

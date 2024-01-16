@@ -352,6 +352,19 @@ Figure 3.2: The probability distribution of largest group size for n=200.
 </p>
 </div>
 <p>In this case the <span class="math inline">\(P\left(N_{max} \geq 220\right)=0.051\)</span>, so the chance of highly imbalanced groups is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.</p>
+<p>We saw in the sample size section that the greatest power is achieved when group sizes are equal, since this minimises the function</p>
+<p><span class="math display">\[\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}.\]</span>
+However, with simple random sampling we can’t guarantee equal group sizes.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 3.3  </strong></span>Suppose we are designing a trial to have <span class="math inline">\(\alpha=0.05\)</span>, and our minimum detectable effect size is such that <span class="math inline">\(\frac{\tau_M}{\sigma}=1\)</span>. If 30 participants are recruited, then we can calculate the power of the study using methods from Chapter 2:</p>
+<p><span class="math display">\[1-\beta = \Phi\left(\sqrt{\frac{n_T\,n_C}{30}} - 1.96\right). \]</span>
+The first term in the standard normal CDF comes from the fact that</p>
+<p><span class="math display">\[\left[\lambda\left(n,m\right)\right]^{-1} = \sqrt{\frac{nm}{n+m}} .\]</span>
+If we have equal group sizes <span class="math inline">\(n_T=n_C=15\)</span>, then the power achieved is 78%.
+If the group sizes are 10 and 20, we have a power of 73%.
+If the group sizes are 6 and 24, the power goes down to 59%.</p>
+<p>So, as we saw when looking at power, we don’t lose too much if the group sizes are 2:1, but a more pronounced imbalace has resulted in a much more noticeable loss. There may be other disadvantages to having such imbalance, for example increased costs, or a reduction in the amount of information gained about side effects. If this imbalance can be avoided, it should be.</p>
+</div>
 </div>
 <div id="random-permuted-blocks" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Random permuted blocks<a href="allocation.html#random-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -517,7 +530,7 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 <h2><span class="header-section-number">3.4</span> Stratified sampling<a href="allocation.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 3.3  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
+<p><span id="exm:unlabeled-div-16" class="example"><strong>Example 3.4  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
 <p>For sex, we use the levels ‘male’ and ‘female’, and for age we split the range into 50-65, 66-80 and 81 or over. We therefore have six strata, and we use an allocation strategy independently in each stratum. For example, below we have used randomly permuted blocks of length four.</p>
 <table>
 <thead>
@@ -596,7 +609,7 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-16" class="example"><strong>Example 3.4  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
+<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 3.5  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
 <p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table <a href="allocation.html#tab:minimeg">3.1</a>.</p>
 <table>
@@ -706,7 +719,7 @@ Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 </tbody>
 </table>
 <p>This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.</p>
 <p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
 <blockquote>

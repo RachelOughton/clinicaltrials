@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-15" />
+<meta name="date" content="2024-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -247,9 +247,8 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.2</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.3</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
 </ul></li>
@@ -323,11 +322,12 @@ div.csl-indent {
 <li>Allocation</li>
 <li>Analysis</li>
 </ol>
+<p>There are many, many packages in R that implement methods for designing and analysiing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks.</p>
 <div id="allocation-1" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Allocation<a href="computer-practical-1.html#allocation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="some-simulated-examples" class="section level3 unnumbered hasAnchor">
 <h3>Some simulated examples<a href="computer-practical-1.html#some-simulated-examples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In this practical we will compare different allocation methods using simulated datasets with the same underlying probability distributions. We consider four factors:</p>
+<p>In this practical we will compare different allocation methods using a simulated dataset with the same underlying probability distributions. We consider four factors:</p>
 <ul>
 <li>Age: 44 and under, 45 - 54, 55-64, 65-74 and 75 and over (5 levels)</li>
 <li>Sex: M or F</li>
@@ -342,9 +342,9 @@ div.csl-indent {
 <li>Smoking: <span class="math inline">\(p\left(\text{Current}\right)=0.4,\,p\left(\text{Past}\right) = p\left(\text{Never}\right) = 0.3\)</span></li>
 <li>Hypertension:<br />
 <span class="math inline">\(p(Y) = \begin{cases} 0.25 &amp; \text{Age under 45} \\ 0.55 &amp; \text{Age 45 to 74}\\ 0.75 &amp; \text{Age 75 and over} \end{cases}\)</span></li>
+</ul></li>
 </ul>
-To demonstrate our allocation methods, we simulate one dataset from the distribution described, containing 100 participants. This dataset is shown in the Table below, and in Figures <a href="computer-practical-1.html#fig:part-gen1a">6.4</a> and <a href="computer-practical-1.html#fig:part-gen1b">6.5</a>.</li>
-</ul>
+<p>In the code block below, the function <code>participant_gen</code> simulates a dataset of size <code>n</code> from this distribution. The <code>seed</code> argument allows us to make reproducible results; for a specific size <code>n</code> and seed value <code>seed</code> the function will always output exactly the same dataset.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="computer-practical-1.html#cb41-1" tabindex="-1"></a><span class="fu">library</span>(rmarkdown)</span>
 <span id="cb41-2"><a href="computer-practical-1.html#cb41-2" tabindex="-1"></a>participant_gen <span class="ot">=</span> <span class="cf">function</span>(n, <span class="at">seed =</span> <span class="dv">4468</span>){</span>
 <span id="cb41-3"><a href="computer-practical-1.html#cb41-3" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
@@ -390,20 +390,14 @@ To demonstrate our allocation methods, we simulate one dataset from the distribu
 <span id="cb41-43"><a href="computer-practical-1.html#cb41-43" tabindex="-1"></a>  </span>
 <span id="cb41-44"><a href="computer-practical-1.html#cb41-44" tabindex="-1"></a>  data_df</span>
 <span id="cb41-45"><a href="computer-practical-1.html#cb41-45" tabindex="-1"></a>  </span>
-<span id="cb41-46"><a href="computer-practical-1.html#cb41-46" tabindex="-1"></a>}</span>
-<span id="cb41-47"><a href="computer-practical-1.html#cb41-47" tabindex="-1"></a></span>
-<span id="cb41-48"><a href="computer-practical-1.html#cb41-48" tabindex="-1"></a>test_df <span class="ot">=</span> <span class="fu">participant_gen</span>(<span class="dv">100</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:part-gen1a"></span>
-<img src="CT4H_notes_files/figure-html/part-gen1a-1.png" alt="A simulated dataset of 100 participants, using the distributions described above, split by hypertension, age and sex." width="672" />
-<p class="caption">
-Figure 6.4: A simulated dataset of 100 participants, using the distributions described above, split by hypertension, age and sex.
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:part-gen1b"></span>
-<img src="CT4H_notes_files/figure-html/part-gen1b-1.png" alt="A simulated dataset of 100 participants, using the distributions described above, split by smoking history, age and sex." width="672" />
-<p class="caption">
-Figure 6.5: A simulated dataset of 100 participants, using the distributions described above, split by smoking history, age and sex.
-</p>
+<span id="cb41-46"><a href="computer-practical-1.html#cb41-46" tabindex="-1"></a>}</span></code></pre></div>
+<p>We can simulate one dataset from the distribution described, containing 100 participants, as below (leading to the creation of a data frame <code>test_df</code>). This dataset is shown in the Table below, and in Figures <a href="#fig:part-gen1a"><strong>??</strong></a> and <a href="#fig:part-gen1b"><strong>??</strong></a>.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="computer-practical-1.html#cb42-1" tabindex="-1"></a>test_df <span class="ot">=</span> <span class="fu">participant_gen</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-36" class="exercise"><strong>Exercise 6.1  </strong></span>Are there any ways in which you think this data set would be vulnerable to leading to a biased trial? Plot the data in various different ways. For example,</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode e"><code class="sourceCode eiffel"><span id="cb43-1"><a href="computer-practical-1.html#cb43-1" tabindex="-1"></a>ggplot(data=test_df, aes(x=Hypertension, fill=Sex)) + geom_bar(col=<span class="dv">1</span>) + facet_wrap(~Age, nrow=<span class="dv">1</span>) +</span>
+<span id="cb43-2"><a href="computer-practical-1.html#cb43-2" tabindex="-1"></a>  theme(legend.position = <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<p>will generate bar charts of hypertension for each age group, soloured by gender.</p>
 </div>
 </div>
 <div id="simple-random-allocation-1" class="section level3 hasAnchor" number="6.4.1">

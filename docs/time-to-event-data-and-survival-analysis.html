@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-15" />
+<meta name="date" content="2024-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="binary-outcome-variable.html"/>
-<link rel="next" href="computer-practical-1.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -247,9 +247,8 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.2</b> How is this related to ANOVA?</a></li>
-<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.3</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
 </ul></li>
@@ -289,15 +288,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>6.3.1</b> Non-parametric: the log-rank test</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i>Computer Practical 1</a>
-<ul>
-<li class="chapter" data-level="6.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocation-1"><i class="fa fa-check"></i><b>6.4</b> Allocation</a>
-<ul>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#some-simulated-examples"><i class="fa fa-check"></i>Some simulated examples</a></li>
-<li class="chapter" data-level="6.4.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>6.4.1</b> Simple random allocation</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#analysis"><i class="fa fa-check"></i>Analysis</a></li>
 </ul></li>
 </ul>
 
@@ -342,7 +332,7 @@ Figure 6.1: An example of some censored data.
 <p><span class="math display">\[F\left(t\right) = P\left(T&lt;t\right) = \int\limits_0^t f\left(u\right)du, \]</span>
 and this gives us the probability that the survival time is less than <span class="math inline">\(t\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-32" class="definition"><strong>Definition 6.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
+<p><span id="def:unlabeled-div-33" class="definition"><strong>Definition 6.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
 Conventionally we plot <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> against <span class="math inline">\(t\)</span> and this gives us a <strong>survival curve</strong>.</p>
 </div>
 <p>We can immediately say two things about the survival curve:</p>
@@ -359,7 +349,7 @@ Figure 6.2: An example of two survival curves, taken from <span class="citation"
 </div>
 <p>The Survival function is fairly intuitive, but the <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is less so.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-33" class="definition"><strong>Definition 6.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous failure probability at time <span class="math inline">\(t\)</span>.</p>
+<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 6.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous failure probability at time <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>If we use <span class="math inline">\(T\)</span> to denote the random variable of survival time (or time-to-event) then <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> and <span class="math inline">\(h(t)\)</span> are defined by</p>
 <p><span class="math display">\[
@@ -391,7 +381,7 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 <div class="example">
 <p><span id="exm:surveg1" class="example"><strong>Example 6.1  </strong></span><span class="citation">Edmonson et al. (<a href="#ref-edmonson1979prognosis">1979</a>)</span> conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide with a mixture of cyclophosphamide and adriamycin. Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-47">Table 6.1: </span>Ovarian cancer data. $ exttt{FU_time}$ gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
+<caption><span id="tab:unnamed-chunk-48">Table 6.1: </span>Ovarian cancer data. $ exttt{FU_time}$ gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -535,7 +525,7 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 <p>We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
 We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-48">Table 6.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
+<caption><span id="tab:unnamed-chunk-49">Table 6.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
 <thead>
 <tr class="header">
 <th align="right">time</th>
@@ -652,7 +642,7 @@ Figure 6.3: Kaplan-Meier estimate of survival curve for ovarian cancer data.
 and mean survival time <span class="math inline">\(\frac{1}{\lambda}\)</span>.</p>
 <p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well. A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 6.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 6.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
 <p><span class="math display">\[
 f\left(x\mid \lambda,\,k\right) =
 \begin{cases}
@@ -703,7 +693,7 @@ The variance of the MLE is</p>
 </ol>
 <p>Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-35" class="example"><strong>Example 6.2  </strong></span>Returning to the dataset from Example <a href="time-to-event-data-and-survival-analysis.html#exm:surveg1">6.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
+<p><span id="exm:unlabeled-div-36" class="example"><strong>Example 6.2  </strong></span>Returning to the dataset from Example <a href="time-to-event-data-and-survival-analysis.html#exm:surveg1">6.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
 <p><span class="math display">\[
 \begin{aligned}
 \hat{\lambda} &amp;= \frac{m}{\sum\limits_{i=1}^n t_i}\\
@@ -716,7 +706,7 @@ The variance of the MLE is</p>
 <span id="cb39-3"><a href="time-to-event-data-and-survival-analysis.html#cb39-3" tabindex="-1"></a>lambda_hat <span class="ot">=</span> m_eg <span class="sc">/</span> sum_time</span>
 <span id="cb39-4"><a href="time-to-event-data-and-survival-analysis.html#cb39-4" tabindex="-1"></a><span class="fu">round</span>(lambda_hat,<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.00077</code></pre>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -736,6 +726,92 @@ H_1:&amp;\text{ the treatments are different.}
 <p>The log-rank test is performed by creating a series of 2x2 tables, and combining the information.</p>
 <p>[LOOK AT NON-PARAMETRIC WAYS OF DEALING WITH BINARY - MANTEL-HAENSZEL IN 7.4.4]</p>
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+al, Geoffrey Marshall et. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUBERCULOSIS a MEDICAL RESEARCH COUNCIL INVESTIGATION.”</span> <em>British Medical Journal</em>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf</a>.
+</div>
+<div class="csl-entry">
+Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC press.
+</div>
+<div class="csl-entry">
+———. 1998. <span>“Confidence Intervals for the Number Needed to Treat.”</span> <em>Bmj</em> 317 (7168): 1309–12.
+</div>
+<div class="csl-entry">
+Altman, Douglas G, and J Martin Bland. 1999. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
+</div>
+<div class="csl-entry">
+Collett, David. 2003. <em>Modelling Survival Data in Medical Research</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+</div>
+<div class="csl-entry">
+Cottingham, Marci D, and Jill A Fisher. 2022. <span>“Gendered Logics of Biomedical Research: Women in US Phase i Clinical Trials.”</span> <em>Social Problems</em> 69 (2): 492–509.
+</div>
+<div class="csl-entry">
+Edmonson, John H, Thomas R Fleming, David G Decker, George D Malkasian, Edward O Jorgensen, John A Jefferies, Maurice J Webb, and Larry K Kvols. 1979. <span>“Prognosis in Advanced Ovarian Carcinoma Versus Minimal Residual.”</span> <em>Cancer Treatment Reports</em> 63 (2): 241–47.
+</div>
+<div class="csl-entry">
+Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
+</div>
+<div class="csl-entry">
+Freedman, LS, and Susan J White. 1976. <span>“On the Use of Pocock and Simon’s Method for Balancing Treatment Numbers over Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 691–94.
+</div>
+<div class="csl-entry">
+Hayes, Richard J, and Lawrence H Moulton. 2017. <em>Cluster Randomised Trials</em>. CRC press.
+</div>
+<div class="csl-entry">
+Health, National Institute of. 2023. <span>“History of Women’s Participation in Clinical Research.”</span> Office of Research on Women’s Health. https://orwh. od. nih. gov/toolkit …. <a href="https://orwh.od.nih.gov/toolkit/recruitment/history">https://orwh.od.nih.gov/toolkit/recruitment/history</a>.
+</div>
+<div class="csl-entry">
+Hjalmas, Hanson, and Kruse Hellstrom. 1998. <span>“Long‐term Treatment with Desmopressin in Children with Primary Monosymptomatic Nocturnal Enuresis: An Open Multicentre Study.”</span> <em>British Journal of Urology</em>.
+</div>
+<div class="csl-entry">
+Hommel, EHEBMJ, Hans-Henrik Parving, Elisabeth Mathiesen, Berit Edsberg, M Damkjaer Nielsen, and Jørn Giese. 1986. <span>“Effect of Captopril on Kidney Function in Insulin-Dependent Diabetic Patients with Nephropathy.”</span> <em>Br Med J (Clin Res Ed)</em> 293 (6545): 467–70.
+</div>
+<div class="csl-entry">
+Hulley, Stephen B, Steven R. Cummings, Warren S. Browner, Deborah G. Grady, and Thomas B. Newman. 2013. <em>Designing Clinical Research, Fourth Edition</em>. Lippincott Williams &amp; Wilkins.
+</div>
+<div class="csl-entry">
+Kallis, P, JA Tooze, S Talbot, D Cowans, DH Bevan, and T Treasure. 1994. <span>“Pre-Operative Aspirin Decreases Platelet Aggregation and Increases Post-Operative Blood Loss–a Prospective, Randomised, Placebo Controlled, Double-Blind Clinical Trial in 100 Patients with Chronic Stable Angina.”</span> <em>European Journal of Cardio-Thoracic Surgery: Official Journal of the European Association for Cardio-Thoracic Surgery</em> 8 (8): 404–9.
+</div>
+<div class="csl-entry">
+Kar, Sumit, Ajay Krishnan, Preetha K, and Atul Mohankar. 2012. <span>“A Review of Antihistamines Used During Pregnancy.”</span> <em>Journal of Pharmacology and Pharmacotherapeutics</em> 3 (2): 105–8.
+</div>
+<div class="csl-entry">
+Kassambara, Alboukadel. 2019. <em>Datarium: Data Bank for Statistical Analysis and Visualization</em>. <a href="https://CRAN.R-project.org/package=datarium">https://CRAN.R-project.org/package=datarium</a>.
+</div>
+<div class="csl-entry">
+Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
+</div>
+<div class="csl-entry">
+Newcombe, Robert G. 1998. <span>“Interval Estimation for the Difference Between Independent Proportions: Comparison of Eleven Methods.”</span> <em>Statistics in Medicine</em> 17 (8): 873–90.
+</div>
+<div class="csl-entry">
+Pocock, Stuart J, and Richard Simon. 1975. <span>“Sequential Treatment Assignment with Balancing for Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 103–15.
+</div>
+<div class="csl-entry">
+Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskron, Andrea Lassnigg, Jing You, and Daniel I Sessler. 2013. <span>“A Randomized, Double-Blind Comparison of Licorice Versus Sugar-Water Gargle for Prevention of Postoperative Sore Throat and Postextubation Coughing.”</span> <em>Anesthesia &amp; Analgesia</em> 117 (3): 614–21.
+</div>
+<div class="csl-entry">
+Smith, AC, JF Dowsett, RCG Russell, ARW Hatfield, and PB Cotton. 1994. <span>“Randomised Trial of Endoscopic Steriting Versus Surgical Bypass in Malignant Low Bileduct Obstruction.”</span> <em>The Lancet</em> 344 (8938): 1655–60.
+</div>
+<div class="csl-entry">
+Syriopoulou, Elisavet, Tove Wästerlid, Paul C Lambert, and Therese M-L Andersson. 2022. <span>“Standardised Survival Probabilities: A Useful and Informative Tool for Reporting Regression Models for Survival Data.”</span> <em>British Journal of Cancer</em> 127 (10): 1808–15.
+</div>
+<div class="csl-entry">
+Taves, Donald R. 1974. <span>“Minimization: A New Method of Assigning Patients to Treatment and Control Groups.”</span> <em>Clinical Pharmacology &amp; Therapeutics</em> 15 (5): 443–53.
+</div>
+<div class="csl-entry">
+Treasure, Tom, and Kenneth D MacRae. 1998. <span>“Minimisation: The Platinum Standard for Trials?: Randomisation Doesn’t Guarantee Similarity of Groups; Minimisation Does.”</span> <em>Bmj</em>. British Medical Journal Publishing Group.
+</div>
+<div class="csl-entry">
+Villar, Jesús, Carlos Ferrando, Domingo Martı́nez, Alfonso Ambrós, Tomás Muñoz, Juan A Soler, Gerardo Aguilar, et al. 2020. <span>“Dexamethasone Treatment for the Acute Respiratory Distress Syndrome: A Multicentre, Randomised Controlled Trial.”</span> <em>The Lancet Respiratory Medicine</em> 8 (3): 267–76.
+</div>
+<div class="csl-entry">
+Vitale, Cristiana, Massimo Fini, Ilaria Spoletini, Mitja Lainscak, Petar Seferovic, and Giuseppe MC Rosano. 2017. <span>“Under-Representation of Elderly and Women in Clinical Trials.”</span> <em>International Journal of Cardiology</em> 232: 216–21.
+</div>
+<div class="csl-entry">
+Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Controlled Trial?”</span> <em>Journal of Thoracic Disease</em> 1 (1): 51.
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -756,8 +832,8 @@ Syriopoulou, Elisavet, Tove Wästerlid, Paul C Lambert, and Therese M-L Andersso
           </div>
         </div>
       </div>
-<a href="binary-outcome-variable.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="binary-outcome-variable.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

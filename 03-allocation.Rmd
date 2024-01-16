@@ -257,6 +257,40 @@ barplot(p~r, data=df1, xlab = "Size of largest group", ylab = "Probability")
 
 In this case the $P\left(N_{max} \geq 220\right)=0.051$, so the chance of highly imbalanced groups is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.
 
+We saw in the sample size section that the greatest power is achieved when group sizes are equal, since this minimises the function 
+
+$$\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}.$$
+However, with simple random sampling we can't guarantee equal group sizes.
+
+
+
+:::{.example}
+
+Suppose we are designing a trial to have $\alpha=0.05$, and our minimum detectable effect size is such that $\frac{\tau_M}{\sigma}=1$. If 30 participants are recruited, then we can calculate the power of the study using methods from Chapter 2:
+
+$$1-\beta = \Phi\left(\sqrt{\frac{n_T\,n_C}{30}} - 1.96\right). $$
+The first term in the standard normal CDF comes from the fact that
+
+$$\left[\lambda\left(n,m\right)\right]^{-1} = \sqrt{\frac{nm}{n+m}} .$$
+If we have equal group sizes $n_T=n_C=15$, then the power achieved is 78%.
+If the group sizes are 10 and 20, we have a power of 73%.
+If the group sizes are 6 and 24, the power goes down to 59%.
+
+So, as we saw when looking at power, we don't lose too much if the group sizes are 2:1, but a more pronounced imbalace has resulted in a much more noticeable loss. There may be other disadvantages to having such imbalance, for example increased costs, or a reduction in the amount of information gained about side effects. If this imbalance can be avoided, it should be.
+
+```{r}
+powerfun = function(n,m){
+  sqrt_term= sqrt((n*m/30))
+  pnorm(sqrt_term-qnorm(0.975))
+}
+# powerfun(15,15)
+# powerfun(20,10)
+# powerfun(6,24)
+```
+
+:::
+
+
 ### Random permuted blocks
 
 One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $$\binom{2m}{m},$$ but this method can be adapted to more than two groups and to unequal group size.
