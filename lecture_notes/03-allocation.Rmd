@@ -1,5 +1,8 @@
 # (Lecture 4) Allocation 
 
+[Finished with sample size for now - check out JAMAevidence: JAMA Guide to Statistics and Methods
+Interviews about the statistical and methodological foundations of clinical research. Esp sample size, linked from Ultra]
+
 Once we've decided how many participants we need in our trial, and they've been recruited, we next need to determine which participants should be assigned to which trial arm. This is process is known as **allocation** (or sometimes as **randomization**). 
 
 *Before we think about methods for allocation, we are going to spend some time talking about bias.*
@@ -182,6 +185,14 @@ Some measurments are subject to the individual practitioner assessing the patien
 
 Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of (this is known as a **double blind trial**). For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial 'blind', and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware.
 
+#### Slight aside: publication bias {-}
+
+In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a [medical] journal. These are peer-reviewed, which means that experts from the relevant field are ask to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be publised.
+
+It seems that papers reporting positive / conclusive results are more likely to be published than papers about [viable] trials that ultimately fail to reject the null hypothesis. As we know, in most cases if the null hypothesis is rejected this is indicative that there is a true treatment difference. However, sometimes by random chance a trial will detect a difference even when there isn't one (approximately 5% of the time if $\alpha=0.05$). If these papers are disproportionately likely to be published, the body of literature will not reflect the truth, and there may be serious implications for impact on practice.
+
+Measures are being taken to prevent this: for example, leading medical journal *The Lancet* insists that any clinical trial related paper is registered with them before the first participant has been recruited, with details of the design and statistical analysis plan. This is then reviewed before the trial begins. 
+
 
 ### Implications for allocation
 
@@ -204,7 +215,7 @@ There are some approaches that 'pass' the first point, but fail at the second. E
 
 We will now explore some commonly used methods of allocation. We will usually assume two equally sized groups, $A$  and $B$, but it is simple to generalize to three or more groups, or to unequal allocation.
 
-[ASSIGNMENT!]
+[ASSIGNMENT! Explain details a bit, deadline is Monday 29th Jan. ]
 
 ## (Lecture 5) Allocation methods {#sec-allocation}
 

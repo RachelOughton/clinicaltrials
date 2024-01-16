@@ -1,8 +1,17 @@
-# Computer Practical 1
+# Computer Practical 1 {-}
 
-## Some simulated examples
+This computer practical will cover two main parts:
 
-In this practical we will compare different allocation methods using simulated datasets with the same underlying probability distributions. We consider four factors:
+  1. Allocation
+  2. Analysis
+  
+There are many, many packages in R that implement methods for designing and analysiing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks.
+  
+## Allocation
+
+### Some simulated examples {-}
+
+In this practical we will compare different allocation methods using a simulated dataset with the same underlying probability distributions. We consider four factors:
   
   * Age: 44 and under, 45 - 54, 55-64, 65-74 and 75 and over (5 levels)
   * Sex: M or F
@@ -21,8 +30,8 @@ These will be generated using the following distributions:
 0.75 & \text{Age 75 and over}
 \end{cases}$
   
-  To demonstrate our allocation methods, we simulate one dataset from the distribution described, containing 100 participants. This dataset is shown in the Table below, and in Figures \@ref(fig:part-gen1a) and \@ref(fig:part-gen1b).
-
+  
+In the code block below, the function `participant_gen` simulates a dataset of size `n` from this distribution. The `seed` argument allows us to make reproducible results; for a specific size `n` and seed value `seed` the function will always output exactly the same dataset.
 
 ```{r, echo=T}
 library(rmarkdown)
@@ -71,28 +80,35 @@ participant_gen = function(n, seed = 4468){
   data_df
   
 }
-
-test_df = participant_gen(100)
-
 ```
 
 
-```{r part-gen1a, echo=F, fig.cap = "A simulated dataset of 100 participants, using the distributions described above, split by hypertension, age and sex."}
+ 
+We can simulate one dataset from the distribution described, containing 100 participants, as below (leading to the creation of a data frame `test_df`). This dataset is shown in the Table below, and in Figures \@ref(fig:part-gen1a) and \@ref(fig:part-gen1b).
 
+```{r, echo=T}
+test_df = participant_gen(100)
+```
+
+::: {.exercise}
+Are there any ways in which you think this data set would be vulnerable to leading to a biased trial? Plot the data in various different ways. For example, 
+
+```{e, eval=F, echo=T}
 ggplot(data=test_df, aes(x=Hypertension, fill=Sex)) + geom_bar(col=1) + facet_wrap(~Age, nrow=1) +
   theme(legend.position = "bottom")
-
 ```
 
+will generate bar charts of hypertension for each age group, soloured by gender.
 
+:::
 
-```{r part-gen1b,  echo=F,  fig.cap = "A simulated dataset of 100 participants, using the distributions described above, split by smoking history, age and sex."}
-
-ggplot(data=test_df, aes(x=Smoking, fill=Sex)) + geom_bar(col=1) + facet_wrap(~Age, nrow=1) +
-  theme(legend.position = "bottom")
-
-```
 
 ### Simple random allocation
 
 In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. In terms of our allocation, 
+
+
+
+## Analysis {-}
+
+For our analysis section, we will work with real datasets. 

@@ -250,10 +250,10 @@ For our Captopril example, the sample correlation between baseline and outcome i
 
 In the previous section we based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance. 
 
-However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).\@ref(fig:t31-onesided)
+However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).
 
 
-```{r hommel, echo=F, fig.cap = "Baseline measurements from the Captopril trial @hommel1986effect."}
+```{r hommel, echo=F, fig.cap = "Baseline measurements from the Captopril trial."}
 
 ggplot(data = df_hommel, aes(y=baseline, fill = arm)) + geom_boxplot() + ylab("Baseline (mmHg)")+theme_bw()
 
@@ -418,11 +418,6 @@ Is this a contradiction?
 You'll be relieved to hear (and may already have realised) that it isn't; the first pair of equations are blind to the baseline values $B_T$ and $B_C$, and are using their statistical properties. Because of the randomisation procedure, a priori they can be treated the same. However, once we have observed values for the baseline, $b_T$ and $b_C$, they are very unlikely to be exactly the same. They are also (along with all other baseline measurements, often things like age, sex, height etc.) definitely not affected by the trial, since they are taken before any placebo or treatment has been administered, and often even before allocation. However, conditioning on their observed values can reduce the variance of our estimate of $\tau$, as we have seen.
 
 In this sense, the observed baseline means $\bar{b}_T$ and $\bar{b}_C$ are known as **ancillary statistics**; they contain no direct information about the parameter we are interested in (in this case the treatment effect $\tau$), but our inferences can be improved by conditioning on the observed values of the ancillary statistics.
-
-
-
-
-### How is this related to ANOVA?
 
 
 ### What if the lines shouldn't be parallel? The unequal slopes model
