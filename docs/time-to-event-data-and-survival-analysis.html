@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-16" />
+<meta name="date" content="2024-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -257,7 +257,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ss-bin"><i class="fa fa-check"></i><b>5.1</b> Sample size for a binary variable</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#the-delta-method"><i class="fa fa-check"></i><b>5.1.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#delta-method"><i class="fa fa-check"></i><b>5.1.1</b> The Delta Method</a></li>
 <li class="chapter" data-level="5.1.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.1.2</b> A sample size formula</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Point estimates and Hypothesis tests</a>
@@ -273,6 +273,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>5.4</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>5.4.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="5.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>5.4.2</b> Diagnostics for logistic regression</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html"><i class="fa fa-check"></i><b>6</b> Time-to-event data and Survival Analysis</a>
@@ -308,7 +309,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="time-to-event-data-and-survival-analysis" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">6</span> Time-to-event data and Survival Analysis<a href="time-to-event-data-and-survival-analysis.html#time-to-event-data-and-survival-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A data type that is commonly found in clinical trials is <strong>time to event data</strong>. This type of data deals with the amount of time that elapses before a particular event happens. Unlike continuous and binary random variables, this is a fairly recent branch of statistics, which developed rapidly during the many cancer related clinical trials of the 1960s and 1970s. In these cases, the event in question was very often death, and so this branch of statistics came to be known as <strong>survival analysis</strong>. However, the event can be many other things, and indeed can be a positive outcome (for example being cured of some condition). As well as the books already mentioned, this chapter makes use of <span class="citation">Collett (<a href="#ref-collett_surv">2003</a>)</span>.</p>
+<p>A data type that is commonly found in clinical trials is <strong>time to event data</strong>. This type of data deals with the amount of time that elapses before a particular event happens. Unlike continuous and binary random variables, this is a fairly recent branch of statistics, which developed rapidly during the many cancer related clinical trials of the 1960s and 1970s. In these cases, the event in question was very often death, and so this branch of statistics came to be known as <strong>survival analysis</strong>. However, the event can be many other things, and indeed can be a positive outcome (for example being cured of some condition). As well as the books already mentioned, this chapter makes use of <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>.</p>
 <p>Usually, survival data is given in terms of time, but it can also be the number of times something happens (for example, the number of clinic appointments attended) before the event in question occurs.</p>
 <p>Survival data is trickier to handle than the data types we have seen so far, for two main reasons. Firstly (and simply) survival data is very often skewed, so even though it is (usually) continuous, we can’t just treat it as normally distributed. Secondly (and more complicatedly, if that’s a word) with time-to-event data we don’t usually observe the full dataset.</p>
 <div id="censored-times" class="section level2 hasAnchor" number="6.1">
@@ -332,7 +333,7 @@ Figure 6.1: An example of some censored data.
 <p><span class="math display">\[F\left(t\right) = P\left(T&lt;t\right) = \int\limits_0^t f\left(u\right)du, \]</span>
 and this gives us the probability that the survival time is less than <span class="math inline">\(t\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-33" class="definition"><strong>Definition 6.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
+<p><span id="def:unlabeled-div-37" class="definition"><strong>Definition 6.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
 Conventionally we plot <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> against <span class="math inline">\(t\)</span> and this gives us a <strong>survival curve</strong>.</p>
 </div>
 <p>We can immediately say two things about the survival curve:</p>
@@ -349,7 +350,7 @@ Figure 6.2: An example of two survival curves, taken from <span class="citation"
 </div>
 <p>The Survival function is fairly intuitive, but the <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is less so.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 6.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous failure probability at time <span class="math inline">\(t\)</span>.</p>
+<p><span id="def:unlabeled-div-38" class="definition"><strong>Definition 6.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous failure probability at time <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>If we use <span class="math inline">\(T\)</span> to denote the random variable of survival time (or time-to-event) then <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> and <span class="math inline">\(h(t)\)</span> are defined by</p>
 <p><span class="math display">\[
@@ -381,7 +382,7 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 <div class="example">
 <p><span id="exm:surveg1" class="example"><strong>Example 6.1  </strong></span><span class="citation">Edmonson et al. (<a href="#ref-edmonson1979prognosis">1979</a>)</span> conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide with a mixture of cyclophosphamide and adriamycin. Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-48">Table 6.1: </span>Ovarian cancer data. $ exttt{FU_time}$ gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
+<caption><span id="tab:unnamed-chunk-49">Table 6.1: </span>Ovarian cancer data. $ exttt{FU_time}$ gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -525,7 +526,7 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 <p>We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
 We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-49">Table 6.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
+<caption><span id="tab:unnamed-chunk-50">Table 6.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
 <thead>
 <tr class="header">
 <th align="right">time</th>
@@ -642,7 +643,7 @@ Figure 6.3: Kaplan-Meier estimate of survival curve for ovarian cancer data.
 and mean survival time <span class="math inline">\(\frac{1}{\lambda}\)</span>.</p>
 <p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well. A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 6.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span id="def:unlabeled-div-39" class="definition"><strong>Definition 6.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
 <p><span class="math display">\[
 f\left(x\mid \lambda,\,k\right) =
 \begin{cases}
@@ -693,7 +694,7 @@ The variance of the MLE is</p>
 </ol>
 <p>Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-36" class="example"><strong>Example 6.2  </strong></span>Returning to the dataset from Example <a href="time-to-event-data-and-survival-analysis.html#exm:surveg1">6.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
+<p><span id="exm:unlabeled-div-40" class="example"><strong>Example 6.2  </strong></span>Returning to the dataset from Example <a href="time-to-event-data-and-survival-analysis.html#exm:surveg1">6.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
 <p><span class="math display">\[
 \begin{aligned}
 \hat{\lambda} &amp;= \frac{m}{\sum\limits_{i=1}^n t_i}\\
@@ -706,7 +707,7 @@ The variance of the MLE is</p>
 <span id="cb39-3"><a href="time-to-event-data-and-survival-analysis.html#cb39-3" tabindex="-1"></a>lambda_hat <span class="ot">=</span> m_eg <span class="sc">/</span> sum_time</span>
 <span id="cb39-4"><a href="time-to-event-data-and-survival-analysis.html#cb39-4" tabindex="-1"></a><span class="fu">round</span>(lambda_hat,<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.00077</code></pre>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -740,13 +741,19 @@ Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC
 Altman, Douglas G, and J Martin Bland. 1999. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
 </div>
 <div class="csl-entry">
-Collett, David. 2003. <em>Modelling Survival Data in Medical Research</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+Collett, David. 2003a. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+</div>
+<div class="csl-entry">
+———. 2003b. <em>Modelling Survival Data in Medical Research</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
 </div>
 <div class="csl-entry">
 Cottingham, Marci D, and Jill A Fisher. 2022. <span>“Gendered Logics of Biomedical Research: Women in US Phase i Clinical Trials.”</span> <em>Social Problems</em> 69 (2): 492–509.
 </div>
 <div class="csl-entry">
 Edmonson, John H, Thomas R Fleming, David G Decker, George D Malkasian, Edward O Jorgensen, John A Jefferies, Maurice J Webb, and Larry K Kvols. 1979. <span>“Prognosis in Advanced Ovarian Carcinoma Versus Minimal Residual.”</span> <em>Cancer Treatment Reports</em> 63 (2): 241–47.
+</div>
+<div class="csl-entry">
+Elmunzer, B Joseph, James M Scheiman, Glen A Lehman, Amitabh Chak, Patrick Mosler, Peter DR Higgins, Rodney A Hayward, et al. 2012. <span>“A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.”</span> <em>New England Journal of Medicine</em> 366 (15): 1414–22.
 </div>
 <div class="csl-entry">
 Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
@@ -818,7 +825,7 @@ Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Contr
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-collett_surv" class="csl-entry">
-Collett, David. 2003. <em>Modelling Survival Data in Medical Research</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+———. 2003b. <em>Modelling Survival Data in Medical Research</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
 </div>
 <div id="ref-edmonson1979prognosis" class="csl-entry">
 Edmonson, John H, Thomas R Fleming, David G Decker, George D Malkasian, Edward O Jorgensen, John A Jefferies, Maurice J Webb, and Larry K Kvols. 1979. <span>“Prognosis in Advanced Ovarian Carcinoma Versus Minimal Residual.”</span> <em>Cancer Treatment Reports</em> 63 (2): 241–47.

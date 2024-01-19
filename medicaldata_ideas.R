@@ -7,6 +7,11 @@ data("indo_rct") # rx is the treatment arm
 ## Outcome is incidence of pancreatitits after endoscopic retrograde cholangiopancreatography - binary
 # https://www.nejm.org/doi/full/10.1056/NEJMoa1111103
 
+summary(glm(outcome ~ site + risk + rx, data=indo_rct, family = binomial(link = "logit")))
+
+
+summary(glm(outcome ~ ., data=indo_rct, family = binomial(link = "logit")))
+
 
 data("licorice_gargle") # all Likert scale outcomes, not sure about use? Preventing post-op cough type symptoms
 
@@ -32,6 +37,7 @@ summary(lm_polyps12m_int)
 
 data("strep_tb") # binary outcome. Also ethical issues!
 # Results of a randomized, placebo-controlled, prospective 2-arm trial of streptomycin 2 grams daily (arm A2) vs. placebo (arm A1) to treat tuberculosis in 107 young patients, as reported by the Streptomycin in Tuberculosis Trials Committee in 1948 in the British Medical Journal
+summary(glm(improved ~ arm + dose_strep_g, data=strep_tb, family = binomial(link = "logit")))
 
 
 data("supraclavicular") # survival (with some censoring, but rather simple)

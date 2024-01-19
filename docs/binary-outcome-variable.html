@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-16" />
+<meta name="date" content="2024-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -257,7 +257,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ss-bin"><i class="fa fa-check"></i><b>5.1</b> Sample size for a binary variable</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#the-delta-method"><i class="fa fa-check"></i><b>5.1.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#delta-method"><i class="fa fa-check"></i><b>5.1.1</b> The Delta Method</a></li>
 <li class="chapter" data-level="5.1.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.1.2</b> A sample size formula</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Point estimates and Hypothesis tests</a>
@@ -273,6 +273,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>5.4</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>5.4.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="5.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>5.4.2</b> Diagnostics for logistic regression</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html"><i class="fa fa-check"></i><b>6</b> Time-to-event data and Survival Analysis</a>
@@ -324,8 +325,8 @@ div.csl-indent {
       p_B &amp; = \frac{R_B}{n_B}.
 \end{align*}\]</span></p>
 <p>Recall that the variance of <span class="math inline">\(p_X\)</span> (where <span class="math inline">\(X\)</span> is <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>) is <span class="math inline">\(\pi_X\left(1-\pi_X\right)\)</span>, such that the variance depends on the mean. This means there is no free parameter equivalent to <span class="math inline">\(\sigma\)</span> in the binary situation, and the number of participants required will depend on the approximate value of <span class="math inline">\(\pi_A\)</span> and <span class="math inline">\(\pi_B\)</span>. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called <em>the delta method</em>.</p>
-<div id="the-delta-method" class="section level3 hasAnchor" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> The Delta Method<a href="binary-outcome-variable.html#the-delta-method" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="delta-method" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> The Delta Method<a href="binary-outcome-variable.html#delta-method" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We start with a random variable <span class="math inline">\(X\)</span> that has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 = \sigma^2\left(\mu\right)\)</span>, ie. its variance depends on its mean. If we have a ‘well-behaved’ (infinitely differentiable etc.) function <span class="math inline">\(f\left(X\right)\)</span>, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.</p>
 <p>First, we expand <span class="math inline">\(f\left(X\right)\)</span> in a first-order Taylor series about <span class="math inline">\(\mu\)</span>, which gives us</p>
 <p><span class="math display" id="eq:delta1">\[\begin{equation}
@@ -343,7 +344,8 @@ div.csl-indent {
 \tag{5.3}
 \end{equation}\]</span></p>
 <p>where both sides come from</p>
-<p><span class="math display">\[\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right] .\]</span> THis series of approximations, which generally works well, is the Delta method.</p>
+<p><span class="math display">\[\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right] .\]</span>
+This series of approximations, which generally works well, is the Delta method.</p>
 <p>One way in which it is often used, and the way in which we will use it now, is to find a transformation <span class="math inline">\(f\left(X\right)\)</span> for which (at least approximately) the variance is unrelated to the mean. To do this, we solve the differential equation</p>
 <p><span class="math display">\[ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \left[f&#39;\left(\mu\right)\right]^2 = \text{constant}. \]</span>
 In the case of proportions for a binary variable, this becomes</p>
@@ -754,11 +756,79 @@ This is skewed somewhat lower than our standard CI of <span class="math inline">
 </div>
 <div id="risk-ratio-rr-and-odds-ratio-or" class="section level3 hasAnchor" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> Risk Ratio (RR) and Odds ratio (OR)<a href="binary-outcome-variable.html#risk-ratio-rr-and-odds-ratio-or" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The measures we have looked at so far, particularly the ARD, are quite analagous to the continuous normally distributed case. However, there are yet more commonly used measures of difference for proportions, which need to be dealt with differently, but also afford more opportunities for modelling.</p>
 <p>The <strong>risk ratio</strong> is defined as</p>
-<p><span class="math display">\[\text{RR} = \frac{\pi_C}{\pi_T}\]</span></p>
+<p><span class="math display">\[\text{RR} = \frac{\pi_T}{\pi_C}\]</span></p>
 <p>The <strong>odds ratio</strong> is defined as
-<span class="math display">\[\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}\]</span></p>
-<p>[say more here! Look at 7.3.2.3 in Matthews. Need something else before log reg. But not loads. Then Hantschel Meier after]</p>
+<span class="math display">\[\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}\]</span>
+The first thing to note is that for both the risk ratio and the odds ratio, the null value is one (not zero, as for the ARD), and both values must always be positive. We think about things multiplicatively, so for example if <span class="math inline">\(RR=3\)</span> we can say that the event is “3 times more likely” in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>.</p>
+<div id="odds" class="section level4 unnumbered hasAnchor">
+<h4>Odds<a href="binary-outcome-variable.html#odds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Odds and odds ratios are a bit trickier to think about (<a href="https://kids.frontiersin.org/articles/10.3389/frym.2022.926624#:~:text=As%20an%20example%2C%20if%20the,disease%20if%20you%20are%20exposed.">this article</a> explains them really well - it’s aimed at ‘kids and teens’ but don’t let that put you off!). The odds of an event are the probability of it happening over the probability of it not happening. So, if (for some event <span class="math inline">\(A\)</span>), <span class="math inline">\(p\left(A\right)=0.2\)</span>, the odds of <span class="math inline">\(A\)</span> are</p>
+<p><span class="math display">\[\frac{p\left(A\right)}{p\left(A&#39;\right)} = \frac{0.2}{0.8} = \frac{1}{4}, \]</span>
+which we say as “1 to 4” or 1:4. For every one time <span class="math inline">\(A\)</span> occurs, we expect it not to occur four times.</p>
+<p>The <strong>odds ratio</strong> compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).</p>
+<p>With the ARD, we knew that our confidence interval should always be in <span class="math inline">\(\left[-1,\,1\right]\)</span>, and that if we compare treatments in one direction (say <span class="math inline">\(p-T - p_C\)</span>) we would obtain the negative of the interval for the other way (<span class="math inline">\(p_C - p_T\)</span>). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction (<span class="math inline">\(p_T / p_C\)</span>) will give the reciprocal of the other direction (<span class="math inline">\(p_C / p_T\)</span>).</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 5.8  </strong></span>For our Streptomycin example, we estimated the ARD by
+<span class="math display">\[\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364,\]</span>
+or could have alternatively had
+<span class="math display">\[\hat\tau_{ARD}=p_C - p_T = \frac{17}{52} - \frac{38}{55} = - 0.364.\]</span>
+For the risk ratio, we have</p>
+<p><span class="math display">\[\hat{\tau}_{RR} = \frac{p_T}{p_C} = \frac{38/55}{17/52} = 2.113,\]</span>
+or could alternatively have</p>
+<p><span class="math display">\[\hat{\tau}_{RR} = \frac{p_C}{p_T} = \frac{17/52}{38/55} = 0.473 = \frac{1}{2.113}.\]</span>
+We could say that a patient is “more than twice as likely to be cured with streptomycin than by the control”.</p>
+<p>For the odds ratio, we have</p>
+<p><span class="math display">\[\hat{\tau}_{OR} = \frac{p_T/\left(1-p_T\right)}{p_C/\left(1-p_C\right)} = \frac{(38/55)/(17/55)}{(17/52)/(35/52)} = 4.602, \]</span>
+and therefore the odds of recovery are around 4.6 greater for Streptomycin than for the control. Similarly, we could reframe this as</p>
+<p><span class="math display">\[\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \frac{(17/52)/(35/52)}{(38/55)/(17/55)} = 0.217 = \frac{1}{4.602}.\]</span></p>
+</div>
+<p>One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval <span class="math inline">\(\left(l,\,u\right)\)</span> (with <span class="math inline">\(l,u&gt;1\)</span>) and <span class="math inline">\(\left(\frac{1}{u},\frac{1}{l}\right)\)</span>, since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval</p>
+<p><span class="math display">\[\left(\frac{1}{k},\,k\right) \text{ for some }k&gt;1 \]</span>
+can be thought of as symmetric, in that one treatment may be up to <span class="math inline">\(k\)</span> times more effective than the other, in either direction. Therefore, to build a confidence interval for OR or RR, we will not be following the usual formula</p>
+<p><span class="math display">\[\text{point estimate } \pm{z\times{SE}}.\]</span>
+You may have already been thinking that a log transformation would be useful here, and you’d be correct! The <em>sort-of</em> symmetric intervals we’ve been discussing here actually are symmetric (about zero) on the log scale.</p>
+</div>
+<div id="confidence-intervals-for-rr-and-or" class="section level4 hasAnchor" number="5.3.2.1">
+<h4><span class="header-section-number">5.3.2.1</span> Confidence intervals for RR and OR<a href="binary-outcome-variable.html#confidence-intervals-for-rr-and-or" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Firstly we’ll consider the risk ratio. Let’s define</p>
+<p><span class="math display">\[ \phi = \log\left(\frac{\pi_T}{\pi_C}\right).\]</span>
+The natural way to estimate this is with the sample proportions</p>
+<p><span class="math display">\[\log\left(\frac{p_T}{p_C}\right) = \log\left(p_T\right) - \log\left(p_C\right).\]</span>
+These estimated proportions should be approximately normal and independent of one another, and so <span class="math inline">\(\log\left(\frac{p_T}{p_C}\right)\)</span> is approximately normal with mean <span class="math inline">\(\phi\)</span> (the true value) and variance</p>
+<p><span class="math display">\[\operatorname{var}\left(\log\left(p_T\right)\right) + \operatorname{var}\left(\log\left(p_C\right)\right). \]</span>
+We can now apply the Delta method (see section @ref(#delta-method)) to find that (using Equation <a href="binary-outcome-variable.html#eq:delta3">(5.3)</a>)</p>
+<p><span class="math display">\[\operatorname{var}\left[\log\left(p_T\right)\right] = \operatorname{var}\left[\log\left(\frac{r_T}{n_T}\right)\right] \approx \frac{\pi_T\left(1-\pi_T\right)}{n_T}\times{\left(\frac{1}{\pi_T}\right)^2} = \frac{1}{n_T\pi_T} - \frac{1}{n_T}. \]</span>
+Since we estimate <span class="math inline">\(\pi_T\)</span> by <span class="math inline">\(r_T/n_T\)</span> this can be estimated by <span class="math inline">\(r_T^{-1} - n_T^{-1}\)</span>. Notice that we are relying on the derivative of <span class="math inline">\(\log\left(x\right)\)</span> being <span class="math inline">\(x^{-1}\)</span>, so we must always use natural logarithms.</p>
+<p>This leads us to the result that, approximately</p>
+<p><span class="math display">\[\log\left(\frac{p_T}{p_C}\right) \sim N\bigg(\phi,\,\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right) \bigg) \]</span> and so we can generate <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence intervals for <span class="math inline">\(\phi\)</span> as <span class="math inline">\(\left(l_{RR},\;u_{RR}\right)\)</span>, where the limits are</p>
+<p><span class="math display">\[
+\log\left(\frac{p_T}{p_C}\right) \pm z_{\frac{\alpha}{2}}\sqrt{\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right)}.
+\]</span>
+This then translates to an interval for the risk ratio itself of <span class="math inline">\(\left(e^{l_{RR}},e^{u_{RR}}\right)\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-33" class="example"><strong>Example 5.9  </strong></span>Returning once again to our streptomycin example, recall that we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+r_T &amp; = 38\\
+n_T &amp; = 55 \\
+r_C &amp; = 17 \\
+n_C &amp; = 52
+\end{aligned}
+\]</span>
+and so the limits of the confidence interval (with <span class="math inline">\(\alpha=0.05\)</span>) on the log scale are</p>
+<p><span class="math display">\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\frac{1}{38} - \frac{1}{55} + \frac{1}{17} - \frac{1}{52}} = \log(2.11) \pm 1.96 \times 0.218\]</span></p>
+<p>which gives us <span class="math inline">\(\left(0.320,\,1.176\right)\)</span> on the log scale, and a 95% CI for the risk ratio of <span class="math inline">\(\left(1.377,\,3.243\right)\)</span>.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-34" class="exercise"><strong>Exercise 5.1  </strong></span><em>This will be in the next formative assignment.</em> Following the same logic, derive a confidence interval for the Odds ratio. Calculate a 95% CI for the odds ratio for the Streptomycin example, and comment on the values.</p>
+</div>
+</div>
+<div id="summary" class="section level4 unnumbered hasAnchor">
+<h4>Summary<a href="binary-outcome-variable.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can collect all our confidence intervals together</p>
+</div>
 </div>
 </div>
 <div id="accounting-for-baseline-observations-logistic-regression" class="section level2 hasAnchor" number="5.4">
@@ -771,7 +841,7 @@ where <span class="math inline">\(I_i\)</span> is an indicator function taking v
 <p>However, this actually creates quite a few problems with binary variables. The outcome for patient <span class="math inline">\(i\)</span> will be either 0 or 1, but the terms in the model above do not guarantee this at all. Adding a normally distributed error term doesn’t really make sense in this context, so we will remove it. We can also make the LHS more continuous by thinking of the mean outcome rather than a single outcome. This makes sense, since if several patients were identical to patient <span class="math inline">\(i\)</span> (in the sense of having the same baseline covariate values and being allocated to the same treatment), we probably wouldn’t expect them all to have exactly the same outcome. Therefore we might instead think in terms of mean outcome, in which case our model becomes</p>
 <p><span class="math display">\[\text{mean outcome}_i = \mu + \tau I_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}.\]</span></p>
 <p>There is one final problem to overcome, which is that the LHS will certainly be in <span class="math inline">\(\left[0,\;1\right]\)</span>, but the RHS could take any value. To address this we need to use a transformation, to take the mean outcome from <span class="math inline">\(\left[0,1\right]\)</span> to <span class="math inline">\(\mathbb{R}\)</span>.</p>
-<p>The transformation that is usually used for a binary variable is the <strong>logit</strong> function</p>
+<p>The transformation that is usually used for a binary variable is the <strong>logit</strong> function, which is the log of the odds,</p>
 <p><span class="math display">\[\operatorname{logit}\left(\pi\right) = \log\frac{\pi}{1-\pi}.\]</span></p>
 <p>As <span class="math inline">\(\pi\)</span> tends to zero, <span class="math inline">\(\operatorname{logit}\left(\pi\right)\)</span> tends to <span class="math inline">\(-\infty\)</span>, and as <span class="math inline">\(\pi\)</span> tends to one, <span class="math inline">\(\operatorname{logit}\left(\pi\right)\)</span> tends to <span class="math inline">\(\infty\)</span>. The derivative of the <span class="math inline">\(\operatorname{logit}\)</span> function is</p>
 <p><span class="math display">\[ \frac{d\operatorname{logit}\left(\pi\right)}{d\pi} = \frac{1}{\pi\left(1-\pi\right)}\]</span>
@@ -798,14 +868,32 @@ Subtracting one from the other, we find</p>
 \end{aligned}
 \]</span></p>
 <p>That is, <span class="math inline">\(\tau\)</span> is the log of the odds ratio, or <span class="math inline">\(e^\tau\)</span> is the odds ratio of success in group <span class="math inline">\(T\)</span> relative to group <span class="math inline">\(C\)</span>, adjusted for variables <span class="math inline">\(x_1,\;\ldots,\;x_p\)</span>. Put another way, while the baseline covariates <span class="math inline">\(x_1,\ldots,x_p\)</span> affect the probability of ‘success’ (or whatever our binary outcome’s one means), <span class="math inline">\(\tau\)</span> is a measure of the effect of the treatment compared to control given some set of baseline covariate values. The coefficients are estimated using maximum likelihood, but since we will generally be using R (which will fit them for us!) we won’t go into the details.</p>
-<p>One thing that is quite tricky with logistic regression is diagnosing whether the model is appropriate. In theory there are two main places where the logistic regression model could fall down:</p>
+</div>
+<div id="diagnostics-for-logistic-regression" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Diagnostics for logistic regression<a href="binary-outcome-variable.html#diagnostics-for-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One thing that is quite tricky with logistic regression is diagnosing whether the model is appropriate. In theory there are several places where the logistic regression model could fall down:</p>
 <ul>
-<li>The link function - we’ve used the logit function, but others that map <span class="math inline">\(\left[0,1\right]\)</span> to <span class="math inline">\(\mathbb{R}\)</span> are available.</li>
+<li>The link function - we’ve used the logit function, but other functions that map <span class="math inline">\(\left[0,1\right]\)</span> to <span class="math inline">\(\mathbb{R}\)</span> are available.</li>
 <li>The linear model function - if we include variables that shouldn’t be there, or exclude variables or interaction terms that should be included, the model will not fit well.</li>
+<li>Issues with the data, for example outliers or influential values, may be having a disproportionate impact on the model</li>
+<li>The assumption that the observed data are binomially distributed may be invalid</li>
 </ul>
-<p>It is the second that is likely to be the most problematic, and we will explore now a couple of ways to check.</p>
-<div id="separation-plots" class="section level4 hasAnchor" number="5.4.1.1">
-<h4><span class="header-section-number">5.4.1.1</span> Separation plots<a href="binary-outcome-variable.html#separation-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is the second that is likely to be the most problematic, and we will explore now a couple of ways to check. There are many diagnostic techniques for binomial data (see eg. <span class="citation">Collett (<a href="#ref-collett_bin">2003a</a>)</span>) but we will only touch on a small number.</p>
+<p>If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-35" class="example"><strong>Example 5.10  </strong></span>This study is detailed in <span class="citation">Elmunzer et al. (<a href="#ref-elmunzer2012randomized">2012</a>)</span>. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication.</p>
+<p>The dataset contains 33 variables, but we will focus on a small number:</p>
+<ul>
+<li><span class="math inline">\(X\)</span>: (primary outcome) - incidence of post-ercp pancreatitis 0 (no), 1 (yes).</li>
+<li>Treatment arm: 0 (placebo), 1 (treatment)</li>
+<li>Site: 1, 2, 3, 4</li>
+<li>Risk: Risk score (1 to 5). Should be factor but treated as continuous.</li>
+</ul>
+<p>The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the <span class="math inline">\(x\)</span> axis and colour points by treatment group. The circles show the estimates from the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value.</p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+</div>
+<div id="separation-plots" class="section level4 hasAnchor" number="5.4.2.1">
+<h4><span class="header-section-number">5.4.2.1</span> Separation plots<a href="binary-outcome-variable.html#separation-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In a linear regression, we can plot the residual (the true value minus the fitted value) to see whether it fits our modelling assumptions that it should be normally distributed and independent of the fitted values and of all covariates. In a logistic regression model, our actual values are 0 and 1, and we have no error term. The uncertainty in the model comes from the fact that it is estimating probabilities (via the logit link function) rather than directly modelling the outcome.</p>
 <p>Separation plots are an attempt to visualise each piece of data against the model. The dataset is reordered according to the fitted value of the probability, and the fitted probability is plotted as a line. A vertical line (red, in the <code>separationplot</code> package) is drawn for every point where the outcome is 1, and a different coloured line (beige in <code>separationplot</code>) for every outcome that is 0. There are two main useful things the plot can show you:</p>
 <ol style="list-style-type: decimal">
@@ -838,7 +926,7 @@ Subtracting one from the other, we find</p>
 <span class="math display">\[\hat{\beta_i} \pm z_{\alpha/2}\sqrt{\hat{v_i}},\]</span>
 where <span class="math inline">\(\hat\beta_i\)</span> is the estimated coefficient of covariate <span class="math inline">\(i\)</span>, and <span class="math inline">\(\sqrt{\hat{v}_i}\)</span> is the standard error of the estimate. This can then be transformed into a confidence interval for the odds ratio.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 5.8  </strong></span>The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:</p>
+<p><span id="exm:unlabeled-div-36" class="example"><strong>Example 5.11  </strong></span>The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:</p>
 <ul>
 <li>sex</li>
 <li>age</li>
@@ -948,6 +1036,12 @@ al, Geoffrey Marshall et. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUB
 </div>
 <div id="ref-altman1998confidence" class="csl-entry">
 ———. 1998. <span>“Confidence Intervals for the Number Needed to Treat.”</span> <em>Bmj</em> 317 (7168): 1309–12.
+</div>
+<div id="ref-collett_bin" class="csl-entry">
+Collett, David. 2003a. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+</div>
+<div id="ref-elmunzer2012randomized" class="csl-entry">
+Elmunzer, B Joseph, James M Scheiman, Glen A Lehman, Amitabh Chak, Patrick Mosler, Peter DR Higgins, Rodney A Hayward, et al. 2012. <span>“A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.”</span> <em>New England Journal of Medicine</em> 366 (15): 1414–22.
 </div>
 <div id="ref-newcombe1998interval" class="csl-entry">
 Newcombe, Robert G. 1998. <span>“Interval Estimation for the Difference Between Independent Proportions: Comparison of Eleven Methods.”</span> <em>Statistics in Medicine</em> 17 (8): 873–90.
