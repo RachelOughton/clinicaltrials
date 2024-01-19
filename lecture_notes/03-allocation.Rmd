@@ -202,28 +202,39 @@ Clinical trials haven't always used random allocation to assign participants to 
 
 *Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.*
 
-Two important aspects to the allocation being *random*:
-
-1. Every patient should have the same probability of being assigned to each treatment group.
-2. The treatment group for a particular patient should not be able to be predicted.
-
-Point 1 is important because, as we have already mentioned, the statistical theory we use to plan and analyse the trial is based on the groups being random samples from the population. 
-
-Point 2 is important to avoid biases that come through the assignment of  a particular patient being known either in advance or after the fact. 
-
-There are some approaches that 'pass' the first point, but fail at the second. Eg. strict alternation ($ABABAB\ldots$), using patient characteristics such as date of birth or first letter of surname *, which is not related to the trial outcome, but which enables allocations to be predicted.*
-
-We will now explore some commonly used methods of allocation. We will usually assume two equally sized groups, $A$  and $B$, but it is simple to generalize to three or more groups, or to unequal allocation.
 
 [ASSIGNMENT! Explain details a bit, deadline is Monday 29th Jan. ]
 
 ## (Lecture 5) Allocation methods {#sec-allocation}
 
+Two important aspects to the allocation being *random*:
+
+1. Every patient should have the same probability of being assigned to each treatment group.
+2. The treatment group for a particular patient should not be able to be predicted.
+
+*Point 1 is important because, as we have already mentioned, the statistical theory we use to plan and analyse the trial is based on the groups being random samples from the population. *
+
+*Point 2 is important to avoid biases that come through the assignment of  a particular patient being known either in advance or after the fact. *
+
+*There are some approaches that 'pass' the first point, but fail at the second. Eg. strict alternation ($ABABAB\ldots$), using patient characteristics such as date of birth or first letter of surname, which is not related to the trial outcome, but which enables allocations to be predicted.*
+
+*We will now explore some commonly used methods of allocation. We will usually assume two equally sized groups, $A$  and $B$, but it is simple to generalize to three or more groups, or to unequal allocation.*
+
 ### Simple random allocation
 
-Perhaps intuitively the most simple method is a 'toin coss', where each participant has a probability 0.5 of being placed in each group. As participants arrive, assignment $C$ or $T$ is generated (with equal probability). Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn't require a 'master' randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained. 
+Simplest method: 'toin coss', where each participant has a probability 0.5 of being placed in each group. 
 
-This method is, effectively, used in many large trials, but for small trials it can be statistically problematic. The main reason for this is chance imbalance of group sizes.
+*As participants arrive, assignment $C$ or $T$ is generated (with equal probability).*
+
+Statistically ideal:
+
+  * generates the random sample we need
+  * All participants are allocated independently - not predictable
+  * No 'master' randomisation
+  
+*Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn't require a 'master' randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained.* 
+
+SRS is used effectively in many large trials, but for small trials it can be statistically problematic. The main reason for this is chance imbalance of group sizes.
 
 Suppose we have two groups, $T$ of size $N_T$ and $C$ of size $N_C$, with $N_T + N_C = 2n$. Patients are allocated independently with equal probability, which means
 
@@ -239,7 +250,7 @@ The probability that $N_C = N_T = n$ is
 $$ P\left(N_T = N_C = n\right)= \binom{2n}{n}\left(\frac{1}{2}\right)^{2n}. $$
   These probabilities are shown in Figure \@ref(fig:srs-alloc). We can see that  this method leads to very unequal groups relatively easily; with $n=15$, $P\left(N_{max}\geq 20\right) = 0.099$, so there is around a one in ten chance that one group will be double or more the size of the other. 
 
-```{r srs-alloc, echo=F, fig.cap= "The probability distribution of largest group size for n=15."}
+```{r srs-alloc, echo=F, fig.cap= "The probability distribution of largest group size for n=15.", fig.height=4}
 n = 15
 rvec = 15:30
 pvec = sapply(
@@ -257,13 +268,11 @@ df1 = data.frame(r=rvec, p=pvec)
 barplot(p~r, data=df1, xlab = "Size of largest group", ylab = "Probability")
 ```
 
-As we have seen when thinking about sample sizes in Section \@ref(sec-power), this will reduce the power $\Psi$ of the trial, since it depends on $\lambda\left(N_C,\,N_T\right) = \sqrt{\frac{1}{N_C} + \frac{1}{N_T}}$. 
+For larger trials, this imbalance will be less pronounced, for example Figure \@ref(fig:srsalloc300) shows the same for $n=300$.
 
-For larger trials, this imbalance will be less pronounced, for example Figure \@ref(fig:srsalloc200) shows the same for $n=200$.
-
-```{r srsalloc200, echo=F, fig.cap= "The probability distribution of largest group size for n=200."}
-n = 200
-rvec = 200:240
+```{r srsalloc300, echo=F, fig.cap= "The probability distribution of largest group size for n=300.", fig.height=4}
+n = 300
+rvec = 300:400
 pvec = sapply(
   1:length(rvec),
   function(i){
@@ -277,9 +286,11 @@ pvec = sapply(
 ) 
 df1 = data.frame(r=rvec, p=pvec)
 barplot(p~r, data=df1, xlab = "Size of largest group", ylab = "Probability")
+prob_400 = 1 - sum(df1$p[df1$r<=400])
+# prob_400
 ```
 
-In this case the $P\left(N_{max} \geq 220\right)=0.051$, so the chance of highly imbalanced groups is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.
+*In this case the $P\left(N_{max} \geq 400\right)\approx 10^{-16}$, so the chance of highly imbalanced groups (2:1 or worse) is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.*
 
 We saw in the sample size section that the greatest power is achieved when group sizes are equal, since this minimises the function 
 
@@ -290,7 +301,7 @@ However, with simple random sampling we can't guarantee equal group sizes.
 
 :::{.example}
 
-Suppose we are designing a trial to have $\alpha=0.05$, and our minimum detectable effect size is such that $\frac{\tau_M}{\sigma}=1$. If 30 participants are recruited, then we can calculate the power of the study using methods from Chapter 2:
+Suppose we are designing a trial to have $\alpha=0.05$, and our minimum detectable effect size is such that $\frac{\tau_M}{\sigma}=1$. If 30 participants are recruited, then 
 
 $$1-\beta = \Phi\left(\sqrt{\frac{n_T\,n_C}{30}} - 1.96\right). $$
 The first term in the standard normal CDF comes from the fact that
@@ -300,7 +311,7 @@ If we have equal group sizes $n_T=n_C=15$, then the power achieved is 78%.
 If the group sizes are 10 and 20, we have a power of 73%.
 If the group sizes are 6 and 24, the power goes down to 59%.
 
-So, as we saw when looking at power, we don't lose too much if the group sizes are 2:1, but a more pronounced imbalace has resulted in a much more noticeable loss. There may be other disadvantages to having such imbalance, for example increased costs, or a reduction in the amount of information gained about side effects. If this imbalance can be avoided, it should be.
+*So, as we saw when looking at power, we don't lose too much if the group sizes are 2:1, but a more pronounced imbalace has resulted in a much more noticeable loss. There may be other disadvantages to having such imbalance, for example increased costs, or a reduction in the amount of information gained about side effects. If this imbalance can be avoided, it should be.*
 
 ```{r}
 powerfun = function(n,m){
@@ -317,9 +328,9 @@ powerfun = function(n,m){
 
 ### Random permuted blocks
 
-One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $$\binom{2m}{m},$$ but this method can be adapted to more than two groups and to unequal group size.
+Very commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $$\binom{2m}{m},$$ but this method can be adapted to more than two groups and to unequal group size.
 
-If we have two groups, $A$ and $B$, then there are six *blocks* of length containing two $A$s and two $B$s
+If we have two groups, $A$ and $B$, then there are six *blocks* of length 4 containing two $A$s and two $B$s
 
 $$
 \begin{aligned}
@@ -332,37 +343,52 @@ $$
 \end{aligned}
 $$
 
-We can also randomly generate a sequence of numbers from $\left\lbrace 1, 2, 3, 4, 5, 6 \right\rbrace$, where each number has equal probability. This sequence will correspond to a sequence in $A$ and $B$ with four times the length. In this method, each patient is equally likely to receive $A$ and $B$, but there will never be a difference of more than two between the size of the two groups. 
-
+Randomly generate a sequence from $\left\lbrace 1, 2, 3, 4, 5, 6 \right\rbrace$, with equal probability. This sequence will correspond to a sequence in $A$ and $B$ with four times the length.
 For example, suppose the sequence begins $2,1,3,6,\ldots$. Replacing each number by its block, we have $ABAB\;AABB\;ABBA\;BBAA\;\ldots$. 
 
-One serious disadvantage of this method is that if the block size is fixed, and the doctors involved in the trial know which participants have received which treatments (which is unavoidable in cases such as surgery), then the allocation for some patients can be perfectly predicted. This is true for the fourth in every block, and for the third and fourth if the first two were the same. This means that selection bias may be a problem in more than 25% of participants, which is deemed unacceptable; indeed, it fails our second point about randomization.
+Advantages:
+
+  * Each patient is equally likely to receive $A$ and $B$
+  * Difference between $N_A$ and $N_B$ never more than $m$ (two in this case)
+  * Easy to implement
+
+Disadvantages:
+
+  * Some allocations can be predicted (last in every block, sometimes more)
+    *If the block size is fixed, and the doctors involved in the trial know which participants have received which treatments (which is unavoidable in cases such as surgery), then the allocation for some patients can be perfectly predicted. This is true for the fourth in every block, and for the third and fourth if the first two were the same. This means that selection bias may be a problem in more than 25% of participants, which is deemed unacceptable; indeed, it fails our second point about randomization.*
+  
 
 #### RPBs with random block length
 
-The issue above can be circumvented by not only randomly choosing from a selection of blocks, but also randomly choosing the length of the block. For example, there are 
+Remove predictability (almost) by randomly varying the length of the block. Eg. there are
 $$ \binom{6}{3} = 20$$
-possible blocks of size 6. Instead of always selecting from the six possible 4-blocks, a sampling scheme can be as follows.
+possible 6-blocks. Instead of always using 4-blocks, we can do the following.
 
   1. A random number $X$ is drawn from $\left\lbrace 4,6\right\rbrace$ to select the block length. 
-  2. A second random number $Y$ is drawn from 1 to 6 (if the block length is four) or 1 to 20 (if the block length is 6).
-  3. The block corresponding to $Y$ is chosen and participants assigned accordingly. 
+  2. A second random number $Y$ is drawn from 1 to 6 ($X=4$) or 1 to 20 ($X=6$).
+  3. The $Y^{th}$ block is chosen and participants assigned accordingly. 
   4. If more participants are needed, go back to step 1.
-  
-As well as ensuring that patients are equally likely to receive treatments $A$ and $B$, and that $N_A$ and $N_B$  can never differ by more than three, this method hugely reduces the possibility of enabling selection bias. The assignment of a patient can only be perfectly predicted if the difference is three, and this happens only for two of the twenty blocks of length six.
+
+This method
+
+  * Ensures patients equally likely to be in $A$ or $B$
+  * group sizes never differ by more than 3
+  * reduces selection bias (only predictably if difference is 3)
 
 ### Biased coin designs and urn schemes
 
-It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.
+What if we want to retain the pure stochasticity of SRS, but with more balance?
 
-Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.
+*It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.*
+
+Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far. *such that a participant is less likely to be assigned to an over-represented group.*
 
 #### Biased coin designs
 
-Suppose we are using a biased coin design for a trial to compare two treatments, $T$ and $C$. At the point where some number $n$ (not the total trial cohort) have been allocated, we can use the notation $N_T\left(n\right)$ for the number of participants allocated to treatment $T$, and $N_C\left(n\right)$ for the number of participants allocated to treatment $C$. Using these, we can denote the *imbalance* in treatment numbers as 
+Suppose we have groups $T$ and $C$, and have so far allocated $n$ participants. We write $N_T\left(n\right)$ for the number of participants allocated to treatment $T$, and $N_C\left(n\right)$ for the number of participants allocated to treatment $C$. We  denote the *imbalance* by 
 
 $$ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.$$
-  We use the imbalance $D\left(n\right)$ to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:
+  We use $D\left(n\right)$ to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:
   
   - If $D\left(n\right)=0$, allocate patient $n+1$ to treatment $T$ with probability $\frac{1}{2}$.
 - If $D\left(n\right)<0$, allocate patient $n+1$ to treatment $T$ with probability $P$.
@@ -370,9 +396,7 @@ $$ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) 
 
 where $P\in\left(\frac{1}{2}, 1\right)$.
 
-> Question: What would happen if $P=\frac{1}{2}$ or $P=1$?
-  
-  If, at some point in the trial, we have $\lvert D\left(n\right)\rvert = j$, for some $j>0$, then we must have either
+If, at some point in the trial, we have $\lvert D\left(n\right)\rvert = j$, for some $j>0$, then we must have either
 
 $$ \lvert D\left(n+1\right)\rvert = j+1 $$
   or 
@@ -397,7 +421,7 @@ P\bigg(\lvert D\left(n+1\right) \rvert = j-1 \; \bigg| \; \lvert D\left(n\right)
 $$
   Figure \@ref(fig:biasedcoin-p2thirds) shows four realisations of this random walk with $P=0.667$. We see that sometimes the imbalance gets quite high, but in general it isn't too far from 0.
 
-```{r biasedcoin-p2thirds, echo=F, fig.cap = "Absolute imbalance for a biased-coin scheme  with $P=0.667$."}
+```{r biasedcoin-p2thirds, echo=F, fig.cap = "Absolute imbalance for a biased-coin scheme  with $P=0.667$.", fig.height=3.5}
 
 biased.coin = function(
   n,     # how many allocations to do
@@ -425,19 +449,19 @@ abs_50_23a = biased.coin(n=50, p=0.667)
 plot1 = ggplot(data=abs_50_23a, aes(x=ID, y=abs_Dn)) + 
   geom_line() + geom_point(col=2) + 
   xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 8)
+  ylim(0, 8) + theme_bw()
 
 abs_50_23b = biased.coin(n=50, p=0.667, seed = 2863727)
 plot2 = ggplot(data=abs_50_23b, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance")+
-  ylim(0, 8)
+  ylim(0, 8) + theme_bw()
 
 abs_50_23c = biased.coin(n=50, p=0.667, seed = 2313467)
 plot3 = ggplot(data=abs_50_23c, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance")+
-  ylim(0, 8)
+  ylim(0, 8) + theme_bw()
 
 abs_50_23d = biased.coin(n=50, p=0.667, seed = 2682144)
 plot4 = ggplot(data=abs_50_23d, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance")+
-  ylim(0, 8)
+  ylim(0, 8) + theme_bw()
 
 
 grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
@@ -447,22 +471,22 @@ grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 
 Figure \@ref(fig:p-nearlyhalf) shows four realisations of the random walk with $P=0.55$. Here, the imbalance is able to get very high (note the change in $y$-axis); for example in the first plot, if we stopped the trial at $n=50$ we would have 34 participants in one arm and only 16 in the other.
 
-```{r p-nearlyhalf, fig.cap = "Absolute imbalance for a biased-coin scheme  with $P = 0.55$."}
+```{r p-nearlyhalf, fig.cap = "Absolute imbalance for a biased-coin scheme  with $P = 0.55$.", fig.height=3.5}
 abs_50_55a = biased.coin(n=50, p=0.55)
 plot1 = ggplot(data=abs_50_55a, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 18)
+  ylim(0, 18) + theme_bw()
 
 abs_50_55b = biased.coin(n=50, p=0.55, seed = 2863727)
 plot2 = ggplot(data=abs_50_55b, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 18)
+  ylim(0, 18) + theme_bw()
 
 abs_50_55c = biased.coin(n=50, p=0.55, seed = 2313467)
 plot3 = ggplot(data=abs_50_55c, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 18)
+  ylim(0, 18) + theme_bw()
 
 abs_50_55d = biased.coin(n=50, p=0.55, seed = 2682144)
 plot4 = ggplot(data=abs_50_55d, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 18)
+  ylim(0, 18) + theme_bw()
 
 
 grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
@@ -471,36 +495,46 @@ grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 
 By contrast, with $P=0.9$ as in Figure \@ref(fig:p-nearlyone), there is much less imbalance. However, this brings with it greater predictability. Although allocation is always random, given some degree of imbalance (likely to be known about by those executing the trial), the probability of guessing the next allocation correctly is high (0.9). This invites the biases we have been trying to avoid, albeit in an imperfect form.
 
-```{r p-nearlyone, fig.cap = "Absolute imbalance for a biased-coin scheme  with $P = 0.9$."}
+```{r p-nearlyone, fig.cap = "Absolute imbalance for a biased-coin scheme  with $P = 0.9$.", fig.height=3.5}
 abs_50_9a = biased.coin(n=50, p=0.9)
 plot1 = ggplot(data=abs_50_9a, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 4) 
+  ylim(0, 4)  + theme_bw()
 
 abs_50_9b = biased.coin(n=50, p=0.9, seed = 2863727)
 plot2 = ggplot(data=abs_50_9b, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 4) 
+  ylim(0, 4)  + theme_bw()
 
 abs_50_9c = biased.coin(n=50, p=0.9, seed = 2313467)
 plot3 = ggplot(data=abs_50_9c, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 4) 
+  ylim(0, 4)  + theme_bw()
 
 abs_50_9d = biased.coin(n=50, p=0.9, seed = 2682144)
 plot4 = ggplot(data=abs_50_9d, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(col=2) + xlab("Participant ID") + ylab("Absolute Imbalance") +
-  ylim(0, 4) 
+  ylim(0, 4)  + theme_bw()
 
 
 grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 ```
 
+In summary
+
+  * $P$ closer to 0.5 $/rightarrow$ less predictable, more imbalance
+  * $P$ closer to 1 $/rightarrow$ more predictable, less imbalance
+
 A big disadvantage to the biased coin scheme is that the same probability is used regardless of the size of the imbalance (assuming it isn't zero). In the next section, we introduce a method where the probability of allocating the next patient to the underrepresented treatment gets larger as the imbalance grows.
 
 #### Urn models
 
-*Urn models* for treatment allocation use urns in the way that you might well remember from school probability (or indeed often we had drawers of socks). In this setting, the urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant **did not** receive. 
+The urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant **did not** receive. 
 
-To allocate the next participant, a ball is drawn from the urn. If the allocations at this point are balanced, then the participant has equal probability of being allocated to each treatment. If there is imbalance, there will be more balls labelled by the underrepresented treatment, and so the participant is more likely to be allocated to that one. The greater the imbalance, the higher the probability of reducing it. 
+*To allocate the next participant, a ball is drawn from the urn. If the allocations at this point are balanced, then the participant has equal probability of being allocated to each treatment. If there is imbalance, there will be more balls labelled by the underrepresented treatment, and so the participant is more likely to be allocated to that one. The greater the imbalance, the higher the probability of reducing it. *
 
-The process described so far is a $UD\left(1,1\right)$; there is one ball for each treatment to start with, and one ball is added to the urn after each allocation. To be more general, we can assume a $UD\left(r,s\right)$ scheme. Now, there are $r$ balls for each treatment in the urn to begin with, and $s$ are added after each allocation.
+The process described so far is a $UD\left(1,1\right)$; one ball for each treatment to start with, one ball added after each allocation. 
+
+More generally we assume a $UD\left(r,s\right)$ scheme:
+
+  * $r$ balls for each treatment to begin with
+  * $s$ balls added after each allocation.
 
 Near the start of the allocation, the probabilities are likely to change a lot to address imbalance, but once a 'reasonable number' of allocations have been made it is likely to settle into simple random sampling (or very close).
 
@@ -511,7 +545,8 @@ Suppose that after participant $n$, $N_T\left(n\right)$ participants have been a
 $$D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.$$
   After $n$ allocations there will be $2r + ns$ balls in the urn: $r$ for each treatment at the start, and $s$ added after each allocation. Of these, $r + N_C\left(n\right)s$ will be labelled by treatment $T$ and $r + N_T\left(n\right)s$ by treatment $C$.
 
-To think about the probabilities for the absolute imbalance $\lvert D\left(n\right)\rvert$, we have to be careful now about which direction it is in. If the trial currently (after allocation $n$) has an imbalance of participants in favour of treatment $C$, then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment $T$, which is
+*To think about the probabilities for the absolute imbalance $\lvert D\left(n\right)\rvert$, we have to be careful now about which direction it is in.* 
+If after allocation $n$ there is imbalance in favour of treatment $C$, then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment $T$, which is
 
 $$
   \begin{aligned}
@@ -577,7 +612,7 @@ urn = function(r,s,N, seed = 60003){
 ```
 
 
-```{r urn11, fig.cap = "Four realisations of absolute imbalance for r=1, s=1, N=50."}
+```{r urn11, fig.cap = "Four realisations of absolute imbalance for r=1, s=1, N=50.", fig.height=3.5}
 
 urn1 = urn(1,1,50)
 urn2 = urn(1,1,50, seed = 6004)
@@ -586,23 +621,23 @@ urn4 = urn(1,1,50, seed = 431)
 
 plot1 = ggplot(data=urn1, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance") +ylim(0,10)
+  ylab("Absolute Imbalance") +ylim(0,10) + theme_bw()
 plot2 = ggplot(data=urn2, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,10)
+  ylab("Absolute Imbalance")+ylim(0,10) + theme_bw()
 plot3 = ggplot(data=urn3, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,10)
+  ylab("Absolute Imbalance")+ylim(0,10) + theme_bw()
 plot4 = ggplot(data=urn4, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,10)
+  ylab("Absolute Imbalance")+ylim(0,10) + theme_bw()
 
 grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 
 
 ```
 
-```{r urn18, fig.cap = "Four realisations of absolute imbalance for r=1, s=8, N=50."}
+```{r urn18, fig.cap = "Four realisations of absolute imbalance for r=1, s=8, N=50.", fig.height=3.5}
 
 urn1 = urn(1,8,50)
 urn2 = urn(1,8,50, seed = 6004)
@@ -611,23 +646,23 @@ urn4 = urn(1,8,50, seed = 431)
 
 plot1 = ggplot(data=urn1, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,15)
+  ylab("Absolute Imbalance")+ylim(0,15) + theme_bw()
 plot2 = ggplot(data=urn2, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,15)
+  ylab("Absolute Imbalance")+ylim(0,15) + theme_bw()
 plot3 = ggplot(data=urn3, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,15)
+  ylab("Absolute Imbalance")+ylim(0,15) + theme_bw()
 plot4 = ggplot(data=urn4, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,15)
+  ylab("Absolute Imbalance")+ylim(0,15) + theme_bw()
 
 grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 
 
 ```
 
-```{r urn81, fig.cap = "Four realisations of absolute imbalance for r=8, s=1, N=50."}
+```{r urn81, fig.cap = "Four realisations of absolute imbalance for r=8, s=1, N=50.", fig.height=3.5}
 
 urn1 = urn(8,1,50)
 urn2 = urn(8,1,50, seed = 6004)
@@ -636,16 +671,16 @@ urn4 = urn(8,1,50, seed = 431)
 
 plot1 = ggplot(data=urn1, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,8)
+  ylab("Absolute Imbalance")+ylim(0,8) + theme_bw()
 plot2 = ggplot(data=urn2, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,8)
+  ylab("Absolute Imbalance")+ylim(0,8) + theme_bw()
 plot3 = ggplot(data=urn3, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,8)
+  ylab("Absolute Imbalance")+ylim(0,8) + theme_bw()
 plot4 = ggplot(data=urn4, aes(x=ID, y=Dn)) + geom_line() +
   geom_point(col=2) + xlab("Participant ID") + 
-  ylab("Absolute Imbalance")+ylim(0,8)
+  ylab("Absolute Imbalance")+ylim(0,8) + theme_bw()
 
 grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 
@@ -654,7 +689,12 @@ grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 
 We see that imbalance is reduced, particularly for small $n$. A small $r$ and large $s$ enhance this, since the large number ($s$) of balls added to the urn with each allocation weight the probabilities more heavily, as in Figure \@ref(fig:urn18). By contrast, if $r$ is large and $s$ is small, as in Figure \@ref(fig:urn81), the probabilities stay closer to $\left(\frac{1}{2}, \frac{1}{2}\right)$ and so more imbalance occurs early on.
 
-
+Particular advantages of the urn design are:
+  
+  * Easy to implement for $K>2$ groups
+  * Responds to higher imbalance
+  
+We've alluded to the idea of performing these algorithms within specific groups, to achieve balance among participants with particular characteristics. Next lecture we'll think about allocation methods that put more focus on balance in relation to factors.
 
 
 

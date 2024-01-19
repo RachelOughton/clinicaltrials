@@ -295,7 +295,7 @@ powerfun = function(n,m){
 
 One commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $$\binom{2m}{m},$$ but this method can be adapted to more than two groups and to unequal group size.
 
-If we have two groups, $A$ and $B$, then there are six *blocks* of length containing two $A$s and two $B$s
+If we have two groups, $A$ and $B$, then there are six *blocks* of length 4 containing two $A$s and two $B$s
 
 $$
 \begin{aligned}
@@ -335,7 +335,9 @@ Biased coin designs and urn schemes both work by adjusting the probabilities of 
 
 #### Biased coin designs
 
-Suppose we are using a biased coin design for a trial to compare two treatments, $T$ and $C$. At the point where some number $n$ (not the total trial cohort) have been allocated, we can use the notation $N_T\left(n\right)$ for the number of participants allocated to treatment $T$, and $N_C\left(n\right)$ for the number of participants allocated to treatment $C$. Using these, we can denote the *imbalance* in treatment numbers as 
+The biased coin design was introduced by @efron1971forcing, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias.@efron1971forcing suggested the biased coin design be used within categories (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same). 
+
+Suppose we are using a biased coin design for a trial to compare two treatments, $T$ and $C$. At the point where some number $n$ (not the total trial cohort) have been allocated, we can use the notation $N_T\left(n\right)$ for the number of participants allocated to treatment $T$, and $N_C\left(n\right)$ for the number of participants allocated to treatment $C$. Using these, we can denote the *imbalance* in treatment numbers by 
 
 $$ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.$$
   We use the imbalance $D\left(n\right)$ to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:
@@ -371,7 +373,7 @@ P\bigg(\lvert D\left(n+1\right) \rvert = j+ 1 \; \bigg| \; \lvert D\left(n\right
 P\bigg(\lvert D\left(n+1\right) \rvert = j-1 \; \bigg| \; \lvert D\left(n\right)\rvert=j\bigg)& = P
 \end{aligned}
 $$
-  Figure \@ref(fig:biasedcoin-p2thirds) shows four realisations of this random walk with $P=0.667$. We see that sometimes the imbalance gets quite high, but in general it isn't too far from 0.
+  Figure \@ref(fig:biasedcoin-p2thirds) shows four realisations of this random walk with $P=0.667$ (Efron's preferred value). We see that sometimes the imbalance gets quite high, but in general it isn't too far from 0.
 
 ```{r biasedcoin-p2thirds, echo=F, fig.cap = "Absolute imbalance for a biased-coin scheme  with $P=0.667$."}
 
@@ -468,11 +470,13 @@ plot4 = ggplot(data=abs_50_9d, aes(x=ID, y=abs_Dn)) + geom_line() + geom_point(c
 grid.arrange(plot1, plot2, plot3, plot4, nrow=2)
 ```
 
+Efron's suggestion for implementation was that each clinician would received an unordered stack of envelopes. Each would contain three more envelopes, each with instructions covering one of the three possible cases ($\lvert D\left(n\right)\rvert<0,\,\lvert D\left(n\right)\rvert=0$ and $\lvert D\left(n\right)\rvert>0$). The clinician would open the appropriate envelope and implement the instruction. Remember this was 1971!
+
 A big disadvantage to the biased coin scheme is that the same probability is used regardless of the size of the imbalance (assuming it isn't zero). In the next section, we introduce a method where the probability of allocating the next patient to the underrepresented treatment gets larger as the imbalance grows.
 
 #### Urn models
 
-*Urn models* for treatment allocation use urns in the way that you might well remember from school probability (or indeed often we had drawers of socks). In this setting, the urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant **did not** receive. 
+*Urn models* for treatment allocation use urns in the way that you might well remember from school probability (or indeed often we had drawers of socks). They were first applied to clinical trials by wei1978application. In this setting, the urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant **did not** receive. 
 
 To allocate the next participant, a ball is drawn from the urn. If the allocations at this point are balanced, then the participant has equal probability of being allocated to each treatment. If there is imbalance, there will be more balls labelled by the underrepresented treatment, and so the participant is more likely to be allocated to that one. The greater the imbalance, the higher the probability of reducing it. 
 

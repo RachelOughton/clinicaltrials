@@ -3,7 +3,6 @@ setwd("C:/Users/d415ax/OneDrive - Durham University/AP2020_21/Teaching/2023/Clin
 
 # home laptop
 setwd("C:/Users/Rachel Oughton/OneDrive - Durham University/AP2020_21/Teaching/2023/ClinicalTrials4H/Notes/")
-
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 
 ### for github:
@@ -22,3 +21,14 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 setwd("/Users/rachelo/Documents/GitRepos/clinicaltrials/lecture_notes")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 
+#home laptop
+setwd("C:/Users/Rachel Oughton/GitRepos/clinicaltrials/lecture_notes")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+
+
+## in git bash
+## shouldn't need first two on mac
+# git reset
+# git config core.protectNTFS false
+# git checkout
+# git pull

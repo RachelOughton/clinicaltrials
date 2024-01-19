@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Allocation | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Allocation | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
@@ -52,15 +52,11 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -204,8 +200,8 @@ and therefore we can apply this correction to the sample variance <span class="m
 where <span class="math inline">\(\tau\)</span> is our treatment effect, which we can estimate using the difference in the groups’ means, <span class="math inline">\(\bar{X}_T - \bar{X}_C\)</span>. Our null hypothesis is that <span class="math inline">\(\tau = 0\)</span>, and our alternative hypothesis is that <span class="math inline">\(\tau\neq{0}\)</span>, and therefore an estimate of <span class="math inline">\(\tau\)</span> from our data is very important! Put equivalently, it is important that there is no bias in our estimates of <span class="math inline">\(\bar{X}_C\)</span> and <span class="math inline">\(\bar{X}_T\)</span>.</p>
 <p>Usually, what this comes down to is that the assumption that the data are independent, identically distributed random variables from the relevant distributions (which we have already relied on a lot for our sample size calculations) has been violated in some way.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 3.1  </strong></span>Historically, women and the elderly are underrepresented in clinical trials (<span class="citation">Cottingham and Fisher (<a href="#ref-cottingham2022gendered">2022</a>)</span>) and results are often translated from young or middle aged healthy men to these other groups (<span class="citation">Vitale et al. (<a href="#ref-vitale2017under">2017</a>)</span>). This isn’t reasonable, since women have very different hormonal activity from men, causing them to often react differently to drugs compared to men involved in the trial. The standard dose (based on trials with mostly male participants) can also be too high for many women. The complicated nature of women’s hormones is sometimes even given as a reason for not including them in the trial. Women and elderly people are also both more likely to have adverse effects to drugs in some fields.</p>
-<p>There are also ethical reasons behind the low numbers of women in trials, especially phase I and phase II trials. If a woman is possibly pregnant (and trials tend to be extremely cautious in deciding who might be pregnant!) then they are quite often excluded, in order to protect the (actual or hypothetical) fetus. Indeed, in 1977 the Food and Drug Administration (FDA) in the US recommended that women be excluded from phase I and II trials (<span class="citation">Health (<a href="#ref-nationalhistory">2023</a>)</span>) as a result of some severe cases of fetuses being harmed by drugs (especially Thalidamide) . This means that even some very mainstream drugs, for example antihistamines (<span class="citation">Kar et al. (<a href="#ref-kar2012review">2012</a>)</span>), haven’t been tested for safety/efficacy during pregnancy, as well as some (for example HIV treatments) that would be of huge benefit to many many pregnant women. <a href="https://www.politico.eu/article/telescope-hiv-aids-unitaid-gender-pregnant-trials/">This article</a> is an interesting read if you would like to know more.</p>
+<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 3.1  </strong></span>Historically, women and the elderly are underrepresented in clinical trials (<span class="citation">Cottingham and Fisher (<a href="#ref-cottingham2022gendered" role="doc-biblioref">2022</a>)</span>) and results are often translated from young or middle aged healthy men to these other groups (<span class="citation">Vitale et al. (<a href="#ref-vitale2017under" role="doc-biblioref">2017</a>)</span>). This isn’t reasonable, since women have very different hormonal activity from men, causing them to often react differently to drugs compared to men involved in the trial. The standard dose (based on trials with mostly male participants) can also be too high for many women. The complicated nature of women’s hormones is sometimes even given as a reason for not including them in the trial. Women and elderly people are also both more likely to have adverse effects to drugs in some fields.</p>
+<p>There are also ethical reasons behind the low numbers of women in trials, especially phase I and phase II trials. If a woman is possibly pregnant (and trials tend to be extremely cautious in deciding who might be pregnant!) then they are quite often excluded, in order to protect the (actual or hypothetical) fetus. Indeed, in 1977 the Food and Drug Administration (FDA) in the US recommended that women be excluded from phase I and II trials (<span class="citation">Health (<a href="#ref-nationalhistory" role="doc-biblioref">2023</a>)</span>) as a result of some severe cases of fetuses being harmed by drugs (especially Thalidamide) . This means that even some very mainstream drugs, for example antihistamines (<span class="citation">Kar et al. (<a href="#ref-kar2012review" role="doc-biblioref">2012</a>)</span>), haven’t been tested for safety/efficacy during pregnancy, as well as some (for example HIV treatments) that would be of huge benefit to many many pregnant women. <a href="https://www.politico.eu/article/telescope-hiv-aids-unitaid-gender-pregnant-trials/">This article</a> is an interesting read if you would like to know more.</p>
 </div>
 <div id="where-does-bias-come-from" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Where does bias come from?<a href="allocation.html#where-does-bias-come-from" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -308,7 +304,7 @@ If <span class="math inline">\(N\)</span> is the better treatment, then <span cl
 </div>
 <div id="implications-for-allocation" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Implications for allocation<a href="allocation.html#implications-for-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. <span class="citation">Altman and Bland (<a href="#ref-altman1999treatment">1999</a>)</span> gives an overview of why this has led to bias, and gives some examples.</p>
+<p>Historically (and probably still, to an extent), clinical trials have not necessarily used random allocation to assign participants to groups. <span class="citation">Altman and Bland (<a href="#ref-altman1999treatment" role="doc-biblioref">1999</a>)</span> gives an overview of why this has led to bias, and gives some examples.</p>
 <p>Sometimes analyses compare groups in serial, so that <span class="math inline">\(N_A\)</span> patients one year (say) form the control group, and <span class="math inline">\(N_B\)</span> patients in a subsequent year, who are given treatment <span class="math inline">\(B\)</span>, form the intervention group. In this scenario it is impossible to control for all other changes that have occurred with time, and this leads to a systematic bias, usually in favour of treatment <span class="math inline">\(B\)</span>.</p>
 <p>Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.</p>
 <p>There are two important aspects to the allocation being <em>random</em> that we will draw attention to.</p>
@@ -369,7 +365,7 @@ If the group sizes are 6 and 24, the power goes down to 59%.</p>
 <div id="random-permuted-blocks" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Random permuted blocks<a href="allocation.html#random-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One commonly used method to randomly allocate participants while avoiding too much imbalance is to use <em>random permuted blocks</em> (RPBs). If the blocks have size <span class="math inline">\(2m\)</span>, and there are two groups then there are <span class="math display">\[\binom{2m}{m},\]</span> but this method can be adapted to more than two groups and to unequal group size.</p>
-<p>If we have two groups, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then there are six <em>blocks</em> of length containing two <span class="math inline">\(A\)</span>s and two <span class="math inline">\(B\)</span>s</p>
+<p>If we have two groups, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then there are six <em>blocks</em> of length 4 containing two <span class="math inline">\(A\)</span>s and two <span class="math inline">\(B\)</span>s</p>
 <p><span class="math display">\[
 \begin{aligned}
 1.&amp; AABB\\
@@ -403,7 +399,8 @@ possible blocks of size 6. Instead of always selecting from the six possible 4-b
 <p>Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.</p>
 <div id="biased-coin-designs" class="section level4 hasAnchor" number="3.2.3.1">
 <h4><span class="header-section-number">3.2.3.1</span> Biased coin designs<a href="allocation.html#biased-coin-designs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Suppose we are using a biased coin design for a trial to compare two treatments, <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>. At the point where some number <span class="math inline">\(n\)</span> (not the total trial cohort) have been allocated, we can use the notation <span class="math inline">\(N_T\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(T\)</span>, and <span class="math inline">\(N_C\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(C\)</span>. Using these, we can denote the <em>imbalance</em> in treatment numbers as</p>
+<p>The biased coin design was introduced by <span class="citation">Efron (<a href="#ref-efron1971forcing" role="doc-biblioref">1971</a>)</span>, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias.@efron1971forcing suggested the biased coin design be used within categories (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same).</p>
+<p>Suppose we are using a biased coin design for a trial to compare two treatments, <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>. At the point where some number <span class="math inline">\(n\)</span> (not the total trial cohort) have been allocated, we can use the notation <span class="math inline">\(N_T\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(T\)</span>, and <span class="math inline">\(N_C\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(C\)</span>. Using these, we can denote the <em>imbalance</em> in treatment numbers by</p>
 <p><span class="math display">\[ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.\]</span>
 We use the imbalance <span class="math inline">\(D\left(n\right)\)</span> to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:</p>
 <ul>
@@ -432,7 +429,7 @@ P\bigg(\lvert D\left(n+1\right) \rvert = j+ 1 \; \bigg| \; \lvert D\left(n\right
 P\bigg(\lvert D\left(n+1\right) \rvert = j-1 \; \bigg| \; \lvert D\left(n\right)\rvert=j\bigg)&amp; = P
 \end{aligned}
 \]</span>
-Figure <a href="allocation.html#fig:biasedcoin-p2thirds">3.3</a> shows four realisations of this random walk with <span class="math inline">\(P=0.667\)</span>. We see that sometimes the imbalance gets quite high, but in general it isn’t too far from 0.</p>
+Figure <a href="allocation.html#fig:biasedcoin-p2thirds">3.3</a> shows four realisations of this random walk with <span class="math inline">\(P=0.667\)</span> (Efron’s preferred value). We see that sometimes the imbalance gets quite high, but in general it isn’t too far from 0.</p>
 <div class="figure"><span style="display:block;" id="fig:biasedcoin-p2thirds"></span>
 <img src="CT4H_notes_files/figure-html/biasedcoin-p2thirds-1.png" alt="Absolute imbalance for a biased-coin scheme  with $P=0.667$." width="672" />
 <p class="caption">
@@ -453,11 +450,12 @@ Figure 3.4: Absolute imbalance for a biased-coin scheme with <span class="math i
 Figure 3.5: Absolute imbalance for a biased-coin scheme with <span class="math inline">\(P = 0.9\)</span>.
 </p>
 </div>
+<p>Efron’s suggestion for implementation was that each clinician would received an unordered stack of envelopes. Each would contain three more envelopes, each with instructions covering one of the three possible cases (<span class="math inline">\(\lvert D\left(n\right)\rvert&lt;0,\,\lvert D\left(n\right)\rvert=0\)</span> and <span class="math inline">\(\lvert D\left(n\right)\rvert&gt;0\)</span>). The clinician would open the appropriate envelope and implement the instruction. Remember this was 1971!</p>
 <p>A big disadvantage to the biased coin scheme is that the same probability is used regardless of the size of the imbalance (assuming it isn’t zero). In the next section, we introduce a method where the probability of allocating the next patient to the underrepresented treatment gets larger as the imbalance grows.</p>
 </div>
 <div id="urn-models" class="section level4 hasAnchor" number="3.2.3.2">
 <h4><span class="header-section-number">3.2.3.2</span> Urn models<a href="allocation.html#urn-models" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><em>Urn models</em> for treatment allocation use urns in the way that you might well remember from school probability (or indeed often we had drawers of socks). In this setting, the urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant <strong>did not</strong> receive.</p>
+<p><em>Urn models</em> for treatment allocation use urns in the way that you might well remember from school probability (or indeed often we had drawers of socks). They were first applied to clinical trials by wei1978application. In this setting, the urn starts off with a ball for each treatment, and a ball is added to the urn each time a participant is allocated. The ball is labelled according to the treatment allocation that participant <strong>did not</strong> receive.</p>
 <p>To allocate the next participant, a ball is drawn from the urn. If the allocations at this point are balanced, then the participant has equal probability of being allocated to each treatment. If there is imbalance, there will be more balls labelled by the underrepresented treatment, and so the participant is more likely to be allocated to that one. The greater the imbalance, the higher the probability of reducing it.</p>
 <p>The process described so far is a <span class="math inline">\(UD\left(1,1\right)\)</span>; there is one ball for each treatment to start with, and one ball is added to the urn after each allocation. To be more general, we can assume a <span class="math inline">\(UD\left(r,s\right)\)</span> scheme. Now, there are <span class="math inline">\(r\)</span> balls for each treatment in the urn to begin with, and <span class="math inline">\(s\)</span> are added after each allocation.</p>
 <p>Near the start of the allocation, the probabilities are likely to change a lot to address imbalance, but once a ‘reasonable number’ of allocations have been made it is likely to settle into simple random sampling (or very close).</p>
@@ -564,8 +562,8 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 </div>
 <div id="minimization" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Minimization<a href="allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
-<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
+<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization" role="doc-biblioref">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use" role="doc-biblioref">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
+<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre" role="doc-biblioref">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
 <p>When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
 <ul>
 <li>Whether continuous variables have to be binned</li>
@@ -574,7 +572,7 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 <p>It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.</p>
 <div id="minimization-algorithm" class="section level3 hasAnchor" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Minimization algorithm<a href="allocation.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
+<p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential" role="doc-biblioref">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
 <p>Suppose there are several prognostic factors over which we require balance, and that these factors have <span class="math inline">\(I, J, K, ...\)</span> levels. In our example above, there would be <span class="math inline">\(I=2,\; J=2,\; K=3,\; L=2\)</span>. Note that this equates to 24 strata.</p>
 <p>At some point in the trial, suppose we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with levels <span class="math inline">\(i,\,j,\,k,\,l\)</span> of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, <span class="math inline">\(n^A_{ijkl}\)</span> have been assigned to treatment arm <span class="math inline">\(A\)</span>, and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>. So we have</p>
 <p><span class="math display">\[ n^A_{ijkl} + n^B_{ijkl} = n_{ijkl} .\]</span></p>
@@ -609,7 +607,7 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 3.5  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
+<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 3.5  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical" role="doc-biblioref">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control" role="doc-biblioref">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
 <p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table <a href="allocation.html#tab:minimeg">3.1</a>.</p>
 <table>
@@ -689,11 +687,11 @@ Since our sum is greater than zero, we allocate the new patient to arm B (talc) 
 </div>
 <div id="problems-with-allocation" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Problems with allocation<a href="allocation.html#problems-with-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="allocation.html#fig:licorice-participants">3.9</a> shows an example, taken from <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>.</p>
+<p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="allocation.html#fig:licorice-participants">3.9</a> shows an example, taken from <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized" role="doc-biblioref">2013</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:licorice-participants"></span>
 <img src="images/licorice.jpg" alt="Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized" width="60%" />
 <p class="caption">
-Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>
+Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized" role="doc-biblioref">2013</a>)</span>
 </p>
 </div>
 <p>The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.</p>
@@ -721,7 +719,7 @@ Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the inter
 <p>This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.</p>
-<p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
+<p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation" role="doc-biblioref">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
 <blockquote>
 <p>Supposing one group has more elderly women with diabetes and symptoms of heart failure. It would then be impossible to attribute a better outcome in the other group to the beneficial effects of treatment since poor left ventricular function and age at outset are major determinants of survival in any longitudinal study of heart disease, and women with diabetes, as a group, are likely to do worse. At this point the primary objective of randomisation—exclusion of confounding factors—has failed. … If a very big trial fails, because, for example, the play of chance put more hypertensive smokers in one group than the other, the tragedy for the trialists, and all involved, is even greater.</p>
 </blockquote>
@@ -736,6 +734,9 @@ Altman, Douglas G, and J Martin Bland. 1999. <span>“Treatment Allocation in Co
 </div>
 <div class="csl-entry">
 Cottingham, Marci D, and Jill A Fisher. 2022. <span>“Gendered Logics of Biomedical Research: Women in US Phase i Clinical Trials.”</span> <em>Social Problems</em> 69 (2): 492–509.
+</div>
+<div class="csl-entry">
+Efron, Bradley. 1971. <span>“Forcing a Sequential Experiment to Be Balanced.”</span> <em>Biometrika</em> 58 (3): 403–17.
 </div>
 <div class="csl-entry">
 Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
@@ -798,6 +799,9 @@ Altman, Douglas G, and J Martin Bland. 1999. <span>“Treatment Allocation in Co
 </div>
 <div id="ref-cottingham2022gendered" class="csl-entry">
 Cottingham, Marci D, and Jill A Fisher. 2022. <span>“Gendered Logics of Biomedical Research: Women in US Phase i Clinical Trials.”</span> <em>Social Problems</em> 69 (2): 492–509.
+</div>
+<div id="ref-efron1971forcing" class="csl-entry">
+Efron, Bradley. 1971. <span>“Forcing a Sequential Experiment to Be Balanced.”</span> <em>Biometrika</em> 58 (3): 403–17.
 </div>
 <div id="ref-fentiman1983control" class="csl-entry">
 Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
