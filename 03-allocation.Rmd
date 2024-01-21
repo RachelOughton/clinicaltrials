@@ -167,7 +167,7 @@ Clearly it is ideal for both the patient and the clinician not to know which arm
 
 #### Slight aside: publication bias {-}
 
-In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a [medical] journal. These are peer-reviewed, which means that experts from the relevant field are ask to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be publised.
+In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a [medical] journal. These are peer-reviewed, which means that experts from the relevant field are ask to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be published.
 
 It seems that papers reporting positive / conclusive results are more likely to be published than papers about [viable] trials that ultimately fail to reject the null hypothesis. As we know, in most cases if the null hypothesis is rejected this is indicative that there is a true treatment difference. However, sometimes by random chance a trial will detect a difference even when there isn't one (approximately 5% of the time if $\alpha=0.05$). If these papers are disproportionately likely to be published, the body of literature will not reflect the truth, and there may be serious implications for impact on practice.
 
@@ -335,7 +335,7 @@ Biased coin designs and urn schemes both work by adjusting the probabilities of 
 
 #### Biased coin designs
 
-The biased coin design was introduced by @efron1971forcing, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias.@efron1971forcing suggested the biased coin design be used within categories (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same). 
+The biased coin design was introduced by @efron1971forcing, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias. @efron1971forcing suggested the biased coin design be used within categories (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same). 
 
 Suppose we are using a biased coin design for a trial to compare two treatments, $T$ and $C$. At the point where some number $n$ (not the total trial cohort) have been allocated, we can use the notation $N_T\left(n\right)$ for the number of participants allocated to treatment $T$, and $N_C\left(n\right)$ for the number of participants allocated to treatment $C$. Using these, we can denote the *imbalance* in treatment numbers by 
 
@@ -646,7 +646,7 @@ Such baseline measurements can be used in allocation.
 
 ## Stratified sampling
 
-The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.
+The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. Both the biased coin design and the urn design were intended for use in this way, adjusting in relation to imbalance within each stratum independently. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.
 
 :::{.example}
 

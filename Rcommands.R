@@ -32,3 +32,7 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 # git config core.protectNTFS false
 # git checkout
 # git pull
+
+# or maybe
+# git fetch
+# git pull

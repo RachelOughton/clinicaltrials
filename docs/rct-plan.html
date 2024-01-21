@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Sample size for a normally distributed primary outcome variable | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Sample size for a normally distributed primary outcome variable | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-19" />
+<meta name="date" content="2024-01-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,11 +52,15 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -228,7 +232,7 @@ div.csl-indent {
 <p>For example, suppose our test statistic <span class="math inline">\(t\)</span> has a <span class="math inline">\(t\)</span> distribution with 31 degrees of freedom and we obtain a value of 2, as shown in Figure <a href="rct-plan.html#fig:t31-onesided">2.1</a>.
 In this case our P-value is <span class="math inline">\(1 - F_t\left(2, df=31\right)= 0.0272\)</span> (where <span class="math inline">\(F_t\left(\cdot\right)\)</span> is the cumulative distribution function of the <span class="math inline">\(t\)</span> distribution) , and the result would be considered significant at the 0.05 level.</p>
 <div class="figure"><span style="display:block;" id="fig:t31-onesided"></span>
-<img src="CT4H_notes_files/figure-html/t31-onesided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $t &gt; 2$ shaded." width="672" />
+<img src="CT4H_notes_files/figure-html/t31-onesided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $t > 2$ shaded.” width=“672” /&gt;
 <p class="caption">
 Figure 2.1: The distribution <span class="math inline">\(t_{31}\)</span>, with the area corresponding to <span class="math inline">\(t &gt; 2\)</span> shaded.
 </p>
@@ -241,7 +245,7 @@ Figure 2.1: The distribution <span class="math inline">\(t_{31}\)</span>, with t
 \end{align*}\]</span></p>
 <p>In this scenario, Figure <a href="rct-plan.html#fig:t31-onesided">2.1</a> is replaced by the plot shown in Figure <a href="rct-plan.html#fig:t31-twosided">2.2</a>, where values of <span class="math inline">\(t\)</span> with <span class="math inline">\(t&lt;-2\)</span> are considered ‘equivalent’ to those with <span class="math inline">\(t&gt;2\)</span>, in the sense of how unlikely they are under <span class="math inline">\(H_0\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:t31-twosided"></span>
-<img src="CT4H_notes_files/figure-html/t31-twosided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $|t| &gt; 2$ shaded." width="672" />
+<img src="CT4H_notes_files/figure-html/t31-twosided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $|t| > 2$ shaded.” width=“672” /&gt;
 <p class="caption">
 Figure 2.2: The distribution <span class="math inline">\(t_{31}\)</span>, with the area corresponding to <span class="math inline">\(|t| &gt; 2\)</span> shaded.
 </p>
@@ -415,7 +419,7 @@ where <span class="math inline">\(\tau_M\)</span> is our minimum detectable effe
     \tag{2.4}
 \end{equation}\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 2.1  </strong></span><span class="citation">(from <a href="#ref-zhong2009calculate" role="doc-biblioref">Zhong 2009</a>)</span>
+<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 2.1  </strong></span><span class="citation">(from <a href="#ref-zhong2009calculate">Zhong 2009</a>)</span>
 A trial is being planned to test whether there is a difference in the efficacy of ACEII antagonist (a new drug) and ACE inhibitor (the standard drug) for the treatment of primary hypertension (high blood pressure). The primary outcome variable is change in sitting diastolic blood pressure (SDBP, mmHg) compared to a baseline measurement taken at the start of the trial. The trial should have a significance level of <span class="math inline">\(\alpha=0.05\)</span> and a power of <span class="math inline">\(1-\beta = 0.8\)</span>, with the same number of participants in each group. The minimum clinically important difference is <span class="math inline">\(\tau_M = 3 \text{ mmHg}\)</span> and the pooled standard deviation is <span class="math inline">\(s = 8 \text{ mmHg}\)</span>. Therefore, using equation <a href="rct-plan.html#eq:sscont">(2.4)</a> the sample size should be at least</p>
 <p><span class="math display">\[\begin{align*}
       N &amp; = \frac{2\times{8}^2\left(0.842 + 1.96\right)^2}{3^2}\\
