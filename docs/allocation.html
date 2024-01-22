@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-21" />
+<meta name="date" content="2024-01-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -165,7 +165,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="allocation.html"><a href="allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="allocation.html"><a href="allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>3.6</b> Problems with allocation</a></li>
+<li class="chapter" data-level="3.6" data-path="allocation.html"><a href="allocation.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.6</b> Problems around allocation</a></li>
 </ul></li>
 </ul>
 
@@ -566,9 +566,13 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 </div>
 <div id="minimization" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Minimization<a href="allocation.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
-<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).</p>
-<p>When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
+<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for use with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
+<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 3.5  </strong></span>The study by <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> investigates the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
+For their prognostic factors, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.</p>
+</div>
+<p>When a patient enters the trial, their level of each factor is listed. The patient is then allocated in such a way as to minimise any difference in these factors between the two groups. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
 <ul>
 <li>Whether continuous variables have to be binned</li>
 <li>Whether there is any randomness</li>
@@ -596,7 +600,7 @@ where <span class="math inline">\(b\)</span> is the block length. However, there
 \ldots&amp;
 \end{aligned}
 \]</span>
-where <span class="math inline">\(+\)</span> represents summation over the other factors, so that for exammple</p>
+where <span class="math inline">\(+\)</span> represents summation over the other factors, so that for example</p>
 <p><span class="math display">\[n^A_{++k+} = \sum\limits_{i,j,l}{n^A_{ijkl}}\]</span>
 is the total number of patients with level <span class="math inline">\(k\)</span> of that factor assigned to treatment arm <span class="math inline">\(A\)</span>.</p>
 <p>Therefore, instead of having <span class="math inline">\(IJKL\)</span> constraints constraints, as we would with using randomly permuted blocks within each stratum, we have <span class="math inline">\(I+J+K+L\)</span> constraints, one for each level of each factor. In our example this is 9 constraints rather than 24.</p>
@@ -611,7 +615,7 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 3.5  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
+<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 3.6  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
 <p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table <a href="allocation.html#tab:minimeg">3.1</a>.</p>
 <table>
@@ -689,8 +693,8 @@ Since our sum is greater than zero, we allocate the new patient to arm B (talc) 
 </div>
 </div>
 </div>
-<div id="problems-with-allocation" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> Problems with allocation<a href="allocation.html#problems-with-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="problems-around-allocation" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Problems around allocation<a href="allocation.html#problems-around-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="allocation.html#fig:licorice-participants">3.9</a> shows an example, taken from <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:licorice-participants"></span>
 <img src="images/licorice.jpg" alt="Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized" width="60%" />

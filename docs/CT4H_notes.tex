@@ -81,7 +81,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-01-21}
+\date{2024-01-22}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1258,11 +1258,16 @@ A difficulty with stratified sampling is that the number of strata can quickly b
 \hypertarget{minimization}{%
 \section{Minimization}\label{minimization}}
 
-Minimization was first proposed by \citet{taves1974minimization}, then shortly after by \citet{pocock1975sequential} and \citet{freedman1976use}. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
+Minimization was first proposed by \citet{taves1974minimization}, then shortly after by \citet{pocock1975sequential} and \citet{freedman1976use}. The aim of minimization is to minimize the difference between the two groups. It was developed for use with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
 
-To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, \citet{kallis1994pre} chose age (\(\leq{50}\) or \(50\)), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).
+To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome.
 
-When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
+\begin{example}
+The study by \citet{kallis1994pre} investigates the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
+For their prognostic factors, \citet{kallis1994pre} chose age (\(\leq{50}\) or \(50\)), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.
+\end{example}
+
+When a patient enters the trial, their level of each factor is listed. The patient is then allocated in such a way as to minimise any difference in these factors between the two groups. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
 
 \begin{itemize}
 \tightlist
@@ -1309,7 +1314,7 @@ Therefore, it is enough to make sure that the following are all small:
 \ldots&
 \end{aligned}
 \]
-where \(+\) represents summation over the other factors, so that for exammple
+where \(+\) represents summation over the other factors, so that for example
 
 \[n^A_{++k+} = \sum\limits_{i,j,l}{n^A_{ijkl}}\]
 is the total number of patients with level \(k\) of that factor assigned to treatment arm \(A\).
@@ -1383,8 +1388,8 @@ Our calculation from step 4 of the minimisation algorithm is therefore
 Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability \(P\in\left(0.5,1\right)\) and update the table before allocating patient 17.
 \end{example}
 
-\hypertarget{problems-with-allocation}{%
-\section{Problems with allocation}\label{problems-with-allocation}}
+\hypertarget{problems-around-allocation}{%
+\section{Problems around allocation}\label{problems-around-allocation}}
 
 In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \ref{fig:licorice-participants} shows an example, taken from \citet{ruetzler2013randomized}.
 

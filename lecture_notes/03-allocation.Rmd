@@ -700,9 +700,12 @@ We've alluded to the idea of performing these algorithms within specific groups,
 
 ## (Lecture 6) Incorporating baseline measurements
 
-At the start of the trial (ideally before allocation) various baseline measurements are usually taken. If the primary outcome variable is a continuous measurement (eg. blood pressure, weight,...) this same quantity will often be included, so that there is some measure of each participant's condition/symptoms at the start of the trial. Factors such as age, sex, level of symptoms, things to do with treatment history and many others are included. Essentially, we include any variable we can that may lead to bias if not properly dealt with. The crucial thing is that none of these measurements (taken when they are) should be affected by the trial.
+*At the start of the trial (ideally before allocation) various baseline measurements are usually taken. If the primary outcome variable is a continuous measurement (eg. blood pressure, weight,...) this same quantity will often be included, so that there is some measure of each participant's condition/symptoms at the start of the trial. Factors such as age, sex, level of symptoms, things to do with treatment history and many others are included. Essentially, we include any variable we can that may lead to bias if not properly dealt with. The crucial thing is that none of these measurements (taken when they are) should be affected by the trial.*
 
-Such baseline measurements can be used in allocation.
+Baseline measurements can be used in allocation, eg.
+
+  * baseline value of $X$, age, sex, condition specifics,...
+  * Must **not** be affected by the trial
 
 ## Stratified sampling
 
