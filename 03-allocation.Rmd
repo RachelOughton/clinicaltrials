@@ -731,12 +731,17 @@ In order to implement minimisation, we follow these steps:
   2. Suppose that at some point in the trial we have recruited $n_{ijkl}$ patients with prognostic factors $i,\,j,\,k,\,l$. Of these $n^A_{ijkl}$ are allocated to treatment arm $A$ and $n^B_{ijkl}$ to arm $B$.
   3. A new patient enters the trial. They have prognostic factors at levels $w,\,x,\,y,\,z$.
   4. We form the sum 
-  $$\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).$$
+  
+  \begin{equation}
+  \left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).
+  (\#eq:minim)
+  \end{equation}
+  
   5. If the sum from step 4 is negative (that is, allocation to arm $B$ as dominated up to now) then we allocate the new patient to arm $A$ with probability $P$, with $P>0.5$. If the sum is positive, they are allocated to arm $B$ with probability $P$. If the sum is zero, they are allocated to arm $A$ with probability $\frac{1}{2}$.
   
 Some people set $P=1$, whereas others would set $\frac{1}{2}<P<1$ to retain some randomness.  Although setting $P=1$ makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know $n^A_{i+++}$ and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set $P<1$.
 
-:::{.example}
+:::{.example #mustine}
 
 From @altman1990practical (citing @fentiman1983control).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age ($\leq{50}$ or $>50$), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions ($\leq{30}$ or $>30$)  and menopausal status (Pre or post). 
@@ -781,6 +786,8 @@ $$
 $$
 Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability $P\in\left(0.5,1\right)$ and update the table before allocating patient 17. 
 :::
+
+One shortcoming of minimisation is that the factors are equally weighted in the algorithm, regardless of the number of patients with that particular factor level. For example, suppose at some later stage of allocation in Example \@ref(exm:mustine), only four patients with stage I or II disease had been recruited, and that one of these had been allocated to group $A$ and three to group $B$. At the same point, 18 of the recruited number were post-menopausal, and of these 10 had been allocated to group $A$ and 8 to group $B$. The values contributed to the sum in Equation \@ref(eq:minim) are $+2$ and $-2$, so these imbalances effectively cancel one another out, but intuitively it would feel sensible to prioritise equal distribution within the stage I or II women, since proportionally this stratum is less balanced. @wei1978application proposed an extension of the Urn Design that does exactly this, but we won't cover this method in our course.
 
 ## Problems around allocation
 

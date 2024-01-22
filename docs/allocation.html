@@ -609,13 +609,18 @@ is the total number of patients with level <span class="math inline">\(k\)</span
 <li>Allocate the first patient by simple randomisation.</li>
 <li>Suppose that at some point in the trial we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with prognostic factors <span class="math inline">\(i,\,j,\,k,\,l\)</span>. Of these <span class="math inline">\(n^A_{ijkl}\)</span> are allocated to treatment arm <span class="math inline">\(A\)</span> and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>.</li>
 <li>A new patient enters the trial. They have prognostic factors at levels <span class="math inline">\(w,\,x,\,y,\,z\)</span>.</li>
-<li>We form the sum
-<span class="math display">\[\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).\]</span></li>
+<li>We form the sum</li>
+</ol>
+<p><span class="math display" id="eq:minim">\[\begin{equation}
+  \left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).
+  \tag{3.1}
+  \end{equation}\]</span></p>
+<ol start="5" style="list-style-type: decimal">
 <li>If the sum from step 4 is negative (that is, allocation to arm <span class="math inline">\(B\)</span> as dominated up to now) then we allocate the new patient to arm <span class="math inline">\(A\)</span> with probability <span class="math inline">\(P\)</span>, with <span class="math inline">\(P&gt;0.5\)</span>. If the sum is positive, they are allocated to arm <span class="math inline">\(B\)</span> with probability <span class="math inline">\(P\)</span>. If the sum is zero, they are allocated to arm <span class="math inline">\(A\)</span> with probability <span class="math inline">\(\frac{1}{2}\)</span>.</li>
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 3.6  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
+<p><span id="exm:mustine" class="example"><strong>Example 3.6  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
 <p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table <a href="allocation.html#tab:minimeg">3.1</a>.</p>
 <table>
@@ -691,6 +696,7 @@ Our calculation from step 4 of the minimisation algorithm is therefore</p>
 \]</span>
 Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability <span class="math inline">\(P\in\left(0.5,1\right)\)</span> and update the table before allocating patient 17.</p>
 </div>
+<p>One shortcoming of minimisation is that the factors are equally weighted in the algorithm, regardless of the number of patients with that particular factor level. For example, suppose at some later stage of allocation in Example <a href="allocation.html#exm:mustine">3.6</a>, only four patients with stage I or II disease had been recruited, and that one of these had been allocated to group <span class="math inline">\(A\)</span> and three to group <span class="math inline">\(B\)</span>. At the same point, 18 of the recruited number were post-menopausal, and of these 10 had been allocated to group <span class="math inline">\(A\)</span> and 8 to group <span class="math inline">\(B\)</span>. The values contributed to the sum in Equation <a href="allocation.html#eq:minim">(3.1)</a> are <span class="math inline">\(+2\)</span> and <span class="math inline">\(-2\)</span>, so these imbalances effectively cancel one another out, but intuitively it would feel sensible to prioritise equal distribution within the stage I or II women, since proportionally this stratum is less balanced. <span class="citation">Wei (<a href="#ref-wei1978application">1978</a>)</span> proposed an extension of the Urn Design that does exactly this, but we won’t cover this method in our course.</p>
 </div>
 </div>
 <div id="problems-around-allocation" class="section level2 hasAnchor" number="3.6">
