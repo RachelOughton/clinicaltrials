@@ -709,7 +709,11 @@ Baseline measurements can be used in allocation, eg.
 
 ## Stratified sampling
 
-The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.
+*The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.*
+
+Divide each prognostic factor into $\geq2$ levels, consider allocation separately within each combination of factor levels. Each such group is a 'stratum'. 
+
+Within each stratum, apply RBP, biased coin, urn model or your allocation method of choice (one that aims for balance).
 
 :::{.example}
 
@@ -729,17 +733,24 @@ knitr::kable(df_strat)%>%kableExtra::column_spec(1, bold = TRUE)
 Each time a new participant arrives, we follow the randomization pattern for their stratum. We could use another allocation scheme within each stratum, for example an urn model or a biased coin. It is important that we use one that aims to conserve balance, or else the benefits of stratification are lost.
 :::
 
+*A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are $3^4=81$ strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic). *
 
-A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are $3^4=81$ strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic). 
+Difficulty:
+  
+  * Number of strata quickly becomes too large: eg. four factors with three levels each $\rightarrow 3^4=81$ strata.
+  * Unwieldy practically
+  * Very likely to have v small numbers in some strata
 
 
 ## Minimization
 
-Minimization was first proposed by @taves1974minimization, then shortly after by @pocock1975sequential and @freedman1976use. The aim of minimization is to minimize the difference between the two groups. It was developed for us with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
+*Minimization was first proposed by @taves1974minimization, then shortly after by @pocock1975sequential and @freedman1976use. The aim of minimization is to minimize the difference between the two groups ($T$ and $C$). It was developed for use with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.*
 
-To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, @kallis1994pre chose age ($\leq{50}$ or $50$), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).
+Aims to achieve balance between groups $T$ and $C$, taking prognostic factors into account. Has become more popular recently, because of computing availability.
 
-When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
+*To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, @kallis1994pre chose age ($\leq{50}$ or $50$), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).*
+
+When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors between the two groups. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
 
   * Whether continuous variables have to be binned
   * Whether there is any randomness
@@ -748,9 +759,9 @@ It is generally agreed that if the risk of selection bias cannot be avoided, the
 
 ### Minimization algorithm 
 
-Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). @pocock1975sequential give an algorithm in the general case of $N$ treatment arms, but we will not do that here. 
+We have a trial in which patients are recruited sequentially and need to be allocated to arm $A$ or $B$. *@pocock1975sequential give an algorithm in the general case of $N$ treatment arms, but we will not do that here. *
 
-Suppose there are several prognostic factors over which we require balance, and that these factors have $I, J, K, ...$ levels. In our example above, there would be $I=2,\; J=2,\; K=3,\; L=2$. Note that this equates to 24 strata.
+Suppose we require balance over several factors, and that these factors have $I, J, K, ...$ levels. In our example above, there would be $I=2,\; J=2,\; K=3,\; L=2$. Note that this equates to 24 strata. We will use this example to explain minimisation.
 
 At some point in the trial, suppose we have recruited $n_{ijkl}$ patients with levels $i,\,j,\,k,\,l$ of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, $n^A_{ijkl}$ have been assigned to treatment arm $A$, and $n^B_{ijkl}$ to arm $B$. So we have
 
@@ -764,7 +775,7 @@ where $b$ is the block length. However, there are two issues with this:
   * There may be very few patients in some strata, in which case RPBs will fail to provide adequate balance.
   * It is unlikely that we actually need this level of balance. 
   
-The first point is a pragmatic one - the method usually guaranteed to achieve good balance is likely to fail, at least for some strata. The second is more theoretical. In general, we require that groups be balanced according to each individual prognostic factor, but not to interactions. For example, it is often believed that younger patients would have generally better outcomes, but that other factors do not systematically affect this difference.
+*The first point is a pragmatic one - the method usually guaranteed to achieve good balance is likely to fail, at least for some strata. The second is more theoretical. In general, we require that groups be balanced according to each individual prognostic factor, but not to interactions. For example, it is often believed that younger patients would have generally better outcomes, but that other factors do not systematically affect this difference.*
 
 Therefore, it is enough to make sure that the following are all small:
 
@@ -775,7 +786,7 @@ $$
 \ldots&
 \end{aligned}
 $$
-where $+$ represents summation over the other factors, so that for exammple
+where $+$ represents summation over the other factors, so that for example
 
 $$n^A_{++k+} = \sum\limits_{i,j,l}{n^A_{ijkl}}$$
 is the total number of patients with level $k$ of that factor assigned to treatment arm $A$.
@@ -788,8 +799,8 @@ In order to implement minimisation, we follow these steps:
   2. Suppose that at some point in the trial we have recruited $n_{ijkl}$ patients with prognostic factors $i,\,j,\,k,\,l$. Of these $n^A_{ijkl}$ are allocated to treatment arm $A$ and $n^B_{ijkl}$ to arm $B$.
   3. A new patient enters the trial. They have prognostic factors at levels $w,\,x,\,y,\,z$.
   4. We form the sum 
-  $$\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).$$
-  5. If the sum from step 4 is negative (that is, allocation to arm $B$ as dominated up to now) then we allocate the new patient to arm $A$ with probability $P$, with $P>0.5$. If the sum is positive, they are allocated to arm $B$ with probability $P$. If the sum is zero, they are allocated to arm $A$ with probability $\frac{1}{2}$.
+  $$S=\left(n^A_{w+++} - n^B_{w+++}\right) + \left(n^A_{+x++} - n^B_{+x++}\right) + \left(n^A_{++y+} - n^B_{++y+}\right) + \left(n^A_{+++z} - n^B_{+++z}\right).$$
+  5. If $S<0$ (that is, allocation to arm $B$ as dominated up to now) then we allocate the new patient to arm $A$ with probability $P$, with $P>0.5$. If the $S>0$, they are allocated to arm $B$ with probability $P$. If the $S=0$, they are allocated to arm $A$ with probability $\frac{1}{2}$.
   
 Some people set $P=1$, whereas others would set $\frac{1}{2}<P<1$ to retain some randomness.  Although setting $P=1$ makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know $n^A_{i+++}$ and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set $P<1$.
 
@@ -840,6 +851,12 @@ Since our sum is greater than zero, we allocate the new patient to arm B (talc) 
 :::
 
 ## Problems with allocation
+
+### Communication!
+
+
+
+### Interactions
 
 In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure \@ref(fig:licorice-participants) shows an example, taken from @ruetzler2013randomized.
 
