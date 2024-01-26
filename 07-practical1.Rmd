@@ -1,4 +1,6 @@
-# Computer Practical 1 {-}
+# (APPENDIX) Computer practicals {-} 
+
+# Computer Practical 1
 
 This computer practical will cover two main parts:
 
@@ -11,16 +13,32 @@ There are many, many packages in R that implement methods for designing and anal
 install.packages("<packagename>")
 ```
 
-If you have problems running R on you local machine, or on the university machines, the most foolproof way might be to use a remote server (you may have already done this in 2H thanks to Louis Aslett). 
 
-## Allocation {-}
+If you have problems running R on you local machine, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
 
-### Preparing to allocate {-}
+This requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
 
-To work with allocation, we will use the `licorice_gargle` dataset, which you can find by 
+
+[Direct link to codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&reserved=0)
+
+[Instructions for how to use codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&reserved=0)
+
+
+
+## Allocation
+
+We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow!
+
+```{r, eval=F, echo=T}
+install.packages(c("medicaldata", "ggplot2", "Minirand", "blockrand"))
+```
+
+### Example dataset 
+
+To work with allocation, we will use the `licorice_gargle` dataset from the package `medicaldata`, which you can find by 
 
 ```{r, echo=T}
-require(medicaldata)
+library(medicaldata)
 data("licorice_gargle")
 ```
 
@@ -30,7 +48,7 @@ You can find out about the dataset by looking at the help file
 ?licorice_gargle
 ```
 
-and at [this website](https://www.causeweb.org/tshs/licorice-gargle/).
+and at [this website](https://www.causeweb.org/tshs/licorice-gargle/), even the original paper @ruetzler2013randomized.
 
 :::{.exercise}
 Of the 19 columns, how many are baseline characteristics that we could use in the allocation?
@@ -43,6 +61,7 @@ lic_garg = licorice_gargle[ ,1:8]
 # vector of names of columns to be coerced to factor
 cols <- c("preOp_gender", "preOp_asa",  
 "preOp_mallampati", "preOp_smoking", "preOp_pain", "treat")
+# convert each of those columns to factors
 lic_garg[cols] <- lapply(lic_garg[cols], factor) 
 
 # Check the result:
@@ -68,9 +87,9 @@ Are there any ways in which you think this data set would be particularly vulner
 :::
 
 
-#### Tabulating results {-}
+### Demographic tables
 
-For every allocation, we'll want to see a summary table of how the patients have been split between the groups. In this practical we'll use a relatively simple method, detailed [here](https://www.rdocumentation.org/packages/Minirand/versions/0.1.3/topics/randbalance) from the package `Minirand`, which is designed to output a table in the R console.
+For every allocation, we'll want to see a summary table of how the patients are distributed between the groups. In this practical we'll use a relatively simple method, detailed [here](https://www.rdocumentation.org/packages/Minirand/versions/0.1.3/topics/randbalance) from the package `Minirand`, which is designed to output a table in the R console.
 
 ```{r, echo=T, results='hide'}
 library(Minirand)
@@ -82,7 +101,7 @@ randbalance(
   trtseq = c("0", "1"))
 ```
 
-Notice that we can also save this as an object and access the individual tables, for example
+Notice that we can also save this as an object and access the individual sub-tables, for example
 
 ```{r, echo=T}
 rb_tab = randbalance(
@@ -94,7 +113,7 @@ rb_tab$preOp_gender
 ```
 There are also packages with functions to output these demographic tables formatted for use in latex documents, for example [`atable`](https://journal.r-project.org/archive/2019/RJ-2019-001/RJ-2019-001.pdf).
 
-#### Binning continuous variables {-}
+#### Binning continuous variables
 
 Looking at the output above, it's clear that the two numeric variables `preOp_age` and `preOp_calcBMI` are going to complicate things. 
 
@@ -143,12 +162,12 @@ If you've chosen different bins, that's fine! But it will help you if the column
 
 </details>
 
-To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this is likely not the most efficient way to produce the end result. For the complicated methods we'll use packages. Feel free to write your own code for the simpler methods if you want to!
+To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we'll use packages. Feel free to write your own code for the simpler methods if you want to!
 
 We'll start by performing each method once, and then go on to perform a more thorough simulation study.
 
 
-### Simple random allocation {-}
+### Simple random allocation
 
 In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. At this point we don't need to think about the prognostic factors at all.
 
@@ -205,22 +224,143 @@ rb_tab = randbalance(
 
 
 
-### Randomly permuted blocks {-}
+### Randomly permuted blocks
+
+An obvious problem with using RPBs for this data is the number of strata. We have (if you have the same numbers of levels for `age` and `BMI` as I do)
+
+$$2\times{3}\times{4}\times{3}\times{2}\times{3}\times{3} = 1296 $$
+strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will start by using RPBs without stratification. We will do this with the package `blockrand`. 
+
+```{r, echo=F}
+library(blockrand)
+```
+
+The default for the function `blockrand` is that it will randomly vary block length within $\left\brace 2,\,4,\,6,\,8 \right\rbrace$. 
+
+
+:::{.exercise}
+Try playing around with the function `blockrand`, for example starting with
+
+```{r, echo=T, eval=F}
+blockrand(n=100)
+```
+
+Can you generate an allocation for the `licorice_gargle` data (remember our data frame is now `lg_df`) and produce the balance table?
+
+:::
+
+<details><summary>Click for solution</summary>
+
+There are 235 rows/participants in `lg_df`, and to keep consistency we would like the levels of our treatment to be `"T"` and `"C"`. Therefore we can do
+
+```{r, echo=T}
+rpb_lg = blockrand(n=235, levels = c("T", "C"))
+```
+
+Notice that this doesn't have 235 rows: the `blockrand` function will always finish after a whole block.
+
+Let's add this to our participant data to create a new data frame `lg_rpb`:
+
+```{r, echo=T}
+# create the new data frame, a copy of lg_df
+lg_rpb = lg_df  
+
+# Replace the original treat column with the RPB treatment column
+# Using only the first 235 allocations
+lg_rpb$treat = rpb_lg$treatment[1:235]
+```
+
+Then we can generate the demographic table as before:
+
+```{r, echo=T, eval=F}
+randbalance(
+  trt = lg_rpb$treat, 
+  covmat = lg_rpb[,-8], 
+  ntrt=2, 
+  trtseq = c("T", "C"))
+```
+</details>
+
+The package `blockrand` contains a function `plotblockrand` outputs PDFs of randomization cards, ready to be printed and put into envelopes!
+
+### Biased coin designs
+
+We can write code for a biased coin design by adapting the `srs` function above, setting $p=\frac{2}{3}$ by default as per @efron1971forcing.
+
+```{r, echo=T, eval=T}
+biased_coin = function(
+    data,
+    levels = c("T", "C"),
+    p=2/3
+){
+  Dn = 0 # starting value of imbalance
+  n = nrow(data)
+  alloc = rep(NA, n)
+  
+  for (i in 1:n){
+    if (Dn==0){ # equally balanced
+      alloc[i] = sample(levels, size=1, prob=c(0.5, 0.5) )
+    } else if(Dn<0){ # More allocations to levels[2] up to this point
+      alloc[i] = sample(levels, size=1, prob=c(p, 1-p) )
+    } else if(Dn>0){ # More allocations to levels[1] up to this point
+      alloc[i] = sample(levels, size=1, prob=c(1-p, p) )
+    }
+    # Compute imbalance at this stage
+    alloc_to_n = alloc[1:i]
+    Dn = sum(alloc_to_n==levels[1]) - sum(alloc_to_n == levels[2])
+  }
+  data$treat = as.factor(alloc)
+  data
+}
+```
+
+
+:::{.exercise}
+Use the function `biased_coin` above to allocate patients to the two groups. 
+
+  1. Produce the demographic table. Try this for some different values of `p`. 
+  2. Choose two of the baseline factors and use these to stratify the dataset. 
+
+:::
+
+
+<details><summary>Click for solution</summary>
+
+To create a biased coin design with $p=0.9$ (for example), we enter
+
+```{r, echo=T}
+lg_bc1 = biased_coin(
+  data=lg_df[,-8],
+  p=0.9
+)
+
+```
+
+and to produce a balance table:
+
+```{r, echo=T, eval=F}
+randbalance(
+  trt = lg_bc1$treat, 
+  covmat = lg_bc1[,-8], 
+  ntrt=2, 
+  trtseq = c("T", "C"))
+```
+
+The simplest way to introduce stratification is to split the dataset completely into the strata, and treat them as separate trials. For example, here we'll use `preOp_smoking` and `preOp_gender`
+
+THERE HAS TO BE A BETTER WAY THAN THIS!!!!!!
+Look into stratification in R
+
+</details>
 
 
 
-#### RPBs with random block length {-}
 
-
-### Biased coin designs {-}
-
-
-### Urn designs {-}
+### Urn designs
 
 
 
 ### Minimisation {-}
-
 
 For the licorice dataset, @ruetzler2013randomized say that "Randomization (1:1) to licorice or placebo was assigned by a Web-based system that was accessed just before treatment by an independent researcher who was not involved in data collection; no stratification was used."
 

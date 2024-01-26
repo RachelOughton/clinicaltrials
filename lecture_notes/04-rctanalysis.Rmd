@@ -3,16 +3,26 @@ always_allow_html: true
 ---
 
 
-# Analyzing RCT data {#rct-analysis}
+# (Lecture 7) Analyzing RCT data {#rct-analysis}
 
-We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation $\tau$ to denote the treatment effect.
+*We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation $\tau$ to denote the treatment effect.*
 
-In this chapter we'll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we'll go on to look at other types of data.
+*In this chapter we'll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we'll go on to look at other types of data.*
+
+We now have trial data, and want to estimate the treatment effect $\tau$.
 
 ::: {.example} 
-To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
+  
+  * From @hommel1986effect. 
+  * 16 diabetes patients
+  * Group $T$ receive Captopril, a drug that may reduce blood pressure.
+  * Placebo given to group $C$
+  * Primary outcome $X$ is systolic blood pressure (mmHg)
 
-The baseline and outcome blood pressure measurements (in mmHg) are shown in Table \@ref(tab:captoprildata). We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. @hommel1986effect say that the patients were 'randomly allocated' to their group.
+  
+*This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.*
+
+*The baseline and outcome blood pressure measurements (in mmHg) are shown in Table \@ref(tab:captoprildata). We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. @hommel1986effect say that the patients were 'randomly allocated' to their group.*
 
 
 ```{r captoprildata}
@@ -33,7 +43,7 @@ knitr::kable(df_hommel_print,
 ```
 
 
-This is very small dataset, and so in that respect it is quite unusual, but its structure is similar to many other trials.
+*This is very small dataset, and so in that respect it is quite unusual, but its structure is similar to many other trials.*
 
 :::
   
@@ -41,7 +51,7 @@ This is very small dataset, and so in that respect it is quite unusual, but its 
 
 ## Confidence intervals and P-values {#ttest}
 
-Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (often referred to as $X$) between the groups.
+Because the randomization process should produce groups that are comparable, we can in principle compare $X$ between the groups.
 
 ::: {.example}
 Summary statistics of the outcome for each group are shown below.
@@ -65,7 +75,18 @@ knitr::kable(df_hommel1_print, caption = "Summary statistics for each group.")
 
 ```
 
-We see that the difference in mean outcome (systolic blood pressure) between the two groups is $141.86 - 135.33 = 6.53 \text{mmHg}$. Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for the hypothetical population) there is no reduction, and we have just been 'lucky'. 
+We have 
+
+$$ 
+\begin{aligned}
+\bar{x}_T & = 135.33 \\
+\bar{x}_C & = 141.86.
+\end{aligned}
+$$
+
+Difference in average of $X$ between the two groups $141.86 - 135.33 = 6.53 \text{mmHg}$. 
+
+*Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for the hypothetical population) there is no reduction, and we have just been 'lucky'.* 
 
 The variances within the two groups are fairly close, so we can use the pooled estimate of standard deviation:
   
@@ -81,7 +102,8 @@ s_p&= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
 & = 7.82\text{ mmHg.}
 \end{aligned}
 $$
-  This enables us to do an independent two-sample $t$-test, and we can find the $t$ statistic
+
+We can do an independent two-sample $t$-test,
 
 $$
   \begin{aligned}
@@ -92,7 +114,7 @@ t & = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
 $$
 Note that here the placebo group is group $C$, and the Captopril group is group $T$.
 
-  Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a $t$ distribution with 14 degrees of freedom ($n_i-1$ for each group). 
+Under $H_0$, this value should be $t_{14}$ ($n_i-1$ for each group). 
 
 ```{r ttestcapt, fig.cap = "The distribution $t_{14}$, with $t=1.65$ shown by the dashed line and the 'more extreme' areas shaded. "}
 x1 = seq(-4, -1.65, by=0.01)
@@ -107,21 +129,35 @@ ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
   geom_vline(xintercept = 1.65, lty=2) + theme_bw()
 ```
 
-The dashed line in Figure \@ref(fig:ttestcapt) is at $t=1.65$, and the red shaded areas show anywhere 'at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by 
+*The dashed line is at $t=1.65$, and the red shaded areas show anywhere 'at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by *
+
 ```{r echo=T}
 2*(1-pt(1.65, df=14))
 ```
-This is the value we know as 'the P value'. We see that in this case our results are not statistically significant (at the 0.10 level), under this model.
+
+So $p=0.121$ - not significant even at $\alpha=0.1$.
 :::
   
 ### What do we do with this outcome?
   
-  The outcome of this Captopril study is in some ways the worst case scenario. The difference in means is large enough to be compelling, but our dataset is too small for it to be statistically significant, and so we can't confidently conclude that Captopril has any effect on blood pressure. However, we also can't say that there is no effect. This is exactly the sort of scenario we hoped to avoid when planning our study.
+Worst case scenario:
 
-One way to reframe the question is to consider the range of treatment effects that are compatible with our trial data. That is, we find the set
+  * $\hat{\tau} = 6.53\text{ mmHg}$ is large enough to be compelling 
+  * Dataset is too small for it to be statistically significant
+  * Can't confidently conclude that Captopril has any effect on blood pressure (reject $H_0$). 
+  * Can't say that there is no effect. 
+  
+*This is exactly the sort of scenario we hoped to avoid when planning our study.*
 
-$$\left\lbrace \tau \mid \frac{\lvert \bar{x}_C - \bar{x}_T - \tau \rvert}{s\sqrt{n_C^{-1} + n_T^{-1}}} \leq t_{n_C+n_T-2;\,0.975} \right\rbrace, $$
-which contains all possible values of treatment effect $\tau$ that are compatible with our data. That is, suppose the true treatment effect is  $\tau^*$, and we test the hypothesis that $\tau = \tau^*$. For all values of $\tau^*$ inside this range, our data are not sufficiently unlikely to reject the hypothesis at the 0.05 level. However, for all values of $\tau^*$ outside this range, our data are sufficiently unlikely to reject that hypothesis. We can rearrange this to give a 95% confidence interval for $\tau$,
+Consider the range of treatment effects that are compatible with our trial data. That is, we find the set
+
+$$\left\lbrace \tau \mid \frac{\lvert \bar{x}_C - \bar{x}_T - \tau \rvert}{s\sqrt{n_C^{-1} + n_T^{-1}}} \leq t_{n_C+n_T-2;\,0.975} \right\rbrace. $$
+Suppose the true treatment effect is  $\tau^*$, and we test $H_0:\; \tau = \tau^*$. 
+
+  * For all $\tau^*$ inside this range, our data are not sufficiently unlikely to reject the $H_0$ at the 0.05 level. 
+  * For all values of $\tau^*$ outside this range, our data are sufficiently unlikely to reject that hypothesis. 
+  
+Rearrange to give a 95% confidence interval for $\tau$,
 
 $$\left\lbrace \tau \mid \bar{x}_C - \bar{x}_T - t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}} \leq \tau \leq \bar{x}_C - \bar{x}_T + t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}}  \right\rbrace $$
 
@@ -131,7 +167,7 @@ Continuing our example, we have
 
 $$\left\lbrace \tau \mid \frac{\lvert 6.53 - \tau \rvert}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \leq t_{14;0.975} = 2.145 \right\rbrace $$
   
-  Here, $t_{14;0.975} = 2.145$ is the $t$-value for a significance level of $0.05$, so if we were working to a different significance level we would change this.
+*Here, $t_{14;0.975} = 2.145$ is the $t$-value for a significance level of $0.05$, so if we were working to a different significance level we would change this.*
 
 Rearranging as above, this works out to be the interval
 
@@ -145,16 +181,26 @@ Notice that zero is in this interval, consistent with the fact that we failed to
 Some things to note
 
   * We can compute this confidence interval whether or not we failed to reject the null hypothesis that $\tau=0$, and for significance levels other than 0.05.
-  * In most cases, reporting the confidence interval is much more informative than simply reporting the $P$-value. In our Captopril example, we found that a negative treatment effect (ie. Captopril reducing blood pressure less than the placebo) of more than 2 mmHg was very unlikely, whereas a positive effective (Captopril reducing blood pressure) of up to 15 mmHg was plausible. If Captopril were inexpensive and had very limited side effects (sadly neither of which is true) it may still be an attractive drug.
-  * These confidence intervals are exactly the same as you have learned before, but we emphasise them because they are very informative in randomised controlled trials (but not so often used!).
+  * Reporting the CI is much more informative than simply reporting the $P$-value. *In our Captopril example, we found that a negative treatment effect (ie. Captopril reducing blood pressure less than the placebo) of more than 2 mmHg was very unlikely, whereas a positive effective (Captopril reducing blood pressure) of up to 15 mmHg was plausible. If Captopril were inexpensive and had very limited side effects (sadly neither of which is true) it may still be an attractive drug.*
+  * *These confidence intervals are exactly the same as you have learned before, but we emphasise them because they are very informative in randomised controlled trials (but not so often used!).*
 
-At the post trial stage, when we have data, the confidence interval is the most useful link to the concept of *power*, which we thought about at the planning stage. Remember that the power function is defined as 
+*At the post trial stage, when we have data, the confidence interval is the most useful link to the concept of *power*, which we thought about at the planning stage.* 
 
-$$\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),$$ that is, the probability that we successfully reject $H_0$ (that $\tau=0$) given that there is a non-zero treatment effect $\tau\neq 0$. This was calculated in terms of the theoretical model of the trial, and in terms of some minimum detectable effect size $\tau_M$ that we wanted to be able to correctly detect with probability $1-\beta$ (the power). Sometimes people attempt to re-calculate the power after the trial, to detect whether the trial was underpowered. However, now we have actual data. If we failed to reject $H_0$ and $\tau_M$ is in the confidence interval for $\tau$, then that is a good indication that our trial was indeed underpowered.
+Remember that the power function is defined as 
+
+$$\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),$$ 
+
+*This was calculated in terms of the theoretical model of the trial, and in terms of some minimum detectable effect size $\tau_M$ that we wanted to be able to correctly detect with probability $1-\beta$ (the power). Sometimes people attempt to re-calculate the power after the trial, to detect whether the trial was underpowered. However, now we have actual data.*
+
+You can't calculate the power of a trial after it's happened, but if we fail to reject $H_0$ and $\tau_M$ is in the confidence interval for $\tau$, then that is a good indication that our trial was indeed underpowered.
 
 ## Using baseline values {#baseline}
 
-In our example above, our primary outcome variable $X$ was the systolic blood pressure of each participant at the end of the intervention period. However, we see in Table \@ref(tab:captoprildata) that we also have *baseline* measurements: measurements of systolic blood pressure for each patient from before the intervention period. Baseline measurements are useful primarily for two reasons:
+*In our example above, our primary outcome variable $X$ was the systolic blood pressure of each participant at the end of the intervention period.*
+
+In Table \@ref(tab:captoprildata) we also have *baseline* measurements: measurements of systolic blood pressure for each patient from before the intervention period. We'll denote these $B_T$ and $B_C$.
+
+Baseline measurements are useful primarily for two reasons:
 
   1. They can be used to assess the balance of the design. 
   2. They can be used in the analysis.
@@ -163,9 +209,18 @@ We will demonstrate these by returning to our Captopril example.
 
 ::: {.example}
 
-Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren't identical, they are sufficiently similar not to suspect any systematic imbalance. In a study this small there is likely to be some difference.
+Balance:
 
-Secondly, since we are interested in whether the use of Captopril has reduced blood pressure for each individual, and these individuals had different baseline values, it makes sense to compare not just the outcome but the difference from baseline to outcome for each individual. We can see individual data in Table \@ref(tab:captoprildiff) and summary statistics in Table \@ref(tab:captoprildiffsumm).
+  * Placebo group: $\bar{b}_C = 146.6 \text{ mmHg}$ and $SD\left(b_C\right) = 12.3 \text{ mmHg}$
+  * Captopril group: $\bar{b}_T = 148 \text{ mmHg}$ and $SD\left(b_T\right) = 11.4 \text{ mmHg}$
+  
+Not identical, but sufficiently similar not to suspect systematic imbalance. In a study this small there is likely to be some difference.
+
+Analysis:
+
+  * Interested in whether Captopril has reduced BP for each individual - makes sense to compare change in BP ($X-P$), rather than final BP measurement.
+
+We can see individual data in Table \@ref(tab:captoprildiff) and summary statistics in Table \@ref(tab:captoprildiffsumm).
 
 ```{r captoprildiff}
 df_hommel_diff = df_hommel
@@ -173,7 +228,7 @@ df_hommel_diff$diff = df_hommel_diff$outcome - df_hommel_diff$baseline
 df_hommel_diff_print = df_hommel_diff
 names(df_hommel_diff_print) = c("Patient (ID)", "Baseline (B)", "Outcome at 1 week (X)", "Trial Arm", "Difference")
 
-knitr::kable(df_hommel_diff_print, caption = "Data for the Captopril trial, with differences shown.")
+knitr::kable(df_hommel_diff_print, caption = "Data for the Captopril trial from @hommel1986effect, with differences shown.")
 ```
 
 ```{r captoprildiffsumm}
@@ -194,7 +249,7 @@ row.names(df_hommel2_print) = c("Captopril", "Placebo")
 knitr::kable(df_hommel2_print, caption = "Summary statistics for each group.")
 ```
 
-Now we can perform our test as before, in which case we find
+Now we can perform our test as before, 
 
 $$ t = \frac{-4.71 - (-12.67)}{8.54\sqrt{\frac{1}{7}+\frac{1}{9}}} = 1.850 $$
 where 8.54 is the pooled standard deviation (as before). Under the null distribution of no difference, this has a $t$-distribution with 14 degrees of freedom, and so we have a $P$-value of 0.086. Our 0.95 confidence interval is 
@@ -203,9 +258,14 @@ $$ -4.71 - (-12.67) \pm t_{14;\,0.975}\times 8.54\sqrt{\frac{1}{7}+\frac{1}{9}} 
 We see that taking into account the baseline values in this way has slightly reduced the $P$-value and shifted the confidence interval slightly higher. Though at the $\alpha = 0.05$ level we still don't have significance.
 :::
 
-We will now look into why the confidence interval and $P$-value changed in this way, before going on to another way of taking into account the baseline value.
+### Why did the CI and p-value change?
 
-Let's label the baseline measurement for each group $B_C$ and $B_T$, and the outcome measurements $X_C,\,X_T$, where we will take group $C$ to be the placebo/control group and group $T$ to be the treatment group. Because all participants have been randomised from the same population, we have 
+Notation:
+
+  * Baseline: $B_C,\,B_T$
+  * Outcome : $X_C,\,X_T$
+  
+All participants have been randomised from the same population, so we have 
 
 $$\operatorname{E}\left(B_C\right) = \operatorname{E}\left(B_T\right) = \mu_B.$$
 Assuming some treatment effect $\tau$ (which could still be zero) we have
@@ -216,12 +276,14 @@ $$
 \operatorname{E}\left(X_T\right) & = \mu + \tau.
 \end{aligned}
 $$
+*Sometimes we'll have $\mu_B=\mu$, but this won't always be the case.* 
+
 Usually we will assume that
 
 $$\operatorname{Var}\left(X_C\right) = \operatorname{Var}\left(X_T\right) = \operatorname{Var}\left(B_C\right) = \operatorname{Var}\left(B_T\right) = \sigma^2,$$
-and this is generally fairly reasonable in practice. 
+*and this is generally fairly reasonable in practice. *
 
-Notice that for the two analyses we have performed so far (comparing outcomes and comparing differences) we have
+For our two analyses so far we have
 
 $$
 \begin{aligned}
@@ -240,24 +302,29 @@ $$
 & = 2\sigma^2\left(1-\rho\right),
 \end{aligned}
 $$
-where $\rho$ is the true correlation between $X$ and $B$, and is assumed to be the same in either group. Similarly, 
+where $\rho$ is the true correlation between $X$ and $B$, and is assumed to be the same in either group.
 
-$$\operatorname{var}\left(X_C-B_C\right) = 2\sigma^2\left(1-\rho\right).$$
+Similarly, 
+
+$$\operatorname{var}\left(X_C-B_C\right) = 2\sigma^2\left(1-\rho\right).$$ 
 
 
-Therefore, if $\frac{1}{2}<\rho\leq 1$ there will be a smaller variance when comparing differences. However, if $0\leq\rho<\frac{1}{2}$, the variance will be smaller when comparing outcome variables.
+Therefore, 
 
-Intuitively, this seems reasonable: if the correlation between baseline and outcome measurements is very strong, then we can remove some of the variability between participants by taking into account their baseline measurement. However, if the correlation is weak, then by including the baseline in the analysis we are essentially just introducing noise.
+  * If $\frac{1}{2}<\rho\leq 1$ there will be a smaller variance when comparing differences
+  * If $0\leq\rho<\frac{1}{2}$there will be a smaller variance when comparing outcome variables
+
+*Intuitively, this seems reasonable: if the correlation between baseline and outcome measurements is very strong, then we can remove some of the variability between participants by taking into account their baseline measurement. However, if the correlation is weak, then by including the baseline in the analysis we are essentially just introducing noise.*
 
 For our Captopril example, the sample correlation between baseline and outcome is 0.63 in the Captopril group and 0.80 in the Placebo group. This fits with the $P$-value having reduced slightly.
 
 ### A dodgy way to use baseline variables 
 
-Sometimes the analysis performed on a dataset is rather spurious, but it isn't always immediately obvious why. We'll look at one example now, because it is done sometimes.
+*Sometimes the analysis performed on a dataset is rather spurious, but it isn't always immediately obvious why. We'll look at one example now, because it is done sometimes.*
 
-This approach involves looking at each group separately, and determining whether there has been a significant change in the outcome variable (note that this only 'works' if $\mu_B = \mu$).
+Look at each group separately and determine whether there has been a significant change in the outcome variable (assumes $\mu_B = \mu$).
 
-For example, with our Captopril data, we could perform a paired $t$-test on the difference between baseline $B$ and outcome $X$ for each patient, for each group.
+For Captopril data, we could perform a paired $t$-test on the difference between baseline $B$ and outcome $X$ for each patient, for each group.
 
 If we do this, we find the summary statistics in Table \@ref(tab:ttestdodge).
 
@@ -268,13 +335,17 @@ df_dodge = data.frame(
   p_value = c(0.003, 0.17)
   )
 row.names(df_dodge) = c("Captopril", "Placebo")
-names(df_dodge) = c("T statistic", "Deg of freedom", "P-value")
 
 knitr::kable(df_dodge, caption = "Summary statistics for the dodgy analysis")
 
 ```
 
-From this we see that there is strong evidence for a change in blood pressure for the Captopril patients (group $T$), which isn't surprising, and no such evidence for the placebo patients. Can we therefore conclude that Captopril is significantly better than the placebo? No! The analysis is flawed:
+We find
+
+  * Strong evidence for a change in blood pressure for the Captopril patients (group $T$)
+  * No such evidence for the placebo patients. 
+  
+Can we therefore conclude that Captopril is significantly better than the placebo? No! The analysis is flawed:
 
   * The $p$-value of 0.17 in the control group doesn't show that the null hypothesis (no treatment effect for the control group) is true, just that we can't reject the null hypothesis. It is quite possible that there is a difference in the control group, and that numerically it could even be comparable to that in the treatment group, so although we can say that there is a significant reduction in blood pressure for the captopril group, we can't conclude that Captopril is better than the placebo.
   * Having set up the experiment as a randomised controlled trial, with a view to comparing the two groups, it seems strange to then deal with them separately.
@@ -366,13 +437,16 @@ where $SSE$ is the residual sum of squares, $n$ is the number of data points and
 
 As well as generating a fitted value $\hat{\tau}$, we (or rather R!) will also find the standard error of $\hat\tau$, and we can use this to generate a confidence interval for the treatment effect $\tau$.
 
-The technique described above is a well-established statistical method known as **ANCOVA** (short for the **An**alysis of **Cova**riance), which can be implemented in R and many other statistical software packages. Notice that it is really just a linear model (the like of which you have seen many times) with at least one factor variable, and with a particular focus (application-wise) on the coefficient of the treatment group variable.
+The technique described above is a well-established statistical method known as **ANCOVA** (short for the **An**alysis of **Cova**riance), which can be implemented in R and many other statistical software packages.
 
 ::: {.example}
 Let's now implement ANCOVA on our Captopril data in R.
 We do this by first fitting a linear model using 'lm', with baseline measurement and arm as predictor variables and outcome as the predictand. 
 ```{r, echo=T}
-
+# Gives same answers as above, so use this!
+# Find out what the numbesrs mean
+# Background on ANOVA and factor models (SMII)
+# Where to include random effects models? Is it in Matthews?
 lm_capt = lm(outcome ~ baseline + arm, data = df_hommel)
 summary(lm_capt)
 ```
@@ -467,6 +541,7 @@ Continuing once again with the Captopril dataset, we now fit the model
 ```{r, echo=T}
 lm_capt_int = lm(outcome ~ arm + baseline + baseline:arm, data = df_hommel)
 summary(lm_capt_int)
+anova(lm_capt_int) # still don't think I need to include this
 ```
 We see that the $p$-value for the coefficient $\lambda$ (seen in the `arm:baseline` row) is not at all significant (0.97). Therefore we can be confident that there is no need to fit unequal slopes for this dataset. This fits with our earlier conclusion (from inspecting the residuals) that just including first order terms is fine.
 :::
@@ -528,4 +603,25 @@ ggplot(data=stress_sum, aes(x=fitted, y=resid, col=treatment)) +
 :::
 
 
+## Some general principles of Analysis
 
+There are some assumptions we're making here, and so we need to be careful when fitting an ANCOVA model.
+
+  * We're assuming that the residual variance is the same for both groups
+  * We're assuming that the coefficient of the baseline is the same for both groups: only the intercept is changing.
+  
+We can't check the first until after 
+
+::: {.example}
+
+Before fitting our ANCOVA model we should first have checked that there's no significant relationship between the covariate (in this case the baseline) and the treatment group, which we can do using ANOVA:
+
+```{r, echo=T}
+# There's probably a better way to do this - check online articles
+model_aov_capt = aov(baseline ~ arm, data = df_hommel)
+summary(model_aov_capt)
+```
+
+If the experiment has been properly designed then there shouldn't be, but this is not always the case, and indeed depending on how we do the randomisation we could be unlucky. If baseline measurements are available before allocation, this can be checked before the trial is run.
+
+:::
