@@ -194,7 +194,7 @@ $$\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),$$
 
 You can't calculate the power of a trial after it's happened, but if we fail to reject $H_0$ and $\tau_M$ is in the confidence interval for $\tau$, then that is a good indication that our trial was indeed underpowered.
 
-## Using baseline values {#baseline}
+## (Lecture 8) Using baseline values {#baseline}
 
 *In our example above, our primary outcome variable $X$ was the systolic blood pressure of each participant at the end of the intervention period.*
 
@@ -216,9 +216,11 @@ Balance:
   
 Not identical, but sufficiently similar not to suspect systematic imbalance. In a study this small there is likely to be some difference.
 
+*Note, it's sensible to compare things informally like this, but sometimes people suggest using a t-test or similar to test whether the two groups are similar enough. This is a flawed exercise: a formal hypothesis test is testing whether what we see is likely to have arisen by random change. We  know that this arose by random chance, because we randomly allocated the patients! A formal test only makes sense if you suspect that something has systematically disrupted the randomisation.*
+
 Analysis:
 
-  * Interested in whether Captopril has reduced BP for each individual - makes sense to compare change in BP ($X-P$), rather than final BP measurement.
+  * Interested in whether Captopril has reduced BP for each individual - makes sense to compare change in BP ($X-B$), rather than final BP measurement.
 
 We can see individual data in Table \@ref(tab:captoprildiff) and summary statistics in Table \@ref(tab:captoprildiffsumm).
 
@@ -251,11 +253,15 @@ knitr::kable(df_hommel2_print, caption = "Summary statistics for each group.")
 
 Now we can perform our test as before, 
 
-$$ t = \frac{-4.71 - (-12.67)}{8.54\sqrt{\frac{1}{7}+\frac{1}{9}}} = 1.850 $$
+$$ t = \frac{- 12.67 - (-4.71)}{8.54\sqrt{\frac{1}{7}+\frac{1}{9}}} = -1.850 $$
 where 8.54 is the pooled standard deviation (as before). Under the null distribution of no difference, this has a $t$-distribution with 14 degrees of freedom, and so we have a $P$-value of 0.086. Our 0.95 confidence interval is 
 
-$$ -4.71 - (-12.67) \pm t_{14;\,0.975}\times 8.54\sqrt{\frac{1}{7}+\frac{1}{9}} = \left[-1.3,\,17.2\right].$$
-We see that taking into account the baseline values in this way has slightly reduced the $P$-value and shifted the confidence interval slightly higher. Though at the $\alpha = 0.05$ level we still don't have significance.
+$$ -12.67 - (-4.71) \pm t_{14;\,0.975}\times 8.54\sqrt{\frac{1}{7}+\frac{1}{9}} = \left[-17.2,\;1.3\right].$$
+Taking into account the baseline values in this way has 
+
+  * slightly reduced the $P$-value (though still $p>0.05$)
+  * shifted the confidence interval slightly lower 
+
 :::
 
 ### Why did the CI and p-value change?
@@ -265,7 +271,7 @@ Notation:
   * Baseline: $B_C,\,B_T$
   * Outcome : $X_C,\,X_T$
   
-All participants have been randomised from the same population, so we have 
+All participants have been randomised from the same population, so 
 
 $$\operatorname{E}\left(B_C\right) = \operatorname{E}\left(B_T\right) = \mu_B.$$
 Assuming some treatment effect $\tau$ (which could still be zero) we have
@@ -309,6 +315,15 @@ Similarly,
 $$\operatorname{var}\left(X_C-B_C\right) = 2\sigma^2\left(1-\rho\right).$$ 
 
 
+Using this to work out the variance of the estimator $\hat{\tau}$ we find that for comparing means we have
+
+$$\operatorname{var}\left(\tau\right) = \operatorname{var}\left(\bar{x}_T - \bar{x}_C\right) = \sigma^2\left(\frac{1}{m}+\frac{1}{n}\right).$$
+
+whereas for comparing differences from baseline
+
+$$\operatorname{var}\left(\tau\right) = \operatorname{var}\left[\left(\overline{X_T-B_T}\right) - \left(\overline{X_C - B_C}\right)\right] = 2\sigma^2\left(1-\rho\right)\left(\frac{1}{m}+\frac{1}{n}\right).$$
+
+
 Therefore, 
 
   * If $\frac{1}{2}<\rho\leq 1$ there will be a smaller variance when comparing differences
@@ -347,15 +362,21 @@ We find
   
 Can we therefore conclude that Captopril is significantly better than the placebo? No! The analysis is flawed:
 
-  * The $p$-value of 0.17 in the control group doesn't show that the null hypothesis (no treatment effect for the control group) is true, just that we can't reject the null hypothesis. It is quite possible that there is a difference in the control group, and that numerically it could even be comparable to that in the treatment group, so although we can say that there is a significant reduction in blood pressure for the captopril group, we can't conclude that Captopril is better than the placebo.
+  * The $p$-value of 0.17 in the control group doesn't show that $H_0$ is true *(no treatment effect for the control group) is true, just that we can't reject the null hypothesis. It is quite possible that there is a difference in the control group, and that numerically it could even be comparable to that in the treatment group, so although we can say that there is a significant reduction in blood pressure for the captopril group, we can't conclude that Captopril is better than the placebo.*
   * Having set up the experiment as a randomised controlled trial, with a view to comparing the two groups, it seems strange to then deal with them separately.
 
 
 ## Analysis of covariance (ANCOVA)
 
-In the previous section we based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance. 
+Previously: based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance. 
 
-However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).
+However, in the event there will be some imbalance.
+
+We can see this in our Captopril example. Eg. we saw that difference in baseline means is $\bar{b}_C - \bar{b}_T = 1.4 \text{ mmHg}$.
+
+  * Not clinicaly significant
+  * Not large enough to make us doubt our randomisation
+  * A difference nonetheless
 
 
 ```{r hommel, echo=F, fig.cap = "Baseline measurements from the Captopril trial."}
@@ -363,19 +384,31 @@ However, although this is theoretically true, in real life trials there will be 
 ggplot(data = df_hommel, aes(y=baseline, fill = arm)) + geom_boxplot() + ylab("Baseline (mmHg)")+theme_bw()
 
 ```
-The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn't a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference. 
 
-The basic principle of ANCOVA is that if there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if $\tau=0$). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples? 
+Basic principle of ANCOVA: if there is some correlation between baseline and outcome, then baselines differing leads to outcomes differing, even if there is no treatment effect (ie. if $\tau=0$). 
 
-This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements. 
+*Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples?* 
+
+*This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements.*
 
 ### The theory {#ancovatheory}
 
-Suppose the outcome for a clinical trial is $X$ and the baseline is $B$. $X$ has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the test group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
+Usual notation and assumptions:
 
-The same quantity is measured at the start of the trial, and this is the baseline $B$, which we can assume to have true mean $\mu_B$ in both groups (because of randomisation) and variance $\sigma^2$. We also assume that the true correlation between $B$ and $X$ is $\rho$ in each group. Finally, we assume that both treatment groups are of size $N$.
+  * Outcome $X$, baseline $B$
+  * $E\left(X_T\right) = \mu + \tau$
+  * $E\left(X_C\right) = \mu$
+  * $var\left(X_T\right) = var(X_C) = \sigma^2$
+  * Correlation between $B$ and $X$ is $\rho$ **within each group**
+  * We want to learn about $\tau$
 
-We therefore have $2N$ patients, and so we observe baseline measurements $b_1,\,b_2,\ldots,b_{2N}$. Given these values, we have
+Baseline $B$ (same measurement as $X$) is measured before start of trial. 
+Assume $E(B_T) = E(B_C) = \mu_B$ and $var(B_C) = var(B_T) = \sigma^2$.
+Also assume both groups have size $N$, therefore $2N$ patients in all.
+
+We observe baseline measurements $b_1,\,b_2,\ldots,b_{2N}$. 
+
+Given these values, we have
 
 $$
 \begin{aligned}
@@ -390,7 +423,15 @@ From this, we find that
 \operatorname{E}\left(\bar{X}_T - \bar{X}_C\mid{\bar{b}_T,\,\bar{b}_C}\right) = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right). 
 (\#eq:diffexp)
 \end{equation}
-That is, if there is a difference in the baseline mean between the control and test groups, then the difference in outcome means is not an unbiased estimator of the treatment effect $\tau$. Assuming $\rho>0$ (which is almost always the case) then if $\bar{b}_T>\bar{b}_C$ the difference in outcome means overestimates $\tau$. Conversely, if $\bar{b}_T<\bar{b}_C$, the difference in outcome means underestimates $\tau$. The only situation in which the difference in outcome means is an unbiased estimator is when $\rho=0$, however this is not common in practice.
+
+If there is a difference in the baseline mean between groups, then the difference in outcome means is not an unbiased estimator of the treatment effect $\tau$. 
+
+Assuming $\rho>0$ (which is almost always the case) then 
+
+  * if $\bar{b}_T>\bar{b}_C$ the difference in outcome means overestimates $\tau$
+  * if $\bar{b}_T<\bar{b}_C$, the difference in outcome means underestimates $\tau$. 
+  
+*The only situation in which the difference in outcome means is an unbiased estimator is when $\rho=0$, however this is not common in practice.*
 
 Comparing the difference between outcome and baseline, as we did in \@ref(baseline), does not solve this problem, since we have
 
@@ -402,6 +443,9 @@ Notice, however, that if we use as our estimator
 $$\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)$$ then, following from Equation \@ref(eq:diffexp) we have
 
 $$\operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. $$
+### What's the variance of this estimator? {-}
+
+
 
 ### The practice
 

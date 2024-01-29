@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  26 JAN 2024 16:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  29 JAN 2024 22:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -708,53 +708,62 @@ LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1588.
 [54] [55 <./CT4H_notes_files/figure-latex/ttestcapt-1.pdf>] [56] [57] [58]
 
-LaTeX Warning: Reference `fig:hommel' on page 59 undefined on input line 1819.
+LaTeX Warning: Reference `fig:hommel' on page 59 undefined on input line 1826.
 
-<CT4H_notes_files/figure-latex/hommel-1.pdf, id=825, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/hommel-1.pdf, id=824, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/hommel-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/hommel-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/hommel-1.pdf  used on input line 1821.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/hommel-1.pdf  used on input line 1828.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1821--1823
+Underfull \hbox (badness 10000) in paragraph at lines 1828--1830
 [][]
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1348) has occurred while \output is active []
 
-[59] [60 <./CT4H_notes_files/figure-latex/hommel-1.pdf>] [61] [62]
-<CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf, id=861, 469.755pt x 325.215pt>
+[59] [60 <./CT4H_notes_files/figure-latex/hommel-1.pdf>]
+<CT4H_notes_files/figure-latex/bvnplot-1.pdf, id=849, 469.755pt x 325.215pt>
+File: CT4H_notes_files/figure-latex/bvnplot-1.pdf Graphic file (type pdf)
+<use CT4H_notes_files/figure-latex/bvnplot-1.pdf>
+Package pdftex.def Info: CT4H_notes_files/figure-latex/bvnplot-1.pdf  used on input line 1923.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[61] [62 <./CT4H_notes_files/figure-latex/bvnplot-1.pdf>] [63] [64] [65]
+<CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf, id=894, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf  used on input line 1949.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf  used on input line 2115.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[63 <./CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf>]
-<CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf, id=871, 469.755pt x 325.215pt>
+[66 <./CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf>]
+<CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf, id=904, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf  used on input line 1975.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf  used on input line 2141.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[64 <./CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf>] [65]
+
+Underfull \vbox (badness 1577) has occurred while \output is active []
+
+[67 <./CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf>] [68]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[66]
+[69]
 Overfull \vbox (101.36961pt too high) has occurred while \output is active []
 
-[67]
-<CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf, id=912, 469.755pt x 325.215pt>
+[70]
+<CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf, id=945, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf  used on input line 2246.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf  used on input line 2412.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[68] [69 <./CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf>] (./CT4H_notes.bbl [70
+[71] [72 <./CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf>] (./CT4H_notes.bbl [73
 
-] [71
+] [74
 
-]) [72] (./CT4H_notes.aux)
+]) [75] (./CT4H_notes.aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-11-09>
@@ -763,21 +772,21 @@ L3 programming layer <2023-11-09>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `CT4H_notes.out' has not changed.
-(rerunfilecheck)             Checksum: 75F2934E100018C3D62CB2C81ABA2AB5;5537.
+(rerunfilecheck)             Checksum: CF34241B5840A1F87D68D16FAF7EE797;5537.
  ) 
 Here is how much of TeX's memory you used:
- 12861 strings out of 476227
- 204554 string characters out of 5795781
+ 12891 strings out of 476227
+ 205302 string characters out of 5795781
  1954555 words of memory out of 5000000
- 34299 multiletter control sequences out of 15000+600000
+ 34316 multiletter control sequences out of 15000+600000
  643916 words of font info for 96 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,14n,79p,1061b,617s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,14n,79p,1061b,710s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on CT4H_notes.pdf (72 pages, 2248015 bytes).
+Output written on CT4H_notes.pdf (75 pages, 2268888 bytes).
 PDF statistics:
- 1105 PDF objects out of 1200 (max. 8388607)
- 931 compressed objects within 10 object streams
- 302 named destinations out of 1000 (max. 500000)
- 358 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1142 PDF objects out of 1200 (max. 8388607)
+ 963 compressed objects within 10 object streams
+ 315 named destinations out of 1000 (max. 500000)
+ 363 words of extra memory for PDF output out of 10000 (max. 10000000)
 

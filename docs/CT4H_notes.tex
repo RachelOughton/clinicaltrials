@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-01-26}
+\date{2024-01-29}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1768,6 +1768,13 @@ However, whereas the first is based on data with variance \(\sigma^2\), the seco
 where \(\rho\) is the true correlation between \(X\) and \(B\), and is assumed to be the same in either group. Similarly,
 
 \[\operatorname{var}\left(X_C-B_C\right) = 2\sigma^2\left(1-\rho\right).\]
+Using this to work out the variance of the estimator \(\hat{\tau}\) we find that for comparing means, assuming two equally sized groups of size \(N\), we have
+
+\[\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left(\bar{x}_T - \bar{x}_C\right) = \frac{2\sigma^2}{N}.\]
+
+whereas for comparing differences from baseline
+
+\[\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left[\left(\overline{X_T-B_T}\right) - \left(\overline{X_C - B_C}\right)\right] = 2\left(1-\rho\right)\left(\frac{2\sigma^2}{N}\right).\]
 
 Therefore, if \(\frac{1}{2}<\rho\leq 1\) there will be a smaller variance when comparing differences. However, if \(0\leq\rho<\frac{1}{2}\), the variance will be smaller when comparing outcome variables.
 
@@ -1856,9 +1863,168 @@ which is similarly unbiased (unless \(\rho=1\), which is never the case).
 
 Notice, however, that if we use as our estimator
 
-\[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\] then, following from Equation \eqref{eq:diffexp} we have
+\begin{equation}
+\hat{\tau} = \left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)
+\label{eq:ancovaest}
+\end{equation}
 
-\[\operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. \]
+then, following from Equation \eqref{eq:diffexp} we have
+
+\[
+\operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. \]
+
+\hypertarget{whats-the-variance-of-this-estimator}{%
+\subsubsection{What's the variance of this estimator?}\label{whats-the-variance-of-this-estimator}}
+
+To work out the variance of \(\hat{\tau}\) in Equation \eqref{eq:ancovaest} we need to think about bivariate normal variables.
+
+Let's suppose that random variables \(X\) and \(Y\) are jointly normally distributed with correlation \(\rho\)
+
+\begin{equation}
+\begin{pmatrix}
+X\\
+Y
+\end{pmatrix} \sim N\left(
+\begin{pmatrix}
+\mu_X\\
+\mu_Y
+\end{pmatrix},\;
+\begin{pmatrix}
+\sigma^2_X & \rho\sigma_X\sigma_Y \\
+\rho\sigma_X\sigma_Y & \sigma^2_Y
+\end{pmatrix}
+\right).
+\label{eq:bvn}
+\end{equation}
+
+From Equation \eqref{eq:bvn}, we know that \(\operatorname{E}\left(Y\right) = \mu_Y\).
+
+But, if we have observed \(X=x\), this gives us some information about likely values of \(Y\): if \(\rho>0\) then a lower value of \(x\) should lead us to expect a lower value of \(Y\), for example. Figure \ref{fig:bvnplot} shows
+
+\begin{equation}
+\begin{pmatrix}
+X\\
+Y
+\end{pmatrix} \sim N\left(
+\begin{pmatrix}
+0\\
+0
+\end{pmatrix},\;
+\begin{pmatrix}
+2 & 1.5 \\
+1.5 & 3
+\end{pmatrix}
+\right).
+\label{eq:bvneg}
+\end{equation}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/bvnplot-1.pdf}
+\caption{\label{fig:bvnplot}A bivariate normal density.}
+\end{figure}
+
+The higher the value of \(\rho\) (in magnitude), the more the conditional distribution of \(Y\) given an observed value of \(x\) deviates from the marginal distribution of \(Y\) (in our example, \(N\left(0,\;3\right)\)). In particular, \[\operatorname{E}\left(Y\mid{X=x}\right)\neq{\operatorname{E}\left(Y\right)}.\]
+
+If we have another random variable, \(W\), that is independent of \(Y\) (and note that if two normally distributed variables are uncorrelated, they are also independent), then observing \(W=w\) doens't give us any information about the distribution of \(Y\), so we have
+
+\[ \operatorname{E}\left(Y\mid{W=w}\right)={\operatorname{E}\left(Y\right)}. \]
+We can combine this information to work out \(\operatorname{E}\left(Y\mid{X=x}\right)\). Firstly, we'll calculate the covariance of \(X\) and \(Y-kX\), for some constant \(k\). We can find this by
+
+\[
+\begin{aligned}
+\operatorname{cov}\left(X,\,Y-kX\right) &= \operatorname{E}\left[\left(X-\mu_X\right)\left(Y-kX - \mu_Y + k\mu_X\right)\right]\\
+&\text{ (using that }\operatorname{cov\left(X,Y\right)=\operatorname{E}\left[\left(X-\operatorname{E}\left(X\right)\right)\left(Y-\operatorname{E}\left(Y\right)\right)\right]}\\
+& = \operatorname{E}\left[\left(X-\mu_X\right)\left(Y-\mu_Y\right) - k\left(X-\mu_X\right)^2\right]\\
+& = \rho \sigma_X\sigma_Y - k\sigma_X^2.
+\end{aligned}
+\]
+If we set
+
+\[k = \beta = \frac{\sigma_Y}{\rho\sigma_X} \]
+then \(\operatorname{cov}\left(X,\,Y-\beta X\right)=0\), and since \(Y-\beta X\) is also normally distributed, this means that \(X\) and \(Y-\beta X\) are independent. Therefore we have
+
+\[\operatorname{E}\left(Y-\beta X \mid X=x\right) = \operatorname{E}\left(Y-\beta X\right) = \mu_Y - \beta \mu_X.\]
+However, since we're conditioning on an observed value of \(X=x\) we can take \(X\) to be fixed at this value, and so \(\operatorname{E}\left(\beta X\mid{X=x}\right) = \beta x\). Finally, this allows us to calculate
+
+\[
+\begin{aligned}
+\operatorname{E}\left(Y\mid{X=x}\right) & = \operatorname{E}\left(\beta X\mid{X=x}\right) + \mu_Y - \beta\mu_X\\
+& = \mu_Y + \beta\left(x - \mu_X\right).
+\end{aligned}
+\]
+
+We can use the same idea to find \(\operatorname{var}\left(Y\mid{X=x}\right)\).
+
+Recall that \(\operatorname{var}\left(Y\right) = \operatorname{E}\left[Y^2\right] - \left[\operatorname{E}\left(Y\right)\right]^2\), and so
+
+\begin{equation}
+\operatorname{var}\left(Y\mid{X=x}\right) = \operatorname{E}\left(Y^2\mid{X=x}\right) - \left[\operatorname{E}\left(Y\mid{X=x}\right)\right]^2. 
+\label{eq:vary2}
+\end{equation}
+
+We already know the second term, and we can find the first term using the same idea as before, this time noting that \(X\) and \(\left(Y-\beta X\right)^2\) are independent.
+
+From this, and using the fact that (for example)
+
+\[
+\begin{aligned}
+\operatorname{var}\left(X\right) & = \operatorname{E}\left(X^2\right) - \left[\operatorname{E}\left(X\right)\right]^2\\
+\text{and therefore} & \\
+\operatorname{E}\left(X^2\right)  &= \sigma_X^2 + \mu_X^2,
+\end{aligned}
+\]
+
+we find that
+
+\begin{equation}
+\operatorname{E}\left[\left(Y-\beta X\right)^2 \mid X=x\right] = \operatorname{E}\left[\left(Y-\beta X\right)^2\right] =S^2 + \left(\mu_Y - \beta \mu_X\right)^2,
+\label{eq:evary1}
+\end{equation}
+
+where \(S^2 = \sigma^2_Y + \beta^2\sigma^2_X - 2\beta\rho\sigma_X\sigma_Y = \sigma^2_Y\left(1-\rho^2\right)\) (by plugging in \(\beta = \frac{\rho\sigma_Y}{\sigma_X}\)).
+
+If we multiply out the left-hand side of Equation \eqref{eq:evary1}, we find that this is the same as
+
+\[\operatorname{E}\left[Y^2\mid{X=x}\right] - 2\beta\operatorname{E}\left(Y\mid{X=x}\right) + \beta^2 x^2 = \operatorname{E}\left[Y^2\mid{X=x}\right] - 2\beta x\left(\mu_Y - \beta\mu_X\right) - \beta^2 x^2.\]
+Equating this with Equation \eqref{eq:evary1} and rearranging, we find
+
+\[\operatorname{E}\left[Y^2\mid{X=x}\right] = S^2 + \left(\mu_Y - \beta\mu_X\right)^2 + 2\beta x\left(\mu_Y - \beta \mu_X\right) + \beta^2x^2.\]
+Now we can expand out
+\[\operatorname{E}\left(Y\mid{X=x}\right) = \mu_Y + \beta\left(x-\mu_X\right) = \left(\mu_Y - \beta\mu_X\right) +\beta x\]
+to find
+
+\[\left[\operatorname{E}\left(Y\mid{X=x}\right) \right]^2  = \left(\mu_Y - \beta\mu_X\right)^2 + 2\beta x \left(\mu_Y - \beta\mu_X\right) + \beta^2 x^2.\]
+Finally (!) we can use these two expressions to find
+
+\[
+\begin{aligned}
+\operatorname{var}\left(Y\mid{X=x}\right) & = \operatorname{E}\left[Y^2\mid{X=x}\right] - \left[\operatorname{E}\left(Y\mid{X=x}\right)\right]^2\\
+& = S^2 \\
+& = \sigma_Y^2\left(1-\rho^2\right).
+\end{aligned}
+\]
+One thing to notice is that this conditional variance of doesn't depend on the observed value of \(X=x\). It can also never exceed \(\sigma^2_Y\), and is only equal to \(\sigma^2_Y\) if \(X\) and \(Y\) are uncorrelated.
+
+\hypertarget{back-to-our-estimator}{%
+\subsubsection*{Back to our estimator!}\label{back-to-our-estimator}}
+\addcontentsline{toc}{subsubsection}{Back to our estimator!}
+
+Recall that in ANCOVA our estimator of the treatment effect \(\tau\) is
+
+\[ \hat{\tau} = \left(\bar{X}_T - \bar{X}_C\right) - \rho\left(\bar{b}_T - \bar{b}_C\right)\]
+and that we have
+
+\[\operatorname{cor}\left(\bar{X}_T - \bar{X}_C,\; \bar{b}_T - \bar{b}_C\right) = \rho.\]
+Therefore, using the result we just found,
+
+\[
+\begin{aligned}
+\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho\left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\bar{b}_C}\right] &= \operatorname{var}\left[\left(\bar{X}_T - \bar{X}_C\right) \mid{\bar{b}_T,\bar{b}_C}\right]\\
+& = \operatorname{var}\left(\bar{X}_T - \bar{X}_C\right)\left(1-\rho^2\right)\\
+& = \frac{2\sigma^2}{N}\left(1-\rho^2\right).
+\end{aligned}
+\]
 
 \hypertarget{the-practice}{%
 \subsection{The practice}\label{the-practice}}
