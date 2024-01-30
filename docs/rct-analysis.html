@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-29" />
+<meta name="date" content="2024-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -898,7 +898,8 @@ Therefore, using the result we just found,</p>
 &amp; = \operatorname{var}\left(\bar{X}_T - \bar{X}_C\right)\left(1-\rho^2\right)\\
 &amp; = \frac{2\sigma^2}{N}\left(1-\rho^2\right).
 \end{aligned}
-\]</span></p>
+\]</span>
+Notice that unlike our first estimator that used baseline values, in Section <a href="rct-analysis.html#baseline">4.2</a>, the variance of the ANCOVA estimate can never exceed <span class="math inline">\(\frac{2\sigma^2}{N}\)</span>; if the baseline and outcome are uncorrelated, ANCOVA will perform as well as a <span class="math inline">\(t\)</span>-test.</p>
 </div>
 </div>
 <div id="the-practice" class="section level3 hasAnchor" number="4.3.2">
