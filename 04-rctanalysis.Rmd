@@ -297,9 +297,13 @@ However, although this is theoretically true, in real life trials there will be 
 
 ```{r hommel, echo=F, fig.cap = "Baseline measurements from the Captopril trial."}
 
-ggplot(data = df_hommel, aes(y=baseline, fill = arm)) + geom_boxplot() + ylab("Baseline (mmHg)")+theme_bw()
+ggplot(data = df_hommel, aes(x=baseline, fill = arm))+ geom_boxplot() + 
+  ylab("Group")+ xlab("Baseline blood pressure (mmHg)")+
+  theme_bw() + scale_y_continuous(breaks=c(-0.2,0.2), labels = c("Captopril", "Placebo")) +
+  theme(legend.position = "none", aspect.ratio=0.25)
 
 ```
+
 The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn't a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference. 
 
 The basic principle of ANCOVA is that if there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if $\tau=0$). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples? 

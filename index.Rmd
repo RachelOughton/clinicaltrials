@@ -51,6 +51,7 @@ options(knitr.table.format = function() {
 
 ```{r, echo=F}
 library(medicaldata)
+library(dplyr)
 library(ggplot2)
 library(gridExtra)
 library(knitr)

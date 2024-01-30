@@ -4,8 +4,10 @@
 
 This computer practical will cover two main parts:
 
-  1. Allocation
-  2. Analysis
+  1. Allocation (Section \@ref(cp1allocation))
+  2. Analysis (Section (\@ref(cp1analysis))
+  
+The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be a good idea to do work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time. 
   
 There are many, many packages in R that implement methods for designing and analysiing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
 
@@ -25,12 +27,12 @@ This requires you to have a github account (you can sign up for free [here](http
 
 
 
-## Allocation
+## Allocation {#cp1allocation}
 
 We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow!
 
 ```{r, eval=F, echo=T}
-install.packages(c("medicaldata", "ggplot2", "Minirand", "blockrand"))
+install.packages(c("medicaldata", "ggplot2", "Minirand", "blockrand", "dplyr"))
 ```
 
 ### Example dataset 
@@ -87,7 +89,7 @@ Are there any ways in which you think this data set would be particularly vulner
 :::
 
 
-### Demographic tables
+#### Demographic tables
 
 For every allocation, we'll want to see a summary table of how the patients are distributed between the groups. In this practical we'll use a relatively simple method, detailed [here](https://www.rdocumentation.org/packages/Minirand/versions/0.1.3/topics/randbalance) from the package `Minirand`, which is designed to output a table in the R console.
 
@@ -166,8 +168,9 @@ To mimic the way that participants are recruited sequentially in a trial (which 
 
 We'll start by performing each method once, and then go on to perform a more thorough simulation study.
 
+### Allocation methods {#allocmethods}
 
-### Simple random allocation
+#### Simple random allocation
 
 In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. At this point we don't need to think about the prognostic factors at all.
 
@@ -224,7 +227,7 @@ rb_tab = randbalance(
 
 
 
-### Randomly permuted blocks
+#### Randomly permuted blocks
 
 An obvious problem with using RPBs for this data is the number of strata. We have (if you have the same numbers of levels for `age` and `BMI` as I do)
 
@@ -235,7 +238,7 @@ strata. Even by collecting levels together and so on, we are not going to get do
 library(blockrand)
 ```
 
-The default for the function `blockrand` is that it will randomly vary block length within $\left\brace 2,\,4,\,6,\,8 \right\rbrace$. 
+The default for the function `blockrand` is that it will randomly vary block length within $\left\lbrace 2,\,4,\,6,\,8 \right\rbrace$. 
 
 
 :::{.exercise}
@@ -283,7 +286,7 @@ randbalance(
 
 The package `blockrand` contains a function `plotblockrand` outputs PDFs of randomization cards, ready to be printed and put into envelopes!
 
-### Biased coin designs
+#### Biased coin designs
 
 We can write code for a biased coin design by adapting the `srs` function above, setting $p=\frac{2}{3}$ by default as per @efron1971forcing.
 
@@ -316,10 +319,7 @@ biased_coin = function(
 
 
 :::{.exercise}
-Use the function `biased_coin` above to allocate patients to the two groups. 
-
-  1. Produce the demographic table. Try this for some different values of `p`. 
-  2. Choose two of the baseline factors and use these to stratify the dataset. 
+Use the function `biased_coin` above to allocate patients to the two groups.  Produce the demographic table. Try this for some different values of `p`. 
 
 :::
 
@@ -346,25 +346,137 @@ randbalance(
   trtseq = c("T", "C"))
 ```
 
-The simplest way to introduce stratification is to split the dataset completely into the strata, and treat them as separate trials. For example, here we'll use `preOp_smoking` and `preOp_gender`
-
-THERE HAS TO BE A BETTER WAY THAN THIS!!!!!!
-Look into stratification in R
-
 </details>
 
 
 
 
-### Urn designs
+#### Urn designs
+
+### Stratifying the dataset
+
+The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataste one stratum might contain only women, aged 50-65, with a history of smoking.
+
+Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate 'mini-trials'.
+
+In our Licorice example there are too many possible strata to do this for all levels, so we will choose just a couple. For example, 
+
+```{r, echo=T}
+# Add an ID variable so that we can keep track of the order of participants
+lg_df$ID = 1:nrow(lg_df)
+# split the data frame according to levels of factors
+strat_gen_sm <- lg_df %>%
+  group_split(preOp_gender, preOp_smoking) 
+```
+
+will create a list of data frames, one for each combination of `preOp_gender` and `preOp_smoking`. In this case there are six data frames, and for example the first (accessed by `strat_gen_sm[[1]]` contains all participants with `preOp_gender`=0 and `preOp_smoking`=1. You can choose different factors to stratify by if you want to!
+
+:::{.exercise}
+Split your group using the code above, choosing two factors to stratify by. How many participants are in each strata? 
+
+:::
+
+<details><summary>Click for solution</summary>
+We'll stick with the group as above. To find the numbers of participants in each group we do 
+
+```{r, echo=T}
+group_sizes = sapply(
+  1:length(strat_gen_sm),
+  function(i){
+    nrow(strat_gen_sm[[i]])
+  }
+)
+group_sizes
+```
+
+</details>
 
 
+:::{.exercise}
+Choose a couple of methods from Section \@ref(allocmethods), and use them with your stratified dataset.
+:::
 
-### Minimisation {-}
+<details><summary>Click for solution</summary>
+The code for this will vary, but the basic idea is to work through the individual data sets individually, and apply the functions from Section \@ref(allocmethods). One way to do this is by creating a for loop. The code below shows how this would work for simple random sampling, but you can change the function to use whichever method you prefer.
+
+```{r, echo=T}
+# This command creates an empty list, which we will fill with allocation data frames as we go through
+alloc_list = list()
+# The loop works through the stratified data frames, applies SRS to allocate patients
+# and stores them in alloc_list
+for (i in 1:length(strat_gen_sm)){
+  alloc_list[[i]] = srs(strat_gen_sm[[i]])
+}
+# bind all the data frames back together again
+alloc_full= dplyr::bind_rows(alloc_list)
+# re-order according to ID variable
+alloc_full[order(alloc_full$ID),]
+```
+It would be silly to do this with SRS - why?
+
+</details>
+
+
+### Minimisation
+
+If we want to try to achieve balance for all prognostic factors, minimisation is a more suitable method. The function `Minirand` in the package `Minirand` implements the minimisation algorithm.
+
+Much like we did in lectures, the function `Minirand` works from the point of view of having already allocated $j-1$ particpants, and being presented with a $j^{th}$.
+
+This example code is copied from the function's help file, but with some extra comments to help you to follow it. It first creates a participant data frame, then allocates the particpants to treatment groups using Minimisation.
+
+```{r, echo=T}
+
+## Information about the treatment
+ntrt <- 3 # There will three treatment groups
+trtseq <- c(1, 2, 3) # the treatment groups are indexed 1, 2, 3
+ratio <- c(2, 2, 1)  # the treatment groups will be allocated in a 2:2:1 ratio
+
+## The next few rows generate the participant data frame
+nsample <- 120 # we will have 120 participants
+c1 <- sample(seq(1, 0), nsample, replace = TRUE, prob = c(0.4, 0.6)) 
+c2 <- sample(seq(1, 0), nsample, replace = TRUE, prob = c(0.3, 0.7))
+c3 <- sample(c(2, 1, 0), nsample, replace = TRUE, prob = c(0.33, 0.2, 0.5)) 
+c4 <- sample(seq(1, 0), nsample, replace = TRUE, prob = c(0.33, 0.67)) 
+covmat <- cbind(c1, c2, c3, c4) # generate the matrix of covariate factors for the subjects
+# label of the covariates 
+colnames(covmat) = c("Gender", "Age", "Hypertension", "Use of Antibiotics") 
+covwt <- c(1/4, 1/4, 1/4, 1/4) # equal weights/importance applied to each factor
+
+## Applying the algorithm - start here if you already have participant data!
+
+res <- rep(NA, nsample) # Generate a vector to store the results (the allocations)
+# generate treatment assignment for the 1st subject
+res[1] = sample(trtseq, 1, replace = TRUE, prob = ratio/sum(ratio)) 
+# work through the remaining patients sequentially
+for (j in 2:nsample)
+  {
+  # get treatment assignment sequentially for all subjects
+  # The vector res is updated and so all previous allocations are accounted for
+  # covmat is the data frame of participant data
+    res[j] <- Minirand(
+      covmat=covmat, j, covwt=covwt, ratio=ratio, ntrt=ntrt, trtseq=trtseq, method="Range", result=res, p = 0.9
+      )
+}
+## Store the allocation vector 'res' as 'trt1'
+trt1 <- res
+
+# Display the number of randomized subjects at covariate factors
+balance1 <- randbalance(trt1, covmat, ntrt, trtseq) 
+balance1
+# Calculate the total imbalance of the allocation
+totimbal(trt = trt1, covmat = covmat, covwt = covwt, 
+ratio = ratio, ntrt = ntrt, trtseq = trtseq, method = "Range")
+```
+
+:::{.exercise}
+Adapt the code above to apply the minimisation algorithm to the licorice gargle data.
+:::
+
 
 For the licorice dataset, @ruetzler2013randomized say that "Randomization (1:1) to licorice or placebo was assigned by a Web-based system that was accessed just before treatment by an independent researcher who was not involved in data collection; no stratification was used."
 
 
-## Analysis {-}
+## Analysis {#cp1analysis}
 
 For our analysis section, we will work with real datasets. 
