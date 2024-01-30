@@ -83,6 +83,10 @@ We have two 2-hour practicals for this module. They are 11am - 1pm on the Friday
 knitr::include_graphics("images/rowanhouse_map.png")
 ```
 
+### Office Hour {-}
+
+The office hour will be every Monday, 3-4pm, in MCS 2091 (this is a meeting room, not my office). If you walk up the stairs, keep straight on past the main maths office and computer room (MCS 2094), turn right and it's on your right through the double doors. Alternatively there are maps in the main areas!
+
 ### Assessment {-}
 
 This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February, the second on Wednesday 13th March.
