@@ -7,16 +7,16 @@ This computer practical will cover two main parts:
   1. Allocation (Section \@ref(cp1allocation))
   2. Analysis (Section (\@ref(cp1analysis))
   
-The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be a good idea to do work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time. 
+The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be a good idea to work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time. 
   
-There are many, many packages in R that implement methods for designing and analysiing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
+There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
 
 ```{r, eval=F, echo=T}
 install.packages("<packagename>")
 ```
 
 
-If you have problems running R on you local machine, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
+If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
 
 This requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
 
@@ -32,7 +32,7 @@ This requires you to have a github account (you can sign up for free [here](http
 We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow!
 
 ```{r, eval=F, echo=T}
-install.packages(c("medicaldata", "ggplot2", "Minirand", "blockrand", "dplyr"))
+install.packages(c("medicaldata", "ggplot2", "Minirand", "blockrand", "dplyr", "randomizeR"))
 ```
 
 ### Example dataset 
@@ -168,6 +168,38 @@ To mimic the way that participants are recruited sequentially in a trial (which 
 
 We'll start by performing each method once, and then go on to perform a more thorough simulation study.
 
+#### A measure of imbalance
+
+It will be useful to have a simple numerical summary of how imbalanced an allocation is. We will define the imbalance as in lectures, 
+
+$$D(n) = \lvert N_T\left(n\right) - N_C\left(n\right) \rvert $$
+This is pretty simple to define in R:
+
+```{r}
+imbalance = function(
+    df,   # participant data frame with allocation column included
+    alloc # name of allocation column
+    ){
+  alloc_vec = as.factor(df[ ,names(df)==alloc])
+  alloc_lev = levels(alloc_vec) # how the treatment groups are coded
+  n1 = nrow(df[df[alloc]==alloc_lev[1],])
+  n2 = nrow(df[df[alloc]==alloc_lev[2],])
+  abs(n1-n2)
+}
+```
+
+:::{.exercise}
+Use the `imbalance` function above to find the imbalance in the allocation recorded in the `lic_garg` dataset.
+:::
+
+<details><summary>Click for solution</summary>
+
+```{r, echo=T}
+imbalance(df = lic_garg, alloc = "treat")
+```
+
+</details>
+
 ### Allocation methods {#allocmethods}
 
 #### Simple random allocation
@@ -178,8 +210,7 @@ In simple random allocation, each participant is allocated to one of the two tri
 srs = function(
     df, # DF should be the participant data frame. 
         # A column 'treat' will be added
-    levels = c("0", "1"), # Levels of treat factor
-    seed = 92220 # A random seed, so that this is reproducible
+    levels = c("0", "1") # Levels of treat factor
 ){
   n = nrow(df) # number of rows / participants
 # Create a new column 'treat'
@@ -197,7 +228,7 @@ srs = function(
 :::{.exercise}
 Use the function `srs` above to allocate the patients in the `licorice_gargle` dataset to groups T or C.
 
-Generate the balance table and comment on it.
+Generate the balance table and imbalance and comment on them.
 :::
 
 <details><summary>Click for solution</summary>
@@ -220,6 +251,12 @@ rb_tab = randbalance(
   ntrt=2, 
   trtseq = c("T", "C"))
 
+```
+
+To find the imbalance, the command is
+
+```{r, echo=T}
+imbalance(lg_srs, alloc = "treat")
 ```
 
 </details>
@@ -353,6 +390,42 @@ randbalance(
 
 #### Urn designs
 
+For the urn design, we will use the function `udPar` from the package `randomizeR`. We wrote this in lectures as $UD\left(r,s\right)$, where 
+
+  * $r$ is the number of balls for each treatment group in the urn to begin with
+  * $s$ is the number of balls added per treatment after each allocation
+  
+:::{.exercise}
+Look at the help file for `udPar`. Which arguments correspond to $r$ and $s$?
+:::
+
+The function `udPar` creates a model object, storing the parameters for the particular Urn design. To generate sequences of allocations, we use the function `genSeq`
+
+:::{.exercise}
+Create an urn design object using `udPar` with $r=3,\;s=1$, set to create enough allocations for the licorice gargle data.
+
+Use the function `genSeq` to generate a sequence of allocations.
+:::
+
+<details><summary>Click for solution</summary>
+
+```{r, echo=T}
+ud_31 = udPar(235, 3, 1, c("0", "1"))
+seq_ud31 = genSeq(ud_31)
+
+```
+The allocation vector is stored as a row in the matrix `M` which is a slot in the `genSeq` object (part of the object). You can access it by 
+
+```{r, echo=T}
+seq_ud31@M[1,]
+```
+
+The argument `r` allows you to generate `r` sequences, in which case the matrix `M` has `r` rows.
+
+</details>
+
+
+
 ### Stratifying the dataset
 
 The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataste one stratum might contain only women, aged 50-65, with a history of smoking.
@@ -370,6 +443,7 @@ strat_gen_sm <- lg_df %>%
 ```
 
 will create a list of data frames, one for each combination of `preOp_gender` and `preOp_smoking`. In this case there are six data frames, and for example the first (accessed by `strat_gen_sm[[1]]` contains all participants with `preOp_gender`=0 and `preOp_smoking`=1. You can choose different factors to stratify by if you want to!
+
 
 :::{.exercise}
 Split your group using the code above, choosing two factors to stratify by. How many participants are in each strata? 
@@ -391,9 +465,47 @@ group_sizes
 
 </details>
 
+#### Another measure of imbalance {#margimbalance}
+
+To see how well balanced our allocations are in terms of each covariate, we will define a function summing the marginal imbalance
+
+```{r, echo=T}
+marg_imbalance = function(
+    df,  # participant data frame, including allocation and all factor variables
+    alloc, # name of allocation column
+    factors # names of prognostic factors to be included
+    ){
+  n_fact = length(factors) # the numbers of factors
+  imb_sum=0                # a running total of imbalance
+  for (i in 1:n_fact){     # loop through the factors 
+    ind_i = (1:ncol(df))[names(df)==factors[i]]
+    col_i = as.factor(df[ ,ind_i])
+    levels_i = levels(col_i)
+    nlevels_i = length(levels_i)
+    for (j in 1:nlevels_i){ # loop through the levels of factor i
+      df_ij = df[df[ ,ind_i]==levels_i[j] , ]
+      imb_ij = imbalance(df=df_ij, alloc=alloc) # find the imbalance for the sub-data-frame in which factor i has level j
+    }
+  }
+  imb_sum
+}
+```
+
+For example, to find the marginal imbalance over the gender and age factors, use
+
+```{r, echo=T}
+
+marg_imbalance(df=lg_df, alloc="treat", factors = c("preOp_gender", "age"))
+
+```
+
+
+Note that the more factors there are, the bigger the marginal imbalance will be, so if you're comparing between methods, make sure you're including all the same factors!
+
 
 :::{.exercise}
 Choose a couple of methods from Section \@ref(allocmethods), and use them with your stratified dataset.
+Use the `marg_imbalance` function to find the marginal imbalance. Try this for just the factors you stratified by, and for other collections of factors. What do you expect to see?
 :::
 
 <details><summary>Click for solution</summary>
@@ -412,7 +524,7 @@ alloc_full= dplyr::bind_rows(alloc_list)
 # re-order according to ID variable
 alloc_full[order(alloc_full$ID),]
 ```
-It would be silly to do this with SRS - why?
+It would be silly though to do this with SRS - why?
 
 </details>
 
@@ -473,9 +585,35 @@ ratio = ratio, ntrt = ntrt, trtseq = trtseq, method = "Range")
 Adapt the code above to apply the minimisation algorithm to the licorice gargle data.
 :::
 
+### A simulation experiment!
+
+In the above, we've used each method once and produced summaries like the marginal imbalance. Because they are inherently random, to understand the general behaviour of each method, we'll conduct a simulation experiment.
+
+The general process for this is:
+
+  1. Choose a numerical summary (probably either the imbalance or the marginal imbalance) 
+  2. Choose some large number $n_{sim}$ and create a vector of zeroes or NAs that length
+  3. Run through the following process $n_{sim}$ times: 
+      
+       * Perform the allocation
+       * Find the numerical summary 
+       * Store the numerical summary in the vector you created in step 2.
+
+  4. Plot (or otherwise summarise) the vector of summaries.
+  
+:::{.exercise}
+
+Perform the simulation experiment for some of the methods above. Make sure you store the summary vectors by different (and intelligible!) names.
+
+Based on your results, comment on how plausible it is that @ruetzler2013randomized used each method in their trial.
+
+*Hint: think of the simulated summaries as approximations of probability distributions*
+
+:::
+
+
 
 For the licorice dataset, @ruetzler2013randomized say that "Randomization (1:1) to licorice or placebo was assigned by a Web-based system that was accessed just before treatment by an independent researcher who was not involved in data collection; no stratification was used."
-
 
 ## Analysis {#cp1analysis}
 

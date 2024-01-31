@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-30" />
+<meta name="date" content="2024-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -771,7 +771,7 @@ Figure 4.2: Baseline measurements from the Captopril trial.
 That is, if there is a difference in the baseline mean between the control and test groups, then the difference in outcome means is not an unbiased estimator of the treatment effect <span class="math inline">\(\tau\)</span>. Assuming <span class="math inline">\(\rho&gt;0\)</span> (which is almost always the case) then if <span class="math inline">\(\bar{b}_T&gt;\bar{b}_C\)</span> the difference in outcome means overestimates <span class="math inline">\(\tau\)</span>. Conversely, if <span class="math inline">\(\bar{b}_T&lt;\bar{b}_C\)</span>, the difference in outcome means underestimates <span class="math inline">\(\tau\)</span>. The only situation in which the difference in outcome means is an unbiased estimator is when <span class="math inline">\(\rho=0\)</span>, however this is not common in practice.</p>
 <p>Comparing the difference between outcome and baseline, as we did in <a href="rct-analysis.html#baseline">4.2</a>, does not solve this problem, since we have</p>
 <p><span class="math display">\[\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),\]</span>
-which is similarly unbiased (unless <span class="math inline">\(\rho=1\)</span>, which is never the case).</p>
+which is similarly biased (unless <span class="math inline">\(\rho=1\)</span>, which is never the case).</p>
 <p>Notice, however, that if we use as our estimator</p>
 <p><span class="math display" id="eq:ancovaest">\[\begin{equation}
 \hat{\tau} = \left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)
@@ -837,7 +837,7 @@ We can combine this information to work out <span class="math inline">\(\operato
 \end{aligned}
 \]</span>
 If we set</p>
-<p><span class="math display">\[k = \beta = \frac{\sigma_Y}{\rho\sigma_X} \]</span>
+<p><span class="math display">\[k = \beta = \frac{\rho\sigma_Y}{\sigma_X} \]</span>
 then <span class="math inline">\(\operatorname{cov}\left(X,\,Y-\beta X\right)=0\)</span>, and since <span class="math inline">\(Y-\beta X\)</span> is also normally distributed, this means that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y-\beta X\)</span> are independent. Therefore we have</p>
 <p><span class="math display">\[\operatorname{E}\left(Y-\beta X \mid X=x\right) = \operatorname{E}\left(Y-\beta X\right) = \mu_Y - \beta \mu_X.\]</span>
 However, since we’re conditioning on an observed value of <span class="math inline">\(X=x\)</span> we can take <span class="math inline">\(X\)</span> to be fixed at this value, and so <span class="math inline">\(\operatorname{E}\left(\beta X\mid{X=x}\right) = \beta x\)</span>. Finally, this allows us to calculate</p>

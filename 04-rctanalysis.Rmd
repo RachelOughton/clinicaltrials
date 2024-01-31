@@ -336,7 +336,7 @@ That is, if there is a difference in the baseline mean between the control and t
 Comparing the difference between outcome and baseline, as we did in \@ref(baseline), does not solve this problem, since we have
 
 $$\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),$$ 
-which is similarly unbiased (unless $\rho=1$, which is never the case).
+which is similarly biased (unless $\rho=1$, which is never the case).
 
 Notice, however, that if we use as our estimator 
 
@@ -439,7 +439,7 @@ $$
 $$
 If we set 
 
-$$k = \beta = \frac{\sigma_Y}{\rho\sigma_X} $$
+$$k = \beta = \frac{\rho\sigma_Y}{\sigma_X} $$
 then $\operatorname{cov}\left(X,\,Y-\beta X\right)=0$, and since $Y-\beta X$ is also normally distributed, this means that $X$ and $Y-\beta X$ are independent. Therefore we have
 
 $$\operatorname{E}\left(Y-\beta X \mid X=x\right) = \operatorname{E}\left(Y-\beta X\right) = \mu_Y - \beta \mu_X.$$

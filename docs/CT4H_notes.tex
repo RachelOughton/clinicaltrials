@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-01-30}
+\date{2024-01-31}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -170,6 +170,12 @@ Our lectures are 12 noon on Mondays and 9am on Wednesdays, all in ES231. This is
 We have two 2-hour practicals for this module. They are 11am - 1pm on the Fridays of weeks 14 and 19 (2nd February and 8th March). These classes are in RH-0003. This is Rowan House, which is in Upper Mountjoy, across the pond from the MCS building.
 
 \includegraphics{images/rowanhouse_map.png}
+
+\hypertarget{office-hour}{%
+\subsection*{Office Hour}\label{office-hour}}
+\addcontentsline{toc}{subsection}{Office Hour}
+
+The office hour will be every Monday, 3-4pm, in MCS 2091 (this is a meeting room, not my office). If you walk up the stairs, keep straight on past the main maths office and computer room (MCS 2094), turn right and it's on your right through the double doors. Alternatively there are maps in the main areas!
 
 \hypertarget{assessment}{%
 \subsection*{Assessment}\label{assessment}}
@@ -1825,7 +1831,12 @@ In the previous section we based our analysis on the baseline values being stati
 
 However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \ref{fig:hommel}.
 
+\begin{figure}
+\centering
 \includegraphics{CT4H_notes_files/figure-latex/hommel-1.pdf}
+\caption{\label{fig:hommel}Baseline measurements from the Captopril trial.}
+\end{figure}
+
 The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn't a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference.
 
 The basic principle of ANCOVA is that if there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if \(\tau=0\)). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples?
@@ -1859,7 +1870,7 @@ That is, if there is a difference in the baseline mean between the control and t
 Comparing the difference between outcome and baseline, as we did in \ref{baseline}, does not solve this problem, since we have
 
 \[\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),\]
-which is similarly unbiased (unless \(\rho=1\), which is never the case).
+which is similarly biased (unless \(\rho=1\), which is never the case).
 
 Notice, however, that if we use as our estimator
 
@@ -1941,7 +1952,7 @@ We can combine this information to work out \(\operatorname{E}\left(Y\mid{X=x}\r
 \]
 If we set
 
-\[k = \beta = \frac{\sigma_Y}{\rho\sigma_X} \]
+\[k = \beta = \frac{\rho\sigma_Y}{\sigma_X} \]
 then \(\operatorname{cov}\left(X,\,Y-\beta X\right)=0\), and since \(Y-\beta X\) is also normally distributed, this means that \(X\) and \(Y-\beta X\) are independent. Therefore we have
 
 \[\operatorname{E}\left(Y-\beta X \mid X=x\right) = \operatorname{E}\left(Y-\beta X\right) = \mu_Y - \beta \mu_X.\]
