@@ -522,6 +522,8 @@ $$
 \end{aligned}
 $$
 Notice that unlike our first estimator that used baseline values, in Section \@ref(baseline), the variance of the ANCOVA estimate can never exceed $\frac{2\sigma^2}{N}$; if the baseline and outcome are uncorrelated, ANCOVA will perform as well as a $t$-test.
+
+@borm2007simple discuss how this reduction in $\operatorname{var\left(\hat{\tau}\right)}$ can impact our sample size calculations.
  
 ### The practice
 
