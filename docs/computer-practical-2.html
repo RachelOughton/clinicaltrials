@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Clinical Trials 4H</title>
+  <title>B Computer Practical 2 | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Clinical Trials 4H" />
+  <meta property="og:title" content="B Computer Practical 2 | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Clinical Trials 4H" />
+  <meta name="twitter:title" content="B Computer Practical 2 | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="rct-intro.html"/>
+<link rel="prev" href="computer-practical-1.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -253,7 +253,6 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
 <li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
-<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -275,6 +274,18 @@ div.csl-indent {
 <li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="B" data-path="computer-practical-2.html"><a href="computer-practical-2.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#sample-size-by-simulation"><i class="fa fa-check"></i><b>B.1</b> Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#the-simulation-method"><i class="fa fa-check"></i><b>B.1.1</b> The simulation method</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#analysis-for-binary-and-survival-data"><i class="fa fa-check"></i><b>B.2</b> Analysis for Binary and Survival data</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#binary-data"><i class="fa fa-check"></i><b>B.2.1</b> Binary data</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#survival-data"><i class="fa fa-check"></i><b>B.2.2</b> Survival data</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -293,70 +304,37 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Clinical Trials 4H</h1>
-<p class="author"><em>Rachel Oughton</em></p>
-<p class="date"><em>2024-02-02</em></p>
-</div>
-<div id="welcome-to-clinical-trials-4h" class="section level1 unnumbered hasAnchor">
-<h1>Welcome to Clinical Trials 4H!<a href="index.html#welcome-to-clinical-trials-4h" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This page contains the notes for Clinical Trials IV. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!</p>
-<div id="practical-details" class="section level2 unnumbered hasAnchor">
-<h2>Practical details<a href="index.html#practical-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="lectures" class="section level3 unnumbered hasAnchor">
-<h3>Lectures<a href="index.html#lectures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Our lectures are 12 noon on Mondays and 9am on Wednesdays, all in ES231. This is in the Earth Sciences / Arthur Holmes building, which is behind (almost surrounding) the Calman Learning Centre. The door of this room is actually labelled ‘Teaching Room 4’.</p>
-</div>
-<div id="computer-classes" class="section level3 unnumbered hasAnchor">
-<h3>Computer classes<a href="index.html#computer-classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We have two 2-hour practicals for this module. They are 11am - 1pm on the Fridays of weeks 14 and 19 (2nd February and 8th March). These classes are in RH-0003. This is Rowan House, which is in Upper Mountjoy, across the pond from the MCS building.</p>
-<p><img src="images/rowanhouse_map.png" /><!-- --></p>
-</div>
-<div id="office-hour" class="section level3 unnumbered hasAnchor">
-<h3>Office Hour<a href="index.html#office-hour" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The office hour will be every Monday, 3-4pm, in MCS 2091 (this is a meeting room, not my office). If you walk up the stairs, keep straight on past the main maths office and computer room (MCS 2094), turn right and it’s on your right through the double doors. Alternatively there are maps in the main areas!</p>
-</div>
-<div id="assessment" class="section level3 unnumbered hasAnchor">
-<h3>Assessment<a href="index.html#assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February, the second on Wednesday 13th March.</p>
-<p>There will also be some formative assignments throughout the course. More details on these to follow.</p>
-</div>
-<div id="books" class="section level3 unnumbered hasAnchor">
-<h3>Books<a href="index.html#books" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The main reference for the first half of the course is <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are <span class="citation">Hulley et al. (<a href="#ref-hulley2013designing">2013</a>)</span>, <span class="citation">Hayes and Moulton (<a href="#ref-hayes2017cluster">2017</a>)</span>. You shouldn’t need to use any of these books, but of course you’re welcome to if you want to read further.</p>
-</div>
-</div>
-<div id="what-to-expect-from-this-module" class="section level2 unnumbered hasAnchor">
-<h2>What to expect from this module<a href="index.html#what-to-expect-from-this-module" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Clinical Trials IV is somewhat different from the majority of statistics modules, because</p>
+<div id="computer-practical-2" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">B</span> Computer Practical 2<a href="computer-practical-2.html#computer-practical-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this practical, we will focus on two main areas:</p>
 <ul>
-<li>It is more focussed on application than on methodology</li>
-<li>It is assessed purely through coursework.</li>
+<li>Simulation methods for determining sample size</li>
+<li>Analysis methods for Binary and Survival data</li>
 </ul>
-<p>This means that your experience of it might be different from what you’re used to</p>
-<ul>
-<li>We will cover quite a lot of different statistical methods (drawing on most of the 1H and 2H courses, and some 3H!) but not in great depth</li>
-<li>There is no pressure to memorize anything - indeed, if you really were a trial statistician, you would definitely have access to the internet, various textbooks and even these notes (should they prove useful!).</li>
-<li>There is an emphasis on understanding which method we use and why, and what it means. Hopefully this has been the case in some of your other modules too!</li>
-</ul>
-<div id="what-i-expect-from-you" class="section level3 unnumbered hasAnchor">
-<h3>What I expect from you<a href="index.html#what-i-expect-from-you" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Because we will be covering quite a lot of different areas within statistics, there may be some things that you haven’t seen before (or can’t remember very well). I will try my best to explain them as clearly as I can, but there isn’t time to go into the nuts and bolts of everything we come across. Therefore, if you do feel a bit rusty on some area, you may need to read up on that a bit, so that you’re happy with it. I am very happy to suggest resources from time to time, and you’re welcome to come to the office hour to talk about such things.</p>
-<p>This is the first year this course is running, and so I would also really appreciate your feedback. I may not be able to address everything (or I may only be able to implement things for following years), but if I can act on it quickly then I will!</p>
+<div id="sample-size-by-simulation" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">B.1</span> Sample size by simulation<a href="computer-practical-2.html#sample-size-by-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required.</p>
+<p>This approach has the following advantages over the formula-based methods presented in Section <a href="rct-plan.html#rct-plan">2</a>:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Transparency</strong>: If the data generating mechanism is made clear, then the assumptions behind the trial are also clear, and the simulation can be replicated by anyone. Reproducibility is a big issue in clinical trials.</li>
+<li><strong>Flexibility</strong>: Whereas the methods in Section <a href="rct-plan.html#rct-plan">2</a> are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials.</li>
+<li><strong>Practice</strong>: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the statistical analysis plan.</li>
+</ol>
+<p>Arguably the first and third advantages could also be true (though aren’t automatically) of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.</p>
+<div id="the-simulation-method" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">B.1.1</span> The simulation method<a href="computer-practical-2.html#the-simulation-method" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first step in the simulation method is to generate trial data. To do this, we use the underlying probabilistic model we have used (or would use) to develop a sample size formula.</p>
+</div>
+</div>
+<div id="analysis-for-binary-and-survival-data" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">B.2</span> Analysis for Binary and Survival data<a href="computer-practical-2.html#analysis-for-binary-and-survival-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="binary-data" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">B.2.1</span> Binary data<a href="computer-practical-2.html#binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="survival-data" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">B.2.2</span> Survival data<a href="computer-practical-2.html#survival-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-hayes2017cluster" class="csl-entry">
-Hayes, Richard J, and Lawrence H Moulton. 2017. <em>Cluster Randomised Trials</em>. CRC press.
-</div>
-<div id="ref-hulley2013designing" class="csl-entry">
-Hulley, Stephen B, Steven R. Cummings, Warren S. Browner, Deborah G. Grady, and Thomas B. Newman. 2013. <em>Designing Clinical Research, Fourth Edition</em>. Lippincott Williams &amp; Wilkins.
-</div>
-<div id="ref-matthews2006introduction" class="csl-entry">
-Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
 </div>
 </div>
             </section>
@@ -364,8 +342,8 @@ Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Tria
           </div>
         </div>
       </div>
-
-<a href="rct-intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="computer-practical-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

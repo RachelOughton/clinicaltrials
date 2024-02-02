@@ -262,7 +262,7 @@ To allocate the patients, use
 
 ```{r, echo=T}
 lg_srs = srs(
-  df = lg_df[,-7],
+  df = lg_df[,-8],
   levels = c("T", "C")
 )
 ```

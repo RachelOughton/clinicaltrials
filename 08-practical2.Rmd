@@ -1,18 +1,35 @@
-# Practical 2
+# Computer Practical 2
+
+In this practical, we will focus on two main areas:
+
+  * Simulation methods for determining sample size
+  * Analysis methods for Binary and Survival data
+  
 
 
 ## Sample size by simulation
 
 A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required.
 
-This approach has the following advantages over the formula-based methods presented in Section \@ref(ss-norm):
+This approach has the following advantages over the formula-based methods presented in Section \@ref(rct-plan):
 
   1. **Transparency**: If the data generating mechanism is made clear, then the assumptions behind the trial are also clear, and the simulation can be replicated by anyone. Reproducibility is a big issue in clinical trials.
-  2. **Flexibility**: Whereas the methods above are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials.
-  3. **Practice**: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the plan.
+  2. **Flexibility**: Whereas the methods in Section \@ref(rct-plan) are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials.
+  3. **Practice**: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the statistical analysis plan.
   
-Arguably the first and third advantages could be true of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.
+Arguably the first and third advantages could also be true (though aren't automatically) of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.
 
 ### The simulation method
 
 The first step in the simulation method is to generate trial data. To do this, we use the underlying probabilistic model we have used (or would use) to develop a sample size formula.
+
+
+
+## Analysis for Binary and Survival data
+
+
+### Binary data
+
+
+
+### Survival data

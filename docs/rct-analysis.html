@@ -253,6 +253,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
 <li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -927,7 +928,7 @@ Notice that unlike our first estimator that used baseline values, in Section <a 
 <h3><span class="header-section-number">4.3.2</span> The practice<a href="rct-analysis.html#the-practice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the previous section we established an unbiased estimate of the treatment effect that takes into account the baseline measurements. However, we can’t use it as a model, because there are a few practical barriers:</p>
 <ul>
-<li>Our estimate for <span class="math inline">\(\tau\)</span> relies on the correlation <span class="math inline">\(\lambda\)</span>, which is unknown</li>
+<li>Our estimate for <span class="math inline">\(\tau\)</span> relies on the correlation <span class="math inline">\(\rho\)</span>, which is unknown</li>
 <li>In real life, the groups are unlikely to have equal size and variance, so ideally we’d lose these constraints</li>
 </ul>
 <p>We can solve both of these by fitting the following statistical model to the observed outcomes <span class="math inline">\(x_i\)</span>:</p>
@@ -985,8 +986,8 @@ Therefore, for a patient assigned Placebo, a value of 7.1779 is added, as well a
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>For our previous methods we have calculated a confidence interval for the treatment effect <span class="math inline">\(\tau\)</span>, and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of <span class="math inline">\(\hat{\tau}\)</span> is 2.9636. Therefore, to construct a 95/% confidence interval for <span class="math inline">\(\hat{\tau}\)</span>, we use (to 3 decimal places)</p>
 <p><span class="math inline">\(7.178\; \pm\; t_{0.975;13}\times{2.964} = \left(0.775,\; 13.580\right).\)</span></p>
-<p>The model has <span class="math inline">\(n-p=13\)</span> degrees of freedom because there are <span class="math inline">\(n=16\)</span> data points and are estimating <span class="math inline">\(p=3\)</span> parameters.
-Notice that unlike our previous confidence intervals, this doesn’t contain zero, and so our analysis has enabled us to conclude that there is a significant reduction in blood pressure with Captopril. However, you can tell from the width of the interval that there is still a lot of uncertainty about <span class="math inline">\(\tau\)</span>.</p>
+<p>The model has <span class="math inline">\(n-p=13\)</span> degrees of freedom because there are <span class="math inline">\(n=16\)</span> data points and we are estimating <span class="math inline">\(p=3\)</span> parameters.
+Notice that unlike our previous confidence intervals, this doesn’t contain zero, and so our analysis has enabled us to conclude that there is a significant reduction in blood pressure with Captopril. You can also see this in that <span class="math inline">\(p=0.03079&lt;0.05\)</span>. However, you can tell from the width of the interval (and the fact that <span class="math inline">\(p\)</span> is still quite close to 0.05) that there is still a lot of uncertainty about <span class="math inline">\(\tau\)</span>.</p>
 <p>The ‘Residual standard error’ term near the bottom of the linear model summary is the estimate of <span class="math inline">\(\hat{\sigma}\)</span>, so here we have <span class="math inline">\(\hat{\sigma}^2 = 5.869^2 = 34.44.\)</span></p>
 <p>As with any fitted model, we should check the residuals.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="rct-analysis.html#cb5-1" tabindex="-1"></a>resid_capt <span class="ot">=</span> <span class="fu">resid</span>(lm_capt)</span>
@@ -998,7 +999,7 @@ Notice that unlike our previous confidence intervals, this doesn’t contain zer
 <span id="cb5-7"><a href="rct-analysis.html#cb5-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Baseline&quot;</span>)<span class="sc">+</span></span>
 <span id="cb5-8"><a href="rct-analysis.html#cb5-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Residual&quot;</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<p>These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it’s difficult really to assess the fit of the model. In our practical, we’ll work with a more realistic dataset.</p>
+<p>These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it’s difficult really to assess the fit of the model.</p>
 </div>
 </div>
 </div>
@@ -1055,7 +1056,7 @@ The term <span class="math inline">\(\lambda b_i G_i\)</span> is 0 if participan
 </div>
 <div id="can-we-include-any-other-baseline-covariates" class="section level3 hasAnchor" number="4.4.3">
 <h3><span class="header-section-number">4.4.3</span> Can we include any other baseline covariates?<a href="rct-analysis.html#can-we-include-any-other-baseline-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In Section <a href="rct-analysis.html#baseline">4.2</a> when our estimated treatment effect was <span class="math inline">\(\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)\)</span>, we could the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome <span class="math inline">\(X\)</span>. However, in ANCOVA, our treatment effect is</p>
+<p>In Section <a href="rct-analysis.html#baseline">4.2</a> when our estimated treatment effect was <span class="math inline">\(\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)\)</span>, the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome <span class="math inline">\(X\)</span>. However, in ANCOVA, our treatment effect is</p>
 <p><span class="math display">\[ \hat\tau = \left(\bar{x}_T - \bar{x}_C\right) - \hat\gamma\left(\bar{b}_T - \bar{b}_C\right), \]</span>
 and the inclusion of the coefficient <span class="math inline">\(\gamma\)</span> means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation (hence they are sometimes known as <em>baseline covariates</em>, not to be confused with ‘the baseline’, which would generally mean the same measurement as the primary outcome, but before treatment). This is because they cannot, at that point, have been affected by the treatment, or have had an influence on the post-trial outcome measurement. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.</p>
 <div class="example">
@@ -1115,7 +1116,7 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 </tr>
 </tbody>
 </table>
-<p>Fitting a linear model, we see that treatment, high levels of exercise and age have an effect on stress.</p>
+<p>Fitting a linear model, we see that treatment, high levels of exercise and age each have a significant effect on stress.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="rct-analysis.html#cb8-1" tabindex="-1"></a>lm_stresslin <span class="ot">=</span> <span class="fu">lm</span>(score <span class="sc">~</span> treatment <span class="sc">+</span> exercise <span class="sc">+</span> age, <span class="at">data =</span> stress)</span>
 <span id="cb8-2"><a href="rct-analysis.html#cb8-2" tabindex="-1"></a><span class="fu">summary</span>(lm_stresslin)</span></code></pre></div>
 <pre><code>## 
@@ -1143,6 +1144,71 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 <p>We can plot the residuals to check that the model is a reasonable fit</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
+<p>And these look reasonably OK. We could also test for interactions, firstly across all factors:</p>
+<pre><code>## 
+## Call:
+## lm(formula = score ~ (treatment + exercise + age):(treatment + 
+##     exercise + age), data = stress)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.5637 -3.3982  0.4173  2.3827 10.3907 
+## 
+## Coefficients:
+##                               Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)                   61.25416   19.86949   3.083  0.00333 **
+## treatmentno                    3.89781   24.16324   0.161  0.87250   
+## exercisemoderate             -14.60897   24.31690  -0.601  0.55070   
+## exercisehigh                 -12.03441   29.53812  -0.407  0.68544   
+## age                            0.43121    0.32097   1.343  0.18518   
+## treatmentno:exercisemoderate  -0.20723    3.35949  -0.062  0.95106   
+## treatmentno:exercisehigh       8.12783    3.72077   2.184  0.03365 * 
+## treatmentno:age               -0.03769    0.38851  -0.097  0.92311   
+## exercisemoderate:age           0.24286    0.40215   0.604  0.54864   
+## exercisehigh:age              -0.03524    0.50722  -0.069  0.94488   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.106 on 50 degrees of freedom
+## Multiple R-squared:  0.6647, Adjusted R-squared:  0.6043 
+## F-statistic: 11.01 on 9 and 50 DF,  p-value: 3.181e-09</code></pre>
+<p>and then restricted to the interactions that seem important:</p>
+<pre><code>## 
+## Call:
+## lm(formula = score ~ treatment + exercise + age + treatment:exercise, 
+##     data = stress)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.3250 -3.0192  0.2745  2.4650 10.6667 
+## 
+## Coefficients:
+##                               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                   56.79090   10.41383   5.453 1.32e-06 ***
+## treatmentno                    1.52858    2.23026   0.685   0.4961    
+## exercisemoderate               0.01746    2.25662   0.008   0.9939    
+## exercisehigh                 -13.70331    2.36314  -5.799 3.78e-07 ***
+## age                            0.50355    0.16684   3.018   0.0039 ** 
+## treatmentno:exercisemoderate   0.15503    3.16129   0.049   0.9611    
+## treatmentno:exercisehigh       8.21822    3.15375   2.606   0.0119 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.985 on 53 degrees of freedom
+## Multiple R-squared:  0.6613, Adjusted R-squared:  0.623 
+## F-statistic: 17.25 on 6 and 53 DF,  p-value: 6.167e-11</code></pre>
+<p>:::</p>
+<p>Notice that now, the effect of the treatment on its own is not significant. Also notice that for both the linear exercise terms and the interactions between the exercise and treatment, the effects of moderate and low exercise are very similar.
+Combining the coefficients, someone who does a high level of exercise:</p>
+<ul>
+<li>is likely to reduce their stress score by 13.7 if they receive the treatment</li>
+<li>is likely to reduce their stress score by <span class="math inline">\(13.7 - 8.2 = 5.5\)</span> if they don’t receive the treatment</li>
+</ul>
+<p>Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.</p>
+</div>
+<div id="conclusion" class="section level3 unnumbered hasAnchor">
+<h3>Conclusion<a href="rct-analysis.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>That draws to a close our work with continuous outcome variables. In the next lecture, we’ll start thinking about binary outcome variables.</p>
 
 </div>
 </div>
