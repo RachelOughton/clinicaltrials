@@ -883,7 +883,7 @@ ggplot(data=stress_sum, aes(x=fitted, y=resid, col=treatment)) +
 
 
 
-And these look reasonably OK. We could also test for interactions
+And these look reasonably OK. We could also test for interactions, firstly across all factors:
 
 ```{r}
 lm_stressint = lm(score ~ (treatment + exercise + age):(treatment + exercise + age), data = stress)
@@ -892,6 +892,25 @@ summary(lm_stressint)
 
 ```
 
+and then restricted to the interactions that seem important:
+
+```{r}
+lm_stressint2 = lm(score ~ treatment + exercise + age + treatment:exercise, data=stress)
+summary(lm_stressint2)
+
+```
+
+
+Notice that now, the effect of the treatment on its own is not significant. Also notice that for both the linear exercise terms and the interactions between the exercise and treatment, the effects of moderate and low exercise are very similar. 
+Combining the coefficients, someone who does a high level of exercise:
+
+  * is likely to reduce their stress score by 13.7 if they receive the treatment
+  * is likely to reduce their stress score by $13.7 - 8.2 = 5.5$ if they don't receive the treatment
+
+Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.
+
 :::
 
+### Conclusion {-}
 
+That draws to a close our work with continuous outcome variables. In the next lecture, we'll start thinking about binary outcome variables.

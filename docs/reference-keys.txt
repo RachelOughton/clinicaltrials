@@ -39,7 +39,7 @@ fig:licorice-participants
 exm:unlabeled-div-18
 tab:captoprildata
 exm:unlabeled-div-19
-tab:unnamed-chunk-11
+tab:unnamed-chunk-14
 fig:ttestcapt
 exm:unlabeled-div-20
 exm:unlabeled-div-21

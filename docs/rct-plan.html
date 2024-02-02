@@ -436,7 +436,7 @@ where
 <div id="brief-aside-on-notation" class="section level4 unnumbered hasAnchor">
 <h4>Brief aside on notation<a href="rct-plan.html#brief-aside-on-notation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><em>We’ll see a lot of the notation <span class="math inline">\(z_{\alpha/2}\)</span> and similar, so to clarify:</em></p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p><em>In R, we have <span class="math inline">\(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\)</span> and <span class="math inline">\(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\)</span>. <code>qnorm</code> is the quantile and <code>pnorm</code> is the cumulative distribution function. So, for example</em>
 <span class="math display">\[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)\]</span></p>
 <p>We have constructed our whole argument under the assumption that <span class="math inline">\(H_0\)</span> is true, and that the probability of such a value is therefore <span class="math inline">\(\alpha\)</span>. We want this probability to be small, since it constitutes an error; <span class="math inline">\(H_0\)</span> is true, but our value of <span class="math inline">\(D\)</span> (or the difference in means) leads us to reject <span class="math inline">\(H_0\)</span>. This is sometimes called the ‘type I’ error rate. But what if <span class="math inline">\(H_0\)</span> is false?</p>

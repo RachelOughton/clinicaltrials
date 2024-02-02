@@ -446,7 +446,7 @@ seq_ud31 = genSeq(ud_31)
 The allocation vector is stored as a row in the matrix `M` which is a slot in the `genSeq` object (part of the object). You can access it by 
 
 ```{r, echo=T}
-seq_ud31@M[1,]
+seq_ud31$M[1,]
 ```
 
 The argument `r` allows you to generate `r` sequences, in which case the matrix `M` has `r` rows.
