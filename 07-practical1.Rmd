@@ -7,7 +7,17 @@ This computer practical will cover two main parts:
   1. Allocation (Section \@ref(cp1allocation))
   2. Analysis (Section (\@ref(cp1analysis))
   
-The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be a good idea to work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time. 
+### Preliminaries {-}
+  
+The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be sensible to work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time. 
+
+You will need a lot of the techniques covered in this practical for your summative assignments, so consider it a sort of informal formative assignment to finish it if you don't in class. Or, at the very least, you might need to return to it while working on your summative assignments.
+
+There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you're not sure how to do something, please ask!
+
+**In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.**
+
+### R practicalities {-}
   
 There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
 
@@ -16,7 +26,9 @@ install.packages("<packagename>")
 ```
 
 
-If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
+If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III. 
+
+An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
 
 This requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
 
@@ -29,13 +41,16 @@ This requires you to have a github account (you can sign up for free [here](http
 
 ## Allocation {#cp1allocation}
 
-We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow!
+We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We'll load them as we go along.
+
+**Notice that where there are code snippets like this one that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
 
 ```{r, eval=F, echo=T}
-install.packages(c("medicaldata", "ggplot2", "Minirand", "blockrand", "dplyr", "randomizeR"))
+install.packages(c("medicaldata", "ggplot2", "Minirand", 
+                   "blockrand", "dplyr", "randomizeR"))
 ```
 
-### Example dataset 
+### Licorice gargle dataset 
 
 To work with allocation, we will use the `licorice_gargle` dataset from the package `medicaldata`, which you can find by 
 
@@ -50,11 +65,20 @@ You can find out about the dataset by looking at the help file
 ?licorice_gargle
 ```
 
-and at [this website](https://www.causeweb.org/tshs/licorice-gargle/), even the original paper @ruetzler2013randomized.
+and at [this website](https://www.causeweb.org/tshs/licorice-gargle/), and if you're feeling really keen you can even read the original paper: @ruetzler2013randomized.
 
 :::{.exercise}
 Of the 19 columns, how many are baseline characteristics that we could use in the allocation?
 :::
+
+<details><summary>Click for solution</summary>
+In this dataset the baseline characteristics are helpfully prefixed by `preOp`, so there are seven baseline characteristics.
+
+```{r}
+grep("preOp_", names(licorice_gargle), value=T)
+```
+
+</details>
 
 In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure `str(licorice_gargle)` that all columns are numeric to begin with).
 
@@ -77,6 +101,7 @@ It's also useful to get some idea of how the data are distributed.
 Plot the data in various different ways. For example, 
 
 ```{r, eval=F, echo=T}
+library(ggplot2)
 ggplot(data=lic_garg, aes(x=preOp_pain, fill=preOp_gender)) + 
   geom_bar(col=1) + 
   facet_wrap(~preOp_smoking, nrow=1) +
@@ -122,7 +147,7 @@ Looking at the output above, it's clear that the two numeric variables `preOp_ag
 :::{.exercise}
 Bin the two variables `preOp_age` and `preOp_calcBMI` to convert them into factor variables `BMI` and `age`. 
 
-Create a new data frame `lg_df` with these two factor variables instead of the original two numeric variables.
+Create a new data frame `lg_df` with the two new factor variables you just created instead of the original two numeric variables.
 :::
 
 <details><summary>Click for solution</summary>
@@ -164,10 +189,6 @@ If you've chosen different bins, that's fine! But it will help you if the column
 
 </details>
 
-To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we'll use packages. Feel free to write your own code for the simpler methods if you want to!
-
-We'll start by performing each method once, and then go on to perform a more thorough simulation study.
-
 #### A measure of imbalance
 
 It will be useful to have a simple numerical summary of how imbalanced an allocation is. We will define the imbalance as in lectures, 
@@ -175,7 +196,7 @@ It will be useful to have a simple numerical summary of how imbalanced an alloca
 $$D(n) = \lvert N_T\left(n\right) - N_C\left(n\right) \rvert $$
 This is pretty simple to define in R:
 
-```{r}
+```{r, echo=T}
 imbalance = function(
     df,   # participant data frame with allocation column included
     alloc # name of allocation column
@@ -202,9 +223,13 @@ imbalance(df = lic_garg, alloc = "treat")
 
 ### Allocation methods {#allocmethods}
 
+To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we'll use packages. Feel free to write your own code for the simpler methods if you want to!
+
+We'll start by performing each method once with the whole dataset, and then go on to include baseline variables, and finally we'll perform a simulation study.
+
 #### Simple random allocation
 
-In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. At this point we don't need to think about the prognostic factors at all.
+In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. 
 
 ```{r, echo=T}
 srs = function(
@@ -266,16 +291,13 @@ imbalance(lg_srs, alloc = "treat")
 
 #### Randomly permuted blocks
 
-An obvious problem with using RPBs for this data is the number of strata. We have (if you have the same numbers of levels for `age` and `BMI` as I do)
+We will do this with the package `blockrand`. 
 
-$$2\times{3}\times{4}\times{3}\times{2}\times{3}\times{3} = 1296 $$
-strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will start by using RPBs without stratification. We will do this with the package `blockrand`. 
-
-```{r, echo=F}
+```{r, echo=T}
 library(blockrand)
 ```
 
-The default for the function `blockrand` is that it will randomly vary block length within $\left\lbrace 2,\,4,\,6,\,8 \right\rbrace$. 
+The function for generating RPB designs is also called `blockrand`. The default for the function `blockrand` is that it will randomly vary block length within $\left\lbrace 2,\,4,\,6,\,8 \right\rbrace$. 
 
 
 :::{.exercise}
@@ -321,7 +343,7 @@ randbalance(
 ```
 </details>
 
-The package `blockrand` contains a function `plotblockrand` outputs PDFs of randomization cards, ready to be printed and put into envelopes!
+The package `blockrand` contains a function `plotblockrand`, which outputs PDFs of randomization cards, ready to be printed and put into envelopes!
 
 #### Biased coin designs
 
@@ -356,7 +378,7 @@ biased_coin = function(
 
 
 :::{.exercise}
-Use the function `biased_coin` above to allocate patients to the two groups.  Produce the demographic table. Try this for some different values of `p`. 
+Use the function `biased_coin` above to allocate patients to the two groups.  Produce the demographic table and calculate the imbalance. Try this for some different values of `p`. 
 
 :::
 
@@ -383,6 +405,12 @@ randbalance(
   trtseq = c("T", "C"))
 ```
 
+Finally we can find the imbalance:
+
+```{r, echo=T}
+imbalance(lg_bc1, alloc="treat")
+```
+
 </details>
 
 
@@ -396,7 +424,7 @@ For the urn design, we will use the function `udPar` from the package `randomize
   * $s$ is the number of balls added per treatment after each allocation
   
 :::{.exercise}
-Look at the help file for `udPar`. Which arguments correspond to $r$ and $s$?
+Look at the help file for `udPar`. Which arguments correspond to $r$ and $s$ (as we called them in Section \@ref(bcurn)?
 :::
 
 The function `udPar` creates a model object, storing the parameters for the particular Urn design. To generate sequences of allocations, we use the function `genSeq`
@@ -410,6 +438,7 @@ Use the function `genSeq` to generate a sequence of allocations.
 <details><summary>Click for solution</summary>
 
 ```{r, echo=T}
+library(randomizeR)
 ud_31 = udPar(235, 3, 1, c("0", "1"))
 seq_ud31 = genSeq(ud_31)
 
@@ -432,9 +461,13 @@ The first way we thought about to account for baseline measurements was to use s
 
 Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate 'mini-trials'.
 
-In our Licorice example there are too many possible strata to do this for all levels, so we will choose just a couple. For example, 
+An obvious problem with applying stratification to this dataset is the number of strata. We have (if you have the same numbers of levels for `age` and `BMI` as I do)
+
+$$2\times{3}\times{4}\times{3}\times{2}\times{3}\times{3} = 1296 $$
+strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will choose just a couple of covariates to stratify by. For example, 
 
 ```{r, echo=T}
+library(dplyr)
 # Add an ID variable so that we can keep track of the order of participants
 lg_df$ID = 1:nrow(lg_df)
 # split the data frame according to levels of factors
@@ -446,7 +479,7 @@ will create a list of data frames, one for each combination of `preOp_gender` an
 
 
 :::{.exercise}
-Split your group using the code above, choosing two factors to stratify by. How many participants are in each strata? 
+Split your group using the code above, choosing two factors to stratify by. How many participants are in each stratum? 
 
 :::
 
@@ -483,7 +516,8 @@ marg_imbalance = function(
     levels_i = levels(col_i)
     nlevels_i = length(levels_i)
     for (j in 1:nlevels_i){ # loop through the levels of factor i
-      df_ij = df[df[ ,ind_i]==levels_i[j] , ]
+      # df_ij contains just those entries with level j of factor i
+      df_ij = df[df[ ,ind_i]==levels_i[j] , ] 
       imb_ij = imbalance(df=df_ij, alloc=alloc) # find the imbalance for the sub-data-frame in which factor i has level j
     }
   }
@@ -500,7 +534,7 @@ marg_imbalance(df=lg_df, alloc="treat", factors = c("preOp_gender", "age"))
 ```
 
 
-Note that the more factors there are, the bigger the marginal imbalance will be, so if you're comparing between methods, make sure you're including all the same factors!
+**Note that the larger the total number of factor levels, the larger the marginal imbalance will be, so if you're comparing between methods, make sure you're including all the same factors!** 
 
 
 :::{.exercise}
@@ -526,6 +560,8 @@ alloc_full[order(alloc_full$ID),]
 ```
 It would be silly though to do this with SRS - why?
 
+Once you've performed the allocation, you can find the demographic tables, imbalance and marginal imbalance as before (with `alloc_full`, or whatever your is called, as the data frame)
+
 </details>
 
 
@@ -533,7 +569,7 @@ It would be silly though to do this with SRS - why?
 
 If we want to try to achieve balance for all prognostic factors, minimisation is a more suitable method. The function `Minirand` in the package `Minirand` implements the minimisation algorithm.
 
-Much like we did in lectures, the function `Minirand` works from the point of view of having already allocated $j-1$ particpants, and being presented with a $j^{th}$.
+Much like we did in lectures (and like we would in a real trial), the function `Minirand` works from the point of view of having already allocated $j-1$ particpants, and being presented with a $j^{th}$.
 
 This example code is copied from the function's help file, but with some extra comments to help you to follow it. It first creates a participant data frame, then allocates the particpants to treatment groups using Minimisation.
 
@@ -582,8 +618,34 @@ ratio = ratio, ntrt = ntrt, trtseq = trtseq, method = "Range")
 ```
 
 :::{.exercise}
-Adapt the code above to apply the minimisation algorithm to the licorice gargle data.
+Adapt the code above to apply the minimisation algorithm to the licorice gargle data. Investigate how balanced the data set is.
 :::
+
+<details><summary>Click for solution</summary>
+
+Notice in the code above that we only need to start about half way down if we already have a dataset (which we do).
+
+```{r, echo=T}
+nsample = nrow(lg_df)
+res = rep(NA, nsample)
+res[1] = sample(c(0,1), 1, replace = TRUE, prob = c(0.5,0.5)) 
+# work through the remaining patients sequentially
+for (j in 2:nsample){
+  # get treatment assignment sequentially for all subjects
+  # The vector res is updated and so all previous allocations are accounted for
+  # covmat is the data frame of participant data - including only the covariates
+    res[j] <- Minirand(
+      covmat=lg_df[ ,1:7], j, covwt=rep(1,7)/7, ratio=c(1,1), ntrt=2, trtseq=c(0,1), method="Range", result=res, p = 0.9
+      )
+}
+
+lg_df$treat = res
+
+## You can now investigate the balance of the design as usual
+```
+
+</details>
+
 
 ### A simulation experiment!
 
@@ -617,4 +679,452 @@ For the licorice dataset, @ruetzler2013randomized say that "Randomization (1:1) 
 
 ## Analysis {#cp1analysis}
 
-For our analysis section, we will work with real datasets. 
+For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we've covered in lectures. Both of these data sets are slightly awkward, as you will see, but that's perhaps good practice for the real world!
+
+### Polyps data
+
+The first dataset concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in @giardiello1993treatment.
+
+:::{.exercise}
+First of all let's explore the dataset:
+
+  * Look at the help file for `polyps`
+  * Which columns should you use for baseline and outcome variables?
+  * Plot the data in these columns. Do you see any issues? Can you suggest a way to address them? What effect will this have on our estimator of the treatment effect?
+  
+:::
+
+<details><summary>Click for solution</summary>
+First of all, to access the data, enter
+
+```{r, echo=T}
+data(polyps)
+```
+
+You can then view the help file by entering `?polyps`.
+
+To investigate the columns in `polyps` we can use the structure function `str(polyps)`
+
+We have the baseline number of polyps for each patient in the column `baseline`, and a sensible column to use for the outcome would be `number12m`. Other baseline variables are `sex` and `age`.
+
+To plot the baseline and outcome variables we can do 
+
+```{r, echo=T}
+ggplot(data=polyps, aes(x=baseline)) + geom_histogram()
+ggplot(data=polyps, aes(x=number12m)) + geom_histogram()
+```
+
+These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you'd prefer to use natural logs that's fine, some of your numbers will be different.
+
+```{r, echo=T}
+polyps$log_baseline = log10(polyps$baseline)
+polyps$log_number12m = log10(polyps$number12m)
+```
+
+Since we used the logarithms of the numbers of polyps, our treatment effect is
+$$\log\left(X_T\right) - \log\left(X_C\right) = \log\left(\frac{X_T}{X_C}\right).$$
+
+
+</details>
+
+We will work through the tests as we did in lectures, to see how the results differ.
+
+:::{.exercise}
+Using just the outcome variable (which should be `log_number12m` or something similar, see solution above if you aren't sure why), test the hypothesis that the Sulindac has had some effect.
+:::
+
+<details><summary>Click for solution</summary>
+We can either do this the long way or the short way! For sanity's purposes, we'll do it the long way once, then in subsequent questions I'll only show the short way in the solutions.
+
+**The long way**
+
+The first thing to do is to calculate means for each group:
+
+```{r, echo=T}
+polyps_df = na.omit(polyps) # two participants (001 and 018) don't have data for 12m, so remove these
+mean_T = mean(polyps_df$log_number12m[polyps_df$treatment=="sulindac"]) 
+sd_T = sd(polyps_df$log_number12m[polyps_df$treatment=="sulindac"])
+mean_C = mean(polyps_df$log_number12m[polyps_df$treatment=="placebo"])
+sd_C = sd(polyps_df$log_number12m[polyps_df$treatment=="placebo"])
+# There are 11 patients on Placebo (group C) and 9 on Sulindac (group T)
+# The pooled standard deviation 
+pooled_sd_polypsX = sqrt((10*sd_C^2 + 8*sd_T^2)/(10+8))
+# Finally we find the test statistic
+test_stat = (mean_T - mean_C)/(pooled_sd_polypsX*sqrt(1/11 + 1/9))
+```
+
+Under $H_0$ (that there is no treatment effect) the test statistic follows a $t_{18}$ distribution, and therefore we find our $p$-value by
+
+```{r, echo=T}
+2*pt(test_stat, df=18)
+```
+Note that if the test statistic were positive, we'd have to do
+
+```{r, echo=T, eval=F}
+2*(1-pt(test_stat, df=18))
+```
+
+Thus $p=0.001$ and we conclude that the treatment effect is significant. Our confidence interval is given by
+
+```{r, echo=T}
+estimate = mean_T - mean_C
+error = qt(0.975, df=18)*pooled_sd_polypsX*sqrt(1/11 + 1/9)
+c(estimate - error, estimate + error)
+```
+
+**The short way**
+
+R has a t-test function built in, so we can simply use that. Notice that it gives us everything our heart might desire (on a fairly mundane day), including a confidence interval!
+
+```{r, echo=T}
+t.test(
+  x=polyps_df$log_number12m[polyps_df$treatment == "sulindac"],
+  y=polyps_df$log_number12m[polyps_df$treatment == "placebo"],
+  alternative = "two.sided",
+  var.equal=T, # this makes the method use pooled variances, as we did in lectures
+  conf.level = 0.95 # note that this is 1-alpha
+)
+```
+
+Either way, our 95% confidence interval is \left(-1.226,\;-0.368\right) (to 3 d.p). 
+Therefore, the confidence interval for $\frac{X_T}{X_C}$ is
+
+$$\left(10^{-1.226},\;10^{-0.368}\right) =  \left(0.0594,\;0.429\right).$$
+That is, the number of polyps at 12 months is likely to be somewhere between $0.0594 X_C$ and $0.429 X_C$.
+
+</details>
+
+We'll now move on to comparing the differences between baseline and outcome
+
+:::{.exercise}
+Perform another $t$-test, this time using the difference between outcome and baseline.  *Hint: because we've taken logs, you'll have to think about what variable to use and perhaps experiment with some possibilities*
+  
+:::
+
+
+<details><summary>Click for solution</summary>
+
+The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences
+
+```{r, echo=T}
+polyps_df$diff = polyps_df$number12m - polyps_df$baseline
+ggplot(data=polyps_df, aes(x=diff, fill=treatment)) + geom_histogram(position="dodge", bins=10)
+```
+
+But the outliers look potentially problematic, and the central bulk of each distribution doesn't look very normal. We could also try the difference of the logged measurements:
+
+```{r, echo=T}
+polyps_df$diff_log = polyps_df$log_number12m - polyps_df$log_baseline
+ggplot(data=polyps_df, aes(x=diff_log, fill=treatment)) + geom_histogram(position="dodge", bins=10)
+```
+
+This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won't have a nice normal curve.
+
+To do a t-test, we can use R's in-built function
+
+```{r, echo=T}
+t.test(
+  x=polyps_df$diff_log[polyps_df$treatment == "sulindac"],
+  y=polyps_df$diff_log[polyps_df$treatment == "placebo"],
+  alternative = "two.sided",
+  var.equal=T, # this makes the method use pooled variances, as we did in lectures
+  conf.level = 0.95 # note that this is 1-alpha
+)
+
+```
+
+</details>
+
+Finally we can try fitting an ANCOVA model to the data, using the function `lm`. Remember that the general model function for ANCOVA is....
+
+:::{.exercise}
+Fit an ANCOVA model to the licorice data, and interpret your results. If you aren't familiar with the function `lm`, it might be a good idea to look at the solutions.
+
+:::
+
+<details><summary>Click for solution</summary>
+
+In the ANCOVA model we saw in lectures so far, we fit a linear model with the outcome as dependent / target variable, and the trial group and baseline as independent / explanatory variables. 
+
+```{r, echo=T}
+lm_polyp1 = lm(log_number12m ~ treatment + log_baseline, data=polyps_df)
+summary(lm_polyp1)
+```
+
+Based on this, the effect of the drug sulindac is significant ($p=0.00595$, lower than our previous models).  The 95% CI for the treatment effect (which is still $\log\left(\frac{X_T}{X_C}\right)$) now is
+
+```{r, echo=T}
+c(-0.7046 - qt(0.975, df=17)*0.1675, -0.7046 + qt(0.975, df=17)*0.1675 ) 
+```
+
+</details>
+
+Unlike in the $t$-test where we can only compare measurements like-for-like, in ANCOVA we fit a coefficient to the baseline covariate. This means we are no longer limited to comparing the outcome variable to variables on the same scale, but can also include other baseline variables. 
+
+:::{.exercise}
+Fit another linear model, this time including the other baseline variables.
+
+:::
+
+<details><summary>Click for solution</summary>
+
+```{r, echo=T}
+lm_polyp2 = lm(log_number12m ~ treatment + log_baseline + sex + age, data = polyps_df)
+summary(lm_polyp2)
+```
+In this case it appears that the other two baseline covariates, age and sex, don't have a significant effect on the outcome.
+</details>
+
+
+:::{.exercise}
+Inspect some plots of the residuals, to check whether these models have any systematic 
+problems.
+:::
+
+<details><summary>Click for solution</summary>
+These solutions will demonstrate some methods with the first model.
+First of all, we can add columns with the residuals and fitted values from the model.
+
+```{r, echo=T}
+polyps_df$resid1 = resid(lm_polyp1)
+polyps_df$fitted1 = fitted(lm_polyp1)
+ggplot(data=polyps_df, aes(x=fitted1, y=resid1, col=treatment)) + geom_point()
+ggplot(data=polyps_df, aes(x=log_baseline, y=resid1, col=treatment)) + geom_point()
+ggplot(data=polyps_df, aes(x=resid1, fill=treatment)) + geom_histogram(bins=20)
+```
+
+None of these ring huge alarm bells, but because the dataset is so small it's quite hard to tell! Arguably the residuals for the `sulindac` group are more spread out than those for the plaecbo, but there are no obvious systematic trends.
+</details>
+
+
+### Treatment for maternal periodontal disease
+
+This trial is reported in @michalowicz2006treatment. The data are in `opt`, which is in the package `medicaldata`, which you should already have loaded.
+
+:::{.exercise}
+Read the help file for this dataset. What does the study aim to investigate? What are the treatment groups? How many participants are there? How many variables are there? Which are the outcome variables?
+
+:::
+
+
+<details><summary>Click for solution</summary>
+
+We can find this information using commands such as 
+
+```{r, echo=T}
+data(opt)
+dim(opt)
+str(opt)
+?opt
+```
+
+The aim of the study is to find out whether treating women for periodontal disease during the first 21 weeks of pregnancy resulted in a low birth weight or pre-term birth.
+
+The groups are stored in the `group` variable
+  
+  * `group` T: those who received periodontal treatment, and tooth polishing at their follow-ups
+  * `group` C: Brief oral exams
+  
+There are 823 participants and 171 variables - many of these are baseline covariates, but there are also quite a few interim measurements.
+
+The study's primary outcome variable is gestational age at end of pregnancy, but birth weight was also measured, as well as some clinical measures of periodontal disease and some microbiological and immunological outcomes.
+
+</details>
+
+To make this more managable, we will concentrate on the outcome `Birthweight`.
+
+:::{.exercise}
+Plot the variable `Birthweight`. Do we need to use any transformations before we model it? 
+
+:::
+
+<details><summary>Click for solution</summary>
+```{r, echo=T}
+
+ggplot(data=opt, aes(x=Birthweight, fill=Group)) + geom_histogram(position="dodge")
+
+```
+This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won't transform it.
+</details>
+
+
+We'll reduce the dataset to a more managable size, by removing all outcomes except `Birthweight` and reducing the number of covariates. We'll also alter a couple of factor levels to make the data work with the linear model (the main source of difficulty is that lots of variables are coded `NA` when really there is information).
+
+```{r, echo=T}
+opt_red = opt[ ,c(1:22,72)] 
+# Change NAs to "None" for diabetic
+# since in opt the non-diabetic people are coded as NA (and therefore excluded from the model)
+diab = as.character(opt_red$BL.Diab.Type)
+diab[is.na(diab)] = "None"
+opt_red$BL.Diab.Type = as.factor(diab)
+# similar problem with smokers and how many cigarettes per day
+
+# If people are non-smokers and have missing for number of cigarettes per day
+# change their number of cigarettes to zero
+sm = opt_red$Use.Tob
+cigs = opt_red$BL.Cig.Day
+cigs[(is.na(cigs)&(sm=="No "))] = 0
+opt_red$BL.Cig.Day = cigs
+
+# Same for alcohol and drinks per day
+
+alc = opt_red$Use.Alc
+dr = opt_red$BL.Drks.Day
+dr[(is.na(dr)&(alc=="No "))] = 0
+opt_red$BL.Drks.Day = dr
+
+# If a participant hasn't had a previous pregnancy, her N.prev.preg should be zero (not NA)
+
+pp = opt_red$Prev.preg
+npp = opt_red$N.prev.preg
+npp[pp=="No "] = 0
+opt_red$N.prev.preg = npp
+
+```
+
+When we use `lm` to fit an ANCOVA model, all rows with an `NA` in will be ignored. It's therefore important to try to eradicate any `NA`s where we actually do know the value!
+
+:::{.exercise}
+Perform a $t$-test on the outcome `Birthweight`. What do you find? Can you also perform a $t$-test using difference from baseline?
+:::
+
+<details><summary>Click for solution</summary>
+To perform the $t$-test we can use the inbuilt R function
+
+```{r, echo=T}
+# Check SDs are fairly close before proceeding
+sd(opt_red$Birthweight[opt_red$Group == "T"], na.rm=T)
+sd(opt_red$Birthweight[opt_red$Group == "C"], na.rm=T)
+
+t.test(
+  x=opt_red$Birthweight[opt_red$Group == "T"],
+  y=opt_red$Birthweight[opt_red$Group == "C"],
+  alternative = "two.sided",
+  var.equal=T, # this makes the method use pooled variances, as we did in lectures
+  conf.level = 0.95 # note that this is 1-alpha
+)
+```
+We find that the difference in Birthweights between the groups is not even close to significant ($p=0.456$).
+
+We can't do a $t$-test with differences because there is no comparable baseline measurement.
+
+</details>
+
+Now we will move on to ANCOVA.
+
+:::{.exercise}
+Before fitting the model, think about what you expect to find. Bear in mind:
+
+  * the result above
+  * the description of risk factors of preterm birth / low birth weight in the help file for `opt`
+  * which variables you will include in your model
+
+You might want to explore some correlations in the data set
+  
+:::
+
+
+<details><summary>Click for solution</summary>
+The $p$-value from the $t$-test was very high, so it seems unlikely that we'll find a significant treatment effect using ANCOVA unless there are some significant interactions going on between covariates.
+
+The help file says (under 'Background'):
+
+> Many risk factors for preterm birth have already been identified, including maternal age, drug use, and diabetes. However, such factors are exhibited in only about half of preterm birth mothers, highlighting a need to expand our understanding of what contributes to preterm birth risk.
+
+Therefore, if we include related factors in our model (many of which we have in our dataset) we should expect to see significant coefficients. But, it sounds like there is a lot that isn't well understood, so our model is likely not to explain a huge proportion of the variance.
+
+If you wanted to explore correlations, you could for example try 
+
+```{r, echo=T}
+cor(opt_red$Birthweight, opt_red$Age, use = "complete.obs")
+```
+
+though this will only work with numerical variables.
+
+</details>
+
+:::{.exercise}
+Fit an ANCOVA model. What do you find?
+:::
+
+<details><summary>Click for solution</summary>
+
+To fit a linear model including every variable as a covariate (apart from the target variable), we can do
+
+```{r, echo=T}
+
+lm_full = lm(Birthweight ~ ., data = opt_red[ ,-1]) # don't include the ID column!
+summary(lm_full)
+```
+
+We see from the model summary that our model is terrible: $R^2=0.03241$, which means it is explaining about 3% of the variance in Birthweight.
+
+If you want to use only certain terms, you can include them in the formula, for example
+
+```{r, echo=T, eval=F}
+lm_eg = lm(Birthweight ~ Group + Age + Hypertension, data=opt_red)
+
+```
+
+
+We see that, as we expected, the `Group` variable is not significant ($p=0.5644$). However, some terms are significant, for example whether or not the participant has diabetes, and how many cigarettes a mother smokes per day.
+</details>
+
+:::{.exercise}
+Perform some diagnostic checks on your model. Do you have any reason to suspect it isn't adequate?
+:::
+
+<details><summary>Click for solution</summary>
+There are lots of checks we can do, and we will focus on studying the residuals. If the residuals of our model appear to be homoskedastic, approximately normal with mean 0, and we can't find any trends, then our model is OK.
+
+The first step is to extract the residuals and the fitted values (which are also useful). We will create a new data frame called `opt_diag` with these in, so that we can plot things easily but don't pollute our original dataset (in case we want to fit any more models)
+
+```{r, echo=T}
+opt_diag = na.omit(opt_red) # lm only fits where all variables are present
+opt_diag$resid = resid(lm_full)
+opt_diag$fitted = fitted(lm_full)
+```
+
+Some examples of plots are
+
+```{r, echo=T}
+ggplot(data=opt_diag, aes(x=resid, fill=Group)) + geom_histogram(position="dodge")
+
+
+ggplot(data=opt_diag, aes(x=fitted, y=resid, col=Group)) + geom_point()
+
+
+```
+
+
+We could also see if there are any patterns in the data that weren't included in the model, because one or more entries were `NA`
+
+```{r, echo=T}
+exc_ind = !(opt_red$PID %in% opt_diag$PID)
+
+opt_exc = opt_red[exc_ind, ]
+# we can check this has worked by doing
+nrow(opt_exc) # should be the difference between nrow(opt_red) and nrow(opt_diag)
+na.omit(opt_exc) # should be empty, since each row should have at least one NA
+```
+
+For example, by comparing summary statistics
+
+```{r, echo=T}
+summary(opt_diag$Birthweight)
+summary(opt_exc$Birthweight)
+sd(opt_exc$Birthweight, na.rm=T)
+sd(opt_diag$Birthweight, na.rm=T)
+```
+
+</details>
+
+:::{.exercise}
+Given the results of your ANCOVA model, what do you think the risks would be if the study had been much smaller, or if the allocation had not been well-balanced?
+:::
+
+<details><summary>Click for solution</summary>
+In this case, it would be possible for the baseline factors that did turn out to be significant to make it appear that the treatment had a significant effect. This wouldn't be possible with ANCOVA, but it would with a $t$-test in which the other covariates aren't considered.
+
+</details>
+

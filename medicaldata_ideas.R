@@ -29,7 +29,7 @@ summary(lm_polyps3m_int)
 
 # 12m is a bit mad, 3m works well
 
-lm_polyps12m = lm(number12m ~ baseline + treatment, data=polyps)
+lm_polyps12m = lm(log(number12m) ~ log(baseline) + treatment, data=polyps)
 summary(lm_polyps12m)
 
 lm_polyps12m_int = lm(number12m ~ baseline + treatment + baseline:treatment, data=polyps)
@@ -57,7 +57,7 @@ data(toenail) # probably very good for introductory binary stuff!
 
 
 library(carData)
-data("WeightLoss") # made up but might be useful
+data("WeightLoss") # made up but might be useful. Although two treatment effects!
 
 library(datarium) # quite a few!
 data(stress) # ideal for ANCOVA with covariates!

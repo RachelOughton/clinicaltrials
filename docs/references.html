@@ -23,14 +23,14 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-31" />
+<meta name="date" content="2024-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rct-analysis.html"/>
+<link rel="prev" href="computer-practical-1.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -223,7 +223,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="allocation.html"><a href="allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
 <li class="chapter" data-level="3.2.2" data-path="allocation.html"><a href="allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
-<li class="chapter" data-level="3.2.3" data-path="allocation.html"><a href="allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+<li class="chapter" data-level="3.2.3" data-path="allocation.html"><a href="allocation.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="allocation.html"><a href="allocation.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
 <li class="chapter" data-level="3.4" data-path="allocation.html"><a href="allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
@@ -253,6 +253,25 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
 <li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+<li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.1.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocmethods"><i class="fa fa-check"></i><b>A.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.1.3" data-path="computer-practical-1.html"><a href="computer-practical-1.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.1.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#minimisation"><i class="fa fa-check"></i><b>A.1.4</b> Minimisation</a></li>
+<li class="chapter" data-level="A.1.5" data-path="computer-practical-1.html"><a href="computer-practical-1.html#a-simulation-experiment"><i class="fa fa-check"></i><b>A.1.5</b> A simulation experiment!</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1analysis"><i class="fa fa-check"></i><b>A.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
+<li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -300,6 +319,9 @@ Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of 
 Freedman, LS, and Susan J White. 1976. <span>“On the Use of Pocock and Simon’s Method for Balancing Treatment Numbers over Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 691–94.
 </div>
 <div class="csl-entry">
+Giardiello, Francis M, Stanley R Hamilton, Anne J Krush, Steven Piantadosi, Linda M Hylind, Paul Celano, Susan V Booker, C Rahj Robinson, and G Johan A Offerhaus. 1993. <span>“Treatment of Colonic and Rectal Adenomas with Sulindac in Familial Adenomatous Polyposis.”</span> <em>New England Journal of Medicine</em> 328 (18): 1313–16.
+</div>
+<div class="csl-entry">
 Hayes, Richard J, and Lawrence H Moulton. 2017. <em>Cluster Randomised Trials</em>. CRC press.
 </div>
 <div class="csl-entry">
@@ -325,6 +347,9 @@ Kassambara, Alboukadel. 2019. <em>Datarium: Data Bank for Statistical Analysis a
 </div>
 <div class="csl-entry">
 Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
+</div>
+<div class="csl-entry">
+Michalowicz, Bryan S, James S Hodges, Anthony J DiAngelis, Virginia R Lupo, M John Novak, James E Ferguson, William Buchanan, et al. 2006. <span>“Treatment of Periodontal Disease and the Risk of Preterm Birth.”</span> <em>New England Journal of Medicine</em> 355 (18): 1885–94.
 </div>
 <div class="csl-entry">
 Pocock, Stuart J, and Richard Simon. 1975. <span>“Sequential Treatment Assignment with Balancing for Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 103–15.
@@ -357,7 +382,7 @@ Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Contr
           </div>
         </div>
       </div>
-<a href="rct-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computer-practical-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

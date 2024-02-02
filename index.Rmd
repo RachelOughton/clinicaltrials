@@ -63,6 +63,7 @@ library(rstatix)
 library(separationplot)
 library(survival)
 library(mvtnorm)
+library(randomizeR)
 ```
 
 # Welcome to Clinical Trials 4H! {-}

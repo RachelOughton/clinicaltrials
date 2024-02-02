@@ -2,8 +2,7 @@ book_filename: "CT4H_notes.Rmd"
 delete_merged_file: true
 output_dir: "docs"
 rmd_files:
-    html: ["index.Rmd", "01-rctbackground.Rmd", "02-samplesize.Rmd", "03-allocation.Rmd", "04-rctanalysis.Rmd", "99-references.Rmd"]
-    # , "07-practical1.Rmd"]
+    html: ["index.Rmd", "01-rctbackground.Rmd", "02-samplesize.Rmd", "03-allocation.Rmd", "04-rctanalysis.Rmd", "07-practical1.Rmd", "99-references.Rmd"]
     #, "04a-binary.Rmd", "05-survival.Rmd"]
     latex: ["index.Rmd", "01-rctbackground.Rmd", "02-samplesize.Rmd", "03-allocation.Rmd", "04-rctanalysis.Rmd",
     "99-references.Rmd"]

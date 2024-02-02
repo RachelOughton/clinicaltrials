@@ -327,7 +327,7 @@ possible blocks of size 6. Instead of always selecting from the six possible 4-b
   
 As well as ensuring that patients are equally likely to receive treatments $A$ and $B$, and that $N_A$ and $N_B$  can never differ by more than three, this method hugely reduces the possibility of enabling selection bias. The assignment of a patient can only be perfectly predicted if the difference is three, and this happens only for two of the twenty blocks of length six.
 
-### Biased coin designs and urn schemes
+### Biased coin designs and urn schemes {#bcurn}
 
 It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.
 

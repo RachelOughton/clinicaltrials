@@ -23,15 +23,15 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-01-30" />
+<meta name="date" content="2024-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="references.html"/>
-
+<link rel="prev" href="rct-analysis.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -223,7 +223,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="allocation.html"><a href="allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
 <li class="chapter" data-level="3.2.2" data-path="allocation.html"><a href="allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
-<li class="chapter" data-level="3.2.3" data-path="allocation.html"><a href="allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+<li class="chapter" data-level="3.2.3" data-path="allocation.html"><a href="allocation.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="allocation.html"><a href="allocation.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
 <li class="chapter" data-level="3.4" data-path="allocation.html"><a href="allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
@@ -255,20 +255,26 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
 <li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
 <ul>
-<li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#example-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Example dataset</a></li>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
 <li class="chapter" data-level="A.1.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocmethods"><i class="fa fa-check"></i><b>A.1.2</b> Allocation methods</a></li>
 <li class="chapter" data-level="A.1.3" data-path="computer-practical-1.html"><a href="computer-practical-1.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.1.3</b> Stratifying the dataset</a></li>
 <li class="chapter" data-level="A.1.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#minimisation"><i class="fa fa-check"></i><b>A.1.4</b> Minimisation</a></li>
 <li class="chapter" data-level="A.1.5" data-path="computer-practical-1.html"><a href="computer-practical-1.html#a-simulation-experiment"><i class="fa fa-check"></i><b>A.1.5</b> A simulation experiment!</a></li>
 </ul></li>
-<li class="chapter" data-level="A.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1analysis"><i class="fa fa-check"></i><b>A.2</b> Analysis</a></li>
+<li class="chapter" data-level="A.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1analysis"><i class="fa fa-check"></i><b>A.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
+<li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -293,38 +299,58 @@ div.csl-indent {
 <li>Allocation (Section <a href="computer-practical-1.html#cp1allocation">A.1</a>)</li>
 <li>Analysis (Section (<a href="computer-practical-1.html#cp1analysis">A.2</a>)</li>
 </ol>
-<p>The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be a good idea to work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time.</p>
+<div id="preliminaries" class="section level3 unnumbered hasAnchor">
+<h3>Preliminaries<a href="computer-practical-1.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be sensible to work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time.</p>
+<p>You will need a lot of the techniques covered in this practical for your summative assignments, so consider it a sort of informal formative assignment to finish it if you don’t in class. Or, at the very least, you might need to return to it while working on your summative assignments.</p>
+<p>There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you’re not sure how to do something, please ask!</p>
+<p><strong>In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.</strong></p>
+</div>
+<div id="r-practicalities" class="section level3 unnumbered hasAnchor">
+<h3>R practicalities<a href="computer-practical-1.html#r-practicalities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="computer-practical-1.html#cb10-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
-<p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
+<p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III.</p>
+<p>An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
 <p>This requires you to have a github account (you can sign up for free <a href="https://github.com/">here</a>) and there is a short guide to creating a github account <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&amp;reserved=0">here</a>.</p>
 <p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&amp;reserved=0">Direct link to codespace</a></p>
 <p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&amp;reserved=0">Instructions for how to use codespace</a></p>
+</div>
 <div id="cp1allocation" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">A.1</span> Allocation<a href="computer-practical-1.html#cp1allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We’ll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow!</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="computer-practical-1.html#cb11-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;medicaldata&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;Minirand&quot;</span>, <span class="st">&quot;blockrand&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;randomizeR&quot;</span>))</span></code></pre></div>
-<div id="example-dataset" class="section level3 hasAnchor" number="5.1.1">
-<h3><span class="header-section-number">A.1.1</span> Example dataset<a href="computer-practical-1.html#example-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We’ll load them as we go along.</p>
+<p><strong>Notice that where there are code snippets like this one that you want to copy directly, you can hover your cursor in the top right of the code box and a ‘copy’ icon will appear.</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="computer-practical-1.html#cb11-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;medicaldata&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;Minirand&quot;</span>, </span>
+<span id="cb11-2"><a href="computer-practical-1.html#cb11-2" tabindex="-1"></a>                   <span class="st">&quot;blockrand&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;randomizeR&quot;</span>))</span></code></pre></div>
+<div id="licorice-gargle-dataset" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">A.1.1</span> Licorice gargle dataset<a href="computer-practical-1.html#licorice-gargle-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To work with allocation, we will use the <code>licorice_gargle</code> dataset from the package <code>medicaldata</code>, which you can find by</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="computer-practical-1.html#cb12-1" tabindex="-1"></a><span class="fu">library</span>(medicaldata)</span>
 <span id="cb12-2"><a href="computer-practical-1.html#cb12-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;licorice_gargle&quot;</span>)</span></code></pre></div>
 <p>You can find out about the dataset by looking at the help file</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="computer-practical-1.html#cb13-1" tabindex="-1"></a>?licorice_gargle</span></code></pre></div>
-<p>and at <a href="https://www.causeweb.org/tshs/licorice-gargle/">this website</a>, even the original paper <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>.</p>
+<p>and at <a href="https://www.causeweb.org/tshs/licorice-gargle/">this website</a>, and if you’re feeling really keen you can even read the original paper: <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-25" class="exercise"><strong>Exercise A.1  </strong></span>Of the 19 columns, how many are baseline characteristics that we could use in the allocation?</p>
 </div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>In this dataset the baseline characteristics are helpfully prefixed by <code>preOp</code>, so there are seven baseline characteristics.</p>
+<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;        &quot;preOp_mallampati&quot; &quot;preOp_smoking&quot;   
+## [7] &quot;preOp_pain&quot;</code></pre>
+</details>
 <p>In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure <code>str(licorice_gargle)</code> that all columns are numeric to begin with).</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="computer-practical-1.html#cb14-1" tabindex="-1"></a>lic_garg <span class="ot">=</span> licorice_gargle[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
-<span id="cb14-2"><a href="computer-practical-1.html#cb14-2" tabindex="-1"></a><span class="co"># vector of names of columns to be coerced to factor</span></span>
-<span id="cb14-3"><a href="computer-practical-1.html#cb14-3" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;preOp_gender&quot;</span>, <span class="st">&quot;preOp_asa&quot;</span>,  </span>
-<span id="cb14-4"><a href="computer-practical-1.html#cb14-4" tabindex="-1"></a><span class="st">&quot;preOp_mallampati&quot;</span>, <span class="st">&quot;preOp_smoking&quot;</span>, <span class="st">&quot;preOp_pain&quot;</span>, <span class="st">&quot;treat&quot;</span>)</span>
-<span id="cb14-5"><a href="computer-practical-1.html#cb14-5" tabindex="-1"></a><span class="co"># convert each of those columns to factors</span></span>
-<span id="cb14-6"><a href="computer-practical-1.html#cb14-6" tabindex="-1"></a>lic_garg[cols] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(lic_garg[cols], factor) </span>
-<span id="cb14-7"><a href="computer-practical-1.html#cb14-7" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="computer-practical-1.html#cb14-8" tabindex="-1"></a><span class="co"># Check the result:</span></span>
-<span id="cb14-9"><a href="computer-practical-1.html#cb14-9" tabindex="-1"></a><span class="fu">str</span>(lic_garg)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="computer-practical-1.html#cb15-1" tabindex="-1"></a>lic_garg <span class="ot">=</span> licorice_gargle[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb15-2"><a href="computer-practical-1.html#cb15-2" tabindex="-1"></a><span class="co"># vector of names of columns to be coerced to factor</span></span>
+<span id="cb15-3"><a href="computer-practical-1.html#cb15-3" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;preOp_gender&quot;</span>, <span class="st">&quot;preOp_asa&quot;</span>,  </span>
+<span id="cb15-4"><a href="computer-practical-1.html#cb15-4" tabindex="-1"></a><span class="st">&quot;preOp_mallampati&quot;</span>, <span class="st">&quot;preOp_smoking&quot;</span>, <span class="st">&quot;preOp_pain&quot;</span>, <span class="st">&quot;treat&quot;</span>)</span>
+<span id="cb15-5"><a href="computer-practical-1.html#cb15-5" tabindex="-1"></a><span class="co"># convert each of those columns to factors</span></span>
+<span id="cb15-6"><a href="computer-practical-1.html#cb15-6" tabindex="-1"></a>lic_garg[cols] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(lic_garg[cols], factor) </span>
+<span id="cb15-7"><a href="computer-practical-1.html#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="computer-practical-1.html#cb15-8" tabindex="-1"></a><span class="co"># Check the result:</span></span>
+<span id="cb15-9"><a href="computer-practical-1.html#cb15-9" tabindex="-1"></a><span class="fu">str</span>(lic_garg)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    235 obs. of  8 variables:
 ##  $ preOp_gender    : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ preOp_asa       : Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 3 2 2 2 1 2 3 2 3 3 ...
@@ -337,30 +363,31 @@ div.csl-indent {
 <p>It’s also useful to get some idea of how the data are distributed.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-26" class="exercise"><strong>Exercise A.2  </strong></span>Plot the data in various different ways. For example,</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="computer-practical-1.html#cb16-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>lic_garg, <span class="fu">aes</span>(<span class="at">x=</span>preOp_pain, <span class="at">fill=</span>preOp_gender)) <span class="sc">+</span> </span>
-<span id="cb16-2"><a href="computer-practical-1.html#cb16-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">col=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb16-3"><a href="computer-practical-1.html#cb16-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>preOp_smoking, <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="computer-practical-1.html#cb16-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="computer-practical-1.html#cb17-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-2"><a href="computer-practical-1.html#cb17-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>lic_garg, <span class="fu">aes</span>(<span class="at">x=</span>preOp_pain, <span class="at">fill=</span>preOp_gender)) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="computer-practical-1.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">col=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb17-4"><a href="computer-practical-1.html#cb17-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>preOp_smoking, <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="computer-practical-1.html#cb17-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p>will generate bar charts of pre-operative pain (0=No, 1=Yes) coloured by gender (0=Male, 1=Female), for each smoking category (1=Current, 2=Past, 3=Never).</p>
 <p>Are there any ways in which you think this data set would be particularly vulnerable to leading to a biased trial?</p>
 </div>
 <div id="demographic-tables" class="section level4 hasAnchor" number="5.1.1.1">
 <h4><span class="header-section-number">A.1.1.1</span> Demographic tables<a href="computer-practical-1.html#demographic-tables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For every allocation, we’ll want to see a summary table of how the patients are distributed between the groups. In this practical we’ll use a relatively simple method, detailed <a href="https://www.rdocumentation.org/packages/Minirand/versions/0.1.3/topics/randbalance">here</a> from the package <code>Minirand</code>, which is designed to output a table in the R console.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="computer-practical-1.html#cb17-1" tabindex="-1"></a><span class="fu">library</span>(Minirand)</span>
-<span id="cb17-2"><a href="computer-practical-1.html#cb17-2" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="computer-practical-1.html#cb17-3" tabindex="-1"></a><span class="fu">randbalance</span>(</span>
-<span id="cb17-4"><a href="computer-practical-1.html#cb17-4" tabindex="-1"></a>  <span class="at">trt =</span> lic_garg<span class="sc">$</span>treat, </span>
-<span id="cb17-5"><a href="computer-practical-1.html#cb17-5" tabindex="-1"></a>  <span class="at">covmat =</span> lic_garg[,<span class="sc">-</span><span class="dv">8</span>], </span>
-<span id="cb17-6"><a href="computer-practical-1.html#cb17-6" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
-<span id="cb17-7"><a href="computer-practical-1.html#cb17-7" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="computer-practical-1.html#cb18-1" tabindex="-1"></a><span class="fu">library</span>(Minirand)</span>
+<span id="cb18-2"><a href="computer-practical-1.html#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="computer-practical-1.html#cb18-3" tabindex="-1"></a><span class="fu">randbalance</span>(</span>
+<span id="cb18-4"><a href="computer-practical-1.html#cb18-4" tabindex="-1"></a>  <span class="at">trt =</span> lic_garg<span class="sc">$</span>treat, </span>
+<span id="cb18-5"><a href="computer-practical-1.html#cb18-5" tabindex="-1"></a>  <span class="at">covmat =</span> lic_garg[,<span class="sc">-</span><span class="dv">8</span>], </span>
+<span id="cb18-6"><a href="computer-practical-1.html#cb18-6" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
+<span id="cb18-7"><a href="computer-practical-1.html#cb18-7" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span></code></pre></div>
 <p>Notice that we can also save this as an object and access the individual sub-tables, for example</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="computer-practical-1.html#cb18-1" tabindex="-1"></a>rb_tab <span class="ot">=</span> <span class="fu">randbalance</span>(</span>
-<span id="cb18-2"><a href="computer-practical-1.html#cb18-2" tabindex="-1"></a>  <span class="at">trt =</span> lic_garg<span class="sc">$</span>treat, </span>
-<span id="cb18-3"><a href="computer-practical-1.html#cb18-3" tabindex="-1"></a>  <span class="at">covmat =</span> lic_garg[,<span class="sc">-</span><span class="dv">8</span>], </span>
-<span id="cb18-4"><a href="computer-practical-1.html#cb18-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
-<span id="cb18-5"><a href="computer-practical-1.html#cb18-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
-<span id="cb18-6"><a href="computer-practical-1.html#cb18-6" tabindex="-1"></a>rb_tab<span class="sc">$</span>preOp_gender</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="computer-practical-1.html#cb19-1" tabindex="-1"></a>rb_tab <span class="ot">=</span> <span class="fu">randbalance</span>(</span>
+<span id="cb19-2"><a href="computer-practical-1.html#cb19-2" tabindex="-1"></a>  <span class="at">trt =</span> lic_garg<span class="sc">$</span>treat, </span>
+<span id="cb19-3"><a href="computer-practical-1.html#cb19-3" tabindex="-1"></a>  <span class="at">covmat =</span> lic_garg[,<span class="sc">-</span><span class="dv">8</span>], </span>
+<span id="cb19-4"><a href="computer-practical-1.html#cb19-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
+<span id="cb19-5"><a href="computer-practical-1.html#cb19-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb19-6"><a href="computer-practical-1.html#cb19-6" tabindex="-1"></a>rb_tab<span class="sc">$</span>preOp_gender</span></code></pre></div>
 <pre><code>##    
 ## trt  0  1
 ##   0 73 44
@@ -372,7 +399,7 @@ div.csl-indent {
 <p>Looking at the output above, it’s clear that the two numeric variables <code>preOp_age</code> and <code>preOp_calcBMI</code> are going to complicate things.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-27" class="exercise"><strong>Exercise A.3  </strong></span>Bin the two variables <code>preOp_age</code> and <code>preOp_calcBMI</code> to convert them into factor variables <code>BMI</code> and <code>age</code>.</p>
-<p>Create a new data frame <code>lg_df</code> with these two factor variables instead of the original two numeric variables.</p>
+<p>Create a new data frame <code>lg_df</code> with the two new factor variables you just created instead of the original two numeric variables.</p>
 </div>
 <details>
 <summary>
@@ -380,30 +407,38 @@ Click for solution
 </summary>
 <p>These solutions show you one way to create such factor variables, but if you choose different bins that’s fine!</p>
 <p>One approach is to look at the distribution of the variables. For example for age:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="computer-practical-1.html#cb20-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>lic_garg) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>preOp_age), <span class="at">binwidth=</span><span class="dv">5</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="computer-practical-1.html#cb21-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>lic_garg) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>preOp_age), <span class="at">binwidth=</span><span class="dv">5</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>Based on this, one reasonable split would be <span class="math inline">\(&lt;50,\;50-70\)</span> and <span class="math inline">\(&gt;70\)</span>, in which case we could do</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="computer-practical-1.html#cb21-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Under 50&quot;</span></span>
-<span id="cb21-2"><a href="computer-practical-1.html#cb21-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;50 to 70&quot;</span></span>
-<span id="cb21-3"><a href="computer-practical-1.html#cb21-3" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;70 plus&quot;</span></span>
-<span id="cb21-4"><a href="computer-practical-1.html#cb21-4" tabindex="-1"></a>lic_garg<span class="sc">$</span>age <span class="ot">=</span> <span class="fu">as.factor</span>(lic_garg<span class="sc">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="computer-practical-1.html#cb22-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Under 50&quot;</span></span>
+<span id="cb22-2"><a href="computer-practical-1.html#cb22-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;50 to 70&quot;</span></span>
+<span id="cb22-3"><a href="computer-practical-1.html#cb22-3" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;70 plus&quot;</span></span>
+<span id="cb22-4"><a href="computer-practical-1.html#cb22-4" tabindex="-1"></a>lic_garg<span class="sc">$</span>age <span class="ot">=</span> <span class="fu">as.factor</span>(lic_garg<span class="sc">$</span>age)</span></code></pre></div>
 <p>Another approach is to bin the variable according to pre-defined categories, which we could do with BMI, for example</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="computer-practical-1.html#cb22-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&lt;</span> <span class="fl">18.5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;low&quot;</span></span>
-<span id="cb22-2"><a href="computer-practical-1.html#cb22-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&gt;=</span> <span class="fl">18.5</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&lt;</span> <span class="dv">25</span>] <span class="ot">&lt;-</span> <span class="st">&quot;medium&quot;</span></span>
-<span id="cb22-3"><a href="computer-practical-1.html#cb22-3" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&gt;=</span> <span class="dv">25</span>] <span class="ot">&lt;-</span> <span class="st">&quot;high&quot;</span></span>
-<span id="cb22-4"><a href="computer-practical-1.html#cb22-4" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI <span class="ot">=</span> <span class="fu">as.factor</span>(lic_garg<span class="sc">$</span>BMI)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="computer-practical-1.html#cb23-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&lt;</span> <span class="fl">18.5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;low&quot;</span></span>
+<span id="cb23-2"><a href="computer-practical-1.html#cb23-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&gt;=</span> <span class="fl">18.5</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&lt;</span> <span class="dv">25</span>] <span class="ot">&lt;-</span> <span class="st">&quot;medium&quot;</span></span>
+<span id="cb23-3"><a href="computer-practical-1.html#cb23-3" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&gt;=</span> <span class="dv">25</span>] <span class="ot">&lt;-</span> <span class="st">&quot;high&quot;</span></span>
+<span id="cb23-4"><a href="computer-practical-1.html#cb23-4" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI <span class="ot">=</span> <span class="fu">as.factor</span>(lic_garg<span class="sc">$</span>BMI)</span></code></pre></div>
 <p>Finally, we can select the columns we want from <code>lic_garg</code> to create <code>lg_df</code></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="computer-practical-1.html#cb23-1" tabindex="-1"></a>lg_df <span class="ot">=</span> lic_garg[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">8</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="computer-practical-1.html#cb24-1" tabindex="-1"></a>lg_df <span class="ot">=</span> lic_garg[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">8</span>)]</span></code></pre></div>
 <p>If you’ve chosen different bins, that’s fine! But it will help you if the column names and data frame names are the same as on this page.</p>
 </details>
-<p>To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we’ll use packages. Feel free to write your own code for the simpler methods if you want to!</p>
-<p>We’ll start by performing each method once, and then go on to perform a more thorough simulation study.</p>
 </div>
 <div id="a-measure-of-imbalance" class="section level4 hasAnchor" number="5.1.1.3">
 <h4><span class="header-section-number">A.1.1.3</span> A measure of imbalance<a href="computer-practical-1.html#a-measure-of-imbalance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>It will be useful to have a simple numerical summary of how imbalanced an allocation is. We will define the imbalance as in lectures,</p>
 <p><span class="math display">\[D(n) = \lvert N_T\left(n\right) - N_C\left(n\right) \rvert \]</span>
 This is pretty simple to define in R:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="computer-practical-1.html#cb25-1" tabindex="-1"></a>imbalance <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb25-2"><a href="computer-practical-1.html#cb25-2" tabindex="-1"></a>    df,   <span class="co"># participant data frame with allocation column included</span></span>
+<span id="cb25-3"><a href="computer-practical-1.html#cb25-3" tabindex="-1"></a>    alloc <span class="co"># name of allocation column</span></span>
+<span id="cb25-4"><a href="computer-practical-1.html#cb25-4" tabindex="-1"></a>    ){</span>
+<span id="cb25-5"><a href="computer-practical-1.html#cb25-5" tabindex="-1"></a>  alloc_vec <span class="ot">=</span> <span class="fu">as.factor</span>(df[ ,<span class="fu">names</span>(df)<span class="sc">==</span>alloc])</span>
+<span id="cb25-6"><a href="computer-practical-1.html#cb25-6" tabindex="-1"></a>  alloc_lev <span class="ot">=</span> <span class="fu">levels</span>(alloc_vec) <span class="co"># how the treatment groups are coded</span></span>
+<span id="cb25-7"><a href="computer-practical-1.html#cb25-7" tabindex="-1"></a>  n1 <span class="ot">=</span> <span class="fu">nrow</span>(df[df[alloc]<span class="sc">==</span>alloc_lev[<span class="dv">1</span>],])</span>
+<span id="cb25-8"><a href="computer-practical-1.html#cb25-8" tabindex="-1"></a>  n2 <span class="ot">=</span> <span class="fu">nrow</span>(df[df[alloc]<span class="sc">==</span>alloc_lev[<span class="dv">2</span>],])</span>
+<span id="cb25-9"><a href="computer-practical-1.html#cb25-9" tabindex="-1"></a>  <span class="fu">abs</span>(n1<span class="sc">-</span>n2)</span>
+<span id="cb25-10"><a href="computer-practical-1.html#cb25-10" tabindex="-1"></a>}</span></code></pre></div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-28" class="exercise"><strong>Exercise A.4  </strong></span>Use the <code>imbalance</code> function above to find the imbalance in the allocation recorded in the <code>lic_garg</code> dataset.</p>
 </div>
@@ -411,31 +446,33 @@ This is pretty simple to define in R:</p>
 <summary>
 Click for solution
 </summary>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="computer-practical-1.html#cb24-1" tabindex="-1"></a><span class="fu">imbalance</span>(<span class="at">df =</span> lic_garg, <span class="at">alloc =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="computer-practical-1.html#cb26-1" tabindex="-1"></a><span class="fu">imbalance</span>(<span class="at">df =</span> lic_garg, <span class="at">alloc =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 </details>
 </div>
 </div>
 <div id="allocmethods" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">A.1.2</span> Allocation methods<a href="computer-practical-1.html#allocmethods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we’ll use packages. Feel free to write your own code for the simpler methods if you want to!</p>
+<p>We’ll start by performing each method once with the whole dataset, and then go on to include baseline variables, and finally we’ll perform a simulation study.</p>
 <div id="simple-random-allocation-1" class="section level4 hasAnchor" number="5.1.2.1">
 <h4><span class="header-section-number">A.1.2.1</span> Simple random allocation<a href="computer-practical-1.html#simple-random-allocation-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. At this point we don’t need to think about the prognostic factors at all.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="computer-practical-1.html#cb26-1" tabindex="-1"></a>srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb26-2"><a href="computer-practical-1.html#cb26-2" tabindex="-1"></a>    df, <span class="co"># DF should be the participant data frame. </span></span>
-<span id="cb26-3"><a href="computer-practical-1.html#cb26-3" tabindex="-1"></a>        <span class="co"># A column &#39;treat&#39; will be added</span></span>
-<span id="cb26-4"><a href="computer-practical-1.html#cb26-4" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>) <span class="co"># Levels of treat factor</span></span>
-<span id="cb26-5"><a href="computer-practical-1.html#cb26-5" tabindex="-1"></a>){</span>
-<span id="cb26-6"><a href="computer-practical-1.html#cb26-6" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(df) <span class="co"># number of rows / participants</span></span>
-<span id="cb26-7"><a href="computer-practical-1.html#cb26-7" tabindex="-1"></a><span class="co"># Create a new column &#39;treat&#39;</span></span>
-<span id="cb26-8"><a href="computer-practical-1.html#cb26-8" tabindex="-1"></a>  df<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb26-9"><a href="computer-practical-1.html#cb26-9" tabindex="-1"></a><span class="co"># work through the rows, randomly allocating patients with probably 1/2</span></span>
-<span id="cb26-10"><a href="computer-practical-1.html#cb26-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
-<span id="cb26-11"><a href="computer-practical-1.html#cb26-11" tabindex="-1"></a>    df<span class="sc">$</span>treat[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
-<span id="cb26-12"><a href="computer-practical-1.html#cb26-12" tabindex="-1"></a>  }</span>
-<span id="cb26-13"><a href="computer-practical-1.html#cb26-13" tabindex="-1"></a>  df<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>treat)</span>
-<span id="cb26-14"><a href="computer-practical-1.html#cb26-14" tabindex="-1"></a>  df</span>
-<span id="cb26-15"><a href="computer-practical-1.html#cb26-15" tabindex="-1"></a>}</span></code></pre></div>
+<p>In simple random allocation, each participant is allocated to one of the two trial arms with equal probability.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="computer-practical-1.html#cb28-1" tabindex="-1"></a>srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb28-2"><a href="computer-practical-1.html#cb28-2" tabindex="-1"></a>    df, <span class="co"># DF should be the participant data frame. </span></span>
+<span id="cb28-3"><a href="computer-practical-1.html#cb28-3" tabindex="-1"></a>        <span class="co"># A column &#39;treat&#39; will be added</span></span>
+<span id="cb28-4"><a href="computer-practical-1.html#cb28-4" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>) <span class="co"># Levels of treat factor</span></span>
+<span id="cb28-5"><a href="computer-practical-1.html#cb28-5" tabindex="-1"></a>){</span>
+<span id="cb28-6"><a href="computer-practical-1.html#cb28-6" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(df) <span class="co"># number of rows / participants</span></span>
+<span id="cb28-7"><a href="computer-practical-1.html#cb28-7" tabindex="-1"></a><span class="co"># Create a new column &#39;treat&#39;</span></span>
+<span id="cb28-8"><a href="computer-practical-1.html#cb28-8" tabindex="-1"></a>  df<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb28-9"><a href="computer-practical-1.html#cb28-9" tabindex="-1"></a><span class="co"># work through the rows, randomly allocating patients with probably 1/2</span></span>
+<span id="cb28-10"><a href="computer-practical-1.html#cb28-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb28-11"><a href="computer-practical-1.html#cb28-11" tabindex="-1"></a>    df<span class="sc">$</span>treat[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb28-12"><a href="computer-practical-1.html#cb28-12" tabindex="-1"></a>  }</span>
+<span id="cb28-13"><a href="computer-practical-1.html#cb28-13" tabindex="-1"></a>  df<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>treat)</span>
+<span id="cb28-14"><a href="computer-practical-1.html#cb28-14" tabindex="-1"></a>  df</span>
+<span id="cb28-15"><a href="computer-practical-1.html#cb28-15" tabindex="-1"></a>}</span></code></pre></div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-29" class="exercise"><strong>Exercise A.5  </strong></span>Use the function <code>srs</code> above to allocate the patients in the <code>licorice_gargle</code> dataset to groups T or C.</p>
 <p>Generate the balance table and imbalance and comment on them.</p>
@@ -445,30 +482,29 @@ Click for solution
 Click for solution
 </summary>
 <p>To allocate the patients, use</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="computer-practical-1.html#cb27-1" tabindex="-1"></a>lg_srs <span class="ot">=</span> <span class="fu">srs</span>(</span>
-<span id="cb27-2"><a href="computer-practical-1.html#cb27-2" tabindex="-1"></a>  <span class="at">df =</span> lg_df[,<span class="sc">-</span><span class="dv">7</span>],</span>
-<span id="cb27-3"><a href="computer-practical-1.html#cb27-3" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb27-4"><a href="computer-practical-1.html#cb27-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="computer-practical-1.html#cb29-1" tabindex="-1"></a>lg_srs <span class="ot">=</span> <span class="fu">srs</span>(</span>
+<span id="cb29-2"><a href="computer-practical-1.html#cb29-2" tabindex="-1"></a>  <span class="at">df =</span> lg_df[,<span class="sc">-</span><span class="dv">7</span>],</span>
+<span id="cb29-3"><a href="computer-practical-1.html#cb29-3" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb29-4"><a href="computer-practical-1.html#cb29-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>And to display the balance table</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="computer-practical-1.html#cb28-1" tabindex="-1"></a>rb_tab <span class="ot">=</span> <span class="fu">randbalance</span>(</span>
-<span id="cb28-2"><a href="computer-practical-1.html#cb28-2" tabindex="-1"></a>  <span class="at">trt =</span> lg_srs<span class="sc">$</span>treat, </span>
-<span id="cb28-3"><a href="computer-practical-1.html#cb28-3" tabindex="-1"></a>  <span class="at">covmat =</span> lg_srs[,<span class="sc">-</span><span class="dv">8</span>], </span>
-<span id="cb28-4"><a href="computer-practical-1.html#cb28-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
-<span id="cb28-5"><a href="computer-practical-1.html#cb28-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="computer-practical-1.html#cb30-1" tabindex="-1"></a>rb_tab <span class="ot">=</span> <span class="fu">randbalance</span>(</span>
+<span id="cb30-2"><a href="computer-practical-1.html#cb30-2" tabindex="-1"></a>  <span class="at">trt =</span> lg_srs<span class="sc">$</span>treat, </span>
+<span id="cb30-3"><a href="computer-practical-1.html#cb30-3" tabindex="-1"></a>  <span class="at">covmat =</span> lg_srs[,<span class="sc">-</span><span class="dv">8</span>], </span>
+<span id="cb30-4"><a href="computer-practical-1.html#cb30-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
+<span id="cb30-5"><a href="computer-practical-1.html#cb30-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
 <p>To find the imbalance, the command is</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="computer-practical-1.html#cb29-1" tabindex="-1"></a><span class="fu">imbalance</span>(lg_srs, <span class="at">alloc =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="computer-practical-1.html#cb31-1" tabindex="-1"></a><span class="fu">imbalance</span>(lg_srs, <span class="at">alloc =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 35</code></pre>
 </details>
 </div>
 <div id="randomly-permuted-blocks" class="section level4 hasAnchor" number="5.1.2.2">
 <h4><span class="header-section-number">A.1.2.2</span> Randomly permuted blocks<a href="computer-practical-1.html#randomly-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>An obvious problem with using RPBs for this data is the number of strata. We have (if you have the same numbers of levels for <code>age</code> and <code>BMI</code> as I do)</p>
-<p><span class="math display">\[2\times{3}\times{4}\times{3}\times{2}\times{3}\times{3} = 1296 \]</span>
-strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will start by using RPBs without stratification. We will do this with the package <code>blockrand</code>.</p>
-<p>The default for the function <code>blockrand</code> is that it will randomly vary block length within <span class="math inline">\(\left\lbrace 2,\,4,\,6,\,8 \right\rbrace\)</span>.</p>
+<p>We will do this with the package <code>blockrand</code>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="computer-practical-1.html#cb33-1" tabindex="-1"></a><span class="fu">library</span>(blockrand)</span></code></pre></div>
+<p>The function for generating RPB designs is also called <code>blockrand</code>. The default for the function <code>blockrand</code> is that it will randomly vary block length within <span class="math inline">\(\left\lbrace 2,\,4,\,6,\,8 \right\rbrace\)</span>.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-30" class="exercise"><strong>Exercise A.6  </strong></span>Try playing around with the function <code>blockrand</code>, for example starting with</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="computer-practical-1.html#cb31-1" tabindex="-1"></a><span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="computer-practical-1.html#cb34-1" tabindex="-1"></a><span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div>
 <p>Can you generate an allocation for the <code>licorice_gargle</code> data (remember our data frame is now <code>lg_df</code>) and produce the balance table?</p>
 </div>
 <details>
@@ -476,69 +512,72 @@ strata. Even by collecting levels together and so on, we are not going to get do
 Click for solution
 </summary>
 <p>There are 235 rows/participants in <code>lg_df</code>, and to keep consistency we would like the levels of our treatment to be <code>"T"</code> and <code>"C"</code>. Therefore we can do</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="computer-practical-1.html#cb32-1" tabindex="-1"></a>rpb_lg <span class="ot">=</span> <span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">235</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="computer-practical-1.html#cb35-1" tabindex="-1"></a>rpb_lg <span class="ot">=</span> <span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">235</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
 <p>Notice that this doesn’t have 235 rows: the <code>blockrand</code> function will always finish after a whole block.</p>
 <p>Let’s add this to our participant data to create a new data frame <code>lg_rpb</code>:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="computer-practical-1.html#cb33-1" tabindex="-1"></a><span class="co"># create the new data frame, a copy of lg_df</span></span>
-<span id="cb33-2"><a href="computer-practical-1.html#cb33-2" tabindex="-1"></a>lg_rpb <span class="ot">=</span> lg_df  </span>
-<span id="cb33-3"><a href="computer-practical-1.html#cb33-3" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="computer-practical-1.html#cb33-4" tabindex="-1"></a><span class="co"># Replace the original treat column with the RPB treatment column</span></span>
-<span id="cb33-5"><a href="computer-practical-1.html#cb33-5" tabindex="-1"></a><span class="co"># Using only the first 235 allocations</span></span>
-<span id="cb33-6"><a href="computer-practical-1.html#cb33-6" tabindex="-1"></a>lg_rpb<span class="sc">$</span>treat <span class="ot">=</span> rpb_lg<span class="sc">$</span>treatment[<span class="dv">1</span><span class="sc">:</span><span class="dv">235</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="computer-practical-1.html#cb36-1" tabindex="-1"></a><span class="co"># create the new data frame, a copy of lg_df</span></span>
+<span id="cb36-2"><a href="computer-practical-1.html#cb36-2" tabindex="-1"></a>lg_rpb <span class="ot">=</span> lg_df  </span>
+<span id="cb36-3"><a href="computer-practical-1.html#cb36-3" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="computer-practical-1.html#cb36-4" tabindex="-1"></a><span class="co"># Replace the original treat column with the RPB treatment column</span></span>
+<span id="cb36-5"><a href="computer-practical-1.html#cb36-5" tabindex="-1"></a><span class="co"># Using only the first 235 allocations</span></span>
+<span id="cb36-6"><a href="computer-practical-1.html#cb36-6" tabindex="-1"></a>lg_rpb<span class="sc">$</span>treat <span class="ot">=</span> rpb_lg<span class="sc">$</span>treatment[<span class="dv">1</span><span class="sc">:</span><span class="dv">235</span>]</span></code></pre></div>
 <p>Then we can generate the demographic table as before:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="computer-practical-1.html#cb34-1" tabindex="-1"></a><span class="fu">randbalance</span>(</span>
-<span id="cb34-2"><a href="computer-practical-1.html#cb34-2" tabindex="-1"></a>  <span class="at">trt =</span> lg_rpb<span class="sc">$</span>treat, </span>
-<span id="cb34-3"><a href="computer-practical-1.html#cb34-3" tabindex="-1"></a>  <span class="at">covmat =</span> lg_rpb[,<span class="sc">-</span><span class="dv">8</span>], </span>
-<span id="cb34-4"><a href="computer-practical-1.html#cb34-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
-<span id="cb34-5"><a href="computer-practical-1.html#cb34-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="computer-practical-1.html#cb37-1" tabindex="-1"></a><span class="fu">randbalance</span>(</span>
+<span id="cb37-2"><a href="computer-practical-1.html#cb37-2" tabindex="-1"></a>  <span class="at">trt =</span> lg_rpb<span class="sc">$</span>treat, </span>
+<span id="cb37-3"><a href="computer-practical-1.html#cb37-3" tabindex="-1"></a>  <span class="at">covmat =</span> lg_rpb[,<span class="sc">-</span><span class="dv">8</span>], </span>
+<span id="cb37-4"><a href="computer-practical-1.html#cb37-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
+<span id="cb37-5"><a href="computer-practical-1.html#cb37-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
 </details>
-<p>The package <code>blockrand</code> contains a function <code>plotblockrand</code> outputs PDFs of randomization cards, ready to be printed and put into envelopes!</p>
+<p>The package <code>blockrand</code> contains a function <code>plotblockrand</code>, which outputs PDFs of randomization cards, ready to be printed and put into envelopes!</p>
 </div>
 <div id="biased-coin-designs-1" class="section level4 hasAnchor" number="5.1.2.3">
 <h4><span class="header-section-number">A.1.2.3</span> Biased coin designs<a href="computer-practical-1.html#biased-coin-designs-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can write code for a biased coin design by adapting the <code>srs</code> function above, setting <span class="math inline">\(p=\frac{2}{3}\)</span> by default as per <span class="citation">Efron (<a href="#ref-efron1971forcing">1971</a>)</span>.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="computer-practical-1.html#cb35-1" tabindex="-1"></a>biased_coin <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb35-2"><a href="computer-practical-1.html#cb35-2" tabindex="-1"></a>    data,</span>
-<span id="cb35-3"><a href="computer-practical-1.html#cb35-3" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb35-4"><a href="computer-practical-1.html#cb35-4" tabindex="-1"></a>    <span class="at">p=</span><span class="dv">2</span><span class="sc">/</span><span class="dv">3</span></span>
-<span id="cb35-5"><a href="computer-practical-1.html#cb35-5" tabindex="-1"></a>){</span>
-<span id="cb35-6"><a href="computer-practical-1.html#cb35-6" tabindex="-1"></a>  Dn <span class="ot">=</span> <span class="dv">0</span> <span class="co"># starting value of imbalance</span></span>
-<span id="cb35-7"><a href="computer-practical-1.html#cb35-7" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb35-8"><a href="computer-practical-1.html#cb35-8" tabindex="-1"></a>  alloc <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb35-9"><a href="computer-practical-1.html#cb35-9" tabindex="-1"></a>  </span>
-<span id="cb35-10"><a href="computer-practical-1.html#cb35-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
-<span id="cb35-11"><a href="computer-practical-1.html#cb35-11" tabindex="-1"></a>    <span class="cf">if</span> (Dn<span class="sc">==</span><span class="dv">0</span>){ <span class="co"># equally balanced</span></span>
-<span id="cb35-12"><a href="computer-practical-1.html#cb35-12" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>) )</span>
-<span id="cb35-13"><a href="computer-practical-1.html#cb35-13" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(Dn<span class="sc">&lt;</span><span class="dv">0</span>){ <span class="co"># More allocations to levels[2] up to this point</span></span>
-<span id="cb35-14"><a href="computer-practical-1.html#cb35-14" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(p, <span class="dv">1</span><span class="sc">-</span>p) )</span>
-<span id="cb35-15"><a href="computer-practical-1.html#cb35-15" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(Dn<span class="sc">&gt;</span><span class="dv">0</span>){ <span class="co"># More allocations to levels[1] up to this point</span></span>
-<span id="cb35-16"><a href="computer-practical-1.html#cb35-16" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>p, p) )</span>
-<span id="cb35-17"><a href="computer-practical-1.html#cb35-17" tabindex="-1"></a>    }</span>
-<span id="cb35-18"><a href="computer-practical-1.html#cb35-18" tabindex="-1"></a>    <span class="co"># Compute imbalance at this stage</span></span>
-<span id="cb35-19"><a href="computer-practical-1.html#cb35-19" tabindex="-1"></a>    alloc_to_n <span class="ot">=</span> alloc[<span class="dv">1</span><span class="sc">:</span>i]</span>
-<span id="cb35-20"><a href="computer-practical-1.html#cb35-20" tabindex="-1"></a>    Dn <span class="ot">=</span> <span class="fu">sum</span>(alloc_to_n<span class="sc">==</span>levels[<span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">sum</span>(alloc_to_n <span class="sc">==</span> levels[<span class="dv">2</span>])</span>
-<span id="cb35-21"><a href="computer-practical-1.html#cb35-21" tabindex="-1"></a>  }</span>
-<span id="cb35-22"><a href="computer-practical-1.html#cb35-22" tabindex="-1"></a>  data<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">as.factor</span>(alloc)</span>
-<span id="cb35-23"><a href="computer-practical-1.html#cb35-23" tabindex="-1"></a>  data</span>
-<span id="cb35-24"><a href="computer-practical-1.html#cb35-24" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="computer-practical-1.html#cb38-1" tabindex="-1"></a>biased_coin <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb38-2"><a href="computer-practical-1.html#cb38-2" tabindex="-1"></a>    data,</span>
+<span id="cb38-3"><a href="computer-practical-1.html#cb38-3" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
+<span id="cb38-4"><a href="computer-practical-1.html#cb38-4" tabindex="-1"></a>    <span class="at">p=</span><span class="dv">2</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb38-5"><a href="computer-practical-1.html#cb38-5" tabindex="-1"></a>){</span>
+<span id="cb38-6"><a href="computer-practical-1.html#cb38-6" tabindex="-1"></a>  Dn <span class="ot">=</span> <span class="dv">0</span> <span class="co"># starting value of imbalance</span></span>
+<span id="cb38-7"><a href="computer-practical-1.html#cb38-7" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb38-8"><a href="computer-practical-1.html#cb38-8" tabindex="-1"></a>  alloc <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb38-9"><a href="computer-practical-1.html#cb38-9" tabindex="-1"></a>  </span>
+<span id="cb38-10"><a href="computer-practical-1.html#cb38-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb38-11"><a href="computer-practical-1.html#cb38-11" tabindex="-1"></a>    <span class="cf">if</span> (Dn<span class="sc">==</span><span class="dv">0</span>){ <span class="co"># equally balanced</span></span>
+<span id="cb38-12"><a href="computer-practical-1.html#cb38-12" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>) )</span>
+<span id="cb38-13"><a href="computer-practical-1.html#cb38-13" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(Dn<span class="sc">&lt;</span><span class="dv">0</span>){ <span class="co"># More allocations to levels[2] up to this point</span></span>
+<span id="cb38-14"><a href="computer-practical-1.html#cb38-14" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(p, <span class="dv">1</span><span class="sc">-</span>p) )</span>
+<span id="cb38-15"><a href="computer-practical-1.html#cb38-15" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(Dn<span class="sc">&gt;</span><span class="dv">0</span>){ <span class="co"># More allocations to levels[1] up to this point</span></span>
+<span id="cb38-16"><a href="computer-practical-1.html#cb38-16" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>p, p) )</span>
+<span id="cb38-17"><a href="computer-practical-1.html#cb38-17" tabindex="-1"></a>    }</span>
+<span id="cb38-18"><a href="computer-practical-1.html#cb38-18" tabindex="-1"></a>    <span class="co"># Compute imbalance at this stage</span></span>
+<span id="cb38-19"><a href="computer-practical-1.html#cb38-19" tabindex="-1"></a>    alloc_to_n <span class="ot">=</span> alloc[<span class="dv">1</span><span class="sc">:</span>i]</span>
+<span id="cb38-20"><a href="computer-practical-1.html#cb38-20" tabindex="-1"></a>    Dn <span class="ot">=</span> <span class="fu">sum</span>(alloc_to_n<span class="sc">==</span>levels[<span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">sum</span>(alloc_to_n <span class="sc">==</span> levels[<span class="dv">2</span>])</span>
+<span id="cb38-21"><a href="computer-practical-1.html#cb38-21" tabindex="-1"></a>  }</span>
+<span id="cb38-22"><a href="computer-practical-1.html#cb38-22" tabindex="-1"></a>  data<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">as.factor</span>(alloc)</span>
+<span id="cb38-23"><a href="computer-practical-1.html#cb38-23" tabindex="-1"></a>  data</span>
+<span id="cb38-24"><a href="computer-practical-1.html#cb38-24" tabindex="-1"></a>}</span></code></pre></div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-31" class="exercise"><strong>Exercise A.7  </strong></span>Use the function <code>biased_coin</code> above to allocate patients to the two groups. Produce the demographic table. Try this for some different values of <code>p</code>.</p>
+<p><span id="exr:unlabeled-div-31" class="exercise"><strong>Exercise A.7  </strong></span>Use the function <code>biased_coin</code> above to allocate patients to the two groups. Produce the demographic table and calculate the imbalance. Try this for some different values of <code>p</code>.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <p>To create a biased coin design with <span class="math inline">\(p=0.9\)</span> (for example), we enter</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="computer-practical-1.html#cb36-1" tabindex="-1"></a>lg_bc1 <span class="ot">=</span> <span class="fu">biased_coin</span>(</span>
-<span id="cb36-2"><a href="computer-practical-1.html#cb36-2" tabindex="-1"></a>  <span class="at">data=</span>lg_df[,<span class="sc">-</span><span class="dv">8</span>],</span>
-<span id="cb36-3"><a href="computer-practical-1.html#cb36-3" tabindex="-1"></a>  <span class="at">p=</span><span class="fl">0.9</span></span>
-<span id="cb36-4"><a href="computer-practical-1.html#cb36-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="computer-practical-1.html#cb39-1" tabindex="-1"></a>lg_bc1 <span class="ot">=</span> <span class="fu">biased_coin</span>(</span>
+<span id="cb39-2"><a href="computer-practical-1.html#cb39-2" tabindex="-1"></a>  <span class="at">data=</span>lg_df[,<span class="sc">-</span><span class="dv">8</span>],</span>
+<span id="cb39-3"><a href="computer-practical-1.html#cb39-3" tabindex="-1"></a>  <span class="at">p=</span><span class="fl">0.9</span></span>
+<span id="cb39-4"><a href="computer-practical-1.html#cb39-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>and to produce a balance table:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="computer-practical-1.html#cb37-1" tabindex="-1"></a><span class="fu">randbalance</span>(</span>
-<span id="cb37-2"><a href="computer-practical-1.html#cb37-2" tabindex="-1"></a>  <span class="at">trt =</span> lg_bc1<span class="sc">$</span>treat, </span>
-<span id="cb37-3"><a href="computer-practical-1.html#cb37-3" tabindex="-1"></a>  <span class="at">covmat =</span> lg_bc1[,<span class="sc">-</span><span class="dv">8</span>], </span>
-<span id="cb37-4"><a href="computer-practical-1.html#cb37-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
-<span id="cb37-5"><a href="computer-practical-1.html#cb37-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="computer-practical-1.html#cb40-1" tabindex="-1"></a><span class="fu">randbalance</span>(</span>
+<span id="cb40-2"><a href="computer-practical-1.html#cb40-2" tabindex="-1"></a>  <span class="at">trt =</span> lg_bc1<span class="sc">$</span>treat, </span>
+<span id="cb40-3"><a href="computer-practical-1.html#cb40-3" tabindex="-1"></a>  <span class="at">covmat =</span> lg_bc1[,<span class="sc">-</span><span class="dv">8</span>], </span>
+<span id="cb40-4"><a href="computer-practical-1.html#cb40-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
+<span id="cb40-5"><a href="computer-practical-1.html#cb40-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
+<p>Finally we can find the imbalance:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="computer-practical-1.html#cb41-1" tabindex="-1"></a><span class="fu">imbalance</span>(lg_bc1, <span class="at">alloc=</span><span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
 </details>
 </div>
 <div id="urn-designs" class="section level4 hasAnchor" number="5.1.2.4">
@@ -549,7 +588,7 @@ Click for solution
 <li><span class="math inline">\(s\)</span> is the number of balls added per treatment after each allocation</li>
 </ul>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-32" class="exercise"><strong>Exercise A.8  </strong></span>Look at the help file for <code>udPar</code>. Which arguments correspond to <span class="math inline">\(r\)</span> and <span class="math inline">\(s\)</span>?</p>
+<p><span id="exr:unlabeled-div-32" class="exercise"><strong>Exercise A.8  </strong></span>Look at the help file for <code>udPar</code>. Which arguments correspond to <span class="math inline">\(r\)</span> and <span class="math inline">\(s\)</span> (as we called them in Section <a href="allocation.html#bcurn">3.2.3</a>?</p>
 </div>
 <p>The function <code>udPar</code> creates a model object, storing the parameters for the particular Urn design. To generate sequences of allocations, we use the function <code>genSeq</code></p>
 <div class="exercise">
@@ -560,14 +599,15 @@ Click for solution
 <summary>
 Click for solution
 </summary>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="computer-practical-1.html#cb38-1" tabindex="-1"></a>ud_31 <span class="ot">=</span> <span class="fu">udPar</span>(<span class="dv">235</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
-<span id="cb38-2"><a href="computer-practical-1.html#cb38-2" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="computer-practical-1.html#cb43-1" tabindex="-1"></a><span class="fu">library</span>(randomizeR)</span>
+<span id="cb43-2"><a href="computer-practical-1.html#cb43-2" tabindex="-1"></a>ud_31 <span class="ot">=</span> <span class="fu">udPar</span>(<span class="dv">235</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb43-3"><a href="computer-practical-1.html#cb43-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
 <p>The allocation vector is stored as a row in the matrix <code>M</code> which is a slot in the <code>genSeq</code> object (part of the object). You can access it by</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="computer-practical-1.html#cb39-1" tabindex="-1"></a>seq_ud31<span class="sc">@</span>M[<span class="dv">1</span>,]</span></code></pre></div>
-<pre><code>##   [1] 0 0 1 1 0 0 0 1 0 1 1 0 0 1 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 1 0 1 1 1 1 0 0 0 1 1 1 1 1 0 1 1 1 1 1 1 0 1 0 0 1 0 0 1 1
-##  [60] 1 0 1 1 0 1 0 0 1 1 1 1 0 1 0 0 0 0 0 1 0 0 1 1 1 0 1 0 1 0 0 0 1 1 1 0 1 0 1 1 1 0 1 0 0 1 1 0 1 1 1 1 1 1 0 1 0 0 1
-## [119] 1 0 1 0 0 0 1 0 0 1 1 0 0 1 1 1 0 1 1 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1
-## [178] 1 0 0 1 1 1 0 0 1 1 0 0 0 1 1 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 0 1 0 0 1 0 0 0 1 1 1 0 1 1 1 0 1</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="computer-practical-1.html#cb44-1" tabindex="-1"></a>seq_ud31<span class="sc">@</span>M[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>##   [1] 0 0 1 1 0 0 0 1 0 1 1 0 0 1 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 1 0 1 1 1 1 0 0 0 1 1 1 1 1 0 1 1 1 1 1 1 0 1 0 0 1 0 0 1 1 1
+##  [61] 0 1 1 0 1 0 0 1 1 1 1 0 1 0 0 0 0 0 1 0 0 1 1 1 0 1 0 1 0 0 0 1 1 1 0 1 0 1 1 1 0 1 0 0 1 1 0 1 1 1 1 1 1 0 1 0 0 1 1 0
+## [121] 1 0 0 0 1 0 0 1 1 0 0 1 1 1 0 1 1 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1 1 0 0
+## [181] 1 1 1 0 0 1 1 0 0 0 1 1 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 0 1 0 0 1 0 0 0 1 1 1 0 1 1 1 0 1</code></pre>
 <p>The argument <code>r</code> allows you to generate <code>r</code> sequences, in which case the matrix <code>M</code> has <code>r</code> rows.</p>
 </details>
 </div>
@@ -576,56 +616,60 @@ Click for solution
 <h3><span class="header-section-number">A.1.3</span> Stratifying the dataset<a href="computer-practical-1.html#stratifying-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataste one stratum might contain only women, aged 50-65, with a history of smoking.</p>
 <p>Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate ‘mini-trials’.</p>
-<p>In our Licorice example there are too many possible strata to do this for all levels, so we will choose just a couple. For example,</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="computer-practical-1.html#cb41-1" tabindex="-1"></a><span class="co"># Add an ID variable so that we can keep track of the order of participants</span></span>
-<span id="cb41-2"><a href="computer-practical-1.html#cb41-2" tabindex="-1"></a>lg_df<span class="sc">$</span>ID <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(lg_df)</span>
-<span id="cb41-3"><a href="computer-practical-1.html#cb41-3" tabindex="-1"></a><span class="co"># split the data frame according to levels of factors</span></span>
-<span id="cb41-4"><a href="computer-practical-1.html#cb41-4" tabindex="-1"></a>strat_gen_sm <span class="ot">&lt;-</span> lg_df <span class="sc">%&gt;%</span></span>
-<span id="cb41-5"><a href="computer-practical-1.html#cb41-5" tabindex="-1"></a>  <span class="fu">group_split</span>(preOp_gender, preOp_smoking) </span></code></pre></div>
+<p>An obvious problem with applying stratification to this dataset is the number of strata. We have (if you have the same numbers of levels for <code>age</code> and <code>BMI</code> as I do)</p>
+<p><span class="math display">\[2\times{3}\times{4}\times{3}\times{2}\times{3}\times{3} = 1296 \]</span>
+strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will choose just a couple of covariates to stratify by. For example,</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="computer-practical-1.html#cb46-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb46-2"><a href="computer-practical-1.html#cb46-2" tabindex="-1"></a><span class="co"># Add an ID variable so that we can keep track of the order of participants</span></span>
+<span id="cb46-3"><a href="computer-practical-1.html#cb46-3" tabindex="-1"></a>lg_df<span class="sc">$</span>ID <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(lg_df)</span>
+<span id="cb46-4"><a href="computer-practical-1.html#cb46-4" tabindex="-1"></a><span class="co"># split the data frame according to levels of factors</span></span>
+<span id="cb46-5"><a href="computer-practical-1.html#cb46-5" tabindex="-1"></a>strat_gen_sm <span class="ot">&lt;-</span> lg_df <span class="sc">%&gt;%</span></span>
+<span id="cb46-6"><a href="computer-practical-1.html#cb46-6" tabindex="-1"></a>  <span class="fu">group_split</span>(preOp_gender, preOp_smoking) </span></code></pre></div>
 <p>will create a list of data frames, one for each combination of <code>preOp_gender</code> and <code>preOp_smoking</code>. In this case there are six data frames, and for example the first (accessed by <code>strat_gen_sm[[1]]</code> contains all participants with <code>preOp_gender</code>=0 and <code>preOp_smoking</code>=1. You can choose different factors to stratify by if you want to!</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-34" class="exercise"><strong>Exercise A.10  </strong></span>Split your group using the code above, choosing two factors to stratify by. How many participants are in each strata?</p>
+<p><span id="exr:unlabeled-div-34" class="exercise"><strong>Exercise A.10  </strong></span>Split your group using the code above, choosing two factors to stratify by. How many participants are in each stratum?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <p>We’ll stick with the group as above. To find the numbers of participants in each group we do</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="computer-practical-1.html#cb42-1" tabindex="-1"></a>group_sizes <span class="ot">=</span> <span class="fu">sapply</span>(</span>
-<span id="cb42-2"><a href="computer-practical-1.html#cb42-2" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strat_gen_sm),</span>
-<span id="cb42-3"><a href="computer-practical-1.html#cb42-3" tabindex="-1"></a>  <span class="cf">function</span>(i){</span>
-<span id="cb42-4"><a href="computer-practical-1.html#cb42-4" tabindex="-1"></a>    <span class="fu">nrow</span>(strat_gen_sm[[i]])</span>
-<span id="cb42-5"><a href="computer-practical-1.html#cb42-5" tabindex="-1"></a>  }</span>
-<span id="cb42-6"><a href="computer-practical-1.html#cb42-6" tabindex="-1"></a>)</span>
-<span id="cb42-7"><a href="computer-practical-1.html#cb42-7" tabindex="-1"></a>group_sizes</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="computer-practical-1.html#cb47-1" tabindex="-1"></a>group_sizes <span class="ot">=</span> <span class="fu">sapply</span>(</span>
+<span id="cb47-2"><a href="computer-practical-1.html#cb47-2" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strat_gen_sm),</span>
+<span id="cb47-3"><a href="computer-practical-1.html#cb47-3" tabindex="-1"></a>  <span class="cf">function</span>(i){</span>
+<span id="cb47-4"><a href="computer-practical-1.html#cb47-4" tabindex="-1"></a>    <span class="fu">nrow</span>(strat_gen_sm[[i]])</span>
+<span id="cb47-5"><a href="computer-practical-1.html#cb47-5" tabindex="-1"></a>  }</span>
+<span id="cb47-6"><a href="computer-practical-1.html#cb47-6" tabindex="-1"></a>)</span>
+<span id="cb47-7"><a href="computer-practical-1.html#cb47-7" tabindex="-1"></a>group_sizes</span></code></pre></div>
 <pre><code>## [1] 63 47 32 27 25 41</code></pre>
 </details>
 <div id="margimbalance" class="section level4 hasAnchor" number="5.1.3.1">
 <h4><span class="header-section-number">A.1.3.1</span> Another measure of imbalance<a href="computer-practical-1.html#margimbalance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To see how well balanced our allocations are in terms of each covariate, we will define a function summing the marginal imbalance</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="computer-practical-1.html#cb44-1" tabindex="-1"></a>marg_imbalance <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb44-2"><a href="computer-practical-1.html#cb44-2" tabindex="-1"></a>    df,  <span class="co"># participant data frame, including allocation and all factor variables</span></span>
-<span id="cb44-3"><a href="computer-practical-1.html#cb44-3" tabindex="-1"></a>    alloc, <span class="co"># name of allocation column</span></span>
-<span id="cb44-4"><a href="computer-practical-1.html#cb44-4" tabindex="-1"></a>    factors <span class="co"># names of prognostic factors to be included</span></span>
-<span id="cb44-5"><a href="computer-practical-1.html#cb44-5" tabindex="-1"></a>    ){</span>
-<span id="cb44-6"><a href="computer-practical-1.html#cb44-6" tabindex="-1"></a>  n_fact <span class="ot">=</span> <span class="fu">length</span>(factors) <span class="co"># the numbers of factors</span></span>
-<span id="cb44-7"><a href="computer-practical-1.html#cb44-7" tabindex="-1"></a>  imb_sum<span class="ot">=</span><span class="dv">0</span>                <span class="co"># a running total of imbalance</span></span>
-<span id="cb44-8"><a href="computer-practical-1.html#cb44-8" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_fact){     <span class="co"># loop through the factors </span></span>
-<span id="cb44-9"><a href="computer-practical-1.html#cb44-9" tabindex="-1"></a>    ind_i <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df))[<span class="fu">names</span>(df)<span class="sc">==</span>factors[i]]</span>
-<span id="cb44-10"><a href="computer-practical-1.html#cb44-10" tabindex="-1"></a>    col_i <span class="ot">=</span> <span class="fu">as.factor</span>(df[ ,ind_i])</span>
-<span id="cb44-11"><a href="computer-practical-1.html#cb44-11" tabindex="-1"></a>    levels_i <span class="ot">=</span> <span class="fu">levels</span>(col_i)</span>
-<span id="cb44-12"><a href="computer-practical-1.html#cb44-12" tabindex="-1"></a>    nlevels_i <span class="ot">=</span> <span class="fu">length</span>(levels_i)</span>
-<span id="cb44-13"><a href="computer-practical-1.html#cb44-13" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nlevels_i){ <span class="co"># loop through the levels of factor i</span></span>
-<span id="cb44-14"><a href="computer-practical-1.html#cb44-14" tabindex="-1"></a>      df_ij <span class="ot">=</span> df[df[ ,ind_i]<span class="sc">==</span>levels_i[j] , ]</span>
-<span id="cb44-15"><a href="computer-practical-1.html#cb44-15" tabindex="-1"></a>      imb_ij <span class="ot">=</span> <span class="fu">imbalance</span>(<span class="at">df=</span>df_ij, <span class="at">alloc=</span>alloc) <span class="co"># find the imbalance for the sub-data-frame in which factor i has level j</span></span>
-<span id="cb44-16"><a href="computer-practical-1.html#cb44-16" tabindex="-1"></a>    }</span>
-<span id="cb44-17"><a href="computer-practical-1.html#cb44-17" tabindex="-1"></a>  }</span>
-<span id="cb44-18"><a href="computer-practical-1.html#cb44-18" tabindex="-1"></a>  imb_sum</span>
-<span id="cb44-19"><a href="computer-practical-1.html#cb44-19" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="computer-practical-1.html#cb49-1" tabindex="-1"></a>marg_imbalance <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb49-2"><a href="computer-practical-1.html#cb49-2" tabindex="-1"></a>    df,  <span class="co"># participant data frame, including allocation and all factor variables</span></span>
+<span id="cb49-3"><a href="computer-practical-1.html#cb49-3" tabindex="-1"></a>    alloc, <span class="co"># name of allocation column</span></span>
+<span id="cb49-4"><a href="computer-practical-1.html#cb49-4" tabindex="-1"></a>    factors <span class="co"># names of prognostic factors to be included</span></span>
+<span id="cb49-5"><a href="computer-practical-1.html#cb49-5" tabindex="-1"></a>    ){</span>
+<span id="cb49-6"><a href="computer-practical-1.html#cb49-6" tabindex="-1"></a>  n_fact <span class="ot">=</span> <span class="fu">length</span>(factors) <span class="co"># the numbers of factors</span></span>
+<span id="cb49-7"><a href="computer-practical-1.html#cb49-7" tabindex="-1"></a>  imb_sum<span class="ot">=</span><span class="dv">0</span>                <span class="co"># a running total of imbalance</span></span>
+<span id="cb49-8"><a href="computer-practical-1.html#cb49-8" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_fact){     <span class="co"># loop through the factors </span></span>
+<span id="cb49-9"><a href="computer-practical-1.html#cb49-9" tabindex="-1"></a>    ind_i <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df))[<span class="fu">names</span>(df)<span class="sc">==</span>factors[i]]</span>
+<span id="cb49-10"><a href="computer-practical-1.html#cb49-10" tabindex="-1"></a>    col_i <span class="ot">=</span> <span class="fu">as.factor</span>(df[ ,ind_i])</span>
+<span id="cb49-11"><a href="computer-practical-1.html#cb49-11" tabindex="-1"></a>    levels_i <span class="ot">=</span> <span class="fu">levels</span>(col_i)</span>
+<span id="cb49-12"><a href="computer-practical-1.html#cb49-12" tabindex="-1"></a>    nlevels_i <span class="ot">=</span> <span class="fu">length</span>(levels_i)</span>
+<span id="cb49-13"><a href="computer-practical-1.html#cb49-13" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nlevels_i){ <span class="co"># loop through the levels of factor i</span></span>
+<span id="cb49-14"><a href="computer-practical-1.html#cb49-14" tabindex="-1"></a>      <span class="co"># df_ij contains just those entries with level j of factor i</span></span>
+<span id="cb49-15"><a href="computer-practical-1.html#cb49-15" tabindex="-1"></a>      df_ij <span class="ot">=</span> df[df[ ,ind_i]<span class="sc">==</span>levels_i[j] , ] </span>
+<span id="cb49-16"><a href="computer-practical-1.html#cb49-16" tabindex="-1"></a>      imb_ij <span class="ot">=</span> <span class="fu">imbalance</span>(<span class="at">df=</span>df_ij, <span class="at">alloc=</span>alloc) <span class="co"># find the imbalance for the sub-data-frame in which factor i has level j</span></span>
+<span id="cb49-17"><a href="computer-practical-1.html#cb49-17" tabindex="-1"></a>    }</span>
+<span id="cb49-18"><a href="computer-practical-1.html#cb49-18" tabindex="-1"></a>  }</span>
+<span id="cb49-19"><a href="computer-practical-1.html#cb49-19" tabindex="-1"></a>  imb_sum</span>
+<span id="cb49-20"><a href="computer-practical-1.html#cb49-20" tabindex="-1"></a>}</span></code></pre></div>
 <p>For example, to find the marginal imbalance over the gender and age factors, use</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="computer-practical-1.html#cb45-1" tabindex="-1"></a><span class="fu">marg_imbalance</span>(<span class="at">df=</span>lg_df, <span class="at">alloc=</span><span class="st">&quot;treat&quot;</span>, <span class="at">factors =</span> <span class="fu">c</span>(<span class="st">&quot;preOp_gender&quot;</span>, <span class="st">&quot;age&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="computer-practical-1.html#cb50-1" tabindex="-1"></a><span class="fu">marg_imbalance</span>(<span class="at">df=</span>lg_df, <span class="at">alloc=</span><span class="st">&quot;treat&quot;</span>, <span class="at">factors =</span> <span class="fu">c</span>(<span class="st">&quot;preOp_gender&quot;</span>, <span class="st">&quot;age&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<p>Note that the more factors there are, the bigger the marginal imbalance will be, so if you’re comparing between methods, make sure you’re including all the same factors!</p>
+<p><strong>Note that the larger the total number of factor levels, the larger the marginal imbalance will be, so if you’re comparing between methods, make sure you’re including all the same factors!</strong></p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-35" class="exercise"><strong>Exercise A.11  </strong></span>Choose a couple of methods from Section <a href="computer-practical-1.html#allocmethods">A.1.2</a>, and use them with your stratified dataset.
 Use the <code>marg_imbalance</code> function to find the marginal imbalance. Try this for just the factors you stratified by, and for other collections of factors. What do you expect to see?</p>
@@ -635,17 +679,17 @@ Use the <code>marg_imbalance</code> function to find the marginal imbalance. Try
 Click for solution
 </summary>
 <p>The code for this will vary, but the basic idea is to work through the individual data sets individually, and apply the functions from Section <a href="computer-practical-1.html#allocmethods">A.1.2</a>. One way to do this is by creating a for loop. The code below shows how this would work for simple random sampling, but you can change the function to use whichever method you prefer.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="computer-practical-1.html#cb47-1" tabindex="-1"></a><span class="co"># This command creates an empty list, which we will fill with allocation data frames as we go through</span></span>
-<span id="cb47-2"><a href="computer-practical-1.html#cb47-2" tabindex="-1"></a>alloc_list <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb47-3"><a href="computer-practical-1.html#cb47-3" tabindex="-1"></a><span class="co"># The loop works through the stratified data frames, applies SRS to allocate patients</span></span>
-<span id="cb47-4"><a href="computer-practical-1.html#cb47-4" tabindex="-1"></a><span class="co"># and stores them in alloc_list</span></span>
-<span id="cb47-5"><a href="computer-practical-1.html#cb47-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strat_gen_sm)){</span>
-<span id="cb47-6"><a href="computer-practical-1.html#cb47-6" tabindex="-1"></a>  alloc_list[[i]] <span class="ot">=</span> <span class="fu">srs</span>(strat_gen_sm[[i]])</span>
-<span id="cb47-7"><a href="computer-practical-1.html#cb47-7" tabindex="-1"></a>}</span>
-<span id="cb47-8"><a href="computer-practical-1.html#cb47-8" tabindex="-1"></a><span class="co"># bind all the data frames back together again</span></span>
-<span id="cb47-9"><a href="computer-practical-1.html#cb47-9" tabindex="-1"></a>alloc_full<span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(alloc_list)</span>
-<span id="cb47-10"><a href="computer-practical-1.html#cb47-10" tabindex="-1"></a><span class="co"># re-order according to ID variable</span></span>
-<span id="cb47-11"><a href="computer-practical-1.html#cb47-11" tabindex="-1"></a>alloc_full[<span class="fu">order</span>(alloc_full<span class="sc">$</span>ID),]</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="computer-practical-1.html#cb52-1" tabindex="-1"></a><span class="co"># This command creates an empty list, which we will fill with allocation data frames as we go through</span></span>
+<span id="cb52-2"><a href="computer-practical-1.html#cb52-2" tabindex="-1"></a>alloc_list <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb52-3"><a href="computer-practical-1.html#cb52-3" tabindex="-1"></a><span class="co"># The loop works through the stratified data frames, applies SRS to allocate patients</span></span>
+<span id="cb52-4"><a href="computer-practical-1.html#cb52-4" tabindex="-1"></a><span class="co"># and stores them in alloc_list</span></span>
+<span id="cb52-5"><a href="computer-practical-1.html#cb52-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strat_gen_sm)){</span>
+<span id="cb52-6"><a href="computer-practical-1.html#cb52-6" tabindex="-1"></a>  alloc_list[[i]] <span class="ot">=</span> <span class="fu">srs</span>(strat_gen_sm[[i]])</span>
+<span id="cb52-7"><a href="computer-practical-1.html#cb52-7" tabindex="-1"></a>}</span>
+<span id="cb52-8"><a href="computer-practical-1.html#cb52-8" tabindex="-1"></a><span class="co"># bind all the data frames back together again</span></span>
+<span id="cb52-9"><a href="computer-practical-1.html#cb52-9" tabindex="-1"></a>alloc_full<span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(alloc_list)</span>
+<span id="cb52-10"><a href="computer-practical-1.html#cb52-10" tabindex="-1"></a><span class="co"># re-order according to ID variable</span></span>
+<span id="cb52-11"><a href="computer-practical-1.html#cb52-11" tabindex="-1"></a>alloc_full[<span class="fu">order</span>(alloc_full<span class="sc">$</span>ID),]</span></code></pre></div>
 <pre><code>## # A tibble: 235 × 9
 ##    preOp_gender preOp_asa preOp_mallampati preOp_smoking preOp_pain age      BMI    treat    ID
 ##    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;            &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt;  &lt;fct&gt; &lt;int&gt;
@@ -661,51 +705,52 @@ Click for solution
 ## 10 0            3         2                3             0          50 to 70 high   0        10
 ## # ℹ 225 more rows</code></pre>
 <p>It would be silly though to do this with SRS - why?</p>
+<p>Once you’ve performed the allocation, you can find the demographic tables, imbalance and marginal imbalance as before (with <code>alloc_full</code>, or whatever your is called, as the data frame)</p>
 </details>
 </div>
 </div>
 <div id="minimisation" class="section level3 hasAnchor" number="5.1.4">
 <h3><span class="header-section-number">A.1.4</span> Minimisation<a href="computer-practical-1.html#minimisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If we want to try to achieve balance for all prognostic factors, minimisation is a more suitable method. The function <code>Minirand</code> in the package <code>Minirand</code> implements the minimisation algorithm.</p>
-<p>Much like we did in lectures, the function <code>Minirand</code> works from the point of view of having already allocated <span class="math inline">\(j-1\)</span> particpants, and being presented with a <span class="math inline">\(j^{th}\)</span>.</p>
+<p>Much like we did in lectures (and like we would in a real trial), the function <code>Minirand</code> works from the point of view of having already allocated <span class="math inline">\(j-1\)</span> particpants, and being presented with a <span class="math inline">\(j^{th}\)</span>.</p>
 <p>This example code is copied from the function’s help file, but with some extra comments to help you to follow it. It first creates a participant data frame, then allocates the particpants to treatment groups using Minimisation.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="computer-practical-1.html#cb49-1" tabindex="-1"></a><span class="do">## Information about the treatment</span></span>
-<span id="cb49-2"><a href="computer-practical-1.html#cb49-2" tabindex="-1"></a>ntrt <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># There will three treatment groups</span></span>
-<span id="cb49-3"><a href="computer-practical-1.html#cb49-3" tabindex="-1"></a>trtseq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># the treatment groups are indexed 1, 2, 3</span></span>
-<span id="cb49-4"><a href="computer-practical-1.html#cb49-4" tabindex="-1"></a>ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)  <span class="co"># the treatment groups will be allocated in a 2:2:1 ratio</span></span>
-<span id="cb49-5"><a href="computer-practical-1.html#cb49-5" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="computer-practical-1.html#cb49-6" tabindex="-1"></a><span class="do">## The next few rows generate the participant data frame</span></span>
-<span id="cb49-7"><a href="computer-practical-1.html#cb49-7" tabindex="-1"></a>nsample <span class="ot">&lt;-</span> <span class="dv">120</span> <span class="co"># we will have 120 participants</span></span>
-<span id="cb49-8"><a href="computer-practical-1.html#cb49-8" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)) </span>
-<span id="cb49-9"><a href="computer-practical-1.html#cb49-9" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>))</span>
-<span id="cb49-10"><a href="computer-practical-1.html#cb49-10" tabindex="-1"></a>c3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.33</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)) </span>
-<span id="cb49-11"><a href="computer-practical-1.html#cb49-11" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.33</span>, <span class="fl">0.67</span>)) </span>
-<span id="cb49-12"><a href="computer-practical-1.html#cb49-12" tabindex="-1"></a>covmat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c1, c2, c3, c4) <span class="co"># generate the matrix of covariate factors for the subjects</span></span>
-<span id="cb49-13"><a href="computer-practical-1.html#cb49-13" tabindex="-1"></a><span class="co"># label of the covariates </span></span>
-<span id="cb49-14"><a href="computer-practical-1.html#cb49-14" tabindex="-1"></a><span class="fu">colnames</span>(covmat) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Hypertension&quot;</span>, <span class="st">&quot;Use of Antibiotics&quot;</span>) </span>
-<span id="cb49-15"><a href="computer-practical-1.html#cb49-15" tabindex="-1"></a>covwt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="co"># equal weights/importance applied to each factor</span></span>
-<span id="cb49-16"><a href="computer-practical-1.html#cb49-16" tabindex="-1"></a></span>
-<span id="cb49-17"><a href="computer-practical-1.html#cb49-17" tabindex="-1"></a><span class="do">## Applying the algorithm - start here if you already have participant data!</span></span>
-<span id="cb49-18"><a href="computer-practical-1.html#cb49-18" tabindex="-1"></a></span>
-<span id="cb49-19"><a href="computer-practical-1.html#cb49-19" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsample) <span class="co"># Generate a vector to store the results (the allocations)</span></span>
-<span id="cb49-20"><a href="computer-practical-1.html#cb49-20" tabindex="-1"></a><span class="co"># generate treatment assignment for the 1st subject</span></span>
-<span id="cb49-21"><a href="computer-practical-1.html#cb49-21" tabindex="-1"></a>res[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">sample</span>(trtseq, <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> ratio<span class="sc">/</span><span class="fu">sum</span>(ratio)) </span>
-<span id="cb49-22"><a href="computer-practical-1.html#cb49-22" tabindex="-1"></a><span class="co"># work through the remaining patients sequentially</span></span>
-<span id="cb49-23"><a href="computer-practical-1.html#cb49-23" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>nsample)</span>
-<span id="cb49-24"><a href="computer-practical-1.html#cb49-24" tabindex="-1"></a>  {</span>
-<span id="cb49-25"><a href="computer-practical-1.html#cb49-25" tabindex="-1"></a>  <span class="co"># get treatment assignment sequentially for all subjects</span></span>
-<span id="cb49-26"><a href="computer-practical-1.html#cb49-26" tabindex="-1"></a>  <span class="co"># The vector res is updated and so all previous allocations are accounted for</span></span>
-<span id="cb49-27"><a href="computer-practical-1.html#cb49-27" tabindex="-1"></a>  <span class="co"># covmat is the data frame of participant data</span></span>
-<span id="cb49-28"><a href="computer-practical-1.html#cb49-28" tabindex="-1"></a>    res[j] <span class="ot">&lt;-</span> <span class="fu">Minirand</span>(</span>
-<span id="cb49-29"><a href="computer-practical-1.html#cb49-29" tabindex="-1"></a>      <span class="at">covmat=</span>covmat, j, <span class="at">covwt=</span>covwt, <span class="at">ratio=</span>ratio, <span class="at">ntrt=</span>ntrt, <span class="at">trtseq=</span>trtseq, <span class="at">method=</span><span class="st">&quot;Range&quot;</span>, <span class="at">result=</span>res, <span class="at">p =</span> <span class="fl">0.9</span></span>
-<span id="cb49-30"><a href="computer-practical-1.html#cb49-30" tabindex="-1"></a>      )</span>
-<span id="cb49-31"><a href="computer-practical-1.html#cb49-31" tabindex="-1"></a>}</span>
-<span id="cb49-32"><a href="computer-practical-1.html#cb49-32" tabindex="-1"></a><span class="do">## Store the allocation vector &#39;res&#39; as &#39;trt1&#39;</span></span>
-<span id="cb49-33"><a href="computer-practical-1.html#cb49-33" tabindex="-1"></a>trt1 <span class="ot">&lt;-</span> res</span>
-<span id="cb49-34"><a href="computer-practical-1.html#cb49-34" tabindex="-1"></a></span>
-<span id="cb49-35"><a href="computer-practical-1.html#cb49-35" tabindex="-1"></a><span class="co"># Display the number of randomized subjects at covariate factors</span></span>
-<span id="cb49-36"><a href="computer-practical-1.html#cb49-36" tabindex="-1"></a>balance1 <span class="ot">&lt;-</span> <span class="fu">randbalance</span>(trt1, covmat, ntrt, trtseq) </span>
-<span id="cb49-37"><a href="computer-practical-1.html#cb49-37" tabindex="-1"></a>balance1</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="computer-practical-1.html#cb54-1" tabindex="-1"></a><span class="do">## Information about the treatment</span></span>
+<span id="cb54-2"><a href="computer-practical-1.html#cb54-2" tabindex="-1"></a>ntrt <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># There will three treatment groups</span></span>
+<span id="cb54-3"><a href="computer-practical-1.html#cb54-3" tabindex="-1"></a>trtseq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># the treatment groups are indexed 1, 2, 3</span></span>
+<span id="cb54-4"><a href="computer-practical-1.html#cb54-4" tabindex="-1"></a>ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)  <span class="co"># the treatment groups will be allocated in a 2:2:1 ratio</span></span>
+<span id="cb54-5"><a href="computer-practical-1.html#cb54-5" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="computer-practical-1.html#cb54-6" tabindex="-1"></a><span class="do">## The next few rows generate the participant data frame</span></span>
+<span id="cb54-7"><a href="computer-practical-1.html#cb54-7" tabindex="-1"></a>nsample <span class="ot">&lt;-</span> <span class="dv">120</span> <span class="co"># we will have 120 participants</span></span>
+<span id="cb54-8"><a href="computer-practical-1.html#cb54-8" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)) </span>
+<span id="cb54-9"><a href="computer-practical-1.html#cb54-9" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>))</span>
+<span id="cb54-10"><a href="computer-practical-1.html#cb54-10" tabindex="-1"></a>c3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.33</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)) </span>
+<span id="cb54-11"><a href="computer-practical-1.html#cb54-11" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.33</span>, <span class="fl">0.67</span>)) </span>
+<span id="cb54-12"><a href="computer-practical-1.html#cb54-12" tabindex="-1"></a>covmat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c1, c2, c3, c4) <span class="co"># generate the matrix of covariate factors for the subjects</span></span>
+<span id="cb54-13"><a href="computer-practical-1.html#cb54-13" tabindex="-1"></a><span class="co"># label of the covariates </span></span>
+<span id="cb54-14"><a href="computer-practical-1.html#cb54-14" tabindex="-1"></a><span class="fu">colnames</span>(covmat) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Hypertension&quot;</span>, <span class="st">&quot;Use of Antibiotics&quot;</span>) </span>
+<span id="cb54-15"><a href="computer-practical-1.html#cb54-15" tabindex="-1"></a>covwt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="co"># equal weights/importance applied to each factor</span></span>
+<span id="cb54-16"><a href="computer-practical-1.html#cb54-16" tabindex="-1"></a></span>
+<span id="cb54-17"><a href="computer-practical-1.html#cb54-17" tabindex="-1"></a><span class="do">## Applying the algorithm - start here if you already have participant data!</span></span>
+<span id="cb54-18"><a href="computer-practical-1.html#cb54-18" tabindex="-1"></a></span>
+<span id="cb54-19"><a href="computer-practical-1.html#cb54-19" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsample) <span class="co"># Generate a vector to store the results (the allocations)</span></span>
+<span id="cb54-20"><a href="computer-practical-1.html#cb54-20" tabindex="-1"></a><span class="co"># generate treatment assignment for the 1st subject</span></span>
+<span id="cb54-21"><a href="computer-practical-1.html#cb54-21" tabindex="-1"></a>res[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">sample</span>(trtseq, <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> ratio<span class="sc">/</span><span class="fu">sum</span>(ratio)) </span>
+<span id="cb54-22"><a href="computer-practical-1.html#cb54-22" tabindex="-1"></a><span class="co"># work through the remaining patients sequentially</span></span>
+<span id="cb54-23"><a href="computer-practical-1.html#cb54-23" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>nsample)</span>
+<span id="cb54-24"><a href="computer-practical-1.html#cb54-24" tabindex="-1"></a>  {</span>
+<span id="cb54-25"><a href="computer-practical-1.html#cb54-25" tabindex="-1"></a>  <span class="co"># get treatment assignment sequentially for all subjects</span></span>
+<span id="cb54-26"><a href="computer-practical-1.html#cb54-26" tabindex="-1"></a>  <span class="co"># The vector res is updated and so all previous allocations are accounted for</span></span>
+<span id="cb54-27"><a href="computer-practical-1.html#cb54-27" tabindex="-1"></a>  <span class="co"># covmat is the data frame of participant data</span></span>
+<span id="cb54-28"><a href="computer-practical-1.html#cb54-28" tabindex="-1"></a>    res[j] <span class="ot">&lt;-</span> <span class="fu">Minirand</span>(</span>
+<span id="cb54-29"><a href="computer-practical-1.html#cb54-29" tabindex="-1"></a>      <span class="at">covmat=</span>covmat, j, <span class="at">covwt=</span>covwt, <span class="at">ratio=</span>ratio, <span class="at">ntrt=</span>ntrt, <span class="at">trtseq=</span>trtseq, <span class="at">method=</span><span class="st">&quot;Range&quot;</span>, <span class="at">result=</span>res, <span class="at">p =</span> <span class="fl">0.9</span></span>
+<span id="cb54-30"><a href="computer-practical-1.html#cb54-30" tabindex="-1"></a>      )</span>
+<span id="cb54-31"><a href="computer-practical-1.html#cb54-31" tabindex="-1"></a>}</span>
+<span id="cb54-32"><a href="computer-practical-1.html#cb54-32" tabindex="-1"></a><span class="do">## Store the allocation vector &#39;res&#39; as &#39;trt1&#39;</span></span>
+<span id="cb54-33"><a href="computer-practical-1.html#cb54-33" tabindex="-1"></a>trt1 <span class="ot">&lt;-</span> res</span>
+<span id="cb54-34"><a href="computer-practical-1.html#cb54-34" tabindex="-1"></a></span>
+<span id="cb54-35"><a href="computer-practical-1.html#cb54-35" tabindex="-1"></a><span class="co"># Display the number of randomized subjects at covariate factors</span></span>
+<span id="cb54-36"><a href="computer-practical-1.html#cb54-36" tabindex="-1"></a>balance1 <span class="ot">&lt;-</span> <span class="fu">randbalance</span>(trt1, covmat, ntrt, trtseq) </span>
+<span id="cb54-37"><a href="computer-practical-1.html#cb54-37" tabindex="-1"></a>balance1</span></code></pre></div>
 <pre><code>## $Gender
 ##    
 ## trt  0  1
@@ -733,13 +778,35 @@ Click for solution
 ##   1 29 18
 ##   2 29 20
 ##   3 15  9</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="computer-practical-1.html#cb51-1" tabindex="-1"></a><span class="co"># Calculate the total imbalance of the allocation</span></span>
-<span id="cb51-2"><a href="computer-practical-1.html#cb51-2" tabindex="-1"></a><span class="fu">totimbal</span>(<span class="at">trt =</span> trt1, <span class="at">covmat =</span> covmat, <span class="at">covwt =</span> covwt, </span>
-<span id="cb51-3"><a href="computer-practical-1.html#cb51-3" tabindex="-1"></a><span class="at">ratio =</span> ratio, <span class="at">ntrt =</span> ntrt, <span class="at">trtseq =</span> trtseq, <span class="at">method =</span> <span class="st">&quot;Range&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="computer-practical-1.html#cb56-1" tabindex="-1"></a><span class="co"># Calculate the total imbalance of the allocation</span></span>
+<span id="cb56-2"><a href="computer-practical-1.html#cb56-2" tabindex="-1"></a><span class="fu">totimbal</span>(<span class="at">trt =</span> trt1, <span class="at">covmat =</span> covmat, <span class="at">covwt =</span> covwt, </span>
+<span id="cb56-3"><a href="computer-practical-1.html#cb56-3" tabindex="-1"></a><span class="at">ratio =</span> ratio, <span class="at">ntrt =</span> ntrt, <span class="at">trtseq =</span> trtseq, <span class="at">method =</span> <span class="st">&quot;Range&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 1.75</code></pre>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-36" class="exercise"><strong>Exercise A.12  </strong></span>Adapt the code above to apply the minimisation algorithm to the licorice gargle data.</p>
+<p><span id="exr:unlabeled-div-36" class="exercise"><strong>Exercise A.12  </strong></span>Adapt the code above to apply the minimisation algorithm to the licorice gargle data. Investigate how balanced the data set is.</p>
 </div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>Notice in the code above that we only need to start about half way down if we already have a dataset (which we do).</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="computer-practical-1.html#cb58-1" tabindex="-1"></a>nsample <span class="ot">=</span> <span class="fu">nrow</span>(lg_df)</span>
+<span id="cb58-2"><a href="computer-practical-1.html#cb58-2" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsample)</span>
+<span id="cb58-3"><a href="computer-practical-1.html#cb58-3" tabindex="-1"></a>res[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)) </span>
+<span id="cb58-4"><a href="computer-practical-1.html#cb58-4" tabindex="-1"></a><span class="co"># work through the remaining patients sequentially</span></span>
+<span id="cb58-5"><a href="computer-practical-1.html#cb58-5" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>nsample){</span>
+<span id="cb58-6"><a href="computer-practical-1.html#cb58-6" tabindex="-1"></a>  <span class="co"># get treatment assignment sequentially for all subjects</span></span>
+<span id="cb58-7"><a href="computer-practical-1.html#cb58-7" tabindex="-1"></a>  <span class="co"># The vector res is updated and so all previous allocations are accounted for</span></span>
+<span id="cb58-8"><a href="computer-practical-1.html#cb58-8" tabindex="-1"></a>  <span class="co"># covmat is the data frame of participant data - including only the covariates</span></span>
+<span id="cb58-9"><a href="computer-practical-1.html#cb58-9" tabindex="-1"></a>    res[j] <span class="ot">&lt;-</span> <span class="fu">Minirand</span>(</span>
+<span id="cb58-10"><a href="computer-practical-1.html#cb58-10" tabindex="-1"></a>      <span class="at">covmat=</span>lg_df[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>], j, <span class="at">covwt=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">7</span>)<span class="sc">/</span><span class="dv">7</span>, <span class="at">ratio=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ntrt=</span><span class="dv">2</span>, <span class="at">trtseq=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">method=</span><span class="st">&quot;Range&quot;</span>, <span class="at">result=</span>res, <span class="at">p =</span> <span class="fl">0.9</span></span>
+<span id="cb58-11"><a href="computer-practical-1.html#cb58-11" tabindex="-1"></a>      )</span>
+<span id="cb58-12"><a href="computer-practical-1.html#cb58-12" tabindex="-1"></a>}</span>
+<span id="cb58-13"><a href="computer-practical-1.html#cb58-13" tabindex="-1"></a></span>
+<span id="cb58-14"><a href="computer-practical-1.html#cb58-14" tabindex="-1"></a>lg_df<span class="sc">$</span>treat <span class="ot">=</span> res</span>
+<span id="cb58-15"><a href="computer-practical-1.html#cb58-15" tabindex="-1"></a></span>
+<span id="cb58-16"><a href="computer-practical-1.html#cb58-16" tabindex="-1"></a><span class="do">## You can now investigate the balance of the design as usual</span></span></code></pre></div>
+</details>
 </div>
 <div id="a-simulation-experiment" class="section level3 hasAnchor" number="5.1.5">
 <h3><span class="header-section-number">A.1.5</span> A simulation experiment!<a href="computer-practical-1.html#a-simulation-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -766,78 +833,558 @@ Click for solution
 </div>
 <div id="cp1analysis" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">A.2</span> Analysis<a href="computer-practical-1.html#cp1analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For our analysis section, we will work with real datasets.</p>
+<p>For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we’ve covered in lectures. Both of these data sets are slightly awkward, as you will see, but that’s perhaps good practice for the real world!</p>
+<div id="polyps-data" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">A.2.1</span> Polyps data<a href="computer-practical-1.html#polyps-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first dataset concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in <span class="citation">Giardiello et al. (<a href="#ref-giardiello1993treatment">1993</a>)</span>.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-38" class="exercise"><strong>Exercise A.14  </strong></span>First of all let’s explore the dataset:</p>
+<ul>
+<li>Look at the help file for <code>polyps</code></li>
+<li>Which columns should you use for baseline and outcome variables?</li>
+<li>Plot the data in these columns. Do you see any issues? Can you suggest a way to address them? What effect will this have on our estimator of the treatment effect?</li>
+</ul>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>First of all, to access the data, enter</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="computer-practical-1.html#cb59-1" tabindex="-1"></a><span class="fu">data</span>(polyps)</span></code></pre></div>
+<p>You can then view the help file by entering <code>?polyps</code>.</p>
+<p>To investigate the columns in <code>polyps</code> we can use the structure function <code>str(polyps)</code></p>
+<p>We have the baseline number of polyps for each patient in the column <code>baseline</code>, and a sensible column to use for the outcome would be <code>number12m</code>. Other baseline variables are <code>sex</code> and <code>age</code>.</p>
+<p>To plot the baseline and outcome variables we can do</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="computer-practical-1.html#cb60-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>baseline)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="computer-practical-1.html#cb61-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>number12m)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-59-2.png" width="672" /></p>
+<p>These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you’d prefer to use natural logs that’s fine, some of your numbers will be different.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="computer-practical-1.html#cb62-1" tabindex="-1"></a>polyps<span class="sc">$</span>log_baseline <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>baseline)</span>
+<span id="cb62-2"><a href="computer-practical-1.html#cb62-2" tabindex="-1"></a>polyps<span class="sc">$</span>log_number12m <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>number12m)</span></code></pre></div>
+<p>Since we used the logarithms of the numbers of polyps, our treatment effect is
+<span class="math display">\[\log\left(X_T\right) - \log\left(X_C\right) = \log\left(\frac{X_T}{X_C}\right).\]</span></p>
+</details>
+<p>We will work through the tests as we did in lectures, to see how the results differ.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-39" class="exercise"><strong>Exercise A.15  </strong></span>Using just the outcome variable (which should be <code>log_number12m</code> or something similar, see solution above if you aren’t sure why), test the hypothesis that the Sulindac has had some effect.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>We can either do this the long way or the short way! For sanity’s purposes, we’ll do it the long way once, then in subsequent questions I’ll only show the short way in the solutions.</p>
+<p><strong>The long way</strong></p>
+<p>The first thing to do is to calculate means for each group:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="computer-practical-1.html#cb63-1" tabindex="-1"></a>polyps_df <span class="ot">=</span> <span class="fu">na.omit</span>(polyps) <span class="co"># two participants (001 and 018) don&#39;t have data for 12m, so remove these</span></span>
+<span id="cb63-2"><a href="computer-practical-1.html#cb63-2" tabindex="-1"></a>mean_T <span class="ot">=</span> <span class="fu">mean</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;sulindac&quot;</span>]) </span>
+<span id="cb63-3"><a href="computer-practical-1.html#cb63-3" tabindex="-1"></a>sd_T <span class="ot">=</span> <span class="fu">sd</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;sulindac&quot;</span>])</span>
+<span id="cb63-4"><a href="computer-practical-1.html#cb63-4" tabindex="-1"></a>mean_C <span class="ot">=</span> <span class="fu">mean</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;placebo&quot;</span>])</span>
+<span id="cb63-5"><a href="computer-practical-1.html#cb63-5" tabindex="-1"></a>sd_C <span class="ot">=</span> <span class="fu">sd</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;placebo&quot;</span>])</span>
+<span id="cb63-6"><a href="computer-practical-1.html#cb63-6" tabindex="-1"></a><span class="co"># There are 11 patients on Placebo (group C) and 9 on Sulindac (group T)</span></span>
+<span id="cb63-7"><a href="computer-practical-1.html#cb63-7" tabindex="-1"></a><span class="co"># The pooled standard deviation </span></span>
+<span id="cb63-8"><a href="computer-practical-1.html#cb63-8" tabindex="-1"></a>pooled_sd_polypsX <span class="ot">=</span> <span class="fu">sqrt</span>((<span class="dv">10</span><span class="sc">*</span>sd_C<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">8</span><span class="sc">*</span>sd_T<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">10</span><span class="sc">+</span><span class="dv">8</span>))</span>
+<span id="cb63-9"><a href="computer-practical-1.html#cb63-9" tabindex="-1"></a><span class="co"># Finally we find the test statistic</span></span>
+<span id="cb63-10"><a href="computer-practical-1.html#cb63-10" tabindex="-1"></a>test_stat <span class="ot">=</span> (mean_T <span class="sc">-</span> mean_C)<span class="sc">/</span>(pooled_sd_polypsX<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">11</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>))</span></code></pre></div>
+<p>Under <span class="math inline">\(H_0\)</span> (that there is no treatment effect) the test statistic follows a <span class="math inline">\(t_{18}\)</span> distribution, and therefore we find our <span class="math inline">\(p\)</span>-value by</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="computer-practical-1.html#cb64-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(test_stat, <span class="at">df=</span><span class="dv">18</span>)</span></code></pre></div>
+<pre><code>## [1] 0.001046571</code></pre>
+<p>Note that if the test statistic were positive, we’d have to do</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="computer-practical-1.html#cb66-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(test_stat, <span class="at">df=</span><span class="dv">18</span>))</span></code></pre></div>
+<p>Thus <span class="math inline">\(p=0.001\)</span> and we conclude that the treatment effect is significant. Our confidence interval is given by</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="computer-practical-1.html#cb67-1" tabindex="-1"></a>estimate <span class="ot">=</span> mean_T <span class="sc">-</span> mean_C</span>
+<span id="cb67-2"><a href="computer-practical-1.html#cb67-2" tabindex="-1"></a>error <span class="ot">=</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">18</span>)<span class="sc">*</span>pooled_sd_polypsX<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">11</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)</span>
+<span id="cb67-3"><a href="computer-practical-1.html#cb67-3" tabindex="-1"></a><span class="fu">c</span>(estimate <span class="sc">-</span> error, estimate <span class="sc">+</span> error)</span></code></pre></div>
+<pre><code>## [1] -1.2264748 -0.3678718</code></pre>
+<p><strong>The short way</strong></p>
+<p>R has a t-test function built in, so we can simply use that. Notice that it gives us everything our heart might desire (on a fairly mundane day), including a confidence interval!</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="computer-practical-1.html#cb69-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb69-2"><a href="computer-practical-1.html#cb69-2" tabindex="-1"></a>  <span class="at">x=</span>polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;sulindac&quot;</span>],</span>
+<span id="cb69-3"><a href="computer-practical-1.html#cb69-3" tabindex="-1"></a>  <span class="at">y=</span>polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;placebo&quot;</span>],</span>
+<span id="cb69-4"><a href="computer-practical-1.html#cb69-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb69-5"><a href="computer-practical-1.html#cb69-5" tabindex="-1"></a>  <span class="at">var.equal=</span>T, <span class="co"># this makes the method use pooled variances, as we did in lectures</span></span>
+<span id="cb69-6"><a href="computer-practical-1.html#cb69-6" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span> <span class="co"># note that this is 1-alpha</span></span>
+<span id="cb69-7"><a href="computer-practical-1.html#cb69-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  polyps_df$log_number12m[polyps_df$treatment == &quot;sulindac&quot;] and polyps_df$log_number12m[polyps_df$treatment == &quot;placebo&quot;]
+## t = -3.9012, df = 18, p-value = 0.001047
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.2264748 -0.3678718
+## sample estimates:
+## mean of x mean of y 
+## 0.6671373 1.4643106</code></pre>
+<p>Either way, our 95% confidence interval is (-1.226,;-0.368) (to 3 d.p).
+Therefore, the confidence interval for <span class="math inline">\(\frac{X_T}{X_C}\)</span> is</p>
+<p><span class="math display">\[\left(10^{-1.226},\;10^{-0.368}\right) =  \left(0.0594,\;0.429\right).\]</span>
+That is, the number of polyps at 12 months is likely to be somewhere between <span class="math inline">\(0.0594 X_C\)</span> and <span class="math inline">\(0.429 X_C\)</span>.</p>
+</details>
+<p>We’ll now move on to comparing the differences between baseline and outcome</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-40" class="exercise"><strong>Exercise A.16  </strong></span>Perform another <span class="math inline">\(t\)</span>-test, this time using the difference between outcome and baseline. <em>Hint: because we’ve taken logs, you’ll have to think about what variable to use and perhaps experiment with some possibilities</em></p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="computer-practical-1.html#cb71-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff <span class="ot">=</span> polyps_df<span class="sc">$</span>number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>baseline</span>
+<span id="cb71-2"><a href="computer-practical-1.html#cb71-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p>But the outliers look potentially problematic, and the central bulk of each distribution doesn’t look very normal. We could also try the difference of the logged measurements:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="computer-practical-1.html#cb72-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff_log <span class="ot">=</span> polyps_df<span class="sc">$</span>log_number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>log_baseline</span>
+<span id="cb72-2"><a href="computer-practical-1.html#cb72-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff_log, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p>This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won’t have a nice normal curve.</p>
+<p>To do a t-test, we can use R’s in-built function</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="computer-practical-1.html#cb73-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb73-2"><a href="computer-practical-1.html#cb73-2" tabindex="-1"></a>  <span class="at">x=</span>polyps_df<span class="sc">$</span>diff_log[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;sulindac&quot;</span>],</span>
+<span id="cb73-3"><a href="computer-practical-1.html#cb73-3" tabindex="-1"></a>  <span class="at">y=</span>polyps_df<span class="sc">$</span>diff_log[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;placebo&quot;</span>],</span>
+<span id="cb73-4"><a href="computer-practical-1.html#cb73-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb73-5"><a href="computer-practical-1.html#cb73-5" tabindex="-1"></a>  <span class="at">var.equal=</span>T, <span class="co"># this makes the method use pooled variances, as we did in lectures</span></span>
+<span id="cb73-6"><a href="computer-practical-1.html#cb73-6" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span> <span class="co"># note that this is 1-alpha</span></span>
+<span id="cb73-7"><a href="computer-practical-1.html#cb73-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  polyps_df$diff_log[polyps_df$treatment == &quot;sulindac&quot;] and polyps_df$diff_log[polyps_df$treatment == &quot;placebo&quot;]
+## t = -3.5142, df = 18, p-value = 0.002477
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.0242756 -0.2578053
+## sample estimates:
+##   mean of x   mean of y 
+## -0.58476481  0.05627565</code></pre>
+</details>
+<p>Finally we can try fitting an ANCOVA model to the data, using the function <code>lm</code>. Remember that the general model function for ANCOVA is….</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-41" class="exercise"><strong>Exercise A.17  </strong></span>Fit an ANCOVA model to the licorice data, and interpret your results. If you aren’t familiar with the function <code>lm</code>, it might be a good idea to look at the solutions.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>In the ANCOVA model we saw in lectures so far, we fit a linear model with the outcome as dependent / target variable, and the trial group and baseline as independent / explanatory variables.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="computer-practical-1.html#cb75-1" tabindex="-1"></a>lm_polyp1 <span class="ot">=</span> <span class="fu">lm</span>(log_number12m <span class="sc">~</span> treatment <span class="sc">+</span> log_baseline, <span class="at">data=</span>polyps_df)</span>
+<span id="cb75-2"><a href="computer-practical-1.html#cb75-2" tabindex="-1"></a><span class="fu">summary</span>(lm_polyp1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log_number12m ~ treatment + log_baseline, data = polyps_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.69628 -0.15530  0.04155  0.17288  0.68553 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         0.6291     0.2798   2.249 0.038084 *  
+## treatmentsulindac  -0.7046     0.1675  -4.205 0.000595 ***
+## log_baseline        0.5932     0.1824   3.251 0.004698 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3673 on 17 degrees of freedom
+## Multiple R-squared:  0.6659, Adjusted R-squared:  0.6266 
+## F-statistic: 16.94 on 2 and 17 DF,  p-value: 8.973e-05</code></pre>
+<p>Based on this, the effect of the drug sulindac is significant (<span class="math inline">\(p=0.00595\)</span>, lower than our previous models). The 95% CI for the treatment effect (which is still <span class="math inline">\(\log\left(\frac{X_T}{X_C}\right)\)</span>) now is</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="computer-practical-1.html#cb77-1" tabindex="-1"></a><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7046</span> <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">17</span>)<span class="sc">*</span><span class="fl">0.1675</span>, <span class="sc">-</span><span class="fl">0.7046</span> <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">17</span>)<span class="sc">*</span><span class="fl">0.1675</span> ) </span></code></pre></div>
+<pre><code>## [1] -1.0579941 -0.3512059</code></pre>
+</details>
+<p>Unlike in the <span class="math inline">\(t\)</span>-test where we can only compare measurements like-for-like, in ANCOVA we fit a coefficient to the baseline covariate. This means we are no longer limited to comparing the outcome variable to variables on the same scale, but can also include other baseline variables.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-42" class="exercise"><strong>Exercise A.18  </strong></span>Fit another linear model, this time including the other baseline variables.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="computer-practical-1.html#cb79-1" tabindex="-1"></a>lm_polyp2 <span class="ot">=</span> <span class="fu">lm</span>(log_number12m <span class="sc">~</span> treatment <span class="sc">+</span> log_baseline <span class="sc">+</span> sex <span class="sc">+</span> age, <span class="at">data =</span> polyps_df)</span>
+<span id="cb79-2"><a href="computer-practical-1.html#cb79-2" tabindex="-1"></a><span class="fu">summary</span>(lm_polyp2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log_number12m ~ treatment + log_baseline + sex + 
+##     age, data = polyps_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.59539 -0.32008  0.09788  0.17374  0.62089 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        0.888170   0.503801   1.763 0.098266 .  
+## treatmentsulindac -0.730464   0.177936  -4.105 0.000936 ***
+## log_baseline       0.495560   0.216900   2.285 0.037307 *  
+## sexmale            0.197442   0.201555   0.980 0.342821    
+## age               -0.009412   0.012205  -0.771 0.452620    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3779 on 15 degrees of freedom
+## Multiple R-squared:  0.688,  Adjusted R-squared:  0.6048 
+## F-statistic:  8.27 on 4 and 15 DF,  p-value: 0.0009895</code></pre>
+In this case it appears that the other two baseline covariates, age and sex, don’t have a significant effect on the outcome.
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-43" class="exercise"><strong>Exercise A.19  </strong></span>Inspect some plots of the residuals, to check whether these models have any systematic
+problems.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>These solutions will demonstrate some methods with the first model.
+First of all, we can add columns with the residuals and fitted values from the model.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="computer-practical-1.html#cb81-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>resid1 <span class="ot">=</span> <span class="fu">resid</span>(lm_polyp1)</span>
+<span id="cb81-2"><a href="computer-practical-1.html#cb81-2" tabindex="-1"></a>polyps_df<span class="sc">$</span>fitted1 <span class="ot">=</span> <span class="fu">fitted</span>(lm_polyp1)</span>
+<span id="cb81-3"><a href="computer-practical-1.html#cb81-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>fitted1, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="computer-practical-1.html#cb82-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>log_baseline, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-72-2.png" width="672" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="computer-practical-1.html#cb83-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>resid1, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-72-3.png" width="672" /></p>
+None of these ring huge alarm bells, but because the dataset is so small it’s quite hard to tell! Arguably the residuals for the <code>sulindac</code> group are more spread out than those for the plaecbo, but there are no obvious systematic trends.
+</details>
+</div>
+<div id="treatment-for-maternal-periodontal-disease" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">A.2.2</span> Treatment for maternal periodontal disease<a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This trial is reported in <span class="citation">Michalowicz et al. (<a href="#ref-michalowicz2006treatment">2006</a>)</span>. The data are in <code>opt</code>, which is in the package <code>medicaldata</code>, which you should already have loaded.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-44" class="exercise"><strong>Exercise A.20  </strong></span>Read the help file for this dataset. What does the study aim to investigate? What are the treatment groups? How many participants are there? How many variables are there? Which are the outcome variables?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>We can find this information using commands such as</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="computer-practical-1.html#cb84-1" tabindex="-1"></a><span class="fu">data</span>(opt)</span>
+<span id="cb84-2"><a href="computer-practical-1.html#cb84-2" tabindex="-1"></a><span class="fu">dim</span>(opt)</span></code></pre></div>
+<pre><code>## [1] 823 171</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="computer-practical-1.html#cb86-1" tabindex="-1"></a><span class="fu">str</span>(opt)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    823 obs. of  171 variables:
+##  $ PID                        : int  100034 100042 100067 100083 100091 100109 100117 100133 100141 100158 ...
+##  $ Clinic                     : Factor w/ 4 levels &quot;KY&quot;,&quot;MN&quot;,&quot;MS&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
+##  $ Group                      : Factor w/ 2 levels &quot;C&quot;,&quot;T&quot;: 1 1 2 1 1 2 2 1 2 2 ...
+##  $ Age                        : int  25 21 25 36 21 40 23 28 25 27 ...
+##  $ Black                      : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 2 2 1 2 1 1 2 2 2 2 ...
+##  $ White                      : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 1 2 1 2 1 1 1 1 1 ...
+##  $ Nat.Am                     : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Asian                      : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 1 1 1 1 2 1 1 1 1 ...
+##  $ Hisp                       : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 1 1 3 1 3 1 1 1 1 1 ...
+##  $ Education                  : Factor w/ 3 levels &quot;8-12 yrs &quot;,&quot;LT 8 yrs &quot;,..: 1 1 1 3 1 1 1 2 1 3 ...
+##  $ Public.Asstce              : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 2 1 2 1 1 2 1 1 1 ...
+##  $ Hypertension               : Factor w/ 2 levels &quot;N  &quot;,&quot;Y  &quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Diabetes                   : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ BL.Diab.Type               : Factor w/ 2 levels &quot;Type I    &quot;,&quot;Type II   &quot;: NA NA NA NA NA NA NA NA NA NA ...
+##  $ BMI                        : int  NA 21 24 36 27 24 32 NA 26 28 ...
+##  $ Use.Tob                    : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 3 2 2 2 2 2 2 2 2 2 ...
+##  $ BL.Cig.Day                 : int  5 NA NA NA NA NA NA NA NA NA ...
+##  $ Use.Alc                    : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ BL.Drks.Day                : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Drug.Add                   : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Prev.preg                  : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 2 2 2 1 1 2 2 2 1 ...
+##  $ N.prev.preg                : int  NA 5 2 4 NA NA 2 4 2 NA ...
+##  $ Live.PTB                   : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: NA 2 2 1 NA NA 1 1 1 NA ...
+##  $ Any.stillbirth             : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: NA 1 1 1 NA NA 1 1 1 NA ...
+##  $ Spont.ab                   : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: NA 2 1 3 NA NA 1 1 1 NA ...
+##  $ Induced.ab                 : Factor w/ 4 levels &quot;   &quot;,&quot;No&quot;,&quot;No &quot;,..: NA 4 1 4 NA NA 1 1 1 NA ...
+##  $ Any.live.ptb.sb.sp.ab.in.ab: Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: NA 2 2 2 NA NA 1 1 1 NA ...
+##  $ N.living.kids              : int  NA 2 1 2 NA NA 2 4 2 NA ...
+##  $ Tx.comp.                   : Factor w/ 4 levels &quot;   &quot;,&quot;No &quot;,&quot;Und&quot;,..: NA NA 3 NA NA 3 3 NA 3 3 ...
+##  $ Local.anes                 : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: NA NA 1 NA NA 1 1 NA 1 1 ...
+##  $ Topical.Anest              : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: NA NA 1 NA NA 2 2 NA 1 2 ...
+##  $ Tx.time                    : num  NA NA 1 NA NA ...
+##  $ EDC.necessary.             : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 1 3 2 3 1 3 2 3 1 ...
+##  $ Completed.EDC              : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: NA 1 3 NA 3 1 3 NA 3 1 ...
+##  $ N.extractions              : int  NA NA 0 NA 0 NA 1 NA 0 NA ...
+##  $ N.perm.restorations        : int  NA NA 1 NA 1 NA 0 NA 0 NA ...
+##  $ N.qualifying.teeth         : int  13 12 16 15 16 16 19 10 21 11 ...
+##  $ BL.GE                      : num  1.43 1.3 1.78 1.6 1.17 ...
+##  $ BL..BOP                    : num  48.2 79.8 80.2 100 94 ...
+##  $ BL.PD.avg                  : num  2.7 2.69 2.82 2.81 2.77 ...
+##  $ BL..PD.4                   : num  17.9 17.9 25.3 17.3 23.2 ...
+##  $ BL..PD.5                   : num  5.36 10.12 12.35 5.77 14.29 ...
+##  $ BL.CAL.avg                 : num  1.29 1.12 1.41 1.49 1.33 ...
+##  $ BL..CAL.2                  : num  38.2 25 42.6 38.3 40.5 ...
+##  $ BL..CAL.3                  : num  5.46 10.12 16.05 13.64 14.29 ...
+##  $ BL.Calc.I                  : num  1.028 0.861 0.972 2.083 1.111 ...
+##  $ BL.Pl.I                    : num  1.583 1.194 0.917 2.028 1.083 ...
+##  $ V3.GE                      : num  1.64 NA NA 1 1.76 ...
+##  $ V3..BOP                    : num  88.7 NA NA 99.4 72.6 ...
+##  $ V3.PD.avg                  : num  3 NA NA 3.66 2.74 ...
+##  $ V3..PD.4                   : num  27.4 NA NA 49.4 23.2 ...
+##  $ V3..PD.5                   : num  13.1 NA NA 26.9 13.1 ...
+##  $ V3.CAL.avg                 : num  1.56 NA NA 2.28 1.28 ...
+##  $ V3..CAL.2                  : num  46.1 NA NA 79.5 38.7 ...
+##  $ V3..CAL.3                  : num  17.4 NA NA 39.1 13.1 ...
+##  $ V3.Calc.I                  : num  1.111 NA NA 1.778 0.806 ...
+##  $ V3.Pl.I                    : num  0.917 NA NA 1.111 0.778 ...
+##  $ V5.GE                      : num  2.08 NA NA 1 1.84 ...
+##  $ V5..BOP                    : num  86.3 NA NA 99.4 56.5 ...
+##  $ V5.PD.avg                  : num  2.93 NA NA 3.66 2.79 ...
+##  $ V5..PD.4                   : num  23.2 NA NA 49.4 22 ...
+##  $ V5..PD.5                   : num  11.3 NA NA 26.9 13.7 ...
+##  $ V5.CAL.avg                 : num  1.5 NA NA 2.28 1.32 ...
+##  $ V5..CAL.2                  : num  44.6 NA NA 79.5 44 ...
+##  $ V5..CAL.3                  : num  13.1 NA NA 39.1 13.7 ...
+##  $ V5.Calc.I                  : num  1.11 NA NA 1.78 1 ...
+##  $ V5.Pl.I                    : num  1.64 NA NA 1.11 1.25 ...
+##  $ N.PAL.sites                : int  0 0 0 8 0 0 0 0 0 0 ...
+##  $ Birth.outcome              : Factor w/ 4 levels &quot;Elective abortion   &quot;,..: 2 2 2 2 2 2 2 2 2 4 ...
+##  $ Preg.ended...37.wk         : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 3 2 2 2 2 2 2 2 3 ...
+##  $ GA.at.outcome              : int  265 253 266 271 280 275 284 280 283 150 ...
+##  $ Birthweight                : int  3490 2350 2525 3650 3865 3120 3380 3100 3145 NA ...
+##  $ Fetal.congenital.anomaly   : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Apgar1                     : int  9 4 8 9 9 8 8 9 9 NA ...
+##  $ Apgar5                     : int  9 7 9 9 9 9 9 9 9 NA ...
+##  $ Any.SAE.                   : Factor w/ 2 levels &quot;No &quot;,&quot;Yes&quot;: 1 1 1 1 1 1 1 1 1 2 ...
+##  $ GA...1st.SAE               : int  259 259 259 259 259 259 259 259 259 150 ...
+##  $ Bact.vag                   : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Gest.diab                  : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 3 2 3 2 2 2 2 2 2 2 ...
+##  $ Oligo                      : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 3 2 2 2 2 2 2 2 ...
+##  $ Polyhyd                    : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Gonorrhea                  : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 1 2 1 1 2 2 1 1 1 1 ...
+##  $ Chlamydia                  : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 1 3 1 1 2 2 1 1 1 1 ...
+##  $ Strep.B                    : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 1 1 1 1 1 3 1 1 1 1 ...
+##  $ Traumatic.Inj              : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ UTI                        : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Pre.eclamp                 : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Mom.HIV.status             : Factor w/ 3 levels &quot;   &quot;,&quot;No &quot;,&quot;Yes&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ BL.Anti.inf                : int  0 0 0 1 0 0 0 0 0 0 ...
+##  $ BL.Cortico                 : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ BL.Antibio                 : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ BL.Bac.vag                 : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ V3.Anti.inf                : int  0 NA NA 1 0 NA 1 NA 0 NA ...
+##  $ V3.Cortico                 : int  0 NA NA 0 0 NA 0 NA 0 NA ...
+##  $ V3.Antibio                 : int  0 NA NA 0 0 NA 0 NA 0 NA ...
+##  $ V3.Bac.vag                 : int  0 NA NA 0 0 NA 0 NA 0 NA ...
+##  $ V5.Anti.inf                : int  0 NA NA 0 NA NA 1 NA 0 NA ...
+##  $ V5.Cortico                 : int  0 NA NA 0 NA NA 0 NA 0 NA ...
+##  $ V5.Antibio                 : int  0 NA NA 0 NA NA 0 NA 0 NA ...
+##   [list output truncated]</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="computer-practical-1.html#cb88-1" tabindex="-1"></a>?opt</span></code></pre></div>
+<p>The aim of the study is to find out whether treating women for periodontal disease during the first 21 weeks of pregnancy resulted in a low birth weight or pre-term birth.</p>
+<p>The groups are stored in the <code>group</code> variable</p>
+<ul>
+<li><code>group</code> T: those who received periodontal treatment, and tooth polishing at their follow-ups</li>
+<li><code>group</code> C: Brief oral exams</li>
+</ul>
+<p>There are 823 participants and 171 variables - many of these are baseline covariates, but there are also quite a few interim measurements.</p>
+<p>The study’s primary outcome variable is gestational age at end of pregnancy, but birth weight was also measured, as well as some clinical measures of periodontal disease and some microbiological and immunological outcomes.</p>
+</details>
+<p>To make this more managable, we will concentrate on the outcome <code>Birthweight</code>.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-45" class="exercise"><strong>Exercise A.21  </strong></span>Plot the variable <code>Birthweight</code>. Do we need to use any transformations before we model it?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="computer-practical-1.html#cb89-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt, <span class="fu">aes</span>(<span class="at">x=</span>Birthweight, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-74-1.png" width="672" />
+This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won’t transform it.
+</details>
+<p>We’ll reduce the dataset to a more managable size, by removing all outcomes except <code>Birthweight</code> and reducing the number of covariates. We’ll also alter a couple of factor levels to make the data work with the linear model (the main source of difficulty is that lots of variables are coded <code>NA</code> when really there is information).</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="computer-practical-1.html#cb90-1" tabindex="-1"></a>opt_red <span class="ot">=</span> opt[ ,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>,<span class="dv">72</span>)] </span>
+<span id="cb90-2"><a href="computer-practical-1.html#cb90-2" tabindex="-1"></a><span class="co"># Change NAs to &quot;None&quot; for diabetic</span></span>
+<span id="cb90-3"><a href="computer-practical-1.html#cb90-3" tabindex="-1"></a><span class="co"># since in opt the non-diabetic people are coded as NA (and therefore excluded from the model)</span></span>
+<span id="cb90-4"><a href="computer-practical-1.html#cb90-4" tabindex="-1"></a>diab <span class="ot">=</span> <span class="fu">as.character</span>(opt_red<span class="sc">$</span>BL.Diab.Type)</span>
+<span id="cb90-5"><a href="computer-practical-1.html#cb90-5" tabindex="-1"></a>diab[<span class="fu">is.na</span>(diab)] <span class="ot">=</span> <span class="st">&quot;None&quot;</span></span>
+<span id="cb90-6"><a href="computer-practical-1.html#cb90-6" tabindex="-1"></a>opt_red<span class="sc">$</span>BL.Diab.Type <span class="ot">=</span> <span class="fu">as.factor</span>(diab)</span>
+<span id="cb90-7"><a href="computer-practical-1.html#cb90-7" tabindex="-1"></a><span class="co"># similar problem with smokers and how many cigarettes per day</span></span>
+<span id="cb90-8"><a href="computer-practical-1.html#cb90-8" tabindex="-1"></a></span>
+<span id="cb90-9"><a href="computer-practical-1.html#cb90-9" tabindex="-1"></a><span class="co"># If people are non-smokers and have missing for number of cigarettes per day</span></span>
+<span id="cb90-10"><a href="computer-practical-1.html#cb90-10" tabindex="-1"></a><span class="co"># change their number of cigarettes to zero</span></span>
+<span id="cb90-11"><a href="computer-practical-1.html#cb90-11" tabindex="-1"></a>sm <span class="ot">=</span> opt_red<span class="sc">$</span>Use.Tob</span>
+<span id="cb90-12"><a href="computer-practical-1.html#cb90-12" tabindex="-1"></a>cigs <span class="ot">=</span> opt_red<span class="sc">$</span>BL.Cig.Day</span>
+<span id="cb90-13"><a href="computer-practical-1.html#cb90-13" tabindex="-1"></a>cigs[(<span class="fu">is.na</span>(cigs)<span class="sc">&amp;</span>(sm<span class="sc">==</span><span class="st">&quot;No &quot;</span>))] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb90-14"><a href="computer-practical-1.html#cb90-14" tabindex="-1"></a>opt_red<span class="sc">$</span>BL.Cig.Day <span class="ot">=</span> cigs</span>
+<span id="cb90-15"><a href="computer-practical-1.html#cb90-15" tabindex="-1"></a></span>
+<span id="cb90-16"><a href="computer-practical-1.html#cb90-16" tabindex="-1"></a><span class="co"># Same for alcohol and drinks per day</span></span>
+<span id="cb90-17"><a href="computer-practical-1.html#cb90-17" tabindex="-1"></a></span>
+<span id="cb90-18"><a href="computer-practical-1.html#cb90-18" tabindex="-1"></a>alc <span class="ot">=</span> opt_red<span class="sc">$</span>Use.Alc</span>
+<span id="cb90-19"><a href="computer-practical-1.html#cb90-19" tabindex="-1"></a>dr <span class="ot">=</span> opt_red<span class="sc">$</span>BL.Drks.Day</span>
+<span id="cb90-20"><a href="computer-practical-1.html#cb90-20" tabindex="-1"></a>dr[(<span class="fu">is.na</span>(dr)<span class="sc">&amp;</span>(alc<span class="sc">==</span><span class="st">&quot;No &quot;</span>))] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb90-21"><a href="computer-practical-1.html#cb90-21" tabindex="-1"></a>opt_red<span class="sc">$</span>BL.Drks.Day <span class="ot">=</span> dr</span>
+<span id="cb90-22"><a href="computer-practical-1.html#cb90-22" tabindex="-1"></a></span>
+<span id="cb90-23"><a href="computer-practical-1.html#cb90-23" tabindex="-1"></a><span class="co"># If a participant hasn&#39;t had a previous pregnancy, her N.prev.preg should be zero (not NA)</span></span>
+<span id="cb90-24"><a href="computer-practical-1.html#cb90-24" tabindex="-1"></a></span>
+<span id="cb90-25"><a href="computer-practical-1.html#cb90-25" tabindex="-1"></a>pp <span class="ot">=</span> opt_red<span class="sc">$</span>Prev.preg</span>
+<span id="cb90-26"><a href="computer-practical-1.html#cb90-26" tabindex="-1"></a>npp <span class="ot">=</span> opt_red<span class="sc">$</span>N.prev.preg</span>
+<span id="cb90-27"><a href="computer-practical-1.html#cb90-27" tabindex="-1"></a>npp[pp<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb90-28"><a href="computer-practical-1.html#cb90-28" tabindex="-1"></a>opt_red<span class="sc">$</span>N.prev.preg <span class="ot">=</span> npp</span></code></pre></div>
+<p>When we use <code>lm</code> to fit an ANCOVA model, all rows with an <code>NA</code> in will be ignored. It’s therefore important to try to eradicate any <code>NA</code>s where we actually do know the value!</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-46" class="exercise"><strong>Exercise A.22  </strong></span>Perform a <span class="math inline">\(t\)</span>-test on the outcome <code>Birthweight</code>. What do you find? Can you also perform a <span class="math inline">\(t\)</span>-test using difference from baseline?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>To perform the <span class="math inline">\(t\)</span>-test we can use the inbuilt R function</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="computer-practical-1.html#cb91-1" tabindex="-1"></a><span class="co"># Check SDs are fairly close before proceeding</span></span>
+<span id="cb91-2"><a href="computer-practical-1.html#cb91-2" tabindex="-1"></a><span class="fu">sd</span>(opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;T&quot;</span>], <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>## [1] 636.82</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="computer-practical-1.html#cb93-1" tabindex="-1"></a><span class="fu">sd</span>(opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;C&quot;</span>], <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>## [1] 727.4854</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="computer-practical-1.html#cb95-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb95-2"><a href="computer-practical-1.html#cb95-2" tabindex="-1"></a>  <span class="at">x=</span>opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;T&quot;</span>],</span>
+<span id="cb95-3"><a href="computer-practical-1.html#cb95-3" tabindex="-1"></a>  <span class="at">y=</span>opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;C&quot;</span>],</span>
+<span id="cb95-4"><a href="computer-practical-1.html#cb95-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb95-5"><a href="computer-practical-1.html#cb95-5" tabindex="-1"></a>  <span class="at">var.equal=</span>T, <span class="co"># this makes the method use pooled variances, as we did in lectures</span></span>
+<span id="cb95-6"><a href="computer-practical-1.html#cb95-6" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span> <span class="co"># note that this is 1-alpha</span></span>
+<span id="cb95-7"><a href="computer-practical-1.html#cb95-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  opt_red$Birthweight[opt_red$Group == &quot;T&quot;] and opt_red$Birthweight[opt_red$Group == &quot;C&quot;]
+## t = 0.74585, df = 807, p-value = 0.456
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -58.49266 130.18492
+## sample estimates:
+## mean of x mean of y 
+##  3216.670  3180.824</code></pre>
+<p>We find that the difference in Birthweights between the groups is not even close to significant (<span class="math inline">\(p=0.456\)</span>).</p>
+<p>We can’t do a <span class="math inline">\(t\)</span>-test with differences because there is no comparable baseline measurement.</p>
+</details>
+<p>Now we will move on to ANCOVA.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-47" class="exercise"><strong>Exercise A.23  </strong></span>Before fitting the model, think about what you expect to find. Bear in mind:</p>
+<ul>
+<li>the result above</li>
+<li>the description of risk factors of preterm birth / low birth weight in the help file for <code>opt</code></li>
+<li>which variables you will include in your model</li>
+</ul>
+<p>You might want to explore some correlations in the data set</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>The <span class="math inline">\(p\)</span>-value from the <span class="math inline">\(t\)</span>-test was very high, so it seems unlikely that we’ll find a significant treatment effect using ANCOVA unless there are some significant interactions going on between covariates.</p>
+<p>The help file says (under ‘Background’):</p>
+<blockquote>
+<p>Many risk factors for preterm birth have already been identified, including maternal age, drug use, and diabetes. However, such factors are exhibited in only about half of preterm birth mothers, highlighting a need to expand our understanding of what contributes to preterm birth risk.</p>
+</blockquote>
+<p>Therefore, if we include related factors in our model (many of which we have in our dataset) we should expect to see significant coefficients. But, it sounds like there is a lot that isn’t well understood, so our model is likely not to explain a huge proportion of the variance.</p>
+<p>If you wanted to explore correlations, you could for example try</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="computer-practical-1.html#cb97-1" tabindex="-1"></a><span class="fu">cor</span>(opt_red<span class="sc">$</span>Birthweight, opt_red<span class="sc">$</span>Age, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.02496128</code></pre>
+<p>though this will only work with numerical variables.</p>
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-48" class="exercise"><strong>Exercise A.24  </strong></span>Fit an ANCOVA model. What do you find?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>To fit a linear model including every variable as a covariate (apart from the target variable), we can do</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="computer-practical-1.html#cb99-1" tabindex="-1"></a>lm_full <span class="ot">=</span> <span class="fu">lm</span>(Birthweight <span class="sc">~</span> ., <span class="at">data =</span> opt_red[ ,<span class="sc">-</span><span class="dv">1</span>]) <span class="co"># don&#39;t include the ID column!</span></span>
+<span id="cb99-2"><a href="computer-practical-1.html#cb99-2" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Birthweight ~ ., data = opt_red[, -1])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -3019.46  -233.35    46.89   382.82  1935.06 
+## 
+## Coefficients: (1 not defined because of singularities)
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            3906.439    702.835   5.558 3.91e-08 ***
+## ClinicMN                -57.521     73.391  -0.784  0.43345    
+## ClinicMS               -173.068     88.189  -1.962  0.05011 .  
+## ClinicNY               -146.548    100.180  -1.463  0.14397    
+## GroupT                   28.780     49.914   0.577  0.56440    
+## Age                      -1.686      5.417  -0.311  0.75572    
+## BlackYes               -158.055    127.807  -1.237  0.21664    
+## WhiteYes                -47.195    100.791  -0.468  0.63976    
+## Nat.AmYes              -224.757    112.946  -1.990  0.04699 *  
+## AsianYes               -142.693    301.298  -0.474  0.63594    
+## HispNo                  133.343     75.097   1.776  0.07624 .  
+## HispYes                 126.498    115.009   1.100  0.27177    
+## EducationLT 8 yrs       -43.324     70.513  -0.614  0.53915    
+## EducationMT 12 yrs       23.011     66.301   0.347  0.72864    
+## Public.AsstceYes       -144.623     62.886  -2.300  0.02176 *  
+## HypertensionY          -372.548    148.033  -2.517  0.01207 *  
+## DiabetesYes             443.811    170.343   2.605  0.00938 ** 
+## BL.Diab.TypeType I     -425.019    318.490  -1.334  0.18249    
+## BL.Diab.TypeType II          NA         NA      NA       NA    
+## BMI                       2.124      3.857   0.551  0.58206    
+## Use.TobYes              -17.794    134.088  -0.133  0.89446    
+## BL.Cig.Day              -23.101     11.560  -1.998  0.04607 *  
+## Use.AlcYes             -159.827    223.653  -0.715  0.47509    
+## BL.Drks.Day              28.460     24.851   1.145  0.25252    
+## Drug.AddNo             -498.971    659.330  -0.757  0.44944    
+## Drug.AddYes            -475.778    806.745  -0.590  0.55555    
+## Prev.pregYes             85.355     70.825   1.205  0.22856    
+## N.prev.preg             -17.281     18.228  -0.948  0.34345    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 653.6 on 686 degrees of freedom
+##   (110 observations deleted due to missingness)
+## Multiple R-squared:  0.06774,    Adjusted R-squared:  0.03241 
+## F-statistic: 1.917 on 26 and 686 DF,  p-value: 0.004183</code></pre>
+<p>We see from the model summary that our model is terrible: <span class="math inline">\(R^2=0.03241\)</span>, which means it is explaining about 3% of the variance in Birthweight.</p>
+<p>If you want to use only certain terms, you can include them in the formula, for example</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="computer-practical-1.html#cb101-1" tabindex="-1"></a>lm_eg <span class="ot">=</span> <span class="fu">lm</span>(Birthweight <span class="sc">~</span> Group <span class="sc">+</span> Age <span class="sc">+</span> Hypertension, <span class="at">data=</span>opt_red)</span></code></pre></div>
+We see that, as we expected, the <code>Group</code> variable is not significant (<span class="math inline">\(p=0.5644\)</span>). However, some terms are significant, for example whether or not the participant has diabetes, and how many cigarettes a mother smokes per day.
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-49" class="exercise"><strong>Exercise A.25  </strong></span>Perform some diagnostic checks on your model. Do you have any reason to suspect it isn’t adequate?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>There are lots of checks we can do, and we will focus on studying the residuals. If the residuals of our model appear to be homoskedastic, approximately normal with mean 0, and we can’t find any trends, then our model is OK.</p>
+<p>The first step is to extract the residuals and the fitted values (which are also useful). We will create a new data frame called <code>opt_diag</code> with these in, so that we can plot things easily but don’t pollute our original dataset (in case we want to fit any more models)</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="computer-practical-1.html#cb102-1" tabindex="-1"></a>opt_diag <span class="ot">=</span> <span class="fu">na.omit</span>(opt_red) <span class="co"># lm only fits where all variables are present</span></span>
+<span id="cb102-2"><a href="computer-practical-1.html#cb102-2" tabindex="-1"></a>opt_diag<span class="sc">$</span>resid <span class="ot">=</span> <span class="fu">resid</span>(lm_full)</span>
+<span id="cb102-3"><a href="computer-practical-1.html#cb102-3" tabindex="-1"></a>opt_diag<span class="sc">$</span>fitted <span class="ot">=</span> <span class="fu">fitted</span>(lm_full)</span></code></pre></div>
+<p>Some examples of plots are</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="computer-practical-1.html#cb103-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>resid, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="computer-practical-1.html#cb104-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>fitted, <span class="at">y=</span>resid, <span class="at">col=</span>Group)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-81-2.png" width="672" /></p>
+<p>We could also see if there are any patterns in the data that weren’t included in the model, because one or more entries were <code>NA</code></p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="computer-practical-1.html#cb105-1" tabindex="-1"></a>exc_ind <span class="ot">=</span> <span class="sc">!</span>(opt_red<span class="sc">$</span>PID <span class="sc">%in%</span> opt_diag<span class="sc">$</span>PID)</span>
+<span id="cb105-2"><a href="computer-practical-1.html#cb105-2" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="computer-practical-1.html#cb105-3" tabindex="-1"></a>opt_exc <span class="ot">=</span> opt_red[exc_ind, ]</span>
+<span id="cb105-4"><a href="computer-practical-1.html#cb105-4" tabindex="-1"></a><span class="co"># we can check this has worked by doing</span></span>
+<span id="cb105-5"><a href="computer-practical-1.html#cb105-5" tabindex="-1"></a><span class="fu">nrow</span>(opt_exc) <span class="co"># should be the difference between nrow(opt_red) and nrow(opt_diag)</span></span></code></pre></div>
+<pre><code>## [1] 110</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="computer-practical-1.html#cb107-1" tabindex="-1"></a><span class="fu">na.omit</span>(opt_exc) <span class="co"># should be empty, since each row should have at least one NA</span></span></code></pre></div>
+<pre><code>##  [1] PID           Clinic        Group         Age           Black         White         Nat.Am        Asian        
+##  [9] Hisp          Education     Public.Asstce Hypertension  Diabetes      BL.Diab.Type  BMI           Use.Tob      
+## [17] BL.Cig.Day    Use.Alc       BL.Drks.Day   Drug.Add      Prev.preg     N.prev.preg   Birthweight  
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>For example, by comparing summary statistics</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="computer-practical-1.html#cb109-1" tabindex="-1"></a><span class="fu">summary</span>(opt_diag<span class="sc">$</span>Birthweight)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     101    2950    3265    3198    3580    5150</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="computer-practical-1.html#cb111-1" tabindex="-1"></a><span class="fu">summary</span>(opt_exc<span class="sc">$</span>Birthweight)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##     246    3038    3262    3204    3554    5160      14</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="computer-practical-1.html#cb113-1" tabindex="-1"></a><span class="fu">sd</span>(opt_exc<span class="sc">$</span>Birthweight, <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>## [1] 813.831</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="computer-practical-1.html#cb115-1" tabindex="-1"></a><span class="fu">sd</span>(opt_diag<span class="sc">$</span>Birthweight, <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>## [1] 664.4378</code></pre>
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-50" class="exercise"><strong>Exercise A.26  </strong></span>Given the results of your ANCOVA model, what do you think the risks would be if the study had been much smaller, or if the allocation had not been well-balanced?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<p>In this case, it would be possible for the baseline factors that did turn out to be significant to make it appear that the treatment had a significant effect. This wouldn’t be possible with ANCOVA, but it would with a <span class="math inline">\(t\)</span>-test in which the other covariates aren’t considered.</p>
+</details>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Altman, Douglas G. 1990. <em>Practical Statistics for Medical Research</em>. CRC press.
-</div>
-<div class="csl-entry">
-Altman, Douglas G, and J Martin Bland. 1999. <span>“Treatment Allocation in Controlled Trials: Why Randomise?”</span> <em>Bmj</em> 318 (7192): 1209–9.
-</div>
-<div class="csl-entry">
-Cottingham, Marci D, and Jill A Fisher. 2022. <span>“Gendered Logics of Biomedical Research: Women in US Phase i Clinical Trials.”</span> <em>Social Problems</em> 69 (2): 492–509.
-</div>
-<div class="csl-entry">
-Efron, Bradley. 1971. <span>“Forcing a Sequential Experiment to Be Balanced.”</span> <em>Biometrika</em> 58 (3): 403–17.
-</div>
-<div class="csl-entry">
-Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of Pleural Effusions in Patients with Breast Cancer a Randomized Trial.”</span> <em>Cancer</em> 52 (4): 737–39.
-</div>
-<div class="csl-entry">
-Freedman, LS, and Susan J White. 1976. <span>“On the Use of Pocock and Simon’s Method for Balancing Treatment Numbers over Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 691–94.
-</div>
-<div class="csl-entry">
-Hayes, Richard J, and Lawrence H Moulton. 2017. <em>Cluster Randomised Trials</em>. CRC press.
-</div>
-<div class="csl-entry">
-Health, National Institute of. 2023. <span>“History of Women’s Participation in Clinical Research.”</span> Office of Research on Women’s Health. https://orwh. od. nih. gov/toolkit …. <a href="https://orwh.od.nih.gov/toolkit/recruitment/history">https://orwh.od.nih.gov/toolkit/recruitment/history</a>.
-</div>
-<div class="csl-entry">
-Hjalmas, Hanson, and Kruse Hellstrom. 1998. <span>“Long‐term Treatment with Desmopressin in Children with Primary Monosymptomatic Nocturnal Enuresis: An Open Multicentre Study.”</span> <em>British Journal of Urology</em>.
-</div>
-<div class="csl-entry">
-Hommel, EHEBMJ, Hans-Henrik Parving, Elisabeth Mathiesen, Berit Edsberg, M Damkjaer Nielsen, and Jørn Giese. 1986. <span>“Effect of Captopril on Kidney Function in Insulin-Dependent Diabetic Patients with Nephropathy.”</span> <em>Br Med J (Clin Res Ed)</em> 293 (6545): 467–70.
-</div>
-<div class="csl-entry">
-Hulley, Stephen B, Steven R. Cummings, Warren S. Browner, Deborah G. Grady, and Thomas B. Newman. 2013. <em>Designing Clinical Research, Fourth Edition</em>. Lippincott Williams &amp; Wilkins.
-</div>
-<div class="csl-entry">
-Kallis, P, JA Tooze, S Talbot, D Cowans, DH Bevan, and T Treasure. 1994. <span>“Pre-Operative Aspirin Decreases Platelet Aggregation and Increases Post-Operative Blood Loss–a Prospective, Randomised, Placebo Controlled, Double-Blind Clinical Trial in 100 Patients with Chronic Stable Angina.”</span> <em>European Journal of Cardio-Thoracic Surgery: Official Journal of the European Association for Cardio-Thoracic Surgery</em> 8 (8): 404–9.
-</div>
-<div class="csl-entry">
-Kar, Sumit, Ajay Krishnan, Preetha K, and Atul Mohankar. 2012. <span>“A Review of Antihistamines Used During Pregnancy.”</span> <em>Journal of Pharmacology and Pharmacotherapeutics</em> 3 (2): 105–8.
-</div>
-<div class="csl-entry">
-Kassambara, Alboukadel. 2019. <em>Datarium: Data Bank for Statistical Analysis and Visualization</em>. <a href="https://CRAN.R-project.org/package=datarium">https://CRAN.R-project.org/package=datarium</a>.
-</div>
-<div class="csl-entry">
-Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
-</div>
-<div class="csl-entry">
-Pocock, Stuart J, and Richard Simon. 1975. <span>“Sequential Treatment Assignment with Balancing for Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 103–15.
-</div>
-<div class="csl-entry">
-Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskron, Andrea Lassnigg, Jing You, and Daniel I Sessler. 2013. <span>“A Randomized, Double-Blind Comparison of Licorice Versus Sugar-Water Gargle for Prevention of Postoperative Sore Throat and Postextubation Coughing.”</span> <em>Anesthesia &amp; Analgesia</em> 117 (3): 614–21.
-</div>
-<div class="csl-entry">
-Taves, Donald R. 1974. <span>“Minimization: A New Method of Assigning Patients to Treatment and Control Groups.”</span> <em>Clinical Pharmacology &amp; Therapeutics</em> 15 (5): 443–53.
-</div>
-<div class="csl-entry">
-Treasure, Tom, and Kenneth D MacRae. 1998. <span>“Minimisation: The Platinum Standard for Trials?: Randomisation Doesn’t Guarantee Similarity of Groups; Minimisation Does.”</span> <em>Bmj</em>. British Medical Journal Publishing Group.
-</div>
-<div class="csl-entry">
-Villar, Jesús, Carlos Ferrando, Domingo Martı́nez, Alfonso Ambrós, Tomás Muñoz, Juan A Soler, Gerardo Aguilar, et al. 2020. <span>“Dexamethasone Treatment for the Acute Respiratory Distress Syndrome: A Multicentre, Randomised Controlled Trial.”</span> <em>The Lancet Respiratory Medicine</em> 8 (3): 267–76.
-</div>
-<div class="csl-entry">
-Vitale, Cristiana, Massimo Fini, Ilaria Spoletini, Mitja Lainscak, Petar Seferovic, and Giuseppe MC Rosano. 2017. <span>“Under-Representation of Elderly and Women in Clinical Trials.”</span> <em>International Journal of Cardiology</em> 232: 216–21.
-</div>
-<div class="csl-entry">
-Wei, LJ. 1978. <span>“An Application of an Urn Model to the Design of Sequential Controlled Clinical Trials.”</span> <em>Journal of the American Statistical Association</em> 73 (363): 559–63.
-</div>
-<div class="csl-entry">
-Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Controlled Trial?”</span> <em>Journal of Thoracic Disease</em> 1 (1): 51.
-</div>
 </div>
 </div>
 </div>
@@ -845,6 +1392,12 @@ Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Contr
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-efron1971forcing" class="csl-entry">
 Efron, Bradley. 1971. <span>“Forcing a Sequential Experiment to Be Balanced.”</span> <em>Biometrika</em> 58 (3): 403–17.
+</div>
+<div id="ref-giardiello1993treatment" class="csl-entry">
+Giardiello, Francis M, Stanley R Hamilton, Anne J Krush, Steven Piantadosi, Linda M Hylind, Paul Celano, Susan V Booker, C Rahj Robinson, and G Johan A Offerhaus. 1993. <span>“Treatment of Colonic and Rectal Adenomas with Sulindac in Familial Adenomatous Polyposis.”</span> <em>New England Journal of Medicine</em> 328 (18): 1313–16.
+</div>
+<div id="ref-michalowicz2006treatment" class="csl-entry">
+Michalowicz, Bryan S, James S Hodges, Anthony J DiAngelis, Virginia R Lupo, M John Novak, James E Ferguson, William Buchanan, et al. 2006. <span>“Treatment of Periodontal Disease and the Risk of Preterm Birth.”</span> <em>New England Journal of Medicine</em> 355 (18): 1885–94.
 </div>
 <div id="ref-ruetzler2013randomized" class="csl-entry">
 Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskron, Andrea Lassnigg, Jing You, and Daniel I Sessler. 2013. <span>“A Randomized, Double-Blind Comparison of Licorice Versus Sugar-Water Gargle for Prevention of Postoperative Sore Throat and Postextubation Coughing.”</span> <em>Anesthesia &amp; Analgesia</em> 117 (3): 614–21.
@@ -855,8 +1408,8 @@ Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskr
           </div>
         </div>
       </div>
-<a href="references.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="rct-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
