@@ -508,6 +508,7 @@ marg_imbalance = function(
     alloc, # name of allocation column
     factors # names of prognostic factors to be included
     ){
+  df = as.data.frame(df) # deals with tibbles
   n_fact = length(factors) # the numbers of factors
   imb_sum=0                # a running total of imbalance
   for (i in 1:n_fact){     # loop through the factors 
@@ -519,6 +520,7 @@ marg_imbalance = function(
       # df_ij contains just those entries with level j of factor i
       df_ij = df[df[ ,ind_i]==levels_i[j] , ] 
       imb_ij = imbalance(df=df_ij, alloc=alloc) # find the imbalance for the sub-data-frame in which factor i has level j
+      imb_sum = imb_sum + imb_ij
     }
   }
   imb_sum

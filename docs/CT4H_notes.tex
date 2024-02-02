@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-01-31}
+\date{2024-02-02}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1103,8 +1103,8 @@ possible blocks of size 6. Instead of always selecting from the six possible 4-b
 
 As well as ensuring that patients are equally likely to receive treatments \(A\) and \(B\), and that \(N_A\) and \(N_B\) can never differ by more than three, this method hugely reduces the possibility of enabling selection bias. The assignment of a patient can only be perfectly predicted if the difference is three, and this happens only for two of the twenty blocks of length six.
 
-\hypertarget{biased-coin-designs-and-urn-schemes}{%
-\subsection{Biased coin designs and urn schemes}\label{biased-coin-designs-and-urn-schemes}}
+\hypertarget{bcurn}{%
+\subsection{Biased coin designs and urn schemes}\label{bcurn}}
 
 It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.
 
@@ -2038,7 +2038,7 @@ Therefore, using the result we just found,
 \]
 Notice that unlike our first estimator that used baseline values, in Section \ref{baseline}, the variance of the ANCOVA estimate can never exceed \(\frac{2\sigma^2}{N}\); if the baseline and outcome are uncorrelated, ANCOVA will perform as well as a \(t\)-test.
 
-\citet{borm2007simple} discusses how this reduction in \(\operatorname{var\left(\hat{\tau}\right)}\) can impact our sample size calculations.
+\citet{borm2007simple} discuss how this reduction in \(\operatorname{var\left(\hat{\tau}\right)}\) can impact our sample size calculations.
 
 \hypertarget{the-practice}{%
 \subsection{The practice}\label{the-practice}}
@@ -2048,7 +2048,7 @@ In the previous section we established an unbiased estimate of the treatment eff
 \begin{itemize}
 \tightlist
 \item
-  Our estimate for \(\tau\) relies on the correlation \(\lambda\), which is unknown
+  Our estimate for \(\tau\) relies on the correlation \(\rho\), which is unknown
 \item
   In real life, the groups are unlikely to have equal size and variance, so ideally we'd lose these constraints
 \end{itemize}
@@ -2132,8 +2132,8 @@ For our previous methods we have calculated a confidence interval for the treatm
 
 \(7.178\; \pm\; t_{0.975;13}\times{2.964} = \left(0.775,\; 13.580\right).\)
 
-The model has \(n-p=13\) degrees of freedom because there are \(n=16\) data points and are estimating \(p=3\) parameters.
-Notice that unlike our previous confidence intervals, this doesn't contain zero, and so our analysis has enabled us to conclude that there is a significant reduction in blood pressure with Captopril. However, you can tell from the width of the interval that there is still a lot of uncertainty about \(\tau\).
+The model has \(n-p=13\) degrees of freedom because there are \(n=16\) data points and we are estimating \(p=3\) parameters.
+Notice that unlike our previous confidence intervals, this doesn't contain zero, and so our analysis has enabled us to conclude that there is a significant reduction in blood pressure with Captopril. You can also see this in that \(p=0.03079<0.05\). However, you can tell from the width of the interval (and the fact that \(p\) is still quite close to 0.05) that there is still a lot of uncertainty about \(\tau\).
 
 The `Residual standard error' term near the bottom of the linear model summary is the estimate of \(\hat{\sigma}\), so here we have \(\hat{\sigma}^2 = 5.869^2 = 34.44.\)
 
@@ -2154,7 +2154,7 @@ As with any fitted model, we should check the residuals.
 
 \includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf}
 
-These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it's difficult really to assess the fit of the model. In our practical, we'll work with a more realistic dataset.
+These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it's difficult really to assess the fit of the model.
 \end{example}
 
 \hypertarget{some-follow-up-questions.}{%
@@ -2231,7 +2231,7 @@ We see that the \(p\)-value for the coefficient \(\lambda\) (seen in the \texttt
 \hypertarget{can-we-include-any-other-baseline-covariates}{%
 \subsection{Can we include any other baseline covariates?}\label{can-we-include-any-other-baseline-covariates}}
 
-In Section \ref{baseline} when our estimated treatment effect was \(\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)\), we could the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome \(X\). However, in ANCOVA, our treatment effect is
+In Section \ref{baseline} when our estimated treatment effect was \(\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)\), the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome \(X\). However, in ANCOVA, our treatment effect is
 
 \[ \hat\tau = \left(\bar{x}_T - \bar{x}_C\right) - \hat\gamma\left(\bar{b}_T - \bar{b}_C\right), \]
 and the inclusion of the coefficient \(\gamma\) means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation (hence they are sometimes known as \emph{baseline covariates}, not to be confused with `the baseline', which would generally mean the same measurement as the primary outcome, but before treatment). This is because they cannot, at that point, have been affected by the treatment, or have had an influence on the post-trial outcome measurement. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.
@@ -2386,7 +2386,7 @@ no & high & 57.9 & 3.381321\\
 \hline
 \end{tabular}
 
-Fitting a linear model, we see that treatment, high levels of exercise and age have an effect on stress.
+Fitting a linear model, we see that treatment, high levels of exercise and age each have a significant effect on stress.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2425,6 +2425,88 @@ We can plot the residuals to check that the model is a reasonable fit
 
 \includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf}
 \end{example}
+
+And these look reasonably OK. We could also test for interactions, firstly across all factors:
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = score ~ (treatment + exercise + age):(treatment + 
+##     exercise + age), data = stress)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.5637 -3.3982  0.4173  2.3827 10.3907 
+## 
+## Coefficients:
+##                               Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)                   61.25416   19.86949   3.083  0.00333 **
+## treatmentno                    3.89781   24.16324   0.161  0.87250   
+## exercisemoderate             -14.60897   24.31690  -0.601  0.55070   
+## exercisehigh                 -12.03441   29.53812  -0.407  0.68544   
+## age                            0.43121    0.32097   1.343  0.18518   
+## treatmentno:exercisemoderate  -0.20723    3.35949  -0.062  0.95106   
+## treatmentno:exercisehigh       8.12783    3.72077   2.184  0.03365 * 
+## treatmentno:age               -0.03769    0.38851  -0.097  0.92311   
+## exercisemoderate:age           0.24286    0.40215   0.604  0.54864   
+## exercisehigh:age              -0.03524    0.50722  -0.069  0.94488   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.106 on 50 degrees of freedom
+## Multiple R-squared:  0.6647, Adjusted R-squared:  0.6043 
+## F-statistic: 11.01 on 9 and 50 DF,  p-value: 3.181e-09
+\end{verbatim}
+
+and then restricted to the interactions that seem important:
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = score ~ treatment + exercise + age + treatment:exercise, 
+##     data = stress)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.3250 -3.0192  0.2745  2.4650 10.6667 
+## 
+## Coefficients:
+##                               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                   56.79090   10.41383   5.453 1.32e-06 ***
+## treatmentno                    1.52858    2.23026   0.685   0.4961    
+## exercisemoderate               0.01746    2.25662   0.008   0.9939    
+## exercisehigh                 -13.70331    2.36314  -5.799 3.78e-07 ***
+## age                            0.50355    0.16684   3.018   0.0039 ** 
+## treatmentno:exercisemoderate   0.15503    3.16129   0.049   0.9611    
+## treatmentno:exercisehigh       8.21822    3.15375   2.606   0.0119 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.985 on 53 degrees of freedom
+## Multiple R-squared:  0.6613, Adjusted R-squared:  0.623 
+## F-statistic: 17.25 on 6 and 53 DF,  p-value: 6.167e-11
+\end{verbatim}
+
+Notice that now, the effect of the treatment on its own is not significant. Also notice that for both the linear exercise terms and the interactions between the exercise and treatment, the effects of moderate and low exercise are very similar.
+Combining the coefficients, someone who does a high level of exercise:
+
+\begin{itemize}
+\tightlist
+\item
+  is likely to reduce their stress score by 13.7 if they receive the treatment
+\item
+  is likely to reduce their stress score by \(13.7 - 8.2 = 5.5\) if they don't receive the treatment
+\end{itemize}
+
+Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.
+
+:::
+
+\hypertarget{conclusion}{%
+\subsection*{Conclusion}\label{conclusion}}
+\addcontentsline{toc}{subsection}{Conclusion}
+
+That draws to a close our work with continuous outcome variables. In the next lecture, we'll start thinking about binary outcome variables.
 
 \hypertarget{references}{%
 \chapter*{References}\label{references}}
