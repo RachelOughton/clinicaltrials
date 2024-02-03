@@ -683,12 +683,12 @@ library(rmarkdown)
 paged_table(stress)
 ```
 
-The table below shows the mean and standard deviation of age for each combination of treatment and exercise level. If we were being picky / thorough, we might note that (perhaps unsurprisingly!) the mean and standard deviation of age are both lower in the high exercise groups. This might well affect our analysis, but we won't go into this now.
+Table \@ref(tab:sumstress) shows the mean and standard deviation of age for each combination of treatment and exercise level. If we were being picky / thorough, we might note that (perhaps unsurprisingly!) the mean and standard deviation of age are both lower in the high exercise groups. This might well affect our analysis, but we won't go into this now.
 
-```{r}
+```{r sumstress}
 library(dplyr)
 summary_stress = stress %>% group_by(treatment, exercise) %>% dplyr::summarize(mean = mean(age), sd= sd(age))
-knitr::kable(summary_stress)
+knitr::kable(summary_stress, caption = "Summary of the stress dataset", col.names = c("Treatment", "Exercise", "Mean age", "SD age"))
 ```
 
 Fitting a linear model, we see that treatment, high levels of exercise and age each have a significant effect on stress.

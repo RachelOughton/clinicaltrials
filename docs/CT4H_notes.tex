@@ -2366,11 +2366,15 @@ id & score & treatment & exercise & age\\
 \hline
 \end{tabular}
 
-The table below shows the mean and standard deviation of age for each combination of treatment and exercise level. If we were being picky / thorough, we might note that (perhaps unsurprisingly!) the mean and standard deviation of age are both lower in the high exercise groups. This might well affect our analysis, but we won't go into this now.
+Table \ref{tab:sumstress} shows the mean and standard deviation of age for each combination of treatment and exercise level. If we were being picky / thorough, we might note that (perhaps unsurprisingly!) the mean and standard deviation of age are both lower in the high exercise groups. This might well affect our analysis, but we won't go into this now.
 
-\begin{tabular}{l|l|r|r}
+\begin{table}
+
+\caption{\label{tab:sumstress}Summary of the stress dataset}
+\centering
+\begin{tabular}[t]{l|l|r|r}
 \hline
-treatment & exercise & mean & sd\\
+Treatment & Exercise & Mean age & SD age\\
 \hline
 yes & low & 61.7 & 4.691600\\
 \hline
@@ -2385,6 +2389,7 @@ no & moderate & 61.4 & 5.947922\\
 no & high & 57.9 & 3.381321\\
 \hline
 \end{tabular}
+\end{table}
 
 Fitting a linear model, we see that treatment, high levels of exercise and age each have a significant effect on stress.
 
@@ -2423,7 +2428,7 @@ In particular, taking a high level of exercise reduced participants' stress scor
 
 We can plot the residuals to check that the model is a reasonable fit
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-20-1.pdf}
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-19-1.pdf}
 \end{example}
 
 And these look reasonably OK. We could also test for interactions, firstly across all factors:

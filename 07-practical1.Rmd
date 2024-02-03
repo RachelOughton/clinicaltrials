@@ -700,7 +700,7 @@ First of all let's explore the dataset:
 First of all, to access the data, enter
 
 ```{r, echo=T}
-data(polyps)
+data(polyps, package = "medicaldata")
 ```
 
 You can then view the help file by entering `?polyps`.
