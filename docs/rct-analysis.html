@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-03" />
+<meta name="date" content="2024-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -253,7 +253,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
 <li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
-<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -1144,7 +1144,6 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 <p>In particular, taking a high level of exercise reduced participants’ stress scores by around 9.6, and the treatment reduced stress scores by around 4.3. Participants’ stress scores increased slightly with age (just under half a point per year!).</p>
 <p>We can plot the residuals to check that the model is a reasonable fit</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-</div>
 <p>And these look reasonably OK. We could also test for interactions, firstly across all factors:</p>
 <pre><code>## 
 ## Call:
@@ -1205,10 +1204,13 @@ Combining the coefficients, someone who does a high level of exercise:</p>
 <li>is likely to reduce their stress score by <span class="math inline">\(13.7 - 8.2 = 5.5\)</span> if they don’t receive the treatment</li>
 </ul>
 <p>Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.</p>
-<p>:::</p>
 </div>
-<div id="conclusion" class="section level3 unnumbered hasAnchor">
-<h3>Conclusion<a href="rct-analysis.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="an-important-caution" class="section level3 unnumbered hasAnchor">
+<h3>An important caution!<a href="rct-analysis.html#an-important-caution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As you’ll have seen if you read <span class="citation">Kendall (<a href="#ref-kendall2003designing">2003</a>)</span> (for formative assignment 1), we should have everything in place, including a statistical analysis plan, <strong>before</strong> the trial. We should already know which covariates we plan to include in our model, and how. ‘Trawling’ for the best possible model by trying lots of different things (and inevitably settling on the one that leads to the most significant conclusion) is poor practice, and can increase the type I error rate (<span class="math inline">\(\alpha\)</span>).</p>
+<p>I realise that is sort of what we’ve done in this Section on Analysis, but that was to demonstrate and compare the different methods. Proceeding in the way we have, trying lots of different models, when analysing and writing up a trial would be very poor practice!</p>
+<p>There’s another excellent episode of the JAMA Evidence podcast, with a focus on adjusting for covariates, that talks about this issue (you can find it <a href="https://edhub.ama-assn.org/jn-learning/audio-player/18836864">here</a> and linked from Ultra).</p>
 <p>That draws to a close our work with continuous outcome variables. In the next lecture, we’ll start thinking about binary outcome variables.</p>
 
 </div>
@@ -1227,6 +1229,9 @@ Hommel, EHEBMJ, Hans-Henrik Parving, Elisabeth Mathiesen, Berit Edsberg, M Damkj
 </div>
 <div id="ref-datarium" class="csl-entry">
 Kassambara, Alboukadel. 2019. <em>Datarium: Data Bank for Statistical Analysis and Visualization</em>. <a href="https://CRAN.R-project.org/package=datarium">https://CRAN.R-project.org/package=datarium</a>.
+</div>
+<div id="ref-kendall2003designing" class="csl-entry">
+Kendall, John. 2003. <span>“Designing a Research Project: Randomised Controlled Trials and Their Principles.”</span> <em>Emergency Medicine Journal: EMJ</em> 20 (2): 164.
 </div>
 <div id="ref-matthews2006introduction" class="csl-entry">
 Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.

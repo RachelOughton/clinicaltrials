@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-02-02}
+\date{2024-02-04}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2429,7 +2429,6 @@ In particular, taking a high level of exercise reduced participants' stress scor
 We can plot the residuals to check that the model is a reasonable fit
 
 \includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-19-1.pdf}
-\end{example}
 
 And these look reasonably OK. We could also test for interactions, firstly across all factors:
 
@@ -2504,12 +2503,17 @@ Combining the coefficients, someone who does a high level of exercise:
 \end{itemize}
 
 Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.
+\end{example}
 
-:::
+\hypertarget{an-important-caution}{%
+\subsection*{An important caution!}\label{an-important-caution}}
+\addcontentsline{toc}{subsection}{An important caution!}
 
-\hypertarget{conclusion}{%
-\subsection*{Conclusion}\label{conclusion}}
-\addcontentsline{toc}{subsection}{Conclusion}
+As you'll have seen if you read \citet{kendall2003designing} (for formative assignment 1), we should have everything in place, including a statistical analysis plan, \textbf{before} the trial. We should already know which covariates we plan to include in our model, and how. `Trawling' for the best possible model by trying lots of different things (and inevitably settling on the one that leads to the most significant conclusion) is poor practice, and can increase the type I error rate (\(\alpha\)).
+
+I realise that is sort of what we've done in this Section on Analysis, but that was to demonstrate and compare the different methods. Proceeding in the way we have, trying lots of different models, when analysing and writing up a trial would be very poor practice!
+
+There's another excellent episode of the JAMA Evidence podcast, with a focus on adjusting for covariates, that talks about this issue (you can find it \href{https://edhub.ama-assn.org/jn-learning/audio-player/18836864}{here} and linked from Ultra).
 
 That draws to a close our work with continuous outcome variables. In the next lecture, we'll start thinking about binary outcome variables.
 

@@ -718,7 +718,7 @@ ggplot(data=stress_sum, aes(x=fitted, y=resid, col=treatment)) +
 
 ```
 
-:::
+
 
 
 And these look reasonably OK. We could also test for interactions, firstly across all factors:
@@ -749,6 +749,12 @@ Returning to our initial look at the dataset, the fact that age is a factor, and
 
 :::
 
-### Conclusion {-}
+### An important caution! {-}
+
+As you'll have seen if you read @kendall2003designing (for formative assignment 1), we should have everything in place, including a statistical analysis plan, **before** the trial. We should already know which covariates we plan to include in our model, and how. 'Trawling' for the best possible model by trying lots of different things (and inevitably settling on the one that leads to the most significant conclusion) is poor practice, and can increase the type I error rate ($\alpha$). 
+
+I realise that is sort of what we've done in this Section on Analysis, but that was to demonstrate and compare the different methods. Proceeding in the way we have, trying lots of different models, when analysing and writing up a trial would be very poor practice!
+
+There's another excellent episode of the JAMA Evidence podcast, with a focus on adjusting for covariates, that talks about this issue (you can find it [here](https://edhub.ama-assn.org/jn-learning/audio-player/18836864) and linked from Ultra). 
 
 That draws to a close our work with continuous outcome variables. In the next lecture, we'll start thinking about binary outcome variables.

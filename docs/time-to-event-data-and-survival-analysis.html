@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-03" />
+<meta name="date" content="2024-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -277,7 +277,8 @@ div.csl-indent {
 <li class="chapter" data-level="5.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>5.4</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>5.4.1</b> What does this model tell us?</a></li>
-<li class="chapter" data-level="5.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>5.4.2</b> Diagnostics for logistic regression</a></li>
+<li class="chapter" data-level="5.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#fitting-a-linear-regression-model"><i class="fa fa-check"></i><b>5.4.2</b> Fitting a linear regression model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>5.4.3</b> Diagnostics for logistic regression</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html"><i class="fa fa-check"></i><b>6</b> Time-to-event data and Survival Analysis</a>
@@ -313,6 +314,7 @@ div.csl-indent {
 <li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -356,7 +358,7 @@ Figure 6.1: An example of some censored data.
 <p><span class="math display">\[F\left(t\right) = P\left(T&lt;t\right) = \int\limits_0^t f\left(u\right)du, \]</span>
 and this gives us the probability that the survival time is less than <span class="math inline">\(t\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-36" class="definition"><strong>Definition 6.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
+<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 6.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
 Conventionally we plot <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> against <span class="math inline">\(t\)</span> and this gives us a <strong>survival curve</strong>.</p>
 </div>
 <p>We can immediately say two things about the survival curve:</p>
@@ -373,7 +375,7 @@ Figure 6.2: An example of two survival curves, taken from <span class="citation"
 </div>
 <p>The Survival function is fairly intuitive, but the <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is less so.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-37" class="definition"><strong>Definition 6.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous failure probability at time <span class="math inline">\(t\)</span>.</p>
+<p><span id="def:unlabeled-div-36" class="definition"><strong>Definition 6.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous failure probability at time <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>If we use <span class="math inline">\(T\)</span> to denote the random variable of survival time (or time-to-event) then <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> and <span class="math inline">\(h(t)\)</span> are defined by</p>
 <p><span class="math display">\[
@@ -405,7 +407,7 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 <div class="example">
 <p><span id="exm:surveg1" class="example"><strong>Example 6.1  </strong></span><span class="citation">Edmonson et al. (<a href="#ref-edmonson1979prognosis">1979</a>)</span> conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide with a mixture of cyclophosphamide and adriamycin. Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-51">Table 6.1: </span>Ovarian cancer data. $ exttt{FU_time}$ gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
+<caption><span id="tab:unnamed-chunk-48">Table 6.1: </span>Ovarian cancer data. $ exttt{FU_time}$ gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -549,7 +551,7 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 <p>We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
 We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-52">Table 6.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
+<caption><span id="tab:unnamed-chunk-49">Table 6.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
 <thead>
 <tr class="header">
 <th align="right">time</th>
@@ -666,7 +668,7 @@ Figure 6.3: Kaplan-Meier estimate of survival curve for ovarian cancer data.
 and mean survival time <span class="math inline">\(\frac{1}{\lambda}\)</span>.</p>
 <p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well. A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-38" class="definition"><strong>Definition 6.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span id="def:unlabeled-div-37" class="definition"><strong>Definition 6.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
 <p><span class="math display">\[
 f\left(x\mid \lambda,\,k\right) =
 \begin{cases}
@@ -717,7 +719,7 @@ The variance of the MLE is</p>
 </ol>
 <p>Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-39" class="example"><strong>Example 6.2  </strong></span>Returning to the dataset from Example <a href="time-to-event-data-and-survival-analysis.html#exm:surveg1">6.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
+<p><span id="exm:unlabeled-div-38" class="example"><strong>Example 6.2  </strong></span>Returning to the dataset from Example <a href="time-to-event-data-and-survival-analysis.html#exm:surveg1">6.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
 <p><span class="math display">\[
 \begin{aligned}
 \hat{\lambda} &amp;= \frac{m}{\sum\limits_{i=1}^n t_i}\\
@@ -730,7 +732,7 @@ The variance of the MLE is</p>
 <span id="cb37-3"><a href="time-to-event-data-and-survival-analysis.html#cb37-3" tabindex="-1"></a>lambda_hat <span class="ot">=</span> m_eg <span class="sc">/</span> sum_time</span>
 <span id="cb37-4"><a href="time-to-event-data-and-survival-analysis.html#cb37-4" tabindex="-1"></a><span class="fu">round</span>(lambda_hat,<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.00077</code></pre>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 </div>
 </div>

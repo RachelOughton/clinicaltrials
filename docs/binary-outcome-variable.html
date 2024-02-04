@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-03" />
+<meta name="date" content="2024-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -277,7 +277,8 @@ div.csl-indent {
 <li class="chapter" data-level="5.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>5.4</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>5.4.1</b> What does this model tell us?</a></li>
-<li class="chapter" data-level="5.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>5.4.2</b> Diagnostics for logistic regression</a></li>
+<li class="chapter" data-level="5.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#fitting-a-linear-regression-model"><i class="fa fa-check"></i><b>5.4.2</b> Fitting a linear regression model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>5.4.3</b> Diagnostics for logistic regression</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html"><i class="fa fa-check"></i><b>6</b> Time-to-event data and Survival Analysis</a>
@@ -313,6 +314,7 @@ div.csl-indent {
 <li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -487,7 +489,7 @@ and in calculations we replace <span class="math inline">\(\pi\)</span> with <sp
 <p>Putting all this together, our test statistic is</p>
 <p><span class="math display">\[Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 5.2  </strong></span>The data in this example comes from <span class="citation">al (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
+<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 5.2  </strong></span>The data in this example comes from <span class="citation">Marshall (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
 <pre><code>##               improved
 ## arm            FALSE TRUE
 ##   Streptomycin    17   38
@@ -641,7 +643,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="5.3.1.1">
 <h4><span class="header-section-number">5.3.1.1</span> What if the difference is not significant?<a href="binary-outcome-variable.html#what-if-the-difference-is-not-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -690,7 +692,7 @@ which does not pose a problem. However, as indicated by the 95% confidence inter
 <p><span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right), \]</span>
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals.</p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p><span class="citation">Altman (<a href="#ref-altman1998confidence">1998</a>)</span> (<a href="https://www.bmj.com/content/bmj/317/7168/1309.full.pdf">available here</a>) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!</p>
 </div>
 <div id="problems-with-the-confidence-interval-for-the-ard" class="section level4 unnumbered hasAnchor">
@@ -715,7 +717,7 @@ whereas the limits to the Newcombe 95% CI will be the roots of</p>
 which work out to be</p>
 <pre><code>## [1] 0.003539259 0.104954436</code></pre>
 <p>Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <div class="example">
 <p><span id="exm:unlabeled-div-29" class="example"><strong>Example 5.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
 <p><span class="math display">\[\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.\]</span>
@@ -726,19 +728,20 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.5687797 0.8130385</code></pre>
 <p>We can see this graphically</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>Notice that the interval with the new method is now asymmetrical, which is more realistic.</p>
 <p>Similarly for the control proportion <span class="math inline">\(\pi_C\)</span>, we have <span class="math inline">\(p_C = \frac{17}{52},\; n_C=52\)</span>, and our Newcombe interval is</p>
 <pre><code>## [1] 0.2152207 0.4624381</code></pre>
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.1994256 0.4544205</code></pre>
 <p>Again, we can see this graphically.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 </div>
 <div id="generalising-this-to-two-cases" class="section level4 hasAnchor" number="5.3.1.2">
 <h4><span class="header-section-number">5.3.1.2</span> Generalising this to two cases<a href="binary-outcome-variable.html#generalising-this-to-two-cases" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calcualting a confidence interval for the difference in two proportions. You’ll be relieved to hear that there is such a method, and we’ll give a sketch here of how it works.</p>
+<p>What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You’ll be relieved to hear that there is such a method, and we’ll give a sketch here of how it works.</p>
+<p>The limits of the ‘standard method’ confidence interval at significance level <span class="math inline">\(\alpha\)</span> are given by</p>
 <p><span class="math display" id="eq:ardci">\[\begin{equation}
 \left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right).
 \tag{5.5}
@@ -775,6 +778,7 @@ Our <span class="math inline">\(95\%\)</span> confidence interval is therefore</
 \]</span>
 This is skewed somewhat lower than our standard CI of <span class="math inline">\(\left(0.187,\;0.541\right).\)</span></p>
 </div>
+
 </div>
 </div>
 <div id="risk-ratio-rr-and-odds-ratio-or" class="section level3 hasAnchor" number="5.3.2">
@@ -821,7 +825,7 @@ The natural way to estimate this is with the sample proportions</p>
 <p><span class="math display">\[\log\left(\frac{p_T}{p_C}\right) = \log\left(p_T\right) - \log\left(p_C\right).\]</span>
 These estimated proportions should be approximately normal and independent of one another, and so <span class="math inline">\(\log\left(\frac{p_T}{p_C}\right)\)</span> is approximately normal with mean <span class="math inline">\(\phi\)</span> (the true value) and variance</p>
 <p><span class="math display">\[\operatorname{var}\left(\log\left(p_T\right)\right) + \operatorname{var}\left(\log\left(p_C\right)\right). \]</span>
-We can now apply the Delta method (see section @ref(#delta-method)) to find that (using Equation <a href="binary-outcome-variable.html#eq:delta3">(5.3)</a>)</p>
+We can now apply the Delta method (see section <a href="binary-outcome-variable.html#delta-method">5.1.1</a>) to find that (using Equation <a href="binary-outcome-variable.html#eq:delta3">(5.3)</a>)</p>
 <p><span class="math display">\[\operatorname{var}\left[\log\left(p_T\right)\right] = \operatorname{var}\left[\log\left(\frac{r_T}{n_T}\right)\right] \approx \frac{\pi_T\left(1-\pi_T\right)}{n_T}\times{\left(\frac{1}{\pi_T}\right)^2} = \frac{1}{n_T\pi_T} - \frac{1}{n_T}. \]</span>
 Since we estimate <span class="math inline">\(\pi_T\)</span> by <span class="math inline">\(r_T/n_T\)</span> this can be estimated by <span class="math inline">\(r_T^{-1} - n_T^{-1}\)</span>. Notice that we are relying on the derivative of <span class="math inline">\(\log\left(x\right)\)</span> being <span class="math inline">\(x^{-1}\)</span>, so we must always use natural logarithms.</p>
 <p>This leads us to the result that, approximately</p>
@@ -843,9 +847,6 @@ n_C &amp; = 52
 and so the limits of the confidence interval (with <span class="math inline">\(\alpha=0.05\)</span>) on the log scale are</p>
 <p><span class="math display">\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\frac{1}{38} - \frac{1}{55} + \frac{1}{17} - \frac{1}{52}} = \log(2.11) \pm 1.96 \times 0.218\]</span></p>
 <p>which gives us <span class="math inline">\(\left(0.320,\,1.176\right)\)</span> on the log scale, and a 95% CI for the risk ratio of <span class="math inline">\(\left(1.377,\,3.243\right)\)</span>.</p>
-</div>
-<div class="exercise">
-<p><span id="exr:unlabeled-div-33" class="exercise"><strong>Exercise 5.1  </strong></span><em>This will be in the next formative assignment.</em> Following the same logic, derive a confidence interval for the Odds ratio. Calculate a 95% CI for the odds ratio for the Streptomycin example, and comment on the values.</p>
 </div>
 </div>
 <div id="summary" class="section level4 unnumbered hasAnchor">
@@ -890,10 +891,14 @@ Subtracting one from the other, we find</p>
 &amp;= \tau.
 \end{aligned}
 \]</span></p>
-<p>That is, <span class="math inline">\(\tau\)</span> is the log of the odds ratio, or <span class="math inline">\(e^\tau\)</span> is the odds ratio of success in group <span class="math inline">\(T\)</span> relative to group <span class="math inline">\(C\)</span>, adjusted for variables <span class="math inline">\(x_1,\;\ldots,\;x_p\)</span>. Put another way, while the baseline covariates <span class="math inline">\(x_1,\ldots,x_p\)</span> affect the probability of ‘success’ (or whatever our binary outcome’s one means), <span class="math inline">\(\tau\)</span> is a measure of the effect of the treatment compared to control given some set of baseline covariate values. The coefficients are estimated using maximum likelihood, but since we will generally be using R (which will fit them for us!) we won’t go into the details.</p>
+<p>That is, <span class="math inline">\(\tau\)</span> is the log of the odds ratio, or <span class="math inline">\(e^\tau\)</span> is the odds ratio of success in group <span class="math inline">\(T\)</span> relative to group <span class="math inline">\(C\)</span>, adjusted for variables <span class="math inline">\(x_1,\;\ldots,\;x_p\)</span>. Put another way, while the baseline covariates <span class="math inline">\(x_1,\ldots,x_p\)</span> affect the probability of ‘success’ (or whatever our binary outcome’s one means), <span class="math inline">\(\tau\)</span> is a measure of the effect of the treatment compared to control given some set of baseline covariate values. The coefficients are estimated using maximum likelihood.</p>
 </div>
-<div id="diagnostics-for-logistic-regression" class="section level3 hasAnchor" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> Diagnostics for logistic regression<a href="binary-outcome-variable.html#diagnostics-for-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fitting-a-linear-regression-model" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Fitting a linear regression model<a href="binary-outcome-variable.html#fitting-a-linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>p112 of Matthews</p>
+</div>
+<div id="diagnostics-for-logistic-regression" class="section level3 hasAnchor" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Diagnostics for logistic regression<a href="binary-outcome-variable.html#diagnostics-for-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One thing that is quite tricky with logistic regression is diagnosing whether the model is appropriate. In theory there are several places where the logistic regression model could fall down:</p>
 <ul>
 <li>The link function - we’ve used the logit function, but other functions that map <span class="math inline">\(\left[0,1\right]\)</span> to <span class="math inline">\(\mathbb{R}\)</span> are available.</li>
@@ -904,7 +909,7 @@ Subtracting one from the other, we find</p>
 <p>It is the second that is likely to be the most problematic, and we will explore now a couple of ways to check. There are many diagnostic techniques for binomial data (see eg. <span class="citation">Collett (<a href="#ref-collett_bin">2003a</a>)</span>) but we will only touch on a small number.</p>
 <p>If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-34" class="example"><strong>Example 5.10  </strong></span>This study is detailed in <span class="citation">Elmunzer et al. (<a href="#ref-elmunzer2012randomized">2012</a>)</span>. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication.</p>
+<p><span id="exm:unlabeled-div-33" class="example"><strong>Example 5.10  </strong></span>This study is detailed in <span class="citation">Elmunzer et al. (<a href="#ref-elmunzer2012randomized">2012</a>)</span>. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication.</p>
 <p>The dataset contains 33 variables, but we will focus on a small number:</p>
 <ul>
 <li><span class="math inline">\(X\)</span>: (primary outcome) - incidence of post-ercp pancreatitis 0 (no), 1 (yes).</li>
@@ -913,10 +918,10 @@ Subtracting one from the other, we find</p>
 <li>Risk: Risk score (1 to 5). Should be factor but treated as continuous.</li>
 </ul>
 <p>The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the <span class="math inline">\(x\)</span> axis and colour points by treatment group. The circles show the estimates from the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
-<div id="separation-plots" class="section level4 hasAnchor" number="5.4.2.1">
-<h4><span class="header-section-number">5.4.2.1</span> Separation plots<a href="binary-outcome-variable.html#separation-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="separation-plots" class="section level4 hasAnchor" number="5.4.3.1">
+<h4><span class="header-section-number">5.4.3.1</span> Separation plots<a href="binary-outcome-variable.html#separation-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In a linear regression, we can plot the residual (the true value minus the fitted value) to see whether it fits our modelling assumptions that it should be normally distributed and independent of the fitted values and of all covariates. In a logistic regression model, our actual values are 0 and 1, and we have no error term. The uncertainty in the model comes from the fact that it is estimating probabilities (via the logit link function) rather than directly modelling the outcome.</p>
 <p>Separation plots are an attempt to visualise each piece of data against the model. The dataset is reordered according to the fitted value of the probability, and the fitted probability is plotted as a line. A vertical line (red, in the <code>separationplot</code> package) is drawn for every point where the outcome is 1, and a different coloured line (beige in <code>separationplot</code>) for every outcome that is 0. There are two main useful things the plot can show you:</p>
 <ol style="list-style-type: decimal">
@@ -949,7 +954,7 @@ Subtracting one from the other, we find</p>
 <span class="math display">\[\hat{\beta_i} \pm z_{\alpha/2}\sqrt{\hat{v_i}},\]</span>
 where <span class="math inline">\(\hat\beta_i\)</span> is the estimated coefficient of covariate <span class="math inline">\(i\)</span>, and <span class="math inline">\(\sqrt{\hat{v}_i}\)</span> is the standard error of the estimate. This can then be transformed into a confidence interval for the odds ratio.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-35" class="example"><strong>Example 5.11  </strong></span>The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:</p>
+<p><span id="exm:unlabeled-div-34" class="example"><strong>Example 5.11  </strong></span>The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:</p>
 <ul>
 <li>sex</li>
 <li>age</li>
@@ -1054,9 +1059,6 @@ and the estimated probability of having ‘good’ symptom status at four months
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-strep_tb" class="csl-entry">
-al, Geoffrey Marshall et. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUBERCULOSIS a MEDICAL RESEARCH COUNCIL INVESTIGATION.”</span> <em>British Medical Journal</em>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf</a>.
-</div>
 <div id="ref-altman1998confidence" class="csl-entry">
 ———. 1998. <span>“Confidence Intervals for the Number Needed to Treat.”</span> <em>Bmj</em> 317 (7168): 1309–12.
 </div>
@@ -1065,6 +1067,9 @@ Collett, David. 2003a. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statisti
 </div>
 <div id="ref-elmunzer2012randomized" class="csl-entry">
 Elmunzer, B Joseph, James M Scheiman, Glen A Lehman, Amitabh Chak, Patrick Mosler, Peter DR Higgins, Rodney A Hayward, et al. 2012. <span>“A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.”</span> <em>New England Journal of Medicine</em> 366 (15): 1414–22.
+</div>
+<div id="ref-strep_tb" class="csl-entry">
+Marshall, Geoffrey. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUBERCULOSIS a MEDICAL RESEARCH COUNCIL INVESTIGATION.”</span> <em>British Medical Journal</em>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf</a>.
 </div>
 <div id="ref-newcombe1998interval" class="csl-entry">
 Newcombe, Robert G. 1998. <span>“Interval Estimation for the Difference Between Independent Proportions: Comparison of Eleven Methods.”</span> <em>Statistics in Medicine</em> 17 (8): 873–90.
