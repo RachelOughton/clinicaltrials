@@ -718,10 +718,9 @@ ggplot(data=stress_sum, aes(x=fitted, y=resid, col=treatment)) +
 
 ```
 
+The first thing we notice is that the data are sort of 'clumped'. This is common in factor models, especially where one or more factors is highly influential. Working from right to left (higher fitted stress score to lower), the highest clump (in blue) are those who do moderate or low levels of exercise and didn't receive the treatment. The next clump (in red) are those who do moderate or low levels of exercise and did receive the treatment (their stress score is around 4.3 points lower, for the same age). The next clump, in blue, are those who do high levels of exercise and didn't receive the treatment. Their scores are around 9.6 points lower than the low/moderate exercise groups who didn't receive treatment. Finally, the lowest scoring group are those who do high levels of exercise and did receive the treatment. We see that some clumps aren't really centred around zero, and this should raise alarm bells. 
 
-
-
-And these look reasonably OK. We could also test for interactions, firstly across all factors:
+We could also test for interactions, firstly across all factors:
 
 ```{r}
 lm_stressint = lm(score ~ (treatment + exercise + age):(treatment + exercise + age), data = stress)

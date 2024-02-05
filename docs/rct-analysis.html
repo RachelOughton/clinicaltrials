@@ -1144,7 +1144,8 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 <p>In particular, taking a high level of exercise reduced participants’ stress scores by around 9.6, and the treatment reduced stress scores by around 4.3. Participants’ stress scores increased slightly with age (just under half a point per year!).</p>
 <p>We can plot the residuals to check that the model is a reasonable fit</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<p>And these look reasonably OK. We could also test for interactions, firstly across all factors:</p>
+<p>The first thing we notice is that the data are sort of ‘clumped’. This is common in factor models, especially where one or more factors is highly influential. Working from right to left (higher fitted stress score to lower), the highest clump (in blue) are those who do moderate or low levels of exercise and didn’t receive the treatment. The next clump (in red) are those who do moderate or low levels of exercise and did receive the treatment (their stress score is around 4.3 points lower, for the same age). The next clump, in blue, are those who do high levels of exercise and didn’t receive the treatment. Their scores are around 9.6 points lower than the low/moderate exercise groups who didn’t receive treatment. Finally, the lowest scoring group are those who do high levels of exercise and did receive the treatment. We see that some clumps aren’t really centred around zero, and this should raise alarm bells.</p>
+<p>We could also test for interactions, firstly across all factors:</p>
 <pre><code>## 
 ## Call:
 ## lm(formula = score ~ (treatment + exercise + age):(treatment + 

@@ -1,0 +1,724 @@
+# (PART) Part II: Other sorts of outcome variables {-}
+
+# Binary outcome variable
+
+*So far almost everything we've covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the $t$-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).*
+
+Binary outcome:
+
+  * 'the patient was alive 2 years after the procedure' or not
+  * 'the patient was clear of eczema within a month' or not. 
+  
+Often coded as 'success' or 'failure', or 1 or 0. 
+        
+## Sample size for a binary variable {#ss-bin}
+        
+*For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter \@ref(rct-plan) will not work, so in this section we'll work through a similar method developed for binary variables.* 
+      
+Suppose we conduct a trial with a binary primary outcome variable and two groups, $T$ and $C$, containing $n_T$ and $n_C$ participants respectively. The number of successes in each group, $R_T$ and $R_C$, will be Binomially distributed,
+      
+\begin{align*}
+      R_T &\sim{Bi\left(n_T,\, \pi_t\right)} \\
+      R_C &\sim{Bi\left(n_C,\,\pi_C\right)}.
+\end{align*}
+      
+  Now we have 
+  
+  $$
+  \begin{aligned}
+  H_0:&\;\pi_T = \pi_C\\
+  H_1:&\;\pi_T\neq{\pi_C}.
+  \end{aligned}
+  $$
+  
+We will need enough participants to test this hypothesis with sufficient power. 
+
+With the trial data we find estimates
+      
+\begin{align*}
+      p_T & = \frac{R_T}{n_T} \\
+      p_C & = \frac{R_C}{n_C}.
+\end{align*}
+    
+  Recall that 
+  
+  $$\operatorname{var}\left(p_X\right)=\pi_X\left(1-\pi_X\right),$$
+  where $X$ is $T$ or $C$. Notice, **the variance depends on the mean $\rightarrow$ no free parameter**. 
+  
+*This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate value of $\pi_T$ and $\pi_C$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.*
+      
+### The Delta Method {#delta-method}
+      
+  We start with a random variable $X$ that has mean $\mu$ and variance $\sigma^2 = \sigma^2\left(\mu\right)$, ie. its variance depends on its mean. If we have a 'well-behaved' (infinitely differentiable etc.) function $f\left(X\right)$, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.
+      
+First, we expand $f\left(X\right)$ in a first-order Taylor series about $\mu$, which gives us
+
+\begin{equation} 
+      f\left(X\right) \approx f\left(\mu\right) + \left(X-\mu\right)f'\left(\mu\right)
+(\#eq:delta1)
+\end{equation}
+
+and therefore
+
+\begin{equation} 
+\left(f\left(X\right) - f\left(\mu\right)\right)^2 \approx \left(X-\mu\right)^2\left[f'\left(\mu\right)\right]^2.
+(\#eq:delta2)
+\end{equation}
+  
+  If we take expectations of Equation \@ref(eq:delta1) we find $E\left(f\left(X\right)\right) \approx f\left(\mu\right)$. We can use this in the left-hand side of Equation \@ref(eq:delta2)  so that when we take expectations of Equation \@ref(eq:delta2) we find
+  
+  \begin{equation} 
+  \operatorname{var}\left(f\left(X\right)\right) = \sigma^2\left(\mu\right)\left[f'\left(\mu\right)\right]^2,
+(\#eq:delta3)
+\end{equation}
+
+where both sides come from 
+
+$$\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right] .$$ 
+This series of approximations, which generally works well, is the Delta method. 
+
+One way in which it is often used, and the way in which we will use it now, is to find a transformation $f\left(X\right)$ for which (at least approximately) the variance is unrelated to the mean. To do this, we solve the differential equation
+
+$$ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \left[f'\left(\mu\right)\right]^2 = \text{constant}. $$
+    In the case of proportions for a binary variable, this becomes
+  
+  $$ \frac{\pi\left(1-\pi\right)}{n} \left[f'\left(\pi\right)\right]^2 = K$$
+for some constant $K$. We can rearrange this to
+
+$$f\left(\pi\right) \propto{ \int{\frac{1}{\sqrt{\pi\left(1-\pi\right)}}d\pi}}$$
+and by substituting $\pi = u^2$ we find
+
+\begin{align*}
+f\left(\pi\right) & \propto \int{\frac{1}{\sqrt{u^2\left(1-u^2\right)}}2u\,du}\\
+&\propto \int{\frac{1}{\sqrt{1 - u^2}}}du\\
+& \propto \arcsin{\left(\sqrt{\pi}\right)}.
+\end{align*}
+
+Setting $u=\sqrt{\pi}$ again and $f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)$. Using the chain rule, we find
+
+$$\left[f'\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .$$
+    Finally, we can substitute this into Equation \@ref(eq:delta3), with $f\left(X\right) = \arcsin\left(\sqrt{X}\right)$ to find
+  
+  \begin{align*}
+  \operatorname{var}\left[f\left(X\right)\right] & \approx \sigma^2\left(\pi\right)\left[f'\left(\pi\right)\right]^2  \\
+& \approx{\frac{\pi\left(1-\pi\right)}{n}\cdot\frac{1}{4\pi\left(1-\pi\right)}}\\
+& \approx{\frac{1}{4n}},
+\end{align*}
+
+
+and we have achieved our aim of finding a transformation of $X$ whose variance is not related to the mean. This is sometimes called the *angular transformation*.
+
+### A sample size formula
+
+For a binary variable, our estimate $p_X$ (the proportion of successes in group $X$) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of $n$ (less than around 30, which is very small for a clinical trial) or for values of $\pi$ close to 0 or 1, say $\pi<0.15$ or $\pi>0.85$ (this is more likely to be an issue for some trials).
+
+The linear approximation in Equation \@ref(eq:delta1) shows us that if $p_X$ is normally distributed then $f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)$ will be [approximately] normally distributed too. In fact, $\arcsin\left(\sqrt{p_X}\right)$ is approximately normally distributed with mean $\arcsin{\left(\sqrt{\pi_X}\right)}$ and variance $1/\left(4\pi_X\right)$. Using this information, we can test $H_0:\,\pi_T =\pi_C$ at the 100$\alpha$% confidence level by using the variable 
+
+$$
+D =  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\sqrt{\frac{1}{4n_T} + \frac{1}{4n_C}}}=  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\frac{1}{2}\lambda\left(n_T,n_C\right)},
+$$
+which is analogous to the variable $D$ constructed in Section \@ref(sec-measDcont); the difference in $f\left(p_T\right)$ and $f\left(p_C\right)$ divided by the standard error of the difference. 
+
+Using the same logic as in Sections  \@ref(sec-power) and \@ref(sec-ssformulacont), the starting place for a sample size formula to achieve significance level $\alpha$ and power $\beta$ is 
+
+$$
+\frac{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)}{\lambda\left(n_T,n_C\right)} = z_\beta + z_{\frac{\alpha}{2}}.
+$$
+For two groups of equal size $N$, this leads us to
+
+\begin{equation}
+N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)^2}.
+(\#eq:ssbinary)
+\end{equation}
+
+Because $\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}$ is not a function of $\pi_T - \pi_C$, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group $\left(\pi_C\right)$ is well understood, and the probability for the intervention group $\left(\pi_T\right)$ can be specified by using the nearest clinically important value of $\pi_T$.
+
+:::{.example #samplesize1}
+[From @smith1994randomised]
+This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was 'Did the patient die within 30d of the procedure?', and the trial was designed to have $\alpha=0.05,\,\beta=0.95$, which gives $z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65$. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation \@ref(eq:ssbinary)) gives us
+
+$$ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.2}\right)} - \arcsin{\left(\sqrt{0.05}\right)}\right)^2} = 114.9, $$
+and so each group in our trial should contain 115 patients. 
+
+If instead our aim had been to detect a change from around 0.5 to 0.35 (the same in terms of $\pi_A - \pi_B$), we would instead have needed 
+
+$$ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.5}\right)} - \arcsin{\left(\sqrt{0.35}\right)}\right)^2} = 280.8 ,$$
+that is 281 patients per trial arm.
+:::
+
+
+For a group $n$ of participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group $C$ the number of 'successes' would be modelled by
+
+$$R_C \sim \operatorname{Bi}\left(n_C,\,\pi_C\right).$$
+
+Similarly the number of successes in the treatment group can be modelled as 
+$$R_T \sim\operatorname{Bi}\left(n_T,\,\pi_T\right),$$
+and the focus of our analysis is on comparing $\pi_C$ and $\pi_T$. To do this we will require point estimates of both quantities and interval estimates for some measure of the discrepancy between them. We will also need ways to test the null hypothesis that $\pi_C = \pi_T.$
+
+## Point estimates and Hypothesis tests
+
+First of all, we can tabulate the results of a trial with a binary outcome like this: 
+
+                   Successes   Failures    Total     
+-----------------  ----------  ---------   --------------
+    **Treatment**  $r_T$       $n_T-r_T$   $n_T$     
+      **Control**  $r_C$       $n_C-r_C$   $n_C$     
+        **Total**  $r$         $n - r$     $n$       
+
+Note that because this is a table of observed values, they are now all in lower case.
+
+We can estimate $\pi_C$ and $\pi_T$ by the sample proportions
+
+$$
+\begin{aligned}
+p_C &= \frac{r_C}{n_C}\\
+p_T &= \frac{r_T}{n_T}
+\end{aligned}.
+$$
+
+We know from the properties of the binomial distribtion that $\operatorname{E}\left(p_C\right) = \pi_C$ and 
+$$\operatorname{Var}\left(p_C\right) = \frac{\pi_C\left(1-\pi_C\right)}{n_C},$$
+and similarly for $\operatorname{E}\left(p_T\right)$ and $\operatorname{Var}\left(p_T\right)$.
+
+If we think in terms of individual participants, we have the variable $y_{iC}$ for the outcome of the $i$-th patient in group $C$, with $y_{iC}=1$ if the participant's outcome is 'success' and $y_{iC}=0$ otherwise. Then we have 
+
+$$r_C = \sum\limits_{i=1}^{n_C} y_{iC},$$
+and similarly for group $T$. Since $p_C$ and $p_T$ are therefore sample means, we can apply the Central Limit Theorem to conclude that $p_C$ and $p_P$ can be approximated by normal distributions:
+
+$$
+\begin{aligned}
+p_C & \sim N\left(\pi_C,\, \frac{\pi_C\left(1-\pi_c\right)}{n_C}\right)\\
+p_T & \sim N\left(\pi_T,\, \frac{\pi_T\left(1-\pi_T\right)}{n_T}\right).
+\end{aligned}
+$$
+
+This means we can test the null hypothesis that $\pi_C = \pi_T$ by referring our observed value of $p_T - p_C$ to a normal distribution with mean 0 and variance
+
+$$ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\pi_c\right)}{n_C},$$
+
+which we can approximate by substituting in $p_C$ and $p_T$.
+
+However, since under the null hypothesis $\pi_C = \pi_T = \pi$, it would be more appropriate to use this as the common variance. In this case, the variance of $p_T - p_C$ becomes
+
+$$\pi\left(1-\pi\right)\left(\frac{1}{n_C} + \frac{1}{n_T}\right), $$
+and in calculations we replace $\pi$ with $p = r/n$.
+
+Putting all this together, our test statistic is 
+
+$$Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.$$
+
+::: {.example}
+
+The data in this example comes from @strep_tb, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.
+
+
+```{r}
+
+# Maybe this is more complicated than I imagined!
+data(strep_tb)
+
+tab_obs = table(strep_tb[,c(2,13)])
+tab_obs
+
+```
+
+We therefore have
+
+$$
+\begin{aligned}
+n_C & = 52 \\
+n_T & = 55 \\
+p_C & = \frac{17}{17+35} & = 0.327\\
+p_T & = \frac{38}{38+17} & = 0.691\\
+p & = \frac{38+17}{107} &= 0.514. 
+\end{aligned}
+$$ 
+and can calculate our $Z$ statistic to be
+
+$$
+\begin{aligned}
+Z & = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52} + \frac{1}{55}\right)}}\\
+& = 3.765.
+\end{aligned}
+$$
+
+Finally, we can find the $p$-value of this test statistic (making sure to have two tails!)
+
+```{r, echo=T}
+2*(1-pnorm(3.765, mean=0, sd=1))
+```
+So we can reject the hypothesis that streptomycin has no effect on tuberculosis at the $\alpha=0.05$ level (and indeed many lower levels).
+:::
+
+### An alternative approach: chi-squared
+
+Another way to approach this would be to conduct a **chi-squared** test.
+
+In a chi-squared test, we first calculate the **expected** values $\left(E_i\right)$ in each box of the summary table, and compare them to the **observed** values $\left(O_i\right)$ by finding the summary statistic
+
+$$ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.$$
+
+Under the null hypothesis (that $p_C = p_T$) this has a $\chi^2$ distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the $\chi^2_1$ distribution.
+
+::: {.example}
+Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion $p=0.514$ of the total number of patients were improved. There are 52 in the control group, therefore we expect $0.514\times 52 = 26.73$ improved patients in the control group, and by the same logic $0.514\times 55 = 28.27$ in the treatment group. Our expected table is therefore 
+
+```{r}
+tab_exp = tab_obs
+tab_exp[1,1] = (1-0.514)*55
+tab_exp[1,2] = (0.514)*55
+tab_exp[2,1] = (1-0.514)*52
+tab_exp[2,2] = (0.514)*52
+tab_exp
+```
+
+We can therefore calculate the $\chi^2$ statistic by looping through the elements of the tables:
+
+```{r, echo=T}
+sum_chi_sq = 0 # set a running total going 
+# in the following, tab_obs is the table of observed values and
+# tab_exp is the table of expected values
+for (i in 1:2){
+  for (j in 1:2){
+    tmp = ((tab_obs[i,j] - tab_exp[i,j])^2)/tab_exp[i,j]
+    sum_chi_sq = sum_chi_sq + tmp
+  }
+}
+sum_chi_sq
+1-pchisq(sum_chi_sq, df=1)
+```
+and again we have a very significant result. 
+
+In fact, these two tests are almost equivalent, and we have that $\sqrt{X^2} = Z$:
+```{r, echo=T}
+sqrt(sum_chi_sq)
+```
+:::
+
+
+### Likelihood: A more rigorous way
+
+Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.
+
+Earlier we set up notation $y_{iC}$ to be outcome variable (0 or 1, in this case) of the $i$-th participant in the control group (and so on), and we will use that here.
+
+The contribution of the $i$-th patient in group $C$ to the likelihood is 
+
+$$\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{y_{iC}} $$
+(remember we can ignore multiplicative constant terms). Combining all $n_C$ patients in group $C$, their contribution will be 
+
+$$ \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C},$$
+where $r_C$ is the number of 'successes' in group $C$. Similarly for the treatment group we will have
+
+$$ \pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.$$
+Gathering these terms together we can find the complete likelihood function
+
+$$
+\begin{aligned}
+L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) &
+  L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
+  & = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
+\end{aligned}
+$$
+The log-likelihood is therefore
+
+$$ l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right) = r_C\log\pi_C + \left(n_C-r_C\right)\log\left(1-\pi_C\right) + r_T\log\pi_T + \left(n_T-r_T\right)\log\left(1-\pi_T\right).$$
+If we differentiate with respect to $\pi_C$, we find
+
+$$\frac{\mathrm{d} l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)}{\mathrm{d}\pi_C} = \frac{r_C}{\pi_C} - \frac{n_C-r_C}{1-\pi_C}.$$ 
+Setting this to zero we find (reassuringly!) that $\hat\pi_C = \frac{r_C}{n_C}$. We can repeat this exercise for $\pi_T$. If we assume that there is one common probability $\pi$ of success, we can find $\hat\pi$ by maximising
+$l\left(\pi,\pi \mid {n_C,n_T, r_C, r_T}\right)$ with respect to $\pi$, and again this works out to be $\frac{r_{C} + r_T}{n}$ as before.
+
+We can use these to construct a **likelihood ratio test**, by calculating
+
+$$
+\begin{aligned}
+\lambda_{LR} = & -2\left[l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right) - l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)\right]\\
+ =  & 2\left[\underbrace{r_C\log\frac{r_C}{n_C} + \left(n_C-r_C\right)\log\left(1-\frac{r_C}{n_C}\right) + r_T\log\frac{r_T}{n_T} + \left(n_T-r_T\right)\log\left(1-\frac{r_T}{n_T}\right) }_{l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)} \right. \\
+&\;\;\;\;\;\; \left. - \underbrace{\Big(r\log\left(p\right) + \left(n-r\right)\log\left(1-p\right)\Big)}_{l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right)}\right]\\
+ =& 2\left[\underbrace{r_C \log\left(\frac{r_C}{n_C p}\right)}_{\text{Group }C\text{ success}} + \underbrace{\left(n_C - r_C\right)\log\left(\frac{n_C - r_C}{n_C\left(1-p\right)}\right)}_{\text{Group }C\text{ fail}} \right.\\
+ & \;\;\;\;\;\; \left.+ \underbrace{r_T \log\left(\frac{r_T}{n_T p}\right)}_{\text{Group }T\text{ success}} + \underbrace{\left(n_T - r_T\right)\log\left(\frac{n_T - r_T}{n_T\left(1-p\right)}\right)}_{\text{Group }T\text{ fail}}\right]
+\end{aligned}
+$$
+where we use $p,\, r,\, n$ to denote the pooled values ($n = n_C + n_T$ etc.).
+
+Each term in the final line corresponds to a subgroup of the participants, as labelled, and if we rearrange them slightly we see that this can be re-written as
+
+$$\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),$$
+where $G$ is the set of subgroups (group $C$ success etc.). Under the null hypothesis that $\pi_C = \pi_T = \pi$, and for sufficiently large $n_C,\;n_T$, $\lambda_{LR}$ has a $\chi^2$ distribution with one degree of freedom.
+
+:::{.example}
+
+Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.
+
+```{r, echo=T}
+sum_LR = 0 # set a running total going 
+# in the following, tab_obs is the table of observed values and
+# tab_exp is the table of expected values
+for (i in 1:2){
+  for (j in 1:2){
+    tmp = tab_obs[i,j] * log(tab_obs[i,j]/tab_exp[i,j])
+    sum_LR = sum_LR + tmp
+  }
+}
+teststat_LR = 2*sum_LR
+teststat_LR
+1-pchisq(teststat_LR, df=1)
+
+```
+Not surprisingly, this value is quite close to the one we obtained earlier!
+
+:::
+
+
+
+
+## Measures of difference for binary data
+
+In the above example the question we were interested in was 'is what we've observed statistically significant?' and in our streptomycin example the answer was a resounding 'Yes!'. However, if we then ask questions like 'How big is the difference between the effects of each treatment?' or 'What is the treatment effect?', things get a bit less clear. 
+
+In the continuous case, it made sense to simply think about the treatment effect as the difference $\mu_T - \mu_C$ between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions $\pi_C$ and $\pi_T$, and each of them requires a different approach.
+
+### Absolute risk difference and Number Needed to Treat {#ard-and-nnt}
+
+The **absolute risk difference** is 
+
+$$\text{ARD} = \pi_T - \pi_C,$$
+and is sometimes used. However, it loses a lot of information that we'd probably like to keep in some how. For example, suppose a treatment reduces the incidence of some terrible symptom from $\pi_C=0.03$ to $\pi_T=0.01$. The absolute risk difference is $0.02$ here. For some other treatment that results in a reduction from $\pi_C=0.57$ to $\pi_T = 0.55$ we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.
+
+It is useful though to remember that usually these numbers are about people. If the outcome is 'cured' or 'not cured', then for some cohort of $N$ patients, $N\times\text{ARD}$ is the number of extra patients you would expect to cure if you used treatment $T$ instead of treatment $C$ (which may be nothing or may some usual course of treatment).
+
+Linked to this is the **number needed to treat** (NNT), which is defined as
+
+$$ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. $$
+The NNT is the number of patients you'd need to treat (with treatment $T$ rather than $C$) before you would bring benefit to one extra patient. The website [TheNNT](https://thennt.com/) collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!
+
+The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if $\pi_T = 0.25,\,\pi_C=0.2$, then $\text{ARD} = 0.05$ and $\text{NNT} = 20.$ After treating 20 patients with treatment $C$ we expect to cure (say) 4, whereas treating 20 patients with treatment $T$ it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if $\pi_C=0.005$ and $\pi_T = 0.015$ then $\text{ARD}=0.01$ and $\text{NNT}=100$. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!
+
+Let's suppose we want to work with the ARD, and to make a confidence interval for the treatment difference $\tau_{ARD} = \pi_T - \pi_C$. Using the same normal  approximation as before, we can estimate $\tau_{ARD}$ by $p_T - p_C$, and $\operatorname{var}\left(p_T - p_C\right)$ by 
+
+$$ \frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}.$$
+Our $100\left(1-\alpha\right)$% confidence interval is therefore given by
+
+$$\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right) $$
+
+:::{.example}
+Back to our streptomycin example, we can now construct a $100\left(1-\alpha\right)$% confidence interval for the ARD.
+
+Our estimated treatment effect is (to 3 decimal places)
+
+$$\hat\tau=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.$$
+Our estimate of the standard error of $\hat\tau$ is
+
+$$
+\begin{aligned}
+\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C} & = \frac{\frac{38}{55}\times \frac{17}{55}}{55} + \frac{\frac{17}{52}\times \frac{35}{52}}{52}\\
+& = 0.0811
+\end{aligned}
+$$
+and therefore a 95% confidence interval for $\tau_{ARD}$ is
+
+$$\left(0.364 - z_{0.975}\sqrt{0.0811},\; 0.364 + z_{0.975}\sqrt{0.0811}\right) = \left(0.187,\; 0.541\right). $$
+As we should expect from the very low $p$-value we saw, the 95% confidence interval does not contain zero.
+
+If we want to think instead in terms of NNT (the number needed to treat), then we need to find the reciprocal of our estimate of $\tau_{ARD}$:
+
+$$ \text{NNT} = \frac{1}{\tau_{ARD}} = \frac{1}{0.364} = 2.75.$$
+That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for $\tau_{ARD}$ to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get
+
+$$\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).$$
+Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
+
+```{r}
+tauhat = 38/55  - 17/52
+varhat = ((38/55)*(17/55))/55 + ((17/52)*(35/52))/52
+plot_ard = ggplot(data=NULL) + geom_function(fun=dnorm, args = list(mean = tauhat, sd = sqrt(varhat)))+xlab("ARD - approximately normal") + ylab("Density") +
+  xlim(0,0.8) +
+  geom_vline(xintercept = tauhat, col = "blue")+
+  geom_vline(xintercept = c(0.187, 0.541), lty=2, col="blue")
+
+x_vec = rnorm(n=100000, mean = tauhat, sd = sqrt(varhat))
+nnt_df = data.frame(x = 1/x_vec)
+
+plot_nnt = ggplot(data=nnt_df, aes(x=x)) + geom_density() + xlim(0,8) + xlab("NNT") + ylab("Density")+
+  geom_vline(xintercept = 1/tauhat, col = "blue") +
+  geom_vline(xintercept = c(1.85,5.34), lty=2, col="blue")
+
+grid.arrange(plot_ard, plot_nnt)
+```
+:::
+
+#### What if the difference is not significant?
+
+In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will make up some data for a small trial. 
+
+The dataset for our made-up trial is
+
+
+                      Successes   Failures    Total     
+-----------------     ----------  ---------   --------------
+    **Treatment**     9           5           14     
+      **Control**     4           8           12     
+        **Total**     13          13          26     
+        
+The ARD is now
+$$\frac{9}{14} - \frac{4}{12} = \frac{3}{13} \approx 0.310 $$
+and our 95% confidence interval is $\left(-0.0567,\;0.676\right)$.
+
+```{r}
+p_q = 9/14 - 4/12
+
+varhat_q = ((9/14)*(5/14)) /14 + ((4/12)*(8/12)) /12  
+ci_lower = p_q - qnorm(0.975)*sqrt(varhat_q)
+ci_upper = p_q + qnorm(0.975)*sqrt(varhat_q)
+# c(ci_lower, ci_upper)
+
+```
+ Clearly because of the small size of the trial our confidence interval is very wide (this is not a very good trial!), but the important thing to note is that it now contains zero. It looks very likely that the treatment is effective (the interval only just contains zero) but how many patients might we need to treat before we expect to see an extra success? The expected value of NNT is 
+ 
+ $$ \frac{1}{0.310} = 3.23,$$
+ which does not pose a problem. However, as indicated by the 95% confidence interval, it is possible that the ARD is zero, and in this case the NNT is in some sense infinite: no matter how many patients we treat, we don't expect to see any extra improvements. Therefore, since our confidence interval for ARD contains zero it feels appropriate that our confidence interval for NNT should contain infinity.
+ 
+When thinking about a confidence interval for the NNT, we need to think about signs, and what negative and positive values mean. If both the lower and upper limits of the confidence interval for ARD are positive, there is no issue - the treatment is effective, and our NNT confidence interval is another entirely positive interval. If the confidence interval for ARD is entirely negative, we have an entirely negative interval for NNT. A negative value of NNT can be thought of as the 'number needed to treat to harm one extra person'.
+
+The tricky situation is when the confidence interval for the ARD is $\left(-L, U\right)$ with $L,U>0$, ie. an interval containing zero. As we approach zero from $U$, the upper limit of the CI for $\pi_T - \pi_C$, the number of patients we need to treat increases, since the treatment effect is getting smaller, until at $\pi_T - \pi_C=0$ the NNT is infinite. Therefore, the part of the CI for NNT corresponding to the positive part of the CI for ARD is 
+
+$$\left(\frac{1}{U},\; \infty\right)$$
+
+As we approach zero from the left in the interval (ie. from $-L$), the treatment gets less and less effective (and right now we mean effective in a bad way, likely doing harm to the patients compared to the control), and so we need to treat more and more patients to harm one extra patient compared to the control. In this region the NNT is negative, since if we deny some patients the treatment we will benefit a few. Therefore the CI for the NNT corresponding to the negative part of the CI for ARD is 
+
+$$\left(-\infty,\;-\frac{1}{L}\right), $$
+and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals.
+
+The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).
+
+```{r}
+xl = -0.0567
+xu = 0.676
+yl = 1/xl
+yu = 1/xu
+ard_vec = seq(from = -1, to = 1, len = 1000)
+inv_vec = 1/ard_vec
+inv_df = data.frame(x=ard_vec, y=inv_vec)
+inv_x = function(x){1/x}
+ggplot(data=inv_df, aes(x=x, y=y)) + geom_path() + xlim(-1,1) + ylim(-25,25) +
+  geom_hline(yintercept=0, size=0.3) +
+  geom_vline(xintercept=0, size=0.3) +
+  geom_segment(aes(x = xl, xend=xu, y=0, yend=0), linewidth=1) +
+  geom_segment(aes(x=xl, xend=xl, y=0, yend=yl), linewidth=0.3, lty=2) +
+  geom_segment(aes(x=xu, xend=xu, y=yu, yend=0), linewidth=0.3, lty=2) +
+  geom_segment(aes(x=0, xend=xl, y=yl, yend=yl), linewidth=0.3, lty=3) +
+  geom_segment(aes(x=0, xend=xu, y=yu, yend=yu), linewidth=0.3, lty=3) +
+  geom_segment(aes(x=0, xend=0, y=yl, yend = -25), linewidth=1) +
+  geom_segment(aes(x=0, xend=0, y=yu, yend=25)) +
+  xlab("ARD") + ylab("NNT") + theme_bw()
+```
+ 
+ @altman1998confidence ([available here](https://www.bmj.com/content/bmj/317/7168/1309.full.pdf)) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!
+ 
+#### Problems with the confidence interval for the ARD {-}
+
+You may well remember from the dim and distant past that the method we have been using so far (which in this section we'll be calling the 'standard' method) is not so reliable if the proportion is close to zero or one. @newcombe1998interval compared eleven different methods for finding confidence intervals for the difference in proportions (as we are doing when we work with the ARD) and found the standard method to be the worst! The coverage probability turns out to be much lower than the nominal value, with a so-called 95% confidence interval being closer to 90% or even 85%. A further problem with this method (although it will rarely affect us in practice in this setting) is that the limits of the confidence interval aren't forced to be in $\left[-1,1\right]$.
+
+The preferred method from @newcombe1998interval, for its ease of implementation and its accuracy, is one that relies on *score statistics*. 
+
+The first step is to find an interval estimate for a single proportion $\pi$. As before, this can be written
+
+$$\left\lbrace \pi \mid \frac{\lvert p - \pi \rvert}{\sqrt{\pi\left(1-\pi\right)/n}} \leq z_{\frac{\alpha}{2}} \right\rbrace = \left\lbrace \pi \mid \left(p - \pi\right)^2 \leq z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n} \right\rbrace. $$
+We can find the limits of the confindence interval by changing the right hand side to an equality
+
+$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.$$
+
+In the standard method, we substitute $p$ (the estimated value of $\pi$ from our sample) into the right hand side for $\pi$, to get
+
+$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{p\left(1-p\right)}{n}$$
+
+which we solve to get the limits
+$$ \pi = p \pm z_{\frac{\alpha}{2}}\sqrt{\frac{p\left(1-p\right)}{n}}.$$
+In Newcombe's proposed method, we instead keep $\pi$ in the right hand side and solve the quadratic in terms of $\pi$,
+$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.$$
+The benefit of this new method will be most obvious for a probability that is close to 0 or 1. For example, suppose we have 1 success out of 50 patients, so $p=0.02,\;n=50$. 
+
+The limits of a standard 95% confidence interval will be 
+
+$$\left(0.02 - z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}},\; 0.02 + z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}}\right) = \left(-0.0188,\;0.0588\right),$$
+whereas the limits to the Newcombe 95% CI will be the roots of 
+
+$$\left(0.02-\pi\right)^2 = z^2_{\alpha/2}\frac{\pi\left(1-\pi\right)}{50}$$
+which work out to be
+
+```{r}
+quad_fun = function(a,b,c){
+  disc = b^2 - 4*a*c
+  lower = (-b - sqrt(disc))/(2*a)
+  upper = (-b + sqrt(disc))/(2*a)
+  c(lower, upper)
+}
+
+peg = 0.02
+qf_eg = quad_fun(
+  a = 1 + qnorm(0.975)^2/50,
+  b = -2*peg - qnorm(0.975)^2/50,
+  c = peg^2
+)
+qf_eg
+```
+
+Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows $p_T$, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).
+
+```{r}
+fun_LHSeg = function(x){(0.02 - x)^2}
+fun_RHSeg = function(x){qnorm(0.975)^2*(x*(1-x))/50}
+const_RHSeg = (qnorm(0.975)^2)*peg*(1-peg)/50
+
+ggplot() + geom_function(fun = fun_LHSeg) + xlim(-0.1,0.2) +
+  geom_function(fun=fun_RHSeg, lty=2) +
+  geom_hline(aes(yintercept = const_RHSeg), lty=3) +
+  xlab(expression(pi)) + ylab("") + theme_bw() +
+  geom_vline(xintercept = qf_eg, colour = "red", linewidth=0.4, lty=2) +
+  geom_vline(xintercept = peg, colour = "red", linewidth=0.8) +
+  geom_vline(xintercept = c(-0.0188, 0.0588), lty=3, col="red", linewidth=0.4)
+
+```
+
+:::{.example}
+Returning to our streptomycin example, our estimate of the probability of success for the treatment group is $p_T = \frac{38}{55},\;n_T = 55$, and therefore our equation becomes
+
+$$\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.$$
+Solving this equation in the usual way (using the quadratic formula) we find the limits
+
+```{r}
+pT = 38/55
+quad_fun(
+  a = 1 + qnorm(0.975)^2/55,
+  b = -2*pT - qnorm(0.975)^2/55,
+  c = pT^2
+)
+```
+
+By contrast, in our standard method we have 
+$$\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\frac{38}{55}\left(1-\frac{38}{55}\right)}{55}$$
+which is
+
+```{r}
+fun_LHS = function(x){(38/55 - x)^2}
+fun_RHS = function(x){qnorm(0.975)^2*(x*(1-x))/55}
+const_RHS = (qnorm(0.975)^2)*pT*(1-pT)/55
+
+stand_CI = c(pT - qnorm(0.975)*sqrt(pT*(1-pT)/55), pT + qnorm(0.975)*sqrt(pT*(1-pT)/55)) 
+stand_CI
+```
+
+We can see this graphically 
+
+```{r}
+qf_pt = quad_fun(
+  a = 1 + (qnorm(0.975)^2)/55,
+  b = -2*pT - (qnorm(0.975)^2)/55,
+  c = pT^2
+)
+ggplot() + geom_function(fun = fun_LHS) + xlim(0.4,0.9) +
+  geom_function(fun=fun_RHS, lty=2) +
+  geom_hline(aes(yintercept = const_RHS), lty=3) +
+  xlab(expression(pi)) + ylab("") + theme_bw() +
+  geom_vline(xintercept = qf_pt, colour = "red", linewidth=0.4, lty=2) +
+  geom_vline(xintercept = pT, colour = "red", linewidth=0.8) +
+  geom_vline(xintercept = stand_CI, lty=3, col="red", linewidth=0.4)
+
+```
+
+Notice that the interval with the new method is now asymmetrical, which is more realistic.
+
+Similarly for the control proportion $\pi_C$, we have $p_C = \frac{17}{52},\; n_C=52$, and our Newcombe interval is 
+
+```{r}
+pC = 17/52
+nC = 52
+
+fun_LHSc = function(x){(pC - x)^2}
+fun_RHSc = function(x){qnorm(0.975)^2*(x*(1-x))/nC}
+const_RHSc = (qnorm(0.975)^2)*pC*(1-pC)/nC
+
+stand_CIc = c(pC - qnorm(0.975)*sqrt(pC*(1-pC)/nC), pC + qnorm(0.975)*sqrt(pC*(1-pC)/nC))
+
+qf_ptc = quad_fun(
+  a = 1 + (qnorm(0.975)^2)/nC,
+  b = -2*pC - (qnorm(0.975)^2)/nC,
+  c = pC^2
+)
+qf_ptc
+```
+compared to the standard confidence interval
+```{r}
+stand_CIc
+```
+
+Again, we can see this graphically.
+
+```{r}
+ggplot() + geom_function(fun = fun_LHSc) + xlim(0,0.6) +
+  geom_function(fun=fun_RHSc, lty=2) +
+  geom_hline(aes(yintercept = const_RHSc), lty=3) +
+  xlab(expression(pi)) + ylab("") + theme_bw() +
+  geom_vline(xintercept = qf_ptc, colour = "red", linewidth=0.4, lty=2) +
+  geom_vline(xintercept = pC, colour = "red", linewidth=0.8) +
+  geom_vline(xintercept = stand_CIc, lty=3, col="red", linewidth=0.4)
+
+```
+
+:::
+
+
+
+#### Generalising this to two cases
+
+What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You'll be relieved to hear that there is such a method, and we'll give a sketch here of how it works.
+
+The limits of the 'standard method' confidence interval at significance level $\alpha$ are given by
+
+\begin{equation}
+\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right).
+(\#eq:ardci)
+\end{equation}
+
+We can rewrite this as 
+
+\begin{equation}
+\left(p_T - p_C - \sqrt{\omega^2_T + \omega^2_C},\; p_T - p_C + \sqrt{\omega^2_T + \omega^2_C}\right)
+\end{equation}
+
+where $\omega_T$ and $\omega_C$ are the widths of the separate single-sample 'standard' confidence intervals for $p_T$ and $p_C$. In Newcombe's method, we proceed in the same way, but instead use the widths of the Newcombe confidence intervals for the individual probabilities $p_T$ and $p_C$. This is obviously a little more complicated, since the widths (eg. $p_T - l_T$ and $u_T - p_T$) will now not be the same, since the Newcombe CI is not symmetrical. So, we have
+
+$$
+\left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2},\; p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right).
+$$
+These differences must be calculated using the individual sample confidence interval method.
+
+:::{.example}
+Applying this Newcombe method to our Streptomycin example, recall that we have
+
+$$
+\begin{aligned}
+p_T & = \frac{38}{55}\\
+p_T - l_T & = \frac{38}{55} - 0.5597 = 0.1312\\
+u_T - p_T & = 0.7972 - \frac{38}{55} = 0.1064\\
+p_C & = \frac{17}{52} \\
+p_C - l_C & = \frac{17}{52}  - 0.2152 = 0.1117\\
+u_C - p_C & = 0.4624 - \frac{17}{52} = 0.1355.
+\end{aligned}
+$$
+Our $95\%$ confidence interval is therefore
+
+$$
+\begin{aligned}
+\left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2}\right.&,\left. p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right)\\
+\left(\frac{38}{55}-\frac{17}{52} - \sqrt{0.1312^2 + 0.1355^2}\right.&,\left.\frac{38}{55}-\frac{17}{52} + \sqrt{0.1064^2 + 0.1117^2}\right)\\
+\left(0.3640 - 0.1886 \right.&,\left. 0.3640+ 0.1543\right)\\
+\left(0.157 \right.&,\left.0.500\right).
+\end{aligned}
+$$
+This is skewed somewhat lower than our standard CI of $\left(0.187,\;0.541\right).$
+
+
+
+:::

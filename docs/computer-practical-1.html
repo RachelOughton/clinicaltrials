@@ -605,10 +605,10 @@ Click for solution
 <span id="cb45-3"><a href="computer-practical-1.html#cb45-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
 <p>The allocation vector is stored as a row in the matrix <code>M</code> which is a slot in the <code>genSeq</code> object (part of the object). You can access it by</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="computer-practical-1.html#cb46-1" tabindex="-1"></a>seq_ud31<span class="sc">$</span>M[<span class="dv">1</span>,]</span></code></pre></div>
-<pre><code>##   [1] 0 0 1 1 0 0 0 1 0 1 1 0 0 1 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 1 0 1 1 1 1 0 0 0 1 1 1 1 1 0 1 1 1 1 1 1 0 1 0 0 1 0 0 1 1 1
-##  [61] 0 1 1 0 1 0 0 1 1 1 1 0 1 0 0 0 0 0 1 0 0 1 1 1 0 1 0 1 0 0 0 1 1 1 0 1 0 1 1 1 0 1 0 0 1 1 0 1 1 1 1 1 1 0 1 0 0 1 1 0
-## [121] 1 0 0 0 1 0 0 1 1 0 0 1 1 1 0 1 1 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1 1 0 0
-## [181] 1 1 1 0 0 1 1 0 0 0 1 1 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 0 1 0 0 1 0 0 0 1 1 1 0 1 1 1 0 1</code></pre>
+<pre><code>##   [1] 0 0 1 1 0 0 0 1 0 1 1 0 0 1 0 1 0 1 1 0 0 0 0 0 1 0 0 1 0 1 0 1 1 1 1 0 0 0 1 1 1 1 1 0 1 1 1 1 1 1 0 1 0 0 1 0 0 1 1
+##  [60] 1 0 1 1 0 1 0 0 1 1 1 1 0 1 0 0 0 0 0 1 0 0 1 1 1 0 1 0 1 0 0 0 1 1 1 0 1 0 1 1 1 0 1 0 0 1 1 0 1 1 1 1 1 1 0 1 0 0 1
+## [119] 1 0 1 0 0 0 1 0 0 1 1 0 0 1 1 1 0 1 1 0 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1
+## [178] 1 0 0 1 1 1 0 0 1 1 0 0 0 1 1 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 1 1 1 0 1 1 0 1 1 1 1 0 1 0 0 1 0 0 0 1 1 1 0 1 1 1 0 1</code></pre>
 <p>The argument <code>r</code> allows you to generate <code>r</code> sequences, in which case the matrix <code>M</code> has <code>r</code> rows.</p>
 </details>
 </div>
