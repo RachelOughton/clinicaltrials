@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-04" />
+<meta name="date" content="2024-02-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="rct-analysis.html"/>
-<link rel="next" href="time-to-event-data-and-survival-analysis.html"/>
+<link rel="next" href="computer-practical-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -253,7 +253,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
 <li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
-<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Part II: Other sorts of outcome variables</b></span></li>
@@ -279,20 +279,6 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>5.4.1</b> What does this model tell us?</a></li>
 <li class="chapter" data-level="5.4.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#fitting-a-linear-regression-model"><i class="fa fa-check"></i><b>5.4.2</b> Fitting a linear regression model</a></li>
 <li class="chapter" data-level="5.4.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>5.4.3</b> Diagnostics for logistic regression</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html"><i class="fa fa-check"></i><b>6</b> Time-to-event data and Survival Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#censored-times"><i class="fa fa-check"></i><b>6.1</b> Censored times</a></li>
-<li class="chapter" data-level="6.2" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#the-survival-curve-and-the-hazard-function"><i class="fa fa-check"></i><b>6.2</b> The Survival Curve and the Hazard function</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>6.2.1</b> The Kaplan-Meier estimator</a></li>
-<li class="chapter" data-level="6.2.2" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#a-parametric-approach"><i class="fa fa-check"></i><b>6.2.2</b> A parametric approach</a></li>
-<li class="chapter" data-level="6.2.3" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i><b>6.2.3</b> Sample size calculations for time-to-event data</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#comparing-survival-curves"><i class="fa fa-check"></i><b>6.3</b> Comparing survival curves</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="time-to-event-data-and-survival-analysis.html"><a href="time-to-event-data-and-survival-analysis.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>6.3.1</b> Non-parametric: the log-rank test</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -335,21 +321,21 @@ div.csl-indent {
 <div id="binary-outcome-variable" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">5</span> Binary outcome variable<a href="binary-outcome-variable.html#binary-outcome-variable" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>So far almost everything we’ve covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the <span class="math inline">\(t\)</span>-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).</p>
-<p>A binary outcome might be something like ‘the patient was alive 2 years after the procedure’ or not, or ‘the patient was clear of eczema within a month’ or not. Such variables are often coded as success or failure, or 0 or 1.</p>
+<p>A binary outcome might be something like ‘the patient was alive 2 years after the procedure’ or not, or ‘the patient was clear of eczema within a month’ or not. Such variables are often coded as ‘success’ or ‘failure’, or 1 or 0.</p>
 <div id="ss-bin" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Sample size for a binary variable<a href="binary-outcome-variable.html#ss-bin" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter <a href="rct-plan.html#rct-plan">2</a> will not work.</p>
-<p>Suppose we conduct a trial with a binary primary outcome variable and two groups, A and B, containing <span class="math inline">\(n_A\)</span> and <span class="math inline">\(n_B\)</span> participants respectively. The number of successes in each group, <span class="math inline">\(R_A\)</span> and <span class="math inline">\(R_B\)</span>, will be Binomially distributed,</p>
+<p>For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter <a href="rct-plan.html#rct-plan">2</a> will not work, so in this section we’ll work through a similar method developed for binary variables.</p>
+<p>Suppose we conduct a trial with a binary primary outcome variable and two groups, <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>, containing <span class="math inline">\(n_T\)</span> and <span class="math inline">\(n_C\)</span> participants respectively. The number of successes in each group, <span class="math inline">\(R_T\)</span> and <span class="math inline">\(R_C\)</span>, will be Binomially distributed,</p>
 <p><span class="math display">\[\begin{align*}
-      R_A &amp;\sim{Bi\left(n_A,\, \pi_A\right)} \\
-      R_B &amp;\sim{Bi\left(n_B,\,\pi_B\right)}.
+      R_T &amp;\sim{Bi\left(n_T,\, \pi_t\right)} \\
+      R_C &amp;\sim{Bi\left(n_C,\,\pi_C\right)}.
 \end{align*}\]</span></p>
-<p>Our null hypothesis now is therefore that <span class="math inline">\(\pi_A = \pi_B\)</span>, ie. that the probability of success is the same in each group, and we will need enough participants to test this hypothesis with sufficient power. With the trial data we will be able to produce estimates</p>
+<p>Our null hypothesis now is therefore that <span class="math inline">\(\pi_T = \pi_C\)</span>, ie. that the probability of success is the same in each group, and we will need enough participants to test this hypothesis with sufficient power. With the trial data we will be able to produce estimates</p>
 <p><span class="math display">\[\begin{align*}
-      p_A &amp; = \frac{R_A}{n_A} \\
-      p_B &amp; = \frac{R_B}{n_B}.
+      p_T &amp; = \frac{R_T}{n_T} \\
+      p_C &amp; = \frac{R_C}{n_C}.
 \end{align*}\]</span></p>
-<p>Recall that the variance of <span class="math inline">\(p_X\)</span> (where <span class="math inline">\(X\)</span> is <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>) is <span class="math inline">\(\pi_X\left(1-\pi_X\right)\)</span>, such that the variance depends on the mean. This means there is no free parameter equivalent to <span class="math inline">\(\sigma\)</span> in the binary situation, and the number of participants required will depend on the approximate value of <span class="math inline">\(\pi_A\)</span> and <span class="math inline">\(\pi_B\)</span>. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called <em>the delta method</em>.</p>
+<p>Recall that the variance of <span class="math inline">\(p_X\)</span> (where <span class="math inline">\(X\)</span> is <span class="math inline">\(T\)</span> or <span class="math inline">\(C\)</span>) is <span class="math inline">\(\pi_X\left(1-\pi_X\right)\)</span>, such that the variance depends on the mean. This means there is no free parameter equivalent to <span class="math inline">\(\sigma\)</span> in the binary situation, and the number of participants required will depend on the approximate value of <span class="math inline">\(\pi_T\)</span> and <span class="math inline">\(\pi_C\)</span>. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called <em>the delta method</em>.</p>
 <div id="delta-method" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> The Delta Method<a href="binary-outcome-variable.html#delta-method" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We start with a random variable <span class="math inline">\(X\)</span> that has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 = \sigma^2\left(\mu\right)\)</span>, ie. its variance depends on its mean. If we have a ‘well-behaved’ (infinitely differentiable etc.) function <span class="math inline">\(f\left(X\right)\)</span>, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.</p>
@@ -383,8 +369,8 @@ f\left(\pi\right) &amp; \propto \int{\frac{1}{\sqrt{u^2\left(1-u^2\right)}}2u\,d
 &amp;\propto \int{\frac{1}{\sqrt{1 - u^2}}}du\\
 &amp; \propto \arcsin{\left(\sqrt{\pi}\right)}.
 \end{align*}\]</span></p>
-<p>Setting <span class="math inline">\(u=\sqrt{\pi}\)</span> again and <span class="math inline">\(f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)\)</span> and using the chain rule, we find</p>
-<p><span class="math display">\[\left[f&#39;\left(\pi\right)\right]^2 = \frac{1}{\sqrt{4\pi\left(1-\pi\right)}} .\]</span>
+<p>Setting <span class="math inline">\(u=\sqrt{\pi}\)</span> again and <span class="math inline">\(f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)\)</span>. Using the chain rule, we find</p>
+<p><span class="math display">\[\left[f&#39;\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .\]</span>
 Finally, we can substitute this into Equation <a href="binary-outcome-variable.html#eq:delta3">(5.3)</a>, with <span class="math inline">\(f\left(X\right) = \arcsin\left(\sqrt{X}\right)\)</span> to find</p>
 <p><span class="math display">\[\begin{align*}
   \operatorname{var}\left[f\left(X\right)\right] &amp; \approx \sigma^2\left(\pi\right)\left[f&#39;\left(\pi\right)\right]^2  \\
@@ -396,21 +382,21 @@ Finally, we can substitute this into Equation <a href="binary-outcome-variable.h
 <div id="a-sample-size-formula" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> A sample size formula<a href="binary-outcome-variable.html#a-sample-size-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For a binary variable, our estimate <span class="math inline">\(p_X\)</span> (the proportion of successes in group <span class="math inline">\(X\)</span>) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of <span class="math inline">\(n\)</span> (less than around 30, which is very small for a clinical trial) or for values of <span class="math inline">\(\pi\)</span> close to 0 or 1, say <span class="math inline">\(\pi&lt;0.15\)</span> or <span class="math inline">\(\pi&gt;0.85\)</span> (this is more likely to be an issue for some trials).</p>
-<p>The linear approximation in Equation <a href="binary-outcome-variable.html#eq:delta1">(5.1)</a> shows us that if <span class="math inline">\(p_X\)</span> is normally distributed then <span class="math inline">\(f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)\)</span> will be [approximately] normally distributed too. In fact, <span class="math inline">\(\arcsin\left(\sqrt{p_A}\right)\)</span> is approximately normally distributed with mean <span class="math inline">\(\arcsin{\left(\sqrt{\pi_A}\right)}\)</span> and variance <span class="math inline">\(1/\left(4\pi_A\right)\)</span>. Using this information, we can test <span class="math inline">\(H_0:\,\pi_A =\pi_B\)</span> at the 100<span class="math inline">\(\alpha\)</span>% confidence level by using the variable</p>
+<p>The linear approximation in Equation <a href="binary-outcome-variable.html#eq:delta1">(5.1)</a> shows us that if <span class="math inline">\(p_X\)</span> is normally distributed then <span class="math inline">\(f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)\)</span> will be [approximately] normally distributed too. In fact, <span class="math inline">\(\arcsin\left(\sqrt{p_X}\right)\)</span> is approximately normally distributed with mean <span class="math inline">\(\arcsin{\left(\sqrt{\pi_X}\right)}\)</span> and variance <span class="math inline">\(1/\left(4\pi_X\right)\)</span>. Using this information, we can test <span class="math inline">\(H_0:\,\pi_T =\pi_C\)</span> at the 100<span class="math inline">\(\alpha\)</span>% confidence level by using the variable</p>
 <p><span class="math display">\[
-D =  \frac{\arcsin{\left(\sqrt{p_A}\right)} - \arcsin{\left(\sqrt{p_B}\right)}}{\frac{1}{\sqrt{4nA}} + \frac{1}{\sqrt{4n_B}}}=  \frac{\arcsin{\left(\sqrt{p_A}\right)} - \arcsin{\left(\sqrt{p_B}\right)}}{\frac{1}{2}\lambda\left(n_A,n_B\right)},
+D =  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\sqrt{\frac{1}{4n_T} + \frac{1}{4n_C}}}=  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\frac{1}{2}\lambda\left(n_T,n_C\right)},
 \]</span>
-which is analogous to the variable <span class="math inline">\(D\)</span> constructed in Section <a href="rct-plan.html#sec-measDcont">2.3</a>; the difference in <span class="math inline">\(f\left(p_A\right)\)</span> and <span class="math inline">\(f\left(p_B\right)\)</span> divided by the standard error of the difference.</p>
+which is analogous to the variable <span class="math inline">\(D\)</span> constructed in Section <a href="rct-plan.html#sec-measDcont">2.3</a>; the difference in <span class="math inline">\(f\left(p_T\right)\)</span> and <span class="math inline">\(f\left(p_C\right)\)</span> divided by the standard error of the difference.</p>
 <p>Using the same logic as in Sections <a href="rct-plan.html#sec-power">2.4</a> and <a href="rct-plan.html#sec-ssformulacont">2.5</a>, the starting place for a sample size formula to achieve significance level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(\beta\)</span> is</p>
 <p><span class="math display">\[
-\frac{2\left(\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}\right)}{\lambda\left(n_A,n_B\right)} = z_\beta + z_{\frac{\alpha}{2}}.
+\frac{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)}{\lambda\left(n_T,n_C\right)} = z_\beta + z_{\frac{\alpha}{2}}.
 \]</span>
 For two groups of equal size <span class="math inline">\(N\)</span>, this leads us to</p>
 <p><span class="math display" id="eq:ssbinary">\[\begin{equation}
-N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}\right)^2}.
+N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)^2}.
 \tag{5.4}
 \end{equation}\]</span></p>
-<p>Because <span class="math inline">\(\arcsin{\left(\sqrt{\pi_A}\right)} - \arcsin{\left(\sqrt{\pi_B}\right)}\)</span> is not a function of <span class="math inline">\(\pi_A - \pi_B\)</span>, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group <span class="math inline">\(\left(\pi_A\right)\)</span> is well understood, and the probability for the intervention group <span class="math inline">\(\left(\pi_B\right)\)</span> can be specified by using the nearest clinically important value of <span class="math inline">\(\pi_B\)</span>.</p>
+<p>Because <span class="math inline">\(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\)</span> is not a function of <span class="math inline">\(\pi_T - \pi_C\)</span>, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group <span class="math inline">\(\left(\pi_C\right)\)</span> is well understood, and the probability for the intervention group <span class="math inline">\(\left(\pi_T\right)\)</span> can be specified by using the nearest clinically important value of <span class="math inline">\(\pi_T\)</span>.</p>
 <div class="example">
 <p><span id="exm:samplesize1" class="example"><strong>Example 5.1  </strong></span><span class="citation">(From <a href="#ref-smith1994randomised">Smith et al. 1994</a>)</span>
 This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was ‘Did the patient die within 30d of the procedure?’, and the trial was designed to have <span class="math inline">\(\alpha=0.05,\,\beta=0.95\)</span>, which gives <span class="math inline">\(z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65\)</span>. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation <a href="binary-outcome-variable.html#eq:ssbinary">(5.4)</a>) gives us</p>
@@ -906,7 +892,7 @@ Subtracting one from the other, we find</p>
 <li>Issues with the data, for example outliers or influential values, may be having a disproportionate impact on the model</li>
 <li>The assumption that the observed data are binomially distributed may be invalid</li>
 </ul>
-<p>It is the second that is likely to be the most problematic, and we will explore now a couple of ways to check. There are many diagnostic techniques for binomial data (see eg. <span class="citation">Collett (<a href="#ref-collett_bin">2003a</a>)</span>) but we will only touch on a small number.</p>
+<p>It is the second that is likely to be the most problematic, and we will explore now a couple of ways to check. There are many diagnostic techniques for binomial data (see eg. <span class="citation">Collett (<a href="#ref-collett_bin">2003</a>)</span>) but we will only touch on a small number.</p>
 <p>If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-33" class="example"><strong>Example 5.10  </strong></span>This study is detailed in <span class="citation">Elmunzer et al. (<a href="#ref-elmunzer2012randomized">2012</a>)</span>. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication.</p>
@@ -1057,13 +1043,16 @@ and the estimated probability of having ‘good’ symptom status at four months
 </div>
 </div>
 </div>
+
+
+
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-altman1998confidence" class="csl-entry">
 ———. 1998. <span>“Confidence Intervals for the Number Needed to Treat.”</span> <em>Bmj</em> 317 (7168): 1309–12.
 </div>
 <div id="ref-collett_bin" class="csl-entry">
-Collett, David. 2003a. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+Collett, David. 2003. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
 </div>
 <div id="ref-elmunzer2012randomized" class="csl-entry">
 Elmunzer, B Joseph, James M Scheiman, Glen A Lehman, Amitabh Chak, Patrick Mosler, Peter DR Higgins, Rodney A Hayward, et al. 2012. <span>“A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.”</span> <em>New England Journal of Medicine</em> 366 (15): 1414–22.
@@ -1084,7 +1073,7 @@ Smith, AC, JF Dowsett, RCG Russell, ARW Hatfield, and PB Cotton. 1994. <span>“
         </div>
       </div>
 <a href="rct-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="time-to-event-data-and-survival-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

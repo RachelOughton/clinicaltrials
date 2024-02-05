@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-02-04}
+\date{2024-02-05}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2061,22 +2061,22 @@ x_i & = \mu + \gamma b_i + \epsilon_i & \text{ in group C}\\
 x_i & = \mu + \tau + \gamma b_i + \epsilon_i & \text{ in group T}&.
 \end{aligned}
 \]
-Here, the \(\epsilon_i\) are independent errors with distribution \(N\left(0,\,\sigma^2\right)\), the \(b_i\) are the baseline measurements for \(i=1,\ldots,N_T+N_C\), for groups \(T\) and \(C\) with sizes \(N_T\) and \(N_C\) respectively. Sometimes this is written instead in the form
+Here, the \(\epsilon_i\) are independent errors with distribution \(N\left(0,\,\sigma^2_\epsilon\right)\), the \(b_i\) are the baseline measurements for \(i=1,\ldots,N_T+N_C\), for groups \(T\) and \(C\) with sizes \(N_T\) and \(N_C\) respectively. Sometimes this is written instead in the form
 
 \[ x_i = \mu + \tau G_i+ \gamma b_i + \epsilon_i \]
 where \(G_i\) is 1 if participant \(i\) is in group \(T\) and 0 if they're in group \(C\). This is a factor variable, which you may remember from Stats Modelling II (if you took it). If \(G_i=1\) (ie. participant \(i\) is in group \(T\)) then \(\tau\) is added. If \(G_i=0\) (ie. participant \(i\) is in group \(C\)) then it isn't.
 
-We now have four parameters to estimate: \(\mu,\,\tau,\,\gamma\) and \(\sigma^2\). For the first three we can use least squares (as you have probably seen for linear regression). Our aim is to minimise the sum of squares
+We now have four parameters to estimate: \(\mu,\,\tau,\,\gamma\) and \(\sigma^2_\epsilon\). For the first three we can use least squares (as you have probably seen for linear regression). Our aim is to minimise the sum of squares
 
 \[S\left(\mu,\, \tau,\,\gamma\right) = \sum\limits_{i\text{ in }T} \left(x_i - \mu - \tau - \gamma b_i\right)^2 + \sum\limits_{i\text{ in }C} \left(x_i - \mu - \gamma b_i\right)^2.\]
 
-This leads to estimates \(\hat{\mu},\, \hat{\tau}\) and \(\hat{\gamma}\). We won't worry about how this sum is minimised, since we'll always be using pre-written R functions. We can use the estimates \(\hat{\mu},\, \hat{\tau}\) and \(\hat{\gamma}\) to estimate \(\sigma^2\), using
+This leads to estimates \(\hat{\mu},\, \hat{\tau}\) and \(\hat{\gamma}\). We won't worry about how this sum is minimised, since we'll always be using pre-written R functions. We can use the estimates \(\hat{\mu},\, \hat{\tau}\) and \(\hat{\gamma}\) to estimate \(\sigma^2_\epsilon\), using
 
-\[\hat{\sigma}^2 = \frac{S\left(\hat{\mu},\hat{\tau}, \hat{\gamma}\right)}{N_T + N_C -3}.\]
+\[\hat{\sigma_\epsilon}^2 = \frac{S\left(\hat{\mu},\hat{\tau}, \hat{\gamma}\right)}{N_T + N_C -3}.\]
 The general form for this is
 
-\[ \hat{\sigma}^2 = \frac{SSE}{n-p},\]
-where \(SSE\) is the residual sum of squares, \(n\) is the number of data points and \(p\) the number of parameters (apart from \(\sigma^2\)) being estimated. If you want to know why that is, you can find out \href{https://pages.stern.nyu.edu/~wgreene/MathStat/GreeneChapter4.pdf}{here} (look particularly at page 62), but we will just take it as given!
+\[ \hat{\sigma_\epsilon}^2 = \frac{SSE}{n-p},\]
+where \(SSE\) is the residual sum of squares, \(n\) is the number of data points and \(p\) the number of parameters (apart from \(\sigma_\epsilon^2\)) being estimated. If you want to know why that is, you can find out \href{https://pages.stern.nyu.edu/~wgreene/MathStat/GreeneChapter4.pdf}{here} (look particularly at page 62), but we will just take it as given!
 
 As well as generating a fitted value \(\hat{\tau}\), we (or rather R!) will also find the standard error of \(\hat\tau\), and we can use this to generate a confidence interval for the treatment effect \(\tau\).
 
@@ -2135,7 +2135,7 @@ For our previous methods we have calculated a confidence interval for the treatm
 The model has \(n-p=13\) degrees of freedom because there are \(n=16\) data points and we are estimating \(p=3\) parameters.
 Notice that unlike our previous confidence intervals, this doesn't contain zero, and so our analysis has enabled us to conclude that there is a significant reduction in blood pressure with Captopril. You can also see this in that \(p=0.03079<0.05\). However, you can tell from the width of the interval (and the fact that \(p\) is still quite close to 0.05) that there is still a lot of uncertainty about \(\tau\).
 
-The `Residual standard error' term near the bottom of the linear model summary is the estimate of \(\hat{\sigma}\), so here we have \(\hat{\sigma}^2 = 5.869^2 = 34.44.\)
+The `Residual standard error' term near the bottom of the linear model summary is the estimate of \(\hat{\sigma_\epsilon}\), so here we have \(\hat{\sigma_\epsilon}^2 = 5.869^2 = 34.44.\)
 
 As with any fitted model, we should check the residuals.
 
