@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Binary outcome variable | Clinical Trials 4H</title>
+  <title>6 Analysis for binary outcomes | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Binary outcome variable | Clinical Trials 4H" />
+  <meta property="og:title" content="6 Analysis for binary outcomes | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Binary outcome variable | Clinical Trials 4H" />
+  <meta name="twitter:title" content="6 Analysis for binary outcomes | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-05" />
+<meta name="date" content="2024-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rct-analysis.html"/>
+<link rel="prev" href="ss-bin.html"/>
 <link rel="next" href="computer-practical-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -256,21 +256,22 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>II Part II: Other sorts of outcome variables</b></span></li>
-<li class="chapter" data-level="5" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html"><i class="fa fa-check"></i><b>5</b> Binary outcome variable</a>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ss-bin"><i class="fa fa-check"></i><b>5.1</b> Sample size for a binary variable</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#delta-method"><i class="fa fa-check"></i><b>5.1.1</b> The Delta Method</a></li>
-<li class="chapter" data-level="5.1.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.1.2</b> A sample size formula</a></li>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#analysis"><i class="fa fa-check"></i><b>5.2</b> Analysis</a>
+<li class="chapter" data-level="6" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>5.2.1</b> Point estimates and Hypothesis tests</a></li>
+<li class="chapter" data-level="6.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>5.3</b> Measures of difference for binary data</a>
+<li class="chapter" data-level="6.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ard-and-nnt"><i class="fa fa-check"></i><b>5.3.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -310,105 +311,15 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="binary-outcome-variable" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> Binary outcome variable<a href="binary-outcome-variable.html#binary-outcome-variable" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>So far almost everything we’ve covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the <span class="math inline">\(t\)</span>-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).</p>
-<p>A binary outcome might be something like ‘the patient was alive 2 years after the procedure’ or not, or ‘the patient was clear of eczema within a month’ or not. Such variables are often coded as ‘success’ or ‘failure’, or 1 or 0.</p>
-<div id="ss-bin" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Sample size for a binary variable<a href="binary-outcome-variable.html#ss-bin" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter <a href="rct-plan.html#rct-plan">2</a> will not work, so in this section we’ll work through a similar method developed for binary variables.</p>
-<p>Suppose we conduct a trial with a binary primary outcome variable and two groups, <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>, containing <span class="math inline">\(n_T\)</span> and <span class="math inline">\(n_C\)</span> participants respectively. The number of successes in each group, <span class="math inline">\(R_T\)</span> and <span class="math inline">\(R_C\)</span>, will be Binomially distributed,</p>
-<p><span class="math display">\[\begin{align*}
-      R_T &amp;\sim{Bi\left(n_T,\, \pi_t\right)} \\
-      R_C &amp;\sim{Bi\left(n_C,\,\pi_C\right)}.
-\end{align*}\]</span></p>
-<p>Our null hypothesis now is therefore that <span class="math inline">\(\pi_T = \pi_C\)</span>, ie. that the probability of success is the same in each group, and we will need enough participants to test this hypothesis with sufficient power. With the trial data we will be able to produce estimates</p>
-<p><span class="math display">\[\begin{align*}
-      p_T &amp; = \frac{R_T}{n_T} \\
-      p_C &amp; = \frac{R_C}{n_C}.
-\end{align*}\]</span></p>
-<p>Recall that the variance of <span class="math inline">\(p_X\)</span> (where <span class="math inline">\(X\)</span> is <span class="math inline">\(T\)</span> or <span class="math inline">\(C\)</span>) is <span class="math inline">\(\pi_X\left(1-\pi_X\right)\)</span>, such that the variance depends on the mean. This means there is no free parameter equivalent to <span class="math inline">\(\sigma\)</span> in the binary situation, and the number of participants required will depend on the approximate value of <span class="math inline">\(\pi_T\)</span> and <span class="math inline">\(\pi_C\)</span>. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called <em>the delta method</em>.</p>
-<div id="delta-method" class="section level3 hasAnchor" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> The Delta Method<a href="binary-outcome-variable.html#delta-method" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We start with a random variable <span class="math inline">\(X\)</span> that has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 = \sigma^2\left(\mu\right)\)</span>, ie. its variance depends on its mean. If we have a ‘well-behaved’ (infinitely differentiable etc.) function <span class="math inline">\(f\left(X\right)\)</span>, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.</p>
-<p>First, we expand <span class="math inline">\(f\left(X\right)\)</span> in a first-order Taylor series about <span class="math inline">\(\mu\)</span>, which gives us</p>
-<p><span class="math display" id="eq:delta1">\[\begin{equation}
-      f\left(X\right) \approx f\left(\mu\right) + \left(X-\mu\right)f&#39;\left(\mu\right)
-\tag{5.1}
-\end{equation}\]</span></p>
-<p>and therefore</p>
-<p><span class="math display" id="eq:delta2">\[\begin{equation}
-\left(f\left(X\right) - f\left(\mu\right)\right)^2 \approx \left(X-\mu\right)^2\left[f&#39;\left(\mu\right)\right]^2.
-\tag{5.2}
-\end{equation}\]</span></p>
-<p>If we take expectations of Equation <a href="binary-outcome-variable.html#eq:delta1">(5.1)</a> we find <span class="math inline">\(E\left(f\left(X\right)\right) \approx f\left(\mu\right)\)</span>. We can use this in the left-hand side of Equation <a href="binary-outcome-variable.html#eq:delta2">(5.2)</a> so that when we take expectations of Equation <a href="binary-outcome-variable.html#eq:delta2">(5.2)</a> we find</p>
-<p><span class="math display" id="eq:delta3">\[\begin{equation}
-  \operatorname{var}\left(f\left(X\right)\right) = \sigma^2\left(\mu\right)\left[f&#39;\left(\mu\right)\right]^2,
-\tag{5.3}
-\end{equation}\]</span></p>
-<p>where both sides come from</p>
-<p><span class="math display">\[\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right] .\]</span>
-This series of approximations, which generally works well, is the Delta method.</p>
-<p>One way in which it is often used, and the way in which we will use it now, is to find a transformation <span class="math inline">\(f\left(X\right)\)</span> for which (at least approximately) the variance is unrelated to the mean. To do this, we solve the differential equation</p>
-<p><span class="math display">\[ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \left[f&#39;\left(\mu\right)\right]^2 = \text{constant}. \]</span>
-In the case of proportions for a binary variable, this becomes</p>
-<p><span class="math display">\[ \frac{\pi\left(1-\pi\right)}{n} \left[f&#39;\left(\pi\right)\right]^2 = K\]</span>
-for some constant <span class="math inline">\(K\)</span>. We can rearrange this to</p>
-<p><span class="math display">\[f\left(\pi\right) \propto{ \int{\frac{1}{\sqrt{\pi\left(1-\pi\right)}}d\pi}}\]</span>
-and by substituting <span class="math inline">\(\pi = u^2\)</span> we find</p>
-<p><span class="math display">\[\begin{align*}
-f\left(\pi\right) &amp; \propto \int{\frac{1}{\sqrt{u^2\left(1-u^2\right)}}2u\,du}\\
-&amp;\propto \int{\frac{1}{\sqrt{1 - u^2}}}du\\
-&amp; \propto \arcsin{\left(\sqrt{\pi}\right)}.
-\end{align*}\]</span></p>
-<p>Setting <span class="math inline">\(u=\sqrt{\pi}\)</span> again and <span class="math inline">\(f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)\)</span>. Using the chain rule, we find</p>
-<p><span class="math display">\[\left[f&#39;\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .\]</span>
-Finally, we can substitute this into Equation <a href="binary-outcome-variable.html#eq:delta3">(5.3)</a>, with <span class="math inline">\(f\left(X\right) = \arcsin\left(\sqrt{X}\right)\)</span> to find</p>
-<p><span class="math display">\[\begin{align*}
-  \operatorname{var}\left[f\left(X\right)\right] &amp; \approx \sigma^2\left(\pi\right)\left[f&#39;\left(\pi\right)\right]^2  \\
-&amp; \approx{\frac{\pi\left(1-\pi\right)}{n}\cdot\frac{1}{4\pi\left(1-\pi\right)}}\\
-&amp; \approx{\frac{1}{4n}},
-\end{align*}\]</span></p>
-<p>and we have achieved our aim of finding a transformation of <span class="math inline">\(X\)</span> whose variance is not related to the mean. This is sometimes called the <em>angular transformation</em>.</p>
-</div>
-<div id="a-sample-size-formula" class="section level3 hasAnchor" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> A sample size formula<a href="binary-outcome-variable.html#a-sample-size-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For a binary variable, our estimate <span class="math inline">\(p_X\)</span> (the proportion of successes in group <span class="math inline">\(X\)</span>) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of <span class="math inline">\(n\)</span> (less than around 30, which is very small for a clinical trial) or for values of <span class="math inline">\(\pi\)</span> close to 0 or 1, say <span class="math inline">\(\pi&lt;0.15\)</span> or <span class="math inline">\(\pi&gt;0.85\)</span> (this is more likely to be an issue for some trials).</p>
-<p>The linear approximation in Equation <a href="binary-outcome-variable.html#eq:delta1">(5.1)</a> shows us that if <span class="math inline">\(p_X\)</span> is normally distributed then <span class="math inline">\(f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)\)</span> will be [approximately] normally distributed too. In fact, <span class="math inline">\(\arcsin\left(\sqrt{p_X}\right)\)</span> is approximately normally distributed with mean <span class="math inline">\(\arcsin{\left(\sqrt{\pi_X}\right)}\)</span> and variance <span class="math inline">\(1/\left(4\pi_X\right)\)</span>. Using this information, we can test <span class="math inline">\(H_0:\,\pi_T =\pi_C\)</span> at the 100<span class="math inline">\(\alpha\)</span>% confidence level by using the variable</p>
-<p><span class="math display">\[
-D =  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\sqrt{\frac{1}{4n_T} + \frac{1}{4n_C}}}=  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\frac{1}{2}\lambda\left(n_T,n_C\right)},
-\]</span>
-which is analogous to the variable <span class="math inline">\(D\)</span> constructed in Section <a href="rct-plan.html#sec-measDcont">2.3</a>; the difference in <span class="math inline">\(f\left(p_T\right)\)</span> and <span class="math inline">\(f\left(p_C\right)\)</span> divided by the standard error of the difference.</p>
-<p>Using the same logic as in Sections <a href="rct-plan.html#sec-power">2.4</a> and <a href="rct-plan.html#sec-ssformulacont">2.5</a>, the starting place for a sample size formula to achieve significance level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(\beta\)</span> is</p>
-<p><span class="math display">\[
-\frac{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)}{\lambda\left(n_T,n_C\right)} = z_\beta + z_{\frac{\alpha}{2}}.
-\]</span>
-For two groups of equal size <span class="math inline">\(N\)</span>, this leads us to</p>
-<p><span class="math display" id="eq:ssbinary">\[\begin{equation}
-N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)^2}.
-\tag{5.4}
-\end{equation}\]</span></p>
-<p>Because <span class="math inline">\(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\)</span> is not a function of <span class="math inline">\(\pi_T - \pi_C\)</span>, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group <span class="math inline">\(\left(\pi_C\right)\)</span> is well understood, and the probability for the intervention group <span class="math inline">\(\left(\pi_T\right)\)</span> can be specified by using the nearest clinically important value of <span class="math inline">\(\pi_T\)</span>.</p>
-<div class="example">
-<p><span id="exm:samplesize1" class="example"><strong>Example 5.1  </strong></span><span class="citation">(From <a href="#ref-smith1994randomised">Smith et al. 1994</a>)</span>
-This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was ‘Did the patient die within 30d of the procedure?’, and the trial was designed to have <span class="math inline">\(\alpha=0.05,\,\beta=0.95\)</span>, which gives <span class="math inline">\(z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65\)</span>. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation <a href="binary-outcome-variable.html#eq:ssbinary">(5.4)</a>) gives us</p>
-<p><span class="math display">\[ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.2}\right)} - \arcsin{\left(\sqrt{0.05}\right)}\right)^2} = 114.9, \]</span>
-and so each group in our trial should contain 115 patients.</p>
-<p>If instead our aim had been to detect a change from around 0.5 to 0.35 (the same in terms of <span class="math inline">\(\pi_A - \pi_B\)</span>), we would instead have needed</p>
-<p><span class="math display">\[ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.5}\right)} - \arcsin{\left(\sqrt{0.35}\right)}\right)^2} = 280.8 ,\]</span>
-that is 281 patients per trial arm.</p>
-</div>
-</div>
-</div>
-<div id="analysis" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Analysis<a href="binary-outcome-variable.html#analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For a group <span class="math inline">\(n\)</span> of participants, we will have allocated <span class="math inline">\(n_C\)</span> to the control group (group <span class="math inline">\(C\)</span>), and <span class="math inline">\(n_T\)</span> to the treatment group (group <span class="math inline">\(T\)</span>). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group <span class="math inline">\(C\)</span> the number of ‘successes’ would be modelled by</p>
+<div id="analysis-for-binary-outcomes" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Analysis for binary outcomes<a href="analysis-for-binary-outcomes.html#analysis-for-binary-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For a group of <span class="math inline">\(2n\)</span> participants, we will have allocated <span class="math inline">\(n_C\)</span> to the control group (group <span class="math inline">\(C\)</span>), and <span class="math inline">\(n_T\)</span> to the treatment group (group <span class="math inline">\(T\)</span>). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group <span class="math inline">\(C\)</span> the number of ‘successes’ would be modelled by</p>
 <p><span class="math display">\[R_C \sim \operatorname{Bi}\left(n_C,\,\pi_C\right).\]</span></p>
 <p>Similarly the number of successes in the treatment group can be modelled as
 <span class="math display">\[R_T \sim\operatorname{Bi}\left(n_T,\,\pi_T\right),\]</span>
 and the focus of our analysis is on comparing <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span>. To do this we will require point estimates of both quantities and interval estimates for some measure of the discrepancy between them. We will also need ways to test the null hypothesis that <span class="math inline">\(\pi_C = \pi_T.\)</span></p>
-<div id="point-estimates-and-hypothesis-tests" class="section level3 hasAnchor" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Point estimates and Hypothesis tests<a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="point-estimates-and-hypothesis-tests" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Point estimates and Hypothesis tests<a href="analysis-for-binary-outcomes.html#point-estimates-and-hypothesis-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>First of all, we can tabulate the results of a trial with a binary outcome like this:</p>
 <table>
 <thead>
@@ -451,7 +362,7 @@ p_T &amp;= \frac{r_T}{n_T}
 <p>We know from the properties of the binomial distribtion that <span class="math inline">\(\operatorname{E}\left(p_C\right) = \pi_C\)</span> and
 <span class="math display">\[\operatorname{Var}\left(p_C\right) = \frac{\pi_C\left(1-\pi_C\right)}{n_C},\]</span>
 and similarly for <span class="math inline">\(\operatorname{E}\left(p_T\right)\)</span> and <span class="math inline">\(\operatorname{Var}\left(p_T\right)\)</span>.</p>
-<p>If we think in terms of individual participants, we have the variable <span class="math inline">\(y_{iC}\)</span> for the outcome of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span>, with <span class="math inline">\(y_{iC}=1\)</span> if the participant’s outcome is ‘success’ and <span class="math inline">\(y_{iC}=0\)</span> otherwise. Then we have</p>
+<p>If we think in terms of individual participants, we have the variable <span class="math inline">\(Y_{iC}\)</span> for the outcome of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span>, with <span class="math inline">\(Y_{iC}=1\)</span> if the participant’s outcome is ‘success’ and <span class="math inline">\(Y_{iC}=0\)</span> otherwise. Then we have</p>
 <p><span class="math display">\[r_C = \sum\limits_{i=1}^{n_C} y_{iC},\]</span>
 and similarly for group <span class="math inline">\(T\)</span>. Since <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span> are therefore sample means, we can apply the Central Limit Theorem to conclude that <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_P\)</span> can be approximated by normal distributions:</p>
 <p><span class="math display">\[
@@ -469,7 +380,7 @@ and in calculations we replace <span class="math inline">\(\pi\)</span> with <sp
 <p>Putting all this together, our test statistic is</p>
 <p><span class="math display">\[Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 5.2  </strong></span>The data in this example comes from <span class="citation">Marshall (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
+<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 6.1  </strong></span>The data in this example comes from <span class="citation">Marshall (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
 <pre><code>##               improved
 ## arm            FALSE TRUE
 ##   Streptomycin    17   38
@@ -492,44 +403,44 @@ Z &amp; = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52}
 \end{aligned}
 \]</span></p>
 <p>Finally, we can find the <span class="math inline">\(p\)</span>-value of this test statistic (making sure to have two tails!)</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="binary-outcome-variable.html#cb13-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">3.765</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="analysis-for-binary-outcomes.html#cb13-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">3.765</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## [1] 0.0001665491</code></pre>
 <p>So we can reject the hypothesis that streptomycin has no effect on tuberculosis at the <span class="math inline">\(\alpha=0.05\)</span> level (and indeed many lower levels).</p>
 </div>
-<div id="an-alternative-approach-chi-squared" class="section level4 hasAnchor" number="5.2.1.1">
-<h4><span class="header-section-number">5.2.1.1</span> An alternative approach: chi-squared<a href="binary-outcome-variable.html#an-alternative-approach-chi-squared" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="an-alternative-approach-chi-squared" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> An alternative approach: chi-squared<a href="analysis-for-binary-outcomes.html#an-alternative-approach-chi-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another way to approach this would be to conduct a <strong>chi-squared</strong> test.</p>
 <p>In a chi-squared test, we first calculate the <strong>expected</strong> values <span class="math inline">\(\left(E_i\right)\)</span> in each box of the summary table, and compare them to the <strong>observed</strong> values <span class="math inline">\(\left(O_i\right)\)</span> by finding the summary statistic</p>
 <p><span class="math display">\[ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.\]</span></p>
-<p>Under the null hypothesis (that <span class="math inline">\(p_C = p_T\)</span>) this has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the <span class="math inline">\(\chi^2_1\)</span> distribution.</p>
+<p>Under the null hypothesis (that <span class="math inline">\(\pi_C = \pi_T\)</span>) this has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the <span class="math inline">\(\chi^2_1\)</span> distribution.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-26" class="example"><strong>Example 5.3  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
+<p><span id="exm:unlabeled-div-26" class="example"><strong>Example 6.2  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
 <pre><code>##               improved
 ## arm             FALSE   TRUE
 ##   Streptomycin 26.730 28.270
 ##   Control      25.272 26.728</code></pre>
 <p>We can therefore calculate the <span class="math inline">\(\chi^2\)</span> statistic by looping through the elements of the tables:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="binary-outcome-variable.html#cb16-1" tabindex="-1"></a>sum_chi_sq <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
-<span id="cb16-2"><a href="binary-outcome-variable.html#cb16-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
-<span id="cb16-3"><a href="binary-outcome-variable.html#cb16-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
-<span id="cb16-4"><a href="binary-outcome-variable.html#cb16-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
-<span id="cb16-5"><a href="binary-outcome-variable.html#cb16-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
-<span id="cb16-6"><a href="binary-outcome-variable.html#cb16-6" tabindex="-1"></a>    tmp <span class="ot">=</span> ((tab_obs[i,j] <span class="sc">-</span> tab_exp[i,j])<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>tab_exp[i,j]</span>
-<span id="cb16-7"><a href="binary-outcome-variable.html#cb16-7" tabindex="-1"></a>    sum_chi_sq <span class="ot">=</span> sum_chi_sq <span class="sc">+</span> tmp</span>
-<span id="cb16-8"><a href="binary-outcome-variable.html#cb16-8" tabindex="-1"></a>  }</span>
-<span id="cb16-9"><a href="binary-outcome-variable.html#cb16-9" tabindex="-1"></a>}</span>
-<span id="cb16-10"><a href="binary-outcome-variable.html#cb16-10" tabindex="-1"></a>sum_chi_sq</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="analysis-for-binary-outcomes.html#cb16-1" tabindex="-1"></a>sum_chi_sq <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
+<span id="cb16-2"><a href="analysis-for-binary-outcomes.html#cb16-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
+<span id="cb16-3"><a href="analysis-for-binary-outcomes.html#cb16-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
+<span id="cb16-4"><a href="analysis-for-binary-outcomes.html#cb16-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb16-5"><a href="analysis-for-binary-outcomes.html#cb16-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb16-6"><a href="analysis-for-binary-outcomes.html#cb16-6" tabindex="-1"></a>    tmp <span class="ot">=</span> ((tab_obs[i,j] <span class="sc">-</span> tab_exp[i,j])<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>tab_exp[i,j]</span>
+<span id="cb16-7"><a href="analysis-for-binary-outcomes.html#cb16-7" tabindex="-1"></a>    sum_chi_sq <span class="ot">=</span> sum_chi_sq <span class="sc">+</span> tmp</span>
+<span id="cb16-8"><a href="analysis-for-binary-outcomes.html#cb16-8" tabindex="-1"></a>  }</span>
+<span id="cb16-9"><a href="analysis-for-binary-outcomes.html#cb16-9" tabindex="-1"></a>}</span>
+<span id="cb16-10"><a href="analysis-for-binary-outcomes.html#cb16-10" tabindex="-1"></a>sum_chi_sq</span></code></pre></div>
 <pre><code>## [1] 14.17595</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="binary-outcome-variable.html#cb18-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(sum_chi_sq, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="analysis-for-binary-outcomes.html#cb18-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(sum_chi_sq, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0001664847</code></pre>
 <p>and again we have a very significant result.</p>
 <p>In fact, these two tests are almost equivalent, and we have that <span class="math inline">\(\sqrt{X^2} = Z\)</span>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="binary-outcome-variable.html#cb20-1" tabindex="-1"></a><span class="fu">sqrt</span>(sum_chi_sq)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="analysis-for-binary-outcomes.html#cb20-1" tabindex="-1"></a><span class="fu">sqrt</span>(sum_chi_sq)</span></code></pre></div>
 <pre><code>## [1] 3.765097</code></pre>
 </div>
 </div>
-<div id="likelihood-a-more-rigorous-way" class="section level4 hasAnchor" number="5.2.1.2">
-<h4><span class="header-section-number">5.2.1.2</span> Likelihood: A more rigorous way<a href="binary-outcome-variable.html#likelihood-a-more-rigorous-way" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="likelihood-a-more-rigorous-way" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Likelihood: A more rigorous way<a href="analysis-for-binary-outcomes.html#likelihood-a-more-rigorous-way" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.</p>
 <p>Earlier we set up notation <span class="math inline">\(y_{iC}\)</span> to be outcome variable (0 or 1, in this case) of the <span class="math inline">\(i\)</span>-th participant in the control group (and so on), and we will use that here.</p>
 <p>The contribution of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span> to the likelihood is</p>
@@ -567,32 +478,31 @@ where we use <span class="math inline">\(p,\, r,\, n\)</span> to denote the pool
 <p><span class="math display">\[\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),\]</span>
 where <span class="math inline">\(G\)</span> is the set of subgroups (group <span class="math inline">\(C\)</span> success etc.). Under the null hypothesis that <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, and for sufficiently large <span class="math inline">\(n_C,\;n_T\)</span>, <span class="math inline">\(\lambda_{LR}\)</span> has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-27" class="example"><strong>Example 5.4  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="binary-outcome-variable.html#cb22-1" tabindex="-1"></a>sum_LR <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
-<span id="cb22-2"><a href="binary-outcome-variable.html#cb22-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
-<span id="cb22-3"><a href="binary-outcome-variable.html#cb22-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
-<span id="cb22-4"><a href="binary-outcome-variable.html#cb22-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
-<span id="cb22-5"><a href="binary-outcome-variable.html#cb22-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
-<span id="cb22-6"><a href="binary-outcome-variable.html#cb22-6" tabindex="-1"></a>    tmp <span class="ot">=</span> tab_obs[i,j] <span class="sc">*</span> <span class="fu">log</span>(tab_obs[i,j]<span class="sc">/</span>tab_exp[i,j])</span>
-<span id="cb22-7"><a href="binary-outcome-variable.html#cb22-7" tabindex="-1"></a>    sum_LR <span class="ot">=</span> sum_LR <span class="sc">+</span> tmp</span>
-<span id="cb22-8"><a href="binary-outcome-variable.html#cb22-8" tabindex="-1"></a>  }</span>
-<span id="cb22-9"><a href="binary-outcome-variable.html#cb22-9" tabindex="-1"></a>}</span>
-<span id="cb22-10"><a href="binary-outcome-variable.html#cb22-10" tabindex="-1"></a>teststat_LR <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>sum_LR</span>
-<span id="cb22-11"><a href="binary-outcome-variable.html#cb22-11" tabindex="-1"></a>teststat_LR</span></code></pre></div>
+<p><span id="exm:unlabeled-div-27" class="example"><strong>Example 6.3  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="analysis-for-binary-outcomes.html#cb22-1" tabindex="-1"></a>sum_LR <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
+<span id="cb22-2"><a href="analysis-for-binary-outcomes.html#cb22-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
+<span id="cb22-3"><a href="analysis-for-binary-outcomes.html#cb22-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
+<span id="cb22-4"><a href="analysis-for-binary-outcomes.html#cb22-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb22-5"><a href="analysis-for-binary-outcomes.html#cb22-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb22-6"><a href="analysis-for-binary-outcomes.html#cb22-6" tabindex="-1"></a>    tmp <span class="ot">=</span> tab_obs[i,j] <span class="sc">*</span> <span class="fu">log</span>(tab_obs[i,j]<span class="sc">/</span>tab_exp[i,j])</span>
+<span id="cb22-7"><a href="analysis-for-binary-outcomes.html#cb22-7" tabindex="-1"></a>    sum_LR <span class="ot">=</span> sum_LR <span class="sc">+</span> tmp</span>
+<span id="cb22-8"><a href="analysis-for-binary-outcomes.html#cb22-8" tabindex="-1"></a>  }</span>
+<span id="cb22-9"><a href="analysis-for-binary-outcomes.html#cb22-9" tabindex="-1"></a>}</span>
+<span id="cb22-10"><a href="analysis-for-binary-outcomes.html#cb22-10" tabindex="-1"></a>teststat_LR <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>sum_LR</span>
+<span id="cb22-11"><a href="analysis-for-binary-outcomes.html#cb22-11" tabindex="-1"></a>teststat_LR</span></code></pre></div>
 <pre><code>## [1] 14.5028</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="binary-outcome-variable.html#cb24-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(teststat_LR, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="analysis-for-binary-outcomes.html#cb24-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(teststat_LR, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0001399516</code></pre>
 <p>Not surprisingly, this value is quite close to the one we obtained earlier!</p>
 </div>
 </div>
 </div>
-</div>
-<div id="measures-of-difference-for-binary-data" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Measures of difference for binary data<a href="binary-outcome-variable.html#measures-of-difference-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="measures-of-difference-for-binary-data" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Measures of difference for binary data<a href="analysis-for-binary-outcomes.html#measures-of-difference-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the above example the question we were interested in was ‘is what we’ve observed statistically significant?’ and in our streptomycin example the answer was a resounding ‘Yes!’. However, if we then ask questions like ‘How big is the difference between the effects of each treatment?’ or ‘What is the treatment effect?’, things get a bit less clear.</p>
 <p>In the continuous case, it made sense to simply think about the treatment effect as the difference <span class="math inline">\(\mu_T - \mu_C\)</span> between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span>, and each of them requires a different approach.</p>
-<div id="ard-and-nnt" class="section level3 hasAnchor" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Absolute risk difference and Number Needed to Treat<a href="binary-outcome-variable.html#ard-and-nnt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ard-and-nnt" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Absolute risk difference and Number Needed to Treat<a href="analysis-for-binary-outcomes.html#ard-and-nnt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <strong>absolute risk difference</strong> is</p>
 <p><span class="math display">\[\text{ARD} = \pi_T - \pi_C,\]</span>
 and is sometimes used. However, it loses a lot of information that we’d probably like to keep in some how. For example, suppose a treatment reduces the incidence of some terrible symptom from <span class="math inline">\(\pi_C=0.03\)</span> to <span class="math inline">\(\pi_T=0.01\)</span>. The absolute risk difference is <span class="math inline">\(0.02\)</span> here. For some other treatment that results in a reduction from <span class="math inline">\(\pi_C=0.57\)</span> to <span class="math inline">\(\pi_T = 0.55\)</span> we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.</p>
@@ -606,7 +516,7 @@ The NNT is the number of patients you’d need to treat (with treatment <span cl
 Our <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval is therefore given by</p>
 <p><span class="math display">\[\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right) \]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-28" class="example"><strong>Example 5.5  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
+<p><span id="exm:unlabeled-div-28" class="example"><strong>Example 6.4  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
 <p>Our estimated treatment effect is (to 3 decimal places)</p>
 <p><span class="math display">\[\hat\tau=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.\]</span>
 Our estimate of the standard error of <span class="math inline">\(\hat\tau\)</span> is</p>
@@ -626,8 +536,8 @@ That is, we would expect to treat nearly three patients before one is improved (
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
-<div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="5.3.1.1">
-<h4><span class="header-section-number">5.3.1.1</span> What if the difference is not significant?<a href="binary-outcome-variable.html#what-if-the-difference-is-not-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.1">
+<h4><span class="header-section-number">6.2.1.1</span> What if the difference is not significant?<a href="analysis-for-binary-outcomes.html#what-if-the-difference-is-not-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will make up some data for a small trial.</p>
 <p>The dataset for our made-up trial is</p>
 <table>
@@ -677,7 +587,7 @@ and altogether the confidence interval for the number needed to treat (NNT) is t
 <p><span class="citation">Altman (<a href="#ref-altman1998confidence">1998</a>)</span> (<a href="https://www.bmj.com/content/bmj/317/7168/1309.full.pdf">available here</a>) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!</p>
 </div>
 <div id="problems-with-the-confidence-interval-for-the-ard" class="section level4 unnumbered hasAnchor">
-<h4>Problems with the confidence interval for the ARD<a href="binary-outcome-variable.html#problems-with-the-confidence-interval-for-the-ard" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<h4>Problems with the confidence interval for the ARD<a href="analysis-for-binary-outcomes.html#problems-with-the-confidence-interval-for-the-ard" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>You may well remember from the dim and distant past that the method we have been using so far (which in this section we’ll be calling the ‘standard’ method) is not so reliable if the proportion is close to zero or one. <span class="citation">Newcombe (<a href="#ref-newcombe1998interval">1998</a>)</span> compared eleven different methods for finding confidence intervals for the difference in proportions (as we are doing when we work with the ARD) and found the standard method to be the worst! The coverage probability turns out to be much lower than the nominal value, with a so-called 95% confidence interval being closer to 90% or even 85%. A further problem with this method (although it will rarely affect us in practice in this setting) is that the limits of the confidence interval aren’t forced to be in <span class="math inline">\(\left[-1,1\right]\)</span>.</p>
 <p>The preferred method from <span class="citation">Newcombe (<a href="#ref-newcombe1998interval">1998</a>)</span>, for its ease of implementation and its accuracy, is one that relies on <em>score statistics</em>.</p>
 <p>The first step is to find an interval estimate for a single proportion <span class="math inline">\(\pi\)</span>. As before, this can be written</p>
@@ -700,7 +610,7 @@ which work out to be</p>
 <p>Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 5.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
+<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 6.5  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
 <p><span class="math display">\[\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.\]</span>
 Solving this equation in the usual way (using the quadratic formula) we find the limits</p>
 <pre><code>## [1] 0.5597141 0.7971771</code></pre>
@@ -719,13 +629,13 @@ which is</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 </div>
-<div id="generalising-this-to-two-cases" class="section level4 hasAnchor" number="5.3.1.2">
-<h4><span class="header-section-number">5.3.1.2</span> Generalising this to two cases<a href="binary-outcome-variable.html#generalising-this-to-two-cases" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="generalising-this-to-two-cases" class="section level4 hasAnchor" number="6.2.1.2">
+<h4><span class="header-section-number">6.2.1.2</span> Generalising this to two cases<a href="analysis-for-binary-outcomes.html#generalising-this-to-two-cases" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You’ll be relieved to hear that there is such a method, and we’ll give a sketch here of how it works.</p>
 <p>The limits of the ‘standard method’ confidence interval at significance level <span class="math inline">\(\alpha\)</span> are given by</p>
 <p><span class="math display" id="eq:ardci">\[\begin{equation}
 \left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right).
-\tag{5.5}
+\tag{6.1}
 \end{equation}\]</span></p>
 <p>We can rewrite this as</p>
 <p><span class="math display">\[\begin{equation}
@@ -737,7 +647,7 @@ which is</p>
 \]</span>
 These differences must be calculated using the individual sample confidence interval method.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 5.7  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
+<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 6.6  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
 <p><span class="math display">\[
 \begin{aligned}
 p_T &amp; = \frac{38}{55}\\
@@ -778,16 +688,13 @@ Marshall, Geoffrey. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUBERCULO
 <div id="ref-newcombe1998interval" class="csl-entry">
 Newcombe, Robert G. 1998. <span>“Interval Estimation for the Difference Between Independent Proportions: Comparison of Eleven Methods.”</span> <em>Statistics in Medicine</em> 17 (8): 873–90.
 </div>
-<div id="ref-smith1994randomised" class="csl-entry">
-Smith, AC, JF Dowsett, RCG Russell, ARW Hatfield, and PB Cotton. 1994. <span>“Randomised Trial of Endoscopic Steriting Versus Surgical Bypass in Malignant Low Bileduct Obstruction.”</span> <em>The Lancet</em> 344 (8938): 1655–60.
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="rct-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ss-bin.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

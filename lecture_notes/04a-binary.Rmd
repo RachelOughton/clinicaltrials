@@ -1,6 +1,7 @@
-# (PART) Part II: Other sorts of outcome variables {-}
+# (PART) Part II: Binary outcome variable {-}
 
-# Binary outcome variable
+        
+# (Lecture 10) Sample size for a binary variable {#ss-bin}
 
 *So far almost everything we've covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the $t$-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).*
 
@@ -11,8 +12,7 @@ Binary outcome:
   
 Often coded as 'success' or 'failure', or 1 or 0. 
         
-## Sample size for a binary variable {#ss-bin}
-        
+
 *For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter \@ref(rct-plan) will not work, so in this section we'll work through a similar method developed for binary variables.* 
       
 Suppose we conduct a trial with a binary primary outcome variable and two groups, $T$ and $C$, containing $n_T$ and $n_C$ participants respectively. The number of successes in each group, $R_T$ and $R_C$, will be Binomially distributed,
@@ -47,9 +47,13 @@ With the trial data we find estimates
   
 *This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate value of $\pi_T$ and $\pi_C$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.*
       
-### The Delta Method {#delta-method}
-      
-  We start with a random variable $X$ that has mean $\mu$ and variance $\sigma^2 = \sigma^2\left(\mu\right)$, ie. its variance depends on its mean. If we have a 'well-behaved' (infinitely differentiable etc.) function $f\left(X\right)$, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.
+## The Delta Method {#delta-method}
+
+Suppose a random variable $X$ has mean $\mu$ and variance $\sigma^2 = \sigma^2\left(\mu\right)$, ie. its variance depends on its mean. 
+
+If we have a 'well-behaved' (infinitely differentiable etc.) function $f\left(X\right)$, what are its mean and variance? 
+
+*To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.*
       
 First, we expand $f\left(X\right)$ in a first-order Taylor series about $\mu$, which gives us
 
@@ -65,7 +69,9 @@ and therefore
 (\#eq:delta2)
 \end{equation}
   
-  If we take expectations of Equation \@ref(eq:delta1) we find $E\left(f\left(X\right)\right) \approx f\left(\mu\right)$. We can use this in the left-hand side of Equation \@ref(eq:delta2)  so that when we take expectations of Equation \@ref(eq:delta2) we find
+  Taking expectations of Equation \@ref(eq:delta1) we find $E\left(f\left(X\right)\right) \approx f\left(\mu\right)$. 
+  
+Use this in the LHS of Equation \@ref(eq:delta2) so that when we take expectations of Equation \@ref(eq:delta2) we find
   
   \begin{equation} 
   \operatorname{var}\left(f\left(X\right)\right) = \sigma^2\left(\mu\right)\left[f'\left(\mu\right)\right]^2,
@@ -74,10 +80,11 @@ and therefore
 
 where both sides come from 
 
-$$\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right] .$$ 
+$$\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right].$$ 
+
 This series of approximations, which generally works well, is the Delta method. 
 
-One way in which it is often used, and the way in which we will use it now, is to find a transformation $f\left(X\right)$ for which (at least approximately) the variance is unrelated to the mean. To do this, we solve the differential equation
+We use the Delta method to find a transformation $f\left(X\right)$ for which (at least approximately) the variance is unrelated to the mean. To do this, we solve the differential equation
 
 $$ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \left[f'\left(\mu\right)\right]^2 = \text{constant}. $$
     In the case of proportions for a binary variable, this becomes
@@ -85,18 +92,22 @@ $$ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \le
   $$ \frac{\pi\left(1-\pi\right)}{n} \left[f'\left(\pi\right)\right]^2 = K$$
 for some constant $K$. We can rearrange this to
 
-$$f\left(\pi\right) \propto{ \int{\frac{1}{\sqrt{\pi\left(1-\pi\right)}}d\pi}}$$
-and by substituting $\pi = u^2$ we find
+$$f'\left(\pi\right) = \sqrt{\frac{Kn}{\pi\left(1-\pi\right)} } \propto \sqrt{\frac{1}{\pi\left(1-\pi\right)}}.$$
+So we need
+
+$$\int^\pi \sqrt{\frac{1}{u\left(1-u\right)}}du, $$
+where the notation indicates that we want the anti-derivative, evaluated at $\pi$. By substituting $u = w^2$ we find
 
 \begin{align*}
-f\left(\pi\right) & \propto \int{\frac{1}{\sqrt{u^2\left(1-u^2\right)}}2u\,du}\\
-&\propto \int{\frac{1}{\sqrt{1 - u^2}}}du\\
+f\left(\pi\right) & \propto \int^\pi{\frac{1}{\sqrt{w^2\left(1-w^2\right)}}2w\,dw}\\
+&\propto \int{\frac{1}{\sqrt{1 - w^2}}}dw\\
 & \propto \arcsin{\left(\sqrt{\pi}\right)}.
 \end{align*}
 
-Setting $u=\sqrt{\pi}$ again and $f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)$. Using the chain rule, we find
+Setting $f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)$ and using the chain rule, we find
 
 $$\left[f'\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .$$
+
     Finally, we can substitute this into Equation \@ref(eq:delta3), with $f\left(X\right) = \arcsin\left(\sqrt{X}\right)$ to find
   
   \begin{align*}
@@ -108,11 +119,17 @@ $$\left[f'\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .$$
 
 and we have achieved our aim of finding a transformation of $X$ whose variance is not related to the mean. This is sometimes called the *angular transformation*.
 
-### A sample size formula
+## A sample size formula
 
-For a binary variable, our estimate $p_X$ (the proportion of successes in group $X$) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of $n$ (less than around 30, which is very small for a clinical trial) or for values of $\pi$ close to 0 or 1, say $\pi<0.15$ or $\pi>0.85$ (this is more likely to be an issue for some trials).
+Our estimate $p_X$ (the proportion of successes in group $X$) is approximately normally distributed (by CLT).
 
-The linear approximation in Equation \@ref(eq:delta1) shows us that if $p_X$ is normally distributed then $f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)$ will be [approximately] normally distributed too. In fact, $\arcsin\left(\sqrt{p_X}\right)$ is approximately normally distributed with mean $\arcsin{\left(\sqrt{\pi_X}\right)}$ and variance $1/\left(4\pi_X\right)$. Using this information, we can test $H_0:\,\pi_T =\pi_C$ at the 100$\alpha$% confidence level by using the variable 
+Not true for $n\leq{30}$ ish (very small for a clinical trial) or for $\pi$ close to 0 or 1, say $\pi<0.15$ or $\pi>0.85$ (this is more likely to be an issue for some trials).
+
+The linear approximation in Equation \@ref(eq:delta1) shows us that if $p_X$ is normally distributed then $f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)$ will be [approximately] normally distributed too. 
+
+In fact, $\arcsin\left(\sqrt{p_X}\right)$ is approximately normally distributed with mean $\arcsin{\left(\sqrt{\pi_X}\right)}$ and variance $1/\left(4\pi_X\right)$. 
+
+Using this information, we can test $H_0:\,\pi_T =\pi_C$ at the 100$\alpha$% confidence level by using the variable 
 
 $$
 D =  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\sqrt{\frac{1}{4n_T} + \frac{1}{4n_C}}}=  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\frac{1}{2}\lambda\left(n_T,n_C\right)},
@@ -131,29 +148,53 @@ N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\s
 (\#eq:ssbinary)
 \end{equation}
 
-Because $\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}$ is not a function of $\pi_T - \pi_C$, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group $\left(\pi_C\right)$ is well understood, and the probability for the intervention group $\left(\pi_T\right)$ can be specified by using the nearest clinically important value of $\pi_T$.
+Because $\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}$ is not a function of $\pi_T - \pi_C$, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. 
+
+In practice, it is likely that $\left(\pi_C\right)$ is well understood, and $\left(\pi_T\right)$ can be specified by using the nearest clinically important value of $\pi_T$.
 
 :::{.example #samplesize1}
 [From @smith1994randomised]
-This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was 'Did the patient die within 30d of the procedure?', and the trial was designed to have $\alpha=0.05,\,\beta=0.95$, which gives $z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65$. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation \@ref(eq:ssbinary)) gives us
+
+Two approaches to managing malignent low bile duct obstruction: 
+
+  * surgical biliary bypass  
+  * endoscopic insertion of a stent. 
+  
+Primary outcome: 'Did the patient die within 30d of the procedure?'
+
+Trial designed to have $\alpha=0.05,\,\beta=0.95$, which gives $z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65$. 
+
+The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. 
+Equation \@ref(eq:ssbinary)) gives 
 
 $$ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.2}\right)} - \arcsin{\left(\sqrt{0.05}\right)}\right)^2} = 114.9, $$
 and so each group in our trial should contain 115 patients. 
 
-If instead our aim had been to detect a change from around 0.5 to 0.35 (the same in terms of $\pi_A - \pi_B$), we would instead have needed 
+If instead our aim had been to detect a change from around 0.5 to 0.35 (the same in terms of $\pi_T - \pi_C$) then
 
 $$ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.5}\right)} - \arcsin{\left(\sqrt{0.35}\right)}\right)^2} = 280.8 ,$$
-that is 281 patients per trial arm.
+that is, 281 patients per trial arm.
 :::
 
+Later in the course we'll look at another way of estimating sample size. 
 
-For a group $n$ of participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group $C$ the number of 'successes' would be modelled by
+# Analysis for binary outcomes
+
+For a group of $n$ participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). 
+
+Natural to model number of 'successes' $R_C$ by
 
 $$R_C \sim \operatorname{Bi}\left(n_C,\,\pi_C\right).$$
 
 Similarly the number of successes in the treatment group can be modelled as 
 $$R_T \sim\operatorname{Bi}\left(n_T,\,\pi_T\right),$$
-and the focus of our analysis is on comparing $\pi_C$ and $\pi_T$. To do this we will require point estimates of both quantities and interval estimates for some measure of the discrepancy between them. We will also need ways to test the null hypothesis that $\pi_C = \pi_T.$
+and the focus of our analysis is on comparing $\pi_C$ and $\pi_T$. 
+
+To do this we need 
+
+  * point estimates of $\pi_C$ and $\pi_T$ 
+  * interval estimates for some measure of the discrepancy between them
+  * ways to test $H_0:\;\pi_C = \pi_T.$
 
 ## Point estimates and Hypothesis tests
 
@@ -165,7 +206,7 @@ First of all, we can tabulate the results of a trial with a binary outcome like 
       **Control**  $r_C$       $n_C-r_C$   $n_C$     
         **Total**  $r$         $n - r$     $n$       
 
-Note that because this is a table of observed values, they are now all in lower case.
+*Note that because this is a table of observed values, they are now all in lower case.*
 
 We can estimate $\pi_C$ and $\pi_T$ by the sample proportions
 
@@ -176,14 +217,21 @@ p_T &= \frac{r_T}{n_T}
 \end{aligned}.
 $$
 
-We know from the properties of the binomial distribtion that $\operatorname{E}\left(p_C\right) = \pi_C$ and 
+We know that $$\operatorname{E}\left(p_C\right) = \pi_C$$ and 
 $$\operatorname{Var}\left(p_C\right) = \frac{\pi_C\left(1-\pi_C\right)}{n_C},$$
 and similarly for $\operatorname{E}\left(p_T\right)$ and $\operatorname{Var}\left(p_T\right)$.
 
-If we think in terms of individual participants, we have the variable $y_{iC}$ for the outcome of the $i$-th patient in group $C$, with $y_{iC}=1$ if the participant's outcome is 'success' and $y_{iC}=0$ otherwise. Then we have 
+If  $Y_{iC}$ is the outcome of the $i$-th patient in group $C$, with
+
+  * $Y_{iC}=1$ if the participant's outcome is 'success' 
+  * $Y_{iC}=0$ otherwise. 
+
+Then we have 
 
 $$r_C = \sum\limits_{i=1}^{n_C} y_{iC},$$
-and similarly for group $T$. Since $p_C$ and $p_T$ are therefore sample means, we can apply the Central Limit Theorem to conclude that $p_C$ and $p_P$ can be approximated by normal distributions:
+and similarly for group $T$. 
+
+Since $p_C$ and $p_T$ are therefore sample means, the Central Limit Theorem $\implies$ $p_C$ and $p_P$ can be approximated by normal distributions:
 
 $$
 \begin{aligned}
@@ -198,7 +246,9 @@ $$ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\pi_c\right)}{n_C}
 
 which we can approximate by substituting in $p_C$ and $p_T$.
 
-However, since under the null hypothesis $\pi_C = \pi_T = \pi$, it would be more appropriate to use this as the common variance. In this case, the variance of $p_T - p_C$ becomes
+Under $H_0$,  $\pi_C = \pi_T = \pi$, so it would be more appropriate to use this as the common variance. 
+
+The variance of $p_T - p_C$ becomes
 
 $$\pi\left(1-\pi\right)\left(\frac{1}{n_C} + \frac{1}{n_T}\right), $$
 and in calculations we replace $\pi$ with $p = r/n$.
@@ -209,7 +259,13 @@ $$Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C
 
 ::: {.example}
 
-The data in this example comes from @strep_tb, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.
+From @strep_tb. 
+
+  * 109 patients with tuberculosis
+  * Assigned to either receive Streptomycin (group $T$), or placebo (group $C$)
+  * Primary outcome variable is whether or not the patient was improved after the treatment period. 
+  
+*The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.*
 
 
 ```{r}
@@ -254,11 +310,14 @@ So we can reject the hypothesis that streptomycin has no effect on tuberculosis 
 
 Another way to approach this would be to conduct a **chi-squared** test.
 
-In a chi-squared test, we first calculate the **expected** values $\left(E_i\right)$ in each box of the summary table, and compare them to the **observed** values $\left(O_i\right)$ by finding the summary statistic
+  * Calculate the **expected** values $\left(E_i\right)$ for each box of the summary table
+  * Compare them to the **observed** values $\left(O_i\right)$ by finding the summary statistic
 
 $$ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.$$
 
-Under the null hypothesis (that $p_C = p_T$) this has a $\chi^2$ distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the $\chi^2_1$ distribution.
+Under $H_0:\; \pi_C = \pi_T$,  the test statistic $X^2 \sim \chi^2_1$. 
+
+*We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the $\chi^2_1$ distribution.*
 
 ::: {.example}
 Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion $p=0.514$ of the total number of patients were improved. There are 52 in the control group, therefore we expect $0.514\times 52 = 26.73$ improved patients in the control group, and by the same logic $0.514\times 55 = 28.27$ in the treatment group. Our expected table is therefore 
@@ -296,7 +355,7 @@ sqrt(sum_chi_sq)
 :::
 
 
-### Likelihood: A more rigorous way
+### (Lecture 11) Likelihood: A more rigorous way
 
 Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.
 

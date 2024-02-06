@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Clinical Trials 4H</title>
+  <title>5 Sample size for a binary variable | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Clinical Trials 4H" />
+  <meta property="og:title" content="5 Sample size for a binary variable | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Clinical Trials 4H" />
+  <meta name="twitter:title" content="5 Sample size for a binary variable | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="rct-intro.html"/>
+<link rel="prev" href="rct-analysis.html"/>
+<link rel="next" href="analysis-for-binary-outcomes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -311,70 +311,100 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Clinical Trials 4H</h1>
-<p class="author"><em>Rachel Oughton</em></p>
-<p class="date"><em>2024-02-06</em></p>
+<div id="ss-bin" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Sample size for a binary variable<a href="ss-bin.html#ss-bin" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>So far almost everything we’ve covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the <span class="math inline">\(t\)</span>-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).</p>
+<p>A binary outcome might be something like ‘the patient was alive 2 years after the procedure’ or not, or ‘the patient was clear of eczema within a month’ or not. Such variables are often coded as ‘success’ or ‘failure’, or 1 or 0.</p>
+<p>For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter <a href="rct-plan.html#rct-plan">2</a> will not work, so in this section we’ll work through a similar method developed for binary variables.</p>
+<p>Suppose we conduct a trial with a binary primary outcome variable and two groups, <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>, containing <span class="math inline">\(n_T\)</span> and <span class="math inline">\(n_C\)</span> participants respectively. The number of successes in each group, <span class="math inline">\(R_T\)</span> and <span class="math inline">\(R_C\)</span>, will be Binomially distributed,</p>
+<p><span class="math display">\[\begin{align*}
+      R_T &amp;\sim{Bi\left(n_T,\, \pi_t\right)} \\
+      R_C &amp;\sim{Bi\left(n_C,\,\pi_C\right)}.
+\end{align*}\]</span></p>
+<p>Our null hypothesis now is therefore that <span class="math inline">\(\pi_T = \pi_C\)</span>, ie. that the probability of success is the same in each group, and we will need enough participants to test this hypothesis with sufficient power. With the trial data we will be able to produce estimates</p>
+<p><span class="math display">\[\begin{align*}
+      p_T &amp; = \frac{R_T}{n_T} \\
+      p_C &amp; = \frac{R_C}{n_C}.
+\end{align*}\]</span></p>
+<p>Recall that the variance of <span class="math inline">\(p_X\)</span> (where <span class="math inline">\(X\)</span> is <span class="math inline">\(T\)</span> or <span class="math inline">\(C\)</span>) is <span class="math inline">\(\pi_X\left(1-\pi_X\right)\)</span>, such that the variance depends on the mean. This means there is no free parameter equivalent to <span class="math inline">\(\sigma\)</span> in the binary situation, and the number of participants required will depend on the approximate value of <span class="math inline">\(\pi_T\)</span> and <span class="math inline">\(\pi_C\)</span>. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called <em>the delta method</em>.</p>
+<div id="delta-method" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> The Delta Method<a href="ss-bin.html#delta-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We start with a random variable <span class="math inline">\(X\)</span> that has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 = \sigma^2\left(\mu\right)\)</span>, ie. its variance depends on its mean. If we have a ‘well-behaved’ (infinitely differentiable etc.) function <span class="math inline">\(f\left(X\right)\)</span>, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.</p>
+<p>First, we expand <span class="math inline">\(f\left(X\right)\)</span> in a first-order Taylor series about <span class="math inline">\(\mu\)</span>, which gives us</p>
+<p><span class="math display" id="eq:delta1">\[\begin{equation}
+      f\left(X\right) \approx f\left(\mu\right) + \left(X-\mu\right)f&#39;\left(\mu\right)
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>and therefore</p>
+<p><span class="math display" id="eq:delta2">\[\begin{equation}
+\left(f\left(X\right) - f\left(\mu\right)\right)^2 \approx \left(X-\mu\right)^2\left[f&#39;\left(\mu\right)\right]^2.
+\tag{5.2}
+\end{equation}\]</span></p>
+<p>If we take expectations of Equation <a href="ss-bin.html#eq:delta1">(5.1)</a> we find <span class="math inline">\(E\left(f\left(X\right)\right) \approx f\left(\mu\right)\)</span>. We can use this in the left-hand side of Equation <a href="ss-bin.html#eq:delta2">(5.2)</a> so that when we take expectations of Equation <a href="ss-bin.html#eq:delta2">(5.2)</a> we find</p>
+<p><span class="math display" id="eq:delta3">\[\begin{equation}
+  \operatorname{var}\left(f\left(X\right)\right) = \sigma^2\left(\mu\right)\left[f&#39;\left(\mu\right)\right]^2,
+\tag{5.3}
+\end{equation}\]</span></p>
+<p>where both sides come from</p>
+<p><span class="math display">\[\operatorname{var}\left(X\right) = \operatorname{E}\left[\left(X - \mu\right)^2\right] .\]</span>
+This series of approximations, which generally works well, is the Delta method.</p>
+<p>One way in which it is often used, and the way in which we will use it now, is to find a transformation <span class="math inline">\(f\left(X\right)\)</span> for which (at least approximately) the variance is unrelated to the mean. To do this, we solve the differential equation</p>
+<p><span class="math display">\[ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \left[f&#39;\left(\mu\right)\right]^2 = \text{constant}. \]</span>
+In the case of proportions for a binary variable, this becomes</p>
+<p><span class="math display">\[ \frac{\pi\left(1-\pi\right)}{n} \left[f&#39;\left(\pi\right)\right]^2 = K\]</span>
+for some constant <span class="math inline">\(K\)</span>. We can rearrange this to</p>
+<p><span class="math display">\[f&#39;\left(\pi\right) = \sqrt{\frac{Kn}{\pi\left(1-\pi\right)} } \propto \sqrt{\frac{1}{\pi\left(1-\pi\right)}}.\]</span>
+So we need</p>
+<p><span class="math display">\[\int^\pi \sqrt{\frac{1}{u\left(1-u\right)}}du, \]</span>
+where the notation indicates that we want the anti-derivative, evaluated at <span class="math inline">\(\pi\)</span>. By substituting <span class="math inline">\(u = w^2\)</span> we find</p>
+<p><span class="math display">\[\begin{align*}
+f\left(\pi\right) &amp; \propto \int^\pi{\frac{1}{\sqrt{w^2\left(1-w^2\right)}}2w\,dw}\\
+&amp;\propto \int{\frac{1}{\sqrt{1 - w^2}}}dw\\
+&amp; \propto \arcsin{\left(\sqrt{\pi}\right)}.
+\end{align*}\]</span></p>
+<p>Setting <span class="math inline">\(f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)\)</span> and using the chain rule, we find</p>
+<p><span class="math display">\[\left[f&#39;\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .\]</span>
+Finally, we can substitute this into Equation <a href="ss-bin.html#eq:delta3">(5.3)</a>, with <span class="math inline">\(f\left(X\right) = \arcsin\left(\sqrt{X}\right)\)</span> to find</p>
+<p><span class="math display">\[\begin{align*}
+  \operatorname{var}\left[f\left(X\right)\right] &amp; \approx \sigma^2\left(\pi\right)\left[f&#39;\left(\pi\right)\right]^2  \\
+&amp; \approx{\frac{\pi\left(1-\pi\right)}{n}\cdot\frac{1}{4\pi\left(1-\pi\right)}}\\
+&amp; \approx{\frac{1}{4n}},
+\end{align*}\]</span></p>
+<p>and we have achieved our aim of finding a transformation of <span class="math inline">\(X\)</span> whose variance is not related to the mean. This is sometimes called the <em>angular transformation</em>.</p>
 </div>
-<div id="welcome-to-clinical-trials-4h" class="section level1 unnumbered hasAnchor">
-<h1>Welcome to Clinical Trials 4H!<a href="index.html#welcome-to-clinical-trials-4h" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This page contains the notes for Clinical Trials IV. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!</p>
-<div id="practical-details" class="section level2 unnumbered hasAnchor">
-<h2>Practical details<a href="index.html#practical-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="lectures" class="section level3 unnumbered hasAnchor">
-<h3>Lectures<a href="index.html#lectures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Our lectures are 12 noon on Mondays and 9am on Wednesdays, all in ES231. This is in the Earth Sciences / Arthur Holmes building, which is behind (almost surrounding) the Calman Learning Centre. The door of this room is actually labelled ‘Teaching Room 4’.</p>
-</div>
-<div id="computer-classes" class="section level3 unnumbered hasAnchor">
-<h3>Computer classes<a href="index.html#computer-classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We have two 2-hour practicals for this module. They are 11am - 1pm on the Fridays of weeks 14 and 19 (2nd February and 8th March). These classes are in RH-0003. This is Rowan House, which is in Upper Mountjoy, across the pond from the MCS building.</p>
-<p><img src="images/rowanhouse_map.png" /><!-- --></p>
-</div>
-<div id="office-hour" class="section level3 unnumbered hasAnchor">
-<h3>Office Hour<a href="index.html#office-hour" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The office hour will be every Monday, 3-4pm, in MCS 2091 (this is a meeting room, not my office). If you walk up the stairs, keep straight on past the main maths office and computer room (MCS 2094), turn right and it’s on your right through the double doors. Alternatively there are maps in the main areas!</p>
-</div>
-<div id="assessment" class="section level3 unnumbered hasAnchor">
-<h3>Assessment<a href="index.html#assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February, the second on Wednesday 13th March.</p>
-<p>There will also be some formative assignments throughout the course. More details on these to follow.</p>
-</div>
-<div id="books" class="section level3 unnumbered hasAnchor">
-<h3>Books<a href="index.html#books" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The main reference for the first half of the course is <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are <span class="citation">Hulley et al. (<a href="#ref-hulley2013designing">2013</a>)</span>, <span class="citation">Hayes and Moulton (<a href="#ref-hayes2017cluster">2017</a>)</span>. You shouldn’t need to use any of these books, but of course you’re welcome to if you want to read further.</p>
-</div>
-</div>
-<div id="what-to-expect-from-this-module" class="section level2 unnumbered hasAnchor">
-<h2>What to expect from this module<a href="index.html#what-to-expect-from-this-module" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Clinical Trials IV is somewhat different from the majority of statistics modules, because</p>
-<ul>
-<li>It is more focussed on application than on methodology</li>
-<li>It is assessed purely through coursework.</li>
-</ul>
-<p>This means that your experience of it might be different from what you’re used to</p>
-<ul>
-<li>We will cover quite a lot of different statistical methods (drawing on most of the 1H and 2H courses, and some 3H!) but not in great depth</li>
-<li>There is no pressure to memorize anything - indeed, if you really were a trial statistician, you would definitely have access to the internet, various textbooks and even these notes (should they prove useful!).</li>
-<li>There is an emphasis on understanding which method we use and why, and what it means. Hopefully this has been the case in some of your other modules too!</li>
-</ul>
-<div id="what-i-expect-from-you" class="section level3 unnumbered hasAnchor">
-<h3>What I expect from you<a href="index.html#what-i-expect-from-you" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Because we will be covering quite a lot of different areas within statistics, there may be some things that you haven’t seen before (or can’t remember very well). I will try my best to explain them as clearly as I can, but there isn’t time to go into the nuts and bolts of everything we come across. Therefore, if you do feel a bit rusty on some area, you may need to read up on that a bit, so that you’re happy with it. I am very happy to suggest resources from time to time, and you’re welcome to come to the office hour to talk about such things.</p>
-<p>This is the first year this course is running, and so I would also really appreciate your feedback. I may not be able to address everything (or I may only be able to implement things for following years), but if I can act on it quickly then I will!</p>
-
+<div id="a-sample-size-formula" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> A sample size formula<a href="ss-bin.html#a-sample-size-formula" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For a binary variable, our estimate <span class="math inline">\(p_X\)</span> (the proportion of successes in group <span class="math inline">\(X\)</span>) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of <span class="math inline">\(n\)</span> (less than around 30, which is very small for a clinical trial) or for values of <span class="math inline">\(\pi\)</span> close to 0 or 1, say <span class="math inline">\(\pi&lt;0.15\)</span> or <span class="math inline">\(\pi&gt;0.85\)</span> (this is more likely to be an issue for some trials).</p>
+<p>The linear approximation in Equation <a href="ss-bin.html#eq:delta1">(5.1)</a> shows us that if <span class="math inline">\(p_X\)</span> is normally distributed then <span class="math inline">\(f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)\)</span> will be [approximately] normally distributed too. In fact, <span class="math inline">\(\arcsin\left(\sqrt{p_X}\right)\)</span> is approximately normally distributed with mean <span class="math inline">\(\arcsin{\left(\sqrt{\pi_X}\right)}\)</span> and variance <span class="math inline">\(1/\left(4\pi_X\right)\)</span>. Using this information, we can test <span class="math inline">\(H_0:\,\pi_T =\pi_C\)</span> at the 100<span class="math inline">\(\alpha\)</span>% confidence level by using the variable</p>
+<p><span class="math display">\[
+D =  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\sqrt{\frac{1}{4n_T} + \frac{1}{4n_C}}}=  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\frac{1}{2}\lambda\left(n_T,n_C\right)},
+\]</span>
+which is analogous to the variable <span class="math inline">\(D\)</span> constructed in Section <a href="rct-plan.html#sec-measDcont">2.3</a>; the difference in <span class="math inline">\(f\left(p_T\right)\)</span> and <span class="math inline">\(f\left(p_C\right)\)</span> divided by the standard error of the difference.</p>
+<p>Using the same logic as in Sections <a href="rct-plan.html#sec-power">2.4</a> and <a href="rct-plan.html#sec-ssformulacont">2.5</a>, the starting place for a sample size formula to achieve significance level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(\beta\)</span> is</p>
+<p><span class="math display">\[
+\frac{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)}{\lambda\left(n_T,n_C\right)} = z_\beta + z_{\frac{\alpha}{2}}.
+\]</span>
+For two groups of equal size <span class="math inline">\(N\)</span>, this leads us to</p>
+<p><span class="math display" id="eq:ssbinary">\[\begin{equation}
+N = \frac{\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)^2}.
+\tag{5.4}
+\end{equation}\]</span></p>
+<p>Because <span class="math inline">\(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\)</span> is not a function of <span class="math inline">\(\pi_T - \pi_C\)</span>, we cannot express this in terms of the difference itself, but instead need to specify the expected probabilities of success in each group. In practice, it is likely that the success rate for the control group <span class="math inline">\(\left(\pi_C\right)\)</span> is well understood, and the probability for the intervention group <span class="math inline">\(\left(\pi_T\right)\)</span> can be specified by using the nearest clinically important value of <span class="math inline">\(\pi_T\)</span>.</p>
+<div class="example">
+<p><span id="exm:samplesize1" class="example"><strong>Example 5.1  </strong></span><span class="citation">(From <a href="#ref-smith1994randomised">Smith et al. 1994</a>)</span>
+This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was ‘Did the patient die within 30d of the procedure?’, and the trial was designed to have <span class="math inline">\(\alpha=0.05,\,\beta=0.95\)</span>, which gives <span class="math inline">\(z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65\)</span>. The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation <a href="ss-bin.html#eq:ssbinary">(5.4)</a>) gives us</p>
+<p><span class="math display">\[ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.2}\right)} - \arcsin{\left(\sqrt{0.05}\right)}\right)^2} = 114.9, \]</span>
+and so each group in our trial should contain 115 patients.</p>
+<p>If instead our aim had been to detect a change from around 0.5 to 0.35 (the same in terms of <span class="math inline">\(\pi_A - \pi_B\)</span>), we would instead have needed</p>
+<p><span class="math display">\[ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.5}\right)} - \arcsin{\left(\sqrt{0.35}\right)}\right)^2} = 280.8 ,\]</span>
+that is 281 patients per trial arm.</p>
 </div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-hayes2017cluster" class="csl-entry">
-Hayes, Richard J, and Lawrence H Moulton. 2017. <em>Cluster Randomised Trials</em>. CRC press.
-</div>
-<div id="ref-hulley2013designing" class="csl-entry">
-Hulley, Stephen B, Steven R. Cummings, Warren S. Browner, Deborah G. Grady, and Thomas B. Newman. 2013. <em>Designing Clinical Research, Fourth Edition</em>. Lippincott Williams &amp; Wilkins.
-</div>
-<div id="ref-matthews2006introduction" class="csl-entry">
-Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Trials</em>. CRC Press.
+<div id="ref-smith1994randomised" class="csl-entry">
+Smith, AC, JF Dowsett, RCG Russell, ARW Hatfield, and PB Cotton. 1994. <span>“Randomised Trial of Endoscopic Steriting Versus Surgical Bypass in Malignant Low Bileduct Obstruction.”</span> <em>The Lancet</em> 344 (8938): 1655–60.
 </div>
 </div>
             </section>
@@ -382,8 +412,8 @@ Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Tria
           </div>
         </div>
       </div>
-
-<a href="rct-intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rct-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis-for-binary-outcomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

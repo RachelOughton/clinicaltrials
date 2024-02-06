@@ -1,12 +1,12 @@
-# (PART) Part II: Other sorts of outcome variables {-}
+# (PART) Part II: Binary outcome variable {-}
 
-# Binary outcome variable
+        
+# Sample size for a binary variable {#ss-bin}
+
 
 So far almost everything we've covered has related to continuous outcome variables, which we assumed to be normally distributed. This allowed us to use familiar techniques such as the $t$-test, and to take baseline information into account in an accessible way (the linear model / ANCOVA). However, very often clinical trials do not have a continuous, normally distributed output, and in the next two sections we will look at two other common possibilities: binary data (this section) and survival data (next section).
 
 A binary outcome might be something like 'the patient was alive 2 years after the procedure' or not, or 'the patient was clear of eczema within a month' or not. Such variables are often coded as 'success' or 'failure', or 1 or 0. 
-        
-## Sample size for a binary variable {#ss-bin}
         
 For a trial whose primary outcome variables are binary, the sample size calculations we derived in Chapter \@ref(rct-plan) will not work, so in this section we'll work through a similar method developed for binary variables. 
       
@@ -26,7 +26,7 @@ Suppose we conduct a trial with a binary primary outcome variable and two groups
     
   Recall that the variance of $p_X$ (where $X$ is $T$ or $C$) is $\pi_X\left(1-\pi_X\right)$, such that the variance depends on the mean. This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate value of $\pi_T$ and $\pi_C$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.
       
-### The Delta Method {#delta-method}
+## The Delta Method {#delta-method}
       
   We start with a random variable $X$ that has mean $\mu$ and variance $\sigma^2 = \sigma^2\left(\mu\right)$, ie. its variance depends on its mean. If we have a 'well-behaved' (infinitely differentiable etc.) function $f\left(X\right)$, what are its mean and variance? To find this exactly requires us to evaluate a sum or integral, and this may be analytically intractable, so we use instead a crude approximation.
       
@@ -64,16 +64,19 @@ $$ \operatorname{var}\left[f\left(X\right)\right] = \sigma^2\left(\mu\right) \le
   $$ \frac{\pi\left(1-\pi\right)}{n} \left[f'\left(\pi\right)\right]^2 = K$$
 for some constant $K$. We can rearrange this to
 
-$$f\left(\pi\right) \propto{ \int{\frac{1}{\sqrt{\pi\left(1-\pi\right)}}d\pi}}$$
-and by substituting $\pi = u^2$ we find
+$$f'\left(\pi\right) = \sqrt{\frac{Kn}{\pi\left(1-\pi\right)} } \propto \sqrt{\frac{1}{\pi\left(1-\pi\right)}}.$$
+So we need
+
+$$\int^\pi \sqrt{\frac{1}{u\left(1-u\right)}}du, $$
+where the notation indicates that we want the anti-derivative, evaluated at $\pi$. By substituting $u = w^2$ we find
 
 \begin{align*}
-f\left(\pi\right) & \propto \int{\frac{1}{\sqrt{u^2\left(1-u^2\right)}}2u\,du}\\
-&\propto \int{\frac{1}{\sqrt{1 - u^2}}}du\\
+f\left(\pi\right) & \propto \int^\pi{\frac{1}{\sqrt{w^2\left(1-w^2\right)}}2w\,dw}\\
+&\propto \int{\frac{1}{\sqrt{1 - w^2}}}dw\\
 & \propto \arcsin{\left(\sqrt{\pi}\right)}.
 \end{align*}
 
-Setting $u=\sqrt{\pi}$ again and $f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)$. Using the chain rule, we find
+Setting $f\left(\pi\right) = \arcsin\left(\sqrt{\pi}\right)$ and using the chain rule, we find
 
 $$\left[f'\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .$$
     Finally, we can substitute this into Equation \@ref(eq:delta3), with $f\left(X\right) = \arcsin\left(\sqrt{X}\right)$ to find
@@ -87,7 +90,7 @@ $$\left[f'\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .$$
 
 and we have achieved our aim of finding a transformation of $X$ whose variance is not related to the mean. This is sometimes called the *angular transformation*.
 
-### A sample size formula
+## A sample size formula
 
 For a binary variable, our estimate $p_X$ (the proportion of successes in group $X$) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of $n$ (less than around 30, which is very small for a clinical trial) or for values of $\pi$ close to 0 or 1, say $\pi<0.15$ or $\pi>0.85$ (this is more likely to be an issue for some trials).
 
@@ -126,7 +129,9 @@ that is 281 patients per trial arm.
 :::
 
 
-For a group $n$ of participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group $C$ the number of 'successes' would be modelled by
+# Analysis for binary outcomes
+
+For a group of $2n$ participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group $C$ the number of 'successes' would be modelled by
 
 $$R_C \sim \operatorname{Bi}\left(n_C,\,\pi_C\right).$$
 
@@ -159,7 +164,7 @@ We know from the properties of the binomial distribtion that $\operatorname{E}\l
 $$\operatorname{Var}\left(p_C\right) = \frac{\pi_C\left(1-\pi_C\right)}{n_C},$$
 and similarly for $\operatorname{E}\left(p_T\right)$ and $\operatorname{Var}\left(p_T\right)$.
 
-If we think in terms of individual participants, we have the variable $y_{iC}$ for the outcome of the $i$-th patient in group $C$, with $y_{iC}=1$ if the participant's outcome is 'success' and $y_{iC}=0$ otherwise. Then we have 
+If we think in terms of individual participants, we have the variable $Y_{iC}$ for the outcome of the $i$-th patient in group $C$, with $Y_{iC}=1$ if the participant's outcome is 'success' and $Y_{iC}=0$ otherwise. Then we have 
 
 $$r_C = \sum\limits_{i=1}^{n_C} y_{iC},$$
 and similarly for group $T$. Since $p_C$ and $p_T$ are therefore sample means, we can apply the Central Limit Theorem to conclude that $p_C$ and $p_P$ can be approximated by normal distributions:
@@ -237,7 +242,7 @@ In a chi-squared test, we first calculate the **expected** values $\left(E_i\rig
 
 $$ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.$$
 
-Under the null hypothesis (that $p_C = p_T$) this has a $\chi^2$ distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the $\chi^2_1$ distribution.
+Under the null hypothesis (that $\pi_C = \pi_T$) this has a $\chi^2$ distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the $\chi^2_1$ distribution.
 
 ::: {.example}
 Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion $p=0.514$ of the total number of patients were improved. There are 52 in the control group, therefore we expect $0.514\times 52 = 26.73$ improved patients in the control group, and by the same logic $0.514\times 55 = 28.27$ in the treatment group. Our expected table is therefore 
