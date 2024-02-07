@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-02-06}
+\date{2024-02-07}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2616,14 +2616,14 @@ and we have achieved our aim of finding a transformation of \(X\) whose variance
 
 For a binary variable, our estimate \(p_X\) (the proportion of successes in group \(X\)) is approximately normally distributed, since the central limit theorem applies. This is not true for small values of \(n\) (less than around 30, which is very small for a clinical trial) or for values of \(\pi\) close to 0 or 1, say \(\pi<0.15\) or \(\pi>0.85\) (this is more likely to be an issue for some trials).
 
-The linear approximation in Equation \eqref{eq:delta1} shows us that if \(p_X\) is normally distributed then \(f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)\) will be {[}approximately{]} normally distributed too. In fact, \(\arcsin\left(\sqrt{p_X}\right)\) is approximately normally distributed with mean \(\arcsin{\left(\sqrt{\pi_X}\right)}\) and variance \(1/\left(4\pi_X\right)\). Using this information, we can test \(H_0:\,\pi_T =\pi_C\) at the 100\(\alpha\)\% confidence level by using the variable
+The linear approximation in Equation \eqref{eq:delta1} shows us that if \(p_X\) is normally distributed then \(f\left(p_X\right) = \arcsin\left(\sqrt{p_X}\right)\) will be {[}approximately{]} normally distributed too. In fact, \(\arcsin\left(\sqrt{p_X}\right)\) is approximately normally distributed with mean \(\arcsin{\left(\sqrt{\pi_X}\right)}\) and variance \(1/\left(4n_X\right)\). Using this information, we can test \(H_0:\,\pi_T =\pi_C\) at the 100\(\alpha\)\% confidence level by using the variable
 
 \[
 D =  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\sqrt{\frac{1}{4n_T} + \frac{1}{4n_C}}}=  \frac{\arcsin{\left(\sqrt{p_T}\right)} - \arcsin{\left(\sqrt{p_C}\right)}}{\frac{1}{2}\lambda\left(n_T,n_C\right)},
 \]
 which is analogous to the variable \(D\) constructed in Section \ref{sec-measDcont}; the difference in \(f\left(p_T\right)\) and \(f\left(p_C\right)\) divided by the standard error of the difference.
 
-Using the same logic as in Sections \ref{sec-power} and \ref{sec-ssformulacont}, the starting place for a sample size formula to achieve significance level \(\alpha\) and power \(\beta\) is
+Using the same logic as in Sections \ref{sec-power} and \ref{sec-ssformulacont}, the starting place for a sample size formula to achieve significance level \(\alpha\) and power \(1-\beta\) is
 
 \[
 \frac{2\left(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)}\right)}{\lambda\left(n_T,n_C\right)} = z_\beta + z_{\frac{\alpha}{2}}.
@@ -2639,7 +2639,7 @@ Because \(\arcsin{\left(\sqrt{\pi_T}\right)} - \arcsin{\left(\sqrt{\pi_C}\right)
 
 \begin{example}
 \protect\hypertarget{exm:samplesize1}{}\label{exm:samplesize1}\citep[From][]{smith1994randomised}
-This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was `Did the patient die within 30d of the procedure?', and the trial was designed to have \(\alpha=0.05,\,\beta=0.95\), which gives \(z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65\). The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation \eqref{eq:ssbinary}) gives us
+This trial compares two approaches to managing malignent low bile duct obstruction: surgical biliary bypass and endoscopic insertion of a stent. The primary outcome variable was `Did the patient die within 30d of the procedure?', and the trial was designed to have \(\alpha=0.05,\;1-\beta=0.95\), which gives \(z_{\frac{\alpha}{2}}=1.96,\,z_{\beta} = 1.65\). The trial wanted to be able to determine a change in 30 day mortality rate from 0.2 to at most 0.05. Plugging these numbers into Equation \eqref{eq:ssbinary}) gives us
 
 \[ N = \frac{\left(1.65 + 1.96\right)^2}{2\left(\arcsin{\left(\sqrt{0.2}\right)} - \arcsin{\left(\sqrt{0.05}\right)}\right)^2} = 114.9, \]
 and so each group in our trial should contain 115 patients.

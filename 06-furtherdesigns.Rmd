@@ -1,8 +1,89 @@
 # Cluster randomised controlled trials {#cluster-rct}
 
+For the trials we've been studying so far, the intervention is applied at an individual level. For many treatments this is realistic, for example a medicine, injection or operation. However, for some treatments this is not practical. One example would be implementing a new cleaning regime in operating theatres. It would be almost impossible to implement this if different patients within the same hospital would be allocated to different cleaning styles. Logistically it would be very difficult, and there would likely be contamination as staff may be reluctant to clean an operating theatre in what might now seem an inferior way, for a control pateint. In general it is very difficult (if not impossible) to implement changes in practice across healthcare systems at an individual level. 
+
+The solution to this is to work at the group level, rather than the individual level.
+
 ## What is a cluster RCT?
 
+In a cluster RCT, participants within the same natural group (eg. doctor's surgery, hospital, school, classroom,...) are all allocated to the same group together. This means that, in the cleaning example above, the staff at a hospital in the treatment group can be trained in the new practice, all patients at that hospital will 'receive the new treatment', and contamination between groups is minimised.
+
+The main issue that makes cluster RCTs different is that participants within the same group are often likely to be more similar than those in a different group. We expect that each group has its own 'true' mean, which is different from the underlying population mean. This violates one of the key assumptions we've held so far, that the data are independent, and leads us to a very important quantity called the **intracluster correlation** (ICC).
+
 ### Intracluster correlation
+
+The ICC quantifies the relatedness of data that are clustered in groups by comparing the variance within groups by the variance between groups. The ICC is given by
+
+$$ICC = \frac{\sigma^2_b}{\sigma^2_b + \sigma^2_w}, $$
+where $\sigma^2_b$ is the variance **between** groups and $\sigma^2_w$ is the variance **within** groups. At one extreme, where $\sigma_w^2=0$, we have $ICC=1$ and all measurements within each group are the same. At the other extreme, where $\sigma^2_b=0$, $ICC=0$ and in fact all groups are independent and identically distributed.
+
+We can estimate the between group and within group variances by 
+
+$$
+\begin{aligned}
+s_w^2 & = \sum\limits_{j=1}^{g}\sum\limits_{i=1}^{N_j} \frac{\left(y_{ij} - \bar{y}_j\right)^2}{N_j-1}\\
+s_b^2 & = \frac{\sum\limits_{j=1}^g n_j\left(\bar{y}_j - \bar{y}\right)^2}{g-1}
+\end{aligned}
+$$
+where $g$ is the number of groups and $N_j$ is the number of participants in group $j$.
+
+:::{.example}
+
+```{r}
+data(iris)
+library(multigroup)
+
+## THESE ARE NOT RIGHT!!!
+
+between.var = function(
+    data,
+    groupvec
+){
+  groups = levels(as.factor(groupvec))
+  ng = length(groups)
+  ntot = length(data)
+  
+  
+  means = sapply(1:ng, function(i){mean(data[groupvec == groups[i]])})
+  njvec = sapply(1:ng, function(i){length(data[groupvec == groups[i]])})
+  mean = mean(data)
+  ssqvec = sapply(1:ng, function(i){njvec[i]*(means[i]-mean)^2})
+  sum(ssqvec)/(ntot-ng)
+}
+
+within.var = function(
+    data,
+    groupvec
+){
+  groups = levels(as.factor(groupvec))
+  ng = length(groups)
+  ntot = length(data)
+  
+  means = sapply(1:ng, function(i){mean(data[groupvec == groups[i]])})
+  njvec = sapply(1:ng, function(i){length(data[groupvec == groups[i]])})
+
+
+  g_sums = rep(NA, ng)
+  
+  for (j in 1:ng){
+    data_j = data[groupvec == groups[j]]
+    ssqvec = rep(NA, njvec[j])
+    for (i in 1:njvec[j]){
+      ssqvec[i] = (data_j[i] - means[j])^2
+    }
+      g_sums[j] = sum(ssqvec)/(njvec[j]-1)
+  }
+  sum(g_sums)
+}
+
+between.var(iris$Sepal.Length, iris$Species)
+within.var(iris$Sepal.Length, iris$Species)
+
+
+
+```
+
+:::
 
 
 ## Designing a cluster RCT

@@ -357,9 +357,9 @@ sqrt(sum_chi_sq)
 
 ### (Lecture 11) Likelihood: A more rigorous way
 
-Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.
+*Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.*
 
-Earlier we set up notation $y_{iC}$ to be outcome variable (0 or 1, in this case) of the $i$-th participant in the control group (and so on), and we will use that here.
+Using same notation $y_{iC}$ to be outcome variable (0 or 1, in this case) of the $i$-th participant in the control group (and so on).
 
 The contribution of the $i$-th patient in group $C$ to the likelihood is 
 
@@ -370,7 +370,7 @@ $$ \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C},$$
 where $r_C$ is the number of 'successes' in group $C$. Similarly for the treatment group we will have
 
 $$ \pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.$$
-Gathering these terms together we can find the complete likelihood function
+Wwe can find the complete likelihood function
 
 $$
 \begin{aligned}
@@ -401,10 +401,14 @@ $$
 $$
 where we use $p,\, r,\, n$ to denote the pooled values ($n = n_C + n_T$ etc.).
 
-Each term in the final line corresponds to a subgroup of the participants, as labelled, and if we rearrange them slightly we see that this can be re-written as
+*Each term in the final line corresponds to a subgroup of the participants, as labelled, and if we rearrange them slightly we see that*
+
+This can be re-written as
 
 $$\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),$$
-where $G$ is the set of subgroups (group $C$ success etc.). Under the null hypothesis that $\pi_C = \pi_T = \pi$, and for sufficiently large $n_C,\;n_T$, $\lambda_{LR}$ has a $\chi^2$ distribution with one degree of freedom.
+where $G$ is the set of subgroups (group $C$ success etc.). 
+
+Under the null hypothesis that $\pi_C = \pi_T = \pi$, and for sufficiently large $n_C,\;n_T$, $\lambda_{LR}$ has a $\chi^2$ distribution with one degree of freedom.
 
 :::{.example}
 
@@ -429,6 +433,7 @@ Not surprisingly, this value is quite close to the one we obtained earlier!
 
 :::
 
+*Having thought about tests for one proportion, we now move on to thinking how we might compare proportions.*
 
 
 
