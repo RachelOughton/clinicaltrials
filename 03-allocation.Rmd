@@ -1,4 +1,4 @@
-# Allocation 
+# Allocation {#alloc}
 
 Once we've decided how many participants we need in our trial, and they've been recruited, we next need to determine which participants should be assigned to which trial arm. This is process is known as **allocation** (or sometimes as **randomization**). Before we think about methods for allocation, we are going to spend some time talking about bias.
 

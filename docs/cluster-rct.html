@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 Cluster randomised controlled trials | Clinical Trials 4H</title>
+  <title>7 Cluster randomised controlled trials | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 Cluster randomised controlled trials | Clinical Trials 4H" />
+  <meta property="og:title" content="7 Cluster randomised controlled trials | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Cluster randomised controlled trials | Clinical Trials 4H" />
+  <meta name="twitter:title" content="7 Cluster randomised controlled trials | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2023-12-15" />
+<meta name="date" content="2024-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="survival-distributed-data.html"/>
-<link rel="next" href="practical-2.html"/>
+<link rel="prev" href="analysis-for-binary-outcomes.html"/>
+<link rel="next" href="computer-practical-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -168,6 +168,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
 </ul></li>
@@ -205,112 +206,118 @@ div.csl-indent {
 <li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
-<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-sided-or-two-sided"><i class="fa fa-check"></i><b>2.2.2</b> One-sided or two-sided?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.2</b> One-tailed or two-tailed?</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
 <li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
 <li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="allocation.html"><a href="allocation.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="allocation.html"><a href="allocation.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="allocation.html"><a href="allocation.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="allocation.html"><a href="allocation.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="allocation.html"><a href="allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
-<li class="chapter" data-level="3.2.2" data-path="allocation.html"><a href="allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
-<li class="chapter" data-level="3.2.3" data-path="allocation.html"><a href="allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="allocation.html"><a href="allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3</b> Stratified sampling</a></li>
-<li class="chapter" data-level="3.4" data-path="allocation.html"><a href="allocation.html#minimization"><i class="fa fa-check"></i><b>3.4</b> Minimization</a>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.5" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.5</b> Minimization</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="allocation.html"><a href="allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.4.1</b> Minimization algorithm</a></li>
+<li class="chapter" data-level="3.5.1" data-path="alloc.html"><a href="alloc.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="allocation.html"><a href="allocation.html#problems-with-allocation"><i class="fa fa-check"></i><b>3.5</b> Problems with allocation</a></li>
+<li class="chapter" data-level="3.6" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.6</b> Problems around allocation</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#confidence-intervals-and-p-values"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#bonferroni-correction"><i class="fa fa-check"></i><b>4.1.1</b> Bonferroni correction</a></li>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#a-dodgy-way-to-use-baseline-variables"><i class="fa fa-check"></i><b>4.2.1</b> A dodgy way to use baseline variables</a></li>
+</ul></li>
 <li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-theory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
 <li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#how-is-this-related-to-anova"><i class="fa fa-check"></i><b>4.4.1</b> How is this related to ANOVA?</a></li>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
 <li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
-<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.3</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
-<li class="chapter" data-level="4.4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.4</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="rct-analysis.html"><a href="rct-analysis.html#some-general-principles-of-analysis"><i class="fa fa-check"></i><b>4.5</b> Some general principles of Analysis</a></li>
 </ul></li>
-<li class="part"><span><b>II Computer practicals</b></span></li>
-<li class="chapter" data-level="5" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i><b>5</b> Practical 1</a>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="practical-1.html"><a href="practical-1.html#some-simulated-examples"><i class="fa fa-check"></i><b>5.1</b> Some simulated examples</a>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="practical-1.html"><a href="practical-1.html#simple-random-allocation-1"><i class="fa fa-check"></i><b>5.1.1</b> Simple random allocation</a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>III Part II: Other sorts of outcome variables</b></span></li>
-<li class="chapter" data-level="6" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html"><i class="fa fa-check"></i><b>6</b> Binary outcome variable</a>
+<li class="chapter" data-level="6.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.1</b> Point estimates and Hypothesis tests</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#ss-bin"><i class="fa fa-check"></i><b>6.1</b> Sample size for a binary variable</a>
+<li class="chapter" data-level="6.1.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#the-delta-method"><i class="fa fa-check"></i><b>6.1.1</b> The Delta Method</a></li>
-<li class="chapter" data-level="6.1.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#a-sample-size-formula"><i class="fa fa-check"></i><b>6.1.2</b> A sample size formula</a></li>
+<li class="chapter" data-level="6.2.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.2</b> Point estimates and Hypothesis tests</a>
+</ul></li>
+<li class="part"><span><b>III Part III: Further designs</b></span></li>
+<li class="chapter" data-level="7" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>7</b> Cluster randomised controlled trials</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.2.1</b> An alternative approach: chi-squared</a></li>
-<li class="chapter" data-level="6.2.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.2.2</b> Likelihood: A more rigorous way</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.3</b> Measures of difference for binary data</a>
+<li class="chapter" data-level="7.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>7.1</b> What is a cluster RCT?</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#absolute-risk-difference-and-number-needed-to-treat"><i class="fa fa-check"></i><b>6.3.1</b> Absolute risk difference and Number Needed to Treat</a></li>
-<li class="chapter" data-level="6.3.2" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.3.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+<li class="chapter" data-level="7.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>7.1.1</b> Intracluster correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Accounting for baseline observations: logistic regression</a>
+<li class="chapter" data-level="7.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>7.2</b> Designing a cluster RCT</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="binary-outcome-variable.html"><a href="binary-outcome-variable.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.4.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="7.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>7.2.1</b> Sample size</a></li>
+<li class="chapter" data-level="7.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>7.2.2</b> Allocation</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="survival-distributed-data.html"><a href="survival-distributed-data.html"><i class="fa fa-check"></i><b>7</b> Survival distributed data</a></li>
-<li class="chapter" data-level="8" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>8</b> Cluster randomised controlled trials</a>
+<li class="chapter" data-level="7.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>7.3</b> Allocating everyone at once</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>8.1</b> What is a cluster RCT?</a>
+<li class="chapter" data-level="7.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#covariate-constrained-randomization"><i class="fa fa-check"></i><b>7.3.1</b> Covariate constrained randomization</a></li>
+<li class="chapter" data-level="7.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>7.3.2</b> Restricted randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>7.4</b> Analysing a cluster RCT</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>8.1.1</b> Intracluster correlation</a></li>
+<li class="chapter" data-level="7.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>7.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="7.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-random-effects-models"><i class="fa fa-check"></i><b>7.4.2</b> At the individual level: Random effects models</a></li>
+<li class="chapter" data-level="7.4.3" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-for-effect-modification---random-effects-model"><i class="fa fa-check"></i><b>7.4.3</b> Analysing for effect modification - Random effects model</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="cluster-rct.html"><a href="cluster-rct.html#designing-a-cluster-rct"><i class="fa fa-check"></i><b>8.2</b> Designing a cluster RCT</a>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>8.2.1</b> Sample size</a></li>
-<li class="chapter" data-level="8.2.2" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation-1"><i class="fa fa-check"></i><b>8.2.2</b> Allocation</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>8.3</b> Allocating everyone at once</a>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+<li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#restricted-randomization"><i class="fa fa-check"></i><b>8.3.1</b> Restricted randomization</a></li>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.1.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocmethods"><i class="fa fa-check"></i><b>A.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.1.3" data-path="computer-practical-1.html"><a href="computer-practical-1.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.1.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#minimisation"><i class="fa fa-check"></i><b>A.1.4</b> Minimisation</a></li>
+<li class="chapter" data-level="A.1.5" data-path="computer-practical-1.html"><a href="computer-practical-1.html#a-simulation-experiment"><i class="fa fa-check"></i><b>A.1.5</b> A simulation experiment!</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>8.4</b> Analysing a cluster RCT</a>
+<li class="chapter" data-level="A.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1analysis"><i class="fa fa-check"></i><b>A.2</b> Analysis</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>8.4.1</b> At the cluster level</a></li>
-<li class="chapter" data-level="8.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level"><i class="fa fa-check"></i><b>8.4.2</b> At the individual level</a></li>
+<li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
+<li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i><b>9</b> Practical 2</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="practical-2.html"><a href="practical-2.html#sample-size-by-simulation"><i class="fa fa-check"></i><b>9.1</b> Sample size by simulation</a>
-<ul>
-<li class="chapter" data-level="9.1.1" data-path="practical-2.html"><a href="practical-2.html#the-simulation-method"><i class="fa fa-check"></i><b>9.1.1</b> The simulation method</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -328,42 +335,461 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cluster-rct" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">8</span> Cluster randomised controlled trials<a href="cluster-rct.html#cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="what-is-a-cluster-rct" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> What is a cluster RCT?<a href="cluster-rct.html#what-is-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="intracluster-correlation" class="section level3 hasAnchor" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> Intracluster correlation<a href="cluster-rct.html#intracluster-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="cluster-rct" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Cluster randomised controlled trials<a href="cluster-rct.html#cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For the trials we’ve been studying so far, the intervention is applied at an individual level. For many treatments this is realistic, for example a medicine, injection or operation. However, for some treatments this is not practical. One example would be implementing a new cleaning regime in operating theatres. It would be almost impossible to implement this if different patients within the same hospital would be allocated to different cleaning styles. Logistically it would be very difficult, and there would likely be contamination as staff may be reluctant to clean an operating theatre in what might now seem an inferior way, for a control pateint. In general it is very difficult (if not impossible) to implement changes in practice across healthcare systems at an individual level.</p>
+<p>The solution to this is to work at the group level, rather than the individual level.</p>
+<div id="what-is-a-cluster-rct" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> What is a cluster RCT?<a href="cluster-rct.html#what-is-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In a cluster RCT, participants within the same natural group (eg. doctor’s surgery, hospital, school, classroom,…) are all allocated to the same group together. This means that, in the cleaning example above, the staff at a hospital in the treatment group can be trained in the new practice, all patients at that hospital will ‘receive the new treatment’, and contamination between groups is minimised.</p>
+<p>The main issue that makes cluster RCTs different is that participants within the same group are often likely to be more similar than those in a different group. We expect that each group has its own ‘true’ mean, which is different from the underlying population mean. This violates one of the key assumptions we’ve held so far, that the data are independent, and leads us to a very important quantity called the <strong>intracluster correlation</strong> (ICC).</p>
+<div id="intracluster-correlation" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Intracluster correlation<a href="cluster-rct.html#intracluster-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The ICC quantifies the relatedness of data that are clustered in groups by comparing the variance within groups by the variance between groups. The ICC is given by</p>
+<p><span class="math display">\[ICC = \frac{\sigma^2_b}{\sigma^2_b + \sigma^2_w}, \]</span>
+where <span class="math inline">\(\sigma^2_b\)</span> is the variance <strong>between</strong> groups and <span class="math inline">\(\sigma^2_w\)</span> is the variance <strong>within</strong> groups. At one extreme, where <span class="math inline">\(\sigma_w^2=0\)</span>, we have <span class="math inline">\(ICC=1\)</span> and all measurements within each group are the same. At the other extreme, where <span class="math inline">\(\sigma^2_b=0\)</span>, <span class="math inline">\(ICC=0\)</span> and in fact all groups are independent and identically distributed.</p>
+<p>We can estimate <span class="math inline">\(\sigma_w^2\)</span> and <span class="math inline">\(\sigma_b^2\)</span> using <span class="math inline">\(s_w^2\)</span> and <span class="math inline">\(s_b^2\)</span>, which we find by decomposing the pooled variance. Here, <span class="math inline">\(g\)</span> is the number of groups, <span class="math inline">\(n_j\)</span> is the number of participants in group <span class="math inline">\(j\)</span> and <span class="math inline">\(n\)</span> is the total number of participants.</p>
+<p><span class="math display">\[
+s^2_{Tot} =  \frac{\sum\limits_{j=1}^g \sum\limits_{i=1}^{n_j}\left(x_{ij}-\bar{x}\right)^2}{n-g}\\
+\]</span>
+We can split this up as</p>
+<p><span class="math display">\[
+\begin{aligned}
+s^2_{Tot} &amp; = \frac{1}{n-g}\sum\limits_{j=1}^g \sum\limits_{i=1}^{n_j}\left(x_{ij} - \bar{x}_j + \bar{x}_j-\bar{x}\right)^2\\
+&amp; = \frac{1}{n-g}\sum\limits_{j=1}^g \sum\limits_{i=1}^{n_j}\left[\left(x_{ij} - \bar{x}_j\right)^2 + \left(\bar{x}_j-\bar{x}\right)^2 + 2\left(x_{ij} - \bar{x}_j\right)\left(\bar{x}_j-\bar{x}\right)\right]\\
+&amp; = \frac{1}{n-g}\sum\limits_{j=1}^g \sum\limits_{i=1}^{n_j}\left[\left(x_{ij} - \bar{x}_j\right)^2 + \left(\bar{x}_j-\bar{x}\right)^2 \right]\\
+&amp;= \underbrace{\frac{1}{n-g}\sum\limits_{j=1}^g \sum\limits_{i=1}^{n_j}\left(x_{ij} - \bar{x}_j\right)^2}_{\text{Within groups}} + \underbrace{\frac{1}{n-g}\sum\limits_{j=1}^g n_j\left(\bar{x}_j - \bar{x}\right)^2}_{\text{Between groups}}
+\end{aligned}
+\]</span></p>
+<div class="example">
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 7.1  </strong></span>We will demonstrate the ICC using some familiar datasets (having nothing to do with clinical trials!). Firstly the <code>iris</code> data, which you may remember is in three distinct groups, grouped by <code>Species</code>. The data are plotted in Figure <a href="cluster-rct.html#fig:iris">7.1</a></p>
+<div class="figure"><span style="display:block;" id="fig:iris"></span>
+<img src="CT4H_notes_files/figure-html/iris-1.png" alt="Sepal length and width from Iris data, coloured by Species" width="672" />
+<p class="caption">
+Figure 7.1: Sepal length and width from Iris data, coloured by Species
+</p>
+</div>
+<p>We can estimate the within and between variances, and therefore the ICC, for any of the numeric variables. We will choose <code>Sepal.Length</code>. It is clear just from looking at the plot that a lot of variation is explained by the species, and we see below that <span class="math inline">\(ICC=0.\)</span></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="cluster-rct.html#cb31-1" tabindex="-1"></a><span class="co"># Firstly we define functions for the estimates</span></span>
+<span id="cb31-2"><a href="cluster-rct.html#cb31-2" tabindex="-1"></a>between.var <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb31-3"><a href="cluster-rct.html#cb31-3" tabindex="-1"></a>    data,</span>
+<span id="cb31-4"><a href="cluster-rct.html#cb31-4" tabindex="-1"></a>    groupvec</span>
+<span id="cb31-5"><a href="cluster-rct.html#cb31-5" tabindex="-1"></a>){</span>
+<span id="cb31-6"><a href="cluster-rct.html#cb31-6" tabindex="-1"></a>  groups <span class="ot">=</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(groupvec))</span>
+<span id="cb31-7"><a href="cluster-rct.html#cb31-7" tabindex="-1"></a>  ng <span class="ot">=</span> <span class="fu">length</span>(groups)</span>
+<span id="cb31-8"><a href="cluster-rct.html#cb31-8" tabindex="-1"></a>  ntot <span class="ot">=</span> <span class="fu">length</span>(data)</span>
+<span id="cb31-9"><a href="cluster-rct.html#cb31-9" tabindex="-1"></a>  </span>
+<span id="cb31-10"><a href="cluster-rct.html#cb31-10" tabindex="-1"></a>  </span>
+<span id="cb31-11"><a href="cluster-rct.html#cb31-11" tabindex="-1"></a>  means <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">mean</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb31-12"><a href="cluster-rct.html#cb31-12" tabindex="-1"></a>  njvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">length</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb31-13"><a href="cluster-rct.html#cb31-13" tabindex="-1"></a>  mean <span class="ot">=</span> <span class="fu">mean</span>(data)</span>
+<span id="cb31-14"><a href="cluster-rct.html#cb31-14" tabindex="-1"></a>  ssqvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){(njvec[i]<span class="sc">*</span>(means[i]<span class="sc">-</span>mean)<span class="sc">^</span><span class="dv">2</span>)})</span>
+<span id="cb31-15"><a href="cluster-rct.html#cb31-15" tabindex="-1"></a>  <span class="fu">sum</span>(ssqvec)<span class="sc">/</span>(ntot<span class="sc">-</span>ng)</span>
+<span id="cb31-16"><a href="cluster-rct.html#cb31-16" tabindex="-1"></a>}</span>
+<span id="cb31-17"><a href="cluster-rct.html#cb31-17" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="cluster-rct.html#cb31-18" tabindex="-1"></a>within.var <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb31-19"><a href="cluster-rct.html#cb31-19" tabindex="-1"></a>    data,</span>
+<span id="cb31-20"><a href="cluster-rct.html#cb31-20" tabindex="-1"></a>    groupvec</span>
+<span id="cb31-21"><a href="cluster-rct.html#cb31-21" tabindex="-1"></a>){</span>
+<span id="cb31-22"><a href="cluster-rct.html#cb31-22" tabindex="-1"></a>  groups <span class="ot">=</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(groupvec))</span>
+<span id="cb31-23"><a href="cluster-rct.html#cb31-23" tabindex="-1"></a>  ng <span class="ot">=</span> <span class="fu">length</span>(groups)</span>
+<span id="cb31-24"><a href="cluster-rct.html#cb31-24" tabindex="-1"></a>  ntot <span class="ot">=</span> <span class="fu">length</span>(data)</span>
+<span id="cb31-25"><a href="cluster-rct.html#cb31-25" tabindex="-1"></a>  </span>
+<span id="cb31-26"><a href="cluster-rct.html#cb31-26" tabindex="-1"></a>  means <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">mean</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb31-27"><a href="cluster-rct.html#cb31-27" tabindex="-1"></a>  njvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">length</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb31-28"><a href="cluster-rct.html#cb31-28" tabindex="-1"></a></span>
+<span id="cb31-29"><a href="cluster-rct.html#cb31-29" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="cluster-rct.html#cb31-30" tabindex="-1"></a>  g_sums <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, ng)</span>
+<span id="cb31-31"><a href="cluster-rct.html#cb31-31" tabindex="-1"></a>  </span>
+<span id="cb31-32"><a href="cluster-rct.html#cb31-32" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>ng){</span>
+<span id="cb31-33"><a href="cluster-rct.html#cb31-33" tabindex="-1"></a>    data_j <span class="ot">=</span> data[groupvec <span class="sc">==</span> groups[j]]</span>
+<span id="cb31-34"><a href="cluster-rct.html#cb31-34" tabindex="-1"></a>    ssqvec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, njvec[j])</span>
+<span id="cb31-35"><a href="cluster-rct.html#cb31-35" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>njvec[j]){</span>
+<span id="cb31-36"><a href="cluster-rct.html#cb31-36" tabindex="-1"></a>      ssqvec[i] <span class="ot">=</span> (data_j[i] <span class="sc">-</span> means[j])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb31-37"><a href="cluster-rct.html#cb31-37" tabindex="-1"></a>    }</span>
+<span id="cb31-38"><a href="cluster-rct.html#cb31-38" tabindex="-1"></a>    g_sums[j] <span class="ot">=</span> <span class="fu">sum</span>(ssqvec)<span class="sc">/</span>(ntot <span class="sc">-</span> ng)</span>
+<span id="cb31-39"><a href="cluster-rct.html#cb31-39" tabindex="-1"></a>  }</span>
+<span id="cb31-40"><a href="cluster-rct.html#cb31-40" tabindex="-1"></a>  <span class="fu">sum</span>(g_sums)</span>
+<span id="cb31-41"><a href="cluster-rct.html#cb31-41" tabindex="-1"></a>}</span>
+<span id="cb31-42"><a href="cluster-rct.html#cb31-42" tabindex="-1"></a></span>
+<span id="cb31-43"><a href="cluster-rct.html#cb31-43" tabindex="-1"></a><span class="do">## Now we can calculate them</span></span>
+<span id="cb31-44"><a href="cluster-rct.html#cb31-44" tabindex="-1"></a></span>
+<span id="cb31-45"><a href="cluster-rct.html#cb31-45" tabindex="-1"></a>bvar <span class="ot">=</span> <span class="fu">between.var</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Species)</span>
+<span id="cb31-46"><a href="cluster-rct.html#cb31-46" tabindex="-1"></a>bvar</span></code></pre></div>
+<pre><code>## [1] 0.4300145</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="cluster-rct.html#cb33-1" tabindex="-1"></a>wvar <span class="ot">=</span> <span class="fu">within.var</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Species)</span>
+<span id="cb33-2"><a href="cluster-rct.html#cb33-2" tabindex="-1"></a>wvar</span></code></pre></div>
+<pre><code>## [1] 0.2650082</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="cluster-rct.html#cb35-1" tabindex="-1"></a><span class="do">## And find the ICC:</span></span>
+<span id="cb35-2"><a href="cluster-rct.html#cb35-2" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="cluster-rct.html#cb35-3" tabindex="-1"></a>icc <span class="ot">=</span> bvar<span class="sc">/</span>(bvar<span class="sc">+</span>wvar)</span>
+<span id="cb35-4"><a href="cluster-rct.html#cb35-4" tabindex="-1"></a>icc</span></code></pre></div>
+<pre><code>## [1] 0.6187057</code></pre>
+</div>
+<div class="example">
+<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 7.2  </strong></span>Our second example</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="cluster-rct.html#cb37-1" tabindex="-1"></a>cheese <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;kroger.csv&quot;</span>, <span class="at">header=</span>T)</span>
+<span id="cb37-2"><a href="cluster-rct.html#cb37-2" tabindex="-1"></a>cheese<span class="sc">$</span>city <span class="ot">=</span> <span class="fu">as.factor</span>(cheese<span class="sc">$</span>city)</span>
+<span id="cb37-3"><a href="cluster-rct.html#cb37-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cheese, <span class="fu">aes</span>(<span class="at">x=</span>price, <span class="at">y=</span>vol, <span class="at">col=</span>city)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="cluster-rct.html#cb38-1" tabindex="-1"></a>wv_price <span class="ot">=</span> <span class="fu">within.var</span>(cheese<span class="sc">$</span>price, cheese<span class="sc">$</span>city)</span>
+<span id="cb38-2"><a href="cluster-rct.html#cb38-2" tabindex="-1"></a>bv_price <span class="ot">=</span> <span class="fu">between.var</span>(cheese<span class="sc">$</span>price, cheese<span class="sc">$</span>city)</span>
+<span id="cb38-3"><a href="cluster-rct.html#cb38-3" tabindex="-1"></a>icc <span class="ot">=</span> bv_price <span class="sc">/</span> (bv_price <span class="sc">+</span> wv_price)</span>
+<span id="cb38-4"><a href="cluster-rct.html#cb38-4" tabindex="-1"></a>icc</span></code></pre></div>
+<pre><code>## [1] 0.253104</code></pre>
+</div>
+<p>We can see that for each district we know a fair amount about the cost of cheese. But, if we had to predict the price of cheese in a new city, for which we have no data, we would have no idea what the mean for that city would be, apart from that it would come from <span class="math inline">\(N\left(\mu,\;\sigma^2_b\right)\)</span>, where <span class="math inline">\(\mu\)</span> is the mean price of cheese in the overall population and <span class="math inline">\(\sigma^2_b\)</span> is the between group variance.</p>
+<p>Estimating the ICC when planning a study is an important step, but isn’t always easy. For a well-understood (or at least well-documented) condition, it can often be estimated from existing data, which is likely to cover many sites. In non-medical studies like education or social interventions (where cluster RCTs are very common), it can be much more difficult because there is generally less data. Statistical studies are much newer in these areas, though they are becoming increasingly common, and even mandated by some organisations (for example the <a href="https://educationendowmentfoundation.org.uk">Educational Endowment Foundation</a>).</p>
+<p><strong>FIND ARTICLE ABOUT ESTIMATING ICC</strong></p>
 </div>
 </div>
-<div id="designing-a-cluster-rct" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Designing a cluster RCT<a href="cluster-rct.html#designing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="sample-size" class="section level3 hasAnchor" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Sample size<a href="cluster-rct.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="designing-a-cluster-rct" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Designing a cluster RCT<a href="cluster-rct.html#designing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sample-size" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Sample size<a href="cluster-rct.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The upshot of the non-independence of the sample is that we have less information from <span class="math inline">\(n\)</span> participants in a cluster RCT than we would do for an individual-based RCT where all the participants were independent (at least conditional on some covariates).</p>
+<p>At one extreme, where ICC=0, there is in fact no intracluster correlation, all the groups have the same mean, and this is the same as a normal RCT. At the other extreme, where ICC=1, all measurements within a cluster are identical, and to achieve the same power as with <span class="math inline">\(n\)</span> particpants in a standard RCT, we would need <span class="math inline">\(n\)</span> clusters (and their size would be irrelevant). Obviously neither of these is ever true! In most studies, the ICC is in <span class="math inline">\(\left(0,\;0.15\right)\)</span>.</p>
+<p>We will work through the sample size (and indeed most other things) for a cluster RCT in which the outcome is continuous (as in Chapter <a href="rct-plan.html#rct-plan">2</a>), but you can equally do a cluster RCT with a binary or time-to-event outcome.</p>
+<p>The first step is to think about how the clustering affectst the variance. An estimate of the outcome variance in the control group, ignoring the clustering, is</p>
+<p><span class="math display" id="eq:varcrt1">\[\begin{equation}
+\hat{\sigma}^2 = \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}\left(X_{ij} - \bar{X}\right)^2}{n-1},
+\tag{7.1}
+\end{equation}\]</span>
+where as before there are <span class="math inline">\(g\)</span> clusters, cluster <span class="math inline">\(j\)</span> has size <span class="math inline">\(n_j\)</span> and <span class="math inline">\(\sum\limits_{j=1}^gn_j=n\)</span> is the total sample size.</p>
+<p>The mean is also calculated without reference to the clustering, so</p>
+<p><span class="math display">\[\bar{X} =  \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}X_{ij}}{n}.\]</span>
+Assuming the clusters are independent, we can find expectations of Equation <a href="cluster-rct.html#eq:varcrt1">(7.1)</a></p>
+<p><span class="math display">\[
+\begin{aligned}
+E\left[\left(n-1\right)\hat{\sigma}^2\right]&amp;= n\sigma^2 - \frac{1}{n}E\left[\left(\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}\left[X_{ij} - E\left(X_{ij}\right)\right]\right)^2\right] \\
+&amp;=n\sigma^2 - \frac{1}{n}\operatorname{var}\left(\sum\limits_{j=1}^g T_j\right)\\
+&amp; = n\sigma^2 - \frac{1}{n}\sum\limits_{j=1}^g\operatorname{var}\left(T_j\right)
+\end{aligned},
+\]</span>
+where <span class="math inline">\(T_j = \sum\limits_{i=1}^{n_j}X_{ij}\)</span> is the sum of responses in cluster <span class="math inline">\(j\)</span>. The variance of <span class="math inline">\(T_j\)</span> can therefore be calculated as</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{var}\left(T_j\right) &amp; = \sum\limits_{i=1}^{n_j} \operatorname{var}\left(X_{ij}\right) + \sum\limits_{i\neq{l}}\operatorname{cov}\left(X_i,\,X_l\right)\\
+&amp; = n_j \sigma^2 + n_j \left(n_j-1\right)\rho\sigma^2.
+\end{aligned}
+\]</span>
+and so the expected value of Equation <a href="cluster-rct.html#eq:varcrt1">(7.1)</a> is <span class="math inline">\(\sigma^2\left(1-C\rho\right)\)</span>, where</p>
+<p><span class="math display">\[C = \frac{\sum\limits_{j=1}^g n_j\left(n_j-1\right)}{n\left(n-1\right)}.\]</span>
+Notice that if all the groups are the same size <span class="math inline">\(n_g = \frac{n}{g}\)</span> then this simplifies to</p>
+<p><span class="math display">\[C = n\left(n_g - 1\right).\]</span>
+We will assume from now on that this is the case.</p>
+<div id="ss-crt" class="section level4 hasAnchor" number="7.2.1.1">
+<h4><span class="header-section-number">7.2.1.1</span> A formula for sample size<a href="cluster-rct.html#ss-crt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now that we know <span class="math inline">\(\operatorname{E}\left(\hat{\sigma}^2\right)\)</span> we can adapt our sample size formula from Section <a href="rct-plan.html#sec-ssformulacont">2.5</a>. For an individual-level RCT with a continuous outcome, we had</p>
+<p><span class="math display" id="eq:ss1">\[\begin{equation}
+n = \frac{2\sigma^2\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M},
+\tag{7.2}
+\end{equation}\]</span></p>
+<p>and the reason we were able to do this was because the variance of the treatment mean was <span class="math inline">\(\sigma^2/n\)</span>.
+For a cluster RCT, the variance of the treatment effect is</p>
+<p><span class="math display" id="eq:varte1">\[\begin{equation}
+\frac{\sigma^2}{n} \left[1 + \rho\left(\frac{\sum\limits_{j=1}^g n_j}{n}-1\right)\right]
+\tag{7.3}
+\end{equation}\]</span></p>
+<p>At the planning stage of a cluster RCT we are unlikely to know the size of each cluster; each individual involved will usually need to give their consent, so knowing the size of the hospital / GP surgery / class is not enough. Instead, usually a [conservative] average cluster size <span class="math inline">\(n_g\)</span> is specified, and this is used. In this case, the variance of the treatment effect in Equation <a href="cluster-rct.html#eq:varte1">(7.3)</a> becomes</p>
+<p><span class="math display" id="eq:varte2">\[\begin{equation}
+\frac{\sigma^2}{n} \left[1 + \rho\left(n_g-1\right)\right] .
+\tag{7.4}
+\end{equation}\]</span></p>
+<p>Equation <a href="cluster-rct.html#eq:varte2">(7.4)</a> can be combined with Equation <a href="cluster-rct.html#eq:ss1">(7.2)</a> to give the sample size formula for a cluster RCT:</p>
+<p><span class="math display">\[n = \frac{2\sigma^2\left[1 + \rho\left(n_g-1\right)\right]\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M}.
+\]</span>
+Since <span class="math inline">\(n=n_gg\)</span>, this can be rearranged to find the number of clusters of a given size needed, or the size of cluster if a given numnber of clusters is to be used.</p>
+<p>The sample size (and therefore the real power of the study) depends on two additional quantites that are generally beyond our control, and possibly knowledge: ICC and <span class="math inline">\(n_g\)</span>. It is therefore sensible to conduct some sensitivity analysis, with several scenarios of ICC and <span class="math inline">\(n_g\)</span>, to see what the implications are for the power of the study if things don’t quite go to plan.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-33" class="example"><strong>Example 7.3  </strong></span>This is something I wrote for an education study I’m involved in (funded by the EEF) where the treatment is a particular way of engaging 2 year olds in conversation. The outcome variable is each child’s score on the British Picture Vocabulary Scale (BPVS), a test aimed at 3 - 16 year olds designed to assess each child’s vocabulary. We needed to recruit some number of nurseries, but had very little information about the IIC (notice that the age in our study is outside the intended range of the BPVS test!).</p>
+<p>To help the rest of the evaluation team understand the sensitivity of the power of the study to various quantities, I designed <a href="https://racheloughton.shinyapps.io/sample_size/">this dashboard</a>, so that they could play around with the variables and see the effect.</p>
+<p>As well as giving the sample size for a simple t-test (as we’ve done above) it also shows the size for a random effects model (similar to ANCOVA, more on this soon), which is why the baseline-outcome correlation (about which we also know very little!) is included.</p>
+<p>The plot shows the minimum detectable effect size (MDES, or <span class="math inline">\(\tau_M\)</span>, in SD units), since the evaluation team wanted to know what size of effect we could find with our desired power.</p>
+<p><img src="images/Screenshot_shiny.png" /><!-- --></p>
 </div>
-<div id="allocation-1" class="section level3 hasAnchor" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> Allocation<a href="cluster-rct.html#allocation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="allocating-everyone-at-once" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Allocating everyone at once<a href="cluster-rct.html#allocating-everyone-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Should this be in the cluster RCT section?</p>
+<div id="allocation" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Allocation<a href="cluster-rct.html#allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In a cluster RCT, everyone within a particular cluster will be in the same group (<span class="math inline">\(T\)</span> or <span class="math inline">\(C\)</span>). Therefore, the allocation needs to be performed at the cluster level, rather than at the individual level as we did in Chapter <a href="alloc.html#alloc">3</a>.</p>
+<p>In theory we could use any of the first few methods we learned (simple random sampling, random permuted blocks, biased coin, urn design) to allocate the clusters. However, there are often relatively few clusters, and so the potential for imbalance in terms of the nature of the clusters would be rather high. This means we are more likely to use a stratified method or minimisation.</p>
+<p>In terms of prognostic factors, there are now two levels: cluster level and individual level. For example, in a study with GP practices as clusters, some cluster-level covariates could be the size of the practice, whether it was rural or urban, the IMB (index of mass deprivation) of the area it was in. It would be sensible to make sure there was balance in each of these in the allocation. One might also include aggregates of individual-level characteristics, for example the mean age, or the proportion of people with a particular condition (especially if the study relates to a particular condition).</p>
+<p>However, a key feature of cluster RCTs means that in fact some different, and perhaps more effective, allocation methods are open to us.</p>
+</div>
+</div>
+<div id="allocating-everyone-at-once" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Allocating everyone at once<a href="cluster-rct.html#allocating-everyone-at-once" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The methods we’ve covered so far assume that participants are recruited sequentially, and begin the intervention at different points in time. In this scenario, when a particular participant (participant <span class="math inline">\(n\)</span>) is allocated we only know the allocation for the previous <span class="math inline">\(n-1\)</span> participants. It is very likely that we don’t know the details of the following participants, in particular their values of any prognostic variables. This makes sense in many medical settings, where a patient would want to begin treatment as soon as possible, and there may be a limited number of patients with particular criteria at any one time.</p>
-<p>In some trials, the whole group of participants is recruited over some preliminary phase, and they are all allocated at the same time, in order for the trial to run over some set time period. This is particularly common with interventions that take place in groups (we will think about this later).</p>
-<div id="restricted-randomization" class="section level3 hasAnchor" number="8.3.1">
-<h3><span class="header-section-number">8.3.1</span> Restricted randomization<a href="cluster-rct.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>READ UP ON THIS!</p>
+<p>However, cluster RCTs rarely deal with urgent conditions (at least in the sense of administering a direct treatment), and so the procedure is usually that the settings (the clusters) are recruited over some recruitment period and all begin the intervention at the same time. This means that at the point of allocation, the details of all settings involved are known.
+There are a couple of proposals for how to deal with allocation in this scenario, and we will look at one now.</p>
+<div id="covariate-constrained-randomization" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Covariate constrained randomization<a href="cluster-rct.html#covariate-constrained-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This method is proposed in <span class="citation">Dickinson et al. (<a href="#ref-dickinson2015pragmatic">2015</a>)</span>, and implemented in the R package <code>cvcrand</code>. We’ll review the key points of the method, but if you’re interested you can find the details in the article.</p>
+<p>Baseline information must be available for all settings, for any covariate thought to be potentially important. These can be setting-level variables or aggregates of individual-level variables. Once all this data has been collected, the randomisation procedure is as follows.</p>
+<p>Firstly, generate all possible allocations of the clusters into two arms (<span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>).</p>
+<p>Secondly, rule out all allocations that don’t achieve the desired balance criteria.</p>
+<p>For a categorical covariate, the procedure is very simple. For example, we may stipulate that we want groups <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span> to have the same number of rural GP practices as one another. In this case, we would remove from our set of possible allocations any where the numnber was different, or perhaps where it differed by more than some number <span class="math inline">\(d_{rural}\)</span>. We continue for all the covariates we want to balance, setting rules for each one.</p>
+<p>Continous covariates are standardized and used to calculate a ‘balance score’ <span class="math inline">\(B\)</span> for each of the remaining allocations. A cut-off is used to rule out all allocations that don’t achieve the desired level of balance. This leaves an ‘optimal set’ of allocations.</p>
+<p>Finally, an allocation is chosen at random from the optimal set, and this is the allocation that is used.</p>
+</div>
+<div id="restricted-randomization" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Restricted randomization<a href="cluster-rct.html#restricted-randomization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>READ UP ON THIS!
+<a href="https://cran.r-project.org/web/packages/cvcrand/vignettes/cvcrand.html" class="uri">https://cran.r-project.org/web/packages/cvcrand/vignettes/cvcrand.html</a></p>
+<p><a href="https://clusterrandomisedtrials.qmul.ac.uk/parallel-crts/" class="uri">https://clusterrandomisedtrials.qmul.ac.uk/parallel-crts/</a></p>
 </div>
 </div>
-<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="8.4">
-<h2><span class="header-section-number">8.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="at-the-cluster-level" class="section level3 hasAnchor" number="8.4.1">
-<h3><span class="header-section-number">8.4.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="analysing-a-cluster-rct" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As with the other stages of a cluster RCT, to conduct an effective and accurate analysis we need to take into account the clustered nature of the data. There are several ways to do this, and we will whizz through the main ones now.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-34" class="example"><strong>Example 7.4  </strong></span>The data we use will be from an educational trial, contained in <code>crtData</code> in the package <code>eefAnalytics</code>. The dataset contains 22 schools and 265 pupils in total. Each school was assigned to either <code>1</code> (group <span class="math inline">\(T\)</span>) or <code>0</code> (group <span class="math inline">\(C\)</span>). Each pupil took a test before the trial, and again at the end of the trial. We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["School"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Posttest"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Intervention"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Prettest"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Percentage_Attendance"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"16","3":"1","4":"1","5":"38.93522"},{"1":"1","2":"13","3":"1","4":"4","5":"44.45092"},{"1":"1","2":"18","3":"1","4":"5","5":"43.82757"},{"1":"1","2":"14","3":"1","4":"4","5":"43.19104"},{"1":"1","2":"25","3":"1","4":"5","5":"79.26182"},{"1":"1","2":"13","3":"1","4":"2","5":"48.12196"},{"1":"1","2":"23","3":"1","4":"5","5":"51.66367"},{"1":"1","2":"26","3":"1","4":"5","5":"74.35925"},{"1":"1","2":"16","3":"1","4":"2","5":"61.93960"},{"1":"1","2":"8","3":"1","4":"2","5":"37.55799"},{"1":"1","2":"17","3":"1","4":"4","5":"56.88572"},{"1":"1","2":"21","3":"1","4":"4","5":"78.76347"},{"1":"1","2":"14","3":"1","4":"2","5":"40.50979"},{"1":"2","2":"22","3":"1","4":"3","5":"58.65307"},{"1":"2","2":"23","3":"1","4":"5","5":"75.64325"},{"1":"2","2":"20","3":"1","4":"4","5":"43.92932"},{"1":"2","2":"24","3":"1","4":"4","5":"31.72918"},{"1":"2","2":"16","3":"1","4":"2","5":"40.80767"},{"1":"2","2":"25","3":"1","4":"5","5":"51.02061"},{"1":"2","2":"24","3":"1","4":"5","5":"66.72816"},{"1":"2","2":"26","3":"1","4":"4","5":"30.38044"},{"1":"2","2":"20","3":"1","4":"4","5":"35.88198"},{"1":"2","2":"27","3":"1","4":"4","5":"30.78740"},{"1":"2","2":"22","3":"1","4":"3","5":"31.52731"},{"1":"2","2":"29","3":"1","4":"5","5":"65.52711"},{"1":"2","2":"19","3":"1","4":"5","5":"78.23127"},{"1":"2","2":"26","3":"1","4":"3","5":"54.81036"},{"1":"2","2":"19","3":"1","4":"3","5":"43.21148"},{"1":"2","2":"27","3":"1","4":"5","5":"62.03816"},{"1":"2","2":"28","3":"1","4":"5","5":"53.72432"},{"1":"2","2":"27","3":"1","4":"5","5":"48.03327"},{"1":"2","2":"24","3":"1","4":"5","5":"48.41552"},{"1":"2","2":"26","3":"1","4":"5","5":"70.88963"},{"1":"2","2":"24","3":"1","4":"5","5":"51.05913"},{"1":"2","2":"22","3":"1","4":"5","5":"37.08812"},{"1":"2","2":"20","3":"1","4":"4","5":"44.57875"},{"1":"2","2":"24","3":"1","4":"5","5":"51.59796"},{"1":"2","2":"26","3":"1","4":"5","5":"44.73954"},{"1":"2","2":"24","3":"1","4":"4","5":"76.57686"},{"1":"2","2":"17","3":"1","4":"2","5":"39.56660"},{"1":"2","2":"16","3":"1","4":"5","5":"52.73160"},{"1":"2","2":"18","3":"1","4":"3","5":"32.53751"},{"1":"2","2":"26","3":"1","4":"1","5":"43.89097"},{"1":"2","2":"18","3":"1","4":"2","5":"43.28145"},{"1":"2","2":"27","3":"1","4":"5","5":"50.90251"},{"1":"2","2":"28","3":"1","4":"4","5":"63.23200"},{"1":"3","2":"22","3":"1","4":"2","5":"52.37832"},{"1":"3","2":"27","3":"1","4":"4","5":"41.63862"},{"1":"3","2":"27","3":"1","4":"4","5":"75.18426"},{"1":"3","2":"24","3":"1","4":"5","5":"30.45645"},{"1":"3","2":"21","3":"1","4":"2","5":"39.54906"},{"1":"3","2":"23","3":"1","4":"3","5":"47.02374"},{"1":"3","2":"27","3":"1","4":"4","5":"31.04815"},{"1":"3","2":"27","3":"1","4":"4","5":"72.43039"},{"1":"3","2":"23","3":"1","4":"4","5":"31.80369"},{"1":"3","2":"21","3":"1","4":"1","5":"39.52121"},{"1":"3","2":"30","3":"1","4":"4","5":"63.54140"},{"1":"3","2":"27","3":"1","4":"4","5":"47.43257"},{"1":"3","2":"24","3":"1","4":"2","5":"60.99506"},{"1":"3","2":"24","3":"1","4":"3","5":"34.98901"},{"1":"3","2":"23","3":"1","4":"4","5":"71.99338"},{"1":"3","2":"24","3":"1","4":"5","5":"42.46743"},{"1":"3","2":"23","3":"1","4":"4","5":"68.39513"},{"1":"3","2":"31","3":"1","4":"3","5":"43.36852"},{"1":"3","2":"21","3":"1","4":"1","5":"49.17847"},{"1":"3","2":"21","3":"1","4":"2","5":"59.34640"},{"1":"3","2":"18","3":"1","4":"5","5":"69.15468"},{"1":"3","2":"14","3":"1","4":"3","5":"55.01449"},{"1":"3","2":"28","3":"1","4":"5","5":"75.80082"},{"1":"3","2":"19","3":"1","4":"2","5":"35.53784"},{"1":"3","2":"19","3":"1","4":"1","5":"60.24745"},{"1":"3","2":"22","3":"1","4":"3","5":"60.73282"},{"1":"3","2":"21","3":"1","4":"5","5":"52.13861"},{"1":"3","2":"25","3":"1","4":"2","5":"68.97191"},{"1":"3","2":"26","3":"1","4":"4","5":"49.10915"},{"1":"3","2":"30","3":"1","4":"4","5":"58.23657"},{"1":"4","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"15","3":"0","4":"1","5":"0.00000"},{"1":"4","2":"23","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"25","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"22","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"32","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"23","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"17","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"16","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"20","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"14","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"19","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"16","3":"0","4":"2","5":"0.00000"},{"1":"4","2":"29","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"28","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"29","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"4","2":"29","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"22","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"21","3":"0","4":"2","5":"0.00000"},{"1":"4","2":"31","3":"0","4":"5","5":"0.00000"},{"1":"4","2":"24","3":"0","4":"5","5":"0.00000"},{"1":"5","2":"22","3":"1","4":"3","5":"77.50179"},{"1":"5","2":"24","3":"1","4":"5","5":"51.69075"},{"1":"5","2":"17","3":"1","4":"2","5":"36.57232"},{"1":"5","2":"17","3":"1","4":"1","5":"65.10825"},{"1":"5","2":"16","3":"1","4":"4","5":"69.24968"},{"1":"5","2":"22","3":"1","4":"5","5":"52.08538"},{"1":"5","2":"21","3":"1","4":"3","5":"79.80035"},{"1":"5","2":"23","3":"1","4":"5","5":"33.19360"},{"1":"5","2":"23","3":"1","4":"5","5":"51.10264"},{"1":"5","2":"18","3":"1","4":"5","5":"58.64285"},{"1":"5","2":"19","3":"1","4":"2","5":"64.25721"},{"1":"5","2":"22","3":"1","4":"5","5":"57.89059"},{"1":"5","2":"21","3":"1","4":"5","5":"35.20990"},{"1":"5","2":"16","3":"1","4":"1","5":"42.76454"},{"1":"5","2":"24","3":"1","4":"4","5":"63.47763"},{"1":"6","2":"21","3":"1","4":"5","5":"49.82564"},{"1":"6","2":"14","3":"1","4":"5","5":"41.81680"},{"1":"6","2":"20","3":"1","4":"5","5":"58.91239"},{"1":"6","2":"18","3":"1","4":"4","5":"59.68618"},{"1":"6","2":"22","3":"1","4":"4","5":"51.54841"},{"1":"7","2":"24","3":"1","4":"5","5":"63.68137"},{"1":"7","2":"24","3":"1","4":"4","5":"48.57541"},{"1":"7","2":"20","3":"1","4":"4","5":"53.93865"},{"1":"7","2":"22","3":"1","4":"5","5":"52.98224"},{"1":"7","2":"18","3":"1","4":"5","5":"30.67784"},{"1":"7","2":"22","3":"1","4":"5","5":"52.07663"},{"1":"7","2":"14","3":"1","4":"3","5":"55.92027"},{"1":"7","2":"30","3":"1","4":"5","5":"64.71822"},{"1":"7","2":"28","3":"1","4":"4","5":"69.12586"},{"1":"7","2":"22","3":"1","4":"4","5":"43.34101"},{"1":"7","2":"16","3":"1","4":"2","5":"52.08053"},{"1":"7","2":"28","3":"1","4":"5","5":"72.34687"},{"1":"7","2":"23","3":"1","4":"5","5":"40.14234"},{"1":"7","2":"22","3":"1","4":"5","5":"42.29338"},{"1":"7","2":"16","3":"1","4":"4","5":"66.44449"},{"1":"7","2":"16","3":"1","4":"2","5":"36.44158"},{"1":"7","2":"16","3":"1","4":"3","5":"47.70865"},{"1":"7","2":"23","3":"1","4":"5","5":"70.00461"},{"1":"7","2":"18","3":"1","4":"4","5":"55.45079"},{"1":"7","2":"25","3":"1","4":"5","5":"35.97708"},{"1":"7","2":"18","3":"1","4":"5","5":"49.14617"},{"1":"7","2":"16","3":"1","4":"5","5":"46.70409"},{"1":"7","2":"18","3":"1","4":"2","5":"32.59216"},{"1":"7","2":"23","3":"1","4":"4","5":"47.39180"},{"1":"8","2":"14","3":"0","4":"2","5":"0.00000"},{"1":"8","2":"23","3":"0","4":"5","5":"0.00000"},{"1":"8","2":"14","3":"0","4":"3","5":"0.00000"},{"1":"8","2":"15","3":"0","4":"2","5":"0.00000"},{"1":"8","2":"20","3":"0","4":"4","5":"0.00000"},{"1":"8","2":"20","3":"0","4":"5","5":"0.00000"},{"1":"8","2":"14","3":"0","4":"3","5":"0.00000"},{"1":"8","2":"16","3":"0","4":"2","5":"0.00000"},{"1":"8","2":"21","3":"0","4":"4","5":"0.00000"},{"1":"8","2":"9","3":"0","4":"3","5":"0.00000"},{"1":"8","2":"29","3":"0","4":"5","5":"0.00000"},{"1":"8","2":"13","3":"0","4":"4","5":"0.00000"},{"1":"9","2":"24","3":"0","4":"2","5":"0.00000"},{"1":"9","2":"16","3":"0","4":"5","5":"0.00000"},{"1":"9","2":"16","3":"0","4":"5","5":"0.00000"},{"1":"9","2":"21","3":"0","4":"5","5":"0.00000"},{"1":"10","2":"20","3":"1","4":"5","5":"69.80688"},{"1":"10","2":"23","3":"1","4":"4","5":"42.98634"},{"1":"10","2":"22","3":"1","4":"4","5":"39.42771"},{"1":"10","2":"16","3":"1","4":"2","5":"68.02026"},{"1":"10","2":"24","3":"1","4":"4","5":"63.72106"},{"1":"10","2":"25","3":"1","4":"4","5":"35.92574"},{"1":"10","2":"20","3":"1","4":"4","5":"56.15627"},{"1":"10","2":"28","3":"1","4":"5","5":"72.28913"},{"1":"10","2":"25","3":"1","4":"3","5":"30.78657"},{"1":"10","2":"23","3":"1","4":"4","5":"33.48093"},{"1":"10","2":"19","3":"1","4":"4","5":"31.69955"},{"1":"10","2":"19","3":"1","4":"2","5":"38.67681"},{"1":"10","2":"23","3":"1","4":"4","5":"49.88061"},{"1":"10","2":"22","3":"1","4":"4","5":"68.93329"},{"1":"11","2":"18","3":"0","4":"4","5":"0.00000"},{"1":"11","2":"16","3":"0","4":"5","5":"0.00000"},{"1":"11","2":"12","3":"0","4":"5","5":"0.00000"},{"1":"11","2":"14","3":"0","4":"2","5":"0.00000"},{"1":"11","2":"14","3":"0","4":"2","5":"0.00000"},{"1":"11","2":"8","3":"0","4":"3","5":"0.00000"},{"1":"11","2":"18","3":"0","4":"5","5":"0.00000"},{"1":"11","2":"17","3":"0","4":"4","5":"0.00000"},{"1":"11","2":"28","3":"0","4":"5","5":"0.00000"},{"1":"11","2":"15","3":"0","4":"5","5":"0.00000"},{"1":"11","2":"9","3":"0","4":"2","5":"0.00000"},{"1":"12","2":"16","3":"0","4":"4","5":"0.00000"},{"1":"12","2":"18","3":"0","4":"5","5":"0.00000"},{"1":"12","2":"19","3":"0","4":"4","5":"0.00000"},{"1":"12","2":"16","3":"0","4":"3","5":"0.00000"},{"1":"12","2":"16","3":"0","4":"5","5":"0.00000"},{"1":"12","2":"14","3":"0","4":"4","5":"0.00000"},{"1":"12","2":"16","3":"0","4":"4","5":"0.00000"},{"1":"12","2":"8","3":"0","4":"1","5":"0.00000"},{"1":"12","2":"16","3":"0","4":"1","5":"0.00000"},{"1":"12","2":"24","3":"0","4":"4","5":"0.00000"},{"1":"12","2":"11","3":"0","4":"2","5":"0.00000"},{"1":"12","2":"18","3":"0","4":"4","5":"0.00000"},{"1":"12","2":"19","3":"0","4":"5","5":"0.00000"},{"1":"12","2":"21","3":"0","4":"4","5":"0.00000"},{"1":"12","2":"16","3":"0","4":"1","5":"0.00000"},{"1":"12","2":"16","3":"0","4":"4","5":"0.00000"},{"1":"13","2":"13","3":"0","4":"2","5":"0.00000"},{"1":"13","2":"16","3":"0","4":"5","5":"0.00000"},{"1":"13","2":"22","3":"0","4":"4","5":"0.00000"},{"1":"13","2":"16","3":"0","4":"4","5":"0.00000"},{"1":"13","2":"21","3":"0","4":"5","5":"0.00000"},{"1":"13","2":"10","3":"0","4":"2","5":"0.00000"},{"1":"13","2":"20","3":"0","4":"4","5":"0.00000"},{"1":"13","2":"20","3":"0","4":"2","5":"0.00000"},{"1":"13","2":"25","3":"0","4":"4","5":"0.00000"},{"1":"14","2":"17","3":"0","4":"4","5":"0.00000"},{"1":"14","2":"18","3":"0","4":"4","5":"0.00000"},{"1":"14","2":"13","3":"0","4":"1","5":"0.00000"},{"1":"14","2":"23","3":"0","4":"4","5":"0.00000"},{"1":"14","2":"11","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"20","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"17","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"24","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"16","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"20","3":"0","4":"4","5":"0.00000"},{"1":"14","2":"14","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"24","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"28","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"20","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"24","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"22","3":"0","4":"4","5":"0.00000"},{"1":"14","2":"19","3":"0","4":"2","5":"0.00000"},{"1":"14","2":"12","3":"0","4":"2","5":"0.00000"},{"1":"14","2":"8","3":"0","4":"2","5":"0.00000"},{"1":"14","2":"30","3":"0","4":"5","5":"0.00000"},{"1":"14","2":"13","3":"0","4":"2","5":"0.00000"},{"1":"15","2":"14","3":"0","4":"5","5":"0.00000"},{"1":"15","2":"17","3":"0","4":"5","5":"0.00000"},{"1":"15","2":"16","3":"0","4":"4","5":"0.00000"},{"1":"15","2":"20","3":"0","4":"5","5":"0.00000"},{"1":"15","2":"16","3":"0","4":"2","5":"0.00000"},{"1":"15","2":"10","3":"0","4":"4","5":"0.00000"},{"1":"16","2":"24","3":"1","4":"4","5":"79.49604"},{"1":"16","2":"23","3":"1","4":"4","5":"58.97785"},{"1":"16","2":"15","3":"1","4":"1","5":"49.66033"},{"1":"16","2":"12","3":"1","4":"2","5":"30.16991"},{"1":"16","2":"31","3":"1","4":"5","5":"76.11766"},{"1":"16","2":"30","3":"1","4":"3","5":"44.70826"},{"1":"16","2":"24","3":"1","4":"4","5":"36.69678"},{"1":"16","2":"30","3":"1","4":"4","5":"48.62169"},{"1":"17","2":"26","3":"0","4":"4","5":"0.00000"},{"1":"17","2":"24","3":"0","4":"3","5":"0.00000"},{"1":"17","2":"16","3":"0","4":"2","5":"0.00000"},{"1":"17","2":"16","3":"0","4":"4","5":"0.00000"},{"1":"18","2":"16","3":"0","4":"2","5":"0.00000"},{"1":"18","2":"21","3":"0","4":"5","5":"0.00000"},{"1":"19","2":"25","3":"1","4":"5","5":"72.68007"},{"1":"20","2":"23","3":"0","4":"5","5":"0.00000"},{"1":"20","2":"18","3":"0","4":"3","5":"0.00000"},{"1":"20","2":"14","3":"0","4":"3","5":"0.00000"},{"1":"20","2":"21","3":"0","4":"5","5":"0.00000"},{"1":"20","2":"20","3":"0","4":"3","5":"0.00000"},{"1":"21","2":"16","3":"1","4":"5","5":"54.98373"},{"1":"22","2":"9","3":"0","4":"5","5":"0.00000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
-<div id="at-the-individual-level" class="section level3 hasAnchor" number="8.4.2">
-<h3><span class="header-section-number">8.4.2</span> At the individual level<a href="cluster-rct.html#at-the-individual-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="at-the-cluster-level" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> At the cluster level<a href="cluster-rct.html#at-the-cluster-level" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In cluster level analysis, the data is aggregated to the cluster level, so that for each cluster (school, in our case), there is effectively one data point. The advantage of this approach is that, because the design is conducted at the cluster level, the statistical methodology is relatively simple - for example, a t-test. However, if cluster sizes vary a lot, a cluster-level analysis is often not appropriate because they usually rely on the assumption that the variance of the outcome in each cluster is approximately the same. As we have seen, the larger a group, the smaller the variance of its sample mean. There are methods designed to account for this, such as the weighted t-test, but these methods are generally inefficient and less robust. These methods are generally thought to be appropriate for fewer than 15-20 clusters per treatment arm.</p>
+<p>One possibility for our trial would be to collect the mean and SD of scores within each school, and perform a t-test to find out if there is a significant difference between the intervention and control arms. If we wanted to find out whether this depended on, say, gender, we could split the data set and perform seperate t-tests for the different gender groups. This has the advantage that it is simple to implement, but the disadvantage that it is difficult to take into account covariates (apart from in the simple way discussed for eg. gender). With a small study, is likely that there is some imbalance in the design in terms of covariates.</p>
+<p>The required sample size for this option would be</p>
+<p><span class="math display">\[
+g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{icc}\right]}{n_g\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2,
+\]</span>
+where <span class="math inline">\(n_g\)</span> is the average cluster size and <span class="math inline">\(g\)</span> is the number of clusters per treatment arm. This is the value we worked out in Section <a href="cluster-rct.html#ss-crt">7.2.1.1</a></p>
+<div class="{r}">
+<p>We can perform this analysis on our schools data. The first step is to calculate the difference between <code>posttest</code> and <code>pretest</code> for each pupil.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="cluster-rct.html#cb40-1" tabindex="-1"></a>crt_df<span class="sc">$</span>diff <span class="ot">=</span> crt_df<span class="sc">$</span>Posttest <span class="sc">-</span> crt_df<span class="sc">$</span>Prettest</span></code></pre></div>
+<p>We can then aggregate this to find the mean of <code>diff</code> for each school:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="cluster-rct.html#cb41-1" tabindex="-1"></a>crt_summ <span class="ot">=</span> crt_df <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="cluster-rct.html#cb41-2" tabindex="-1"></a>  <span class="fu">group_by</span>(School) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="cluster-rct.html#cb41-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">MeanDiff =</span> <span class="fu">mean</span>(diff), <span class="at">ng =</span> <span class="fu">n</span>(), <span class="at">Group =</span> <span class="fu">mean</span>(Intervention))</span>
+<span id="cb41-4"><a href="cluster-rct.html#cb41-4" tabindex="-1"></a>crt_summ<span class="sc">$</span>Group <span class="ot">=</span> <span class="fu">as.factor</span>(crt_summ<span class="sc">$</span>Group)</span>
+<span id="cb41-5"><a href="cluster-rct.html#cb41-5" tabindex="-1"></a><span class="fu">paged_table</span>(crt_summ)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["School"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["MeanDiff"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["ng"],"name":[3],"type":["int"],"align":["right"]},{"label":["Group"],"name":[4],"type":["fct"],"align":["left"]}],"data":[{"1":"1","2":"13.76923","3":"13","4":"1"},{"1":"2","2":"19.09091","3":"33","4":"1"},{"1":"3","2":"20.43333","3":"30","4":"1"},{"1":"4","2":"19.00000","3":"30","4":"0"},{"1":"5","2":"16.66667","3":"15","4":"1"},{"1":"6","2":"14.40000","3":"5","4":"1"},{"1":"7","2":"16.75000","3":"24","4":"1"},{"1":"8","2":"13.83333","3":"12","4":"0"},{"1":"9","2":"15.00000","3":"4","4":"0"},{"1":"10","2":"18.28571","3":"14","4":"1"},{"1":"11","2":"11.54545","3":"11","4":"0"},{"1":"12","2":"13.06250","3":"16","4":"0"},{"1":"13","2":"14.55556","3":"9","4":"0"},{"1":"14","2":"14.71429","3":"21","4":"0"},{"1":"15","2":"11.33333","3":"6","4":"0"},{"1":"16","2":"20.25000","3":"8","4":"1"},{"1":"17","2":"17.25000","3":"4","4":"0"},{"1":"18","2":"15.00000","3":"2","4":"0"},{"1":"19","2":"20.00000","3":"1","4":"1"},{"1":"20","2":"15.40000","3":"5","4":"0"},{"1":"21","2":"11.00000","3":"1","4":"1"},{"1":"22","2":"4.00000","3":"1","4":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We can also visualise the mean differences by group</p>
+<div class="figure"><span style="display:block;" id="fig:crt1bp"></span>
+<img src="CT4H_notes_files/figure-html/crt1bp-1.png" alt="Boxplots of the mean differences for each trial arm" width="672" />
+<p class="caption">
+Figure 7.2: Boxplots of the mean differences for each trial arm
+</p>
+</div>
+<p>From Figure <a href="cluster-rct.html#fig:crt1bp">7.2</a> it certainly looks likely that a significant difference will be found.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="cluster-rct.html#cb42-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb42-2"><a href="cluster-rct.html#cb42-2" tabindex="-1"></a>  <span class="at">x=</span>crt_summ<span class="sc">$</span>MeanDiff[crt_summ<span class="sc">$</span>Group<span class="sc">==</span><span class="dv">0</span>],</span>
+<span id="cb42-3"><a href="cluster-rct.html#cb42-3" tabindex="-1"></a>  <span class="at">y=</span>crt_summ<span class="sc">$</span>MeanDiff[crt_summ<span class="sc">$</span>Group<span class="sc">==</span><span class="dv">1</span>],</span>
+<span id="cb42-4"><a href="cluster-rct.html#cb42-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb42-5"><a href="cluster-rct.html#cb42-5" tabindex="-1"></a>  <span class="at">paired =</span> F,</span>
+<span id="cb42-6"><a href="cluster-rct.html#cb42-6" tabindex="-1"></a>  <span class="at">var.equal=</span>F</span>
+<span id="cb42-7"><a href="cluster-rct.html#cb42-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  crt_summ$MeanDiff[crt_summ$Group == 0] and crt_summ$MeanDiff[crt_summ$Group == 1]
+## t = -2.2671, df = 19.983, p-value = 0.03463
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -6.4133879 -0.2667059
+## sample estimates:
+## mean of x mean of y 
+##  13.72454  17.06459</code></pre>
+</div>
+<p>This is fairly easy to implement, but it seems rather unsatisfactory. What we need is a linear (in the continuous outcome case at least) model that takes into account the covariates, and makes the most of the available data.</p>
+</div>
+<div id="at-the-individual-level-random-effects-models" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> At the individual level: Random effects models<a href="cluster-rct.html#at-the-individual-level-random-effects-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TIDY THIS UP!!!</p>
+<p>The random effects model takes the form</p>
+<p><span class="math display" id="eq:remodel">\[\begin{equation}
+x_{ijk} = \alpha + \beta_i + \sum\limits_l \gamma_l z_{ijkl} + u_{ij} + v_{ijk}
+\tag{7.5}
+\end{equation}\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(x_{ijk}\)</span> is the outcome for the <span class="math inline">\(k\)</span>-th individual in the <span class="math inline">\(j\)</span>-th cluster in the <span class="math inline">\(i\)</span>-th treatment arm (usually <span class="math inline">\(i=0\)</span> is the control arm and <span class="math inline">\(i=1\)</span> is the intervention arm)</li>
+<li><span class="math inline">\(\beta_i\)</span> is the intervention effect (with <span class="math inline">\(\beta_0=0\)</span>). Our null hypothesis is that <span class="math inline">\(\beta_1\)</span> is also zero)</li>
+<li>The <span class="math inline">\(z_{ijkl}\)</span> are <span class="math inline">\(L\)</span> different individual level covariates that we wish to take into account, and the <span class="math inline">\(\gamma_l\)</span> are the estimated coefficients.</li>
+<li><span class="math inline">\(u_{ij}\)</span> is a random effect relating to the <span class="math inline">\(j\)</span>-th cluster in the <span class="math inline">\(i\)</span>-th treatment arm. This is the term that accounts for the between-cluster variation. We assume <span class="math inline">\(u_{ij}\)</span> is normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2_B\)</span> (the between-cluster variance).</li>
+<li><span class="math inline">\(v_{ijk}\)</span> is a random effect relating to the <span class="math inline">\(k\)</span>-th individual in the cluster (ie. an individual level random error term), assumed normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2_W\)</span> (the within-cluster variance).</li>
+</ul>
+<p>With a random effects model we can take into account the effects of individual-level covariates and also the clustered design of the data. Approximately, our sample size requirements are</p>
+<p><span class="math display">\[
+k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{icc}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
+\]</span></p>
+<p>This is the ‘Random effects model’ line in <a href="https://racheloughton.shinyapps.io/sample_size/?_ga=2.190583720.2013007057.1679308387-1261352122.1678702192">the shiny dashboard</a>.)</p>
+<p>The random effects model is more suitable when there are more than around 15-20 clusters in each arm.</p>
+</div>
+<div id="analysing-for-effect-modification---random-effects-model" class="section level3 hasAnchor" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Analysing for effect modification - Random effects model<a href="cluster-rct.html#analysing-for-effect-modification---random-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In a random effects model, interaction terms can be built into the model specification in <a href="cluster-rct.html#eq:remodel">(7.5)</a>. This works well for individual level covariates, but less well for cluster-level covariates, especially for a small number of clusters, because it relies on comparisons between the clusters.</p>
+<p>This would be equivalent to</p>
+<p><span class="math display">\[
+x_{ijk} = \alpha + \beta_i + \sum\limits_l\left(\gamma_l z_{ijkl} + \lambda_l\beta_i z_{ijkl}\right)+ u_{ij} + v_{ijk},
+\]</span></p>
+<p>Where there is a coefficient <span class="math inline">\(\lambda_l\)</span> for each covariate <span class="math inline">\(z_{\cdot l}\)</span> that is only ‘activated’ if <span class="math inline">\(\beta_i\neq0\)</span> ie. for the intervention group. Therefore, significant values of <span class="math inline">\(\lambda_l\)</span> will give us an idea of interaction effects between individual-level covariates and the intervention. However, how reliable these estimates are depends on the balance of the design. In particular, if there is strong multicollinearity in the covariates (ie. if some individual level covariates are correlated in the design), the coefficients <span class="math inline">\(\lambda_l\)</span> are also strongly related to one another, and are therefore not easily interpretable.</p>
+<p><strong>This method is not suitable for pair-matched datasets - or is it? p290! Additional fixed effects to account for th strata, if stratified</strong></p>
+<pre><code>##     county location inciis uptodateonimmunizations hispanic incomecat outcome
+## 1        1    Rural     94                      37       44         0       1
+## 2        1    Rural     94                      37       44         0       1
+## 3        1    Rural     94                      37       44         0       1
+## 4        1    Rural     94                      37       44         0       1
+## 5        1    Rural     94                      37       44         0       0
+## 6        1    Rural     94                      37       44         0       0
+## 7        1    Rural     94                      37       44         0       1
+## 8        1    Rural     94                      37       44         0       1
+## 9        1    Rural     94                      37       44         0       1
+## 10       1    Rural     94                      37       44         0       1
+## 11       1    Rural     94                      37       44         0       0
+## 12       1    Rural     94                      37       44         0       1
+## 13       1    Rural     94                      37       44         0       1
+## 14       1    Rural     94                      37       44         0       1
+## 15       1    Rural     94                      37       44         0       1
+## 16       1    Rural     94                      37       44         0       1
+## 17       1    Rural     94                      37       44         0       1
+## 18       1    Rural     94                      37       44         0       1
+## 19       1    Rural     94                      37       44         0       0
+## 20       1    Rural     94                      37       44         0       0
+## 21       1    Rural     94                      37       44         0       1
+## 22       1    Rural     94                      37       44         0       1
+## 23       1    Rural     94                      37       44         0       1
+## 24       1    Rural     94                      37       44         0       1
+## 25       1    Rural     94                      37       44         0       1
+## 26       1    Rural     94                      37       44         0       1
+## 27       1    Rural     94                      37       44         0       1
+## 28       1    Rural     94                      37       44         0       1
+## 29       1    Rural     94                      37       44         0       0
+## 30       1    Rural     94                      37       44         0       1
+## 31       1    Rural     94                      37       44         0       0
+## 32       1    Rural     94                      37       44         0       1
+## 33       1    Rural     94                      37       44         0       0
+## 34       1    Rural     94                      37       44         0       1
+## 35       1    Rural     94                      37       44         0       0
+## 36       1    Rural     94                      37       44         0       1
+## 37       1    Rural     94                      37       44         0       1
+## 38       1    Rural     94                      37       44         0       0
+## 39       1    Rural     94                      37       44         0       1
+## 40       1    Rural     94                      37       44         0       1
+## 41       1    Rural     94                      37       44         0       1
+## 42       1    Rural     94                      37       44         0       1
+## 43       1    Rural     94                      37       44         0       1
+## 44       1    Rural     94                      37       44         0       1
+## 45       1    Rural     94                      37       44         0       0
+## 46       1    Rural     94                      37       44         0       1
+## 47       1    Rural     94                      37       44         0       1
+## 48       1    Rural     94                      37       44         0       1
+## 49       1    Rural     94                      37       44         0       0
+## 50       1    Rural     94                      37       44         0       1
+## 51       1    Rural     94                      37       44         0       1
+## 52       1    Rural     94                      37       44         0       1
+## 53       1    Rural     94                      37       44         0       1
+## 54       1    Rural     94                      37       44         0       1
+## 55       1    Rural     94                      37       44         0       0
+## 56       1    Rural     94                      37       44         0       1
+## 57       1    Rural     94                      37       44         0       0
+## 58       1    Rural     94                      37       44         0       1
+## 59       1    Rural     94                      37       44         0       0
+## 60       1    Rural     94                      37       44         0       0
+## 61       1    Rural     94                      37       44         0       1
+## 62       1    Rural     94                      37       44         0       1
+## 63       1    Rural     94                      37       44         0       1
+## 64       1    Rural     94                      37       44         0       1
+## 65       1    Rural     94                      37       44         0       1
+## 66       1    Rural     94                      37       44         0       1
+## 67       1    Rural     94                      37       44         0       1
+## 68       1    Rural     94                      37       44         0       1
+## 69       1    Rural     94                      37       44         0       1
+## 70       1    Rural     94                      37       44         0       1
+## 71       1    Rural     94                      37       44         0       0
+## 72       1    Rural     94                      37       44         0       1
+## 73       1    Rural     94                      37       44         0       1
+## 74       1    Rural     94                      37       44         0       0
+## 75       1    Rural     94                      37       44         0       1
+## 76       1    Rural     94                      37       44         0       0
+## 77       1    Rural     94                      37       44         0       1
+## 78       1    Rural     94                      37       44         0       1
+## 79       1    Rural     94                      37       44         0       1
+## 80       1    Rural     94                      37       44         0       1
+## 81       1    Rural     94                      37       44         0       1
+## 82       1    Rural     94                      37       44         0       1
+## 83       1    Rural     94                      37       44         0       0
+## 84       1    Rural     94                      37       44         0       0
+## 85       1    Rural     94                      37       44         0       0
+## 86       1    Rural     94                      37       44         0       1
+## 87       1    Rural     94                      37       44         0       1
+## 88       1    Rural     94                      37       44         0       1
+## 89       1    Rural     94                      37       44         0       1
+## 90       1    Rural     94                      37       44         0       1
+## 91       1    Rural     94                      37       44         0       1
+## 92       1    Rural     94                      37       44         0       1
+## 93       1    Rural     94                      37       44         0       1
+## 94       1    Rural     94                      37       44         0       0
+## 95       1    Rural     94                      37       44         0       0
+## 96       1    Rural     94                      37       44         0       1
+## 97       1    Rural     94                      37       44         0       1
+## 98       1    Rural     94                      37       44         0       1
+## 99       1    Rural     94                      37       44         0       1
+## 100      1    Rural     94                      37       44         0       1
+## 101      1    Rural     94                      37       44         0       0
+## 102      1    Rural     94                      37       44         0       1
+## 103      1    Rural     94                      37       44         0       0
+## 104      1    Rural     94                      37       44         0       0
+## 105      1    Rural     94                      37       44         0       1
+## 106      1    Rural     94                      37       44         0       1
+## 107      1    Rural     94                      37       44         0       1
+## 108      1    Rural     94                      37       44         0       0
+## 109      1    Rural     94                      37       44         0       1
+## 110      1    Rural     94                      37       44         0       1
+## 111      1    Rural     94                      37       44         0       1
+## 112      1    Rural     94                      37       44         0       1
+## 113      1    Rural     94                      37       44         0       1
+## 114      1    Rural     94                      37       44         0       0
+## 115      1    Rural     94                      37       44         0       0
+## 116      1    Rural     94                      37       44         0       1
+## 117      1    Rural     94                      37       44         0       0
+## 118      1    Rural     94                      37       44         0       1
+## 119      1    Rural     94                      37       44         0       0
+## 120      1    Rural     94                      37       44         0       1
+## 121      1    Rural     94                      37       44         0       0
+## 122      1    Rural     94                      37       44         0       1
+## 123      1    Rural     94                      37       44         0       1
+## 124      1    Rural     94                      37       44         0       1
+## 125      1    Rural     94                      37       44         0       1
+## 126      1    Rural     94                      37       44         0       1
+## 127      1    Rural     94                      37       44         0       0
+## 128      1    Rural     94                      37       44         0       1
+## 129      1    Rural     94                      37       44         0       1
+## 130      1    Rural     94                      37       44         0       1
+## 131      1    Rural     94                      37       44         0       0
+## 132      1    Rural     94                      37       44         0       0
+## 133      1    Rural     94                      37       44         0       1
+## 134      1    Rural     94                      37       44         0       1
+## 135      1    Rural     94                      37       44         0       0
+## 136      1    Rural     94                      37       44         0       1
+## 137      1    Rural     94                      37       44         0       0
+## 138      1    Rural     94                      37       44         0       1
+## 139      1    Rural     94                      37       44         0       0
+## 140      1    Rural     94                      37       44         0       1
+## 141      1    Rural     94                      37       44         0       1
+## 142      1    Rural     94                      37       44         0       1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 4658 rows ]</code></pre>
 
 </div>
+</div>
+</div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-dickinson2015pragmatic" class="csl-entry">
+Dickinson, L Miriam, Brenda Beaty, Chet Fox, Wilson Pace, W Perry Dickinson, Caroline Emsermann, and Allison Kempe. 2015. <span>“Pragmatic Cluster Randomized Trials Using Covariate Constrained Randomization: A Method for Practice-Based Research Networks (PBRNs).”</span> <em>The Journal of the American Board of Family Medicine</em> 28 (5): 663–72.
 </div>
 </div>
             </section>
@@ -371,8 +797,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="survival-distributed-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="practical-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analysis-for-binary-outcomes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
