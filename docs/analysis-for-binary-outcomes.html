@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-08" />
+<meta name="date" content="2024-02-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -499,6 +499,7 @@ where <span class="math inline">\(G\)</span> is the set of subgroups (group <spa
 </div>
 <div id="measures-of-difference-for-binary-data" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Measures of difference for binary data<a href="analysis-for-binary-outcomes.html#measures-of-difference-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>An important note: we’re treating <span class="math inline">\(\pi_T&gt;\pi_C\)</span> as good here, as we would when the primary outcome is something positive, like a patient being cured. All the methods can easily be adapted to a situation where <span class="math inline">\(\pi_C&gt;\pi_T\)</span> is desirable.</strong></p>
 <p>In the above example the question we were interested in was ‘is what we’ve observed statistically significant?’ and in our streptomycin example the answer was a resounding ‘Yes!’. However, if we then ask questions like ‘How big is the difference between the effects of each treatment?’ or ‘What is the treatment effect?’, things get a bit less clear.</p>
 <p>In the continuous case, it made sense to simply think about the treatment effect as the difference <span class="math inline">\(\mu_T - \mu_C\)</span> between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span>, and each of them requires a different approach.</p>
 <div id="ard-and-nnt" class="section level3 hasAnchor" number="6.2.1">
@@ -511,6 +512,8 @@ and is sometimes used. However, it loses a lot of information that we’d probab
 <p><span class="math display">\[ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. \]</span>
 The NNT is the number of patients you’d need to treat (with treatment <span class="math inline">\(T\)</span> rather than <span class="math inline">\(C\)</span>) before you would bring benefit to one extra patient. The website <a href="https://thennt.com/">TheNNT</a> collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!</p>
 <p>The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if <span class="math inline">\(\pi_T = 0.25,\,\pi_C=0.2\)</span>, then <span class="math inline">\(\text{ARD} = 0.05\)</span> and <span class="math inline">\(\text{NNT} = 20.\)</span> After treating 20 patients with treatment <span class="math inline">\(C\)</span> we expect to cure (say) 4, whereas treating 20 patients with treatment <span class="math inline">\(T\)</span> it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if <span class="math inline">\(\pi_C=0.005\)</span> and <span class="math inline">\(\pi_T = 0.015\)</span> then <span class="math inline">\(\text{ARD}=0.01\)</span> and <span class="math inline">\(\text{NNT}=100\)</span>. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!</p>
+<div id="confint-ardnnt" class="section level4 hasAnchor" number="6.2.1.1">
+<h4><span class="header-section-number">6.2.1.1</span> Confidence intervals for ARD and NNT<a href="analysis-for-binary-outcomes.html#confint-ardnnt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s suppose we want to work with the ARD, and to make a confidence interval for the treatment difference <span class="math inline">\(\tau_{ARD} = \pi_T - \pi_C\)</span>. Using the same normal approximation as before, we can estimate <span class="math inline">\(\tau_{ARD}\)</span> by <span class="math inline">\(p_T - p_C\)</span>, and <span class="math inline">\(\operatorname{var}\left(p_T - p_C\right)\)</span> by</p>
 <p><span class="math display">\[ \frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}.\]</span>
 Our <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval is therefore given by</p>
@@ -536,9 +539,10 @@ That is, we would expect to treat nearly three patients before one is improved (
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
-<div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.1">
-<h4><span class="header-section-number">6.2.1.1</span> What if the difference is not significant?<a href="analysis-for-binary-outcomes.html#what-if-the-difference-is-not-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will make up some data for a small trial.</p>
+</div>
+<div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
+<h4><span class="header-section-number">6.2.1.2</span> What if the difference is not significant?<a href="analysis-for-binary-outcomes.html#what-if-the-difference-is-not-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will make up some data for a small trial, loosely based on the Streptomycin data we’ve been using.</p>
 <p>The dataset for our made-up trial is</p>
 <table>
 <thead>
@@ -572,16 +576,17 @@ Because the NNT is the reciprocal of something approximately normally distribute
 </table>
 <p>The ARD is now
 <span class="math display">\[\frac{9}{14} - \frac{4}{12} = \frac{3}{13} \approx 0.310 \]</span>
-and our 95% confidence interval is <span class="math inline">\(\left(-0.0567,\;0.676\right)\)</span>.</p>
+and our 95% confidence interval for <span class="math inline">\(\tau_{ARD}\)</span> is <span class="math inline">\(\left(-0.0567,\;0.676\right)\)</span>.</p>
 <p>Clearly because of the small size of the trial our confidence interval is very wide (this is not a very good trial!), but the important thing to note is that it now contains zero. It looks very likely that the treatment is effective (the interval only just contains zero) but how many patients might we need to treat before we expect to see an extra success? The expected value of NNT is</p>
 <p><span class="math display">\[ \frac{1}{0.310} = 3.23,\]</span>
-which does not pose a problem. However, as indicated by the 95% confidence interval, it is possible that the ARD is zero, and in this case the NNT is in some sense infinite: no matter how many patients we treat, we don’t expect to see any extra improvements. Therefore, since our confidence interval for ARD contains zero it feels appropriate that our confidence interval for NNT should contain infinity.</p>
+which does not pose a problem. However, our 95% confidence interval now contains the possibility that the ARD is zero, and in this case the NNT is in some sense infinite: no matter how many patients we treat, we don’t expect to see any extra improvements. Therefore, since our confidence interval for ARD contains zero it feels appropriate that our confidence interval for NNT should contain infinity.</p>
 <p>When thinking about a confidence interval for the NNT, we need to think about signs, and what negative and positive values mean. If both the lower and upper limits of the confidence interval for ARD are positive, there is no issue - the treatment is effective, and our NNT confidence interval is another entirely positive interval. If the confidence interval for ARD is entirely negative, we have an entirely negative interval for NNT. A negative value of NNT can be thought of as the ‘number needed to treat to harm one extra person’.</p>
 <p>The tricky situation is when the confidence interval for the ARD is <span class="math inline">\(\left(-L, U\right)\)</span> with <span class="math inline">\(L,U&gt;0\)</span>, ie. an interval containing zero. As we approach zero from <span class="math inline">\(U\)</span>, the upper limit of the CI for <span class="math inline">\(\pi_T - \pi_C\)</span>, the number of patients we need to treat increases, since the treatment effect is getting smaller, until at <span class="math inline">\(\pi_T - \pi_C=0\)</span> the NNT is infinite. Therefore, the part of the CI for NNT corresponding to the positive part of the CI for ARD is</p>
 <p><span class="math display">\[\left(\frac{1}{U},\; \infty\right)\]</span></p>
 <p>As we approach zero from the left in the interval (ie. from <span class="math inline">\(-L\)</span>), the treatment gets less and less effective (and right now we mean effective in a bad way, likely doing harm to the patients compared to the control), and so we need to treat more and more patients to harm one extra patient compared to the control. In this region the NNT is negative, since if we deny some patients the treatment we will benefit a few. Therefore the CI for the NNT corresponding to the negative part of the CI for ARD is</p>
 <p><span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right), \]</span>
-and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals.</p>
+and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
+<span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p><span class="citation">Altman (<a href="#ref-altman1998confidence">1998</a>)</span> (<a href="https://www.bmj.com/content/bmj/317/7168/1309.full.pdf">available here</a>) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!</p>
@@ -589,28 +594,38 @@ and altogether the confidence interval for the number needed to treat (NNT) is t
 <div id="problems-with-the-confidence-interval-for-the-ard" class="section level4 unnumbered hasAnchor">
 <h4>Problems with the confidence interval for the ARD<a href="analysis-for-binary-outcomes.html#problems-with-the-confidence-interval-for-the-ard" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>You may well remember from the dim and distant past that the method we have been using so far (which in this section we’ll be calling the ‘standard’ method) is not so reliable if the proportion is close to zero or one. <span class="citation">Newcombe (<a href="#ref-newcombe1998interval">1998</a>)</span> compared eleven different methods for finding confidence intervals for the difference in proportions (as we are doing when we work with the ARD) and found the standard method to be the worst! The coverage probability turns out to be much lower than the nominal value, with a so-called 95% confidence interval being closer to 90% or even 85%. A further problem with this method (although it will rarely affect us in practice in this setting) is that the limits of the confidence interval aren’t forced to be in <span class="math inline">\(\left[-1,1\right]\)</span>.</p>
-<p>The preferred method from <span class="citation">Newcombe (<a href="#ref-newcombe1998interval">1998</a>)</span>, for its ease of implementation and its accuracy, is one that relies on <em>score statistics</em>.</p>
+<p>We will give a sketch of the favourite method of <span class="citation">Newcombe (<a href="#ref-newcombe1998interval">1998</a>)</span>, chosen for its ease of implementation and its accuracy, now.</p>
 <p>The first step is to find an interval estimate for a single proportion <span class="math inline">\(\pi\)</span>. As before, this can be written</p>
 <p><span class="math display">\[\left\lbrace \pi \mid \frac{\lvert p - \pi \rvert}{\sqrt{\pi\left(1-\pi\right)/n}} \leq z_{\frac{\alpha}{2}} \right\rbrace = \left\lbrace \pi \mid \left(p - \pi\right)^2 \leq z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n} \right\rbrace. \]</span>
-We can find the limits of the confindence interval by changing the right hand side to an equality</p>
-<p><span class="math display">\[\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.\]</span></p>
-<p>In the standard method, we substitute <span class="math inline">\(p\)</span> (the estimated value of <span class="math inline">\(\pi\)</span> from our sample) into the right hand side for <span class="math inline">\(\pi\)</span>, to get</p>
+We can find the limits of the <span class="math inline">\(100\left(1-\alpha\right)\)</span>% level confidence interval by changing the right hand side to an equality</p>
+<p><span class="math display" id="eq:newcombe1">\[\begin{equation}
+\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.
+\tag{6.1}
+\end{equation}\]</span></p>
+<p>In the standard method, we substitute <span class="math inline">\(p\)</span> (the estimated value of <span class="math inline">\(\pi\)</span> from our sample) into the right hand side of Equation <a href="analysis-for-binary-outcomes.html#eq:newcombe1">(6.1)</a> for <span class="math inline">\(\pi\)</span>, to get</p>
 <p><span class="math display">\[\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{p\left(1-p\right)}{n}\]</span></p>
 <p>which we solve to get the limits
 <span class="math display">\[ \pi = p \pm z_{\frac{\alpha}{2}}\sqrt{\frac{p\left(1-p\right)}{n}}.\]</span>
-In Newcombe’s proposed method, we instead keep <span class="math inline">\(\pi\)</span> in the right hand side and solve the quadratic in terms of <span class="math inline">\(\pi\)</span>,
-<span class="math display">\[\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.\]</span>
-The benefit of this new method will be most obvious for a probability that is close to 0 or 1. For example, suppose we have 1 success out of 50 patients, so <span class="math inline">\(p=0.02,\;n=50\)</span>.</p>
+In Newcombe’s proposed method, we instead keep <span class="math inline">\(\pi\)</span> in the right hand side and solve the quadratic in Equation <a href="analysis-for-binary-outcomes.html#eq:newcombe1">(6.1)</a> in terms of <span class="math inline">\(\pi\)</span>.</p>
+<p>The benefit of this new method will be most obvious for a probability that is close to 0 or 1.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 6.5  </strong></span>Suppose we have 1 success out of 50 patients, so <span class="math inline">\(p=0.02,\;n=50\)</span>.</p>
 <p>The limits of a standard 95% confidence interval will be</p>
 <p><span class="math display">\[\left(0.02 - z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}},\; 0.02 + z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}}\right) = \left(-0.0188,\;0.0588\right),\]</span>
 whereas the limits to the Newcombe 95% CI will be the roots of</p>
 <p><span class="math display">\[\left(0.02-\pi\right)^2 = z^2_{\alpha/2}\frac{\pi\left(1-\pi\right)}{50}\]</span>
 which work out to be</p>
 <pre><code>## [1] 0.003539259 0.104954436</code></pre>
-<p>Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>Visually, we can represent this as in Figure <a href="analysis-for-binary-outcomes.html#fig:newc1">6.1</a> by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:newc1"></span>
+<img src="CT4H_notes_files/figure-html/newc1-1.png" alt="LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate $p$ subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard." width="672" />
+<p class="caption">
+Figure 6.1: LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate <span class="math inline">\(p\)</span> subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard.
+</p>
+</div>
 <div class="example">
-<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 6.5  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
+<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 6.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
 <p><span class="math display">\[\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.\]</span>
 Solving this equation in the usual way (using the quadratic formula) we find the limits</p>
 <pre><code>## [1] 0.5597141 0.7971771</code></pre>
@@ -619,23 +634,33 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.5687797 0.8130385</code></pre>
 <p>We can see this graphically</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<p class="caption">
+Figure 6.2: As before, dashed for Newcombe, dotted for standard
+</p>
+</div>
 <p>Notice that the interval with the new method is now asymmetrical, which is more realistic.</p>
 <p>Similarly for the control proportion <span class="math inline">\(\pi_C\)</span>, we have <span class="math inline">\(p_C = \frac{17}{52},\; n_C=52\)</span>, and our Newcombe interval is</p>
 <pre><code>## [1] 0.2152207 0.4624381</code></pre>
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.1994256 0.4544205</code></pre>
 <p>Again, we can see this graphically.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<p class="caption">
+Figure 6.3: As before, dashed for Newcombe, dotted for standard
+</p>
 </div>
 </div>
-<div id="generalising-this-to-two-cases" class="section level4 hasAnchor" number="6.2.1.2">
-<h4><span class="header-section-number">6.2.1.2</span> Generalising this to two cases<a href="analysis-for-binary-outcomes.html#generalising-this-to-two-cases" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="extending-this-to-pi_t---pi_c" class="section level4 hasAnchor" number="6.2.1.3">
+<h4><span class="header-section-number">6.2.1.3</span> Extending this to <span class="math inline">\(\pi_T - \pi_C\)</span><a href="analysis-for-binary-outcomes.html#extending-this-to-pi_t---pi_c" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You’ll be relieved to hear that there is such a method, and we’ll give a sketch here of how it works.</p>
 <p>The limits of the ‘standard method’ confidence interval at significance level <span class="math inline">\(\alpha\)</span> are given by</p>
 <p><span class="math display" id="eq:ardci">\[\begin{equation}
 \left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right).
-\tag{6.1}
+\tag{6.2}
 \end{equation}\]</span></p>
 <p>We can rewrite this as</p>
 <p><span class="math display">\[\begin{equation}
@@ -647,7 +672,7 @@ which is</p>
 \]</span>
 These differences must be calculated using the individual sample confidence interval method.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 6.6  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 6.7  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
 <p><span class="math display">\[
 \begin{aligned}
 p_T &amp; = \frac{38}{55}\\

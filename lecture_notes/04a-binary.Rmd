@@ -178,7 +178,7 @@ that is, 281 patients per trial arm.
 
 Later in the course we'll look at another way of estimating sample size. 
 
-# Analysis for binary outcomes
+# (Lecture 11) Analysis for binary outcomes
 
 For a group of $n$ participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). 
 
@@ -435,31 +435,73 @@ Not surprisingly, this value is quite close to the one we obtained earlier!
 
 *Having thought about tests for one proportion, we now move on to thinking how we might compare proportions.*
 
+Brief overview of the different measure's we'll be looking at:
+
+Absolute risk difference (ARD): $\pi_T - \pi_C$
+
+Number needed to treat (NNT): $\frac{1}{\text{ARD}} = \frac{1}{\pi_T - \pi_C}$
+
+Risk ratio (RR): $\frac{\pi_T}{\pi_C}$
+
+Odds Ratio (OR): $\frac{\pi_T/ \left(1-\pi_T\right)}{\pi_C/ \left(1-\pi_C\right)}$
 
 
-## Measures of difference for binary data
+## (Lecture 12) Measures of difference for binary data
 
-In the above example the question we were interested in was 'is what we've observed statistically significant?' and in our streptomycin example the answer was a resounding 'Yes!'. However, if we then ask questions like 'How big is the difference between the effects of each treatment?' or 'What is the treatment effect?', things get a bit less clear. 
+**Important note: treating $\pi_T>\pi_C$ as good**
 
-In the continuous case, it made sense to simply think about the treatment effect as the difference $\mu_T - \mu_C$ between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions $\pi_C$ and $\pi_T$, and each of them requires a different approach.
+Our question in the last lecture was 'is what we've observed statistically significant?' For streptomycin example the answer was a resounding 'Yes!'. 
+
+However, for questions like 
+
+  * 'How big is the difference between the effects of each treatment?' 
+  * 'What is the treatment effect?'
+  
+things are a bit less clear. 
+
+For continuous $X$, it made sense to think about the treatment effect as $\mu_T - \mu_C$. 
+
+In the binary case there are several ways we can think of the difference between two proportions $\pi_C$ and $\pi_T$. 
+
+*Each requires a different approach, so we will work our way through them in the next couple of lectures*.
 
 ### Absolute risk difference and Number Needed to Treat {#ard-and-nnt}
 
 The **absolute risk difference** is 
 
 $$\text{ARD} = \pi_T - \pi_C,$$
-and is sometimes used. However, it loses a lot of information that we'd probably like to keep in some how. For example, suppose a treatment reduces the incidence of some terrible symptom from $\pi_C=0.03$ to $\pi_T=0.01$. The absolute risk difference is $0.02$ here. For some other treatment that results in a reduction from $\pi_C=0.57$ to $\pi_T = 0.55$ we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.
+and is sometimes used. Loses a lot of information that we'd like to keep in: a change from $\pi_C=0.03$ to $\pi_T=0.01$ is very different from $\pi_C=0.57$ to $\pi_T = 0.55$.
 
-It is useful though to remember that usually these numbers are about people. If the outcome is 'cured' or 'not cured', then for some cohort of $N$ patients, $N\times\text{ARD}$ is the number of extra patients you would expect to cure if you used treatment $T$ instead of treatment $C$ (which may be nothing or may some usual course of treatment).
+*Eg., suppose a treatment reduces the incidence of some terrible symptom from $\pi_C=0.03$ to $\pi_T=0.01$. The absolute risk difference is $0.02$ here. For some other treatment that results in a reduction from $\pi_C=0.57$ to $\pi_T = 0.55$ we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.*
+
+BUT these numbers are (usually) about people. If the outcome is 'cured' or 'not cured', then for $N$ patients, $N\times\text{ARD}$ is the number of extra patients you would expect to cure if you used treatment $T$ instead of treatment $C$ *(which may be nothing or may some usual course of treatment).*
 
 Linked to this is the **number needed to treat** (NNT), which is defined as
 
 $$ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. $$
-The NNT is the number of patients you'd need to treat (with treatment $T$ rather than $C$) before you would bring benefit to one extra patient. The website [TheNNT](https://thennt.com/) collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!
+The NNT is the number of patients you'd need to treat (with treatment $T$ rather than $C$) before you would bring benefit to one extra patient. 
 
-The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if $\pi_T = 0.25,\,\pi_C=0.2$, then $\text{ARD} = 0.05$ and $\text{NNT} = 20.$ After treating 20 patients with treatment $C$ we expect to cure (say) 4, whereas treating 20 patients with treatment $T$ it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if $\pi_C=0.005$ and $\pi_T = 0.015$ then $\text{ARD}=0.01$ and $\text{NNT}=100$. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!
+*The website [TheNNT](https://thennt.com/) collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!*
 
-Let's suppose we want to work with the ARD, and to make a confidence interval for the treatment difference $\tau_{ARD} = \pi_T - \pi_C$. Using the same normal  approximation as before, we can estimate $\tau_{ARD}$ by $p_T - p_C$, and $\operatorname{var}\left(p_T - p_C\right)$ by 
+  * Popular as a clinical benchmark
+  * Provides useful intuition in terms of the number of people it will help
+  
+Eg. $\pi_T = 0.25,\,\pi_C=0.2$, then $\text{ARD} = 0.05$ and $\text{NNT} = 20.$ 
+
+After treating 20 patients with treatment $C$ we expect to cure (say) 4, 
+whereas treating 20 patients with treatment $T$ it is expected that we will cure 5. 
+
+For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if $\pi_C=0.005$ and $\pi_T = 0.015$ then $\text{ARD}=0.01$ and $\text{NNT}=100$. 
+
+*It might be decided that the necessary changes and costs are not worth it for such a small difference. *
+
+*That said, the NNT is not the easiest statistic to work with, as we shall see!*
+
+#### Confidence intervals for ARD and NNT {#confint-ardnnt}
+
+Let's make a confidence interval for the treatment difference $\tau_{ARD} = \pi_T - \pi_C$. 
+
+Using the same normal  approximation as before, we can estimate $\tau_{ARD}$ by $p_T - p_C$, and $\operatorname{var}\left(p_T - p_C\right)$ by 
 
 $$ \frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}.$$
 Our $100\left(1-\alpha\right)$% confidence interval is therefore given by
@@ -483,15 +525,18 @@ $$
 and therefore a 95% confidence interval for $\tau_{ARD}$ is
 
 $$\left(0.364 - z_{0.975}\sqrt{0.0811},\; 0.364 + z_{0.975}\sqrt{0.0811}\right) = \left(0.187,\; 0.541\right). $$
-As we should expect from the very low $p$-value we saw, the 95% confidence interval does not contain zero.
+*As we should expect from the very low $p$-value we saw, the 95% confidence interval does not contain zero.*
 
-If we want to think instead in terms of NNT (the number needed to treat), then we need to find the reciprocal of our estimate of $\tau_{ARD}$:
+Our expected value of $\tau_{NNT}$ is
 
 $$ \text{NNT} = \frac{1}{\tau_{ARD}} = \frac{1}{0.364} = 2.75.$$
-That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for $\tau_{ARD}$ to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get
+That is, we would expect to treat three patients before one is improved (in terms of their tuberculosis symptoms). 
+
+We can use the limits of the 95% CI for $\tau_{ARD}$ to form a 95% CI for NNT: *simply by taking the reciprocals of the limits to get*
 
 $$\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).$$
-Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
+
+*Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.*
 
 ```{r}
 tauhat = 38/55  - 17/52
@@ -514,9 +559,9 @@ grid.arrange(plot_ard, plot_nnt)
 
 #### What if the difference is not significant?
 
-In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will make up some data for a small trial. 
+*In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero.* 
 
-The dataset for our made-up trial is
+To illustrate this, we will make up some data for a small trial:
 
 
                       Successes   Failures    Total     
@@ -527,7 +572,7 @@ The dataset for our made-up trial is
         
 The ARD is now
 $$\frac{9}{14} - \frac{4}{12} = \frac{3}{13} \approx 0.310 $$
-and our 95% confidence interval is $\left(-0.0567,\;0.676\right)$.
+and our 95% confidence interval for $\tau_{ARD}$ is $\left(-0.0567,\;0.676\right)$.
 
 ```{r}
 p_q = 9/14 - 4/12
@@ -538,21 +583,41 @@ ci_upper = p_q + qnorm(0.975)*sqrt(varhat_q)
 # c(ci_lower, ci_upper)
 
 ```
- Clearly because of the small size of the trial our confidence interval is very wide (this is not a very good trial!), but the important thing to note is that it now contains zero. It looks very likely that the treatment is effective (the interval only just contains zero) but how many patients might we need to treat before we expect to see an extra success? The expected value of NNT is 
+Our CI is very wide (this is not a very good trial!), and now contains zero. 
+
+*It looks very likely that the treatment is effective (the interval only just contains zero) but how many patients might we need to treat before we expect to see an extra success?* 
+
+The expected value of NNT is 
  
  $$ \frac{1}{0.310} = 3.23,$$
- which does not pose a problem. However, as indicated by the 95% confidence interval, it is possible that the ARD is zero, and in this case the NNT is in some sense infinite: no matter how many patients we treat, we don't expect to see any extra improvements. Therefore, since our confidence interval for ARD contains zero it feels appropriate that our confidence interval for NNT should contain infinity.
  
-When thinking about a confidence interval for the NNT, we need to think about signs, and what negative and positive values mean. If both the lower and upper limits of the confidence interval for ARD are positive, there is no issue - the treatment is effective, and our NNT confidence interval is another entirely positive interval. If the confidence interval for ARD is entirely negative, we have an entirely negative interval for NNT. A negative value of NNT can be thought of as the 'number needed to treat to harm one extra person'.
+ which is fine.
 
-The tricky situation is when the confidence interval for the ARD is $\left(-L, U\right)$ with $L,U>0$, ie. an interval containing zero. As we approach zero from $U$, the upper limit of the CI for $\pi_T - \pi_C$, the number of patients we need to treat increases, since the treatment effect is getting smaller, until at $\pi_T - \pi_C=0$ the NNT is infinite. Therefore, the part of the CI for NNT corresponding to the positive part of the CI for ARD is 
+However, our CI contains the possibility that  $\tau_{ARD}=0$, in which case the NNT is in some sense infinite: 
+
+*no matter how many patients we treat, we don't expect to see any extra improvements.* 
+
+Therefore, it feels appropriate that our CI for $\tau_{NNT}$ should contain infinity.
+ 
+*When thinking about a confidence interval for the NNT, we need to think about signs, and what negative and positive values mean.* 
+
+  * *If both the lower and upper limits of the confidence interval for ARD are positive, there is no issue - the treatment is effective, and our NNT confidence interval is another entirely positive interval.* 
+  * *If the confidence interval for ARD is entirely negative, we have an entirely negative interval for NNT. A negative value of NNT can be thought of as the 'number needed to treat to harm one extra person'.*
+
+The tricky situation is when the CI for $\tau_{ARD}$ is $\left(-L, U\right)$ with $L,U>0$, ie. an interval containing zero. 
+
+As we approach zero from $U$, the upper limit of the CI for $\pi_T - \pi_C$, the number of patients we need to treat increases, since the treatment effect is getting smaller, until at $\pi_T - \pi_C=0$ the NNT is infinite. Therefore, the part of the CI for NNT corresponding to the positive part of the CI for ARD is 
 
 $$\left(\frac{1}{U},\; \infty\right)$$
 
-As we approach zero from the left in the interval (ie. from $-L$), the treatment gets less and less effective (and right now we mean effective in a bad way, likely doing harm to the patients compared to the control), and so we need to treat more and more patients to harm one extra patient compared to the control. In this region the NNT is negative, since if we deny some patients the treatment we will benefit a few. Therefore the CI for the NNT corresponding to the negative part of the CI for ARD is 
+As we approach zero from the left in the interval (ie. from $-L$), we need to treat more and more patients to **harm** one more. In this region the NNT is negative, since if we deny some patients the treatment we will benefit a few. 
+
+Therefore the CI for $\tau_{NNT}$ corresponding to the negative part of the CI for $\tau_{ARD}$ is 
 
 $$\left(-\infty,\;-\frac{1}{L}\right), $$
-and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals.
+and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals,
+
+$$\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).$$
 
 The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).
 
@@ -582,26 +647,38 @@ ggplot(data=inv_df, aes(x=x, y=y)) + geom_path() + xlim(-1,1) + ylim(-25,25) +
  
 #### Problems with the confidence interval for the ARD {-}
 
-You may well remember from the dim and distant past that the method we have been using so far (which in this section we'll be calling the 'standard' method) is not so reliable if the proportion is close to zero or one. @newcombe1998interval compared eleven different methods for finding confidence intervals for the difference in proportions (as we are doing when we work with the ARD) and found the standard method to be the worst! The coverage probability turns out to be much lower than the nominal value, with a so-called 95% confidence interval being closer to 90% or even 85%. A further problem with this method (although it will rarely affect us in practice in this setting) is that the limits of the confidence interval aren't forced to be in $\left[-1,1\right]$.
+The 'standard' method is not so reliable if the proportion is close to zero or one. The coverage probability of a 95% CI like in Section \@ref(confint-ardnnt) often turns out to be more like 90% or even 85%.
 
-The preferred method from @newcombe1998interval, for its ease of implementation and its accuracy, is one that relies on *score statistics*. 
+Also, the limits of the 'standard' CI aren't forced to be in $\left[-1,1\right]$.
 
-The first step is to find an interval estimate for a single proportion $\pi$. As before, this can be written
+#### Newcombe Method {-}
+
+Step 1: find an interval estimate for a single proportion $\pi$. As before, this can be written
 
 $$\left\lbrace \pi \mid \frac{\lvert p - \pi \rvert}{\sqrt{\pi\left(1-\pi\right)/n}} \leq z_{\frac{\alpha}{2}} \right\rbrace = \left\lbrace \pi \mid \left(p - \pi\right)^2 \leq z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n} \right\rbrace. $$
-We can find the limits of the confindence interval by changing the right hand side to an equality
+We find the limits of the $100\left(1-\alpha\right)$% level CI by changing the right hand side to an equality:
 
 $$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.$$
 
-In the standard method, we substitute $p$ (the estimated value of $\pi$ from our sample) into the right hand side for $\pi$, to get
+**'standard' method**: 
 
-$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{p\left(1-p\right)}{n}$$
+Substitute $p$ (the estimated value of $\pi$ from our sample) into the right hand side of Equation \@ref(eq:newcombe1) for $\pi$, to get
+
+\begin{equation}
+\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.
+(\#eq:newcombe1)
+\end{equation}
+
 
 which we solve to get the limits
 $$ \pi = p \pm z_{\frac{\alpha}{2}}\sqrt{\frac{p\left(1-p\right)}{n}}.$$
-In Newcombe's proposed method, we instead keep $\pi$ in the right hand side and solve the quadratic in terms of $\pi$,
-$$\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.$$
-The benefit of this new method will be most obvious for a probability that is close to 0 or 1. For example, suppose we have 1 success out of 50 patients, so $p=0.02,\;n=50$. 
+**Newcombe's method**
+
+Keep $\pi$ in the right hand side and solve the quadratic in Equation \@ref(eq:newcombe1) in terms of $\pi$.
+
+The benefit of this new method will be most obvious for a probability that is close to 0 or 1. 
+
+Eg. Suppose we have 1 success out of 50 patients, so $p=0.02,\;n=50$. 
 
 The limits of a standard 95% confidence interval will be 
 
@@ -628,9 +705,9 @@ qf_eg = quad_fun(
 qf_eg
 ```
 
-Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows $p_T$, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).
+*Visually, we can represent this as below by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows $p_T$, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).*
 
-```{r}
+```{r newc1, caption="LHS of Equation 6.1 (solid black) with RHS of 6.1 (black dashed) and RHS with estimate $p$ subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard."}
 fun_LHSeg = function(x){(0.02 - x)^2}
 fun_RHSeg = function(x){qnorm(0.975)^2*(x*(1-x))/50}
 const_RHSeg = (qnorm(0.975)^2)*peg*(1-peg)/50
@@ -675,7 +752,7 @@ stand_CI
 
 We can see this graphically 
 
-```{r}
+```{r, fig.cap = "As before, dashed for Newcombe, dotted for standard"}
 qf_pt = quad_fun(
   a = 1 + (qnorm(0.975)^2)/55,
   b = -2*pT - (qnorm(0.975)^2)/55,
@@ -719,7 +796,7 @@ stand_CIc
 
 Again, we can see this graphically.
 
-```{r}
+```{r, fig.cap = "As before, dashed for Newcombe, dotted for standard"}
 ggplot() + geom_function(fun = fun_LHSc) + xlim(0,0.6) +
   geom_function(fun=fun_RHSc, lty=2) +
   geom_hline(aes(yintercept = const_RHSc), lty=3) +
@@ -734,9 +811,9 @@ ggplot() + geom_function(fun = fun_LHSc) + xlim(0,0.6) +
 
 
 
-#### Generalising this to two cases
+#### Extending this to  $\pi_T - \pi_C$
 
-What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You'll be relieved to hear that there is such a method, and we'll give a sketch here of how it works.
+*What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You'll be relieved to hear that there is such a method, and we'll give a sketch here of how it works.*
 
 The limits of the 'standard method' confidence interval at significance level $\alpha$ are given by
 
@@ -751,7 +828,13 @@ We can rewrite this as
 \left(p_T - p_C - \sqrt{\omega^2_T + \omega^2_C},\; p_T - p_C + \sqrt{\omega^2_T + \omega^2_C}\right)
 \end{equation}
 
-where $\omega_T$ and $\omega_C$ are the widths of the separate single-sample 'standard' confidence intervals for $p_T$ and $p_C$. In Newcombe's method, we proceed in the same way, but instead use the widths of the Newcombe confidence intervals for the individual probabilities $p_T$ and $p_C$. This is obviously a little more complicated, since the widths (eg. $p_T - l_T$ and $u_T - p_T$) will now not be the same, since the Newcombe CI is not symmetrical. So, we have
+where $\omega_T$ and $\omega_C$ are the widths of the separate single-sample 'standard' confidence intervals for $p_T$ and $p_C$. 
+
+**Newcombe's method**: proceed in the same way, but instead use the widths of the Newcombe confidence intervals for the individual probabilities $p_T$ and $p_C$. 
+
+A bit more complicated, since for a Newcombe $\left(p_X - l_X\right)\neq \left(u_X - p_X\right)$ (for $X=T$ or $C$)
+
+So, we have
 
 $$
 \left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2},\; p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right).

@@ -1,7 +1,5 @@
 # (PART) Part III: Further designs {-}
 
- 
-
 # Cluster randomised controlled trials {#cluster-rct}
 
 For the trials we've been studying so far, the intervention is applied at an individual level. For many treatments this is realistic, for example a medicine, injection or operation. However, for some treatments this is not practical. One example would be implementing a new cleaning regime in operating theatres. It would be almost impossible to implement this if different patients within the same hospital would be allocated to different cleaning styles. Logistically it would be very difficult, and there would likely be contamination as staff may be reluctant to clean an operating theatre in what might now seem an inferior way, for a control participant. In general it is very difficult (if not impossible) to implement changes in practice across healthcare systems at an individual level. 
@@ -129,9 +127,7 @@ Estimating the ICC when planning a study is an important step, but isn't always 
 
 **FIND ARTICLE ABOUT ESTIMATING ICC**
 
-## Designing a cluster RCT
-
-### Sample size
+## Sample size
 
 The upshot of the non-independence of the sample is that we have less information from $n$ participants in a cluster RCT than we would do for an individual-based RCT where all the participants were independent (at least conditional on some covariates). 
 
@@ -225,7 +221,7 @@ knitr::include_graphics("images/Screenshot_shiny.png")
 
 :::
 
-### Allocation
+## Allocation
 
 In a cluster RCT, everyone within a particular cluster will be in the same group ($T$ or $C$). Therefore, the allocation needs to be performed at the cluster level, rather than at the individual level as we did in Chapter \@ref(alloc). 
 
@@ -235,7 +231,7 @@ In terms of prognostic factors, there are now two levels: cluster level and indi
 
 However, a key feature of cluster RCTs means that in fact some different, and perhaps more effective, allocation methods are open to us.
 
-## Allocating everyone at once
+### Allocating everyone at once
 
 The methods we've covered so far assume that participants are recruited sequentially, and begin the intervention at different points in time. In this scenario, when a particular participant (participant $n$) is allocated we only know the allocation for the previous $n-1$ participants. It is very likely that we don't know the details of the following participants, in particular their values of any prognostic variables. This makes sense in many medical settings, where a patient would want to begin treatment as soon as possible, and there may be a limited number of patients with particular criteria at any one time.
 
@@ -257,15 +253,6 @@ For a categorical covariate, the procedure is very simple. For example, we may s
 Continous covariates are standardized and used to calculate a 'balance score' $B$ for each of the remaining allocations. A cut-off is used to rule out all allocations that don't achieve the desired level of balance. This leaves an 'optimal set' of allocations.
 
 Finally, an allocation is chosen at random from the optimal set, and this is the allocation that is used.
-
-
-
-### Restricted randomization
-
-READ UP ON THIS!
-https://cran.r-project.org/web/packages/cvcrand/vignettes/cvcrand.html
-
-https://clusterrandomisedtrials.qmul.ac.uk/parallel-crts/
 
 
 ## Analysing a cluster RCT

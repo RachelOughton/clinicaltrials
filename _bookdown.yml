@@ -3,7 +3,7 @@ delete_merged_file: true
 output_dir: "docs"
 rmd_files:
     html: ["index.Rmd", "01-rctbackground.Rmd", "02-samplesize.Rmd", "03-allocation.Rmd", "04-rctanalysis.Rmd",
-     "04a-binary.Rmd", # "04b-binary.Rmd", "05-survival.Rmd", 
+     "04a-binary.Rmd", #"04b-binary.Rmd", # "05-survival.Rmd", 
    #  "06-furtherdesigns.Rmd",
     "07-practical1.Rmd", "99-references.Rmd"]
     #
