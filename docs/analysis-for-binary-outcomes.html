@@ -272,6 +272,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -694,6 +695,78 @@ Our <span class="math inline">\(95\%\)</span> confidence interval is therefore</
 \]</span>
 This is skewed somewhat lower than our standard CI of <span class="math inline">\(\left(0.187,\;0.541\right).\)</span></p>
 </div>
+<p>4b from here!!!</p>
+</div>
+</div>
+<div id="risk-ratio-rr-and-odds-ratio-or" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Risk Ratio (RR) and Odds ratio (OR)<a href="analysis-for-binary-outcomes.html#risk-ratio-rr-and-odds-ratio-or" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The measures we have looked at so far, particularly the ARD, are quite analagous to the continuous normally distributed case. However, there are yet more commonly used measures of difference for proportions, which need to be dealt with differently, but also afford more opportunities for modelling.</p>
+<p>The <strong>risk ratio</strong> is defined as</p>
+<p><span class="math display">\[\text{RR} = \frac{\pi_T}{\pi_C}\]</span></p>
+<p>The <strong>odds ratio</strong> is defined as
+<span class="math display">\[\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}\]</span>
+The first thing to note is that for both the risk ratio and the odds ratio, the null value is one (not zero, as for the ARD), and both values must always be positive. We think about things multiplicatively, so for example if <span class="math inline">\(RR=3\)</span> we can say that the event is “3 times more likely” in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>.</p>
+<div id="odds" class="section level4 unnumbered hasAnchor">
+<h4>Odds<a href="analysis-for-binary-outcomes.html#odds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Odds and odds ratios are a bit trickier to think about (<a href="https://kids.frontiersin.org/articles/10.3389/frym.2022.926624#:~:text=As%20an%20example%2C%20if%20the,disease%20if%20you%20are%20exposed.">this article</a> explains them really well - it’s aimed at ‘kids and teens’ but don’t let that put you off!). The odds of an event are the probability of it happening over the probability of it not happening. So, if (for some event <span class="math inline">\(A\)</span>), <span class="math inline">\(p\left(A\right)=0.2\)</span>, the odds of <span class="math inline">\(A\)</span> are</p>
+<p><span class="math display">\[\frac{p\left(A\right)}{p\left(A&#39;\right)} = \frac{0.2}{0.8} = \frac{1}{4}, \]</span>
+which we say as “1 to 4” or 1:4. For every one time <span class="math inline">\(A\)</span> occurs, we expect it not to occur four times.</p>
+<p>The <strong>odds ratio</strong> compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).</p>
+<p>With the ARD, we knew that our confidence interval should always be in <span class="math inline">\(\left[-1,\,1\right]\)</span>, and that if we compare treatments in one direction (say <span class="math inline">\(p-T - p_C\)</span>) we would obtain the negative of the interval for the other way (<span class="math inline">\(p_C - p_T\)</span>). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction (<span class="math inline">\(p_T / p_C\)</span>) will give the reciprocal of the other direction (<span class="math inline">\(p_C / p_T\)</span>).</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 6.8  </strong></span>For our Streptomycin example, we estimated the ARD by
+<span class="math display">\[\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364,\]</span>
+or could have alternatively had
+<span class="math display">\[\hat\tau_{ARD}=p_C - p_T = \frac{17}{52} - \frac{38}{55} = - 0.364.\]</span>
+For the risk ratio, we have</p>
+<p><span class="math display">\[\hat{\tau}_{RR} = \frac{p_T}{p_C} = \frac{38/55}{17/52} = 2.113,\]</span>
+or could alternatively have</p>
+<p><span class="math display">\[\hat{\tau}_{RR} = \frac{p_C}{p_T} = \frac{17/52}{38/55} = 0.473 = \frac{1}{2.113}.\]</span>
+We could say that a patient is “more than twice as likely to be cured with streptomycin than by the control”.</p>
+<p>For the odds ratio, we have</p>
+<p><span class="math display">\[\hat{\tau}_{OR} = \frac{p_T/\left(1-p_T\right)}{p_C/\left(1-p_C\right)} = \frac{(38/55)/(17/55)}{(17/52)/(35/52)} = 4.602, \]</span>
+and therefore the odds of recovery are around 4.6 greater for Streptomycin than for the control. Similarly, we could reframe this as</p>
+<p><span class="math display">\[\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \frac{(17/52)/(35/52)}{(38/55)/(17/55)} = 0.217 = \frac{1}{4.602}.\]</span></p>
+</div>
+<p>One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval <span class="math inline">\(\left(l,\,u\right)\)</span> (with <span class="math inline">\(l,u&gt;1\)</span>) and <span class="math inline">\(\left(\frac{1}{u},\frac{1}{l}\right)\)</span>, since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval</p>
+<p><span class="math display">\[\left(\frac{1}{k},\,k\right) \text{ for some }k&gt;1 \]</span>
+can be thought of as symmetric, in that one treatment may be up to <span class="math inline">\(k\)</span> times more effective than the other, in either direction. Therefore, to build a confidence interval for OR or RR, we will not be following the usual formula</p>
+<p><span class="math display">\[\text{point estimate } \pm{z\times{SE}}.\]</span>
+You may have already been thinking that a log transformation would be useful here, and you’d be correct! The <em>sort-of</em> symmetric intervals we’ve been discussing here actually are symmetric (about zero) on the log scale.</p>
+</div>
+<div id="confidence-intervals-for-rr-and-or" class="section level4 hasAnchor" number="6.2.2.1">
+<h4><span class="header-section-number">6.2.2.1</span> Confidence intervals for RR and OR<a href="analysis-for-binary-outcomes.html#confidence-intervals-for-rr-and-or" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Firstly we’ll consider the risk ratio. Let’s define</p>
+<p><span class="math display">\[ \phi = \log\left(\frac{\pi_T}{\pi_C}\right).\]</span>
+The natural way to estimate this is with the sample proportions</p>
+<p><span class="math display">\[\log\left(\frac{p_T}{p_C}\right) = \log\left(p_T\right) - \log\left(p_C\right).\]</span>
+These estimated proportions should be approximately normal and independent of one another, and so <span class="math inline">\(\log\left(\frac{p_T}{p_C}\right)\)</span> is approximately normal with mean <span class="math inline">\(\phi\)</span> (the true value) and variance</p>
+<p><span class="math display">\[\operatorname{var}\left(\log\left(p_T\right)\right) + \operatorname{var}\left(\log\left(p_C\right)\right). \]</span>
+We can now apply the Delta method (see section <a href="ss-bin.html#delta-method">5.1</a>) to find that (using Equation <a href="ss-bin.html#eq:delta3">(5.3)</a>)</p>
+<p><span class="math display">\[\operatorname{var}\left[\log\left(p_T\right)\right] = \operatorname{var}\left[\log\left(\frac{r_T}{n_T}\right)\right] \approx \frac{\pi_T\left(1-\pi_T\right)}{n_T}\times{\left(\frac{1}{\pi_T}\right)^2} = \frac{1}{n_T\pi_T} - \frac{1}{n_T}. \]</span>
+Since we estimate <span class="math inline">\(\pi_T\)</span> by <span class="math inline">\(r_T/n_T\)</span> this can be estimated by <span class="math inline">\(r_T^{-1} - n_T^{-1}\)</span>. Notice that we are relying on the derivative of <span class="math inline">\(\log\left(x\right)\)</span> being <span class="math inline">\(x^{-1}\)</span>, so we must always use natural logarithms.</p>
+<p>This leads us to the result that, approximately</p>
+<p><span class="math display">\[\log\left(\frac{p_T}{p_C}\right) \sim N\bigg(\phi,\,\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right) \bigg) \]</span> and so we can generate <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence intervals for <span class="math inline">\(\phi\)</span> as <span class="math inline">\(\left(l_{RR},\;u_{RR}\right)\)</span>, where the limits are</p>
+<p><span class="math display">\[
+\log\left(\frac{p_T}{p_C}\right) \pm z_{\frac{\alpha}{2}}\sqrt{\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right)}.
+\]</span>
+This then translates to an interval for the risk ratio itself of <span class="math inline">\(\left(e^{l_{RR}},e^{u_{RR}}\right)\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-33" class="example"><strong>Example 6.9  </strong></span>Returning once again to our streptomycin example, recall that we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+r_T &amp; = 38\\
+n_T &amp; = 55 \\
+r_C &amp; = 17 \\
+n_C &amp; = 52
+\end{aligned}
+\]</span>
+and so the limits of the confidence interval (with <span class="math inline">\(\alpha=0.05\)</span>) on the log scale are</p>
+<p><span class="math display">\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\frac{1}{38} - \frac{1}{55} + \frac{1}{17} - \frac{1}{52}} = \log(2.11) \pm 1.96 \times 0.218\]</span></p>
+<p>which gives us <span class="math inline">\(\left(0.320,\,1.176\right)\)</span> on the log scale, and a 95% CI for the risk ratio of <span class="math inline">\(\left(1.377,\,3.243\right)\)</span>.</p>
+</div>
+<p>So, we’ve seen that we can find confidence intervals for each of our four measures of difference. But we probably want to also be able to incorporate baseline measurements, as we
+did for continuous outcome variables.</p>
 
 </div>
 </div>
