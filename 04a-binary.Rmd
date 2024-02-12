@@ -171,14 +171,14 @@ and similarly for group $T$. Since $p_C$ and $p_T$ are therefore sample means, w
 
 $$
 \begin{aligned}
-p_C & \sim N\left(\pi_C,\, \frac{\pi_C\left(1-\pi_c\right)}{n_C}\right)\\
+p_C & \sim N\left(\pi_C,\, \frac{\pi_C\left(1-\color{red}{\pi_C}\right)}{n_C}\right)\\
 p_T & \sim N\left(\pi_T,\, \frac{\pi_T\left(1-\pi_T\right)}{n_T}\right).
 \end{aligned}
 $$
 
 This means we can test the null hypothesis that $\pi_C = \pi_T$ by referring our observed value of $p_T - p_C$ to a normal distribution with mean 0 and variance
 
-$$ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\pi_c\right)}{n_C},$$
+$$ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\color{red}{\pi_C}\right)}{n_C},$$
 
 which we can approximate by substituting in $p_C$ and $p_T$.
 
@@ -288,7 +288,7 @@ Earlier we set up notation $y_{iC}$ to be outcome variable (0 or 1, in this case
 
 The contribution of the $i$-th patient in group $C$ to the likelihood is 
 
-$$\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{y_{iC}} $$
+$$\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{\color{red}{1-}y_{iC}} $$
 (remember we can ignore multiplicative constant terms). Combining all $n_C$ patients in group $C$, their contribution will be 
 
 $$ \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C},$$

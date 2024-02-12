@@ -65,6 +65,7 @@ library(survival)
 library(mvtnorm)
 library(randomizeR)
 library(cvcrand)
+library(eefAnalytics)
 ```
 
 # Welcome to Clinical Trials 4H! {-}

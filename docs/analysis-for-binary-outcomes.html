@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-09" />
+<meta name="date" content="2024-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -367,12 +367,12 @@ and similarly for <span class="math inline">\(\operatorname{E}\left(p_T\right)\)
 and similarly for group <span class="math inline">\(T\)</span>. Since <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span> are therefore sample means, we can apply the Central Limit Theorem to conclude that <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_P\)</span> can be approximated by normal distributions:</p>
 <p><span class="math display">\[
 \begin{aligned}
-p_C &amp; \sim N\left(\pi_C,\, \frac{\pi_C\left(1-\pi_c\right)}{n_C}\right)\\
+p_C &amp; \sim N\left(\pi_C,\, \frac{\pi_C\left(1-\color{red}{\pi_C}\right)}{n_C}\right)\\
 p_T &amp; \sim N\left(\pi_T,\, \frac{\pi_T\left(1-\pi_T\right)}{n_T}\right).
 \end{aligned}
 \]</span></p>
 <p>This means we can test the null hypothesis that <span class="math inline">\(\pi_C = \pi_T\)</span> by referring our observed value of <span class="math inline">\(p_T - p_C\)</span> to a normal distribution with mean 0 and variance</p>
-<p><span class="math display">\[ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\pi_c\right)}{n_C},\]</span></p>
+<p><span class="math display">\[ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\color{red}{\pi_C}\right)}{n_C},\]</span></p>
 <p>which we can approximate by substituting in <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span>.</p>
 <p>However, since under the null hypothesis <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, it would be more appropriate to use this as the common variance. In this case, the variance of <span class="math inline">\(p_T - p_C\)</span> becomes</p>
 <p><span class="math display">\[\pi\left(1-\pi\right)\left(\frac{1}{n_C} + \frac{1}{n_T}\right), \]</span>
@@ -444,7 +444,7 @@ Z &amp; = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52}
 <p>Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.</p>
 <p>Earlier we set up notation <span class="math inline">\(y_{iC}\)</span> to be outcome variable (0 or 1, in this case) of the <span class="math inline">\(i\)</span>-th participant in the control group (and so on), and we will use that here.</p>
 <p>The contribution of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span> to the likelihood is</p>
-<p><span class="math display">\[\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{y_{iC}} \]</span>
+<p><span class="math display">\[\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{\color{red}{1-}y_{iC}} \]</span>
 (remember we can ignore multiplicative constant terms). Combining all <span class="math inline">\(n_C\)</span> patients in group <span class="math inline">\(C\)</span>, their contribution will be</p>
 <p><span class="math display">\[ \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C},\]</span>
 where <span class="math inline">\(r_C\)</span> is the number of ‘successes’ in group <span class="math inline">\(C\)</span>. Similarly for the treatment group we will have</p>

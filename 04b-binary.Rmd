@@ -104,6 +104,7 @@ which gives us $\left(0.320,\,1.176\right)$ on the log scale, and a 95% CI for t
 #### Summary {-}
 
 We can collect all our confidence intervals together
+DO I WANT TO?! YES, I MIGHT AS WELL - P 109.
 
 
 ## Accounting for baseline observations: logistic regression
@@ -114,12 +115,12 @@ In this section we use the term 'baseline observations' to mean any measurement 
 
 The general form of model that we would like for patient $i$ is
 
-$$\text{outcome}_i = \mu + \tau I_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}} + \text{error}_i,$$
-where $I_i$ is an indicator function taking values 1 if patient $i$ was in group $T$ and 0 if they were in group $C$, and $\text{baseline}_1,\;\ldots,\;\text{baseline}_p$ are $p$ baseline measurements that we would like to take into account.
+$$\text{outcome}_i = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}} + \text{error}_i,$$
+where $G_i$ is an indicator function taking values 1 if patient $i$ was in group $T$ and 0 if they were in group $C$, and $\text{baseline}_1,\;\ldots,\;\text{baseline}_p$ are $p$ baseline measurements that we would like to take into account.
 
 However, this actually creates quite a few problems with binary variables. The outcome for patient $i$ will be either 0 or 1, but the terms in the model above do not guarantee this at all. Adding a normally distributed error term doesn't really make sense in this context, so we will remove it. We can also make the LHS more continuous by thinking of the mean outcome rather than a single outcome. This makes sense, since if several patients were identical to patient $i$ (in the sense of having the same baseline covariate values and being allocated to the same treatment), we probably wouldn't expect them all to have exactly the same outcome. Therefore we might instead think in terms of mean outcome, in which case our model becomes
 
-$$\text{mean outcome}_i = \mu + \tau I_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}.$$
+$$\text{mean outcome}_i = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}.$$
 
 There is one final problem to overcome, which is that the LHS will certainly be in $\left[0,\;1\right]$, but the RHS could take any value. To address this we need to use a transformation, to take the mean outcome from $\left[0,1\right]$ to $\mathbb{R}$.
 
@@ -132,13 +133,18 @@ As $\pi$ tends to zero, $\operatorname{logit}\left(\pi\right)$ tends to $-\infty
 $$ \frac{d\operatorname{logit}\left(\pi\right)}{d\pi} = \frac{1}{\pi\left(1-\pi\right)}$$
 which is always positive for $\pi\in\left[0,1\right]$. This means that we can use it to transform our mean outcome (which we will now call $\pi$, since the mean outcome is the estimate of the probability of success) in the model
 
-$$ \operatorname{logit}\left(\pi\right) = \mu + \tau I_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}$$
+\begin{equation}
+\operatorname{logit}\left(\pi\right) = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}
+(\#eq:logreg1)
+\end{equation}
+
 and any value in $\mathbb{R}$ is allowed on both sides. This model is known as **logistic regression**, and belongs to a class of models called **Generalized Linear Models**. If you did Advanced Statistical Modelling III you'll have seen these before. If you haven't seen them, and want to know more, [this article](https://www.r-bloggers.com/2015/08/generalised-linear-models-in-r/) gives a nice introduction (and some useful R tips!).
 
+  
 ### What does this model tell us?
 
 We now have an equation for a model that makes sense, but what is it actually modelling? And what does it tell us about the effect of the treatment?
-Consider the difference between two patients who are the same in every respect except one is assigned to group $C$ (so $I=0$) and the other to group $T$ (so $I=1$). The model gives:
+Consider the difference between two patients who are the same in every respect except one is assigned to group $C$ (so $G=0$) and the other to group $T$ (so $G=1$). The model gives:
 
 $$
 \begin{aligned}
@@ -157,44 +163,203 @@ $$
 \end{aligned}
 $$
 
-That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. The coefficients are estimated using maximum likelihood.
+That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. 
 
 ### Fitting a linear regression model 
 
-p112 of Matthews
+Logistic regression models are generally fitted using *maximum likelihood*. In the notation of Equation \@ref(eq:logreg1), the parameters we need to fit are the coefficients $\mu,\;\tau$ and $\beta_1,\ldots,\beta_p$. To ease notation, we will collect these into a vector $\boldsymbol\beta$, with $\beta_0=\mu$, $\beta_1=\tau$ and $\beta_2,\ldots,\beta_{p+1}$ the original $\beta_1,\ldots,\beta_p$. Sorry this is confusing - we won't really use the vector $\boldsymbol\beta$ after this, or think about the parameters individually (apart from $\tau$).
 
+This notation allows us to write the linear function on the RHS of Equation \@ref(eq:logreg1) for participant $i$ as 
 
+$$x_i^T\boldsymbol\beta = \sum\limits_{j=0}^{q} x_{ij}\beta_j, $$
+where 
 
-### Diagnostics for logistic regression
-
-One thing that is quite tricky with logistic regression is diagnosing whether the model is appropriate. In theory there are several places where the logistic regression model could fall down:
-
-  * The link function - we've used the logit function, but other functions that map $\left[0,1\right]$ to $\mathbb{R}$ are available.
-  * The linear model function - if we include variables that shouldn't be there, or exclude variables or interaction terms that should be included, the model will not fit well.
-  * Issues with the data, for example outliers or influential values, may be having a disproportionate impact on the model
-  * The assumption that the observed data are binomially distributed may be invalid
+  * $x_{i0}=1$ (so that $\beta_0$ is the intercept $\mu$)
+  * $x_{i1}=
+  \begin{cases}
+  0\text{ if participant }i\text{ is in group }C\\
+  1\text{ if participant }i\text{ is in group }T
+  \end{cases}$
+  * $x_{i2},\ldots,x_{iq}$ are the baseline covariates.
   
-It is the second that is likely to be the most problematic, and we will explore now a couple of ways to check. There are many diagnostic techniques for binomial data (see eg. @collett_bin) but we will only touch on a small number.
+If $\pi_i$ is the probability that the outcome for participant $i$ is 1, where $i=1,\ldots,n$, then the logistic model specifies these $n$ parameters through the $q+1$ parameters $\beta_j$, via the $n$ expressions 
+
+\begin{equation}
+\operatorname{logit}\left(\pi_i\right) = x_i^T\boldsymbol\beta.
+(\#eq:logit1)
+\end{equation}
+
+Using the Bernoulli distribution, the log-likelihood of the data is
+
+\begin{align*}
+\ell\left(\left\lbrace\pi_i \right\rbrace \mid\text{data}\right) & = \sum\limits_{i=1}^n\left[y_i\log(\pi_i) + \left(1-y_i\right)\log\left(1-\pi_i\right)\right]\\
+& = \sum\limits_{i=1}^n\left[y_i\log\left(\frac{\pi_i}{1-\pi_i}\right) + \log\left(1-\pi_i\right)\right],
+\end{align*}
+where $y_i=0$ or 1 is the outcome for participant $i$. Using Equation \@ref(eq:logit1) we can rewrite this in terms of $\boldsymbol\beta$ as 
+
+$$\ell\left(\left\lbrace\beta_j \right\rbrace\mid{\text{data}}\right) = \sum\limits_{i=1}^n \left[y_i x_i^T\boldsymbol\beta - \log\left(1+e^{x_i^T\boldsymbol\beta}\right)\right].$$
+
+The fitted model is then the one with the values $\beta_j$ that maximise this expression (and hence maximise the likelihood itself), which we will label the $\left\lbrace \hat{\beta}_j\right\rbrace$. 
+
+This is generally done some via some numerical method, and we won't go into that here. The method used by R will generate the MLE $\hat\beta_j$ for each $\beta_j$, and also an estimate of the standard error of the estimate. In particular there will be an estimate of the standard error of $\hat\beta_1$, better known as $\hat\tau$, the estimate of the treatment effect. This is important, because it means we can test the hypothesis that $\tau=0$, and can form a confidence interval for the adjusted log OR.
+
+:::{.example #logregeg1}
+
+This study is detailed in @elmunzer2012randomized. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication. The study had 602 participants.
+
+The dataset contains 33 variables, but we will focus on a small number:
+
+  * $X$: (primary outcome) - incidence of post-ercp pancreatitis 0 (no), 1 (yes).
+  * Treatment arm `rx`: 0 (placebo), 1 (treatment)
+  * Site: 1, 2, 3, 4
+  * Risk: Risk score (1 to 5). Should be factor but treated as continuous.
+  * Age: from 19 to 90, mean 45.27, SD 13.30.
+
+The correlation between `risk` and `age` is -0.216, suggesting no problems of collinearity between those two variables.
+
+
+```{r, echo=T}
+data("indo_rct")
+summary(indo_rct)
+## Some things to note:
+# There are very few patients in group 4, and not many in group 3
+# The age range goes from 19 to 90 
+# 'rx' is the group variable
+
+## Checking for collinearity with factor variables
+
+# No consistent patterns between age and site or risk and site
+indo_rct%>%
+  group_by(site) %>% 
+  summarise(
+    meanage=mean(age), sdage=sd(age),
+    meanrisk = mean(risk), sdrisk=sd(risk)
+    )
+
+## We will try models with age and age^2
+
+glm_indo_agelin = glm(outcome ~ age + site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
+glm_indo_agesq = glm(outcome ~ I(age^2) + site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
+
+summary(glm_indo_agelin)
+summary(glm_indo_agesq)
+
+```
+
+Since neither `age` nor `age^2` appear influential, we'll remove it and keep the other covariates.
+
+```{r, echo=T}
+glm_indo = glm(outcome ~ site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
+summary(glm_indo)
+```
+
+From the summary we see that $\hat\tau = -0.752$, with a standard error of 0.261. A 95% CI for $\tau$ is therefore 
+
+$$-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).$$
+:::
+
+We can also use the model to estimate the odds of 'success' (the outcome 1) for different groups of patients, by fixing the values of the covariates. The linear expression $x\boldsymbol\hat\beta$ for given values of $x$ gives us as estimate of 
+
+$$\log\left(\frac{p(X=1)}{1-p(X=1)}\right),$$ 
+where $X$ here is the primary outcome. The exponent of this therefore gives the odds.
+
+:::{.example}
+Continuing with Example \@ref(exm:logregeg1), we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.
+
+For this we will make heavy use of the summary table
+
+```{r, echo=T}
+summary(glm_indo)
+```
+
+For example, a patient from site 1, with risk level 3, in the control group would have odds
+
+$$\exp\left(-2.2307 + 3\times 0.5846\right) = 0.6207, $$
+which translates to a probability of 
+
+$$\frac{0.6207}{1+0.6207} = 0.383. $$
+
+By contrast, a patient in group $T$, from site 2, at risk level 1, would have odds
+
+$$\exp\left(-2.2307 - 1.2204 + 1\times 0.5846 - 0.7523\right) = 0.0268, $$
+which is equivalent to a probability of post-ECRP pancreatitis of 
+
+$$\frac{0.0268}{1+0.0268} = 0.0261.$$ 
+Being more methodical we can collect these into a table. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will treat them as zero and lump them in with the site 1 people.
+
+```{r}
+sites = c("2", "Not 2")
+risks = 1:5
+
+df_indo = data.frame(
+  site = c(rep("2", 5), rep("Not 2", 5)),
+  risk = rep(1:5, 2)
+)
+
+df_indo$Odds_groupC = rep(NA, 10)
+df_indo$Prob_groupC = rep(NA, 10)
+df_indo$Odds_groupT = rep(NA, 10)
+df_indo$Prob_groupT = rep(NA, 10)
+
+for (i in 1:5){
+  oddsC = exp(-2.2307 - 1.2204 + df_indo$risk[i]*0.5846)
+  oddsT = exp(-2.2307 - 1.2204 + df_indo$risk[i]*0.5846 - 0.7523)
+  df_indo$Odds_groupC[i] = round(oddsC,3)
+  df_indo$Odds_groupT[i] = round(oddsT,3)
+}
+
+for (i in 1:5){
+  oddsC = exp(-2.2307  + df_indo$risk[i]*0.5846)
+  oddsT = exp(-2.2307  + df_indo$risk[i]*0.5846 - 0.7523)
+  df_indo$Odds_groupC[i+5] = round(oddsC,3)
+  df_indo$Odds_groupT[i+5] = round(oddsT,3)
+}
+
+df_indo$Prob_groupC = round(df_indo$Odds_groupC/(1+df_indo$Odds_groupC),3)
+df_indo$Prob_groupT = round(df_indo$Odds_groupT/(1+df_indo$Odds_groupT),3)
+
+df_indo
+```
+
+:::
+
+#### Some cautions {-}
+
+As with any linear model, we need to ensure that it is appropriate for our dataset. Two key things we need to check for are:
+
+  * **Collinearity**: we should make sure that none of the independent variables are highly correlated. This is not uncommon in clinical datasets, since measurements are sometimes strongly related. Sometimes therefore, this can mean choosing only one out of a collection of two or more strongly related variables.
+  * **linear effect across the range of the dataset**: a linear model is based on the assumption that the effect of the independent variables is the same across the whole range of the data. This is not always the case. For example, the rate of deterioration with age can be more at older ages. This can be dealt with either by binning age into categories, or by using a transformation, eg. age$^2$. Note that this would still be a linear model, because it is linear in the coefficients.
+
+
+
+
+## Diagnostics for logistic regression
+
+There are many diagnostic techniques for binomial data (see eg. @collett_bin) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse. Our model outputs probabilities, but our data is all either 0 or 1. This makes diagnostics somewhat trickier.
+
+Diagnostics for logistic regression fall into two categories: **discrimination** and **calibration**. We will look at each of these in turn.
+
+### Discrimination
+
+Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the $\operatorname{logit}\left(p\right)$ scale. If that value is below some threshold, we classify that participant as 0 If the value is above the threshold, we classify them as 1. 
+
+
+### Calibration
+
+
+
+
 
 If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.
 
 
 :::{.example}
 
-This study is detailed in @elmunzer2012randomized. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication.
-
-The dataset contains 33 variables, but we will focus on a small number:
-
-  * $X$: (primary outcome) - incidence of post-ercp pancreatitis 0 (no), 1 (yes).
-  * Treatment arm: 0 (placebo), 1 (treatment)
-  * Site: 1, 2, 3, 4
-  * Risk: Risk score (1 to 5). Should be factor but treated as continuous.
+This example uses the model fitted in Example \@ref(exm:logregeg1).
   
 The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the estimates from the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value. 
 
 ```{r}
-data("indo_rct")
-glm_indo = glm(outcome ~ site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
 
 indo_exp = indo_rct[,c(2,4,32)]
 indo_fact = unique(indo_exp)

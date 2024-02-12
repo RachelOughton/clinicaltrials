@@ -139,7 +139,7 @@ The first step is to think about how the clustering affectst the variance. An es
 
 \begin{equation}
 \hat{\sigma}^2 = \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}\left(X_{ij} - \bar{X}\right)^2}{n-1},
-(#eq:varcrt1)
+(\#eq:varcrt1)
 \end{equation}
 
 where as before there are $g$ clusters, cluster $j$ has size $n_j$ and $\sum\limits_{j=1}^gn_j=n$ is the total sample size.
@@ -217,6 +217,10 @@ The plot shows the minimum detectable effect size (MDES, or $\tau_M$, in SD unit
 ```{r}
 knitr::include_graphics("images/Screenshot_shiny.png")
 
+```
+
+```{r}
+knitr::include_app(url = "https://racheloughton.shinyapps.io/sample_size/")
 ```
 
 :::
@@ -365,5 +369,5 @@ Where there is a coefficient $\lambda_l$ for each covariate $z_{\cdot l}$ that i
 
 
 ```{r}
-Dickinson_outcome # from cvcrand. Binary outcome cluster trial. Use a GLMM. Could work in a pinch!
+dickinson_df = Dickinson_outcome # from cvcrand. Binary outcome cluster trial. Use a GLMM. Could work in a pinch!
 ```
