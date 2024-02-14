@@ -66,6 +66,8 @@ library(mvtnorm)
 library(randomizeR)
 library(cvcrand)
 library(eefAnalytics)
+library(shiny)
+library(pROC)
 ```
 
 # Welcome to Clinical Trials 4H! {-}

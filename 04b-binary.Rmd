@@ -56,7 +56,7 @@ $$
 \end{aligned}
 $$
 
-That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. 
+That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. 
 
 ### Fitting a logistic regression model 
 
@@ -82,19 +82,19 @@ If $\pi_i$ is the probability that the outcome for participant $i$ is 1, where $
 (\#eq:logit1)
 \end{equation}
 
-Using the Bernoulli distribution, the log-likelihood of the data is
+Using the Bernoulli distribution, the log-likelihood given data $y_1,\ldots,y_n$ is
 
 \begin{align*}
-\ell\left(\left\lbrace\pi_i \right\rbrace \mid\text{data}\right) & = \sum\limits_{i=1}^n\left[y_i\log(\pi_i) + \left(1-y_i\right)\log\left(1-\pi_i\right)\right]\\
+\ell\left(\left\lbrace\pi_i \right\rbrace \mid\left\lbrace y_i\right\rbrace\right) & = \sum\limits_{i=1}^n\left[y_i\log(\pi_i) + \left(1-y_i\right)\log\left(1-\pi_i\right)\right]\\
 & = \sum\limits_{i=1}^n\left[y_i\log\left(\frac{\pi_i}{1-\pi_i}\right) + \log\left(1-\pi_i\right)\right],
 \end{align*}
 where $y_i=0$ or 1 is the outcome for participant $i$. Using Equation \@ref(eq:logit1) we can rewrite this in terms of $\boldsymbol\beta$ as 
 
 $$\ell\left(\left\lbrace\beta_j \right\rbrace\mid{\text{data}}\right) = \sum\limits_{i=1}^n \left[y_i x_i^T\boldsymbol\beta - \log\left(1+e^{x_i^T\boldsymbol\beta}\right)\right].$$
 
-The fitted model is then the one with the values $\beta_j$ that maximise this expression (and hence maximise the likelihood itself), which we will label the $\left\lbrace \hat{\beta}_j\right\rbrace$. 
+The fitted model is then the one with the values $\beta_j$, $j=0,\dots,q$, that maximise this expression (and hence maximise the likelihood itself), which we will label the $\left\lbrace \hat{\beta}_j\right\rbrace$. 
 
-This is generally done some via some numerical method, and we won't go into that here. The method used by R will generate the MLE $\hat\beta_j$ for each $\beta_j$, and also an estimate of the standard error of the estimate. In particular there will be an estimate of the standard error of $\hat\beta_1$, better known as $\hat\tau$, the estimate of the treatment effect. This is important, because it means we can test the hypothesis that $\tau=0$, and can form a confidence interval for the adjusted log odds ratio.
+This is generally done some via some numerical method, and we won't go into that here. The method used by R will generate the MLE $\hat\beta_j$ for each $\beta_j$, and also an estimate of the standard error of each $\hat\beta_j$. In particular there will be an estimate of the standard error of $\hat\beta_1$, better known as $\hat\tau$, the estimate of the treatment effect. This is important, because it means we can test the hypothesis that $\tau=0$, and can form a confidence interval for the adjusted log odds ratio.
 
 :::{.example #logregeg1}
 
@@ -153,7 +153,9 @@ summary(glm_indo)
 From the summary we see that $\hat\tau = -0.752$, with a standard error of 0.261. A 95% CI for $\tau$ is therefore 
 
 $$-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).$$
+This model supports the hypothesis that the treatment difference isn't zero. We do see however from the Null deviance and the Residual deviance that the model isn't explaining a huge proportion of the variation.
 :::
+
 
 We can also use the model to estimate the odds of 'success' (the outcome 1) for different groups of patients, by fixing the values of the covariates. The linear expression $x^T\hat{\boldsymbol\beta}$ for given values of $x$ gives us as estimate of 
 
@@ -161,7 +163,7 @@ $$\log\left(\frac{p(X=1)}{1-p(X=1)}\right),$$
 where $X$ here is the primary outcome. The exponent of this therefore gives the odds, and this can be rearranged to find the probability, 
 
 $$p\left(X_i=1\right) = \frac{\exp(\text{logit}_i)}{1+\exp(\text{logit}_i)}, $$
-where $\text{logit}_i$ is the fitted value of the linear model (on the logt scale) given all the baseline characteristics of some patient $i$.
+where $\text{logit}_i$ is the fitted value of the linear model (on the logit scale) given all the baseline characteristics of some patient $i$.
 This will be the probability, according to the model, that a patient with this particular combination of baseline characteristics will have outcome 1.
 
 :::{.example}
@@ -176,7 +178,7 @@ summary(glm_indo)
 For example, a patient from site 1, with risk level 3, in the control group would have odds
 
 $$\exp\left(-2.2307 + 3\times 0.5846\right) = 0.6207, $$
-which translates to a probability of 
+which translates to a probability of post-ECRP pancreatitis of
 
 $$\frac{0.6207}{1+0.6207} = 0.383. $$
 
@@ -186,7 +188,7 @@ $$\exp\left(-2.2307 - 1.2204 + 1\times 0.5846 - 0.7523\right) = 0.0268, $$
 which is equivalent to a probability of post-ECRP pancreatitis of 
 
 $$\frac{0.0268}{1+0.0268} = 0.0261.$$ 
-Being more methodical we can collect these into a table. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will treat them as zero and lump them in with the site 1 people.
+Being more methodical we can collect these into a table. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will treat them as zero and lump them in with the site 1 participants
 
 ```{r}
 sites = c("2", "Not 2")
@@ -240,35 +242,90 @@ There are many diagnostic techniques for binomial data (see eg. @collett_bin) bu
 
 This makes diagnostics somewhat trickier.
 
-Diagnostics for logistic regression fall into two categories: **discrimination** and **calibration**. We will look at each of these in turn.
+Diagnostics for logistic regression fall into two categories: **discrimination** and **calibration**. We will look at each of these in turn, though by no means exhaustively.
 
 ### Discrimination
 
 Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the $\operatorname{logit}\left(p\right)$ scale. If that value is below some threshold, we classify that participant as 0 If the value is above the threshold, we classify them as 1. Here, we are slightly abandoning the notion that the model is predicting probabilities, and instead testing whether the model can successfully order the patients correctly. Can we set some threshold on the model output that (almost) separates the cohort into its ones and zeros?
 
-A classic way to think about this is Receiver Operating Characteric (ROC) analysis. ROC analysis is a very widely used method, that can be applied to any binary classifier.
+A classic way to asses this is by using Receiver Operating Characteric (ROC) analysis. ROC analysis was developed during the second world war, as radar operators analysed their classification accuracy in distinguishing signal (eg. an enemy plane) from noise. It is still widely used in the field of statistical classification, including in medical diagnostics. ROC analysis can be applied to any binary classifier, not just logistic regression.
 
 #### ROC analysis
 
-[READ THIS THROUGH AND MAKE IT MORE MATHSY! MAKE A DASHBOARD!!! FIND R PACAKGES THAT DO IT]
+To understand ROC analysis, we need to revisit two concepts relating to tests or classifiers that you might not have seen since Stats I, and we will introduce (or remind ourselves of) some notation to do this:
 
-To understand ROC analysis, we need to revisit two concepts relating to tests or classifiers that you might not have seen since Stats I:
+  * $\hat{p}_i\in\left(0,1\right)$ is the fitted value of the logistic regression model for patient $i$
+  * $X_i=0$ or $1$ is the true outcome for patient $i$
+  * $t\in\left(0,1\right)$ is the threshold value.
+  
+If $\hat{p}_i<t$ we classify patient $i$ as 0, if $\hat{p}\geq t$ we classify them as 1. The language of ROC analysis is so entrenched in diagnostic/screening tests that I have kept it here for consistency. A 'positive' result for us is $X=1$, and a 'negative' result is $X=0$.
 
 :::{.definition}
-The **sensitivity** of a test (or classifier) is the probability that it will output positive (or 1) if the true value is positive.
+The **sensitivity** of a test (or classifier) is the probability that it will output positive (or 1) if the true value is positive (or 1):
+$$p\left(\hat{p}_i \geq t \mid{X_i=1}\right).$$
 :::
 
 :::{.definition}
-The **specificity** of a test (or classifier) is the probability that it will output negative (or 0) if the true value is negative.
+The **specificity** of a test (or classifier) is the probability that it will output negative (or 0) if the true value is negative (or 0):
+
+  $$p\left(\hat{p}_i < t \mid{X_i=0}\right) $$
 :::
+
+We estimate these by the proportions within the dataset.
 
 These are very commonly used for thinking about diagnostic tests and screening tests, and in these contexts a 'success' or 'positive' is almost always the presence of some condition or disease. In our context, we need to be mindful that a 1 could be good or bad, depending on the trial.
 
-The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the threshold here, the model will predict everyone to have an outcome of 1. At the other extreme, if we set the threshold to zero, we will classify everyone as a 0. If we vary the threshold from 0 to 1 the number of people classified in each group will change.
+The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the $t=0$, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set $t=0$, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a **ROC curve**. 
+
+The dashboard below shows the distributions of fitted values for patients with $X=0$ and $X=1$, with options for good, moderate and poor separation, and the corresponding ROC curve. You can move the threshold to see the sensitivity and specificity at that value. Also note the AUC (area under the curve) which is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
+
+If you're viewing this in PDF you'll just have a static image, but you can find the dashboard at 
+[https://racheloughton.shinyapps.io/ROCplots/](https://racheloughton.shinyapps.io/ROCplots/).
+
+```{r}
+knitr::include_app("https://racheloughton.shinyapps.io/ROCplots/", height="600px")
+
+```
+
+Note that I've used beta distributions for some hypothetical distributions of fitted values for the different groups, but this is just for convenience: ROC analysis makes no distributional assumptions.
+
+
+:::{.example}
+Let's look at the model we fitted in Example \@ref(exm:logregeg1). To draw the ROC curve of this data, we will use the R package `pROC`. 
+
+```{r, echo=T}
+fit_indo = fitted(glm_indo)   # Fitted values from glm_indo
+out_indo = indo_rct$outcome   # outcome values (0 or 1)
+roc_indo_df = data.frame(fit = fit_indo, out = out_indo)
+```
+
+The main function in the package `pROC` is `roc`, which creates a `roc` object. and `ggroc` that sort and plot the data for us:
+
+```{r, echo=T}
+roc_indo = roc(data=roc_indo_df, response = out, predictor=fit)
+
+```
+
+With that object we can do various things, such as plot the ROC curve:
+
+```{r indoroc1, echo=T, fig.cap = "ROC curve for our logistic regression model of the indo RCT data (solid line). The dotted line shows the ROC curve we'd expect with random guessing."}
+ggroc(roc_indo, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)
+
+```
+
+and find the area under the curve for the model
+
+```{r, echo=T}
+auc(roc_indo)
+```
+So we see that our model is better than random guessing, but really not all that good! In particular, wherever we put a threshold (if we use the model that way), many people will be mis-classified. It's also worth noting that here we're performing the diagnostics on the data we used to fit the model: if we were to use the model on a new set of patients, the fit would likely be slightly worse.
+
+:::
+
 
 ### Calibration
 
-Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, 'correct' or 'accurate'. One intuitive way to do this is to work through different 'types' of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data match the probability given by the model.
+Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, 'correct' or 'accurate'. One intuitive way to do this is to work through different 'types' of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.
 
 If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.
 
@@ -277,7 +334,7 @@ If the explanatory variables are factors, and we have repeated observations for 
 
 This example uses the model fitted in Example \@ref(exm:logregeg1).
   
-The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the estimates from the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value. 
+The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value. 
 
 ```{r}
 
@@ -327,6 +384,9 @@ grid.arrange(plot_s1, plot_s2, nrow=2)
 
 ```
 
+These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model. 
 :::
 
-### Holding some data back [read about this]
+We will look some more at this in the upcoming practical class, as well as some further principles of model validation.
+
+For now, we're done with Binary data, and in our next few lectures we'll think about survival, or time-to-event data.

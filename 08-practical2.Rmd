@@ -30,7 +30,7 @@ The first step in the simulation method is to generate trial data. To do this, w
 
 ### Binary data
 
-Possible dataset - change this to questions, obviously. There might be more interesting ones, check medical data file.
+Possible dataset - change this to questions, obviously. There might be more interesting ones, check medical data file. Also, include some on model validation through holding data back - read about this a bit?
 
 :::{.example}
 ```{r}

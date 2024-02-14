@@ -743,7 +743,7 @@ which we say as "1 to 4" or 1:4. For every one time $A$ occurs, we expect it not
 The **odds ratio** compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).
 
 
-With the ARD, we knew that our confidence interval should always be in $\left[-1,\,1\right]$, and that if we compare treatments in one direction (say $p-T - p_C$) we would obtain the negative of the interval for the other way ($p_C - p_T$). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction ($p_T / p_C$) will give the reciprocal of the other direction ($p_C / p_T$).
+With the ARD, we knew that our confidence interval should always be in $\left[-1,\,1\right]$, and that if we compare treatments in one direction (say $p_T - p_C$) we would obtain the negative of the interval for the other way ($p_C - p_T$). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction ($p_T / p_C$) will give the reciprocal of the other direction ($p_C / p_T$).
 
 :::{.example}
 
@@ -823,3 +823,396 @@ which gives us $\left(0.320,\,1.176\right)$ on the log scale, and a 95% CI for t
 
 So, we've seen that we can find confidence intervals for each of our four measures of difference. But we probably want to also be able to incorporate baseline measurements, as we 
 did for continuous outcome variables.
+
+
+
+## Accounting for baseline observations: logistic regression
+
+We saw with the continuous outcomes that it is often advantageous to include baseline measurements of the outcome (if they are known) in our analysis, and this is the same for binary outcomes. 
+
+In this section we use the term 'baseline observations' to mean any measurement that was known before the trial started. Unlike with continuous measurements, with a binary outcome, there is not usually a pre-trial value of the primary outcome. A binary outcome is often already relative to pre-trial (for example 'Have the patient's symptoms improved?') or refers to an event that definitely wouldn't have happened pre-trial (for example 'Did the patient die within the next 6 months?' or 'Was the patient cured?'). However, as we saw with ANCOVA, we can include other sorts of covariates in a linear model, so this is fine.
+
+The general form of model that we would like for patient $i$ is
+
+$$\text{outcome}_i = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}} + \text{error}_i,$$
+where $G_i$ is an indicator function taking values 1 if patient $i$ was in group $T$ and 0 if they were in group $C$, and $\text{baseline}_1,\;\ldots,\;\text{baseline}_p$ are $p$ baseline measurements that we would like to take into account.
+
+However, this actually creates quite a few problems with binary variables. The outcome for patient $i$ will be either 0 or 1, but the terms in the model above do not guarantee this at all. Adding a normally distributed error term doesn't really make sense in this context, so we will remove it. We can also make the LHS more continuous by thinking of the mean outcome rather than a single outcome. This makes sense, since if several patients were identical to patient $i$ (in the sense of having the same baseline covariate values and being allocated to the same treatment), we probably wouldn't expect them all to have exactly the same outcome. Therefore we might instead think in terms of mean outcome, in which case our model becomes
+
+$$\text{mean outcome}_i = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}.$$
+
+There is one final problem to overcome, which is that the LHS will certainly be in $\left[0,\;1\right]$, but the RHS could take any value. To address this we need to use a transformation, to take the mean outcome from $\left[0,1\right]$ to $\mathbb{R}$.
+
+The transformation that is usually used for a binary variable is the **logit** function, which is the log of the odds,
+
+$$\operatorname{logit}\left(\pi\right) = \log\frac{\pi}{1-\pi}.$$
+
+As $\pi$ tends to zero, $\operatorname{logit}\left(\pi\right)$ tends to $-\infty$, and as $\pi$ tends to one, $\operatorname{logit}\left(\pi\right)$ tends to $\infty$. The derivative of the $\operatorname{logit}$ function is
+
+$$ \frac{d\operatorname{logit}\left(\pi\right)}{d\pi} = \frac{1}{\pi\left(1-\pi\right)}$$
+which is always positive for $\pi\in\left[0,1\right]$. This means that we can use it to transform our mean outcome (which we will now call $\pi$, since the mean outcome is the estimate of the probability of success) in the model
+
+\begin{equation}
+\operatorname{logit}\left(\pi\right) = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}
+(\#eq:logreg1)
+\end{equation}
+
+and any value in $\mathbb{R}$ is allowed on both sides. This model is known as **logistic regression**, and belongs to a class of models called **Generalized Linear Models**. If you did Advanced Statistical Modelling III you'll have seen these before. If you haven't seen them, and want to know more, [this article](https://www.r-bloggers.com/2015/08/generalised-linear-models-in-r/) gives a nice introduction (and some useful R tips!).
+
+  
+### What does this model tell us?
+
+We now have an equation for a model that makes sense, but what is it actually modelling? And what does it tell us about the effect of the treatment?
+Consider the difference between two patients who are the same in every respect except one is assigned to group $C$ (so $G=0$) and the other to group $T$ (so $G=1$). The model gives:
+
+$$
+\begin{aligned}
+\operatorname{logit}\left(\pi\right) = \log\left(\frac{\pi}{1-\pi}\right) = \log\left(\text{Odds of success}\right) & = \mu + \tau + \beta_1x_1 + \ldots + \beta_px_p & \text{ (group T)}\\
+\operatorname{logit}\left(\pi\right) = \log\left(\frac{\pi}{1-\pi}\right) = \log\left(\text{Odds of success}\right) & = \mu + \beta_1x_1 + \ldots + \beta_px_p & \text{ (group C)}
+\end{aligned}
+$$
+Subtracting one from the other, we find
+
+$$
+\begin{aligned}
+\log(\text{Odds of success for group T}) - & \log(\text{Odds of success for group C})\\
+&= 
+\log\left(\frac{\text{Odds of success for group T}}{\text{Odds of success for group C}}\right) = \log\left(OR\right) \\
+&= \tau.
+\end{aligned}
+$$
+
+That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. 
+
+### Fitting a logistic regression model 
+
+Logistic regression models are generally fitted using *maximum likelihood*. In the notation of Equation \@ref(eq:logreg1), the parameters we need to fit are the coefficients $\mu,\;\tau$ and $\beta_1,\ldots,\beta_p$. To ease notation, we will collect these into a vector $\boldsymbol\beta$, with $\beta_0=\mu$, $\beta_1=\tau$ and $\beta_2,\ldots,\beta_{p+1}$ the original $\beta_1,\ldots,\beta_p$. Sorry this is confusing - we won't really use the vector $\boldsymbol\beta$ after this, or think about the parameters individually (apart from $\tau$).
+
+This notation allows us to write the linear function on the RHS of Equation \@ref(eq:logreg1) for participant $i$ as 
+
+$$x_i^T\boldsymbol\beta = \sum\limits_{j=0}^{q} x_{ij}\beta_j, $$
+where 
+
+  * $x_{i0}=1$ (so that $\beta_0$ is the intercept $\mu$)
+  * $x_{i1}=
+  \begin{cases}
+  0\text{ if participant }i\text{ is in group }C\\
+  1\text{ if participant }i\text{ is in group }T
+  \end{cases}$
+  * $x_{i2},\ldots,x_{iq}$ are the baseline covariates.
+  
+If $\pi_i$ is the probability that the outcome for participant $i$ is 1, where $i=1,\ldots,n$, then the logistic model specifies these $n$ parameters through the $q+1$ parameters $\beta_j$, via the $n$ expressions 
+
+\begin{equation}
+\operatorname{logit}\left(\pi_i\right) = x_i^T\boldsymbol\beta.
+(\#eq:logit1)
+\end{equation}
+
+Using the Bernoulli distribution, the log-likelihood given data $y_1,\ldots,y_n$ is
+
+\begin{align*}
+\ell\left(\left\lbrace\pi_i \right\rbrace \mid\left\lbrace y_i\right\rbrace\right) & = \sum\limits_{i=1}^n\left[y_i\log(\pi_i) + \left(1-y_i\right)\log\left(1-\pi_i\right)\right]\\
+& = \sum\limits_{i=1}^n\left[y_i\log\left(\frac{\pi_i}{1-\pi_i}\right) + \log\left(1-\pi_i\right)\right],
+\end{align*}
+where $y_i=0$ or 1 is the outcome for participant $i$. Using Equation \@ref(eq:logit1) we can rewrite this in terms of $\boldsymbol\beta$ as 
+
+$$\ell\left(\left\lbrace\beta_j \right\rbrace\mid{\text{data}}\right) = \sum\limits_{i=1}^n \left[y_i x_i^T\boldsymbol\beta - \log\left(1+e^{x_i^T\boldsymbol\beta}\right)\right].$$
+
+The fitted model is then the one with the values $\beta_j$, $j=0,\dots,q$, that maximise this expression (and hence maximise the likelihood itself), which we will label the $\left\lbrace \hat{\beta}_j\right\rbrace$. 
+
+This is generally done some via some numerical method, and we won't go into that here. The method used by R will generate the MLE $\hat\beta_j$ for each $\beta_j$, and also an estimate of the standard error of each $\hat\beta_j$. In particular there will be an estimate of the standard error of $\hat\beta_1$, better known as $\hat\tau$, the estimate of the treatment effect. This is important, because it means we can test the hypothesis that $\tau=0$, and can form a confidence interval for the adjusted log odds ratio.
+
+:::{.example #logregeg1}
+
+This study is detailed in @elmunzer2012randomized. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication. The study had 602 participants.
+
+The dataset contains 33 variables, but we will focus on a small number:
+
+  * $X$: (primary outcome) - incidence of post-ercp pancreatitis 0 (no), 1 (yes).
+  * Treatment arm `rx`: 0 (placebo), 1 (treatment)
+  * Site: 1, 2, 3, 4
+  * Risk: Risk score (1 to 5). Should be factor but treated as continuous.
+  * Age: from 19 to 90, mean 45.27, SD 13.30.
+
+The correlation between `risk` and `age` is -0.216, suggesting no problems of collinearity between those two variables. 
+
+Note: an obvious one to include would be `gender`, but I tried it and it is not at all significant, so I have pre-whittled it down for [even more] simplicity.
+
+
+```{r, echo=T}
+data("indo_rct")
+summary(indo_rct[ ,c(1,2,3,4,6,32)])
+## Some things to note:
+# There are very few patients in group 4, and not many in group 3
+# The age range goes from 19 to 90 
+# 'rx' is the group variable
+
+## Checking for collinearity with factor variables
+
+# No consistent patterns between age and site or risk and site
+indo_rct%>%
+  group_by(site) %>% 
+  summarise(
+    meanage=mean(age), sdage=sd(age),
+    meanrisk = mean(risk), sdrisk=sd(risk)
+    )
+
+## We will try models with age and age^2
+
+glm_indo_agelin = glm(outcome ~ age + site + risk + rx, data=indo_rct, 
+                      family = binomial(link = "logit"))
+glm_indo_agesq = glm(outcome ~ I(age^2) + site + risk + rx, data=indo_rct, 
+                     family = binomial(link = "logit"))
+
+summary(glm_indo_agelin)
+summary(glm_indo_agesq)
+
+```
+
+Since neither `age` nor `age^2` appear influential, we'll remove it and keep the other covariates.
+
+```{r, echo=T}
+glm_indo = glm(outcome ~ site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
+summary(glm_indo)
+```
+
+From the summary we see that $\hat\tau = -0.752$, with a standard error of 0.261. A 95% CI for $\tau$ is therefore 
+
+$$-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).$$
+This model supports the hypothesis that the treatment difference isn't zero. We do see however from the Null deviance and the Residual deviance that the model isn't explaining a huge proportion of the variation.
+:::
+
+
+We can also use the model to estimate the odds of 'success' (the outcome 1) for different groups of patients, by fixing the values of the covariates. The linear expression $x^T\hat{\boldsymbol\beta}$ for given values of $x$ gives us as estimate of 
+
+$$\log\left(\frac{p(X=1)}{1-p(X=1)}\right),$$ 
+where $X$ here is the primary outcome. The exponent of this therefore gives the odds, and this can be rearranged to find the probability, 
+
+$$p\left(X_i=1\right) = \frac{\exp(\text{logit}_i)}{1+\exp(\text{logit}_i)}, $$
+where $\text{logit}_i$ is the fitted value of the linear model (on the logit scale) given all the baseline characteristics of some patient $i$.
+This will be the probability, according to the model, that a patient with this particular combination of baseline characteristics will have outcome 1.
+
+:::{.example}
+Continuing with Example \@ref(exm:logregeg1), we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.
+
+For this we will make heavy use of the summary table
+
+```{r, echo=T}
+summary(glm_indo)
+```
+
+For example, a patient from site 1, with risk level 3, in the control group would have odds
+
+$$\exp\left(-2.2307 + 3\times 0.5846\right) = 0.6207, $$
+which translates to a probability of post-ECRP pancreatitis of
+
+$$\frac{0.6207}{1+0.6207} = 0.383. $$
+
+By contrast, a patient in group $T$, from site 2, at risk level 1, would have odds
+
+$$\exp\left(-2.2307 - 1.2204 + 1\times 0.5846 - 0.7523\right) = 0.0268, $$
+which is equivalent to a probability of post-ECRP pancreatitis of 
+
+$$\frac{0.0268}{1+0.0268} = 0.0261.$$ 
+Being more methodical we can collect these into a table. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will treat them as zero and lump them in with the site 1 participants
+
+```{r}
+sites = c("2", "Not 2")
+risks = 1:5
+
+df_indo = data.frame(
+  site = c(rep("2", 5), rep("Not 2", 5)),
+  risk = rep(1:5, 2)
+)
+
+df_indo$Odds_groupC = rep(NA, 10)
+df_indo$Prob_groupC = rep(NA, 10)
+df_indo$Odds_groupT = rep(NA, 10)
+df_indo$Prob_groupT = rep(NA, 10)
+
+for (i in 1:5){
+  oddsC = exp(-2.2307 - 1.2204 + df_indo$risk[i]*0.5846)
+  oddsT = exp(-2.2307 - 1.2204 + df_indo$risk[i]*0.5846 - 0.7523)
+  df_indo$Odds_groupC[i] = round(oddsC,3)
+  df_indo$Odds_groupT[i] = round(oddsT,3)
+}
+
+for (i in 1:5){
+  oddsC = exp(-2.2307  + df_indo$risk[i]*0.5846)
+  oddsT = exp(-2.2307  + df_indo$risk[i]*0.5846 - 0.7523)
+  df_indo$Odds_groupC[i+5] = round(oddsC,3)
+  df_indo$Odds_groupT[i+5] = round(oddsT,3)
+}
+
+df_indo$Prob_groupC = round(df_indo$Odds_groupC/(1+df_indo$Odds_groupC),3)
+df_indo$Prob_groupT = round(df_indo$Odds_groupT/(1+df_indo$Odds_groupT),3)
+
+df_indo
+```
+
+:::
+
+#### Some cautions {-}
+
+As with any linear model, we need to ensure that it is appropriate for our dataset. Two key things we need to check for are:
+
+  * **Collinearity**: we should make sure that none of the independent variables are highly correlated. This is not uncommon in clinical datasets, since measurements are sometimes strongly related. Sometimes therefore, this can mean choosing only one out of a collection of two or more strongly related variables.
+  * **linear effect across the range of the dataset**: a linear model is based on the assumption that the effect of the independent variables is the same across the whole range of the data. This is not always the case. For example, the rate of deterioration with age can be more at older ages. This can be dealt with either by binning age into categories, or by using a transformation, eg. age$^2$. Note that this would still be a linear model, because it is linear in the coefficients.
+
+
+
+
+## Diagnostics for logistic regression
+
+There are many diagnostic techniques for binomial data (see eg. @collett_bin) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of `1`, we can't conclude that their probability should have been high. If the 'true' probability of $X=1$ for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have $X=0$. 
+
+This makes diagnostics somewhat trickier.
+
+Diagnostics for logistic regression fall into two categories: **discrimination** and **calibration**. We will look at each of these in turn, though by no means exhaustively.
+
+### Discrimination
+
+Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the $\operatorname{logit}\left(p\right)$ scale. If that value is below some threshold, we classify that participant as 0 If the value is above the threshold, we classify them as 1. Here, we are slightly abandoning the notion that the model is predicting probabilities, and instead testing whether the model can successfully order the patients correctly. Can we set some threshold on the model output that (almost) separates the cohort into its ones and zeros?
+
+A classic way to asses this is by using Receiver Operating Characteric (ROC) analysis. ROC analysis was developed during the second world war, as radar operators analysed their classification accuracy in distinguishing signal (eg. an enemy plane) from noise. It is still widely used in the field of statistical classification, including in medical diagnostics. ROC analysis can be applied to any binary classifier, not just logistic regression.
+
+#### ROC analysis
+
+To understand ROC analysis, we need to revisit two concepts relating to tests or classifiers that you might not have seen since Stats I, and we will introduce (or remind ourselves of) some notation to do this:
+
+  * $\hat{p}_i\in\left(0,1\right)$ is the fitted value of the logistic regression model for patient $i$
+  * $X_i=0$ or $1$ is the true outcome for patient $i$
+  * $t\in\left(0,1\right)$ is the threshold value.
+  
+If $\hat{p}_i<t$ we classify patient $i$ as 0, if $\hat{p}\geq t$ we classify them as 1. The language of ROC analysis is so entrenched in diagnostic/screening tests that I have kept it here for consistency. A 'positive' result for us is $X=1$, and a 'negative' result is $X=0$.
+
+:::{.definition}
+The **sensitivity** of a test (or classifier) is the probability that it will output positive (or 1) if the true value is positive (or 1):
+$$p\left(\hat{p}_i \geq t \mid{X_i=1}\right).$$
+:::
+
+:::{.definition}
+The **specificity** of a test (or classifier) is the probability that it will output negative (or 0) if the true value is negative (or 0):
+
+  $$p\left(\hat{p}_i < t \mid{X_i=0}\right) $$
+:::
+
+We estimate these by the proportions within the dataset.
+
+These are very commonly used for thinking about diagnostic tests and screening tests, and in these contexts a 'success' or 'positive' is almost always the presence of some condition or disease. In our context, we need to be mindful that a 1 could be good or bad, depending on the trial.
+
+The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the $t=0$, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set $t=0$, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a **ROC curve**. 
+
+The dashboard below shows the distributions of fitted values for patients with $X=0$ and $X=1$, with options for good, moderate and poor separation, and the corresponding ROC curve. You can move the threshold to see the sensitivity and specificity at that value. Also note the AUC (area under the curve) which is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
+
+If you're viewing this in PDF you'll just have a static image, but you can find the dashboard at \newline
+[https://racheloughton.shinyapps.io/ROCplots/](https://racheloughton.shinyapps.io/ROCplots/).
+
+```{r}
+knitr::include_app("https://racheloughton.shinyapps.io/ROCplots/", height="600px")
+
+```
+
+Note that I've used beta distributions for some hypothetical distributions of fitted values for the different groups, but this is just for convenience: ROC analysis makes no distributional assumptions.
+
+
+:::{.example}
+Let's look at the model we fitted in Example \@ref(exm:logregeg1). To draw the ROC curve of this data, we will use the R package `pROC`. 
+
+```{r, echo=T}
+fit_indo = fitted(glm_indo)   # Fitted values from glm_indo
+out_indo = indo_rct$outcome   # outcome values (0 or 1)
+roc_indo_df = data.frame(fit = fit_indo, out = out_indo)
+```
+
+The main function in the package `pROC` is `roc`, which creates a `roc` object. and `ggroc` that sort and plot the data for us:
+
+```{r, echo=T}
+roc_indo = roc(data=roc_indo_df, response = out, predictor=fit)
+
+```
+
+With that object we can do various things, such as plot the ROC curve:
+
+```{r indoroc1, echo=T, fig.cap = "ROC curve for our logistic regression model of the indo RCT data (solid line). The dotted line shows the ROC curve we'd expect with random guessing."}
+ggroc(roc_indo, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)
+
+```
+
+and find the area under the curve for the model
+
+```{r, echo=T}
+auc(roc_indo)
+```
+So we see that our model is better than random guessing, but really not all that good! In particular, wherever we put a threshold (if we use the model that way), many people will be mis-classified. It's also worth noting that here we're performing the diagnostics on the data we used to fit the model: if we were to use the model on a new set of patients, the fit would likely be slightly worse.
+
+:::
+
+
+### Calibration
+
+Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, 'correct' or 'accurate'. One intuitive way to do this is to work through different 'types' of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.
+
+If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.
+
+
+:::{.example}
+
+This example uses the model fitted in Example \@ref(exm:logregeg1).
+  
+The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value. 
+
+```{r}
+
+indo_exp = indo_rct[,c(2,4,32)]
+indo_fact = unique(indo_exp)
+fit_fact = predict(glm_indo, newdata=indo_fact, se.fit=T, type="response")
+indo_fact$fit = fit_fact$fit
+indo_fact$fit_se = fit_fact$se.fit
+indo_fact$est = rep(NA, nrow(indo_fact))
+indo_fact$size = rep(NA, nrow(indo_fact))
+for (i in 1:nrow(indo_fact)){
+  indo_sub = indo_rct[
+    (indo_rct$site == indo_fact$site[i])&(indo_rct$risk == indo_fact$risk[i])&(indo_rct$rx == indo_fact$rx[i]),
+  ] 
+  indo_fact$est[i] = (sum(indo_sub$outcome=="1_yes"))/nrow(indo_sub)
+  indo_fact$size[i] = nrow(indo_sub)
+}
+# indo_fact
+# By group
+plot0 = ggplot(data=indo_fact[indo_fact$rx=="0_placebo",], aes(x=risk, col=site)) +
+  geom_point(aes(y=est, size=size), pch=16) + 
+  geom_point(aes(y=fit), pch=4) +
+  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
+  theme_bw()+ggtitle("Control Group")
+
+plot1 = ggplot(data=indo_fact[indo_fact$rx=="1_indomethacin",], aes(x=risk, col=site)) +
+  geom_point(aes(y=est, size=size), pch=16) + 
+  geom_point(aes(y=fit), pch=4) +
+  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
+  theme_bw() + ggtitle("Treatment Group")
+
+# By site
+
+plot_s1 = ggplot(data=indo_fact[indo_fact$site=="1_UM",], aes(x=risk, col=rx)) +
+  geom_point(aes(y=est, size=size), pch=16) + 
+  geom_point(aes(y=fit), pch=4) +
+  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
+  theme_bw()+ggtitle("Site 1")
+plot_s2 = ggplot(data=indo_fact[indo_fact$site=="2_IU",], aes(x=risk, col=rx)) +
+  geom_point(aes(y=est, size=size), pch=16) + 
+  geom_point(aes(y=fit), pch=4) +
+  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
+  theme_bw()+ggtitle("Site 2")
+
+grid.arrange(plot_s1, plot_s2, nrow=2)
+
+
+```
+
+These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model. 
+:::
+
+We will look some more at this in the upcoming practical class, as well as some further principles of model validation.
+
+For now, we're done with Binary data, and in our next few lectures we'll think about survival, or time-to-event data.
