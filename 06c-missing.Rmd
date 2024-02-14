@@ -1,0 +1,8 @@
+# Missing data
+
+```{r}
+
+knitr::include_graphics("images/plane.png")
+```
+
+[missing data article](https://www.trevorbragdon.com/p/when-data-gives-the-wrong-solution)

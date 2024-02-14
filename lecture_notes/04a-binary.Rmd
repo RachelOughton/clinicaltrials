@@ -621,7 +621,7 @@ $$\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).$$
 
 The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).
 
-```{r}
+```{r, fig.height=3}
 xl = -0.0567
 xu = 0.676
 yl = 1/xl
@@ -866,6 +866,107 @@ $$
 $$
 This is skewed somewhat lower than our standard CI of $\left(0.187,\;0.541\right).$
 
+:::
 
+### (Lecture 13) Risk Ratio (RR) and Odds ratio (OR)
+
+The measures we have looked at so far, particularly the ARD, are quite analagous to the continuous normally distributed case. However, there are yet more commonly used measures of difference for proportions, which need to be dealt with differently,  but also afford more opportunities for modelling.
+
+The **risk ratio** is defined as 
+
+$$\text{RR} = \frac{\pi_T}{\pi_C}$$
+
+The **odds ratio** is defined as 
+$$\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}$$
+The first thing to note is that for both the risk ratio and the odds ratio, the null value is one (not zero, as for the ARD), and both values must always be positive. We think about things multiplicatively, so for example if $RR=3$ we can say that the event is "3 times more likely" in group $T$ than in group $C$.
+
+#### Odds {-}
+
+Odds and odds ratios are a bit trickier to think about ([this article](https://kids.frontiersin.org/articles/10.3389/frym.2022.926624#:~:text=As%20an%20example%2C%20if%20the,disease%20if%20you%20are%20exposed.) explains them really well - it's aimed at 'kids and teens' but don't let that put you off!). The odds of an event are the probability of it happening over the probability of it not happening. So, if (for some event $A$), $p\left(A\right)=0.2$, the odds of $A$ are 
+
+$$\frac{p\left(A\right)}{p\left(A'\right)} = \frac{0.2}{0.8} = \frac{1}{4}, $$
+which we say as "1 to 4" or 1:4. For every one time $A$ occurs, we expect it not to occur four times.
+
+The **odds ratio** compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).
+
+
+With the ARD, we knew that our confidence interval should always be in $\left[-1,\,1\right]$, and that if we compare treatments in one direction (say $p-T - p_C$) we would obtain the negative of the interval for the other way ($p_C - p_T$). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction ($p_T / p_C$) will give the reciprocal of the other direction ($p_C / p_T$).
+
+:::{.example}
+
+For our Streptomycin example, we estimated the ARD by 
+$$\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364,$$
+or could have alternatively had
+$$\hat\tau_{ARD}=p_C - p_T = \frac{17}{52} - \frac{38}{55} = - 0.364.$$
+For the risk ratio, we have
+
+$$\hat{\tau}_{RR} = \frac{p_T}{p_C} = \frac{38/55}{17/52} = 2.113,$$
+or could alternatively have
+
+$$\hat{\tau}_{RR} = \frac{p_C}{p_T} = \frac{17/52}{38/55} = 0.473 = \frac{1}{2.113}.$$
+We could say that a patient is "more than twice as likely to be cured with streptomycin than by the control". 
+
+For the odds ratio, we have
+
+$$\hat{\tau}_{OR} = \frac{p_T/\left(1-p_T\right)}{p_C/\left(1-p_C\right)} = \frac{(38/55)/(17/55)}{(17/52)/(35/52)} = 4.602, $$
+and therefore the odds of recovery are around 4.6 greater for Streptomycin than for the control. Similarly, we could reframe this as
+
+$$\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \frac{(17/52)/(35/52)}{(38/55)/(17/55)} = 0.217 = \frac{1}{4.602}.$$
 
 :::
+
+One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval $\left(l,\,u\right)$ (with $l,u>1$) and $\left(\frac{1}{u},\frac{1}{l}\right)$, since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval 
+
+$$\left(\frac{1}{k},\,k\right) \text{ for some }k>1 $$
+can be thought of as symmetric, in that one treatment may be up to $k$ times more effective than the other, in either direction. Therefore, to build a confidence interval for OR or RR, we will not be following the usual formula
+
+$$\text{point estimate } \pm{z\times{SE}}.$$
+You may have already been thinking that a log transformation would be useful here, and you'd be correct! The *sort-of* symmetric intervals we've been discussing here actually are symmetric (about zero) on the log scale.
+
+
+#### Confidence intervals for RR and OR
+
+Firstly we'll consider the risk ratio. Let's define 
+
+$$ \phi = \log\left(\frac{\pi_T}{\pi_C}\right).$$
+The natural way to estimate this is with the sample proportions
+
+$$\log\left(\frac{p_T}{p_C}\right) = \log\left(p_T\right) - \log\left(p_C\right).$$
+These estimated proportions should be approximately normal and independent of one another, and so $\log\left(\frac{p_T}{p_C}\right)$ is approximately normal with mean $\phi$ (the true value) and variance 
+
+$$\operatorname{var}\left(\log\left(p_T\right)\right) + \operatorname{var}\left(\log\left(p_C\right)\right). $$
+We can now apply the Delta method (see section \@ref(delta-method)) to find that (using Equation \@ref(eq:delta3))
+
+$$\operatorname{var}\left[\log\left(p_T\right)\right] = \operatorname{var}\left[\log\left(\frac{r_T}{n_T}\right)\right] \approx \frac{\pi_T\left(1-\pi_T\right)}{n_T}\times{\left(\frac{1}{\pi_T}\right)^2} = \frac{1}{n_T\pi_T} - \frac{1}{n_T}. $$
+Since we estimate $\pi_T$ by $r_T/n_T$ this can be estimated by $r_T^{-1} - n_T^{-1}$. Notice that we are relying on the derivative of $\log\left(x\right)$ being $x^{-1}$, so we must always use natural logarithms.
+
+This leads us to the result that, approximately
+
+$$\log\left(\frac{p_T}{p_C}\right) \sim N\bigg(\phi,\,\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right) \bigg) $$ and so we can generate $100\left(1-\alpha\right)$% confidence intervals for $\phi$ as $\left(l_{RR},\;u_{RR}\right)$, where the limits are
+
+$$
+\log\left(\frac{p_T}{p_C}\right) \pm z_{\frac{\alpha}{2}}\sqrt{\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right)}.
+$$
+This then translates to an interval for the risk ratio itself of $\left(e^{l_{RR}},e^{u_{RR}}\right)$.
+
+:::{.example}
+Returning once again to our streptomycin example, recall that we have 
+
+$$
+\begin{aligned}
+r_T & = 38\\
+n_T & = 55 \\
+r_C & = 17 \\
+n_C & = 52
+\end{aligned}
+$$
+and so the limits of the confidence interval (with $\alpha=0.05$) on the log scale are
+
+$$\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\frac{1}{38} - \frac{1}{55} + \frac{1}{17} - \frac{1}{52}} = \log(2.11) \pm 1.96 \times 0.218$$
+
+which gives us $\left(0.320,\,1.176\right)$ on the log scale, and a 95% CI for the risk ratio of $\left(1.377,\,3.243\right)$.
+
+:::
+
+So, we've seen that we can find confidence intervals for each of our four measures of difference. But we probably want to also be able to incorporate baseline measurements, as we 
+did for continuous outcome variables.

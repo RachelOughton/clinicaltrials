@@ -11,7 +11,7 @@ In this practical, we will focus on two main areas:
 
 A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required.
 
-This approach has the following advantages over the formula-based methods presented in Section \@ref(rct-plan):
+This approach has the following advantages over the formula-based methods presented in Section \@ref(rct-plan) [CHECK WHETHER THIS OVERLAPS ASSIGNMENT 2]:
 
   1. **Transparency**: If the data generating mechanism is made clear, then the assumptions behind the trial are also clear, and the simulation can be replicated by anyone. Reproducibility is a big issue in clinical trials.
   2. **Flexibility**: Whereas the methods in Section \@ref(rct-plan) are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials.
@@ -29,6 +29,101 @@ The first step in the simulation method is to generate trial data. To do this, w
 
 
 ### Binary data
+
+Possible dataset - change this to questions, obviously. There might be more interesting ones, check medical data file.
+
+:::{.example}
+```{r}
+library(HSAUR)
+data("respiratory")
+resp_04 = respiratory[respiratory$month %in% c(0,4),]
+resp_4 = respiratory[respiratory$month %in% c(4),]
+resp_4$status0 = resp_04$status[resp_04$month==0]
+```
+The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:
+
+  * sex 
+  * age 
+  * treatment centre (centre 1 or centre 2)
+  * symptom status (poor = 0, good = 1).
+  
+The outcome variable is whether the status of the patient's symptoms are poor (0) or good (1) after four months of the trial. The first model we fit involves all covariates:
+
+```{r, echo=T}
+model1 = glm(status ~ centre + treatment + sex + age + status0, 
+             family = binomial(link='logit'), data=resp_4)
+summary(model1)
+```
+And we can plot the separation plot.
+```{r, echo=T}
+fit1 = predict(model1, resp_4, type = "response")
+separationplot(fit1, (as.numeric(resp_4$status)-1) )
+```
+
+Having done this we can fit a second model with only those covariates that appear to be significantly active:
+
+```{r, echo=T}
+model2 = glm(status ~ centre + treatment +  status0, 
+             family = binomial(link='logit'), data=resp_4)
+summary(model2)
+```
+The separation plot shows that the model is OK (though certainly not brilliant).
+```{r}
+fit2 = predict(model2, resp_4, type = "response")
+separationplot(fit2, (as.numeric(resp_4$status)-1) )
+
+```
+
+First of all, we see that the treatment is significant, and that all other things being equal, being in the treatment group increases the log of the odds ratio by around 1.024. We can construst a 95% confidence interval for this using the estimate and standard error of the coefficient (shown in the R output above), 
+
+$$1.024 \pm 1.96 \times{0.453} = \left(0.136,\; 1.912\right).$$
+Taking the exponent, the 95% confidence interval for the effect of the treatment on the **odds** of 'good' symptom status at 4 months is
+$$\left(\exp(0.136),\; \exp(1.912)\right) = \left(1.145,\;6.768\right).$$
+
+Using the coefficient estimates from `model2` above, we see 
+
+$$\log\frac{\pi}{1-\pi} = -1.643 + 1.101\left(\text{centre}=2\right) + 1.024\left(\text{treatment}=1\right) + 1.729\left(\text{baseline status}=1\right), $$
+where $\pi$ is the probability of the symptom status being 'good' (1) at four months.
+The odds of the outcome being 1 can be estimated from this equation by taking the exponent. For example, for a patient at treatment centre 2, in the treatment group, with 'good' baseline status, the odds of a 'good' status at 4 months are approximately
+
+$$
+\begin{aligned}
+\frac{\pi}{1-\pi} & =\exp\left[ -1.643 + 1.101 + 1.024 + 1.729\right] \\
+& = \exp\left(2.211\right)\\
+& = 9.125
+\end{aligned}
+$$
+which corresponds to a probability of a 'good' status at four months of 0.901. 
+
+By contrast, for a patient in the treatment group at treatment centre 1, who had 'poor' symptoms at baseline, the odds of a 'good' status at 4 months are approximately
+
+$$
+\begin{aligned}
+\frac{\pi}{1-\pi} & =\exp\left[ -1.643 + 1.024 \right] \\
+& = \exp\left(-0.619\right) \\
+& = 0.538.
+\end{aligned}
+$$
+Rearranging this for probability we find $\pi = 0.350$.
+
+However, if that same participant had been in the control group instead, we would have
+
+$$
+\begin{aligned}
+\frac{\pi}{1-\pi}& = \exp\left(-1.643\right)\\
+& = 0.193
+\end{aligned}
+$$
+and the estimated probability of having 'good' symptom status at four months would be 0.162.
+
+:::
+
+
+
+
+
+
+
 
 
 

@@ -371,7 +371,7 @@ In the continuous case, it made sense to simply think about the treatment effect
 The **absolute risk difference** is 
 
 $$\text{ARD} = \pi_T - \pi_C,$$
-and is sometimes used. However, it loses a lot of information that we'd probably like to keep in some how. For example, suppose a treatment reduces the incidence of some terrible symptom from $\pi_C=0.03$ to $\pi_T=0.01$. The absolute risk difference is $0.02$ here. For some other treatment that results in a reduction from $\pi_C=0.57$ to $\pi_T = 0.55$ we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.
+and is sometimes used. However, it loses a lot of information that we'd probably like to keep in some how. For example, suppose a treatment increases the proportion cured from $\color{red}{\pi_C=0.01}$ to $\color{red}{\pi_T=0.03}$. The absolute risk difference is $0.02$ here. For some other treatment that results in an increase from $\color{red}{\pi_C=0.55}$ to $\color{red}{\pi_T = 0.57}$ we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.
 
 It is useful though to remember that usually these numbers are about people. If the outcome is 'cured' or 'not cured', then for some cohort of $N$ patients, $N\times\text{ARD}$ is the number of extra patients you would expect to cure if you used treatment $T$ instead of treatment $C$ (which may be nothing or may some usual course of treatment).
 
@@ -379,6 +379,8 @@ Linked to this is the **number needed to treat** (NNT), which is defined as
 
 $$ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. $$
 The NNT is the number of patients you'd need to treat (with treatment $T$ rather than $C$) before you would bring benefit to one extra patient. The website [TheNNT](https://thennt.com/) collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!
+
+<span style="color: red;">Note that the NNT doesn't tell us how many patients are cured: it is just a measure of how much more effective the treatment is than the control. In both the examples above, with ARD=0.02, we have NNT=50. However, in the first example we would expect around 0-1 patients out of 50 cured under the control and 1-2 out of 50 cured under the treatment. In the second case, we would expect 27-28 cured out of 50 under the control, and 28-29 out of 50 cured under the treatment.</span>
 
 The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if $\pi_T = 0.25,\,\pi_C=0.2$, then $\text{ARD} = 0.05$ and $\text{NNT} = 20.$ After treating 20 patients with treatment $C$ we expect to cure (say) 4, whereas treating 20 patients with treatment $T$ it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if $\pi_C=0.005$ and $\pi_T = 0.015$ then $\text{ARD}=0.01$ and $\text{NNT}=100$. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!
 
@@ -396,13 +398,13 @@ Back to our streptomycin example, we can now construct a $100\left(1-\alpha\righ
 
 Our estimated treatment effect is (to 3 decimal places)
 
-$$\hat\tau=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.$$
-Our estimate of the standard error of $\hat\tau$ is
+$$\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.$$
+Our estimate of the standard error of $\hat\tau_{ARD}$ is
 
 $$
 \begin{aligned}
 \frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C} & = \frac{\frac{38}{55}\times \frac{17}{55}}{55} + \frac{\frac{17}{52}\times \frac{35}{52}}{52}\\
-& = 0.0811
+& = \color{red}{0.00811}
 \end{aligned}
 $$
 and therefore a 95% confidence interval for $\tau_{ARD}$ is
@@ -415,7 +417,7 @@ If we want to think instead in terms of NNT (the number needed to treat), then w
 $$ \text{NNT} = \frac{1}{\tau_{ARD}} = \frac{1}{0.364} = 2.75.$$
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for $\tau_{ARD}$ to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get
 
-$$\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).$$
+$$\left(\frac{1}{0.541},\; \frac{1}{\color{red}{0.187}}\right) = \left(1.85,\; \color{red}{5.33} \right).$$
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
 
 ```{r}
@@ -482,7 +484,7 @@ $$\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).$$
 
 The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).
 
-```{r}
+```{r, fig.cap = "The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.", fig.height=3.5}
 xl = -0.0567
 xu = 0.676
 yl = 1/xl
@@ -718,8 +720,6 @@ $$
 This is skewed somewhat lower than our standard CI of $\left(0.187,\;0.541\right).$
 
 :::
-
-4b from here!!!
 
 ### Risk Ratio (RR) and Odds ratio (OR)
 

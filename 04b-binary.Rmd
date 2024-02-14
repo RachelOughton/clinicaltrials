@@ -58,7 +58,7 @@ $$
 
 That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio of success in group $T$ relative to group $C$, adjusted for variables $x_1,\;\ldots,\;x_p$. Put another way, while the baseline covariates $x_1,\ldots,x_p$ affect the probability of 'success' (or whatever our binary outcome's one means), $\tau$ is a measure of the effect of the treatment compared to control given some set of baseline covariate values. 
 
-### Fitting a linear regression model 
+### Fitting a logistic regression model 
 
 Logistic regression models are generally fitted using *maximum likelihood*. In the notation of Equation \@ref(eq:logreg1), the parameters we need to fit are the coefficients $\mu,\;\tau$ and $\beta_1,\ldots,\beta_p$. To ease notation, we will collect these into a vector $\boldsymbol\beta$, with $\beta_0=\mu$, $\beta_1=\tau$ and $\beta_2,\ldots,\beta_{p+1}$ the original $\beta_1,\ldots,\beta_p$. Sorry this is confusing - we won't really use the vector $\boldsymbol\beta$ after this, or think about the parameters individually (apart from $\tau$).
 
@@ -94,7 +94,7 @@ $$\ell\left(\left\lbrace\beta_j \right\rbrace\mid{\text{data}}\right) = \sum\lim
 
 The fitted model is then the one with the values $\beta_j$ that maximise this expression (and hence maximise the likelihood itself), which we will label the $\left\lbrace \hat{\beta}_j\right\rbrace$. 
 
-This is generally done some via some numerical method, and we won't go into that here. The method used by R will generate the MLE $\hat\beta_j$ for each $\beta_j$, and also an estimate of the standard error of the estimate. In particular there will be an estimate of the standard error of $\hat\beta_1$, better known as $\hat\tau$, the estimate of the treatment effect. This is important, because it means we can test the hypothesis that $\tau=0$, and can form a confidence interval for the adjusted log OR.
+This is generally done some via some numerical method, and we won't go into that here. The method used by R will generate the MLE $\hat\beta_j$ for each $\beta_j$, and also an estimate of the standard error of the estimate. In particular there will be an estimate of the standard error of $\hat\beta_1$, better known as $\hat\tau$, the estimate of the treatment effect. This is important, because it means we can test the hypothesis that $\tau=0$, and can form a confidence interval for the adjusted log odds ratio.
 
 :::{.example #logregeg1}
 
@@ -108,12 +108,14 @@ The dataset contains 33 variables, but we will focus on a small number:
   * Risk: Risk score (1 to 5). Should be factor but treated as continuous.
   * Age: from 19 to 90, mean 45.27, SD 13.30.
 
-The correlation between `risk` and `age` is -0.216, suggesting no problems of collinearity between those two variables.
+The correlation between `risk` and `age` is -0.216, suggesting no problems of collinearity between those two variables. 
+
+Note: an obvious one to include would be `gender`, but I tried it and it is not at all significant, so I have pre-whittled it down for [even more] simplicity.
 
 
 ```{r, echo=T}
 data("indo_rct")
-summary(indo_rct)
+summary(indo_rct[ ,c(1,2,3,4,6,32)])
 ## Some things to note:
 # There are very few patients in group 4, and not many in group 3
 # The age range goes from 19 to 90 
@@ -131,8 +133,10 @@ indo_rct%>%
 
 ## We will try models with age and age^2
 
-glm_indo_agelin = glm(outcome ~ age + site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
-glm_indo_agesq = glm(outcome ~ I(age^2) + site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
+glm_indo_agelin = glm(outcome ~ age + site + risk + rx, data=indo_rct, 
+                      family = binomial(link = "logit"))
+glm_indo_agesq = glm(outcome ~ I(age^2) + site + risk + rx, data=indo_rct, 
+                     family = binomial(link = "logit"))
 
 summary(glm_indo_agelin)
 summary(glm_indo_agesq)
@@ -151,10 +155,14 @@ From the summary we see that $\hat\tau = -0.752$, with a standard error of 0.261
 $$-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).$$
 :::
 
-We can also use the model to estimate the odds of 'success' (the outcome 1) for different groups of patients, by fixing the values of the covariates. The linear expression $x\boldsymbol\hat\beta$ for given values of $x$ gives us as estimate of 
+We can also use the model to estimate the odds of 'success' (the outcome 1) for different groups of patients, by fixing the values of the covariates. The linear expression $x^T\hat{\boldsymbol\beta}$ for given values of $x$ gives us as estimate of 
 
 $$\log\left(\frac{p(X=1)}{1-p(X=1)}\right),$$ 
-where $X$ here is the primary outcome. The exponent of this therefore gives the odds.
+where $X$ here is the primary outcome. The exponent of this therefore gives the odds, and this can be rearranged to find the probability, 
+
+$$p\left(X_i=1\right) = \frac{\exp(\text{logit}_i)}{1+\exp(\text{logit}_i)}, $$
+where $\text{logit}_i$ is the fitted value of the linear model (on the logt scale) given all the baseline characteristics of some patient $i$.
+This will be the probability, according to the model, that a patient with this particular combination of baseline characteristics will have outcome 1.
 
 :::{.example}
 Continuing with Example \@ref(exm:logregeg1), we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.
@@ -228,20 +236,39 @@ As with any linear model, we need to ensure that it is appropriate for our datas
 
 ## Diagnostics for logistic regression
 
-There are many diagnostic techniques for binomial data (see eg. @collett_bin) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse. Our model outputs probabilities, but our data is all either 0 or 1. This makes diagnostics somewhat trickier.
+There are many diagnostic techniques for binomial data (see eg. @collett_bin) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of `1`, we can't conclude that their probability should have been high. If the 'true' probability of $X=1$ for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have $X=0$. 
+
+This makes diagnostics somewhat trickier.
 
 Diagnostics for logistic regression fall into two categories: **discrimination** and **calibration**. We will look at each of these in turn.
 
 ### Discrimination
 
-Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the $\operatorname{logit}\left(p\right)$ scale. If that value is below some threshold, we classify that participant as 0 If the value is above the threshold, we classify them as 1. 
+Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the $\operatorname{logit}\left(p\right)$ scale. If that value is below some threshold, we classify that participant as 0 If the value is above the threshold, we classify them as 1. Here, we are slightly abandoning the notion that the model is predicting probabilities, and instead testing whether the model can successfully order the patients correctly. Can we set some threshold on the model output that (almost) separates the cohort into its ones and zeros?
 
+A classic way to think about this is Receiver Operating Characteric (ROC) analysis. ROC analysis is a very widely used method, that can be applied to any binary classifier.
+
+#### ROC analysis
+
+[READ THIS THROUGH AND MAKE IT MORE MATHSY! MAKE A DASHBOARD!!! FIND R PACAKGES THAT DO IT]
+
+To understand ROC analysis, we need to revisit two concepts relating to tests or classifiers that you might not have seen since Stats I:
+
+:::{.definition}
+The **sensitivity** of a test (or classifier) is the probability that it will output positive (or 1) if the true value is positive.
+:::
+
+:::{.definition}
+The **specificity** of a test (or classifier) is the probability that it will output negative (or 0) if the true value is negative.
+:::
+
+These are very commonly used for thinking about diagnostic tests and screening tests, and in these contexts a 'success' or 'positive' is almost always the presence of some condition or disease. In our context, we need to be mindful that a 1 could be good or bad, depending on the trial.
+
+The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the threshold here, the model will predict everyone to have an outcome of 1. At the other extreme, if we set the threshold to zero, we will classify everyone as a 0. If we vary the threshold from 0 to 1 the number of people classified in each group will change.
 
 ### Calibration
 
-
-
-
+Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, 'correct' or 'accurate'. One intuitive way to do this is to work through different 'types' of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data match the probability given by the model.
 
 If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.
 
@@ -300,143 +327,6 @@ grid.arrange(plot_s1, plot_s2, nrow=2)
 
 ```
 
-
 :::
 
-#### Separation plots
-
-In a linear regression, we can plot the residual (the true value minus the fitted value) to see whether it fits our modelling assumptions that it should be normally distributed and independent of the fitted values and of all covariates. In a logistic regression model, our actual values are 0 and 1, and we have no error term. The uncertainty in the model comes from the fact that it is estimating probabilities (via the logit link function) rather than directly modelling the outcome.
-
-Separation plots are an attempt to visualise each piece of data against the model. The dataset is reordered according to the fitted value of the probability, and the fitted probability is plotted as a line. A vertical line (red, in the `separationplot` package) is drawn for every point where the outcome is 1, and a different coloured line (beige in `separationplot`) for every outcome that is 0. There are two main useful things the plot can show you:
-
-  1. **The better the separation, the better the model**. The first plot shows a reasonably good model, where the density of red lines approximately follows the line of fitted probability. However, the line is fairly shallow, and the red lines are fairly scattered. The second plot shows a perfect model. The fitted probability jumps from 0 to 1 at around 0.7 (shown by the black triangle), and there is perfect separation between the ones and zeroes.
-  
-```{r}
-fit1 <- glm(inmetro ~ percollege, data = midwest, family = binomial)
-midwest$f1 <- predict(fit1, midwest, type = "response")
-separationplot(pred = midwest$f1, actual = midwest$inmetro, show.expected = T)
-```
-
-```{r}
-fit3 <- glm(inmetro ~ category, data = midwest, family = binomial)
-midwest$f3 <- predict(fit3, midwest, type = "response")
-separationplot(midwest$f3, midwest$inmetro, show.expected = T)
-
-```
-
-  2. **If the data doesn't follow the line, the fit is off**. 
-  
-```{r}
-mw_eg = data.frame(
-  inmetro = midwest$inmetro,
-  percollege = midwest$percollege,
-  unif1 = runif(n=nrow(midwest), min=0, max=1),
-  cat1 = sample(c(0,1,2,3), size=nrow(midwest), replace=T)
-  
-)
-glm_eg = glm(inmetro ~ ., data=mw_eg, family=binomial(link = 'logit'))
-mw_eg$fit <- predict(glm_eg, mw_eg, type = "response")
-separationplot(mw_eg$fit, mw_eg$inmetro, show.expected = T)
-summary(glm_eg)
-```
-  
-You can see a nice example of using separation plots [here](https://www.ndrewwm.com/post/20191023-separation-plots/) (note that they don't use the library we'll use though). 
-
-For the effect of a binary variable on the log of the odds ratio, we have
-$$\hat{\beta_i} \pm z_{\alpha/2}\sqrt{\hat{v_i}},$$
-where $\hat\beta_i$ is the estimated coefficient of covariate $i$, and $\sqrt{\hat{v}_i}$ is the standard error of the estimate. This can then be transformed into a confidence interval for the odds ratio.
-
-
-
-:::{.example}
-```{r}
-library(HSAUR)
-data("respiratory")
-resp_04 = respiratory[respiratory$month %in% c(0,4),]
-resp_4 = respiratory[respiratory$month %in% c(4),]
-resp_4$status0 = resp_04$status[resp_04$month==0]
-```
-The data in this example is from a trial in which a drug is being tested for whether it improves the conditions of a respiratory condition. For each patient, we have the following baseline covariates:
-
-  * sex 
-  * age 
-  * treatment centre (centre 1 or centre 2)
-  * age 
-  * symptom status (poor = 0, good = 1).
-  
-The outcome variable is whether the status of the patient's symptoms are poor (0) or good (1) after four months of the trial. The first model we fit involves all covariates:
-
-```{r, echo=T}
-model1 = glm(status ~ centre + treatment + sex + age + status0, 
-             family = binomial(link='logit'), data=resp_4)
-summary(model1)
-```
-And we can plot the separation plot.
-```{r, echo=T}
-fit1 = predict(model1, resp_4, type = "response")
-separationplot(fit1, (as.numeric(resp_4$status)-1) )
-```
-
-Having done this we can fit a second model with only those covariates that appear to be significantly active:
-
-```{r, echo=T}
-model2 = glm(status ~ centre + treatment +  status0, 
-             family = binomial(link='logit'), data=resp_4)
-summary(model2)
-```
-The separation plot shows that the model is OK (though certainly not brilliant).
-```{r}
-fit2 = predict(model2, resp_4, type = "response")
-separationplot(fit2, (as.numeric(resp_4$status)-1) )
-
-```
-
-First of all, we see that the treatment is significant, and that all other things being equal, being in the treatment group increases the log of the odds ratio by around 1.024. We can construst a 95% confidence interval for this using the estimate and standard error of the coefficient (shown in the R output above), 
-
-$$1.024 \pm 1.96 \times{0.453} = \left(0.136,\; 1.912\right).$$
-Taking the exponent, the 95% confidence interval for the effect of the treatment on the **odds** of 'good' symptom status at 4 months is
-$$\left(\exp(0.136),\; \exp(1.912)\right) = \left(1.145,\;6.768\right).$$
-
-Using the coefficient estimates from `model2` above, we see 
-
-$$\log\frac{\pi}{1-\pi} = -1.643 + 1.101\left(\text{centre}=2\right) + 1.024\left(\text{treatment}=1\right) + 1.729\left(\text{baseline status}=1\right), $$
-where $\pi$ is the probability of the symptom status being 'good' (1) at four months.
-The odds of the outcome being 1 can be estimated from this equation by taking the exponent. For example, for a patient at treatment centre 2, in the treatment group, with 'good' baseline status, the odds of a 'good' status at 4 months are approximately
-
-$$
-\begin{aligned}
-\frac{\pi}{1-\pi} & =\exp\left[ -1.643 + 1.101 + 1.024 + 1.729\right] \\
-& = \exp\left(2.211\right)\\
-& = 9.125
-\end{aligned}
-$$
-which corresponds to a probability of a 'good' status at four months of 0.901. 
-
-By contrast, for a patient in the treatment group at treatment centre 1, who had 'poor' symptoms at baseline, the odds of a 'good' status at 4 months are approximately
-
-$$
-\begin{aligned}
-\frac{\pi}{1-\pi} & =\exp\left[ -1.643 + 1.024 \right] \\
-& = \exp\left(-0.619\right) \\
-& = 0.538.
-\end{aligned}
-$$
-Rearranging this for probability we find $\pi = 0.350$.
-
-However, if that same participant had been in the control group instead, we would have
-
-$$
-\begin{aligned}
-\frac{\pi}{1-\pi}& = \exp\left(-1.643\right)\\
-& = 0.193
-\end{aligned}
-$$
-and the estimated probability of having 'good' symptom status at four months would be 0.162.
-
-:::
-
-
-
-
-
-
+### Holding some data back [read about this]

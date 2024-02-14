@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-12" />
+<meta name="date" content="2024-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -507,11 +507,12 @@ where <span class="math inline">\(G\)</span> is the set of subgroups (group <spa
 <h3><span class="header-section-number">6.2.1</span> Absolute risk difference and Number Needed to Treat<a href="analysis-for-binary-outcomes.html#ard-and-nnt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <strong>absolute risk difference</strong> is</p>
 <p><span class="math display">\[\text{ARD} = \pi_T - \pi_C,\]</span>
-and is sometimes used. However, it loses a lot of information that we’d probably like to keep in some how. For example, suppose a treatment reduces the incidence of some terrible symptom from <span class="math inline">\(\pi_C=0.03\)</span> to <span class="math inline">\(\pi_T=0.01\)</span>. The absolute risk difference is <span class="math inline">\(0.02\)</span> here. For some other treatment that results in a reduction from <span class="math inline">\(\pi_C=0.57\)</span> to <span class="math inline">\(\pi_T = 0.55\)</span> we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.</p>
+and is sometimes used. However, it loses a lot of information that we’d probably like to keep in some how. For example, suppose a treatment increases the proportion cured from <span class="math inline">\(\color{red}{\pi_C=0.01}\)</span> to <span class="math inline">\(\color{red}{\pi_T=0.03}\)</span>. The absolute risk difference is <span class="math inline">\(0.02\)</span> here. For some other treatment that results in an increase from <span class="math inline">\(\color{red}{\pi_C=0.55}\)</span> to <span class="math inline">\(\color{red}{\pi_T = 0.57}\)</span> we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.</p>
 <p>It is useful though to remember that usually these numbers are about people. If the outcome is ‘cured’ or ‘not cured’, then for some cohort of <span class="math inline">\(N\)</span> patients, <span class="math inline">\(N\times\text{ARD}\)</span> is the number of extra patients you would expect to cure if you used treatment <span class="math inline">\(T\)</span> instead of treatment <span class="math inline">\(C\)</span> (which may be nothing or may some usual course of treatment).</p>
 <p>Linked to this is the <strong>number needed to treat</strong> (NNT), which is defined as</p>
 <p><span class="math display">\[ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. \]</span>
 The NNT is the number of patients you’d need to treat (with treatment <span class="math inline">\(T\)</span> rather than <span class="math inline">\(C\)</span>) before you would bring benefit to one extra patient. The website <a href="https://thennt.com/">TheNNT</a> collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!</p>
+<p><span style="color: red;">Note that the NNT doesn’t tell us how many patients are cured: it is just a measure of how much more effective the treatment is than the control. In both the examples above, with ARD=0.02, we have NNT=50. However, in the first example we would expect around 0-1 patients out of 50 cured under the control and 1-2 out of 50 cured under the treatment. In the second case, we would expect 27-28 cured out of 50 under the control, and 28-29 out of 50 cured under the treatment.</span></p>
 <p>The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if <span class="math inline">\(\pi_T = 0.25,\,\pi_C=0.2\)</span>, then <span class="math inline">\(\text{ARD} = 0.05\)</span> and <span class="math inline">\(\text{NNT} = 20.\)</span> After treating 20 patients with treatment <span class="math inline">\(C\)</span> we expect to cure (say) 4, whereas treating 20 patients with treatment <span class="math inline">\(T\)</span> it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if <span class="math inline">\(\pi_C=0.005\)</span> and <span class="math inline">\(\pi_T = 0.015\)</span> then <span class="math inline">\(\text{ARD}=0.01\)</span> and <span class="math inline">\(\text{NNT}=100\)</span>. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!</p>
 <div id="confint-ardnnt" class="section level4 hasAnchor" number="6.2.1.1">
 <h4><span class="header-section-number">6.2.1.1</span> Confidence intervals for ARD and NNT<a href="analysis-for-binary-outcomes.html#confint-ardnnt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -522,12 +523,12 @@ Our <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence in
 <div class="example">
 <p><span id="exm:unlabeled-div-28" class="example"><strong>Example 6.4  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
 <p>Our estimated treatment effect is (to 3 decimal places)</p>
-<p><span class="math display">\[\hat\tau=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.\]</span>
-Our estimate of the standard error of <span class="math inline">\(\hat\tau\)</span> is</p>
+<p><span class="math display">\[\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.\]</span>
+Our estimate of the standard error of <span class="math inline">\(\hat\tau_{ARD}\)</span> is</p>
 <p><span class="math display">\[
 \begin{aligned}
 \frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C} &amp; = \frac{\frac{38}{55}\times \frac{17}{55}}{55} + \frac{\frac{17}{52}\times \frac{35}{52}}{52}\\
-&amp; = 0.0811
+&amp; = \color{red}{0.00811}
 \end{aligned}
 \]</span>
 and therefore a 95% confidence interval for <span class="math inline">\(\tau_{ARD}\)</span> is</p>
@@ -536,7 +537,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 <p>If we want to think instead in terms of NNT (the number needed to treat), then we need to find the reciprocal of our estimate of <span class="math inline">\(\tau_{ARD}\)</span>:</p>
 <p><span class="math display">\[ \text{NNT} = \frac{1}{\tau_{ARD}} = \frac{1}{0.364} = 2.75.\]</span>
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
-<p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{0.178}\right) = \left(1.85,\; 5.34 \right).\]</span>
+<p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{\color{red}{0.187}}\right) = \left(1.85,\; \color{red}{5.33} \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
@@ -589,7 +590,12 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<p class="caption">
+Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
+</p>
+</div>
 <p><span class="citation">Altman (<a href="#ref-altman1998confidence">1998</a>)</span> (<a href="https://www.bmj.com/content/bmj/317/7168/1309.full.pdf">available here</a>) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!</p>
 </div>
 <div id="problems-with-the-confidence-interval-for-the-ard" class="section level4 unnumbered hasAnchor">
@@ -617,12 +623,12 @@ whereas the limits to the Newcombe 95% CI will be the roots of</p>
 <p><span class="math display">\[\left(0.02-\pi\right)^2 = z^2_{\alpha/2}\frac{\pi\left(1-\pi\right)}{50}\]</span>
 which work out to be</p>
 <pre><code>## [1] 0.003539259 0.104954436</code></pre>
-<p>Visually, we can represent this as in Figure <a href="analysis-for-binary-outcomes.html#fig:newc1">6.1</a> by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
+<p>Visually, we can represent this as in Figure <a href="analysis-for-binary-outcomes.html#fig:newc1">6.2</a> by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:newc1"></span>
 <img src="CT4H_notes_files/figure-html/newc1-1.png" alt="LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate $p$ subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard." width="672" />
 <p class="caption">
-Figure 6.1: LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate <span class="math inline">\(p\)</span> subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard.
+Figure 6.2: LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate <span class="math inline">\(p\)</span> subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard.
 </p>
 </div>
 <div class="example">
@@ -638,7 +644,7 @@ which is</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
 <img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
-Figure 6.2: As before, dashed for Newcombe, dotted for standard
+Figure 6.3: As before, dashed for Newcombe, dotted for standard
 </p>
 </div>
 <p>Notice that the interval with the new method is now asymmetrical, which is more realistic.</p>
@@ -650,7 +656,7 @@ Figure 6.2: As before, dashed for Newcombe, dotted for standard
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
-Figure 6.3: As before, dashed for Newcombe, dotted for standard
+Figure 6.4: As before, dashed for Newcombe, dotted for standard
 </p>
 </div>
 </div>
@@ -695,7 +701,6 @@ Our <span class="math inline">\(95\%\)</span> confidence interval is therefore</
 \]</span>
 This is skewed somewhat lower than our standard CI of <span class="math inline">\(\left(0.187,\;0.541\right).\)</span></p>
 </div>
-<p>4b from here!!!</p>
 </div>
 </div>
 <div id="risk-ratio-rr-and-odds-ratio-or" class="section level3 hasAnchor" number="6.2.2">
