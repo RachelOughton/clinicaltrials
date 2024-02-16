@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-14" />
+<meta name="date" content="2024-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -634,10 +634,10 @@ Click for solution
 <span id="cb82-3"><a href="computer-practical-1.html#cb82-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
 <p>The allocation vector is stored as a row in the matrix <code>M</code> which is a slot in the <code>genSeq</code> object (part of the object). You can access it by</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="computer-practical-1.html#cb83-1" tabindex="-1"></a>seq_ud31<span class="sc">$</span>M[<span class="dv">1</span>,]</span></code></pre></div>
-<pre><code>##   [1] 1 1 1 1 0 1 1 1 0 0 1 1 1 0 0 0 0 0 1 1 0 1 1 0 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 1 1 0 0 0 1 1 0 0 1 1 0
-##  [60] 1 1 0 0 1 0 1 0 0 1 0 1 1 1 0 0 1 1 1 1 0 1 1 1 0 1 0 1 0 1 0 1 1 0 1 0 0 1 1 1 0 0 0 0 0 0 1 0 1 1 1 1 0 1 1 0 0 1 1
-## [119] 1 1 0 1 0 1 1 1 0 0 0 1 1 1 0 0 1 1 1 0 1 0 1 0 1 1 0 1 0 0 0 0 0 0 1 1 1 0 1 1 1 0 1 0 1 1 0 0 1 0 1 1 1 0 1 0 1 1 1
-## [178] 1 1 1 0 0 1 1 1 1 0 0 1 1 1 1 1 1 0 1 0 1 1 0 0 0 1 0 1 0 1 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 0 1 1 0 0 1 1 0 1 0 0 0 0</code></pre>
+<pre><code>##   [1] 1 1 1 1 0 1 1 1 0 0 1 1 1 0 0 0 0 0 1 1 0 1 1 0 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 1 1 0 0 0 1 1 0 0 1 1 0 1 1 0
+##  [63] 0 1 0 1 0 0 1 0 1 1 1 0 0 1 1 1 1 0 1 1 1 0 1 0 1 0 1 0 1 1 0 1 0 0 1 1 1 0 0 0 0 0 0 1 0 1 1 1 1 0 1 1 0 0 1 1 1 1 0 1 0 1
+## [125] 1 1 0 0 0 1 1 1 0 0 1 1 1 0 1 0 1 0 1 1 0 1 0 0 0 0 0 0 1 1 1 0 1 1 1 0 1 0 1 1 0 0 1 0 1 1 1 0 1 0 1 1 1 1 1 1 0 0 1 1 1 1
+## [187] 0 0 1 1 1 1 1 1 0 1 0 1 1 0 0 0 1 0 1 0 1 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 0 1 1 0 0 1 1 0 1 0 0 0 0</code></pre>
 <p>The argument <code>r</code> allows you to generate <code>r</code> sequences, in which case the matrix <code>M</code> has <code>r</code> rows.</p>
 </details>
 </div>

@@ -2,7 +2,7 @@ book_filename: "CT4H_lecture_notes.Rmd"
 delete_merged_file: true
 output_dir: "lecture_notes"
 rmd_files: ["index.Rmd", "02-samplesize.Rmd" , "03-allocation.Rmd", "04-rctanalysis.Rmd",
-  "04a-binary.Rmd", "04b-binary.Rmd", # "05-survival.Rmd"
+  "04a-binary.Rmd", # "05-survival.Rmd"
 "99-references.Rmd"]
 #, "07-practical1.Rmd",  "06-furtherdesigns.Rmd", "08-practical2.Rmd"]
 always_allow_html: true

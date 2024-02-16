@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Comparing survival curves | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Comparing survival curves | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Comparing survival curves | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2024-02-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="working-with-time-to-event-data.html"/>
+<link rel="next" href="computer-practical-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.2</b> One-tailed or two-tailed?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.5" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.5</b> Minimization</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="alloc.html"><a href="alloc.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.6</b> Problems around allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#a-dodgy-way-to-use-baseline-variables"><i class="fa fa-check"></i><b>4.2.1</b> A dodgy way to use baseline variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="6.3.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
+<li class="chapter" data-level="6.4.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Part III: Survival data</b></span></li>
+<li class="chapter" data-level="7" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html"><i class="fa fa-check"></i><b>7</b> Working with time-to-event data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#censored-times"><i class="fa fa-check"></i><b>7.1</b> Censored times</a></li>
+<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-survival-curve-and-the-hazard-function"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
+<li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#parametric-likelihood-ratio-test"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a>
+<ul>
+<li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#limitations-of-this-approach"><i class="fa fa-check"></i>Limitations of this approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
+<li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#cox-regression"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+<li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.1.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocmethods"><i class="fa fa-check"></i><b>A.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.1.3" data-path="computer-practical-1.html"><a href="computer-practical-1.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.1.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#minimisation"><i class="fa fa-check"></i><b>A.1.4</b> Minimisation</a></li>
+<li class="chapter" data-level="A.1.5" data-path="computer-practical-1.html"><a href="computer-practical-1.html#a-simulation-experiment"><i class="fa fa-check"></i><b>A.1.5</b> A simulation experiment!</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1analysis"><i class="fa fa-check"></i><b>A.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
+<li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="comparing-survival-curves" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Comparing survival curves<a href="comparing-survival-curves.html#comparing-survival-curves" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Really what we would like to be able to do is to compare two survival curves (showing, for example, the results from different treatments), so that we can say whether one is significantly different from the other. In most cases, this boils down to constructing a hypothesis test along the lines of</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0:&amp;\text{ the treatments are the same}\\
+H_1:&amp;\text{ the treatments are different.}
+\end{aligned}
+\]</span></p>
+<p>There are various ways to do this, and we will look at some now.</p>
+<div id="parametric-likelihood-ratio-test" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Parametric: likelihood ratio test<a href="comparing-survival-curves.html#parametric-likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We’ve already calculated the log-likelihood of for the exponential distriubtion in Section <a href="working-with-time-to-event-data.html#expll">7.2.2.1</a>, and found the MLE.</p>
+<p>Working with the exponential distribution, we can model the survival function as</p>
+<p><span class="math display">\[S\left(t\right) =
+\begin{cases}
+e^{-\lambda_Ct}\; \text{ for participants in group C}\\
+e^{-\lambda_Tt}\; \text{ for participants in group T}
+\end{cases}
+\]</span>
+and the null hypotehssi boils down to</p>
+<p><span class="math display">\[H_0: \; \lambda_C = \lambda_T = \lambda. \]</span>
+We can adapt the log-likelihood we found in Section <a href="working-with-time-to-event-data.html#expll">7.2.2.1</a> in light of the separate groups, and we find</p>
+<p><span class="math display" id="eq:llsurv1">\[\begin{equation}
+\ell\left(\lambda_C,\,\lambda_T\right) = m_C\log\lambda_C - \lambda_C\sum\limits_{i=1}^{n_C}t_{iC} + m_T\log\lambda_T - \lambda_T\sum\limits_{i=1}^{n_T}t_{iT}  
+\tag{8.1}
+\end{equation}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\hat{\lambda}_X = \frac{m_X}{\sum\limits_{i=1}^{n_X}t_{iX}}\]</span>
+where <span class="math inline">\(X=C\)</span> or <span class="math inline">\(T\)</span>. In these equations <span class="math inline">\(m_X\)</span> is the number of non-censored observations in group <span class="math inline">\(X\)</span>, <span class="math inline">\(n_X\)</span> is the total number of participants in group <span class="math inline">\(X\)</span> and <span class="math inline">\(t_{iX}\)</span> is the time for participant <span class="math inline">\(i\)</span> in group <span class="math inline">\(X\)</span>. To simplify notation, we will write</p>
+<p><span class="math display">\[t^+_X = \sum\limits_{i=1}^{n_X}t_{iX},\]</span>
+and <span class="math inline">\(t^+\)</span> for the sum over both groups.</p>
+<p>Substituting the MLEs into Equation <a href="comparing-survival-curves.html#eq:llsurv1">(8.1)</a> gives</p>
+<p><span class="math display">\[\ell\left(\hat{\lambda}_C,\,\hat{\lambda}_T\right) = m_C\log\left(\frac{m_C}{t^+_C}\right) - m_C + m_T\log\left(\frac{m_T}{t^+_T}\right) - m_T  \]</span>
+and</p>
+<p><span class="math display">\[\ell\left(\hat\lambda,\,\hat\lambda\right) = m\log\left(\frac{m}{t^+}\right) - m,\]</span>
+where <span class="math inline">\(n,\,m\)</span> are the corresponding totals over both groups.</p>
+<p>We can therefore perform a maximum likelihood test by finding</p>
+<p><span class="math display">\[\begin{align*}
+\lambda_{LR}&amp;  = -2\left[\ell\left(\hat{\lambda},\hat{\lambda}\right) - \ell\left(\hat{\lambda}_C,\hat{\lambda}_T\right)\right] \\
+&amp; = 2\left[\left(m_C\log\left(\frac{m_C}{t^+_C}\right) - m_C + m_T\log\left(\frac{m_T}{t^+_T}\right) - m_T \right) - \left(m\log\left(\frac{m}{t^+}\right)\right)\right]\\
+&amp; = 2\left(m_C\log\left(\frac{m_C}{t^+_C}\right) + m_T\log\left(\frac{m_T}{t^+_T}\right) - m\log\left(\frac{m}{t^+}\right)\right)
+\end{align*}\]</span></p>
+<p>and referring this value to a <span class="math inline">\(\chi^2_1\)</span> distribution.</p>
+<p>We can also find a confidence interval for the difference between <span class="math inline">\(\lambda_T\)</span> and <span class="math inline">\(\lambda_C\)</span>, by using the asymptotic variances of the MLEs, which are <span class="math inline">\(\frac{\lambda_C^2}{m_C}\)</span> and <span class="math inline">\(\frac{\lambda_T^2}{m_T}\)</span>. Therefore, the limits of a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% CI for <span class="math inline">\(\lambda_T - \lambda_C\)</span> is given by</p>
+<p><span class="math display">\[ \frac{m_T}{t^+_T} - \frac{m_C}{t^+_C} \pm z_{\alpha/2}\sqrt{\frac{m_T}{\left(t^+_T\right)^2} + \frac{m_C}{\left(t^+_C\right)^2}}.\]</span></p>
+<div class="example">
+<p><span id="exm:surveglr" class="example"><strong>Example 8.1  </strong></span>In this example we’ll conduct a likelihood ratio test for each of the datasets in Example <a href="working-with-time-to-event-data.html#exm:surveg1">7.1</a>. For each dataset, the quantities we need are:</p>
+<ul>
+<li><span class="math inline">\(m_C,\,m_T\)</span>: the number of complete observations in each group</li>
+<li><span class="math inline">\(t^+_C,\,t^+_T\)</span> the sum of all observation times in each group</li>
+</ul>
+<p>Note that <span class="math inline">\(m=m_C + m_T\)</span> and <span class="math inline">\(t^+ = t^+_C + t^+_T\)</span>.</p>
+<p>For the <code>ovarian</code> data we have</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="comparing-survival-curves.html#cb51-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb51-2"><a href="comparing-survival-curves.html#cb51-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
+<span id="cb51-3"><a href="comparing-survival-curves.html#cb51-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb51-4"><a href="comparing-survival-curves.html#cb51-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
+<span id="cb51-5"><a href="comparing-survival-curves.html#cb51-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
+<span id="cb51-6"><a href="comparing-survival-curves.html#cb51-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
+<span id="cb51-7"><a href="comparing-survival-curves.html#cb51-7" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="comparing-survival-curves.html#cb51-8" tabindex="-1"></a><span class="do">## Can now plug these into LR test stat</span></span>
+<span id="cb51-9"><a href="comparing-survival-curves.html#cb51-9" tabindex="-1"></a>LRstat_ov <span class="ot">=</span>  <span class="dv">2</span><span class="sc">*</span>(mC_ov<span class="sc">*</span><span class="fu">log</span>(mC_ov<span class="sc">/</span>tsum_ov_C) <span class="sc">+</span> mT_ov<span class="sc">*</span><span class="fu">log</span>(mT_ov<span class="sc">/</span>tsum_ov_T) <span class="sc">-</span> m_ov<span class="sc">*</span><span class="fu">log</span>(m_ov<span class="sc">/</span>tsum_ov))</span>
+<span id="cb51-10"><a href="comparing-survival-curves.html#cb51-10" tabindex="-1"></a>LRstat_ov</span></code></pre></div>
+<pre><code>## [1] 1.114895</code></pre>
+<p>We can find the p-value of this test by</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="comparing-survival-curves.html#cb53-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(LRstat_ov, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2910204</code></pre>
+<p>and we find that it isn’t significant. A 95% confidence interval for the difference is given by</p>
+<pre><code>## [1] -0.0013927697  0.0004392714</code></pre>
+<div class="figure"><span style="display:block;" id="fig:ovplotlr"></span>
+<img src="CT4H_notes_files/figure-html/ovplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<p class="caption">
+Figure 8.1: Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
+</p>
+</div>
+<p>Figure <a href="comparing-survival-curves.html#fig:ovplotlr">8.1</a> shows the fitted curves, using <span class="math inline">\(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\)</span> for group <span class="math inline">\(X\)</span>, along with the Kaplan Meier estimate of the survival curve. Although there isn’t much data, the exponential distribution looks to be an OK fit.</p>
+<p>For the Myeloid data we can do the same thing</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="comparing-survival-curves.html#cb56-1" tabindex="-1"></a>mC_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;A&quot;</span>))</span>
+<span id="cb56-2"><a href="comparing-survival-curves.html#cb56-2" tabindex="-1"></a>mT_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;B&quot;</span>))</span>
+<span id="cb56-3"><a href="comparing-survival-curves.html#cb56-3" tabindex="-1"></a>tsum_my_C <span class="ot">=</span> <span class="fu">sum</span>(myeloid<span class="sc">$</span>futime[myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;A&quot;</span>])</span>
+<span id="cb56-4"><a href="comparing-survival-curves.html#cb56-4" tabindex="-1"></a>tsum_my_T <span class="ot">=</span> <span class="fu">sum</span>(myeloid<span class="sc">$</span>futime[myeloid<span class="sc">$</span>trt <span class="sc">==</span> <span class="st">&quot;B&quot;</span>])</span>
+<span id="cb56-5"><a href="comparing-survival-curves.html#cb56-5" tabindex="-1"></a>m_my <span class="ot">=</span> mT_my <span class="sc">+</span> mC_my</span>
+<span id="cb56-6"><a href="comparing-survival-curves.html#cb56-6" tabindex="-1"></a>tsum_my <span class="ot">=</span> tsum_my_C <span class="sc">+</span> tsum_my_T</span>
+<span id="cb56-7"><a href="comparing-survival-curves.html#cb56-7" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="comparing-survival-curves.html#cb56-8" tabindex="-1"></a><span class="do">## Can now plug these into LR test stat</span></span>
+<span id="cb56-9"><a href="comparing-survival-curves.html#cb56-9" tabindex="-1"></a>LRstat_my <span class="ot">=</span>  <span class="dv">2</span><span class="sc">*</span>(mC_my<span class="sc">*</span><span class="fu">log</span>(mC_my<span class="sc">/</span>tsum_my_C) <span class="sc">+</span> mT_my<span class="sc">*</span><span class="fu">log</span>(mT_my<span class="sc">/</span>tsum_my_T) <span class="sc">-</span> m_my<span class="sc">*</span><span class="fu">log</span>(m_my<span class="sc">/</span>tsum_my))</span>
+<span id="cb56-10"><a href="comparing-survival-curves.html#cb56-10" tabindex="-1"></a>LRstat_my</span></code></pre></div>
+<pre><code>## [1] 11.95293</code></pre>
+<p>Again, we refer this to <span class="math inline">\(\chi^2_1\)</span>:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="comparing-survival-curves.html#cb58-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(LRstat_my, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0005456153</code></pre>
+<p>This time we find that the difference is significant at even a very low level, and the 95% CI is given by</p>
+<pre><code>## [1] -3.028814e-04 -8.108237e-05</code></pre>
+<div class="figure"><span style="display:block;" id="fig:myplotlr"></span>
+<img src="CT4H_notes_files/figure-html/myplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<p class="caption">
+Figure 8.2: Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
+</p>
+</div>
+<p>Figure <a href="comparing-survival-curves.html#fig:myplotlr">8.2</a> shows the fitted curves, using <span class="math inline">\(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\)</span> for group <span class="math inline">\(X\)</span>. Although the confidence around <span class="math inline">\(\hat\lambda_X\)</span> is high (ie. small standard error of the estimate), because of the large amount of data, the fit appears to actually be rather poor.</p>
+</div>
+<div id="limitations-of-this-approach" class="section level3 unnumbered hasAnchor">
+<h3>Limitations of this approach<a href="comparing-survival-curves.html#limitations-of-this-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well. A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-42" class="definition"><strong>Definition 8.1  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span class="math display">\[
+f\left(x\mid \lambda,\,k\right) =
+\begin{cases}
+\lambda\gamma t^{\gamma-1}\exp\left[{-\lambda t^{\gamma}}\right] &amp; \text{for }t\geq{0}\\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>Here, <span class="math inline">\(\gamma\)</span> is the <em>shape</em> parameter, and <span class="math inline">\(\lambda\)</span> is the <em>scale</em> parameter. If <span class="math inline">\(\gamma=1\)</span> then this reduces to an exponential distribution.</p>
+</div>
+<p>For the Weibull distribution, we have</p>
+<p><span class="math display">\[\operatorname{S}\left(t\right) = \exp\left(-\lambda t^{\gamma}\right). \]</span>
+We won’t go into any more detail about the Weibull distrubtion, since the LR procedure is much more involved.</p>
+</div>
+</div>
+<div id="non-parametric-the-log-rank-test" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Non-parametric: the log-rank test<a href="comparing-survival-curves.html#non-parametric-the-log-rank-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The log-rank test is performed by creating a series of 2x2 tables, and combining the information to find a test statistic.</p>
+<p>At each time <span class="math inline">\(t_j\)</span> at which an event is observed in either of the groups.</p>
+<p>For notation, we will say that at time <span class="math inline">\(t_j\)</span>,</p>
+<ul>
+<li><span class="math inline">\(n_j\)</span> patients are ‘at risk’ of the event</li>
+<li><span class="math inline">\(d_j\)</span> events are observed (often the ‘event’ is death, so we will sometimes say this)</li>
+</ul>
+<p>For groups <span class="math inline">\(C\)</span> and <span class="math inline">\(T\)</span> we would therefore have a table representing the state of things at time <span class="math inline">\(t_j\)</span>, with this general form:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Group</th>
+<th align="left">No. surviving</th>
+<th align="left">No. events</th>
+<th align="left">No. at risk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Treatment</strong></td>
+<td align="left"><span class="math inline">\(n_{Tj}-d_{Tj}\)</span></td>
+<td align="left"><span class="math inline">\(d_{Cj}\)</span></td>
+<td align="left"><span class="math inline">\(n_{Cj}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Control</strong></td>
+<td align="left"><span class="math inline">\(n_{Cj}-d_{Cj}\)</span></td>
+<td align="left"><span class="math inline">\(d_{Tj}\)</span></td>
+<td align="left"><span class="math inline">\(n_{Tj}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Total</strong></td>
+<td align="left"><span class="math inline">\(n_j-d_j\)</span></td>
+<td align="left"><span class="math inline">\(d_j\)</span></td>
+<td align="left"><span class="math inline">\(n_j\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Under <span class="math inline">\(H_0\)</span>, we expect the deaths (or events) to be distributed proportionally between groups <span class="math inline">\(C\)</span> and <span class="math inline">\(T\)</span>, and so the expected number of events in group <span class="math inline">\(X\)</span> (<span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>) at time <span class="math inline">\(t_j\)</span> is</p>
+<p><span class="math display">\[e_{Xj} = n_{Xj}\times{\frac{d_j}{n_j}}.\]</span>
+This means that <span class="math inline">\(e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j\)</span>.</p>
+<p>If we take the margins of the table as fixed (by which we mean <span class="math inline">\(n_j, \,d_j\,n_{Cj}\)</span> and <span class="math inline">\(n_{Tj}\)</span>), then <span class="math inline">\(d_{Cj}\)</span> has a <strong>hypergeometric distribution</strong>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-43" class="definition"><strong>Definition 8.2  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
+<p><span class="math display">\[p\left(X=k\mid{K,N,n}\right) = \frac{{K \choose k}{{N-K} \choose {n-k}}}{{N \choose n}}. \]</span>
+An example would be an urn containing 50 (<span class="math inline">\(N\)</span>) balls, of which 16 (<span class="math inline">\(K\)</span>) are green and the rest (34, <span class="math inline">\(N-K\)</span>) are red. If we draw 10 (<span class="math inline">\(n\)</span>) balls <strong>without replacement</strong>, <span class="math inline">\(X\)</span> is the random variable whose outcome is <span class="math inline">\(k\)</span>, the number of green balls drawn.</p>
+</div>
+<p>In the notation of the definition, the mean is</p>
+<p><span class="math display">\[\operatorname{E}\left(X\right)= n\frac{K}{N} \]</span>
+and the variance is</p>
+<p><span class="math display">\[\operatorname{var}\left(X\right) = n\frac{K}{N}\frac{N-K}{N}\frac{N-n}{N-1}.\]</span></p>
+<p>In the notation of our table at time <span class="math inline">\(t_j\)</span>, we have</p>
+<p><span class="math display">\[\begin{align*}
+\operatorname{E}\left(d_{Cj}\right) = e_{Cj} &amp; = n_{Cj}\times{\frac{d_j}{n_j}}\\
+\operatorname{var}\left(d_{Cj}\right) = v_{Cj} &amp;= \frac{d_j n_{Cj}n_{Tj} \left(n_j-d_j\right)}{n_j^2\left(n_j-1\right)}
+\end{align*}\]</span></p>
+<p>With the marginal totals fixed, the value of <span class="math inline">\(d_{Cj}\)</span> fixes the other three elements of the table, so considering this one variable is enough.</p>
+<p>Under <span class="math inline">\(H_0\)</span>, the numbers dying at successive times are independent, so</p>
+<p><span class="math display">\[U = \sum\limits_{j}\left(d_{Cj}-e_{Cj}\right) \]</span>
+will (asymptotically) have a normal distribution, with</p>
+<p><span class="math display">\[U \sim \left(0,\;\sum\limits_j v_{Cj}\right). \]</span>
+We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in the log-rank test we refer <span class="math inline">\(\frac{U^2}{V}\)</span> to <span class="math inline">\(\chi^2_1\)</span>.</p>
+<p>A someone simpler, and more commonly used, version of the log-rank test uses the fact that under <span class="math inline">\(H_0\)</span>, the expected number of events (eg. deaths) in group <span class="math inline">\(X\)</span> is <span class="math inline">\(E_X = \sum\limits_je_{Xj}\)</span>, and the observed number is <span class="math inline">\(O_X = \sum\limits_j d_{Xj}\)</span>. The standard <span class="math inline">\(\chi^2\)</span> test formula can then be applied, and the test-statistic is</p>
+<p><span class="math display">\[\frac{\left(O_C - E_C\right)^2}{E_C} + \frac{\left(O_T - E_T\right)^2}{E_T}.\]</span></p>
+<p>It turns out that this test statistic is always smaller than <span class="math inline">\(\frac{U^2}{V}\)</span>, so this test is slightly more conservative (ie. it has a larger p-value).</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-44" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
+<p>First, the ovarian cancer dataset. To do this, we can tabulate the key values at each time step.</p>
+<pre><code>##    Time n_Cj d_Cj      e_Cj n_Tj d_Tj      e_Tj n_j d_j
+## 1    59   13    1 0.5000000   13    0 0.5000000  26   1
+## 2   115   12    1 0.4800000   13    0 0.5200000  25   1
+## 3   156   11    1 0.4583333   13    0 0.5416667  24   1
+## 4   268   10    1 0.4347826   13    0 0.5652174  23   1
+## 5   329    9    1 0.4090909   13    0 0.5909091  22   1
+## 6   353    8    0 0.3809524   13    1 0.6190476  21   1
+## 7   365    8    0 0.4000000   12    1 0.6000000  20   1
+## 8   431    8    1 0.4705882    9    0 0.5294118  17   1
+## 9   464    6    0 0.4000000    9    1 0.6000000  15   1
+## 10  475    6    0 0.4285714    8    1 0.5714286  14   1
+## 11  563    5    0 0.4166667    7    1 0.5833333  12   1
+## 12  638    5    1 0.4545455    6    0 0.5454545  11   1</code></pre>
+<p>From this, we can find the <span class="math inline">\(v_{j}\)</span> and the test statistic <span class="math inline">\(\frac{U^2}{V}\)</span>:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="comparing-survival-curves.html#cb62-1" tabindex="-1"></a><span class="co"># Add up the differences</span></span>
+<span id="cb62-2"><a href="comparing-survival-curves.html#cb62-2" tabindex="-1"></a>UC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Cj <span class="sc">-</span> logrank_df<span class="sc">$</span>e_Cj)</span>
+<span id="cb62-3"><a href="comparing-survival-curves.html#cb62-3" tabindex="-1"></a>vCj_vec <span class="ot">=</span> <span class="fu">sapply</span>(</span>
+<span id="cb62-4"><a href="comparing-survival-curves.html#cb62-4" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span>n_event, </span>
+<span id="cb62-5"><a href="comparing-survival-curves.html#cb62-5" tabindex="-1"></a>  <span class="cf">function</span>(j){</span>
+<span id="cb62-6"><a href="comparing-survival-curves.html#cb62-6" tabindex="-1"></a>    nCj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_Cj[j]</span>
+<span id="cb62-7"><a href="comparing-survival-curves.html#cb62-7" tabindex="-1"></a>    nTj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_Tj[j]</span>
+<span id="cb62-8"><a href="comparing-survival-curves.html#cb62-8" tabindex="-1"></a>    dj <span class="ot">=</span> logrank_df<span class="sc">$</span>d_j[j]</span>
+<span id="cb62-9"><a href="comparing-survival-curves.html#cb62-9" tabindex="-1"></a>    nj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_j[j]</span>
+<span id="cb62-10"><a href="comparing-survival-curves.html#cb62-10" tabindex="-1"></a>    </span>
+<span id="cb62-11"><a href="comparing-survival-curves.html#cb62-11" tabindex="-1"></a>    (nCj<span class="sc">*</span>nTj<span class="sc">*</span>dj<span class="sc">*</span>(nj<span class="dv">-1</span>))<span class="sc">/</span>((nj<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(nj<span class="dv">-1</span>))</span>
+<span id="cb62-12"><a href="comparing-survival-curves.html#cb62-12" tabindex="-1"></a>})</span>
+<span id="cb62-13"><a href="comparing-survival-curves.html#cb62-13" tabindex="-1"></a>VC <span class="ot">=</span> <span class="fu">sum</span>(vCj_vec)</span>
+<span id="cb62-14"><a href="comparing-survival-curves.html#cb62-14" tabindex="-1"></a>cs_ov_stat <span class="ot">=</span> (UC<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>VC</span>
+<span id="cb62-15"><a href="comparing-survival-curves.html#cb62-15" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(cs_ov_stat, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.3025911</code></pre>
+<p>For the simpler, more conservative, version of the log-rank test, we have</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="comparing-survival-curves.html#cb64-1" tabindex="-1"></a>EC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>e_Cj)</span>
+<span id="cb64-2"><a href="comparing-survival-curves.html#cb64-2" tabindex="-1"></a>ET <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>e_Tj)</span>
+<span id="cb64-3"><a href="comparing-survival-curves.html#cb64-3" tabindex="-1"></a>OC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Cj)</span>
+<span id="cb64-4"><a href="comparing-survival-curves.html#cb64-4" tabindex="-1"></a>OT <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Tj)</span>
+<span id="cb64-5"><a href="comparing-survival-curves.html#cb64-5" tabindex="-1"></a></span>
+<span id="cb64-6"><a href="comparing-survival-curves.html#cb64-6" tabindex="-1"></a>test_stat <span class="ot">=</span> ((EC<span class="sc">-</span>OC)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>EC <span class="sc">+</span> ((ET<span class="sc">-</span>OT)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>ET</span>
+<span id="cb64-7"><a href="comparing-survival-curves.html#cb64-7" tabindex="-1"></a></span>
+<span id="cb64-8"><a href="comparing-survival-curves.html#cb64-8" tabindex="-1"></a>test_stat</span></code></pre></div>
+<pre><code>## [1] 1.057393</code></pre>
+<p>and we can find the p-value by</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="comparing-survival-curves.html#cb66-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(test_stat, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.3038106</code></pre>
+<p>As we expected, slightly larger, but not much different from the first version. These values are also pretty close to the results of our LR test in Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>, where we had <span class="math inline">\(p=0.291\)</span>.</p>
+<p>Since the Myeloid dataset is much bigger, we won’t go through the rigmorole of making the table, but will instead use an inbuilt R function from the <code>survival</code> package (more on this in practicals).</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="comparing-survival-curves.html#cb68-1" tabindex="-1"></a>myeloid<span class="sc">$</span>trt <span class="ot">=</span> <span class="fu">as.factor</span>(myeloid<span class="sc">$</span>trt)</span>
+<span id="cb68-2"><a href="comparing-survival-curves.html#cb68-2" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(futime, death) <span class="sc">~</span> trt, <span class="at">data =</span> myeloid, <span class="at">rho=</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(futime, death) ~ trt, data = myeloid, 
+##     rho = 0)
+## 
+##         N Observed Expected (O-E)^2/E (O-E)^2/V
+## trt=A 317      171      143      5.28      9.59
+## trt=B 329      149      177      4.29      9.59
+## 
+##  Chisq= 9.6  on 1 degrees of freedom, p= 0.002</code></pre>
+<p>This time the p-value is quite far from the one we found using the likelihood ratio test (p=0.00055), further corroborating the view that this test was not appropriate because of the poor fit of the exponential distribution.</p>
+</div>
+</div>
+<div id="semi-parametric-the-proportional-hazards-model" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Semi-parametric: the proportional hazards model<a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As with continuous and binary outcome variables, what we would really like to be able to do is to adjust our model for baseline covariates. It seems intuitively reasonable to suppose that factors like age, sex, disease status etc. might affect someone’s chances of survival (or whatever event we’re concerned with).</p>
+<p>The conventional way to do this is using a <strong>proportional hazards model</strong>, where we assume that</p>
+<p><span class="math display">\[h_T\left(t\right) = \psi h_C\left(t\right) \]</span>
+for any <span class="math inline">\(t&gt;0\)</span> and for some constant <span class="math inline">\(\psi&gt;0\)</span>. We call <span class="math inline">\(\psi\)</span> the <strong>relative hazard</strong> or <strong>hazard ratio</strong>. If <span class="math inline">\(\psi&lt;1\)</span> then the hazard at time <span class="math inline">\(t\)</span> under treatment <span class="math inline">\(T\)</span> is smaller than under control <span class="math inline">\(C\)</span>. If <span class="math inline">\(\psi&gt;1\)</span> then the hazard at time <span class="math inline">\(t\)</span> is greater in greater in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>.</p>
+<p>We can adopt the concept of a <strong>baseline hazard function</strong> <span class="math inline">\(h_0\left(t\right)\)</span>, where for someone in group <span class="math inline">\(C\)</span> (for now), their hazard at time <span class="math inline">\(t\)</span> is <span class="math inline">\(h_0\left(t\right)\)</span>, and for someone in group <span class="math inline">\(T\)</span> it is <span class="math inline">\(\psi h_0\left(t\right)\)</span>. Since we must have <span class="math inline">\(\psi&gt;0\)</span>, it makes sense to set</p>
+<p><span class="math display">\[\psi = e^{\beta},\]</span>
+so that <span class="math inline">\(\beta = \log\psi\)</span> and <span class="math inline">\(\psi&gt;0\;\forall\beta\in\mathbb{R}\)</span>. Note that <span class="math inline">\(\beta&gt;0 \iff \psi&gt;1\)</span>.</p>
+<p>We can now (re)-introduce an indicator variable <span class="math inline">\(G_i\)</span>, where</p>
+<p><span class="math display">\[
+G_i =
+\begin{cases}
+0\text{  if participant }i\text{ is in group }C\\
+1\text{  if participant }i\text{ is in group }T
+\end{cases}
+\]</span></p>
+<p>and model the hazard function for participant <span class="math inline">\(i\)</span> as</p>
+<p><span class="math display">\[h_i\left(t\right) = \exp\left[\beta G_i\right]h_0\left(t\right).\]</span></p>
+<p>This is the proportional hazards model for the comparison of two groups. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.</p>
+<div id="general-proportional-hazards-model" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> General proportional hazards model<a href="comparing-survival-curves.html#general-proportional-hazards-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Extending the model to include covariates <span class="math inline">\(X_1,\ldots,X_p\)</span>, we have</p>
+<p><span class="math display">\[\psi\left(x_i\right) = \beta_0 G_i + \beta_1x_{1i} + \ldots + \beta_p x_{pi} = \mathbf{x}_i^T \boldsymbol\beta,\]</span>
+where the first element of the vector <span class="math inline">\(\mathbf{x}_i\)</span> is <span class="math inline">\(G_i\)</span>, and the hazard function for participant <span class="math inline">\(i\)</span> is</p>
+<p><span class="math display">\[h_i\left(t\right) = \psi\left(\mathbf{x}_i\right)h_0\left(t\right). \]</span></p>
+<p>Now, our baseline hazard function <span class="math inline">\(h_0\left(t\right)\)</span> is the hazard function for a participant in group <span class="math inline">\(C\)</span> for whom all baseline coviariates are either zero (if continuous) or the reference level (if a factor variable). For factor covariates this makes sense, since all levels are realistic values, but for continuous variables zero is likely to be unrealistic (for example you’d never expect zero for age, weight, height, blood pressure etc.). So, if any continuous variables are present, the baseline will always need to be adjusted, but if all covariates are factors, it is likely that for some participants the baseline hazard function won’t be adjusted.</p>
+<p>The linear component <span class="math inline">\(\mathbf{x}_i^T\boldsymbol\beta\)</span> is often called the <strong>risk score</strong> or <strong>prognostic index</strong> for participant <span class="math inline">\(i\)</span>, and represents their hazard at time <span class="math inline">\(t\)</span> relative to the baseline hazard.</p>
+<p>The general form of the model is therefore</p>
+<p><span class="math display" id="eq:hazfun">\[\begin{equation}
+h_i\left(t\right) = \exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]h_0\left(t\right),
+\tag{8.2}
+\end{equation}\]</span></p>
+<p>and we can rewrite it as</p>
+<p><span class="math display">\[\log\left(\frac{h_1\left(t\right)}{h_0\left(t\right)}\right) = \mathbf{x}_i^T\boldsymbol\beta.\]</span></p>
+<p>Notice that there is no constant in the linear term - if there was, it could just be absorbed into the baseline hazard function.</p>
+<p>There are ways to fit this model that rely on specifying the hazard function using parametric methods, but the way we will look (and the most widely used) is one developed by <span class="citation">Cox (<a href="#ref-cox1972regression">1972</a>)</span>.</p>
+</div>
+<div id="cox-regression" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Cox regression<a href="comparing-survival-curves.html#cox-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The beauty of Cox regression is that it avoids specifying a form for <span class="math inline">\(h_0\left(t\right)\)</span> altogether.</p>
+<p>P63 IN COLLETT</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-45" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
+<p>For the <code>ovarian</code> dataset</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="comparing-survival-curves.html#cb70-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx, <span class="at">data=</span>ovarian)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(futime, fustat) ~ rx, data = ovarian)
+## 
+##       coef exp(coef) se(coef)      z    p
+## rx -0.5964    0.5508   0.5870 -1.016 0.31
+## 
+## Likelihood ratio test=1.05  on 1 df, p=0.3052
+## n= 26, number of events= 12</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="comparing-survival-curves.html#cb72-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, death)<span class="sc">~</span>trt, <span class="at">data=</span>myeloid)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(futime, death) ~ trt, data = myeloid)
+## 
+##         coef exp(coef) se(coef)      z       p
+## trtB -0.3457    0.7077   0.1122 -3.081 0.00206
+## 
+## Likelihood ratio test=9.52  on 1 df, p=0.002029
+## n= 646, number of events= 320</code></pre>
+<p>We see that for both results, our p-values are close to what we have found with the log rank test.</p>
+<p>We can now account for more baseline covariates</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="comparing-survival-curves.html#cb74-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx<span class="sc">+</span>age<span class="sc">+</span>resid.ds, <span class="at">data=</span>ovarian)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(futime, fustat) ~ rx + age + resid.ds, data = ovarian)
+## 
+##             coef exp(coef) se(coef)      z       p
+## rx       -0.8489    0.4279   0.6392 -1.328 0.18416
+## age       0.1285    1.1372   0.0473  2.718 0.00657
+## resid.ds  0.6964    2.0065   0.7585  0.918 0.35858
+## 
+## Likelihood ratio test=16.77  on 3 df, p=0.0007889
+## n= 26, number of events= 12</code></pre>
+<p>What this shows is that the most significant factor by far is the particpant’s age, with the hazard function increasing as age increases. The coefficient for treatment group (<code>rx</code>) has increased in magnitude and the p-value has decreased now that age is being adjusted for (although it is still not significant).</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="comparing-survival-curves.html#cb76-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, death)<span class="sc">~</span>trt<span class="sc">+</span>sex, <span class="at">data=</span>myeloid)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(futime, death) ~ trt + sex, data = myeloid)
+## 
+##         coef exp(coef) se(coef)      z       p
+## trtB -0.3582    0.6989   0.1129 -3.174 0.00151
+## sexm  0.1150    1.1219   0.1128  1.020 0.30782
+## 
+## Likelihood ratio test=10.56  on 2 df, p=0.005093
+## n= 646, number of events= 320</code></pre>
+<p>We see that the only covariate we have, <code>sex</code> has very little effect.</p>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-cox1972regression" class="csl-entry">
+Cox, David R. 1972. <span>“Regression Models and Life-Tables.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 34 (2): 187–202.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="working-with-time-to-event-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CT4H_notes.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"bookdown": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

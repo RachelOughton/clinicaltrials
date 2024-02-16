@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-14" />
+<meta name="date" content="2024-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1074,8 +1074,7 @@ Being more methodical we can collect these into a table. Since the site 3 and 4 
 <p>These are very commonly used for thinking about diagnostic tests and screening tests, and in these contexts a ‘success’ or ‘positive’ is almost always the presence of some condition or disease. In our context, we need to be mindful that a 1 could be good or bad, depending on the trial.</p>
 <p>The core part of a ROC analysis is to plot <strong>sensitivity</strong> against <strong>1-specificity</strong> for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the <span class="math inline">\(t=0\)</span>, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set <span class="math inline">\(t=0\)</span>, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a <strong>ROC curve</strong>.</p>
 <p>The dashboard below shows the distributions of fitted values for patients with <span class="math inline">\(X=0\)</span> and <span class="math inline">\(X=1\)</span>, with options for good, moderate and poor separation, and the corresponding ROC curve. You can move the threshold to see the sensitivity and specificity at that value. Also note the AUC (area under the curve) which is an overall summary of the model’s predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent.</p>
-<p>If you’re viewing this in PDF you’ll just have a static image, but you can find the dashboard at
-<a href="https://racheloughton.shinyapps.io/ROCplots/">https://racheloughton.shinyapps.io/ROCplots/</a>.</p>
+<p>If you’re viewing this in PDF you’ll just have a static image, but you can find the dashboard at (<a href="https://racheloughton.shinyapps.io/ROCplots/" class="uri">https://racheloughton.shinyapps.io/ROCplots/</a>).</p>
 <iframe src="https://racheloughton.shinyapps.io/ROCplots/?showcase=0" width="672" height="600px" data-external="1">
 </iframe>
 <p>Note that I’ve used beta distributions for some hypothetical distributions of fitted values for the different groups, but this is just for convenience: ROC analysis makes no distributional assumptions.</p>

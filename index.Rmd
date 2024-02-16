@@ -53,6 +53,7 @@ options(knitr.table.format = function() {
 library(medicaldata)
 library(dplyr)
 library(ggplot2)
+library(ggfortify)
 library(gridExtra)
 library(knitr)
 library(kableExtra)

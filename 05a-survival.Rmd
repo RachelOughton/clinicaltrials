@@ -1,0 +1,441 @@
+# Comparing survival curves
+
+Really what we would like to be able to do is to compare two survival curves (showing, for example, the results from different treatments), so that we can say whether one is significantly different from the other. In most cases, this boils down to constructing a hypothesis test along the lines of 
+
+$$
+\begin{aligned}
+H_0:&\text{ the treatments are the same}\\
+H_1:&\text{ the treatments are different.}
+\end{aligned}
+$$
+
+There are various ways to do this, and we will look at some now.
+
+## Parametric: likelihood ratio test
+
+For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We've already calculated the log-likelihood of for the exponential distriubtion in Section \@ref(expll), and found the MLE. 
+
+Working with the exponential distribution, we can model the survival function as
+
+$$S\left(t\right) = 
+\begin{cases}
+e^{-\lambda_Ct}\; \text{ for participants in group C}\\
+e^{-\lambda_Tt}\; \text{ for participants in group T}
+\end{cases}
+$$
+and the null hypotehssi boils down to 
+
+$$H_0: \; \lambda_C = \lambda_T = \lambda. $$
+We can adapt the log-likelihood we found in Section \@ref(expll) in light of the separate groups, and we find
+
+\begin{equation}
+\ell\left(\lambda_C,\,\lambda_T\right) = m_C\log\lambda_C - \lambda_C\sum\limits_{i=1}^{n_C}t_{iC} + m_T\log\lambda_T - \lambda_T\sum\limits_{i=1}^{n_T}t_{iT}  
+(\#eq:llsurv1)
+\end{equation}
+
+and
+
+$$\hat{\lambda}_X = \frac{m_X}{\sum\limits_{i=1}^{n_X}t_{iX}}$$ 
+where $X=C$ or $T$. In these equations $m_X$ is the number of non-censored observations in group $X$, $n_X$ is the total number of participants in group $X$ and $t_{iX}$ is the time for participant $i$ in group $X$. To simplify notation, we will write
+
+$$t^+_X = \sum\limits_{i=1}^{n_X}t_{iX},$$
+and $t^+$ for the sum over both groups.
+
+
+Substituting the MLEs into Equation \@ref(eq:llsurv1) gives
+
+$$\ell\left(\hat{\lambda}_C,\,\hat{\lambda}_T\right) = m_C\log\left(\frac{m_C}{t^+_C}\right) - m_C + m_T\log\left(\frac{m_T}{t^+_T}\right) - m_T  $$
+and
+
+$$\ell\left(\hat\lambda,\,\hat\lambda\right) = m\log\left(\frac{m}{t^+}\right) - m,$$
+where $n,\,m$ are the corresponding totals over both groups.
+
+We can therefore perform a maximum likelihood test by finding
+
+\begin{align*}
+\lambda_{LR}&  = -2\left[\ell\left(\hat{\lambda},\hat{\lambda}\right) - \ell\left(\hat{\lambda}_C,\hat{\lambda}_T\right)\right] \\
+& = 2\left[\left(m_C\log\left(\frac{m_C}{t^+_C}\right) - m_C + m_T\log\left(\frac{m_T}{t^+_T}\right) - m_T \right) - \left(m\log\left(\frac{m}{t^+}\right)\right)\right]\\
+& = 2\left(m_C\log\left(\frac{m_C}{t^+_C}\right) + m_T\log\left(\frac{m_T}{t^+_T}\right) - m\log\left(\frac{m}{t^+}\right)\right)
+\end{align*}
+
+and referring this value to a $\chi^2_1$ distribution.
+
+We can also find a confidence interval for the difference between $\lambda_T$ and $\lambda_C$, by using the asymptotic variances of the MLEs, which are $\frac{\lambda_C^2}{m_C}$ and $\frac{\lambda_T^2}{m_T}$. Therefore, the limits of a $100\left(1-\alpha\right)$% CI for $\lambda_T - \lambda_C$ is given by
+
+$$ \frac{m_T}{t^+_T} - \frac{m_C}{t^+_C} \pm z_{\alpha/2}\sqrt{\frac{m_T}{\left(t^+_T\right)^2} + \frac{m_C}{\left(t^+_C\right)^2}}.$$
+
+
+:::{.example #surveglr}
+
+In this example we'll conduct a likelihood ratio test for each of the datasets in Example \@ref(exm:surveg1). For each dataset, the quantities we need are:
+
+  * $m_C,\,m_T$: the number of complete observations in each group
+  * $t^+_C,\,t^+_T$ the sum of all observation times in each group 
+  
+Note that $m=m_C + m_T$ and $t^+ = t^+_C + t^+_T$.
+
+For the `ovarian` data we have
+
+```{r, echo=T}
+mC_ov = sum((ovarian$fustat==1)&(ovarian$rx==1))
+mT_ov = sum((ovarian$fustat==1)&(ovarian$rx==2))
+tsum_ov_C = sum(ovarian$futime[ovarian$rx==1])
+tsum_ov_T = sum(ovarian$futime[ovarian$rx==2])
+m_ov = mT_ov + mC_ov
+tsum_ov = tsum_ov_C + tsum_ov_T
+
+## Can now plug these into LR test stat
+LRstat_ov =  2*(mC_ov*log(mC_ov/tsum_ov_C) + mT_ov*log(mT_ov/tsum_ov_T) - m_ov*log(m_ov/tsum_ov))
+LRstat_ov
+```
+We can find the p-value of this test by 
+
+```{r, echo=T}
+1-pchisq(LRstat_ov, df=1)
+```
+and we find that it isn't significant. A 95% confidence interval for the difference is given by
+
+```{r}
+est_diff_ov = mT_ov/tsum_ov_T - mC_ov/tsum_ov_C
+se_ov =  sqrt(mT_ov/(tsum_ov_T^2) + mC_ov/(tsum_ov_C^2))
+
+c(est_diff_ov - qnorm(0.975)*se_ov, est_diff_ov + qnorm(0.975)*se_ov)
+```
+
+
+```{r ovplotlr, fig.cap = "Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)."}
+plot(ov_km_fit, xlab="Time", ylab = "S(t)", col=c(1,2))
+lamhat_ov_C = mC_ov / tsum_ov_C
+lamhat_ov_T = mT_ov / tsum_ov_T
+xvec = 1:2500
+svec_ov_C = exp(-lamhat_ov_C*xvec)
+svec_ov_T = exp(-lamhat_ov_T*xvec)
+
+lines(xvec, svec_ov_C , type = "l", col=1, lty=2)
+lines(xvec, svec_ov_T , type = "l", col=2, lty=2)
+
+```
+
+Figure \@ref(fig:ovplotlr) shows the fitted curves, using $S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]$ for group $X$, along with the Kaplan Meier estimate of the survival curve. Although there isn't much data, the exponential distribution looks to be an OK fit.
+
+For the Myeloid data we can do the same thing
+
+```{r, echo=T}
+mC_my = sum((myeloid$death==1)&(myeloid$trt=="A"))
+mT_my = sum((myeloid$death==1)&(myeloid$trt=="B"))
+tsum_my_C = sum(myeloid$futime[myeloid$trt=="A"])
+tsum_my_T = sum(myeloid$futime[myeloid$trt == "B"])
+m_my = mT_my + mC_my
+tsum_my = tsum_my_C + tsum_my_T
+
+## Can now plug these into LR test stat
+LRstat_my =  2*(mC_my*log(mC_my/tsum_my_C) + mT_my*log(mT_my/tsum_my_T) - m_my*log(m_my/tsum_my))
+LRstat_my
+```
+Again, we refer this to $\chi^2_1$:
+
+```{r, echo=T}
+1-pchisq(LRstat_my, df=1)
+```
+This time we find that the difference is significant at even a very low level, and the 95% CI is given by
+```{r}
+est_diff_my = mT_my/tsum_my_T - mC_my/tsum_my_C
+se_my =  sqrt(mT_my/(tsum_my_T^2) + mC_my/(tsum_my_C^2))
+
+c(est_diff_my - qnorm(0.975)*se_my, est_diff_my + qnorm(0.975)*se_my)
+```
+
+```{r myplotlr, fig.cap = "Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)."}
+plot(my_km_fit, xlab="Time", ylab = "S(t)", col=c(1,2))
+lamhat_my_C = mC_my / tsum_my_C
+lamhat_my_T = mT_my / tsum_my_T
+xvec = 1:2500
+svec_my_C = exp(-lamhat_my_C*xvec)
+svec_my_T = exp(-lamhat_my_T*xvec)
+
+lines(xvec, svec_my_C , type = "l", col=1, lty=2)
+lines(xvec, svec_my_T , type = "l", col=2, lty=2)
+
+```
+
+Figure \@ref(fig:myplotlr) shows the fitted curves, using $S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]$ for group $X$. Although the confidence around $\hat\lambda_X$ is high (ie. small standard error of the estimate), because of the large amount of data, the fit appears to actually be rather poor.
+:::
+
+### Limitations of this approach {-}
+
+Having only one parameter, the exponential distribution is not very flexible, and often doesn't fit data at all well. A related, but more suitable distribution is the **Weibull distribution**.
+
+
+:::{.definition}
+The probability density function of a **Weibull** random variable is
+
+$$
+f\left(x\mid \lambda,\,k\right) = 
+\begin{cases}
+\lambda\gamma t^{\gamma-1}\exp\left[{-\lambda t^{\gamma}}\right] & \text{for }t\geq{0}\\
+0 & \text{otherwise}.
+\end{cases}
+$$
+
+
+Here, $\gamma$ is the *shape* parameter, and $\lambda$ is the *scale* parameter. If $\gamma=1$ then this reduces to an exponential distribution.
+:::
+
+For the Weibull distribution, we have
+
+$$\operatorname{S}\left(t\right) = \exp\left(-\lambda t^{\gamma}\right). $$
+We won't go into any more detail about the Weibull distrubtion, since the LR procedure is much more involved. 
+
+
+
+## Non-parametric: the log-rank test
+
+The log-rank test is performed by creating a series of 2x2 tables, and combining the information to find a test statistic.
+
+At each time $t_j$ at which an event is observed in either of the groups.
+
+For notation, we will say that at time $t_j$, 
+
+  * $n_j$ patients are 'at risk' of the event
+  * $d_j$ events are observed (often the 'event' is death, so we will sometimes say this)
+  
+For groups $C$ and $T$ we would therefore have a table representing the state of things at time $t_j$, with this general form:
+
+Group              No. surviving      No. events    No. at risk     
+-----------------  -----------------  -----------   --------------
+    **Treatment**  $n_{Tj}-d_{Tj}$    $d_{Cj}$       $n_{Cj}$     
+      **Control**  $n_{Cj}-d_{Cj}$    $d_{Tj}$       $n_{Tj}$    
+        **Total**  $n_j-d_j$          $d_j$          $n_j$    
+        
+Under $H_0$, we expect the deaths (or events) to be distributed proportionally between groups $C$ and $T$, and so the expected number of events in group $X$ ($C$ or $T$) at time $t_j$ is
+
+  $$e_{Xj} = n_{Xj}\times{\frac{d_j}{n_j}}.$$
+  This means that $e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j$.
+  
+  If we take the margins of the table as fixed (by which we mean $n_j, \,d_j\,n_{Cj}$ and $n_{Tj}$), then $d_{Cj}$ has a **hypergeometric distribution**.
+  
+:::{.definition}
+The **hypergeometric distribution** is a discrete probability distribution describing the probability of $k$ successes in $n$ draws (without replacement), taken from a finite population of size $N$ that has exactly $K$ objects with the desired feature. The probability mass function for a variable $X$ following a hypergeometric function is
+
+$$p\left(X=k\mid{K,N,n}\right) = \frac{{K \choose k}{{N-K} \choose {n-k}}}{{N \choose n}}. $$
+An example would be an urn containing 50 ($N$) balls, of which 16 ($K$) are green and the rest (34, $N-K$) are red. If we draw 10 ($n$) balls **without replacement**, $X$ is the random variable whose outcome is $k$, the number of green balls drawn.
+:::
+
+In the notation of the definition, the mean is 
+
+$$\operatorname{E}\left(X\right)= n\frac{K}{N} $$
+and the variance is 
+
+$$\operatorname{var}\left(X\right) = n\frac{K}{N}\frac{N-K}{N}\frac{N-n}{N-1}.$$
+
+In the notation of our table at time $t_j$, we have
+
+\begin{align*}
+\operatorname{E}\left(d_{Cj}\right) = e_{Cj} & = n_{Cj}\times{\frac{d_j}{n_j}}\\
+\operatorname{var}\left(d_{Cj}\right) = v_{Cj} &= \frac{d_j n_{Cj}n_{Tj} \left(n_j-d_j\right)}{n_j^2\left(n_j-1\right)}
+\end{align*}
+
+With the marginal totals fixed, the value of $d_{Cj}$ fixes the other three elements of the table, so considering this one variable is enough.
+
+Under $H_0$, the numbers dying at successive times are independent, so 
+
+$$U = \sum\limits_{j}\left(d_{Cj}-e_{Cj}\right) $$
+will (asymptotically) have a normal distribution, with
+
+$$U \sim \left(0,\;\sum\limits_j v_{Cj}\right). $$
+We label $V = \sum\limits_jv_{Cj}$, and in the log-rank test we refer $\frac{U^2}{V}$ to $\chi^2_1$.
+
+A someone simpler, and more commonly used, version of the log-rank test uses the fact that under $H_0$, the expected number of events (eg. deaths) in group $X$ is $E_X = \sum\limits_je_{Xj}$, and the observed number is $O_X = \sum\limits_j d_{Xj}$. The standard $\chi^2$ test formula can then be applied, and the test-statistic is 
+
+$$\frac{\left(O_C - E_C\right)^2}{E_C} + \frac{\left(O_T - E_T\right)^2}{E_T}.$$
+
+It turns out that this test statistic is always smaller than $\frac{U^2}{V}$, so this test is slightly more conservative (ie. it has a larger p-value).
+
+
+:::{.example}
+
+Let's now perform a log-rank test on our data from Example \@ref(exm:surveglr).
+
+First, the ovarian cancer dataset. To do this, we can tabulate the key values at each time step.
+
+```{r}
+ov_survdiff = survdiff(Surv(futime, fustat)~rx, data=ovarian, rho=0)
+ov_coxph = coxph(Surv(futime, fustat)~rx, data=ovarian)
+```
+
+```{r}
+ov_byt = ovarian[order(ovarian$futime),] # 26 rows
+ntime = length(unique(ov_byt$futime)) # no duplicates
+t_event = ov_byt$futime[ov_byt$fustat==1]
+n_event = length(t_event)
+n_part = nrow(ov_byt)
+nC = nrow(ov_byt[ov_byt$rx==1,])
+nT = nrow(ov_byt[ov_byt$rx==2,])
+
+logrank_df = data.frame(matrix(NA, nrow=n_event, ncol=9))
+names(logrank_df) = c("Time", "n_Cj", "d_Cj", "e_Cj", "n_Tj", "d_Tj", "e_Tj", "n_j", "d_j")
+
+for (i in 1:n_event){
+  ti = t_event[i]
+  logrank_df$Time[i] = ti
+  logrank_df$n_Cj[i] = nrow(ov_byt[(ov_byt$rx==1)&(ov_byt$futime>=ti),])
+  logrank_df$n_Tj[i] = nrow(ov_byt[(ov_byt$rx==2)&(ov_byt$futime>=ti),])
+  logrank_df$d_Cj[i] = ifelse(ov_byt$rx[ov_byt$futime == ti]==1, 1, 0)
+  logrank_df$d_Tj[i] = ifelse(ov_byt$rx[ov_byt$futime == ti]==1, 0, 1)
+  logrank_df$n_j[i] = logrank_df$n_Cj[i] + logrank_df$n_Tj[i]
+  logrank_df$d_j[i] = logrank_df$d_Cj[i] + logrank_df$d_Tj[i]
+  logrank_df$e_Cj[i] = logrank_df$n_Cj[i]*(logrank_df$d_j[i]/logrank_df$n_j[i])
+  logrank_df$e_Tj[i] = logrank_df$n_Tj[i]*(logrank_df$d_j[i]/logrank_df$n_j[i])
+}
+logrank_df
+```
+From this, we can find the $v_{j}$ and the test statistic $\frac{U^2}{V}$:
+
+```{r, echo=T}
+# Add up the differences
+UC = sum(logrank_df$d_Cj - logrank_df$e_Cj)
+vCj_vec = sapply(
+  1:n_event, 
+  function(j){
+    nCj = logrank_df$n_Cj[j]
+    nTj = logrank_df$n_Tj[j]
+    dj = logrank_df$d_j[j]
+    nj = logrank_df$n_j[j]
+    
+    (nCj*nTj*dj*(nj-1))/((nj^2)*(nj-1))
+})
+VC = sum(vCj_vec)
+cs_ov_stat = (UC^2)/VC
+1-pchisq(cs_ov_stat, df=1)
+```
+
+For the simpler, more conservative, version of the log-rank test, we have 
+
+```{r, echo=T}
+EC = sum(logrank_df$e_Cj)
+ET = sum(logrank_df$e_Tj)
+OC = sum(logrank_df$d_Cj)
+OT = sum(logrank_df$d_Tj)
+
+test_stat = ((EC-OC)^2)/EC + ((ET-OT)^2)/ET
+
+test_stat
+```
+and we can find the p-value by 
+
+```{r, echo=T}
+1-pchisq(test_stat, df=1)
+
+```
+
+As we expected, slightly larger, but not much different from the first version. These values are also pretty close to the results of our LR test in Example \@ref(exm:surveglr), where we had $p=0.291$.
+
+
+Since the Myeloid dataset is much bigger, we won't go through the rigmorole of making the table, but will instead use an inbuilt R function from the `survival` package (more on this in practicals).
+
+```{r, echo=T}
+myeloid$trt = as.factor(myeloid$trt)
+survdiff(Surv(futime, death) ~ trt, data = myeloid, rho=0)
+
+```
+
+This time the p-value is quite far from the one we found using the likelihood ratio test (p=0.00055), further corroborating the view that this test was not appropriate because of the poor fit of the exponential distribution.
+
+:::
+
+
+## Semi-parametric: the proportional hazards model
+
+As with continuous and binary outcome variables, what we would really like to be able to do is to adjust our model for baseline covariates. It seems intuitively reasonable to suppose that factors like age, sex, disease status etc. might affect someone's chances of survival (or whatever event we're concerned with).
+
+The conventional way to do this is using a **proportional hazards model**, where we assume that 
+
+$$h_T\left(t\right) = \psi h_C\left(t\right) $$
+for any $t>0$ and for some constant $\psi>0$. We call $\psi$ the **relative hazard** or **hazard ratio**. If $\psi<1$ then the hazard at time $t$ under treatment $T$ is smaller than under control $C$. If $\psi>1$ then the hazard at time $t$ is greater in greater in group $T$ than in group $C$. 
+
+We can adopt the concept of a **baseline hazard function** $h_0\left(t\right)$, where for someone in group $C$ (for now), their hazard at time $t$ is $h_0\left(t\right)$, and for someone in group $T$ it is $\psi h_0\left(t\right)$. Since we must have $\psi>0$, it makes sense to set
+
+$$\psi = e^{\beta},$$
+so that $\beta = \log\psi$ and $\psi>0\;\forall\beta\in\mathbb{R}$. Note that $\beta>0 \iff \psi>1$.
+
+We can now (re)-introduce an indicator variable $G_i$, where
+
+$$ 
+G_i = 
+\begin{cases}
+0\text{  if participant }i\text{ is in group }C\\
+1\text{  if participant }i\text{ is in group }T
+\end{cases}
+$$
+
+and model the hazard function for participant $i$ as
+
+$$h_i\left(t\right) = \exp\left[\beta G_i\right]h_0\left(t\right).$$
+
+This is the proportional hazards model for the comparison of two groups. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.
+
+### General proportional hazards model
+
+Extending the model to include covariates $X_1,\ldots,X_p$, we have
+
+$$\psi\left(x_i\right) = \beta_0 G_i + \beta_1x_{1i} + \ldots + \beta_p x_{pi} = \mathbf{x}_i^T \boldsymbol\beta,$$
+where the first element of the vector $\mathbf{x}_i$ is $G_i$, and the hazard function for participant $i$ is 
+
+$$h_i\left(t\right) = \psi\left(\mathbf{x}_i\right)h_0\left(t\right). $$
+
+Now, our baseline hazard function $h_0\left(t\right)$ is the hazard function for a participant in group $C$ for whom all baseline coviariates are either zero (if continuous) or the reference level (if a factor variable). For factor covariates this makes sense, since all levels are realistic values, but for continuous variables zero is likely to be unrealistic (for example you'd never expect zero for age, weight, height, blood pressure etc.). So, if any continuous variables are present, the baseline will always need to be adjusted, but if all covariates are factors, it is likely that for some participants the baseline hazard function won't be adjusted.
+
+The linear component $\mathbf{x}_i^T\boldsymbol\beta$ is often called the **risk score** or **prognostic index** for participant $i$, and represents their hazard at time $t$ relative to the baseline hazard.
+
+The general form of the model is therefore
+
+\begin{equation}
+h_i\left(t\right) = \exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]h_0\left(t\right),
+(\#eq:hazfun)
+\end{equation}
+
+and we can rewrite it as
+
+$$\log\left(\frac{h_1\left(t\right)}{h_0\left(t\right)}\right) = \mathbf{x}_i^T\boldsymbol\beta.$$
+
+Notice that there is no constant in the linear term - if there was, it could just be absorbed into the baseline hazard function.
+
+There are ways to fit this model that rely on specifying the hazard function using parametric methods, but the way we will look (and the most widely used) is one developed by @cox1972regression.
+
+### Cox regression
+
+The beauty of Cox regression is that it avoids specifying a form for $h_0\left(t\right)$ altogether.
+
+P63 IN COLLETT
+
+:::{.example}
+
+First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.
+
+For the `ovarian` dataset
+
+```{r, echo=T}
+coxph(formula = Surv(futime, fustat)~rx, data=ovarian)
+
+```
+
+```{r, echo=T}
+coxph(formula = Surv(futime, death)~trt, data=myeloid)
+
+```
+We see that for both results, our p-values are close to what we have found with the log rank test.
+
+We can now account for more baseline covariates
+
+```{r, echo=T}
+coxph(formula = Surv(futime, fustat)~rx+age+resid.ds, data=ovarian)
+```
+What this shows is that the most significant factor by far is the particpant's age, with the hazard function increasing as age increases. The coefficient for treatment group (`rx`) has increased in magnitude and the p-value has decreased now that age is being adjusted for (although it is still not significant).
+
+```{r, echo=T}
+coxph(formula = Surv(futime, death)~trt+sex, data=myeloid)
+
+```
+We see that the only covariate we have, `sex` has very little effect.
+:::
+

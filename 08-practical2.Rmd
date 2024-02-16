@@ -128,3 +128,13 @@ and the estimated probability of having 'good' symptom status at four months wou
 
 
 ### Survival data
+
+This dataset is from a randomised controlled trial of two treatment regimens for lung cancer. 
+
+```{r kmva, fig.cap = "Kaplan Meier curves for the veteran data, split by treatment. Red is for group T, black for group C (placebo)."}
+s_va = with(veteran, Surv(time, status))
+va_km_fit <- survfit(Surv(time, status)~trt, data=veteran)
+plot(va_km_fit, xlab="Time", ylab = "Probability", col=c(1,2))
+
+```
+We see that at first the patients in the treatment have a lower survival rate, but around day 200 this changes.
