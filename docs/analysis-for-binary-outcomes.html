@@ -549,7 +549,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{\color{red}{0.187}}\right) = \left(1.85,\; \color{red}{5.33} \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
@@ -600,8 +600,8 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-41"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-41-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
 <p class="caption">
 Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
 </p>
@@ -651,8 +651,8 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.5687797 0.8130385</code></pre>
 <p>We can see this graphically</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-45-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.3: As before, dashed for Newcombe, dotted for standard
 </p>
@@ -663,8 +663,8 @@ Figure 6.3: As before, dashed for Newcombe, dotted for standard
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.1994256 0.4544205</code></pre>
 <p>Again, we can see this graphically.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-48"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-48-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.4: As before, dashed for Newcombe, dotted for standard
 </p>
@@ -777,7 +777,7 @@ n_C &amp; = 52
 \end{aligned}
 \]</span>
 and so the limits of the confidence interval (with <span class="math inline">\(\alpha=0.05\)</span>) on the log scale are</p>
-<p><span class="math display">\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\frac{1}{38} - \frac{1}{55} + \frac{1}{17} - \frac{1}{52}} = \log(2.11) \pm 1.96 \times 0.218\]</span></p>
+<p><span class="math display">\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\color{red}{\left(\frac{1}{38} - \frac{1}{55}\right) + \left(\frac{1}{17} - \frac{1}{52}\right)}} = \log(2.11) \pm 1.96 \times 0.218\]</span></p>
 <p>which gives us <span class="math inline">\(\left(0.320,\,1.176\right)\)</span> on the log scale, and a 95% CI for the risk ratio of <span class="math inline">\(\left(1.377,\,3.243\right)\)</span>.</p>
 </div>
 <p>So, we’ve seen that we can find confidence intervals for each of our four measures of difference. But we probably want to also be able to incorporate baseline measurements, as we
@@ -988,7 +988,7 @@ where <span class="math inline">\(\text{logit}_i\)</span> is the fitted value of
 This will be the probability, according to the model, that a patient with this particular combination of baseline characteristics will have outcome 1.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-34" class="example"><strong>Example 6.11  </strong></span>Continuing with Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>, we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.</p>
-<p>For this we will make heavy use of the summary table</p>
+<p>For this we will make use of the summary table</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="analysis-for-binary-outcomes.html#cb41-1" tabindex="-1"></a><span class="fu">summary</span>(glm_indo)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1020,19 +1020,29 @@ which translates to a probability of post-ECRP pancreatitis of</p>
 <p>By contrast, a patient in group <span class="math inline">\(T\)</span>, from site 2, at risk level 1, would have odds</p>
 <p><span class="math display">\[\exp\left(-2.2307 - 1.2204 + 1\times 0.5846 - 0.7523\right) = 0.0268, \]</span>
 which is equivalent to a probability of post-ECRP pancreatitis of</p>
-<p><span class="math display">\[\frac{0.0268}{1+0.0268} = 0.0261.\]</span>
-Being more methodical we can collect these into a table. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will treat them as zero and lump them in with the site 1 participants</p>
-<pre><code>##     site risk Odds_groupC Prob_groupC Odds_groupT Prob_groupT
-## 1      2    1       0.057       0.054       0.027       0.026
-## 2      2    2       0.102       0.093       0.048       0.046
-## 3      2    3       0.183       0.155       0.086       0.079
-## 4      2    4       0.329       0.248       0.155       0.134
-## 5      2    5       0.590       0.371       0.278       0.218
-## 6  Not 2    1       0.193       0.162       0.091       0.083
-## 7  Not 2    2       0.346       0.257       0.163       0.140
-## 8  Not 2    3       0.621       0.383       0.293       0.227
-## 9  Not 2    4       1.114       0.527       0.525       0.344
-## 10 Not 2    5       1.998       0.666       0.942       0.485</code></pre>
+<p><span class="math display">\[\frac{0.0268}{1+0.0268} = 0.0261.\]</span></p>
+<p>Being more methodical we can collect these into a table, and use <code>predict.glm</code>. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.</p>
+<pre><code>##    site risk             rx logodds odds prob
+## 1  2_IU    1      0_placebo   -2.87 0.06 0.05
+## 2  2_IU    2      0_placebo   -2.28 0.10 0.09
+## 3  2_IU    3      0_placebo   -1.70 0.18 0.15
+## 4  2_IU    4      0_placebo   -1.11 0.33 0.25
+## 5  2_IU    5      0_placebo   -0.53 0.59 0.37
+## 6  1_UM    1      0_placebo   -1.65 0.19 0.16
+## 7  1_UM    2      0_placebo   -1.06 0.35 0.26
+## 8  1_UM    3      0_placebo   -0.48 0.62 0.38
+## 9  1_UM    4      0_placebo    0.11 1.11 0.53
+## 10 1_UM    5      0_placebo    0.69 2.00 0.67
+## 11 2_IU    1 1_indomethacin   -3.62 0.03 0.03
+## 12 2_IU    2 1_indomethacin   -3.03 0.05 0.05
+## 13 2_IU    3 1_indomethacin   -2.45 0.09 0.08
+## 14 2_IU    4 1_indomethacin   -1.86 0.15 0.13
+## 15 2_IU    5 1_indomethacin   -1.28 0.28 0.22
+## 16 1_UM    1 1_indomethacin   -2.40 0.09 0.08
+## 17 1_UM    2 1_indomethacin   -1.81 0.16 0.14
+## 18 1_UM    3 1_indomethacin   -1.23 0.29 0.23
+## 19 1_UM    4 1_indomethacin   -0.64 0.52 0.34
+## 20 1_UM    5 1_indomethacin   -0.06 0.94 0.49</code></pre>
 </div>
 <div id="some-cautions" class="section level4 unnumbered hasAnchor">
 <h4>Some cautions<a href="analysis-for-binary-outcomes.html#some-cautions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1107,7 +1117,12 @@ Figure 6.5: ROC curve for our logistic regression model of the indo RCT data (so
 <div class="example">
 <p><span id="exm:unlabeled-div-38" class="example"><strong>Example 6.13  </strong></span>This example uses the model fitted in Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>.</p>
 <p>The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the <span class="math inline">\(x\)</span> axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-57"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-57-1.png" alt="Diagnostic plots for our model, focussing on calibration." width="672" />
+<p class="caption">
+Figure 6.6: Diagnostic plots for our model, focussing on calibration.
+</p>
+</div>
 <p>These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model.</p>
 </div>
 <p>We will look some more at this in the upcoming practical class, as well as some further principles of model validation.</p>

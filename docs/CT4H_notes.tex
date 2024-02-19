@@ -3288,7 +3288,7 @@ n_C & = 52
 \]
 and so the limits of the confidence interval (with \(\alpha=0.05\)) on the log scale are
 
-\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\frac{1}{38} - \frac{1}{55} + \frac{1}{17} - \frac{1}{52}} = \log(2.11) \pm 1.96 \times 0.218\]
+\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\color{red}{\left(\frac{1}{38} - \frac{1}{55}\right) + \left(\frac{1}{17} - \frac{1}{52}\right)}} = \log(2.11) \pm 1.96 \times 0.218\]
 
 which gives us \(\left(0.320,\,1.176\right)\) on the log scale, and a 95\% CI for the risk ratio of \(\left(1.377,\,3.243\right)\).
 \end{example}
@@ -3596,7 +3596,7 @@ This will be the probability, according to the model, that a patient with this p
 
 Continuing with Example \ref{exm:logregeg1}, we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.
 
-For this we will make heavy use of the summary table
+For this we will make use of the summary table
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3643,31 +3643,52 @@ By contrast, a patient in group \(T\), from site 2, at risk level 1, would have 
 which is equivalent to a probability of post-ECRP pancreatitis of
 
 \[\frac{0.0268}{1+0.0268} = 0.0261.\]
-Being more methodical we can collect these into a table. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will treat them as zero and lump them in with the site 1 participants
 
-\begin{tabular}{l|r|r|r|r|r}
+Being more methodical we can collect these into a table, and use \texttt{predict.glm}. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.
+
+\begin{tabular}{l|r|l|r|r|r}
 \hline
-site & risk & Odds\_groupC & Prob\_groupC & Odds\_groupT & Prob\_groupT\\
+site & risk & rx & logodds & odds & prob\\
 \hline
-2 & 1 & 0.057 & 0.054 & 0.027 & 0.026\\
+2\_IU & 1 & 0\_placebo & -2.87 & 0.06 & 0.05\\
 \hline
-2 & 2 & 0.102 & 0.093 & 0.048 & 0.046\\
+2\_IU & 2 & 0\_placebo & -2.28 & 0.10 & 0.09\\
 \hline
-2 & 3 & 0.183 & 0.155 & 0.086 & 0.079\\
+2\_IU & 3 & 0\_placebo & -1.70 & 0.18 & 0.15\\
 \hline
-2 & 4 & 0.329 & 0.248 & 0.155 & 0.134\\
+2\_IU & 4 & 0\_placebo & -1.11 & 0.33 & 0.25\\
 \hline
-2 & 5 & 0.590 & 0.371 & 0.278 & 0.218\\
+2\_IU & 5 & 0\_placebo & -0.53 & 0.59 & 0.37\\
 \hline
-Not 2 & 1 & 0.193 & 0.162 & 0.091 & 0.083\\
+1\_UM & 1 & 0\_placebo & -1.65 & 0.19 & 0.16\\
 \hline
-Not 2 & 2 & 0.346 & 0.257 & 0.163 & 0.140\\
+1\_UM & 2 & 0\_placebo & -1.06 & 0.35 & 0.26\\
 \hline
-Not 2 & 3 & 0.621 & 0.383 & 0.293 & 0.227\\
+1\_UM & 3 & 0\_placebo & -0.48 & 0.62 & 0.38\\
 \hline
-Not 2 & 4 & 1.114 & 0.527 & 0.525 & 0.344\\
+1\_UM & 4 & 0\_placebo & 0.11 & 1.11 & 0.53\\
 \hline
-Not 2 & 5 & 1.998 & 0.666 & 0.942 & 0.485\\
+1\_UM & 5 & 0\_placebo & 0.69 & 2.00 & 0.67\\
+\hline
+2\_IU & 1 & 1\_indomethacin & -3.62 & 0.03 & 0.03\\
+\hline
+2\_IU & 2 & 1\_indomethacin & -3.03 & 0.05 & 0.05\\
+\hline
+2\_IU & 3 & 1\_indomethacin & -2.45 & 0.09 & 0.08\\
+\hline
+2\_IU & 4 & 1\_indomethacin & -1.86 & 0.15 & 0.13\\
+\hline
+2\_IU & 5 & 1\_indomethacin & -1.28 & 0.28 & 0.22\\
+\hline
+1\_UM & 1 & 1\_indomethacin & -2.40 & 0.09 & 0.08\\
+\hline
+1\_UM & 2 & 1\_indomethacin & -1.81 & 0.16 & 0.14\\
+\hline
+1\_UM & 3 & 1\_indomethacin & -1.23 & 0.29 & 0.23\\
+\hline
+1\_UM & 4 & 1\_indomethacin & -0.64 & 0.52 & 0.34\\
+\hline
+1\_UM & 5 & 1\_indomethacin & -0.06 & 0.94 & 0.49\\
 \hline
 \end{tabular}
 
@@ -3806,7 +3827,11 @@ This example uses the model fitted in Example \ref{exm:logregeg1}.
 
 The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the \(x\) axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95\% CI of the fitted value.
 
+\begin{figure}
+\centering
 \includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-46-1.pdf}
+\caption{\label{fig:unnamed-chunk-46}Diagnostic plots for our model, focussing on calibration.}
+\end{figure}
 
 These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model.
 \end{example}

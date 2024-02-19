@@ -118,13 +118,29 @@ and the estimated probability of having 'good' symptom status at four months wou
 
 :::
 
+Extend this by including SE - also some info about how this is found? And generating confidence intervals for these predicted probabilities?
 
+```{r}
+## Create data frame with every combination of factors (only showing sites 1 and 2)
+df_indo = data.frame(
+  site = rep(c(rep("2_IU", 5), rep("1_UM", 5)),2),
+  risk = rep(1:5, 4),
+  rx = rep(c("0_placebo", "1_indomethacin"), c(10,10))
+)
 
+## Find and transform fitted value
 
+df_indo$logodds = predict(glm_indo, newdata=df_indo)
+df_indo$odds = exp(df_indo$logodds)
+df_indo$prob = df_indo$odds/(1+df_indo$odds)
 
+df_indo_round2 <- df_indo %>%                   # Using dplyr functions
+  mutate_if(is.numeric,
+            round,
+            digits = 2)
+df_indo_round2 
 
-
-
+```
 
 
 ### Survival data

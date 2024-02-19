@@ -817,7 +817,7 @@ n_C & = 52
 $$
 and so the limits of the confidence interval (with $\alpha=0.05$) on the log scale are
 
-$$\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\frac{1}{38} - \frac{1}{55} + \frac{1}{17} - \frac{1}{52}} = \log(2.11) \pm 1.96 \times 0.218$$
+$$\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\color{red}{\left(\frac{1}{38} - \frac{1}{55}\right) + \left(\frac{1}{17} - \frac{1}{52}\right)}} = \log(2.11) \pm 1.96 \times 0.218$$
 
 which gives us $\left(0.320,\,1.176\right)$ on the log scale, and a 95% CI for the risk ratio of $\left(1.377,\,3.243\right)$.
 
@@ -997,7 +997,7 @@ This will be the probability, according to the model, that a patient with this p
 :::{.example}
 Continuing with Example \@ref(exm:logregeg1), we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.
 
-For this we will make heavy use of the summary table
+For this we will make use of the summary table
 
 ```{r, echo=T}
 summary(glm_indo)
@@ -1016,40 +1016,30 @@ $$\exp\left(-2.2307 - 1.2204 + 1\times 0.5846 - 0.7523\right) = 0.0268, $$
 which is equivalent to a probability of post-ECRP pancreatitis of 
 
 $$\frac{0.0268}{1+0.0268} = 0.0261.$$ 
-Being more methodical we can collect these into a table. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will treat them as zero and lump them in with the site 1 participants
+
+Being more methodical we can collect these into a table, and use `predict.glm`. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.
+
 
 ```{r}
-sites = c("2", "Not 2")
-risks = 1:5
-
+## Create data frame with every combination of factors (only showing sites 1 and 2)
 df_indo = data.frame(
-  site = c(rep("2", 5), rep("Not 2", 5)),
-  risk = rep(1:5, 2)
+  site = rep(c(rep("2_IU", 5), rep("1_UM", 5)),2),
+  risk = rep(1:5, 4),
+  rx = rep(c("0_placebo", "1_indomethacin"), c(10,10))
 )
 
-df_indo$Odds_groupC = rep(NA, 10)
-df_indo$Prob_groupC = rep(NA, 10)
-df_indo$Odds_groupT = rep(NA, 10)
-df_indo$Prob_groupT = rep(NA, 10)
+## Find and transform fitted value
 
-for (i in 1:5){
-  oddsC = exp(-2.2307 - 1.2204 + df_indo$risk[i]*0.5846)
-  oddsT = exp(-2.2307 - 1.2204 + df_indo$risk[i]*0.5846 - 0.7523)
-  df_indo$Odds_groupC[i] = round(oddsC,3)
-  df_indo$Odds_groupT[i] = round(oddsT,3)
-}
+df_indo$logodds = predict(glm_indo, newdata=df_indo)
+df_indo$odds = exp(df_indo$logodds)
+df_indo$prob = df_indo$odds/(1+df_indo$odds)
 
-for (i in 1:5){
-  oddsC = exp(-2.2307  + df_indo$risk[i]*0.5846)
-  oddsT = exp(-2.2307  + df_indo$risk[i]*0.5846 - 0.7523)
-  df_indo$Odds_groupC[i+5] = round(oddsC,3)
-  df_indo$Odds_groupT[i+5] = round(oddsT,3)
-}
+df_indo_round2 <- df_indo %>%                   # Using dplyr functions
+  mutate_if(is.numeric,
+            round,
+            digits = 2)
+df_indo_round2 
 
-df_indo$Prob_groupC = round(df_indo$Odds_groupC/(1+df_indo$Odds_groupC),3)
-df_indo$Prob_groupT = round(df_indo$Odds_groupT/(1+df_indo$Odds_groupT),3)
-
-df_indo
 ```
 
 :::
@@ -1164,7 +1154,7 @@ This example uses the model fitted in Example \@ref(exm:logregeg1).
   
 The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value. 
 
-```{r}
+```{r, fig.cap = "Diagnostic plots for our model, focussing on calibration."}
 
 indo_exp = indo_rct[,c(2,4,32)]
 indo_fact = unique(indo_exp)
