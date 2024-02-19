@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-16" />
+<meta name="date" content="2024-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -743,14 +743,14 @@ We could say that a patient is “more than twice as likely to be cured with str
 and therefore the odds of recovery are around 4.6 greater for Streptomycin than for the control. Similarly, we could reframe this as</p>
 <p><span class="math display">\[\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \frac{(17/52)/(35/52)}{(38/55)/(17/55)} = 0.217 = \frac{1}{4.602}.\]</span></p>
 </div>
+</div>
+<div id="confidence-intervals-for-rr-and-or" class="section level4 hasAnchor" number="6.2.2.1">
+<h4><span class="header-section-number">6.2.2.1</span> Confidence intervals for RR and OR<a href="analysis-for-binary-outcomes.html#confidence-intervals-for-rr-and-or" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval <span class="math inline">\(\left(l,\,u\right)\)</span> (with <span class="math inline">\(l,u&gt;1\)</span>) and <span class="math inline">\(\left(\frac{1}{u},\frac{1}{l}\right)\)</span>, since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval</p>
 <p><span class="math display">\[\left(\frac{1}{k},\,k\right) \text{ for some }k&gt;1 \]</span>
 can be thought of as symmetric, in that one treatment may be up to <span class="math inline">\(k\)</span> times more effective than the other, in either direction. Therefore, to build a confidence interval for OR or RR, we will not be following the usual formula</p>
 <p><span class="math display">\[\text{point estimate } \pm{z\times{SE}}.\]</span>
 You may have already been thinking that a log transformation would be useful here, and you’d be correct! The <em>sort-of</em> symmetric intervals we’ve been discussing here actually are symmetric (about zero) on the log scale.</p>
-</div>
-<div id="confidence-intervals-for-rr-and-or" class="section level4 hasAnchor" number="6.2.2.1">
-<h4><span class="header-section-number">6.2.2.1</span> Confidence intervals for RR and OR<a href="analysis-for-binary-outcomes.html#confidence-intervals-for-rr-and-or" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Firstly we’ll consider the risk ratio. Let’s define</p>
 <p><span class="math display">\[ \phi = \log\left(\frac{\pi_T}{\pi_C}\right).\]</span>
 The natural way to estimate this is with the sample proportions</p>
@@ -801,7 +801,7 @@ where <span class="math inline">\(G_i\)</span> is an indicator function taking v
 <p><span class="math display">\[ \frac{d\operatorname{logit}\left(\pi\right)}{d\pi} = \frac{1}{\pi\left(1-\pi\right)}\]</span>
 which is always positive for <span class="math inline">\(\pi\in\left[0,1\right]\)</span>. This means that we can use it to transform our mean outcome (which we will now call <span class="math inline">\(\pi\)</span>, since the mean outcome is the estimate of the probability of success) in the model</p>
 <p><span class="math display" id="eq:logreg1">\[\begin{equation}
-\operatorname{logit}\left(\pi\right) = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}
+\operatorname{logit}\left(\pi\right) = \mu + \tau G + \beta_1\times{\text{baseline}_{1}} + \ldots + \beta_p\times{\text{baseline}_{p}}
 \tag{6.3}
 \end{equation}\]</span></p>
 <p>and any value in <span class="math inline">\(\mathbb{R}\)</span> is allowed on both sides. This model is known as <strong>logistic regression</strong>, and belongs to a class of models called <strong>Generalized Linear Models</strong>. If you did Advanced Statistical Modelling III you’ll have seen these before. If you haven’t seen them, and want to know more, <a href="https://www.r-bloggers.com/2015/08/generalised-linear-models-in-r/">this article</a> gives a nice introduction (and some useful R tips!).</p>

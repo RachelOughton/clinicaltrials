@@ -768,6 +768,9 @@ $$\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \fra
 
 :::
 
+#### Confidence intervals for RR and OR
+
+
 One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval $\left(l,\,u\right)$ (with $l,u>1$) and $\left(\frac{1}{u},\frac{1}{l}\right)$, since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval 
 
 $$\left(\frac{1}{k},\,k\right) \text{ for some }k>1 $$
@@ -777,7 +780,6 @@ $$\text{point estimate } \pm{z\times{SE}}.$$
 You may have already been thinking that a log transformation would be useful here, and you'd be correct! The *sort-of* symmetric intervals we've been discussing here actually are symmetric (about zero) on the log scale.
 
 
-#### Confidence intervals for RR and OR
 
 Firstly we'll consider the risk ratio. Let's define 
 
@@ -853,7 +855,7 @@ $$ \frac{d\operatorname{logit}\left(\pi\right)}{d\pi} = \frac{1}{\pi\left(1-\pi\
 which is always positive for $\pi\in\left[0,1\right]$. This means that we can use it to transform our mean outcome (which we will now call $\pi$, since the mean outcome is the estimate of the probability of success) in the model
 
 \begin{equation}
-\operatorname{logit}\left(\pi\right) = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}
+\operatorname{logit}\left(\pi\right) = \mu + \tau G + \beta_1\times{\text{baseline}_{1}} + \ldots + \beta_p\times{\text{baseline}_{p}}
 (\#eq:logreg1)
 \end{equation}
 

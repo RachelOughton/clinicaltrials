@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-02-16}
+\date{2024-02-19}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -3241,6 +3241,9 @@ and therefore the odds of recovery are around 4.6 greater for Streptomycin than 
 \[\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \frac{(17/52)/(35/52)}{(38/55)/(17/55)} = 0.217 = \frac{1}{4.602}.\]
 \end{example}
 
+\hypertarget{confidence-intervals-for-rr-and-or}{%
+\subsubsection{Confidence intervals for RR and OR}\label{confidence-intervals-for-rr-and-or}}
+
 One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval \(\left(l,\,u\right)\) (with \(l,u>1\)) and \(\left(\frac{1}{u},\frac{1}{l}\right)\), since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval
 
 \[\left(\frac{1}{k},\,k\right) \text{ for some }k>1 \]
@@ -3248,9 +3251,6 @@ can be thought of as symmetric, in that one treatment may be up to \(k\) times m
 
 \[\text{point estimate } \pm{z\times{SE}}.\]
 You may have already been thinking that a log transformation would be useful here, and you'd be correct! The \emph{sort-of} symmetric intervals we've been discussing here actually are symmetric (about zero) on the log scale.
-
-\hypertarget{confidence-intervals-for-rr-and-or}{%
-\subsubsection{Confidence intervals for RR and OR}\label{confidence-intervals-for-rr-and-or}}
 
 Firstly we'll consider the risk ratio. Let's define
 
@@ -3324,7 +3324,7 @@ As \(\pi\) tends to zero, \(\operatorname{logit}\left(\pi\right)\) tends to \(-\
 which is always positive for \(\pi\in\left[0,1\right]\). This means that we can use it to transform our mean outcome (which we will now call \(\pi\), since the mean outcome is the estimate of the probability of success) in the model
 
 \begin{equation}
-\operatorname{logit}\left(\pi\right) = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}
+\operatorname{logit}\left(\pi\right) = \mu + \tau G + \beta_1\times{\text{baseline}_{1}} + \ldots + \beta_p\times{\text{baseline}_{p}}
 \label{eq:logreg1}
 \end{equation}
 
