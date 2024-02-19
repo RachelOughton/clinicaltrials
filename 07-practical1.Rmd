@@ -7,6 +7,10 @@ This computer practical will cover two main parts:
   1. Allocation (Section \@ref(cp1allocation))
   2. Analysis (Section (\@ref(cp1analysis))
   
+## Health warning! {-}
+
+This practical, particularly the allocation section, is designed to help you investigate the behaviour of the various methods we've been looking at. There are lots of things that you could do in a real trial. For example, you wouldn't be able to plot the baseline covariates, since you wouldn't have them all at the start of the allocation process. 
+  
 ### Preliminaries {-}
   
 The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be sensible to work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time. 

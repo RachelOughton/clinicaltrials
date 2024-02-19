@@ -24,7 +24,7 @@ Suppose we conduct a trial with a binary primary outcome variable and two groups
       p_C & = \frac{R_C}{n_C}.
 \end{align*}
     
-  Recall that the variance of $p_X$ (where $X$ is $T$ or $C$) is $\pi_X\left(1-\pi_X\right)$, such that the variance depends on the mean. This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate value of $\pi_T$ and $\pi_C$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.
+  Recall that the variance of $p_X$ (where $X$ is $T$ or $C$) is $\color{red}{\frac{\pi_X\left(1-\pi_X\right)}{n_X}}$, such that the variance depends on the mean. This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate value of $\pi_T$ and $\pi_C$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.
       
 ## The Delta Method {#delta-method}
       

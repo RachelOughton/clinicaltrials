@@ -288,8 +288,11 @@ div.csl-indent {
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
+<ul>
 <li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
 <li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
 <li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
 <ul>
 <li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
@@ -549,7 +552,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{\color{red}{0.187}}\right) = \left(1.85,\; \color{red}{5.33} \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
@@ -600,8 +603,8 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-41"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-41-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
 <p class="caption">
 Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
 </p>
@@ -651,8 +654,8 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.5687797 0.8130385</code></pre>
 <p>We can see this graphically</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-45-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.3: As before, dashed for Newcombe, dotted for standard
 </p>
@@ -663,8 +666,8 @@ Figure 6.3: As before, dashed for Newcombe, dotted for standard
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.1994256 0.4544205</code></pre>
 <p>Again, we can see this graphically.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-48"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-48-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.4: As before, dashed for Newcombe, dotted for standard
 </p>
@@ -1117,8 +1120,8 @@ Figure 6.5: ROC curve for our logistic regression model of the indo RCT data (so
 <div class="example">
 <p><span id="exm:unlabeled-div-38" class="example"><strong>Example 6.13  </strong></span>This example uses the model fitted in Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>.</p>
 <p>The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the <span class="math inline">\(x\)</span> axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-57"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-57-1.png" alt="Diagnostic plots for our model, focussing on calibration." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-46-1.png" alt="Diagnostic plots for our model, focussing on calibration." width="672" />
 <p class="caption">
 Figure 6.6: Diagnostic plots for our model, focussing on calibration.
 </p>
