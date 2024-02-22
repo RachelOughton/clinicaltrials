@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-02-19}
+\date{2024-02-22}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2545,7 +2545,7 @@ Our null hypothesis now is therefore that \(\pi_T = \pi_C\), ie. that the probab
       p_C & = \frac{R_C}{n_C}.
 \end{align*}
 
-Recall that the variance of \(p_X\) (where \(X\) is \(T\) or \(C\)) is \(\pi_X\left(1-\pi_X\right)\), such that the variance depends on the mean. This means there is no free parameter equivalent to \(\sigma\) in the binary situation, and the number of participants required will depend on the approximate value of \(\pi_T\) and \(\pi_C\). This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called \emph{the delta method}.
+Recall that the variance of \(p_X\) (where \(X\) is \(T\) or \(C\)) is \(\color{red}{\frac{\pi_X\left(1-\pi_X\right)}{n_X}}\), such that the variance depends on the mean. This means there is no free parameter equivalent to \(\sigma\) in the binary situation, and the number of participants required will depend on the approximate value of \(\pi_T\) and \(\pi_C\). This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called \emph{the delta method}.
 
 \hypertarget{delta-method}{%
 \section{The Delta Method}\label{delta-method}}
@@ -3763,8 +3763,6 @@ The dashboard below shows the distributions of fitted values for patients with \
 If you're viewing this in PDF you'll just have a static image, but you can find the dashboard at \newline
 [https://racheloughton.shinyapps.io/ROCplots/](\url{https://racheloughton.shinyapps.io/ROCplots/}).
 
-\href{https://racheloughton.shinyapps.io/ROCplots/}{\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-42-1.pdf}}
-
 Note that I've used beta distributions for some hypothetical distributions of fitted values for the different groups, but this is just for convenience: ROC analysis makes no distributional assumptions.
 
 \begin{example}
@@ -3839,6 +3837,360 @@ These plots are not the easiest to interpret, but there seems to be no evidence 
 We will look some more at this in the upcoming practical class, as well as some further principles of model validation.
 
 For now, we're done with Binary data, and in our next few lectures we'll think about survival, or time-to-event data.
+
+\hypertarget{part-part-iii-survival-data}{%
+\part{Part III: Survival data}\label{part-part-iii-survival-data}}
+
+\hypertarget{working-with-time-to-event-data}{%
+\chapter{Working with time-to-event data}\label{working-with-time-to-event-data}}
+
+A data type that is commonly found in clinical trials is \textbf{time to event data}. This type of data deals with the amount of time that elapses before a particular event happens. As a sub-field of statistics, survival analysis has been around for a long time, as people have thought about and worked data like mortality records (\href{https://rss.onlinelibrary.wiley.com/doi/full/10.1111/1740-9713.01421}{most notably John Graunt, who used the `Bills of Mortality' during the 1600s to better understand the plague and other causes of death}). However, it developed rapidly during the many cancer related clinical trials of the 1960s and 1970s. In these cases, the event in question was very often death, and which is why this branch of statistics came to be known as \textbf{survival analysis}. However, the event can be many other things, and indeed can be a positive outcome (for example being cured of some condition). Time-to-event data also appears in other applications, such as engineering (eg. monitoring the reliability of a machine) and marketing (eg. thinking of the time-to-purchase). As well as the books already mentioned, this chapter makes use of \citet{collett_surv}.
+
+Usually, survival data is given in terms of time, but it can also be the number of times something happens (for example, the number of clinic appointments attended) before the event in question occurs.
+
+Survival data is trickier to handle than the data types we have seen so far, for two main reasons. Firstly (and simply) survival data is very often skewed, so even though it is (usually) continuous, we can't just treat it as normally distributed. Secondly (and more complicatedly, if that's a word) with time-to-event data we don't usually observe the full dataset.
+
+\hypertarget{censored-times}{%
+\section{Censored times}\label{censored-times}}
+
+If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won't observe the event. This could be because it doesn't happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal), or simply stops attending follow-up appointments after a certain times. For these participants, we do know that they had not experienced the event up to some time \(t\), but we don't know what happened next. All we know is that their time-to-event or \textbf{survival time} is greater than that time \(t\). These partial observations are known as \textbf{censored} times, and in particular as \textbf{right-censored} times, because the event happens \emph{after} the censored time. It is possible (but less common) to have \emph{left-censored} or \emph{interval-censored} data, but in this course we will deal only with right-censoring.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/censor-1.pdf}
+\caption{\label{fig:censor}An example of some censored data.}
+\end{figure}
+
+If we were to treat censored times as observations, ie. as though the event had happened at time \(t\), we would bias the results of the trial very seriously. The survival times reported would be systematically shorter than the true ones. For example, in the dataset shown in Figure \ref{fig:censor}, we would estimate the survival probability at time 10 as 0.2, since only two of the 10 participants were still in the trial after time 10. But it may well be that some of the participants whose observations were censored before \(t=10\) were still alive at \(t=10\).
+
+If we were to remove the censored times, and only analyse the data in which the event was observed during the linespan of the trial, we would be losing data and therefore valuable information. This approach may well also lead to bias, for example if some subset of patients died quite soon into the trial, but the remainder lived a long time (past the end of the trial). If our analysis ignores the survivors, we are likely to underestimate the general survival time. In the dataset in Figure \ref{fig:censor} there are five participants (3,6,7,8,10) whom we are no longer able to observe at time 10, but of whom none had experienced the event by the point at which they were censored.
+
+So we know that we need to somehow include these censored times in our analysis. How we do so will depend on our approach.
+
+\hypertarget{survhaz}{%
+\section{The Survival Curve and the Hazard function}\label{survhaz}}
+
+The field of survival analysis is relatively unusual in statistics, in that it isn't treated predominantly parametrically. For most continuous data, it is overwhelmingly common to work with the normal distribution and its friends (eg. the student's t distribution). Similarly binary data is dominated by the binomial distribution. Inference is therefore often focussed on the parameters \(\mu,\;\sigma\) or \(p\), as an adequate summary of the truth given whatever parameteric assumption has been made.
+
+However, in survival analysis, it is often the case that we focus on the whole shape of the data; there isn't an accepted dominating probability distribution. In order to be able to deal with time-to-event data, we need to introduce some key ways of working with such data.
+
+The \textbf{survival time} (or time-to-event) \(t\) for a particular individual can be thought of as the value of a random variable \(T\), which can take any non-negative value. We can think in terms of a probability distribution over the range of \(T\). If \(T\) has a probability distribution with underlying \emph{probability density function} \(f\left(t\right)\), then the \emph{cumulative distribution function} is given by
+
+\[F\left(t\right) = P\left(T<t\right) = \int\limits_0^t f\left(u\right)du, \]
+and this gives us the probability that the survival time is less than \(t\).
+
+\begin{definition}
+The \textbf{survival function}, \(\operatorname{S}\left(t\right)\), is the probability that some individual (in our context a participant) survives longer than time \(t\). Therefore \(\operatorname{S}\left(t\right) = 1 - F(t)\).
+Conventionally we plot \(\operatorname{S}\left(t\right)\) against \(t\) and this gives us a \textbf{survival curve}.
+\end{definition}
+
+We can immediately say two things about survival curves:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Since all participants must be alive (or equivalent) at the start of the trial, \(\operatorname{S}\left(0\right)=1\).
+\item
+  Since it's impossible to survive past \(t_2>t_1\) but not past time \(t_1\), we must have \(\frac{d\operatorname{S}\left(t\right)}{dt}\leq{0}\), ie. \(\operatorname{S}\left(t\right)\) is non-increasing.
+\end{enumerate}
+
+Figure \ref{fig:egsurvival} shows two survival curves, comparing different therapies. We see that the hormonal therapy reduces the survival time slightly compared to no hormonal therapy.
+
+\begin{figure}
+\centering
+\includegraphics{images/survival_eg.png}
+\caption{\label{fig:egsurvival}An example of two survival curves, taken from \citet{syriopoulou2022standardised}.}
+\end{figure}
+
+Following on from the survival function, we have another (slightly less intuitive) quantity: the \textbf{Hazard function} \(h\left(t\right)\).
+
+\begin{definition}
+The \textbf{Hazard function} \(h(t)\) is the probability that an individual who has survived up to time \(t\) fails just after time \(t\); in other words, the instantaneous probability of death (or \emph{experiencing the event}) at time \(t\).
+\end{definition}
+
+If we use \(T\) to denote the random variable of survival time (or time-to-event) then \(\operatorname{S}\left(t\right)\) and \(h(t)\) are defined by
+
+\[
+\begin{aligned}
+\operatorname{S}\left(t\right)&= \operatorname{Pr}\left(T>t\right)\\
+h\left(t\right) & = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\left(t<T<t+s\mid{T>t}\right)}{s}.
+\end{aligned}
+\]
+Using the definition of conditional probability, we can rewrite \(h(t)\) as
+
+\[
+\begin{aligned}
+h\left(t\right) & = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\left(t<T<t+s\mid{T>t}\right)}{s} \\
+ & = \lim\limits_{s\rightarrow{0+}}\left[\frac{1}{\operatorname{Pr}\left(T>t\right)}\cdot\frac{\operatorname{Pr}\left(\left(t<T<t+s\right)\cap\left(T>t\right)\right)}{s}\right] \\
+ & = \lim\limits_{s\rightarrow{0+}}\left[\frac{1}{\operatorname{Pr}\left(T>t\right)}\cdot\frac{\operatorname{Pr}\left(t<T<t+s\right)}{s}\right]\\
+ & = \frac{f\left(t\right)}{\operatorname{S}\left(t\right)},
+\end{aligned}
+\]
+where \(f\left(\cdot\right)\) is the probability density of \(T\). The hazard function can take any positive value (unlike the survival function), and for this reason \(\log\left(h\left(t\right)\right)\) is often used to transform it to the real line. The hazard function can also be called the `hazard rate', the `instantaneous death rate', the `intensity rate' or the `force of mortality'.
+
+As we hinted before, there are fundamentally two ways to deal with survival data: we can go about things either parametrically or non-parametrically. Unusually for statistics in general, the non-parametric paradigm is prevalent in survival analysis. We will consider some methods from both paradigms.
+
+\hypertarget{the-kaplan-meier-estimator}{%
+\subsection{The Kaplan-Meier estimator}\label{the-kaplan-meier-estimator}}
+
+The \textbf{Kaplan-Meier estimator} is a non-parametric estimate of \(\operatorname{S}\left(t\right)\), originally presented in \citet{kaplan1958nonparametric}. The idea behind it is to divide the interval \(\left[0,\;t\right]\) into many short consecutive intervals,
+
+\[\left[0,\,t\right] = \bigcup\limits_{k=0}^K \left[s_k,\,s_{k+1}\right],\]
+where \(s_k<s_{k+1}\;\forall{k}\), \(s_0=0\) and \(s_{K+1}=t\). We then estimate the probability of surviving past some time \(t\) by multiplying together the probabilities of surviving the successive intervals up to time \(t\). No distributional assumptions are made, and the probability of surviving interval \(\left[s_k,\,s_{k+1}\right]\) is estimated by \(1-Q\), where
+
+\[Q = \frac{\text{Number who die in that interval}}{\text{Number at risk of death in that interval}}.\]
+More precisely, let's say that deaths are observed at times \(t_1<t_2<\ldots < t_n\), and that the number of deaths at time \(t_i\) is \(d_i\) out of a possible \(n_i\). Then for some time \(t\in\left[t_J,\,t_{J+1}\right)\), the Kaplan-Meier estimate of \(\operatorname{S}\left(t\right)\) is
+
+\[\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - d_j\right)}{n_j}.\]
+
+Notice that the number of people at risk at time \(t_{j+1}\), \(n_{j+1}\), will be the number of people at risk at time \(t_j\) (which was \(n_j\)), minus any who died at time \(t_j\) (which we write as \(d_j\)) and any who were censored in the interval \(\left[t_j,\,t_{j+1}\right)\). In this way, the Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.
+
+\begin{example}
+\protect\hypertarget{exm:surveg1}{}\label{exm:surveg1}\citet{edmonson1979prognosis} conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group \(C\)) with a mixture of cyclophosphamide and adriamycin (group \(T\)). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-47}Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.}
+\centering
+\begin{tabular}[t]{l|r|r}
+\hline
+  & FU\_time & FU\_status\\
+\hline
+1 & 59 & 1\\
+\hline
+2 & 115 & 1\\
+\hline
+3 & 156 & 1\\
+\hline
+22 & 268 & 1\\
+\hline
+23 & 329 & 1\\
+\hline
+24 & 353 & 1\\
+\hline
+25 & 365 & 1\\
+\hline
+26 & 377 & 0\\
+\hline
+4 & 421 & 0\\
+\hline
+5 & 431 & 1\\
+\hline
+6 & 448 & 0\\
+\hline
+7 & 464 & 1\\
+\hline
+8 & 475 & 1\\
+\hline
+9 & 477 & 0\\
+\hline
+10 & 563 & 1\\
+\hline
+11 & 638 & 1\\
+\hline
+12 & 744 & 0\\
+\hline
+13 & 769 & 0\\
+\hline
+14 & 770 & 0\\
+\hline
+15 & 803 & 0\\
+\hline
+16 & 855 & 0\\
+\hline
+17 & 1040 & 0\\
+\hline
+18 & 1106 & 0\\
+\hline
+19 & 1129 & 0\\
+\hline
+20 & 1206 & 0\\
+\hline
+21 & 1227 & 0\\
+\hline
+\end{tabular}
+\end{table}
+
+We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
+We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time \(t_j\); number at risk \(n_j\); number of events/deaths \(d_j\); number of censorings in \(\left[t_{j-1},\,t_j\right)\); estimate of survival curve.
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-48}Kaplan-Meier estimator calculations for ovarian cancer dataset.}
+\centering
+\begin{tabular}[t]{>{}r|r|r|r|>{}r}
+\hline
+time & n\_risk & n\_event & n\_cens & survival\\
+\hline
+\textbf{59} & 26 & 1 & 0 & \textbf{0.9615385}\\
+\hline
+\textbf{115} & 25 & 1 & 0 & \textbf{0.9230769}\\
+\hline
+\textbf{156} & 24 & 1 & 0 & \textbf{0.8846154}\\
+\hline
+\textbf{268} & 23 & 1 & 0 & \textbf{0.8461538}\\
+\hline
+\textbf{329} & 22 & 1 & 0 & \textbf{0.8076923}\\
+\hline
+\textbf{353} & 21 & 1 & 0 & \textbf{0.7692308}\\
+\hline
+\textbf{365} & 20 & 1 & 0 & \textbf{0.7307692}\\
+\hline
+\textbf{431} & 17 & 1 & 2 & \textbf{0.6877828}\\
+\hline
+\textbf{464} & 15 & 1 & 1 & \textbf{0.6419306}\\
+\hline
+\textbf{475} & 14 & 1 & 0 & \textbf{0.5960784}\\
+\hline
+\textbf{563} & 12 & 1 & 1 & \textbf{0.5464052}\\
+\hline
+\textbf{638} & 11 & 1 & 0 & \textbf{0.4967320}\\
+\hline
+\end{tabular}
+\end{table}
+
+To demonstrate the effect of including (and correctly treating) the censored data, we can do the same thing, but this time (1) leaving out all censored data and (2) treating all censored data times as deaths. Figure \ref{fig:kmov} shows the resulting survival curve estimates.
+
+\includegraphics{CT4H_notes_files/figure-latex/kmov-1.pdf}
+Leaving out the censored observations entirely is the most problematic approach, since it causes a serious underestimate, and in this case behaves as though there are no survivors after \(t=638\), which is untrue. Treating the censored data as deaths also leads to an underestimate of the survival probability, and notably creates a rather spurious curve past the last real death observation.
+
+The `correct' Kaplan-Meier estimate may seem a bit disatisfying, since it stops at \(t=638\) with a probabiilty of \(0.497\). However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at \(t=638\), and some of the other censored participants may also have been.
+\end{example}
+
+For a clinical trial, we want to plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we'll talk about this later).
+
+\begin{example}
+\protect\hypertarget{exm:veteranmyeloid}{}\label{exm:veteranmyeloid}
+
+Figure \ref{fig:ovarian} shows the Kaplan Meier plots for the ovarian cancer data from Figure \ref{fig:kmov}, this time split by treatment group.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/ovarian-1.pdf}
+\caption{\label{fig:ovarian}Kaplan Meier curves for the ovarian cancer data, split by treatment. Red is for group T (mixture of cyclophosphamide and adriamycin), black for group C (cyclophosphamide only).}
+\end{figure}
+
+The second dataset we will use throughout this chapter has been simulated based on a trial of acute myeloid leukemia (\citet{le2018application}) and is from the \texttt{survival} package \citet{survival-package}.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/myeloid-1.pdf}
+\caption{\label{fig:myeloid}Kaplan Meier curves for the Myeloid data, split by treatment. Red is for group T, black for group C (placebo).}
+\end{figure}
+
+\end{example}
+
+\hypertarget{a-parametric-approach}{%
+\subsection{A parametric approach}\label{a-parametric-approach}}
+
+In a parametric approach, we'll assume that the survival time \(T\) follows some probability distribution, up to unknown parameters which we will estimate from the data. The simplest distribution for time-to-event data is the \emph{exponential distribution}, which has density
+
+\[f\left(t\right) = \lambda e^{-\lambda t} \text{ for }t>0,\]
+
+survival function
+
+\[\operatorname{S}\left(t\right) = 1- \int\limits_{0}^t{\lambda e^{-\lambda t}} = e^{-\lambda t}, \]
+and mean survival time \(\frac{1}{\lambda}\). The hazard function is therefore
+
+\[h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)} = \lambda, \]
+that is, the hazard is constant.
+
+\hypertarget{expll}{%
+\subsubsection{Maximum likelihood for time-to-event data}\label{expll}}
+
+Suppose our dataset has \(n\) times \(t_1,\,t_2,\,\ldots,t_n\). Of these, \(m\) are fully observed and \(n-m\) are censored. We can create a set of indicators \(\delta_1,\ldots,\delta_n\), where \(\delta_i=1\) if observation \(i\) is fully observed and \(\delta_i=0\) if it is censored.
+
+Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, \(f\left(t_i\right)\). However, this won't work for survival data, because for our censored times (those for which \(\delta_i=0\)) we only know that the time-to-event is greater than \(t_i\). For these observations, it is the survival time (remember that this is \(p\left(T>t\right)\)) that contributes what we need to the likelihood function.
+
+Therefore (for either probability distribution) we have
+
+\[L = \prod\limits_{i=1}^n f\left(t_i\right)^\delta_i S\left(t_i\right)^{1-\delta_i}.\]
+If we have \(T\sim Exp\left(\lambda\right)\) then the log-likelihood is
+
+\[
+\begin{aligned}
+\ell &= \sum\limits_{i=1}^n \delta_i\left(\log\lambda - \lambda t_i\right) - \sum\limits_{i=1}^n\left(1-\delta_i\right)\lambda t_i \\
+& =  m\log\lambda - \lambda\sum\limits_{i=1}^n t_i. 
+\end{aligned}
+\]
+
+From this we can find the maximum likelihood estimator (MLE)
+
+\[\hat{\lambda} = \frac{m}{\sum\limits_{i=1}^n t_i}.\]
+The variance of the MLE is
+
+\begin{equation}
+\operatorname{var}\left(\hat\lambda\right) = \frac{\lambda^2}{m},
+\label{eq:lambdavar}
+\end{equation}
+
+which we can approximate by
+
+\[\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.\]
+
+Notice that the numerator in Equation \eqref{eq:lambdavar} is \(m\), the number of complete observations (rather than \(n\) the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.
+
+\hypertarget{aside-sample-size-calculations-for-time-to-event-data}{%
+\subsection*{Aside: Sample size calculations for time-to-event data}\label{aside-sample-size-calculations-for-time-to-event-data}}
+\addcontentsline{toc}{subsection}{Aside: Sample size calculations for time-to-event data}
+
+There are implications here for sample size calculations, which must take into account the duration of a trial; it is important that trials monitor patients until a sufficient proportion have experienced the event (whatever it is). Sample size calculations for time-to-event data therefore have two components:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The power of the trial can first be expressed in terms of \(m\), the number of complete observations.
+\item
+  A separate calculation is needed to estimate the number of participants needing to be recruited, and length of trial, to be sufficiently likely to achieve that value of \(m\).
+\end{enumerate}
+
+Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).
+
+\begin{example}
+
+Returning to the dataset from Example \ref{exm:surveg1}, we can fit an exponential distribution to the data simply by estimating the MLE
+
+\[ 
+\begin{aligned}
+\hat{\lambda}_C &= \frac{m_C}{\sum\limits_{i=1}^{n_C} t_i}\\
+& =\frac{7}{6725}\\
+& = 0.00104
+\end{aligned}
+\]
+and
+
+\[ 
+\begin{aligned}
+\hat{\lambda}_T &= \frac{m_T}{\sum\limits_{i=1}^{n_T} t_i}\\
+& =\frac{5}{8863}\\
+& = 0.00056
+\end{aligned}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mC\_ov }\OtherTok{=} \FunctionTok{sum}\NormalTok{((ovarian}\SpecialCharTok{$}\NormalTok{fustat}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\&}\NormalTok{(ovarian}\SpecialCharTok{$}\NormalTok{rx}\SpecialCharTok{==}\DecValTok{1}\NormalTok{))}
+\NormalTok{mT\_ov }\OtherTok{=} \FunctionTok{sum}\NormalTok{((ovarian}\SpecialCharTok{$}\NormalTok{fustat}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\&}\NormalTok{(ovarian}\SpecialCharTok{$}\NormalTok{rx}\SpecialCharTok{==}\DecValTok{2}\NormalTok{))}
+\NormalTok{tsum\_ov\_C }\OtherTok{=} \FunctionTok{sum}\NormalTok{(ovarian}\SpecialCharTok{$}\NormalTok{futime[ovarian}\SpecialCharTok{$}\NormalTok{rx}\SpecialCharTok{==}\DecValTok{1}\NormalTok{])}
+\NormalTok{tsum\_ov\_T }\OtherTok{=} \FunctionTok{sum}\NormalTok{(ovarian}\SpecialCharTok{$}\NormalTok{futime[ovarian}\SpecialCharTok{$}\NormalTok{rx}\SpecialCharTok{==}\DecValTok{2}\NormalTok{])}
+\NormalTok{m\_ov }\OtherTok{=}\NormalTok{ mT\_ov }\SpecialCharTok{+}\NormalTok{ mC\_ov}
+\NormalTok{tsum\_ov }\OtherTok{=}\NormalTok{ tsum\_ov\_C }\SpecialCharTok{+}\NormalTok{ tsum\_ov\_T}
+\NormalTok{lamhat\_ov\_C }\OtherTok{=}\NormalTok{ mC\_ov }\SpecialCharTok{/}\NormalTok{ tsum\_ov\_C}
+\NormalTok{lamhat\_ov\_T }\OtherTok{=}\NormalTok{ mT\_ov }\SpecialCharTok{/}\NormalTok{ tsum\_ov\_T}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/expov-1.pdf}
+\caption{\label{fig:expov}Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).}
+\end{figure}
+
+\end{example}
+
+We will think more about how this can be used in the next section, when we come to compare treatment effects.
 
 \hypertarget{references}{%
 \chapter*{References}\label{references}}

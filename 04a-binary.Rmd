@@ -1100,7 +1100,7 @@ The dashboard below shows the distributions of fitted values for patients with $
 If you're viewing this in PDF you'll just have a static image, but you can find the dashboard at \newline
 [https://racheloughton.shinyapps.io/ROCplots/](https://racheloughton.shinyapps.io/ROCplots/).
 
-```{r}
+```{r, eval=knitr::is_html_output()}
 knitr::include_app("https://racheloughton.shinyapps.io/ROCplots/", height="600px")
 
 ```
@@ -1198,7 +1198,6 @@ plot_s2 = ggplot(data=indo_fact[indo_fact$site=="2_IU",], aes(x=risk, col=rx)) +
   theme_bw()+ggtitle("Site 2")
 
 grid.arrange(plot_s1, plot_s2, nrow=2)
-
 
 ```
 

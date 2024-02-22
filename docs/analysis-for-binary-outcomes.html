@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-19" />
+<meta name="date" content="2024-02-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="ss-bin.html"/>
-<link rel="next" href="computer-practical-1.html"/>
+<link rel="next" href="working-with-time-to-event-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -283,6 +283,17 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.4.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
 <li class="chapter" data-level="6.4.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Part III: Survival data</b></span></li>
+<li class="chapter" data-level="7" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html"><i class="fa fa-check"></i><b>7</b> Working with time-to-event data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#censored-times"><i class="fa fa-check"></i><b>7.1</b> Censored times</a></li>
+<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#survhaz"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
+<li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -1059,7 +1070,7 @@ which is equivalent to a probability of post-ECRP pancreatitis of</p>
 </div>
 <div id="diagnostics-for-logistic-regression" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Diagnostics for logistic regression<a href="analysis-for-binary-outcomes.html#diagnostics-for-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are many diagnostic techniques for binomial data (see eg. <span class="citation">Collett (<a href="#ref-collett_bin">2003</a>)</span>) but we will only touch on a small number. Unlike with a linear regression model, we don’t have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of <code>1</code>, we can’t conclude that their probability should have been high. If the ‘true’ probability of <span class="math inline">\(X=1\)</span> for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have <span class="math inline">\(X=0\)</span>.</p>
+<p>There are many diagnostic techniques for binomial data (see eg. <span class="citation">Collett (<a href="#ref-collett_bin">2003a</a>)</span>) but we will only touch on a small number. Unlike with a linear regression model, we don’t have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of <code>1</code>, we can’t conclude that their probability should have been high. If the ‘true’ probability of <span class="math inline">\(X=1\)</span> for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have <span class="math inline">\(X=0\)</span>.</p>
 <p>This makes diagnostics somewhat trickier.</p>
 <p>Diagnostics for logistic regression fall into two categories: <strong>discrimination</strong> and <strong>calibration</strong>. We will look at each of these in turn, though by no means exhaustively.</p>
 <div id="discrimination" class="section level3 hasAnchor" number="6.4.1">
@@ -1143,7 +1154,7 @@ Figure 6.6: Diagnostic plots for our model, focussing on calibration.
 ———. 1998. <span>“Confidence Intervals for the Number Needed to Treat.”</span> <em>Bmj</em> 317 (7168): 1309–12.
 </div>
 <div id="ref-collett_bin" class="csl-entry">
-Collett, David. 2003. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+Collett, David. 2003a. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
 </div>
 <div id="ref-elmunzer2012randomized" class="csl-entry">
 Elmunzer, B Joseph, James M Scheiman, Glen A Lehman, Amitabh Chak, Patrick Mosler, Peter DR Higgins, Rodney A Hayward, et al. 2012. <span>“A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.”</span> <em>New England Journal of Medicine</em> 366 (15): 1414–22.
@@ -1161,7 +1172,7 @@ Newcombe, Robert G. 1998. <span>“Interval Estimation for the Difference Betwee
         </div>
       </div>
 <a href="ss-bin.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="working-with-time-to-event-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

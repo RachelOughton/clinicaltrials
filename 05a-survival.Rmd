@@ -103,18 +103,6 @@ c(est_diff_ov - qnorm(0.975)*se_ov, est_diff_ov + qnorm(0.975)*se_ov)
 ```
 
 
-```{r ovplotlr, fig.cap = "Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)."}
-plot(ov_km_fit, xlab="Time", ylab = "S(t)", col=c(1,2))
-lamhat_ov_C = mC_ov / tsum_ov_C
-lamhat_ov_T = mT_ov / tsum_ov_T
-xvec = 1:2500
-svec_ov_C = exp(-lamhat_ov_C*xvec)
-svec_ov_T = exp(-lamhat_ov_T*xvec)
-
-lines(xvec, svec_ov_C , type = "l", col=1, lty=2)
-lines(xvec, svec_ov_T , type = "l", col=2, lty=2)
-
-```
 
 Figure \@ref(fig:ovplotlr) shows the fitted curves, using $S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]$ for group $X$, along with the Kaplan Meier estimate of the survival curve. Although there isn't much data, the exponential distribution looks to be an OK fit.
 
@@ -178,7 +166,7 @@ f\left(x\mid \lambda,\,k\right) =
 $$
 
 
-Here, $\gamma$ is the *shape* parameter, and $\lambda$ is the *scale* parameter. If $\gamma=1$ then this reduces to an exponential distribution.
+Here, $\gamma$ is the *shape* parameter, and $\lambda$ is the *scale* parameter. If $\gamma=1$ then this reduces to an exponential distribution. You can read more about it, should you choose to, in @collett_surv.
 :::
 
 For the Weibull distribution, we have
@@ -217,7 +205,7 @@ Under $H_0$, we expect the deaths (or events) to be distributed proportionally b
 :::{.definition}
 The **hypergeometric distribution** is a discrete probability distribution describing the probability of $k$ successes in $n$ draws (without replacement), taken from a finite population of size $N$ that has exactly $K$ objects with the desired feature. The probability mass function for a variable $X$ following a hypergeometric function is
 
-$$p\left(X=k\mid{K,N,n}\right) = \frac{{K \choose k}{{N-K} \choose {n-k}}}{{N \choose n}}. $$
+$$p\left(X=k\mid{K,N,n}\right) = \frac{{\binom{K}{k}}{\binom{N-K}{n-k}}}{{\binom{N}{n}}}. $$
 An example would be an urn containing 50 ($N$) balls, of which 16 ($K$) are green and the rest (34, $N-K$) are red. If we draw 10 ($n$) balls **without replacement**, $X$ is the random variable whose outcome is $k$, the number of green balls drawn.
 :::
 
@@ -250,6 +238,8 @@ A someone simpler, and more commonly used, version of the log-rank test uses the
 $$\frac{\left(O_C - E_C\right)^2}{E_C} + \frac{\left(O_T - E_T\right)^2}{E_T}.$$
 
 It turns out that this test statistic is always smaller than $\frac{U^2}{V}$, so this test is slightly more conservative (ie. it has a larger p-value).
+
+Notice that for both these test statistics, the actual difference between observed and expected is used, not the absolute difference. Therefore if the differences change in sign over time, the values are likely to cancel out (at least to some extent) and the log-rank test is not appropriate.
 
 
 :::{.example}
@@ -351,7 +341,7 @@ As with continuous and binary outcome variables, what we would really like to be
 The conventional way to do this is using a **proportional hazards model**, where we assume that 
 
 $$h_T\left(t\right) = \psi h_C\left(t\right) $$
-for any $t>0$ and for some constant $\psi>0$. We call $\psi$ the **relative hazard** or **hazard ratio**. If $\psi<1$ then the hazard at time $t$ under treatment $T$ is smaller than under control $C$. If $\psi>1$ then the hazard at time $t$ is greater in greater in group $T$ than in group $C$. 
+for any $t>0$ and for some constant $\psi>0$. We call $\psi$ the **relative hazard** or **hazard ratio**. If $\psi<1$ then the hazard at time $t$ under treatment $T$ is smaller than under control $C$. If $\psi>1$ then the hazard at time $t$ is greater in greater in group $T$ than in group $C$. The important point is that $\psi$ doesn't depend on $t$. The hazard for a particular patient might be greater than for another, due to things like their age, disease history, treatment group and so on, but the extent of this difference doesn't change over time.
 
 We can adopt the concept of a **baseline hazard function** $h_0\left(t\right)$, where for someone in group $C$ (for now), their hazard at time $t$ is $h_0\left(t\right)$, and for someone in group $T$ it is $\psi h_0\left(t\right)$. Since we must have $\psi>0$, it makes sense to set
 
@@ -400,13 +390,96 @@ $$\log\left(\frac{h_1\left(t\right)}{h_0\left(t\right)}\right) = \mathbf{x}_i^T\
 
 Notice that there is no constant in the linear term - if there was, it could just be absorbed into the baseline hazard function.
 
-There are ways to fit this model that rely on specifying the hazard function using parametric methods, but the way we will look (and the most widely used) is one developed by @cox1972regression.
+There are ways of fitting this model that rely on specifying the hazard function using parametric methods, but the method we will study (and the most widely used) is one developed by @cox1972regression.
 
 ### Cox regression
 
-The beauty of Cox regression is that it avoids specifying a form for $h_0\left(t\right)$ altogether.
+The beauty of Cox regression is that it avoids specifying a form for $h_0\left(t\right)$ altogether. 
 
-P63 IN COLLETT
+To fit the model in Equation \@ref(eq:hazfun) we must estimate the coefficients $\beta_1,\ldots,\beta_p$. It also appears like we should estimate the baseline hazard $h_0\left(t\right)$ somehow too, but the great advance made by Cox was to develop a method where this isn't necessary. We don't need to estimate $h_0\left(t\right)$ to make inferences about the hazard ratio 
+
+$$\frac{h_i\left(t\right)}{h_0\left(t\right)}.$$
+We will estimate the coefficients $\boldsymbol\beta$ using maximum likelihood, and so we'll need to specify a likelihood function for the $\boldsymbol\beta$, which will be a function of $\mathbf{x}^T\boldsymbol\beta$ and our observed data, the survival times $t_i$.
+
+Suppose we have data for $n$ participants, and that these include $r$ complete observations (often referred to as deaths) and $n-r$ right-censored survival times. Suppose also that all the complete observation times are distinct. Since time itself is continuous, this is always technically true, but in data the time will be rounded and so there may be multiple observations at one time.
+
+We can order these $r$ event times
+
+$$t_{(1)}< t_{(2)} < \ldots < t_{(r)},$$
+such that $t_{(j)}$ is the time of the $j^{\text{th}}$ event to be observed.  
+
+At time $t_{(j)}$, there will be some number of individuals who are 'at risk' of the event, because either their observation time or their censored survival time is greater than $t_{(j)}$. The set of these individuals is the **risk set**, denoted $R\left(t_{(j)}\right)$.
+
+@cox1972regression shows that the relevant likelihood function for the proportional hazards model in Equation \@ref(eq:hazfun) is
+
+\begin{equation}
+L\left(\boldsymbol\beta\right) = \prod\limits_{j=1}^r\frac{\exp\left[\mathbf{x}_{(j)}^T\boldsymbol\beta\right]}{\sum\limits_{l\in R\left(t_{(j)}\right)}{\exp\left[\mathbf{x}_l^T\boldsymbol\beta\right]}}
+(\#eq:lcox)
+\end{equation}
+
+where $\mathbf{x}_{(j)}$ is the vector of covariates for the individual who dies (or equivalent) at time $t_{(j)}$. Notice that the product is over only those individuals with complete observations, but censored individuals do contributes to the sum in the denominator.
+
+
+Notice that this is not a true likelihood, since it depends only on the ordering of the data (the observation and censoring times) and not the data itself. This makes it a **partial likelihood**. The argument given to justify this is that because the baseline hazard $h_0\left(t\right)$ has an arbitrary form, it's possible that except for at these observed times, $h_0\left(t\right)=0$, and therefore $h_i\left(t\right)=0$. This means the intervals between successive observations convey no information about the effect of the covariates on hazard, and therefore about the $\boldsymbol\beta$ parameters. 
+
+
+The numerator of the fraction inside the product in Equation \@ref(eq:lcox) is the relative hazard for the person who actually did die at time $t_{(j)}$. The denominator is the sum of the relative hazards for all those who possibly could have died at time $t_{(j)}$ (the risk set $R\left(t_{(j)}\right)$). Thus, in very loose terms, maximizing the likelihood means finding values for $\boldsymbol\beta$ that mean the people who did die were 'the most likely' to die at the time they did. 
+
+If you want to know more detail about how this likelihood was derived, you can find in in Section 3.3 of @collett_surv, or in Cox's [original paper](https://www.jstor.org/stable/pdf/2985181.pdf) (@cox1972regression).
+
+If we set 
+
+$$
+\delta_i = 
+\begin{cases}
+0\;\;\text{ if individual }i\text{ is censored}\\
+1\;\;\text{ if individual }i\text{ is observed}
+\end{cases}
+$$
+then we can write Equation \@ref(eq:lcox) as 
+
+$$L\left(\boldsymbol\beta\mid{\text{data}}\right) =   \prod\limits_{i=1}^n\left(\frac{\exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]}{\sum\limits_{l\in R\left(t_i\right)}{\exp\left[\mathbf{x}_l^T\boldsymbol\beta\right]}}\right)^{\delta_i},$$
+where $R\left(t_i\right)$ is the risk set at time $t_i$.
+
+From this we can find the log-likelihood
+
+$$\ell\left(\boldsymbol\beta\mid{\text{data}}\right) = \sum\limits_{i=1}^n \delta_i\left[\mathbf{x}_i^T\boldsymbol\beta - \log\sum\limits_{l\in R\left(t_i\right)}\exp\left(\mathbf{x}_l^T\boldsymbol\beta\right)\right].$$
+The MLE $\hat{\boldsymbol\beta}$ is found using numerical methods (often Newton-Raphson, which you'll have seen if you did Numerical Analysis II).
+
+### How can we tell if a proportional hazards model is appropriate? {-}
+
+We can't easily visualise the hazard function for a dataset, and instead would plot the survival function. So can we tell if the proportional hazards assumption is met by looking at the survival curve?
+
+Thankfully, it turns out that if two hazard functions are proportional, their survival functions won't cross one another. 
+
+Suppose $h_C\left(t\right)$ is the hazard at time $t$ for an individual in group $C$, and $h_T\left(t\right)$ is the hazard for that same individual in group $T$. If the two hazards are proportional then we have
+
+$$h_C\left(t\right) = \psi h_T\left(t\right) $$
+for some constant $\psi$.
+
+Recall from Section \@ref(survhaz) that 
+
+$$h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)},$$
+where $S\left(t\right)$ is the survival function and $f\left(t\right)$ is the probability density of $t$. We can therefore write
+
+$$h\left(t\right) = -\frac{d}{dt}\left[\log\left(S\left(t\right)\right)\right]$$
+and rearrange this to
+
+\begin{equation}
+S\left(t\right) = \exp \left(-H\left(t\right)\right)
+(\#eq:sfun)
+\end{equation}
+
+
+where $$H\left(t\right) = \int\limits_0^t h\left(u\right) du.$$
+
+Therefore for our two hazard functions, we have
+
+$$\exp\left\lbrace - \int\limits_0^t h_C\left(u\right)du \right\rbrace =\exp\left\lbrace -\int\limits_0^t\psi h_T\left(u\right) du \right\rbrace  $$
+From Equation \@ref(eq:sfun) we see that therefore
+
+$$S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.$$
+Since the survival function is always between 0 and 1, we can see that the value of $\psi$ determines whether $S_C\left(t\right)<S_T\left(t\right)$ (if $\psi>1$) or $S_C\left(t\right)>S_T\left(t\right)$ (if $0<\psi<1$). The important thing is that **the survival curves will not cross**. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. There are some more formal tests that can be conducted to assess the proportional hazards assumption, but we won't go into them here.
 
 :::{.example}
 

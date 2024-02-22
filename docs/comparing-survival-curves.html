@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-16" />
+<meta name="date" content="2024-02-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -289,7 +289,7 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html"><i class="fa fa-check"></i><b>7</b> Working with time-to-event data</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#censored-times"><i class="fa fa-check"></i><b>7.1</b> Censored times</a></li>
-<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-survival-curve-and-the-hazard-function"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
+<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#survhaz"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
 <li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
@@ -307,13 +307,17 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
 <li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#cox-regression"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
+<ul>
 <li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
 <li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
 <li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
 <ul>
 <li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
@@ -460,7 +464,7 @@ f\left(x\mid \lambda,\,k\right) =
 0 &amp; \text{otherwise}.
 \end{cases}
 \]</span></p>
-<p>Here, <span class="math inline">\(\gamma\)</span> is the <em>shape</em> parameter, and <span class="math inline">\(\lambda\)</span> is the <em>scale</em> parameter. If <span class="math inline">\(\gamma=1\)</span> then this reduces to an exponential distribution.</p>
+<p>Here, <span class="math inline">\(\gamma\)</span> is the <em>shape</em> parameter, and <span class="math inline">\(\lambda\)</span> is the <em>scale</em> parameter. If <span class="math inline">\(\gamma=1\)</span> then this reduces to an exponential distribution. You can read more about it, should you choose to, in <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>.</p>
 </div>
 <p>For the Weibull distribution, we have</p>
 <p><span class="math display">\[\operatorname{S}\left(t\right) = \exp\left(-\lambda t^{\gamma}\right). \]</span>
@@ -513,7 +517,7 @@ This means that <span class="math inline">\(e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_
 <p>If we take the margins of the table as fixed (by which we mean <span class="math inline">\(n_j, \,d_j\,n_{Cj}\)</span> and <span class="math inline">\(n_{Tj}\)</span>), then <span class="math inline">\(d_{Cj}\)</span> has a <strong>hypergeometric distribution</strong>.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-43" class="definition"><strong>Definition 8.2  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
-<p><span class="math display">\[p\left(X=k\mid{K,N,n}\right) = \frac{{K \choose k}{{N-K} \choose {n-k}}}{{N \choose n}}. \]</span>
+<p><span class="math display">\[p\left(X=k\mid{K,N,n}\right) = \frac{{\binom{K}{k}}{\binom{N-K}{n-k}}}{{\binom{N}{n}}}. \]</span>
 An example would be an urn containing 50 (<span class="math inline">\(N\)</span>) balls, of which 16 (<span class="math inline">\(K\)</span>) are green and the rest (34, <span class="math inline">\(N-K\)</span>) are red. If we draw 10 (<span class="math inline">\(n\)</span>) balls <strong>without replacement</strong>, <span class="math inline">\(X\)</span> is the random variable whose outcome is <span class="math inline">\(k\)</span>, the number of green balls drawn.</p>
 </div>
 <p>In the notation of the definition, the mean is</p>
@@ -534,6 +538,7 @@ We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in th
 <p>A someone simpler, and more commonly used, version of the log-rank test uses the fact that under <span class="math inline">\(H_0\)</span>, the expected number of events (eg. deaths) in group <span class="math inline">\(X\)</span> is <span class="math inline">\(E_X = \sum\limits_je_{Xj}\)</span>, and the observed number is <span class="math inline">\(O_X = \sum\limits_j d_{Xj}\)</span>. The standard <span class="math inline">\(\chi^2\)</span> test formula can then be applied, and the test-statistic is</p>
 <p><span class="math display">\[\frac{\left(O_C - E_C\right)^2}{E_C} + \frac{\left(O_T - E_T\right)^2}{E_T}.\]</span></p>
 <p>It turns out that this test statistic is always smaller than <span class="math inline">\(\frac{U^2}{V}\)</span>, so this test is slightly more conservative (ie. it has a larger p-value).</p>
+<p>Notice that for both these test statistics, the actual difference between observed and expected is used, not the absolute difference. Therefore if the differences change in sign over time, the values are likely to cancel out (at least to some extent) and the log-rank test is not appropriate.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-44" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
 <p>First, the ovarian cancer dataset. To do this, we can tabulate the key values at each time step.</p>
@@ -601,7 +606,7 @@ We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in th
 <p>As with continuous and binary outcome variables, what we would really like to be able to do is to adjust our model for baseline covariates. It seems intuitively reasonable to suppose that factors like age, sex, disease status etc. might affect someone’s chances of survival (or whatever event we’re concerned with).</p>
 <p>The conventional way to do this is using a <strong>proportional hazards model</strong>, where we assume that</p>
 <p><span class="math display">\[h_T\left(t\right) = \psi h_C\left(t\right) \]</span>
-for any <span class="math inline">\(t&gt;0\)</span> and for some constant <span class="math inline">\(\psi&gt;0\)</span>. We call <span class="math inline">\(\psi\)</span> the <strong>relative hazard</strong> or <strong>hazard ratio</strong>. If <span class="math inline">\(\psi&lt;1\)</span> then the hazard at time <span class="math inline">\(t\)</span> under treatment <span class="math inline">\(T\)</span> is smaller than under control <span class="math inline">\(C\)</span>. If <span class="math inline">\(\psi&gt;1\)</span> then the hazard at time <span class="math inline">\(t\)</span> is greater in greater in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>.</p>
+for any <span class="math inline">\(t&gt;0\)</span> and for some constant <span class="math inline">\(\psi&gt;0\)</span>. We call <span class="math inline">\(\psi\)</span> the <strong>relative hazard</strong> or <strong>hazard ratio</strong>. If <span class="math inline">\(\psi&lt;1\)</span> then the hazard at time <span class="math inline">\(t\)</span> under treatment <span class="math inline">\(T\)</span> is smaller than under control <span class="math inline">\(C\)</span>. If <span class="math inline">\(\psi&gt;1\)</span> then the hazard at time <span class="math inline">\(t\)</span> is greater in greater in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>. The important point is that <span class="math inline">\(\psi\)</span> doesn’t depend on <span class="math inline">\(t\)</span>. The hazard for a particular patient might be greater than for another, due to things like their age, disease history, treatment group and so on, but the extent of this difference doesn’t change over time.</p>
 <p>We can adopt the concept of a <strong>baseline hazard function</strong> <span class="math inline">\(h_0\left(t\right)\)</span>, where for someone in group <span class="math inline">\(C\)</span> (for now), their hazard at time <span class="math inline">\(t\)</span> is <span class="math inline">\(h_0\left(t\right)\)</span>, and for someone in group <span class="math inline">\(T\)</span> it is <span class="math inline">\(\psi h_0\left(t\right)\)</span>. Since we must have <span class="math inline">\(\psi&gt;0\)</span>, it makes sense to set</p>
 <p><span class="math display">\[\psi = e^{\beta},\]</span>
 so that <span class="math inline">\(\beta = \log\psi\)</span> and <span class="math inline">\(\psi&gt;0\;\forall\beta\in\mathbb{R}\)</span>. Note that <span class="math inline">\(\beta&gt;0 \iff \psi&gt;1\)</span>.</p>
@@ -632,12 +637,65 @@ h_i\left(t\right) = \exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]h_0\left(t\ri
 <p>and we can rewrite it as</p>
 <p><span class="math display">\[\log\left(\frac{h_1\left(t\right)}{h_0\left(t\right)}\right) = \mathbf{x}_i^T\boldsymbol\beta.\]</span></p>
 <p>Notice that there is no constant in the linear term - if there was, it could just be absorbed into the baseline hazard function.</p>
-<p>There are ways to fit this model that rely on specifying the hazard function using parametric methods, but the way we will look (and the most widely used) is one developed by <span class="citation">Cox (<a href="#ref-cox1972regression">1972</a>)</span>.</p>
+<p>There are ways of fitting this model that rely on specifying the hazard function using parametric methods, but the method we will study (and the most widely used) is one developed by <span class="citation">Cox (<a href="#ref-cox1972regression">1972</a>)</span>.</p>
 </div>
 <div id="cox-regression" class="section level3 hasAnchor" number="8.3.2">
 <h3><span class="header-section-number">8.3.2</span> Cox regression<a href="comparing-survival-curves.html#cox-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The beauty of Cox regression is that it avoids specifying a form for <span class="math inline">\(h_0\left(t\right)\)</span> altogether.</p>
-<p>P63 IN COLLETT</p>
+<p>To fit the model in Equation <a href="comparing-survival-curves.html#eq:hazfun">(8.2)</a> we must estimate the coefficients <span class="math inline">\(\beta_1,\ldots,\beta_p\)</span>. It also appears like we should estimate the baseline hazard <span class="math inline">\(h_0\left(t\right)\)</span> somehow too, but the great advance made by Cox was to develop a method where this isn’t necessary. We don’t need to estimate <span class="math inline">\(h_0\left(t\right)\)</span> to make inferences about the hazard ratio</p>
+<p><span class="math display">\[\frac{h_i\left(t\right)}{h_0\left(t\right)}.\]</span>
+We will estimate the coefficients <span class="math inline">\(\boldsymbol\beta\)</span> using maximum likelihood, and so we’ll need to specify a likelihood function for the <span class="math inline">\(\boldsymbol\beta\)</span>, which will be a function of <span class="math inline">\(\mathbf{x}^T\boldsymbol\beta\)</span> and our observed data, the survival times <span class="math inline">\(t_i\)</span>.</p>
+<p>Suppose we have data for <span class="math inline">\(n\)</span> participants, and that these include <span class="math inline">\(r\)</span> complete observations (often referred to as deaths) and <span class="math inline">\(n-r\)</span> right-censored survival times. Suppose also that all the complete observation times are distinct. Since time itself is continuous, this is always technically true, but in data the time will be rounded and so there may be multiple observations at one time.</p>
+<p>We can order these <span class="math inline">\(r\)</span> event times</p>
+<p><span class="math display">\[t_{(1)}&lt; t_{(2)} &lt; \ldots &lt; t_{(r)},\]</span>
+such that <span class="math inline">\(t_{(j)}\)</span> is the time of the <span class="math inline">\(j^{\text{th}}\)</span> event to be observed.</p>
+<p>At time <span class="math inline">\(t_{(j)}\)</span>, there will be some number of individuals who are ‘at risk’ of the event, because either their observation time or their censored survival time is greater than <span class="math inline">\(t_{(j)}\)</span>. The set of these individuals is the <strong>risk set</strong>, denoted <span class="math inline">\(R\left(t_{(j)}\right)\)</span>.</p>
+<p><span class="citation">Cox (<a href="#ref-cox1972regression">1972</a>)</span> shows that the relevant likelihood function for the proportional hazards model in Equation <a href="comparing-survival-curves.html#eq:hazfun">(8.2)</a> is</p>
+<p><span class="math display" id="eq:lcox">\[\begin{equation}
+L\left(\boldsymbol\beta\right) = \prod\limits_{j=1}^r\frac{\exp\left[\mathbf{x}_{(j)}^T\boldsymbol\beta\right]}{\sum\limits_{l\in R\left(t_{(j)}\right)}{\exp\left[\mathbf{x}_l^T\boldsymbol\beta\right]}}
+\tag{8.3}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mathbf{x}_{(j)}\)</span> is the vector of covariates for the individual who dies (or equivalent) at time <span class="math inline">\(t_{(j)}\)</span>. Notice that the product is over only those individuals with complete observations, but censored individuals do contributes to the sum in the denominator.</p>
+<p>Notice that this is not a true likelihood, since it depends only on the ordering of the data (the observation and censoring times) and not the data itself. This makes it a <strong>partial likelihood</strong>. The argument given to justify this is that because the baseline hazard <span class="math inline">\(h_0\left(t\right)\)</span> has an arbitrary form, it’s possible that except for at these observed times, <span class="math inline">\(h_0\left(t\right)=0\)</span>, and therefore <span class="math inline">\(h_i\left(t\right)=0\)</span>. This means the intervals between successive observations convey no information about the effect of the covariates on hazard, and therefore about the <span class="math inline">\(\boldsymbol\beta\)</span> parameters.</p>
+<p>The numerator of the fraction inside the product in Equation <a href="comparing-survival-curves.html#eq:lcox">(8.3)</a> is the relative hazard for the person who actually did die at time <span class="math inline">\(t_{(j)}\)</span>. The denominator is the sum of the relative hazards for all those who possibly could have died at time <span class="math inline">\(t_{(j)}\)</span> (the risk set <span class="math inline">\(R\left(t_{(j)}\right)\)</span>). Thus, in very loose terms, maximizing the likelihood means finding values for <span class="math inline">\(\boldsymbol\beta\)</span> that mean the people who did die were ‘the most likely’ to die at the time they did.</p>
+<p>If you want to know more detail about how this likelihood was derived, you can find in in Section 3.3 of <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>, or in Cox’s <a href="https://www.jstor.org/stable/pdf/2985181.pdf">original paper</a> (<span class="citation">Cox (<a href="#ref-cox1972regression">1972</a>)</span>).</p>
+<p>If we set</p>
+<p><span class="math display">\[
+\delta_i =
+\begin{cases}
+0\;\;\text{ if individual }i\text{ is censored}\\
+1\;\;\text{ if individual }i\text{ is observed}
+\end{cases}
+\]</span>
+then we can write Equation <a href="comparing-survival-curves.html#eq:lcox">(8.3)</a> as</p>
+<p><span class="math display">\[L\left(\boldsymbol\beta\mid{\text{data}}\right) =   \prod\limits_{i=1}^n\left(\frac{\exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]}{\sum\limits_{l\in R\left(t_i\right)}{\exp\left[\mathbf{x}_l^T\boldsymbol\beta\right]}}\right)^{\delta_i},\]</span>
+where <span class="math inline">\(R\left(t_i\right)\)</span> is the risk set at time <span class="math inline">\(t_i\)</span>.</p>
+<p>From this we can find the log-likelihood</p>
+<p><span class="math display">\[\ell\left(\boldsymbol\beta\mid{\text{data}}\right) = \sum\limits_{i=1}^n \delta_i\left[\mathbf{x}_i^T\boldsymbol\beta - \log\sum\limits_{l\in R\left(t_i\right)}\exp\left(\mathbf{x}_l^T\boldsymbol\beta\right)\right].\]</span>
+The MLE <span class="math inline">\(\hat{\boldsymbol\beta}\)</span> is found using numerical methods (often Newton-Raphson, which you’ll have seen if you did Numerical Analysis II).</p>
+</div>
+<div id="how-can-we-tell-if-a-proportional-hazards-model-is-appropriate" class="section level3 unnumbered hasAnchor">
+<h3>How can we tell if a proportional hazards model is appropriate?<a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can’t easily visualise the hazard function for a dataset, and instead would plot the survival function. So can we tell if the proportional hazards assumption is met by looking at the survival curve?</p>
+<p>Thankfully, it turns out that if two hazard functions are proportional, their survival functions won’t cross one another.</p>
+<p>Suppose <span class="math inline">\(h_C\left(t\right)\)</span> is the hazard at time <span class="math inline">\(t\)</span> for an individual in group <span class="math inline">\(C\)</span>, and <span class="math inline">\(h_T\left(t\right)\)</span> is the hazard for that same individual in group <span class="math inline">\(T\)</span>. If the two hazards are proportional then we have</p>
+<p><span class="math display">\[h_C\left(t\right) = \psi h_T\left(t\right) \]</span>
+for some constant <span class="math inline">\(\psi\)</span>.</p>
+<p>Recall from Section <a href="working-with-time-to-event-data.html#survhaz">7.2</a> that</p>
+<p><span class="math display">\[h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)},\]</span>
+where <span class="math inline">\(S\left(t\right)\)</span> is the survival function and <span class="math inline">\(f\left(t\right)\)</span> is the probability density of <span class="math inline">\(t\)</span>. We can therefore write</p>
+<p><span class="math display">\[h\left(t\right) = -\frac{d}{dt}\left[\log\left(S\left(t\right)\right)\right]\]</span>
+and rearrange this to</p>
+<p><span class="math display" id="eq:sfun">\[\begin{equation}
+S\left(t\right) = \exp \left(-H\left(t\right)\right)
+\tag{8.4}
+\end{equation}\]</span></p>
+<p>where <span class="math display">\[H\left(t\right) = \int\limits_0^t h\left(u\right) du.\]</span></p>
+<p>Therefore for our two hazard functions, we have</p>
+<p><span class="math display">\[\exp\left\lbrace - \int\limits_0^t h_C\left(u\right)du \right\rbrace =\exp\left\lbrace -\int\limits_0^t\psi h_T\left(u\right) du \right\rbrace  \]</span>
+From Equation <a href="comparing-survival-curves.html#eq:sfun">(8.4)</a> we see that therefore</p>
+<p><span class="math display">\[S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.\]</span>
+Since the survival function is always between 0 and 1, we can see that the value of <span class="math inline">\(\psi\)</span> determines whether <span class="math inline">\(S_C\left(t\right)&lt;S_T\left(t\right)\)</span> (if <span class="math inline">\(\psi&gt;1\)</span>) or <span class="math inline">\(S_C\left(t\right)&gt;S_T\left(t\right)\)</span> (if <span class="math inline">\(0&lt;\psi&lt;1\)</span>). The important thing is that <strong>the survival curves will not cross</strong>. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. There are some more formal tests that can be conducted to assess the proportional hazards assumption, but we won’t go into them here.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-45" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
 <p>For the <code>ovarian</code> dataset</p>
@@ -694,6 +752,9 @@ h_i\left(t\right) = \exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]h_0\left(t\ri
 
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-collett_surv" class="csl-entry">
+———. 2003b. <em>Modelling Survival Data in Medical Research</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+</div>
 <div id="ref-cox1972regression" class="csl-entry">
 Cox, David R. 1972. <span>“Regression Models and Life-Tables.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 34 (2): 187–202.
 </div>

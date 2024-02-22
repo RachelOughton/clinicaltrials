@@ -1164,8 +1164,14 @@ As with any linear model, we need to ensure that it is appropriate for our datas
 
 :::{.example #logregeg1}
 
-@elmunzer2012randomized. ERCP, or endoscopic retrograde cholangio-pancreatogram.
-Testing whether use of anti-inflammatory NSAID therapies at time of ERCP (an invasive medical procedure) reduce rate of panreatitis. Occurance of post-ERCP pancreatitis around 16%. The study had 602 participants.
+@elmunzer2012randomized. 
+Testing whether use of anti-inflammatory NSAID therapies at time of ERCP (an invasive medical procedure) reduce rate of panreatitis. 
+
+Occurance of post-ERCP pancreatitis around 16%. 
+
+The study had 602 participants.
+
+
 *A procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine.* 
 *ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). *
 *The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures.* 
@@ -1380,7 +1386,7 @@ roc_indo = roc(data=roc_indo_df, response = out, predictor=fit)
 With that object we can do various things, such as plot the ROC curve:
 
 ```{r indoroc1, echo=T, fig.cap = "ROC curve for our logistic regression model of the indo RCT data (solid line). The dotted line shows the ROC curve we'd expect with random guessing."}
-ggroc(roc_indo, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)
+ggroc(roc_indo, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)+theme_bw()
 
 ```
 
