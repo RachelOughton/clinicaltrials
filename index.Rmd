@@ -69,6 +69,8 @@ library(cvcrand)
 library(eefAnalytics)
 library(shiny)
 library(pROC)
+library(parmsurvfit)
+
 ```
 
 # Welcome to Clinical Trials 4H! {-}

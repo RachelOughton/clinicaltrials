@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-22" />
+<meta name="date" content="2024-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="analysis-for-binary-outcomes.html"/>
-<link rel="next" href="computer-practical-1.html"/>
+<link rel="next" href="comparing-survival-curves.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,7 +293,19 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
 <li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-weibull-distribution"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
 <li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#parametric-likelihood-ratio-test"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
+<li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#cox-regression"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -693,9 +705,12 @@ that is, the hazard is constant.</p>
 <h4><span class="header-section-number">7.2.2.1</span> Maximum likelihood for time-to-event data<a href="working-with-time-to-event-data.html#expll" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Suppose our dataset has <span class="math inline">\(n\)</span> times <span class="math inline">\(t_1,\,t_2,\,\ldots,t_n\)</span>. Of these, <span class="math inline">\(m\)</span> are fully observed and <span class="math inline">\(n-m\)</span> are censored. We can create a set of indicators <span class="math inline">\(\delta_1,\ldots,\delta_n\)</span>, where <span class="math inline">\(\delta_i=1\)</span> if observation <span class="math inline">\(i\)</span> is fully observed and <span class="math inline">\(\delta_i=0\)</span> if it is censored.</p>
 <p>Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, <span class="math inline">\(f\left(t_i\right)\)</span>. However, this won’t work for survival data, because for our censored times (those for which <span class="math inline">\(\delta_i=0\)</span>) we only know that the time-to-event is greater than <span class="math inline">\(t_i\)</span>. For these observations, it is the survival time (remember that this is <span class="math inline">\(p\left(T&gt;t\right)\)</span>) that contributes what we need to the likelihood function.</p>
-<p>Therefore (for either probability distribution) we have</p>
-<p><span class="math display">\[L = \prod\limits_{i=1}^n f\left(t_i\right)^\delta_i S\left(t_i\right)^{1-\delta_i}.\]</span>
-If we have <span class="math inline">\(T\sim Exp\left(\lambda\right)\)</span> then the log-likelihood is</p>
+<p>Therefore (for any probability distribution) we have</p>
+<p><span class="math display" id="eq:lfunsurv">\[\begin{equation}
+L = \prod\limits_{i=1}^n f\left(t_i\right)^\delta_i S\left(t_i\right)^{1-\delta_i}.
+\tag{7.1}
+\end{equation}\]</span></p>
+<p>If we have <span class="math inline">\(T\sim Exp\left(\lambda\right)\)</span> then the log-likelihood is</p>
 <p><span class="math display">\[
 \begin{aligned}
 \ell &amp;= \sum\limits_{i=1}^n \delta_i\left(\log\lambda - \lambda t_i\right) - \sum\limits_{i=1}^n\left(1-\delta_i\right)\lambda t_i \\
@@ -707,21 +722,11 @@ If we have <span class="math inline">\(T\sim Exp\left(\lambda\right)\)</span> th
 The variance of the MLE is</p>
 <p><span class="math display" id="eq:lambdavar">\[\begin{equation}
 \operatorname{var}\left(\hat\lambda\right) = \frac{\lambda^2}{m},
-\tag{7.1}
+\tag{7.2}
 \end{equation}\]</span></p>
 <p>which we can approximate by</p>
 <p><span class="math display">\[\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.\]</span></p>
-<p>Notice that the numerator in Equation <a href="working-with-time-to-event-data.html#eq:lambdavar">(7.1)</a> is <span class="math inline">\(m\)</span>, the number of complete observations (rather than <span class="math inline">\(n\)</span> the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.</p>
-</div>
-</div>
-<div id="aside-sample-size-calculations-for-time-to-event-data" class="section level3 unnumbered hasAnchor">
-<h3>Aside: Sample size calculations for time-to-event data<a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There are implications here for sample size calculations, which must take into account the duration of a trial; it is important that trials monitor patients until a sufficient proportion have experienced the event (whatever it is). Sample size calculations for time-to-event data therefore have two components:</p>
-<ol style="list-style-type: decimal">
-<li>The power of the trial can first be expressed in terms of <span class="math inline">\(m\)</span>, the number of complete observations.</li>
-<li>A separate calculation is needed to estimate the number of participants needing to be recruited, and length of trial, to be sufficiently likely to achieve that value of <span class="math inline">\(m\)</span>.</li>
-</ol>
-<p>Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).</p>
+<p>Notice that the numerator in Equation <a href="working-with-time-to-event-data.html#eq:lambdavar">(7.2)</a> is <span class="math inline">\(m\)</span>, the number of complete observations (rather than <span class="math inline">\(n\)</span> the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-41" class="example"><strong>Example 7.3  </strong></span>Returning to the dataset from Example <a href="working-with-time-to-event-data.html#exm:surveg1">7.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
 <p><span class="math display">\[
@@ -747,21 +752,84 @@ and</p>
 <span id="cb49-6"><a href="working-with-time-to-event-data.html#cb49-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
 <span id="cb49-7"><a href="working-with-time-to-event-data.html#cb49-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
 <span id="cb49-8"><a href="working-with-time-to-event-data.html#cb49-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:expov"></span>
-<img src="CT4H_notes_files/figure-html/expov-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<div class="figure"><span style="display:block;" id="fig:ovplotlr"></span>
+<img src="CT4H_notes_files/figure-html/ovplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
 <p class="caption">
 Figure 7.6: Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
 </p>
 </div>
+<p>We can do the same for the <code>myeloid</code> data. Figure <a href="working-with-time-to-event-data.html#fig:myplotlr">7.7</a> shows the fitted curves, using <span class="math inline">\(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\)</span> for group <span class="math inline">\(X\)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:myplotlr"></span>
+<img src="CT4H_notes_files/figure-html/myplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<p class="caption">
+Figure 7.7: Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
+</p>
 </div>
+</div>
+</div>
+</div>
+<div id="the-weibull-distribution" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> The Weibull distribution<a href="working-with-time-to-event-data.html#the-weibull-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well. A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-42" class="definition"><strong>Definition 7.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span class="math display">\[
+f\left(x\mid \lambda,\,k\right) =
+\begin{cases}
+\lambda\gamma t^{\gamma-1}\exp\left[{-\lambda t^{\gamma}}\right] &amp; \text{for }t\geq{0}\\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>Here, <span class="math inline">\(\gamma\)</span> is the <em>shape</em> parameter, and <span class="math inline">\(\lambda\)</span> is the <em>scale</em> parameter. If <span class="math inline">\(\gamma=1\)</span> then this reduces to an exponential distribution. You can read more about it, should you choose to, in <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>.</p>
+</div>
+<p>For the Weibull distribution, we have</p>
+<p><span class="math display">\[\operatorname{S}\left(t\right) = \exp\left(-\lambda t^{\gamma}\right). \]</span></p>
+<p>As with the exponential distribution, we can use Equation <a href="working-with-time-to-event-data.html#eq:lfunsurv">(7.1)</a> for the likelihood. For the Weibull distribution this becomes</p>
+<p><span class="math display">\[\begin{align*}
+L\left(\lambda,\gamma\mid{\text{data}}\right) &amp; = \prod\limits_{i=1}^n\left\lbrace \lambda \gamma t_i^{\gamma-1}\exp\left(-\lambda t_i^{\gamma}\right) \right\rbrace^{\delta_i} \left\lbrace \exp\left[-\lambda t_i^{\gamma}\right] \right\rbrace ^{1-\delta_i}\\
+&amp; = \prod\limits_{i=1}^n \left\lbrace \lambda\gamma t_i^{\gamma-1} \right\rbrace^{\delta_i} \exp\left(-\lambda t_i^{\gamma}\right)
+\end{align*}\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[\begin{align*}
+\ell\left(\lambda,\gamma\mid{\text{data}}\right) &amp; = \sum\limits_{i=1}^n \delta_i \log\left(\lambda\gamma\right) + \left(\gamma-1\right)\sum\limits_{i=1}^n\delta_i \log{t_i} - \lambda \sum\limits_{i=1}^n t_i^{\gamma}\\
+&amp; = r\log\left(\lambda\gamma\right) + \left(\gamma-1\right)\sum\limits_{i=1}^n \delta_i\log t_i - \lambda\sum\limits_{i=1}^n t_i^{\gamma}.
+\end{align*}\]</span></p>
+<p>For the maximum likelihood estimators, we differentiate (separately) with respect to <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\gamma\)</span> and equate to zero, to solve for the estimators <span class="math inline">\(\hat\lambda\)</span> and <span class="math inline">\(\hat\gamma\)</span>.</p>
+<p>The equations we end up with are</p>
+<p><span class="math display" id="eq:ll2" id="eq:ll1">\[\begin{align}
+\frac{r}{\hat{\lambda}} - \sum\limits_{i=1}^n t_i^{\hat\gamma} &amp; = 0 \tag{7.3}\\
+\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \hat{\lambda}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i &amp;=0 \tag{7.4}.
+\end{align}\]</span></p>
+<p>We can rearrange Equation <a href="working-with-time-to-event-data.html#eq:ll1">(7.3)</a> to</p>
+<p><span class="math display">\[\hat{\lambda} = \frac{r}{\sum\limits_{i=1}^n t_i^{\hat\gamma}},\]</span>
+and substitute this into Equation <a href="working-with-time-to-event-data.html#eq:ll2">(7.4)</a> to find</p>
+<p><span class="math display">\[\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \frac{r}{\sum\limits_{i=1}^n t_i^{\gamma}}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i=0. \]</span>
+This second equation is analytically intractable, so numerical methods are used to find <span class="math inline">\(\hat\gamma\)</span>, and then this value can be used to find <span class="math inline">\(\hat\lambda\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-43" class="example"><strong>Example 7.4  </strong></span>We can fit Weibull distributions to our <code>myeloid</code> dataset, as shown in Figure <a href="working-with-time-to-event-data.html#fig:weibmy">7.8</a>.</p>
+<p><span class="math display">\[S\left(t\right) = \exp\left(-\lambda t^{\gamma}\right).\]</span></p>
+<div class="figure"><span style="display:block;" id="fig:weibmy"></span>
+<img src="CT4H_notes_files/figure-html/weibmy-1.png" alt="Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C." width="672" />
+<p class="caption">
+Figure 7.8: Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C.
+</p>
+</div>
+<p>We see that there is some improvement compared to the exponential fit in Figure <a href="working-with-time-to-event-data.html#fig:myplotlr">7.7</a></p>
+</div>
+</div>
+<div id="aside-sample-size-calculations-for-time-to-event-data" class="section level3 unnumbered hasAnchor">
+<h3>Aside: Sample size calculations for time-to-event data<a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are implications here for sample size calculations, which must take into account the duration of a trial; it is important that trials monitor patients until a sufficient proportion have experienced the event (whatever it is). Sample size calculations for time-to-event data therefore have two components:</p>
+<ol style="list-style-type: decimal">
+<li>The power of the trial can first be expressed in terms of <span class="math inline">\(m\)</span>, the number of complete observations.</li>
+<li>A separate calculation is needed to estimate the number of participants needing to be recruited, and length of trial, to be sufficiently likely to achieve that value of <span class="math inline">\(m\)</span>.</li>
+</ol>
+<p>Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).</p>
 <p>We will think more about how this can be used in the next section, when we come to compare treatment effects.</p>
 
 </div>
 </div>
 </div>
-
-
-
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-collett_surv" class="csl-entry">
@@ -789,7 +857,7 @@ Therneau, Terry M. 2024. <em>A Package for Survival Analysis in r</em>. <a href=
         </div>
       </div>
 <a href="analysis-for-binary-outcomes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="comparing-survival-curves.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

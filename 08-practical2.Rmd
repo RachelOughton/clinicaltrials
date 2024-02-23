@@ -24,6 +24,35 @@ Arguably the first and third advantages could also be true (though aren't automa
 The first step in the simulation method is to generate trial data. To do this, we use the underlying probabilistic model we have used (or would use) to develop a sample size formula.
 
 
+```{r}
+# from https://rileyking.netlify.app/post/bayesian-modeling-of-censored-and-uncensored-fatigue-data-in-r/#part-3---fitting-models-to-weibull-data-with-right-censoring-%5Bfrequentist-perspective%5D
+# function to generate random Weibull data and censor data > 100
+rweibull_cens_mod_fcn <- function(n, shape, scale) {
+  raw_times <- rweibull(n, shape = shape, scale = scale)
+  tibble(failure_time_raw = raw_times) %>%
+    mutate(time = case_when(
+      failure_time_raw < 100 ~ failure_time_raw,
+      TRUE ~ 100
+    )) %>%
+    mutate(censor = case_when(
+      time == 100 ~ 0,
+      TRUE ~ 1
+    )) %>%
+    mutate(censor = censor == 1) %>%
+    mutate(time = time %>% round(digits = 2)) %>%
+    select(-failure_time_raw)
+}
+
+# set seed for repeatability
+set.seed(54)
+first_test_fit_tbl <- rweibull_cens_mod_fcn(30, 3, 100)
+first_test_fit_tbl %>%
+  head(10) %>%
+  kable(align = rep("c", 2))
+
+```
+
+
 
 ## Analysis for Binary and Survival data
 
