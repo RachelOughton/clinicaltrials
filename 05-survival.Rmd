@@ -106,9 +106,9 @@ $$\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - 
 Notice that the number of people at risk at time $t_{j+1}$, $n_{j+1}$, will be the number of people at risk at time $t_j$ (which was $n_j$), minus any who died at time $t_j$ (which we write as $d_j$) and any who were censored in the interval $\left[t_j,\,t_{j+1}\right)$. In this way, the Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.
 
 :::{.example #surveg1}
-@edmonson1979prognosis conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group $C$) with a mixture of cyclophosphamide and adriamycin (group $T$). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.
+@edmonson1979prognosis conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group $C$) with a mixture of cyclophosphamide and adriamycin (group $T$). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation. The data are shown in Table \@ref(tab:ovdata).
 
-```{r}
+```{r ovdata}
 ov_df = ovarian[order(ovarian$futime),1:2]
 names(ov_df) = c("FU_time", "FU_status")
 knitr::kable(ov_df, caption = "Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.")
@@ -119,9 +119,9 @@ knitr::kable(ov_df, caption = "Ovarian cancer data. FU time gives the survival o
 
 
 We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
-We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time $t_j$; number at risk $n_j$; number of events/deaths $d_j$; number of censorings in $\left[t_{j-1},\,t_j\right)$; estimate of survival curve.
+We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in Table \@re(tab:ovkm). The columns are (from left to right): time $t_j$; number at risk $n_j$; number of events/deaths $d_j$; number of censorings in $\left[t_{j-1},\,t_j\right)$; estimate of survival curve.
 
-```{r}
+```{r ovkm}
 surv_object <- Surv(time = ovarian$futime, event = ovarian$fustat)
 fit_ov = survfit(surv_object ~ 1, data=ovarian)
 sum_ovfit = summary(fit_ov)
@@ -228,12 +228,14 @@ $$h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)} = \lambda, $$
 that is, the hazard is constant.
 
 
+Given some dataset, we want to be able to find an estimate for $\lambda$ (or the parameters of our distribution of choice).
+
 
 #### Maximum likelihood for time-to-event data {#expll}
 
 Suppose our dataset has $n$ times $t_1,\,t_2,\,\ldots,t_n$. Of these, $m$ are fully observed and $n-m$ are censored. We can create a set of indicators $\delta_1,\ldots,\delta_n$, where $\delta_i=1$ if observation $i$ is fully observed and $\delta_i=0$ if it is censored. 
 
-Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, $f\left(t_i\right)$. However, this won't work for survival data, because for our censored times (those for which $\delta_i=0$) we only know that the time-to-event is greater than $t_i$. For these observations, it is the survival time (remember that this is $p\left(T>t\right)$) that contributes what we need to the likelihood function.
+Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, $f\left(t_i\mid{\text{params}}\right)$. However, this won't work for survival data, because for our censored times (those for which $\delta_i=0$) we only know that the time-to-event is greater than $t_i$. For these observations, it is the survival function (remember that this is $p\left(T>t\right)$) that contributes what we need to the likelihood function.
 
 Therefore (for any probability distribution) we have
 
@@ -313,6 +315,14 @@ lines(xvec, svec_ov_T , type = "l", col=2, lty=2)
 We can do the same for the `myeloid` data. Figure \@ref(fig:myplotlr) shows the fitted curves, using $S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]$ for group $X$. 
 
 ```{r myplotlr, fig.cap = "Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)."}
+
+mC_my = sum((myeloid$death==1)&(myeloid$trt=="A"))
+mT_my = sum((myeloid$death==1)&(myeloid$trt=="B"))
+tsum_my_C = sum(myeloid$futime[myeloid$trt=="A"])
+tsum_my_T = sum(myeloid$futime[myeloid$trt == "B"])
+m_my = mT_my + mC_my
+tsum_my = tsum_my_C + tsum_my_T
+
 plot(my_km_fit, xlab="Time", ylab = "S(t)", col=c(1,2))
 lamhat_my_C = mC_my / tsum_my_C
 lamhat_my_T = mT_my / tsum_my_T

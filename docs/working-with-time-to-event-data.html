@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-23" />
+<meta name="date" content="2024-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -421,9 +421,9 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 <p><span class="math display">\[\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - d_j\right)}{n_j}.\]</span></p>
 <p>Notice that the number of people at risk at time <span class="math inline">\(t_{j+1}\)</span>, <span class="math inline">\(n_{j+1}\)</span>, will be the number of people at risk at time <span class="math inline">\(t_j\)</span> (which was <span class="math inline">\(n_j\)</span>), minus any who died at time <span class="math inline">\(t_j\)</span> (which we write as <span class="math inline">\(d_j\)</span>) and any who were censored in the interval <span class="math inline">\(\left[t_j,\,t_{j+1}\right)\)</span>. In this way, the Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.</p>
 <div class="example">
-<p><span id="exm:surveg1" class="example"><strong>Example 7.1  </strong></span><span class="citation">Edmonson et al. (<a href="#ref-edmonson1979prognosis">1979</a>)</span> conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group <span class="math inline">\(C\)</span>) with a mixture of cyclophosphamide and adriamycin (group <span class="math inline">\(T\)</span>). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.</p>
+<p><span id="exm:surveg1" class="example"><strong>Example 7.1  </strong></span><span class="citation">Edmonson et al. (<a href="#ref-edmonson1979prognosis">1979</a>)</span> conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group <span class="math inline">\(C\)</span>) with a mixture of cyclophosphamide and adriamycin (group <span class="math inline">\(T\)</span>). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation. The data are shown in Table <a href="working-with-time-to-event-data.html#tab:ovdata">7.1</a>.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-47">Table 7.1: </span>Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
+<caption><span id="tab:ovdata">Table 7.1: </span>Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -565,9 +565,9 @@ More precisely, let’s say that deaths are observed at times <span class="math 
 </tbody>
 </table>
 <p>We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
-We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve.</p>
+We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in Table @re(tab:ovkm). The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-48">Table 7.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
+<caption><span id="tab:ovkm">Table 7.2: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.</caption>
 <thead>
 <tr class="header">
 <th align="right">time</th>
@@ -701,10 +701,11 @@ Figure 7.5: Kaplan Meier curves for the Myeloid data, split by treatment. Red is
 and mean survival time <span class="math inline">\(\frac{1}{\lambda}\)</span>. The hazard function is therefore</p>
 <p><span class="math display">\[h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)} = \lambda, \]</span>
 that is, the hazard is constant.</p>
+<p>Given some dataset, we want to be able to find an estimate for <span class="math inline">\(\lambda\)</span> (or the parameters of our distribution of choice).</p>
 <div id="expll" class="section level4 hasAnchor" number="7.2.2.1">
 <h4><span class="header-section-number">7.2.2.1</span> Maximum likelihood for time-to-event data<a href="working-with-time-to-event-data.html#expll" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Suppose our dataset has <span class="math inline">\(n\)</span> times <span class="math inline">\(t_1,\,t_2,\,\ldots,t_n\)</span>. Of these, <span class="math inline">\(m\)</span> are fully observed and <span class="math inline">\(n-m\)</span> are censored. We can create a set of indicators <span class="math inline">\(\delta_1,\ldots,\delta_n\)</span>, where <span class="math inline">\(\delta_i=1\)</span> if observation <span class="math inline">\(i\)</span> is fully observed and <span class="math inline">\(\delta_i=0\)</span> if it is censored.</p>
-<p>Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, <span class="math inline">\(f\left(t_i\right)\)</span>. However, this won’t work for survival data, because for our censored times (those for which <span class="math inline">\(\delta_i=0\)</span>) we only know that the time-to-event is greater than <span class="math inline">\(t_i\)</span>. For these observations, it is the survival time (remember that this is <span class="math inline">\(p\left(T&gt;t\right)\)</span>) that contributes what we need to the likelihood function.</p>
+<p>Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, <span class="math inline">\(f\left(t_i\mid{\text{params}}\right)\)</span>. However, this won’t work for survival data, because for our censored times (those for which <span class="math inline">\(\delta_i=0\)</span>) we only know that the time-to-event is greater than <span class="math inline">\(t_i\)</span>. For these observations, it is the survival function (remember that this is <span class="math inline">\(p\left(T&gt;t\right)\)</span>) that contributes what we need to the likelihood function.</p>
 <p>Therefore (for any probability distribution) we have</p>
 <p><span class="math display" id="eq:lfunsurv">\[\begin{equation}
 L = \prod\limits_{i=1}^n f\left(t_i\right)^\delta_i S\left(t_i\right)^{1-\delta_i}.

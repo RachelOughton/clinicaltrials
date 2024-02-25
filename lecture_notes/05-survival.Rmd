@@ -3,15 +3,35 @@
 
 # Working with time-to-event data 
 
-A data type that is commonly found in clinical trials is **time to event data**. This type of data deals with the amount of time that elapses before a particular event happens. As a sub-field of statistics, survival analysis has been around for a long time, as people have thought about and worked data like mortality records ([most notably John Graunt, who used the 'Bills of Mortality' during the 1600s to better understand the plague and other causes of death](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/1740-9713.01421)). However, it developed rapidly during the many cancer related clinical trials of the 1960s and 1970s. In these cases, the event in question was very often death, and which is why this branch of statistics came to be known as **survival analysis**. However, the event can be many other things, and indeed can be a positive outcome (for example being cured of some condition). Time-to-event data also appears in other applications, such as engineering (eg. monitoring the reliability of a machine) and marketing (eg. thinking of the time-to-purchase). As well as the books already mentioned, this chapter makes use of @collett_surv.
+**time to event data** / survival data - the amount of time that elapses before a particular event happens. 
 
-Usually, survival data is given in terms of time, but it can also be the number of times something happens (for example, the number of clinic appointments attended) before the event in question occurs.
+*As a sub-field of statistics, survival analysis has been around for a long time, as people have thought about and worked data like mortality records ([most notably John Graunt, who used the 'Bills of Mortality' during the 1600s to better understand the plague and other causes of death](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/1740-9713.01421)). However, it developed rapidly during the many cancer related clinical trials of the 1960s and 1970s.* 
 
-Survival data is trickier to handle than the data types we have seen so far, for two main reasons. Firstly (and simply) survival data is very often skewed, so even though it is (usually) continuous, we can't just treat it as normally distributed. Secondly (and more complicatedly, if that's a word) with time-to-event data we don't usually observe the full dataset. 
+IN clinical trials, the event is very often death, and so the language of 'death' and 'survival' pervade the field. However, the event can be other things, and can indeed be positive.
+
+*why this branch of statistics came to be known as **survival analysis*. 
+
+*Time-to-event data also appears in other applications, such as engineering (eg. monitoring the reliability of a machine) and marketing (eg. thinking of the time-to-purchase). As well as the books already mentioned, this chapter makes use of @collett_surv.*
+
+*Usually, survival data is given in terms of time, but it can also be the number of times something happens (for example, the number of clinic appointments attended) before the event in question occurs.*
+
+Time to event data is tricky because:
+
+  * skewed - can't use normal dist
+  * censored - we don't usually observe the full dataset
+
 
 ## Censored times 
 
-If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won't observe the event. This could be because it doesn't happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal), or simply stops attending follow-up appointments after a certain times. For these participants, we do know that they had not experienced the event up to some time $t$, but we don't know what happened next. All we know is that their time-to-event or **survival time** is greater than that time $t$. These partial observations are known as **censored** times, and in particular as **right-censored** times, because the event happens *after* the censored time. It is possible (but less common) to have *left-censored* or *interval-censored* data, but in this course we will deal only with right-censoring.
+For some participants, we won't observe the event:
+
+  * it may not happen to them in the lifetime of the trial
+  * they may exit the trial early for some reason
+  * they may be lost to follow-up
+  
+We know these people hadn't experienced the event up to some time $t$, but we don't know what happened next. All we know is that their time-to-event or **survival time** is greater than that time $t$. These partial observations are known as **censored** times, and in particular as **right-censored** times, because the event happens *after* the censored time. 
+
+*It is possible (but less common) to have left-censored or interval-censored data, but in this course we will deal only with right-censoring.*
 
 ```{r censor, fig.cap = "An example of some censored data."}
 df_cens = data.frame(
@@ -30,17 +50,25 @@ ggplot(data=df_cens) +
 
 ```
 
-If we were to treat censored times as observations, ie. as though the event had happened at time $t$, we would bias the results of the trial very seriously. The survival times reported would be systematically shorter than the true ones. For example, in the dataset shown in Figure \@ref(fig:censor), we would estimate the survival probability at time 10 as 0.2, since only two of the 10 participants were still in the trial after time 10. But it may well be that some of the participants whose observations were censored before $t=10$ were still alive at $t=10$.
+Possible options:
 
-If we were to remove the censored times, and only analyse the data in which the event was observed during the linespan of the trial, we would be losing data and therefore valuable information. This approach may well also lead to bias, for example if some subset of patients died quite soon into the trial, but the remainder lived a long time (past the end of the trial). If our analysis ignores the survivors, we are likely to underestimate the general survival time. In the dataset in Figure \@ref(fig:censor) there are five participants (3,6,7,8,10) whom we are no longer able to observe at time 10, but of whom none had experienced the event by the point at which they were censored.
+  * Treat censored times as observations, ie. as though the event had happened at time $t$ - bias the results of the trial. *The survival times reported would be systematically shorter than the true ones. For example, in the dataset shown in Figure \@ref(fig:censor), we would estimate the survival probability at time 10 as 0.2, since only two of the 10 participants were still in the trial after time 10. But it may well be that some of the participants whose observations were censored before $t=10$ were still alive at $t=10$.*
+
+  * Remove the censored times, and only analyse complete observations - losing data and therefore valuable information. *This approach may well also lead to bias, for example if some subset of patients died quite soon into the trial, but the remainder lived a long time (past the end of the trial). If our analysis ignores the survivors, we are likely to underestimate the general survival time. In the dataset in Figure \@ref(fig:censor) there are five participants (3,6,7,8,10) whom we are no longer able to observe at time 10, but of whom none had experienced the event by the point at which they were censored.*
 
 So we know that we need to somehow include these censored times in our analysis. How we do so will depend on our approach.
 
 ## The Survival Curve and the Hazard function {#survhaz}
 
-The field of survival analysis is relatively unusual in statistics, in that it isn't treated predominantly parametrically. For most continuous data, it is overwhelmingly common to work with the normal distribution and its friends (eg. the student's t distribution). Similarly binary data is dominated by the binomial distribution. Inference is therefore often focussed on the parameters $\mu,\;\sigma$ or $p$, as an adequate summary of the truth given whatever parameteric assumption has been made. 
+*The field of survival analysis is relatively unusual in statistics, in that it isn't treated predominantly parametrically.*
 
-However, in survival analysis, it is often the case that we focus on the whole shape of the data; there isn't an accepted dominating probability distribution. In order to be able to deal with time-to-event data, we need to introduce some key ways of working with such data. 
+*For most continuous data, it is overwhelmingly common to work with the normal distribution and its friends (eg. the student's t distribution).* 
+
+*Similarly binary data is dominated by the binomial distribution. Inference is therefore often focussed on the parameters $\mu,\;\sigma$ or $p$, as an adequate summary of the truth given whatever parameteric assumption has been made. *
+
+*However, in survival analysis, it is often the case that we focus on the whole shape of the data; there isn't an accepted dominating approach.*
+
+We need to introduce some key ways of working with such data. 
 
 The **survival time** (or time-to-event) $t$ for a particular individual can be thought of as the value of a random variable $T$, which can take any non-negative value. We can think in terms of a probability distribution over the range of $T$. If $T$ has a probability distribution with underlying *probability density function* $f\left(t\right)$, then the *cumulative distribution function* is given by
 
@@ -54,8 +82,8 @@ Conventionally we plot $\operatorname{S}\left(t\right)$ against $t$ and this giv
 
 We can immediately say two things about survival curves:
 
-  1. Since all participants must be alive (or equivalent) at the start of the trial, $\operatorname{S}\left(0\right)=1$.
-  2. Since it's impossible to survive past $t_2>t_1$ but not past time $t_1$, we must have  $\frac{d\operatorname{S}\left(t\right)}{dt}\leq{0}$, ie. $\operatorname{S}\left(t\right)$ is non-increasing.
+  1. All participants must be alive at the start of the trial $\implies\operatorname{S}\left(0\right)=1$.
+  2. It's impossible to survive past $t_2>t_1$ but not past time $t_1$  $\implies\frac{d\operatorname{S}\left(t\right)}{dt}\leq{0}$, ie. $\operatorname{S}\left(t\right)$ is non-increasing.
   
 Figure \@ref(fig:egsurvival) shows two survival curves, comparing different therapies. We see that the hormonal therapy reduces the survival time slightly compared to no hormonal therapy.  
   
@@ -63,7 +91,7 @@ Figure \@ref(fig:egsurvival) shows two survival curves, comparing different ther
 knitr::include_graphics("images/survival_eg.png")
 ```
 
-Following on from the survival function, we have another (slightly less intuitive) quantity: the **Hazard function** $h\left(t\right)$.
+Following on from the survival function, we have the **Hazard function** $h\left(t\right)$.
 
 :::{.definition}
 The **Hazard function** $h(t)$ is the probability that an individual who has survived up to time $t$ fails just after time $t$; in other words, the instantaneous probability of death (or *experiencing the event*) at time $t$.
@@ -87,41 +115,47 @@ h\left(t\right) & = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\left(t
  & = \frac{f\left(t\right)}{\operatorname{S}\left(t\right)},
 \end{aligned}
 $$
-where $f\left(\cdot\right)$ is the probability density of $T$. The hazard function can take any positive value (unlike the survival function), and for this reason $\log\left(h\left(t\right)\right)$ is often used to transform it to the real line. The hazard function can also be called the 'hazard rate', the 'instantaneous death rate', the 'intensity rate' or the 'force of mortality'.
+where $f\left(\cdot\right)$ is the probability density of $T$. The hazard function can take any positive value (unlike the survival function), and for this reason $\log\left(h\left(t\right)\right)$ is often used to transform it to the real line. 
 
-As we hinted before, there are fundamentally two ways to deal with survival data: we can go about things either parametrically or non-parametrically. Unusually for statistics in general, the non-parametric paradigm is prevalent in survival analysis. We will consider some methods from both paradigms.
+The hazard function can also be called the 'hazard rate', the 'instantaneous death rate', the 'intensity rate' or the 'force of mortality'.
+
+*As we hinted before, there are fundamentally two ways to deal with survival data: we can go about things either parametrically or non-parametrically. Unusually for statistics in general, the non-parametric paradigm is prevalent in survival analysis. We will consider some methods from both paradigms.*
+
+We will look at parametric and non-parametric ways to estimate these.
 
 ### The Kaplan-Meier estimator
 
 The **Kaplan-Meier estimator** is a non-parametric estimate of $\operatorname{S}\left(t\right)$, originally presented in @kaplan1958nonparametric. The idea behind it is to divide the interval $\left[0,\;t\right]$ into many short consecutive intervals,
 
 $$\left[0,\,t\right] = \bigcup\limits_{k=0}^K \left[s_k,\,s_{k+1}\right],$$
-where $s_k<s_{k+1}\;\forall{k}$, $s_0=0$ and $s_{K+1}=t$. We then estimate the probability of surviving past some time $t$ by multiplying together the probabilities of surviving the successive intervals up to time $t$. No distributional assumptions are made, and the probability of surviving interval $\left[s_k,\,s_{k+1}\right]$ is estimated by $1-Q$, where 
+where $s_k<s_{k+1}\;\forall{k}$, $s_0=0$ and $s_{K+1}=t$. 
+
+We then estimate the probability of surviving past some time $t$ by multiplying together the probabilities of surviving the successive intervals up to time $t$. No distributional assumptions are made, and the probability of surviving interval $\left[s_k,\,s_{k+1}\right]$ is estimated by $1-Q$, where 
 
 $$Q = \frac{\text{Number who die in that interval}}{\text{Number at risk of death in that interval}}.$$
-More precisely, let's say that deaths are observed at times $t_1<t_2<\ldots < t_n$, and that the number of deaths at time $t_i$ is $d_i$ out of a possible $n_i$. Then for some time $t\in\left[t_J,\,t_{J+1}\right)$, the Kaplan-Meier estimate of $\operatorname{S}\left(t\right)$ is 
+Let's say that deaths are observed at times $t_1<t_2<\ldots < t_n$, and that the number of deaths at time $t_i$ is $d_i$ out of a possible $n_i$. Then for some time $t\in\left[t_J,\,t_{J+1}\right)$, the Kaplan-Meier estimate of $\operatorname{S}\left(t\right)$ is 
 
 $$\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - d_j\right)}{n_j}.$$
 
-Notice that the number of people at risk at time $t_{j+1}$, $n_{j+1}$, will be the number of people at risk at time $t_j$ (which was $n_j$), minus any who died at time $t_j$ (which we write as $d_j$) and any who were censored in the interval $\left[t_j,\,t_{j+1}\right)$. In this way, the Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.
+The number of people at risk at time $t_{j+1}$, $n_{j+1}$, will be the number of people at risk at time $t_j$ (which was $n_j$), minus any who died at time $t_j$ (which we write as $d_j$) and any who were censored in the interval $\left[t_j,\,t_{j+1}\right)$. 
+
+*The Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.*
 
 :::{.example #surveg1}
 @edmonson1979prognosis conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group $C$) with a mixture of cyclophosphamide and adriamycin (group $T$). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.
 
-```{r}
+```{r ovdata}
 ov_df = ovarian[order(ovarian$futime),1:2]
 names(ov_df) = c("FU_time", "FU_status")
 knitr::kable(ov_df, caption = "Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.")
 ```
 
+There are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
+Table \@ref(tab:ovkm)
 
+*The columns are (from left to right): time $t_j$; number at risk $n_j$; number of events/deaths $d_j$; number of censorings in $\left[t_{j-1},\,t_j\right)$; estimate of survival curve.*
 
-
-
-We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
-We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in the table below. The columns are (from left to right): time $t_j$; number at risk $n_j$; number of events/deaths $d_j$; number of censorings in $\left[t_{j-1},\,t_j\right)$; estimate of survival curve.
-
-```{r}
+```{r ovkm}
 surv_object <- Surv(time = ovarian$futime, event = ovarian$fustat)
 fit_ov = survfit(surv_object ~ 1, data=ovarian)
 sum_ovfit = summary(fit_ov)
@@ -177,19 +211,20 @@ ggplot(data = df_ov_full, aes(x=time, y=surv, col = Method, lty = Method)) + geo
   theme_bw() + xlab("Time") + ylab("Survival curve") +theme(legend.position = "bottom")
 
 ```
-Leaving out the censored observations entirely is the most problematic approach, since it causes a serious underestimate, and in this case behaves as though there are no survivors after $t=638$, which is untrue. Treating the censored data as deaths also leads to an underestimate of the survival probability, and notably creates a rather spurious curve past the last real death observation.
 
-The 'correct' Kaplan-Meier estimate may seem a bit disatisfying, since it stops at $t=638$ with a probabiilty of $0.497$. However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at $t=638$, and some of the other censored participants may also have been.
+*Leaving out the censored observations entirely is the most problematic approach, since it causes a serious underestimate, and in this case behaves as though there are no survivors after $t=638$.*
+
+*Treating the censored data as deaths also leads to an underestimate of the survival probability, and notably creates a rather spurious curve past the last real death observation.*
+
+*The 'correct' Kaplan-Meier estimate may seem a bit disatisfying, since it stops at $t=638$ with a probabiilty of $0.497$. However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at $t=638$, and some of the other censored participants may also have been.*
 
 :::
-
-
 
 For a clinical trial, we want to plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we'll talk about this later).
 
 :::{.example #veteranmyeloid}
 
-Figure \@ref(fig:ovarian) shows the Kaplan Meier plots for the ovarian cancer data from Figure \@ref(fig:kmov), this time split by treatment group.
+Figure \@ref(fig:ovarian) shows the Kaplan Meier plots for the ovarian cancer data from Figure \@ref(fig:kmov), this time split by treatment group. *We will also use functions from the package `survival`, which avoids doing all the calculations ourselves.*
 
 ```{r ovarian, fig.cap = "Kaplan Meier curves for the ovarian cancer data, split by treatment. Red is for group T (mixture of cyclophosphamide and adriamycin), black for group C (cyclophosphamide only)."}
 
@@ -212,10 +247,11 @@ plot(my_km_fit, xlab="Time", ylab = "S(t)", col=c(1,2))
 
 :::
 
-
 ### A parametric approach
 
-In a parametric approach, we'll assume that the survival time $T$ follows some probability distribution, up to unknown parameters which we will estimate from the data. The simplest distribution for time-to-event data is the *exponential distribution*, which has density
+Assume the survival time $T$ follows some probability distribution, up to unknown parameters which we will estimate from the data. 
+
+The simplest distribution for time-to-event data is the *exponential distribution*, which has density
 
 $$f\left(t\right) = \lambda e^{-\lambda t} \text{ for }t>0,$$
 
@@ -227,13 +263,25 @@ and mean survival time $\frac{1}{\lambda}$. The hazard function is therefore
 $$h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)} = \lambda, $$
 that is, the hazard is constant.
 
+Given some dataset, we want to be able to find an estimate for $\lambda$ (or the parameters of our distribution of choice).
 
 
 #### Maximum likelihood for time-to-event data {#expll}
 
-Suppose our dataset has $n$ times $t_1,\,t_2,\,\ldots,t_n$. Of these, $m$ are fully observed and $n-m$ are censored. We can create a set of indicators $\delta_1,\ldots,\delta_n$, where $\delta_i=1$ if observation $i$ is fully observed and $\delta_i=0$ if it is censored. 
+Suppose our dataset has $n$ times $t_1,\,t_2,\,\ldots,t_n$. Of these, $m$ are fully observed and $n-m$ are censored. We also have indicators $\delta_1,\ldots,\delta_n$, where 
 
-Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, $f\left(t_i\right)$. However, this won't work for survival data, because for our censored times (those for which $\delta_i=0$) we only know that the time-to-event is greater than $t_i$. For these observations, it is the survival time (remember that this is $p\left(T>t\right)$) that contributes what we need to the likelihood function.
+$$
+\delta_i=
+\begin{cases}
+1\; \text{ if observation }i\text{ is fully observed}\\
+0\;\text{ if observation }i\text{ is censored}
+\end{cases}
+$$
+Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, $f\left(t_i\mid{\text{params}}\right)$. 
+
+However, for our censored times ($\delta_i=0$) we only know that the time-to-event is greater than $t_i$. 
+
+For these observations, it is the survival function (remember that this is $p\left(T>t\right)$) that contributes what we need to the likelihood function.
 
 Therefore (for any probability distribution) we have
 
@@ -265,7 +313,7 @@ which we can approximate by
 
 $$\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.$$
 
-Notice that the numerator in Equation \@ref(eq:lambdavar) is $m$, the number of complete observations (rather than $n$ the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored. 
+*Notice that the numerator in Equation \@ref(eq:lambdavar) is $m$, the number of complete observations (rather than $n$ the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored. *
 
 :::{.example}
 Returning to the dataset from Example \@ref(exm:surveg1), we can fit an exponential distribution to the data simply by estimating the MLE 
@@ -313,6 +361,14 @@ lines(xvec, svec_ov_T , type = "l", col=2, lty=2)
 We can do the same for the `myeloid` data. Figure \@ref(fig:myplotlr) shows the fitted curves, using $S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]$ for group $X$. 
 
 ```{r myplotlr, fig.cap = "Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)."}
+
+mC_my = sum((myeloid$death==1)&(myeloid$trt=="A"))
+mT_my = sum((myeloid$death==1)&(myeloid$trt=="B"))
+tsum_my_C = sum(myeloid$futime[myeloid$trt=="A"])
+tsum_my_T = sum(myeloid$futime[myeloid$trt == "B"])
+m_my = mT_my + mC_my
+tsum_my = tsum_my_C + tsum_my_T
+
 plot(my_km_fit, xlab="Time", ylab = "S(t)", col=c(1,2))
 lamhat_my_C = mC_my / tsum_my_C
 lamhat_my_T = mT_my / tsum_my_T
@@ -330,7 +386,7 @@ lines(xvec, svec_my_T , type = "l", col=2, lty=2)
 
 ### The Weibull distribution
 
-Having only one parameter, the exponential distribution is not very flexible, and often doesn't fit data at all well. A related, but more suitable distribution is the **Weibull distribution**.
+Having only one parameter, the exponential distribution is not very flexible, and often doesn't fit data at all well (like with the Myeloid data). A related, but more suitable distribution is the **Weibull distribution**.
 
 
 :::{.definition}
@@ -345,7 +401,9 @@ f\left(x\mid \lambda,\,k\right) =
 $$
 
 
-Here, $\gamma$ is the *shape* parameter, and $\lambda$ is the *scale* parameter. If $\gamma=1$ then this reduces to an exponential distribution. You can read more about it, should you choose to, in @collett_surv.
+Here, $\gamma$ is the *shape* parameter, and $\lambda$ is the *scale* parameter. 
+
+If $\gamma=1$ then this reduces to an exponential distribution. You can read more about it, should you choose to, in @collett_surv.
 :::
 
 For the Weibull distribution, we have

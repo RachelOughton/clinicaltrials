@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  23 FEB 2024 15:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  25 FEB 2024 19:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -841,7 +841,7 @@ Package pdftex.def Info: images/survival_eg.png  used on input line 3902.
 
 LaTeX Warning: Reference `fig:kmov' on page 116 undefined on input line 4053.
 
-<CT4H_notes_files/figure-latex/kmov-1.pdf, id=1452, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/kmov-1.pdf, id=1453, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/kmov-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/kmov-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/kmov-1.pdf  used on input line 4055.
@@ -861,32 +861,32 @@ Underfull \vbox (badness 3525) has occurred while \output is active []
 
 LaTeX Warning: Reference `fig:kmov' on page 118 undefined on input line 4066.
 
-<CT4H_notes_files/figure-latex/ovarian-1.pdf, id=1472, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/ovarian-1.pdf, id=1473, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/ovarian-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/ovarian-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/ovarian-1.pdf  used on input line 4070.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/myeloid-1.pdf, id=1477, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/myeloid-1.pdf, id=1478, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/myeloid-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/myeloid-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/myeloid-1.pdf  used on input line 4078.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [118 <./CT4H_notes_files/figure-latex/ovarian-1.pdf>] [119 <./CT4H_notes_files/figure-latex/myeloid-1.pdf>] [120]
-<CT4H_notes_files/figure-latex/ovplotlr-1.pdf, id=1514, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/ovplotlr-1.pdf, id=1515, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/ovplotlr-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/ovplotlr-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/ovplotlr-1.pdf  used on input line 4174.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/ovplotlr-1.pdf  used on input line 4176.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/myplotlr-1.pdf, id=1516, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/myplotlr-1.pdf, id=1517, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/myplotlr-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/myplotlr-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/myplotlr-1.pdf  used on input line 4182.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/myplotlr-1.pdf  used on input line 4184.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [121] [122 <./CT4H_notes_files/figure-latex/ovplotlr-1.pdf>] [123 <./CT4H_notes_files/figure-latex/myplotlr-1.pdf>]
-<CT4H_notes_files/figure-latex/weibmy-1.pdf, id=1552, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/weibmy-1.pdf, id=1554, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/weibmy-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/weibmy-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/weibmy-1.pdf  used on input line 4249.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/weibmy-1.pdf  used on input line 4251.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [124] [125 <./CT4H_notes_files/figure-latex/weibmy-1.pdf>] [126]
 Chapter 8.
@@ -909,17 +909,17 @@ Package rerunfilecheck Info: File `CT4H_notes.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  13413 strings out of 476227
- 217703 string characters out of 5795781
+ 217681 string characters out of 5795781
  1954555 words of memory out of 5000000
  34588 multiletter control sequences out of 15000+600000
  655332 words of font info for 107 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,19n,79p,1232b,728s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on CT4H_notes.pdf (141 pages, 2691028 bytes).
+Output written on CT4H_notes.pdf (141 pages, 2691340 bytes).
 PDF statistics:
- 1929 PDF objects out of 2073 (max. 8388607)
- 1638 compressed objects within 17 object streams
+ 1930 PDF objects out of 2073 (max. 8388607)
+ 1639 compressed objects within 17 object streams
  555 named destinations out of 1000 (max. 500000)
  574 words of extra memory for PDF output out of 10000 (max. 10000000)
 
