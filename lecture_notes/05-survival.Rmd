@@ -1,7 +1,7 @@
 # (PART) Part III: Survival data {-}
 
 
-# Working with time-to-event data 
+# (lecture 15) Working with time-to-event data 
 
 **time to event data** / survival data - the amount of time that elapses before a particular event happens. 
 

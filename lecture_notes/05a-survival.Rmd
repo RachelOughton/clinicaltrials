@@ -1,4 +1,4 @@
-# Comparing survival curves
+# (lecture 16) Comparing survival curves
 
 In a clinical trials context, we need to be able to compare two survival curves *(showing, for example, the results from different treatments),* so that we can say whether one is significantly different from the other. 
 
@@ -311,7 +311,7 @@ This time the p-value is quite far from the one we found using the likelihood ra
 :::
 
 
-## Semi-parametric: the proportional hazards model
+## (Lecture 17) Semi-parametric: the proportional hazards model
 
 As with continuous and binary outcome variables, what we would really like to be able to do is to adjust our model for baseline covariates. It seems intuitively reasonable to suppose that factors like age, sex, disease status etc. might affect someone's chances of survival (or whatever event we're concerned with).
 

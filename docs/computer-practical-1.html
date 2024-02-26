@@ -468,7 +468,7 @@ Click for solution
 <p>These solutions show you one way to create such factor variables, but if you choose different bins that’s fine!</p>
 <p>One approach is to look at the distribution of the variables. For example for age:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="computer-practical-1.html#cb88-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>lic_garg) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>preOp_age), <span class="at">binwidth=</span><span class="dv">5</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <p>Based on this, one reasonable split would be <span class="math inline">\(&lt;50,\;50-70\)</span> and <span class="math inline">\(&gt;70\)</span>, in which case we could do</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="computer-practical-1.html#cb89-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Under 50&quot;</span></span>
 <span id="cb89-2"><a href="computer-practical-1.html#cb89-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;50 to 70&quot;</span></span>
@@ -918,9 +918,9 @@ Click for solution
 <p>We have the baseline number of polyps for each patient in the column <code>baseline</code>, and a sensible column to use for the outcome would be <code>number12m</code>. Other baseline variables are <code>sex</code> and <code>age</code>.</p>
 <p>To plot the baseline and outcome variables we can do</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="computer-practical-1.html#cb127-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>baseline)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="computer-practical-1.html#cb128-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>number12m)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-102-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-103-2.png" width="672" /></p>
 <p>These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you’d prefer to use natural logs that’s fine, some of your numbers will be different.</p>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="computer-practical-1.html#cb129-1" tabindex="-1"></a>polyps<span class="sc">$</span>log_baseline <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>baseline)</span>
 <span id="cb129-2"><a href="computer-practical-1.html#cb129-2" tabindex="-1"></a>polyps<span class="sc">$</span>log_number12m <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>number12m)</span></code></pre></div>
@@ -994,11 +994,11 @@ Click for solution
 <p>The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="computer-practical-1.html#cb138-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff <span class="ot">=</span> polyps_df<span class="sc">$</span>number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>baseline</span>
 <span id="cb138-2"><a href="computer-practical-1.html#cb138-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 <p>But the outliers look potentially problematic, and the central bulk of each distribution doesn’t look very normal. We could also try the difference of the logged measurements:</p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="computer-practical-1.html#cb139-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff_log <span class="ot">=</span> polyps_df<span class="sc">$</span>log_number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>log_baseline</span>
 <span id="cb139-2"><a href="computer-practical-1.html#cb139-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff_log, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
 <p>This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won’t have a nice normal curve.</p>
 <p>To do a t-test, we can use R’s in-built function</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="computer-practical-1.html#cb140-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
@@ -1101,11 +1101,11 @@ First of all, we can add columns with the residuals and fitted values from the m
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="computer-practical-1.html#cb148-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>resid1 <span class="ot">=</span> <span class="fu">resid</span>(lm_polyp1)</span>
 <span id="cb148-2"><a href="computer-practical-1.html#cb148-2" tabindex="-1"></a>polyps_df<span class="sc">$</span>fitted1 <span class="ot">=</span> <span class="fu">fitted</span>(lm_polyp1)</span>
 <span id="cb148-3"><a href="computer-practical-1.html#cb148-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>fitted1, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="computer-practical-1.html#cb149-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>log_baseline, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-115-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-116-2.png" width="672" /></p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="computer-practical-1.html#cb150-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>resid1, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-115-3.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-116-3.png" width="672" /></p>
 None of these ring huge alarm bells, but because the dataset is so small it’s quite hard to tell! Arguably the residuals for the <code>sulindac</code> group are more spread out than those for the plaecbo, but there are no obvious systematic trends.
 </details>
 </div>
@@ -1244,7 +1244,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="computer-practical-1.html#cb156-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt, <span class="fu">aes</span>(<span class="at">x=</span>Birthweight, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-117-1.png" width="672" />
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-118-1.png" width="672" />
 This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won’t transform it.
 </details>
 <p>We’ll reduce the dataset to a more managable size, by removing all outcomes except <code>Birthweight</code> and reducing the number of covariates. We’ll also alter a couple of factor levels to make the data work with the linear model (the main source of difficulty is that lots of variables are coded <code>NA</code> when really there is information).</p>
@@ -1410,9 +1410,9 @@ Click for solution
 <span id="cb169-3"><a href="computer-practical-1.html#cb169-3" tabindex="-1"></a>opt_diag<span class="sc">$</span>fitted <span class="ot">=</span> <span class="fu">fitted</span>(lm_full)</span></code></pre></div>
 <p>Some examples of plots are</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="computer-practical-1.html#cb170-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>resid, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="computer-practical-1.html#cb171-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>fitted, <span class="at">y=</span>resid, <span class="at">col=</span>Group)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-124-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-125-2.png" width="672" /></p>
 <p>We could also see if there are any patterns in the data that weren’t included in the model, because one or more entries were <code>NA</code></p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="computer-practical-1.html#cb172-1" tabindex="-1"></a>exc_ind <span class="ot">=</span> <span class="sc">!</span>(opt_red<span class="sc">$</span>PID <span class="sc">%in%</span> opt_diag<span class="sc">$</span>PID)</span>
 <span id="cb172-2"><a href="computer-practical-1.html#cb172-2" tabindex="-1"></a></span>

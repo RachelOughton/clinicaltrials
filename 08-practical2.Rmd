@@ -2,12 +2,41 @@
 
 In this practical, we will focus on two main areas:
 
-  * Simulation methods for determining sample size
+  * Simulation methods for power analysis/determining sample size
   * Analysis methods for Binary and Survival data
   
+  ### R practicalities {-}
+  
+There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
+
+```{r, eval=F, echo=T}
+install.packages("<packagename>")
+```
 
 
-## Sample size by simulation
+If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III. 
+
+An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
+
+This requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
+
+
+[Direct link to codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&reserved=0)
+
+[Instructions for how to use codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&reserved=0)
+
+
+
+## Sample size by simulation {#cp2sim}
+
+We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We'll load them as we go along.
+
+**Notice that where there are code snippets like this one that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
+
+```{r, eval=F, echo=T}
+install.packages(c())
+```
+
 
 A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required.
 
@@ -55,6 +84,8 @@ first_test_fit_tbl %>%
 
 
 ## Analysis for Binary and Survival data
+
+
 
 
 ### Binary data
@@ -173,6 +204,63 @@ df_indo_round2
 
 
 ### Survival data
+
+The package we need for this section is `survival`, so install and load that now.
+
+The first dataset we will use is `aml`. 
+
+
+:::{.exercise}
+Look at the help file for the `aml` dataset and make sure you understand what each variable is doing.
+R might ask which `aml` dataset you want - in this case, choose the one from the `survival` package.
+:::
+
+<details><summary>Click for solution</summary>
+The data set `aml` has three columns
+
+  * `time` - survival or censoring time for each patient. This is the last time at which that patient was recorded.
+  * `status` - censoring status. By convention, this is 1 if a death is observed (ie. for complete data) and 0 for censored data (ie. the time in the `time` column was the last time that patient was seen, and they were still alive)
+  * `x` - maintenance chemotherapy given? This is the treatment variable
+
+</details>
+
+The first step is to combine the first two columns into time-to-event data that we can use. We do this using the `Surv` function in the package `survival`, which creates a 'survival object' that we can then use in various other functions. 
+
+To create a survival object from some dataset `dataframe` containing a time variable and a censoring status variable, the general form is 
+
+```{r, ecoh=T, eval=F}
+surv_obj = with(data=<dataframe>, Surv(<time variable>, <censoring status variable>))
+```
+or if you prefer,
+
+```{r, ecoh=T, eval=F}
+surv_obj = Surv(<dataframe$time variable>, <dataframe$censoring status variable>)
+```
+
+
+
+:::{.exercise}
+Use the `Surv` function now on the `aml` data. The output will contain some notation you probably haven't seen before - what does it mean?
+:::
+
+<details><summary>Click for solution</summary>
+We create the survival object for `aml` by
+
+```{r, echo=T}
+surv_aml = with(data=aml, Surv(time,status))
+surv_aml
+```
+This is a vector of the time values, in the same order as in `aml`. You'll notice that some have a '+' attached. This denotes the censored observations (the notation reflects the fact that the true time of death/the event will be greater than this).
+
+</details>
+
+### Fitting a survival curve
+
+The next thing we probably want to do is to fit a survival curve to the data. 
+
+
+
+
 
 This dataset is from a randomised controlled trial of two treatment regimens for lung cancer. 
 
