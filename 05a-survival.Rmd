@@ -169,7 +169,7 @@ Under $H_0$, we expect the deaths (or events) to be distributed proportionally b
   $$e_{Xj} = n_{Xj}\times{\frac{d_j}{n_j}}.$$
   This means that $e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j$.
   
-  If we take the margins of the table (by which we mean $n_j, \,d_j\,n_{Cj}$ and $n_{Tj}$) as fixed, then $d_{Cj}$ has a **hypergeometric distribution**.
+  If we take the margins of the table (by which we mean $n_j, \,d_j,\,n_{Cj}$ and $n_{Tj}$) as fixed, then $d_{Cj}$ has a **hypergeometric distribution**.
   
 :::{.definition}
 The **hypergeometric distribution** is a discrete probability distribution describing the probability of $k$ successes in $n$ draws (without replacement), taken from a finite population of size $N$ that has exactly $K$ objects with the desired feature. The probability mass function for a variable $X$ following a hypergeometric function is
