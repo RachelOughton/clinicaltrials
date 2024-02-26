@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-25" />
+<meta name="date" content="2024-02-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -360,7 +360,7 @@ H_1:&amp;\text{ the treatments are different.}
 <p>There are various ways to do this, and we will look at some now.</p>
 <div id="parametric-likelihood-ratio-test" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Parametric: likelihood ratio test<a href="comparing-survival-curves.html#parametric-likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We’ve already calculated the log-likelihood of for the exponential distriubtion in Section <a href="working-with-time-to-event-data.html#expll">7.2.2.1</a>, and found the MLE.</p>
+<p>For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We’ve already calculated the log-likelihood for the exponential distribution in Section <a href="working-with-time-to-event-data.html#expll">7.2.2.1</a>, and found the MLE.</p>
 <p><span class="math display">\[\begin{align*}
 \ell\left(\lambda\right) &amp; = m\log\lambda - \lambda\sum\limits_{i=1}^n t_i\\
 \hat{\lambda} &amp; = \frac{m}{\sum\limits_{i=1}^n t_i}.
@@ -487,7 +487,7 @@ where <span class="math inline">\(n,\,m\)</span> are the corresponding totals ov
 <p>Under <span class="math inline">\(H_0\)</span>, we expect the deaths (or events) to be distributed proportionally between groups <span class="math inline">\(C\)</span> and <span class="math inline">\(T\)</span>, and so the expected number of events in group <span class="math inline">\(X\)</span> (<span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>) at time <span class="math inline">\(t_j\)</span> is</p>
 <p><span class="math display">\[e_{Xj} = n_{Xj}\times{\frac{d_j}{n_j}}.\]</span>
 This means that <span class="math inline">\(e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j\)</span>.</p>
-<p>If we take the margins of the table as fixed (by which we mean <span class="math inline">\(n_j, \,d_j\,n_{Cj}\)</span> and <span class="math inline">\(n_{Tj}\)</span>), then <span class="math inline">\(d_{Cj}\)</span> has a <strong>hypergeometric distribution</strong>.</p>
+<p>If we take the margins of the table (by which we mean <span class="math inline">\(n_j, \,d_j\,n_{Cj}\)</span> and <span class="math inline">\(n_{Tj}\)</span>) as fixed, then <span class="math inline">\(d_{Cj}\)</span> has a <strong>hypergeometric distribution</strong>.</p>
 <div class="definition">
 <p><span id="def:unlabeled-div-44" class="definition"><strong>Definition 8.1  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
 <p><span class="math display">\[p\left(X=k\mid{K,N,n}\right) = \frac{{\binom{K}{k}}{\binom{N-K}{n-k}}}{{\binom{N}{n}}}. \]</span>
@@ -559,7 +559,7 @@ We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in th
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="comparing-survival-curves.html#cb65-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(test_stat, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3038106</code></pre>
 <p>As we expected, slightly larger, but not much different from the first version. These values are also pretty close to the results of our LR test in Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>, where we had <span class="math inline">\(p=0.291\)</span>.</p>
-<p>Since the Myeloid dataset is much bigger, we won’t go through the rigmorole of making the table, but will instead use an inbuilt R function from the <code>survival</code> package (more on this in practicals).</p>
+<p>Since the Myeloid dataset is much bigger, we won’t go through the rigmarole of making the table, but will instead use an inbuilt R function from the <code>survival</code> package (more on this in practicals).</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="comparing-survival-curves.html#cb67-1" tabindex="-1"></a>myeloid<span class="sc">$</span>trt <span class="ot">=</span> <span class="fu">as.factor</span>(myeloid<span class="sc">$</span>trt)</span>
 <span id="cb67-2"><a href="comparing-survival-curves.html#cb67-2" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(futime, death) <span class="sc">~</span> trt, <span class="at">data =</span> myeloid, <span class="at">rho=</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## Call:

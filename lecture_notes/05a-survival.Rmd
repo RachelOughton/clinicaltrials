@@ -1,6 +1,8 @@
 # Comparing survival curves
 
-Really what we would like to be able to do is to compare two survival curves (showing, for example, the results from different treatments), so that we can say whether one is significantly different from the other. In most cases, this boils down to constructing a hypothesis test along the lines of 
+In a clinical trials context, we need to be able to compare two survival curves *(showing, for example, the results from different treatments),* so that we can say whether one is significantly different from the other. 
+
+Usually boils down to constructing a hypothesis test along the lines of 
 
 $$
 \begin{aligned}
@@ -13,14 +15,16 @@ There are various ways to do this, and we will look at some now.
 
 ## Parametric: likelihood ratio test
 
-For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We've already calculated the log-likelihood of for the exponential distriubtion in Section \@ref(expll), and found the MLE. 
+For a parametric analysis, we can use a likelihood ratio test to test whether the parameters are the same.
+
+We know the log-likelihood and MLE for the exponential distribution
 
 \begin{align*}
 \ell\left(\lambda\right) & = m\log\lambda - \lambda\sum\limits_{i=1}^n t_i\\
 \hat{\lambda} & = \frac{m}{\sum\limits_{i=1}^n t_i}.
 \end{align*}
 
-Working with the exponential distribution, we can model the survival function as
+The survival function is
 
 $$S\left(t\right) = 
 \begin{cases}
@@ -31,7 +35,7 @@ $$
 and the null hypothesis boils down to 
 
 $$H_0: \; \lambda_C = \lambda_T = \lambda. $$
-We can adapt the log-likelihood we found in Section \@ref(expll) in light of the separate groups, and we find
+Adapting these for the separate groups, we find
 
 \begin{equation}
 \ell\left(\lambda_C,\,\lambda_T\right) = m_C\log\lambda_C - \lambda_C\sum\limits_{i=1}^{n_C}t_{iC} + m_T\log\lambda_T - \lambda_T\sum\limits_{i=1}^{n_T}t_{iT}  
@@ -41,7 +45,9 @@ We can adapt the log-likelihood we found in Section \@ref(expll) in light of the
 and
 
 $$\hat{\lambda}_X = \frac{m_X}{\sum\limits_{i=1}^{n_X}t_{iX}}$$ 
-where $X=C$ or $T$. In these equations $m_X$ is the number of non-censored observations in group $X$, $n_X$ is the total number of participants in group $X$ and $t_{iX}$ is the time for participant $i$ in group $X$. To simplify notation, we will write
+where $X=C$ or $T$, $m_X$ is the number of non-censored observations in group $X$, $n_X$ is the total number of participants in group $X$ and $t_{iX}$ is the time for participant $i$ in group $X$. 
+
+To simplify notation, we will write
 
 $$t^+_X = \sum\limits_{i=1}^{n_X}t_{iX},$$
 and $t^+$ for the sum over both groups.
@@ -140,7 +146,7 @@ c(est_diff_my - qnorm(0.975)*se_my, est_diff_my + qnorm(0.975)*se_my)
 
 
 
-Although the confidence around $\hat\lambda_X$ is high (ie. small standard error of the estimate), because of the large amount of data, the fit appears to actually be rather poor (recall Figure \@ref(fig:myplotlr)), mainly because of the inflexibility of the exponential distribution.
+Confidence around $\hat\lambda_X$ is high (ie. small SE), because of the large amount of data, but recall from last lecture (Fig \@ref(fig:myplotlr)) the fit is not good *because of the inflexibility of the exponential distribution.*
 :::
 
 We could also perform LR tests with the fitted Weibull distributions, but instead we will continue on through some more commonly used methods.
@@ -149,9 +155,9 @@ We could also perform LR tests with the fitted Weibull distributions, but instea
 
 The log-rank test is performed by creating a series of tables, and combining the information to find a test statistic.
 
-We work through each time $t_j$ at which an event is observed (by which we mean a death or equivalent, not a censoring) in either of the groups.
+We work through each time $t_j$ at which an event is observed *(by which we mean a death or equivalent, not a censoring)* in either of the groups.
 
-For notation, we will say that at time $t_j$, 
+Notation: at time $t_j$, 
 
   * $n_j$ patients are 'at risk' of the event
   * $d_j$ events are observed (often the 'event' is death, so we will sometimes say this)
@@ -169,7 +175,7 @@ Under $H_0$, we expect the deaths (or events) to be distributed proportionally b
   $$e_{Xj} = n_{Xj}\times{\frac{d_j}{n_j}}.$$
   This means that $e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j$.
   
-  If we take the margins of the table as fixed (by which we mean $n_j, \,d_j\,n_{Cj}$ and $n_{Tj}$), then $d_{Cj}$ has a **hypergeometric distribution**.
+  If we take the margins of the table (by which we mean $n_j, \,d_j\,n_{Cj}$ and $n_{Tj}$)  as fixed, then $d_{Cj}$ has a **hypergeometric distribution**.
   
 :::{.definition}
 The **hypergeometric distribution** is a discrete probability distribution describing the probability of $k$ successes in $n$ draws (without replacement), taken from a finite population of size $N$ that has exactly $K$ objects with the desired feature. The probability mass function for a variable $X$ following a hypergeometric function is
@@ -202,13 +208,13 @@ will (asymptotically) have a normal distribution, with
 $$U \sim \left(0,\;\sum\limits_j v_{Cj}\right). $$
 We label $V = \sum\limits_jv_{Cj}$, and in the log-rank test we refer $\frac{U^2}{V}$ to $\chi^2_1$.
 
-A somewhat simpler, and more commonly used, version of the log-rank test uses the fact that under $H_0$, the expected number of events (eg. deaths) in group $X$ is $E_X = \sum\limits_je_{Xj}$, and the observed number is $O_X = \sum\limits_j d_{Xj}$. The standard $\chi^2$ test formula can then be applied, and the test-statistic is 
+**Simpler & more widely used version**: under $H_0$, the expected number of events (eg. deaths) in group $X$ is $E_X = \sum\limits_je_{Xj}$, and the observed number is $O_X = \sum\limits_j d_{Xj}$. The standard $\chi^2$ test formula can then be applied, and the test-statistic is 
 
 $$\frac{\left(O_C - E_C\right)^2}{E_C} + \frac{\left(O_T - E_T\right)^2}{E_T}.$$
 
-It turns out that this test statistic is always smaller than $\frac{U^2}{V}$, so this test is slightly more conservative (ie. it has a larger p-value).
+It turns out that this test statistic is always smaller than $\frac{U^2}{V}$, so this test is slightly more conservative *(ie. it has a larger p-value)*.
 
-Notice that for both of these test statistics, the actual difference between observed and expected is used, not the absolute difference. Therefore if the differences change in sign over time, the values are likely to cancel out (at least to some extent) and the log-rank test is not appropriate.
+*Notice that for both of these test statistics, the actual difference between observed and expected is used, not the absolute difference. Therefore if the differences change in sign over time, the values are likely to cancel out (at least to some extent) and the log-rank test is not appropriate.*
 
 
 :::{.example}
@@ -253,6 +259,8 @@ From this, we can find the $v_{j}$ and the test statistic $\frac{U^2}{V}$:
 ```{r, echo=T}
 # Add up the differences
 UC = sum(logrank_df$d_Cj - logrank_df$e_Cj)
+
+## Find the variance at each time t_j
 vCj_vec = sapply(
   1:n_event, 
   function(j){
@@ -290,7 +298,7 @@ and we can find the p-value by
 As we expected, slightly larger, but not much different from the first version. These values are also pretty close to the results of our LR test in Example \@ref(exm:surveglr), where we had $p=0.291$.
 
 
-Since the Myeloid dataset is much bigger, we won't go through the rigmorole of making the table, but will instead use an inbuilt R function from the `survival` package (more on this in practicals).
+Since the Myeloid dataset is much bigger, we won't go through the rigmarole of making the table, but will instead use an inbuilt R function from the `survival` package (more on this in practicals).
 
 ```{r, echo=T}
 myeloid$trt = as.factor(myeloid$trt)
