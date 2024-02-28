@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-02-26}
+\date{2024-02-28}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -777,7 +777,7 @@ and Equation \eqref{eq:powerfun3} rearranges to
 \end{equation}
 
 \begin{example}
-\citep[from][]{zhong2009calculate}
+\protect\hypertarget{exm:sseg1}{}\label{exm:sseg1}\citep[from][]{zhong2009calculate}
 A trial is being planned to test whether there is a difference in the efficacy of ACEII antagonist (a new drug) and ACE inhibitor (the standard drug) for the treatment of primary hypertension (high blood pressure). The primary outcome variable is change in sitting diastolic blood pressure (SDBP, mmHg) compared to a baseline measurement taken at the start of the trial. The trial should have a significance level of \(\alpha=0.05\) and a power of \(1-\beta = 0.8\), with the same number of participants in each group. The minimum clinically important difference is \(\tau_M = 3 \text{ mmHg}\) and the pooled standard deviation is \(s = 8 \text{ mmHg}\). Therefore, using equation \eqref{eq:sscont} the sample size should be at least
 
 \begin{align*}
@@ -2040,8 +2040,8 @@ Notice that unlike our first estimator that used baseline values, in Section \re
 
 \citet{borm2007simple} discuss how this reduction in \(\operatorname{var\left(\hat{\tau}\right)}\) can impact our sample size calculations.
 
-\hypertarget{the-practice}{%
-\subsection{The practice}\label{the-practice}}
+\hypertarget{ancova-practice}{%
+\subsection{The practice}\label{ancova-practice}}
 
 In the previous section we established an unbiased estimate of the treatment effect that takes into account the baseline measurements. However, we can't use it as a model, because there are a few practical barriers:
 
@@ -2064,7 +2064,7 @@ x_i & = \mu + \tau + \gamma b_i + \epsilon_i & \text{ in group T}&.
 Here, the \(\epsilon_i\) are independent errors with distribution \(N\left(0,\,\sigma^2_\epsilon\right)\), the \(b_i\) are the baseline measurements for \(i=1,\ldots,N_T+N_C\), for groups \(T\) and \(C\) with sizes \(N_T\) and \(N_C\) respectively. Sometimes this is written instead in the form
 
 \[ x_i = \mu + \tau G_i+ \gamma b_i + \epsilon_i \]
-where \(G_i\) is 1 if participant \(i\) is in group \(T\) and 0 if they're in group \(C\). This is a factor variable, which you may remember from Stats Modelling II (if you took it). If \(G_i=1\) (ie. participant \(i\) is in group \(T\)) then \(\tau\) is added. If \(G_i=0\) (ie. participant \(i\) is in group \(C\)) then it isn't.
+where \(G_i\) is 1 if participant \(i\) is in group \(T\) and 0 if they're in group \(C\). This is a factor variable, which you may remember from Stats Modelling II (if you took it). If \(G_i=1\) (ie. participant \(i\) is in group \(T\)) then \(\tau\) is added. If \(G_i=0\) (ie. participant \(i\) is in group \(C\)) then it isn't. Notice that \(\mu\) is no longer the mean outcome in any meaningful sense, but is the intercept of the linear model.
 
 We now have four parameters to estimate: \(\mu,\,\tau,\,\gamma\) and \(\sigma^2_\epsilon\). For the first three we can use least squares (as you have probably seen for linear regression). Our aim is to minimise the sum of squares
 
@@ -4288,8 +4288,8 @@ H_1:&\text{ the treatments are different.}
 
 There are various ways to do this, and we will look at some now.
 
-\hypertarget{parametric-likelihood-ratio-test}{%
-\section{Parametric: likelihood ratio test}\label{parametric-likelihood-ratio-test}}
+\hypertarget{survlrtest}{%
+\section{Parametric: likelihood ratio test}\label{survlrtest}}
 
 For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We've already calculated the log-likelihood for the exponential distribution in Section \ref{expll}, and found the MLE.
 
@@ -4510,7 +4510,7 @@ Under \(H_0\), the numbers dying at successive times are independent, so
 \[U = \sum\limits_{j}\left(d_{Cj}-e_{Cj}\right) \]
 will (asymptotically) have a normal distribution, with
 
-\[U \sim \left(0,\;\sum\limits_j v_{Cj}\right). \]
+\[U \sim \color{red}{N}\left(0,\;\sum\limits_j v_{Cj}\right). \]
 We label \(V = \sum\limits_jv_{Cj}\), and in the log-rank test we refer \(\frac{U^2}{V}\) to \(\chi^2_1\).
 
 A somewhat simpler, and more commonly used, version of the log-rank test uses the fact that under \(H_0\), the expected number of events (eg. deaths) in group \(X\) is \(E_X = \sum\limits_je_{Xj}\), and the observed number is \(O_X = \sum\limits_j d_{Xj}\). The standard \(\chi^2\) test formula can then be applied, and the test-statistic is
@@ -4668,21 +4668,21 @@ and model the hazard function for participant \(i\) as
 
 \[h_i\left(t\right) = \exp\left[\beta G_i\right]h_0\left(t\right).\]
 
-This is the proportional hazards model for the comparison of two groups. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.
+This is the proportional hazards model for the comparison of two groups. Now, the relative hazard is a function of the participant's characteristics. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.
 
 \hypertarget{general-proportional-hazards-model}{%
 \subsection{General proportional hazards model}\label{general-proportional-hazards-model}}
 
 Extending the model to include baseline covariates \(B_1,\ldots,B_p\), we have
 
-\[\psi\left(x_i\right) = \beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi} = \mathbf{x}_i^T \boldsymbol\beta,\]
+\[\psi\left(\mathbf{x}_i\right) = \exp\left(\beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi}\right) = \exp\left(\mathbf{x}_i^T \boldsymbol\beta\right),\]
 where the first element of the vector \(\mathbf{x}_i\) is \(G_i\), and the hazard function for participant \(i\) is
 
 \[h_i\left(t\right) = \psi\left(\mathbf{x}_i\right)h_0\left(t\right). \]
 
 Now, our baseline hazard function \(h_0\left(t\right)\) is the hazard function for a participant in group \(C\) for whom all baseline coviariates are either zero (if continuous) or the reference level (if a factor variable). For factor covariates this makes sense, since all levels are realistic values, but for continuous variables zero is likely to be unrealistic (for example you'd never expect zero for age, weight, height, blood pressure etc.). So, if any continuous variables are present, the baseline will always need to be adjusted, but if all covariates are factors, it is likely that the baseline hazard function will be applicable for some set of participants.
 
-The linear component \(\mathbf{x}_i^T\boldsymbol\beta\) is often called the \textbf{risk score} or \textbf{prognostic index} for participant \(i\), and represents their hazard at time \(t\) relative to the baseline hazard.
+The linear component \(\mathbf{x}_i^T\boldsymbol\beta\) is often called the \textbf{risk score} or \textbf{prognostic index} for participant \(i\).
 
 The general form of the model is therefore
 

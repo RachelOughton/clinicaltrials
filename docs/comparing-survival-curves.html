@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-26" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -246,7 +246,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
-<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
@@ -299,7 +299,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#parametric-likelihood-ratio-test"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
 <li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
 <li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
 <ul>
@@ -358,8 +358,8 @@ H_1:&amp;\text{ the treatments are different.}
 \end{aligned}
 \]</span></p>
 <p>There are various ways to do this, and we will look at some now.</p>
-<div id="parametric-likelihood-ratio-test" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Parametric: likelihood ratio test<a href="comparing-survival-curves.html#parametric-likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="survlrtest" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Parametric: likelihood ratio test<a href="comparing-survival-curves.html#survlrtest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We’ve already calculated the log-likelihood for the exponential distribution in Section <a href="working-with-time-to-event-data.html#expll">7.2.2.1</a>, and found the MLE.</p>
 <p><span class="math display">\[\begin{align*}
 \ell\left(\lambda\right) &amp; = m\log\lambda - \lambda\sum\limits_{i=1}^n t_i\\
@@ -489,7 +489,7 @@ where <span class="math inline">\(n,\,m\)</span> are the corresponding totals ov
 This means that <span class="math inline">\(e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j\)</span>.</p>
 <p>If we take the margins of the table (by which we mean <span class="math inline">\(n_j, \,d_j,\,n_{Cj}\)</span> and <span class="math inline">\(n_{Tj}\)</span>) as fixed, then <span class="math inline">\(d_{Cj}\)</span> has a <strong>hypergeometric distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-44" class="definition"><strong>Definition 8.1  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
+<p><span id="def:unlabeled-div-43" class="definition"><strong>Definition 8.1  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
 <p><span class="math display">\[p\left(X=k\mid{K,N,n}\right) = \frac{{\binom{K}{k}}{\binom{N-K}{n-k}}}{{\binom{N}{n}}}. \]</span>
 An example would be an urn containing 50 (<span class="math inline">\(N\)</span>) balls, of which 16 (<span class="math inline">\(K\)</span>) are green and the rest (34, <span class="math inline">\(N-K\)</span>) are red. If we draw 10 (<span class="math inline">\(n\)</span>) balls <strong>without replacement</strong>, <span class="math inline">\(X\)</span> is the random variable whose outcome is <span class="math inline">\(k\)</span>, the number of green balls drawn.</p>
 </div>
@@ -506,14 +506,14 @@ and the variance is</p>
 <p>Under <span class="math inline">\(H_0\)</span>, the numbers dying at successive times are independent, so</p>
 <p><span class="math display">\[U = \sum\limits_{j}\left(d_{Cj}-e_{Cj}\right) \]</span>
 will (asymptotically) have a normal distribution, with</p>
-<p><span class="math display">\[U \sim \left(0,\;\sum\limits_j v_{Cj}\right). \]</span>
+<p><span class="math display">\[U \sim \color{red}{N}\left(0,\;\sum\limits_j v_{Cj}\right). \]</span>
 We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in the log-rank test we refer <span class="math inline">\(\frac{U^2}{V}\)</span> to <span class="math inline">\(\chi^2_1\)</span>.</p>
 <p>A somewhat simpler, and more commonly used, version of the log-rank test uses the fact that under <span class="math inline">\(H_0\)</span>, the expected number of events (eg. deaths) in group <span class="math inline">\(X\)</span> is <span class="math inline">\(E_X = \sum\limits_je_{Xj}\)</span>, and the observed number is <span class="math inline">\(O_X = \sum\limits_j d_{Xj}\)</span>. The standard <span class="math inline">\(\chi^2\)</span> test formula can then be applied, and the test-statistic is</p>
 <p><span class="math display">\[\frac{\left(O_C - E_C\right)^2}{E_C} + \frac{\left(O_T - E_T\right)^2}{E_T}.\]</span></p>
 <p>It turns out that this test statistic is always smaller than <span class="math inline">\(\frac{U^2}{V}\)</span>, so this test is slightly more conservative (ie. it has a larger p-value).</p>
 <p>Notice that for both of these test statistics, the actual difference between observed and expected is used, not the absolute difference. Therefore if the differences change in sign over time, the values are likely to cancel out (at least to some extent) and the log-rank test is not appropriate.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-45" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
+<p><span id="exm:unlabeled-div-44" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
 <p>First, the ovarian cancer dataset. To do this, we can tabulate the key values at each time step.</p>
 <pre><code>##    Time n_Cj d_Cj      e_Cj n_Tj d_Tj      e_Tj n_j d_j
 ## 1    59   13    1 0.5000000   13    0 0.5000000  26   1
@@ -593,15 +593,15 @@ G_i =
 \]</span></p>
 <p>and model the hazard function for participant <span class="math inline">\(i\)</span> as</p>
 <p><span class="math display">\[h_i\left(t\right) = \exp\left[\beta G_i\right]h_0\left(t\right).\]</span></p>
-<p>This is the proportional hazards model for the comparison of two groups. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.</p>
+<p>This is the proportional hazards model for the comparison of two groups. Now, the relative hazard is a function of the participant’s characteristics. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.</p>
 <div id="general-proportional-hazards-model" class="section level3 hasAnchor" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> General proportional hazards model<a href="comparing-survival-curves.html#general-proportional-hazards-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Extending the model to include baseline covariates <span class="math inline">\(B_1,\ldots,B_p\)</span>, we have</p>
-<p><span class="math display">\[\psi\left(x_i\right) = \beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi} = \mathbf{x}_i^T \boldsymbol\beta,\]</span>
+<p><span class="math display">\[\psi\left(\mathbf{x}_i\right) = \exp\left(\beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi}\right) = \exp\left(\mathbf{x}_i^T \boldsymbol\beta\right),\]</span>
 where the first element of the vector <span class="math inline">\(\mathbf{x}_i\)</span> is <span class="math inline">\(G_i\)</span>, and the hazard function for participant <span class="math inline">\(i\)</span> is</p>
 <p><span class="math display">\[h_i\left(t\right) = \psi\left(\mathbf{x}_i\right)h_0\left(t\right). \]</span></p>
 <p>Now, our baseline hazard function <span class="math inline">\(h_0\left(t\right)\)</span> is the hazard function for a participant in group <span class="math inline">\(C\)</span> for whom all baseline coviariates are either zero (if continuous) or the reference level (if a factor variable). For factor covariates this makes sense, since all levels are realistic values, but for continuous variables zero is likely to be unrealistic (for example you’d never expect zero for age, weight, height, blood pressure etc.). So, if any continuous variables are present, the baseline will always need to be adjusted, but if all covariates are factors, it is likely that the baseline hazard function will be applicable for some set of participants.</p>
-<p>The linear component <span class="math inline">\(\mathbf{x}_i^T\boldsymbol\beta\)</span> is often called the <strong>risk score</strong> or <strong>prognostic index</strong> for participant <span class="math inline">\(i\)</span>, and represents their hazard at time <span class="math inline">\(t\)</span> relative to the baseline hazard.</p>
+<p>The linear component <span class="math inline">\(\mathbf{x}_i^T\boldsymbol\beta\)</span> is often called the <strong>risk score</strong> or <strong>prognostic index</strong> for participant <span class="math inline">\(i\)</span>.</p>
 <p>The general form of the model is therefore</p>
 <p><span class="math display" id="eq:hazfun">\[\begin{equation}
 h_i\left(t\right) = \exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]h_0\left(t\right),
@@ -670,7 +670,7 @@ From Equation <a href="comparing-survival-curves.html#eq:sfun">(8.4)</a> we see 
 <p><span class="math display">\[S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.\]</span>
 Since the survival function is always between 0 and 1, we can see that the value of <span class="math inline">\(\psi\)</span> determines whether <span class="math inline">\(S_C\left(t\right)&lt;S_T\left(t\right)\)</span> (if <span class="math inline">\(\psi&gt;1\)</span>) or <span class="math inline">\(S_C\left(t\right)&gt;S_T\left(t\right)\)</span> (if <span class="math inline">\(0&lt;\psi&lt;1\)</span>). The important thing is that <strong>the survival curves will not cross</strong>. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. There are some more formal tests that can be conducted to assess the proportional hazards assumption, but we won’t go into them here.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-46" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
+<p><span id="exm:unlabeled-div-45" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
 <p>For the <code>ovarian</code> dataset</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="comparing-survival-curves.html#cb69-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx, <span class="at">data=</span>ovarian)</span></code></pre></div>
 <pre><code>## Call:

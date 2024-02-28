@@ -11,7 +11,7 @@ $$
 
 There are various ways to do this, and we will look at some now.
 
-## Parametric: likelihood ratio test
+## Parametric: likelihood ratio test {#survlrtest}
 
 For a parametric analysis, our null hypothesis that the two treatments are the same can be reduced to a test of whether the parameter(s) for each group are the same. We can do this using a likelihood ratio test. We've already calculated the log-likelihood for the exponential distribution in Section \@ref(expll), and found the MLE. 
 
@@ -199,7 +199,7 @@ Under $H_0$, the numbers dying at successive times are independent, so
 $$U = \sum\limits_{j}\left(d_{Cj}-e_{Cj}\right) $$
 will (asymptotically) have a normal distribution, with
 
-$$U \sim \left(0,\;\sum\limits_j v_{Cj}\right). $$
+$$U \sim \color{red}{N}\left(0,\;\sum\limits_j v_{Cj}\right). $$
 We label $V = \sum\limits_jv_{Cj}$, and in the log-rank test we refer $\frac{U^2}{V}$ to $\chi^2_1$.
 
 A somewhat simpler, and more commonly used, version of the log-rank test uses the fact that under $H_0$, the expected number of events (eg. deaths) in group $X$ is $E_X = \sum\limits_je_{Xj}$, and the observed number is $O_X = \sum\limits_j d_{Xj}$. The standard $\chi^2$ test formula can then be applied, and the test-statistic is 
@@ -331,20 +331,20 @@ and model the hazard function for participant $i$ as
 
 $$h_i\left(t\right) = \exp\left[\beta G_i\right]h_0\left(t\right).$$
 
-This is the proportional hazards model for the comparison of two groups. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.
+This is the proportional hazards model for the comparison of two groups. Now, the relative hazard is a function of the participant's characteristics. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.
 
 ### General proportional hazards model
 
 Extending the model to include baseline covariates $B_1,\ldots,B_p$, we have
 
-$$\psi\left(x_i\right) = \beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi} = \mathbf{x}_i^T \boldsymbol\beta,$$
+$$\psi\left(\mathbf{x}_i\right) = \exp\left(\beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi}\right) = \exp\left(\mathbf{x}_i^T \boldsymbol\beta\right),$$
 where the first element of the vector $\mathbf{x}_i$ is $G_i$, and the hazard function for participant $i$ is 
 
 $$h_i\left(t\right) = \psi\left(\mathbf{x}_i\right)h_0\left(t\right). $$
 
 Now, our baseline hazard function $h_0\left(t\right)$ is the hazard function for a participant in group $C$ for whom all baseline coviariates are either zero (if continuous) or the reference level (if a factor variable). For factor covariates this makes sense, since all levels are realistic values, but for continuous variables zero is likely to be unrealistic (for example you'd never expect zero for age, weight, height, blood pressure etc.). So, if any continuous variables are present, the baseline will always need to be adjusted, but if all covariates are factors, it is likely that the baseline hazard function will be applicable for some set of participants.
 
-The linear component $\mathbf{x}_i^T\boldsymbol\beta$ is often called the **risk score** or **prognostic index** for participant $i$, and represents their hazard at time $t$ relative to the baseline hazard.
+The linear component $\mathbf{x}_i^T\boldsymbol\beta$ is often called the **risk score** or **prognostic index** for participant $i$.
 
 The general form of the model is therefore
 

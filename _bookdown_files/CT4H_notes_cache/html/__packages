@@ -32,3 +32,5 @@ Rcpp
 RcppParallel
 Rfast2
 parmsurvfit
+SimEngine
+HSAUR

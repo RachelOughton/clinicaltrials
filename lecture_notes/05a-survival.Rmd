@@ -205,7 +205,7 @@ Under $H_0$, the numbers dying at successive times are independent, so
 $$U = \sum\limits_{j}\left(d_{Cj}-e_{Cj}\right) $$
 will (asymptotically) have a normal distribution, with
 
-$$U \sim \left(0,\;\sum\limits_j v_{Cj}\right). $$
+$$U \sim N\left(0,\;\sum\limits_j v_{Cj}\right). $$
 We label $V = \sum\limits_jv_{Cj}$, and in the log-rank test we refer $\frac{U^2}{V}$ to $\chi^2_1$.
 
 **Simpler & more widely used version**: under $H_0$, the expected number of events (eg. deaths) in group $X$ is $E_X = \sum\limits_je_{Xj}$, and the observed number is $O_X = \sum\limits_j d_{Xj}$. The standard $\chi^2$ test formula can then be applied, and the test-statistic is 
@@ -313,14 +313,22 @@ This time the p-value is quite far from the one we found using the likelihood ra
 
 ## (Lecture 17) Semi-parametric: the proportional hazards model
 
-As with continuous and binary outcome variables, what we would really like to be able to do is to adjust our model for baseline covariates. It seems intuitively reasonable to suppose that factors like age, sex, disease status etc. might affect someone's chances of survival (or whatever event we're concerned with).
+We'd like to be able to adjust our model for baseline covariates. 
+
+*It seems intuitively reasonable to suppose that factors like age, sex, disease status etc. might affect someone's chances of survival (or whatever event we're concerned with).*
 
 The conventional way to do this is using a **proportional hazards model**, where we assume that 
 
 $$h_T\left(t\right) = \psi h_C\left(t\right) $$
-for any $t>0$ and for some constant $\psi>0$. We call $\psi$ the **relative hazard** or **hazard ratio**. If $\psi<1$ then the hazard at time $t$ under treatment $T$ is smaller than under control $C$. If $\psi>1$ then the hazard at time $t$ is greater in greater in group $T$ than in group $C$. The important point is that $\psi$ doesn't depend on $t$. The hazard for a particular patient might be greater than for another, due to things like their age, disease history, treatment group and so on, but the extent of this difference doesn't change over time.
+for any $t>0$ and for some constant $\psi>0$. We call $\psi$ the **relative hazard** or **hazard ratio**. 
 
-We can adopt the concept of a **baseline hazard function** $h_0\left(t\right)$, where for someone in group $C$ (for now), their hazard at time $t$ is $h_0\left(t\right)$, and for someone in group $T$ it is $\psi h_0\left(t\right)$. Since we must have $\psi>0$, it makes sense to set
+*If $\psi<1$ then the hazard at time $t$ under treatment $T$ is smaller than under control $C$.*
+
+*If $\psi>1$ then the hazard at time $t$ is greater in greater in group $T$ than in group $C$.* 
+
+*The important point is that $\psi$ doesn't depend on $t$. The hazard for a particular patient might be greater than for another, due to things like their age, disease history, treatment group and so on, but the extent of this difference doesn't change over time.*
+
+We adopt the concept of a **baseline hazard function** $h_0\left(t\right)$, where for someone in group $C$ (for now), their hazard at time $t$ is $h_0\left(t\right)$, and for someone in group $T$ it is $\psi h_0\left(t\right)$. Since we must have $\psi>0$, it makes sense to set
 
 $$\psi = e^{\beta},$$
 so that $\beta = \log\psi$ and $\psi>0\;\forall\beta\in\mathbb{R}$. Note that $\beta>0 \iff \psi>1$.
@@ -339,46 +347,45 @@ and model the hazard function for participant $i$ as
 
 $$h_i\left(t\right) = \exp\left[\beta G_i\right]h_0\left(t\right).$$
 
-This is the proportional hazards model for the comparison of two groups. Naturally, we can extend it to include other baseline covariates, as we have with linear models in ANCOVA, and with logistic regression.
+This is the proportional hazards model for the comparison of two groups. Now, the relative hazard is a function of the participant's characteristics. Naturally, we can extend it to include other baseline covariates. *as we have with linear models in ANCOVA, and with logistic regression.*
 
 ### General proportional hazards model
 
 Extending the model to include baseline covariates $B_1,\ldots,B_p$, we have
 
-$$\psi\left(x_i\right) = \beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi} = \mathbf{x}_i^T \boldsymbol\beta,$$
+$$\psi\left(\mathbf{x}_i\right) = \exp\left(\beta_0 G_i + \beta_1b_{1i} + \ldots + \beta_p b_{pi}\right) = \exp\left(\mathbf{x}_i^T \boldsymbol\beta\right),$$
 where the first element of the vector $\mathbf{x}_i$ is $G_i$, and the hazard function for participant $i$ is 
 
 $$h_i\left(t\right) = \psi\left(\mathbf{x}_i\right)h_0\left(t\right). $$
 
-Now, our baseline hazard function $h_0\left(t\right)$ is the hazard function for a participant in group $C$ for whom all baseline coviariates are either zero (if continuous) or the reference level (if a factor variable). For factor covariates this makes sense, since all levels are realistic values, but for continuous variables zero is likely to be unrealistic (for example you'd never expect zero for age, weight, height, blood pressure etc.). So, if any continuous variables are present, the baseline will always need to be adjusted, but if all covariates are factors, it is likely that the baseline hazard function will be applicable for some set of participants.
+Now, our baseline hazard function $h_0\left(t\right)$ is the hazard function for a participant in group $C$ for whom all baseline coviariates are either zero (if continuous) or the reference level (if a factor variable). 
 
-The linear component $\mathbf{x}_i^T\boldsymbol\beta$ is often called the **risk score** or **prognostic index** for participant $i$, and represents their hazard at time $t$ relative to the baseline hazard.
+*For factor covariates this makes sense, since all levels are realistic values, but for continuous variables zero is likely to be unrealistic (for example you'd never expect zero for age, weight, height, blood pressure etc.). So, if any continuous variables are present, the baseline will always need to be adjusted, but if all covariates are factors, it is likely that the baseline hazard function will be applicable for some set of participants.*
 
-The general form of the model is therefore
+The linear component $\mathbf{x}_i^T\boldsymbol\beta$ is often called the **risk score** or **prognostic index** for participant $i$.
 
-\begin{equation}
-h_i\left(t\right) = \exp\left[\mathbf{x}_i^T\boldsymbol\beta\right]h_0\left(t\right),
-(\#eq:hazfun)
-\end{equation}
-
-and we can rewrite it as
+We can rewrite the model as
 
 $$\log\left(\frac{h_1\left(t\right)}{h_0\left(t\right)}\right) = \mathbf{x}_i^T\boldsymbol\beta.$$
 
-Notice that there is no constant in the linear term - if there was, it could just be absorbed into the baseline hazard function.
+*Notice that there is no constant in the linear term - if there was, it could just be absorbed into the baseline hazard function.*
 
-There are ways of fitting this model that rely on specifying the hazard function using parametric methods, but the method we will study (and the most widely used) is one developed by @cox1972regression.
+There are various ways of fitting this model, but the method we will study (and the most widely used) is one developed by @cox1972regression.
 
 ### Cox regression
 
 The beauty of Cox regression is that it avoids specifying a form for $h_0\left(t\right)$ altogether. 
 
-To fit the model in Equation \@ref(eq:hazfun) we must estimate the coefficients $\beta_0,\ldots,\beta_p$. It also appears like we should estimate the baseline hazard $h_0\left(t\right)$ somehow too, but the great advance made by Cox was to develop a method where this isn't necessary. We don't need to estimate $h_0\left(t\right)$ to make inferences about the hazard ratio 
+*To fit the model in Equation \@ref(eq:hazfun) we must estimate the coefficients $\beta_0,\ldots,\beta_p$. It also appears like we should estimate the baseline hazard $h_0\left(t\right)$ somehow too, but the great advance made by Cox was to develop a method where this isn't necessary.* 
+
+*We don't need to estimate $h_0\left(t\right)$ to make inferences about the hazard ratio* 
 
 $$\frac{h_i\left(t\right)}{h_0\left(t\right)}.$$
 We will estimate the coefficients $\boldsymbol\beta$ using maximum likelihood, and so we'll need to specify a likelihood function for the $\boldsymbol\beta$, which will be a function of $\mathbf{x}^T\boldsymbol\beta$ and our observed data, the survival times $t_i$.
 
-Suppose we have data for $n$ participants, and that these include $m$ complete observations (often referred to as deaths) and $n-m$ right-censored survival times. Suppose also that all the complete observation times are distinct. Since time itself is continuous, this is always technically true, but in data the time will be rounded and so there may be multiple observations at one time.
+Suppose we have data for $n$ participants, and that these include $m$ complete observations (often referred to as deaths) and $n-m$ right-censored survival times. Suppose also that all the complete observation times are distinct. 
+
+*Since time itself is continuous, this is always technically true, but in data the time will be rounded and so there may be multiple observations at one time.*
 
 We can order these $m$ event times
 
@@ -394,16 +401,21 @@ L\left(\boldsymbol\beta\right) = \prod\limits_{j=1}^m\frac{\exp\left[\mathbf{x}_
 (\#eq:lcox)
 \end{equation}
 
-where $\mathbf{x}_{(j)}$ is the vector of covariates for the individual who dies (or equivalent) at time $t_{(j)}$. Notice that the product is over only those individuals with complete observations, but individuals with censored data do contribute to the sum in the denominator.
+where $\mathbf{x}_{(j)}$ is the vector of covariates for the individual who dies (or equivalent) at time $t_{(j)}$. *Notice that the product is over only those individuals with complete observations, but individuals with censored data do contribute to the sum in the denominator.*
+
+The numerator of the fraction inside the product in Equation \@ref(eq:lcox) is the relative hazard for the person who actually did die at time $t_{(j)}$. 
+
+The denominator is the sum of the relative hazards for all those who possibly could have died at time $t_{(j)}$ (the risk set $R\left(t_{(j)}\right)$). 
+
+Very loosely: maximizing the likelihood means finding values for $\boldsymbol\beta$ that mean the people who did die were 'the most likely' to die at the time they did. 
 
 
-The numerator of the fraction inside the product in Equation \@ref(eq:lcox) is the relative hazard for the person who actually did die at time $t_{(j)}$. The denominator is the sum of the relative hazards for all those who possibly could have died at time $t_{(j)}$ (the risk set $R\left(t_{(j)}\right)$). Thus, in very loose terms, maximizing the likelihood means finding values for $\boldsymbol\beta$ that mean the people who did die were 'the most likely' to die at the time they did. 
+This is not a true likelihood, since it depends only on the ordering of the data and not the data itself; it is a **partial likelihood**. 
+
+Justification: because $h_0\left(t\right)$ has an arbitrary form, it's possible that except for at these observed times, $h_0\left(t\right)=0$, and therefore $h_i\left(t\right)=0$. This means the intervals between successive observations convey no information about the effect of the covariates on hazard, and therefore about the $\boldsymbol\beta$ parameters. 
 
 
-Notice that this is not a true likelihood, since it depends only on the ordering of the data (the observation and censoring times) and not the data itself. This makes it a **partial likelihood**. The argument given to justify this is that because the baseline hazard $h_0\left(t\right)$ has an arbitrary form, it's possible that except for at these observed times, $h_0\left(t\right)=0$, and therefore $h_i\left(t\right)=0$. This means the intervals between successive observations convey no information about the effect of the covariates on hazard, and therefore about the $\boldsymbol\beta$ parameters. 
-
-
-If you want to know more detail about how this likelihood was derived, you can find in in Section 3.3 of @collett_surv, or in Cox's [original paper](https://www.jstor.org/stable/pdf/2985181.pdf) (@cox1972regression).
+*If you want to know more detail about how this likelihood was derived, you can find in in Section 3.3 of @collett_surv, or in Cox's [original paper](https://www.jstor.org/stable/pdf/2985181.pdf) (@cox1972regression).*
 
 Moving on, if we set 
 
@@ -426,11 +438,13 @@ The MLE $\hat{\boldsymbol\beta}$ is found using numerical methods (often Newton-
 
 ### How can we tell if a proportional hazards model is appropriate? {-}
 
-We can't easily visualise the hazard function for a dataset, and instead would plot the survival curve. So can we tell if the proportional hazards assumption is met by looking at the survival curve?
+*We can't easily visualise the hazard function for a dataset, and instead would plot the survival curve. So can we tell if the proportional hazards assumption is met by looking at the survival curve?*
 
-Thankfully, it turns out that if two hazard functions are proportional, their survival functions won't cross one another. 
+If two hazard functions are proportional, their survival functions won't cross one another. *Necessary but not sufficient!*
 
-Suppose $h_C\left(t\right)$ is the hazard at time $t$ for an individual in group $C$, and $h_T\left(t\right)$ is the hazard for that same individual in group $T$. If the two hazards are proportional then we have
+Suppose $h_C\left(t\right)$ is the hazard at time $t$ for an individual in group $C$, and $h_T\left(t\right)$ is the hazard for that same individual in group $T$. 
+
+If the two hazards are proportional then we have
 
 $$h_C\left(t\right) = \psi h_T\left(t\right) $$
 for some constant $\psi$.
@@ -438,7 +452,11 @@ for some constant $\psi$.
 Recall from Section \@ref(survhaz) that 
 
 $$h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)},$$
-where $S\left(t\right)$ is the survival function and $f\left(t\right)$ is the probability density of $T$. We can therefore write
+where $S\left(t\right)$ is the survival function
+
+$$S\left(t\right) = 1 - \int\limits_0^t f\left(u\right)du, $$
+
+and $f\left(t\right)$ is the probability density of $T$. We can therefore write
 
 $$h\left(t\right) = -\frac{d}{dt}\left[\log\left(S\left(t\right)\right)\right]$$
 and rearrange this to
@@ -457,7 +475,9 @@ $$\exp\left\lbrace - \int\limits_0^t h_C\left(u\right)du \right\rbrace =\exp\lef
 From Equation \@ref(eq:sfun) we see that therefore
 
 $$S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.$$
-Since the survival function is always between 0 and 1, we can see that the value of $\psi$ determines whether $S_C\left(t\right)<S_T\left(t\right)$ (if $\psi>1$) or $S_C\left(t\right)>S_T\left(t\right)$ (if $0<\psi<1$). The important thing is that **the survival curves will not cross**. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. There are some more formal tests that can be conducted to assess the proportional hazards assumption, but we won't go into them here.
+Since the survival function is always between 0 and 1, we can see that the value of $\psi$ determines whether $S_C\left(t\right)<S_T\left(t\right)$ (if $\psi>1$) or $S_C\left(t\right)>S_T\left(t\right)$ (if $0<\psi<1$). The important thing is that **the survival curves will not cross**. 
+
+*This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. There are some more formal tests that can be conducted to assess the proportional hazards assumption, but we won't go into them here.*
 
 :::{.example}
 
@@ -467,6 +487,7 @@ For the `ovarian` dataset
 
 ```{r, echo=T}
 coxph(formula = Surv(futime, fustat)~rx, data=ovarian)
+
 
 ```
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-26" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -246,7 +246,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
-<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
@@ -299,7 +299,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#parametric-likelihood-ratio-test"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
 <li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
 <li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
 <ul>
@@ -374,7 +374,7 @@ Figure 7.1: An example of some censored data.
 <p><span class="math display">\[F\left(t\right) = P\left(T&lt;t\right) = \int\limits_0^t f\left(u\right)du, \]</span>
 and this gives us the probability that the survival time is less than <span class="math inline">\(t\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-39" class="definition"><strong>Definition 7.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
+<p><span id="def:unlabeled-div-38" class="definition"><strong>Definition 7.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
 Conventionally we plot <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> against <span class="math inline">\(t\)</span> and this gives us a <strong>survival curve</strong>.</p>
 </div>
 <p>We can immediately say two things about survival curves:</p>
@@ -391,7 +391,7 @@ Figure 7.2: An example of two survival curves, taken from <span class="citation"
 </div>
 <p>Following on from the survival function, we have another (slightly less intuitive) quantity: the <strong>Hazard function</strong> <span class="math inline">\(h\left(t\right)\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-40" class="definition"><strong>Definition 7.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous probability of death (or <em>experiencing the event</em>) at time <span class="math inline">\(t\)</span>.</p>
+<p><span id="def:unlabeled-div-39" class="definition"><strong>Definition 7.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous probability of death (or <em>experiencing the event</em>) at time <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>If we use <span class="math inline">\(T\)</span> to denote the random variable of survival time (or time-to-event) then <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> and <span class="math inline">\(h(t)\)</span> are defined by</p>
 <p><span class="math display">\[
@@ -729,7 +729,7 @@ The variance of the MLE is</p>
 <p><span class="math display">\[\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.\]</span></p>
 <p>Notice that the numerator in Equation <a href="working-with-time-to-event-data.html#eq:lambdavar">(7.2)</a> is <span class="math inline">\(m\)</span>, the number of complete observations (rather than <span class="math inline">\(n\)</span> the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-41" class="example"><strong>Example 7.3  </strong></span>Returning to the dataset from Example <a href="working-with-time-to-event-data.html#exm:surveg1">7.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
+<p><span id="exm:unlabeled-div-40" class="example"><strong>Example 7.3  </strong></span>Returning to the dataset from Example <a href="working-with-time-to-event-data.html#exm:surveg1">7.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
 <p><span class="math display">\[
 \begin{aligned}
 \hat{\lambda}_C &amp;= \frac{m_C}{\sum\limits_{i=1}^{n_C} t_i}\\
@@ -773,7 +773,7 @@ Figure 7.7: Kaplan Meier estimates of survival curves for the Myeloid data (soli
 <h3><span class="header-section-number">7.2.3</span> The Weibull distribution<a href="working-with-time-to-event-data.html#the-weibull-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well. A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-42" class="definition"><strong>Definition 7.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span id="def:unlabeled-div-41" class="definition"><strong>Definition 7.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
 <p><span class="math display">\[
 f\left(x\mid \lambda,\,k\right) =
 \begin{cases}
@@ -807,7 +807,7 @@ and substitute this into Equation <a href="working-with-time-to-event-data.html#
 <p><span class="math display">\[\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \frac{r}{\sum\limits_{i=1}^n t_i^{\gamma}}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i=0. \]</span>
 This second equation is analytically intractable, so numerical methods are used to find <span class="math inline">\(\hat\gamma\)</span>, and then this value can be used to find <span class="math inline">\(\hat\lambda\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-43" class="example"><strong>Example 7.4  </strong></span>We can fit Weibull distributions to our <code>myeloid</code> dataset, as shown in Figure <a href="working-with-time-to-event-data.html#fig:weibmy">7.8</a>.</p>
+<p><span id="exm:unlabeled-div-42" class="example"><strong>Example 7.4  </strong></span>We can fit Weibull distributions to our <code>myeloid</code> dataset, as shown in Figure <a href="working-with-time-to-event-data.html#fig:weibmy">7.8</a>.</p>
 <p><span class="math display">\[S\left(t\right) = \exp\left(-\lambda t^{\gamma}\right).\]</span></p>
 <div class="figure"><span style="display:block;" id="fig:weibmy"></span>
 <img src="CT4H_notes_files/figure-html/weibmy-1.png" alt="Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C." width="672" />

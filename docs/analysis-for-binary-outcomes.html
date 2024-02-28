@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-26" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -246,7 +246,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
-<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
@@ -299,7 +299,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#parametric-likelihood-ratio-test"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
 <li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
 <li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
 <ul>
@@ -417,7 +417,7 @@ and in calculations we replace <span class="math inline">\(\pi\)</span> with <sp
 <p>Putting all this together, our test statistic is</p>
 <p><span class="math display">\[Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 6.1  </strong></span>The data in this example comes from <span class="citation">Marshall (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
+<p><span id="exm:unlabeled-div-24" class="example"><strong>Example 6.1  </strong></span>The data in this example comes from <span class="citation">Marshall (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
 <pre><code>##               improved
 ## arm            FALSE TRUE
 ##   Streptomycin    17   38
@@ -451,7 +451,7 @@ Z &amp; = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52}
 <p><span class="math display">\[ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.\]</span></p>
 <p>Under the null hypothesis (that <span class="math inline">\(\pi_C = \pi_T\)</span>) this has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the <span class="math inline">\(\chi^2_1\)</span> distribution.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-26" class="example"><strong>Example 6.2  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
+<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 6.2  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
 <pre><code>##               improved
 ## arm             FALSE   TRUE
 ##   Streptomycin 26.730 28.270
@@ -515,7 +515,7 @@ where we use <span class="math inline">\(p,\, r,\, n\)</span> to denote the pool
 <p><span class="math display">\[\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),\]</span>
 where <span class="math inline">\(G\)</span> is the set of subgroups (group <span class="math inline">\(C\)</span> success etc.). Under the null hypothesis that <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, and for sufficiently large <span class="math inline">\(n_C,\;n_T\)</span>, <span class="math inline">\(\lambda_{LR}\)</span> has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-27" class="example"><strong>Example 6.3  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
+<p><span id="exm:unlabeled-div-26" class="example"><strong>Example 6.3  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="analysis-for-binary-outcomes.html#cb22-1" tabindex="-1"></a>sum_LR <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
 <span id="cb22-2"><a href="analysis-for-binary-outcomes.html#cb22-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
 <span id="cb22-3"><a href="analysis-for-binary-outcomes.html#cb22-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
@@ -557,7 +557,7 @@ The NNT is the number of patients you’d need to treat (with treatment <span cl
 Our <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval is therefore given by</p>
 <p><span class="math display">\[\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right) \]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-28" class="example"><strong>Example 6.4  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
+<p><span id="exm:unlabeled-div-27" class="example"><strong>Example 6.4  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
 <p>Our estimated treatment effect is (to 3 decimal places)</p>
 <p><span class="math display">\[\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.\]</span>
 Our estimate of the standard error of <span class="math inline">\(\hat\tau_{ARD}\)</span> is</p>
@@ -575,7 +575,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{\color{red}{0.187}}\right) = \left(1.85,\; \color{red}{5.33} \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
@@ -626,8 +626,8 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-31-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
 <p class="caption">
 Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
 </p>
@@ -652,7 +652,7 @@ We can find the limits of the <span class="math inline">\(100\left(1-\alpha\righ
 In Newcombe’s proposed method, we instead keep <span class="math inline">\(\pi\)</span> in the right hand side and solve the quadratic in Equation <a href="analysis-for-binary-outcomes.html#eq:newcombe1">(6.1)</a> in terms of <span class="math inline">\(\pi\)</span>.</p>
 <p>The benefit of this new method will be most obvious for a probability that is close to 0 or 1.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 6.5  </strong></span>Suppose we have 1 success out of 50 patients, so <span class="math inline">\(p=0.02,\;n=50\)</span>.</p>
+<p><span id="exm:unlabeled-div-28" class="example"><strong>Example 6.5  </strong></span>Suppose we have 1 success out of 50 patients, so <span class="math inline">\(p=0.02,\;n=50\)</span>.</p>
 <p>The limits of a standard 95% confidence interval will be</p>
 <p><span class="math display">\[\left(0.02 - z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}},\; 0.02 + z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}}\right) = \left(-0.0188,\;0.0588\right),\]</span>
 whereas the limits to the Newcombe 95% CI will be the roots of</p>
@@ -668,7 +668,7 @@ Figure 6.2: LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS
 </p>
 </div>
 <div class="example">
-<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 6.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
+<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 6.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
 <p><span class="math display">\[\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.\]</span>
 Solving this equation in the usual way (using the quadratic formula) we find the limits</p>
 <pre><code>## [1] 0.5597141 0.7971771</code></pre>
@@ -677,8 +677,8 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.5687797 0.8130385</code></pre>
 <p>We can see this graphically</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-35"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-35-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.3: As before, dashed for Newcombe, dotted for standard
 </p>
@@ -689,8 +689,8 @@ Figure 6.3: As before, dashed for Newcombe, dotted for standard
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.1994256 0.4544205</code></pre>
 <p>Again, we can see this graphically.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-38"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-38-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.4: As before, dashed for Newcombe, dotted for standard
 </p>
@@ -715,7 +715,7 @@ Figure 6.4: As before, dashed for Newcombe, dotted for standard
 \]</span>
 These differences must be calculated using the individual sample confidence interval method.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 6.7  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
+<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 6.7  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
 <p><span class="math display">\[
 \begin{aligned}
 p_T &amp; = \frac{38}{55}\\
@@ -755,7 +755,7 @@ which we say as “1 to 4” or 1:4. For every one time <span class="math inline
 <p>The <strong>odds ratio</strong> compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).</p>
 <p>With the ARD, we knew that our confidence interval should always be in <span class="math inline">\(\left[-1,\,1\right]\)</span>, and that if we compare treatments in one direction (say <span class="math inline">\(p_T - p_C\)</span>) we would obtain the negative of the interval for the other way (<span class="math inline">\(p_C - p_T\)</span>). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction (<span class="math inline">\(p_T / p_C\)</span>) will give the reciprocal of the other direction (<span class="math inline">\(p_C / p_T\)</span>).</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 6.8  </strong></span>For our Streptomycin example, we estimated the ARD by
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 6.8  </strong></span>For our Streptomycin example, we estimated the ARD by
 <span class="math display">\[\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364,\]</span>
 or could have alternatively had
 <span class="math display">\[\hat\tau_{ARD}=p_C - p_T = \frac{17}{52} - \frac{38}{55} = - 0.364.\]</span>
@@ -793,7 +793,7 @@ Since we estimate <span class="math inline">\(\pi_T\)</span> by <span class="mat
 \]</span>
 This then translates to an interval for the risk ratio itself of <span class="math inline">\(\left(e^{l_{RR}},e^{u_{RR}}\right)\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-33" class="example"><strong>Example 6.9  </strong></span>Returning once again to our streptomycin example, recall that we have</p>
+<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 6.9  </strong></span>Returning once again to our streptomycin example, recall that we have</p>
 <p><span class="math display">\[
 \begin{aligned}
 r_T &amp; = 38\\
@@ -1013,7 +1013,7 @@ where <span class="math inline">\(X\)</span> here is the primary outcome. The ex
 where <span class="math inline">\(\text{logit}_i\)</span> is the fitted value of the linear model (on the logit scale) given all the baseline characteristics of some patient <span class="math inline">\(i\)</span>.
 This will be the probability, according to the model, that a patient with this particular combination of baseline characteristics will have outcome 1.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-34" class="example"><strong>Example 6.11  </strong></span>Continuing with Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>, we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.</p>
+<p><span id="exm:unlabeled-div-33" class="example"><strong>Example 6.11  </strong></span>Continuing with Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>, we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.</p>
 <p>For this we will make use of the summary table</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="analysis-for-binary-outcomes.html#cb41-1" tabindex="-1"></a><span class="fu">summary</span>(glm_indo)</span></code></pre></div>
 <pre><code>## 
@@ -1099,11 +1099,11 @@ which is equivalent to a probability of post-ECRP pancreatitis of</p>
 </ul>
 <p>If <span class="math inline">\(\hat{p}_i&lt;t\)</span> we classify patient <span class="math inline">\(i\)</span> as 0, if <span class="math inline">\(\hat{p}\geq t\)</span> we classify them as 1. The language of ROC analysis is so entrenched in diagnostic/screening tests that I have kept it here for consistency. A ‘positive’ result for us is <span class="math inline">\(X=1\)</span>, and a ‘negative’ result is <span class="math inline">\(X=0\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 6.1  </strong></span>The <strong>sensitivity</strong> of a test (or classifier) is the probability that it will output positive (or 1) if the true value is positive (or 1):
+<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 6.1  </strong></span>The <strong>sensitivity</strong> of a test (or classifier) is the probability that it will output positive (or 1) if the true value is positive (or 1):
 <span class="math display">\[p\left(\hat{p}_i \geq t \mid{X_i=1}\right).\]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-36" class="definition"><strong>Definition 6.2  </strong></span>The <strong>specificity</strong> of a test (or classifier) is the probability that it will output negative (or 0) if the true value is negative (or 0):</p>
+<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 6.2  </strong></span>The <strong>specificity</strong> of a test (or classifier) is the probability that it will output negative (or 0) if the true value is negative (or 0):</p>
 <p><span class="math display">\[p\left(\hat{p}_i &lt; t \mid{X_i=0}\right) \]</span></p>
 </div>
 <p>We estimate these by the proportions within the dataset.</p>
@@ -1115,7 +1115,7 @@ which is equivalent to a probability of post-ECRP pancreatitis of</p>
 </iframe>
 <p>Note that I’ve used beta distributions for some hypothetical distributions of fitted values for the different groups, but this is just for convenience: ROC analysis makes no distributional assumptions.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-37" class="example"><strong>Example 6.12  </strong></span>Let’s look at the model we fitted in Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>. To draw the ROC curve of this data, we will use the R package <code>pROC</code>.</p>
+<p><span id="exm:unlabeled-div-36" class="example"><strong>Example 6.12  </strong></span>Let’s look at the model we fitted in Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>. To draw the ROC curve of this data, we will use the R package <code>pROC</code>.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="analysis-for-binary-outcomes.html#cb44-1" tabindex="-1"></a>fit_indo <span class="ot">=</span> <span class="fu">fitted</span>(glm_indo)   <span class="co"># Fitted values from glm_indo</span></span>
 <span id="cb44-2"><a href="analysis-for-binary-outcomes.html#cb44-2" tabindex="-1"></a>out_indo <span class="ot">=</span> indo_rct<span class="sc">$</span>outcome   <span class="co"># outcome values (0 or 1)</span></span>
 <span id="cb44-3"><a href="analysis-for-binary-outcomes.html#cb44-3" tabindex="-1"></a>roc_indo_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">fit =</span> fit_indo, <span class="at">out =</span> out_indo)</span></code></pre></div>
@@ -1141,10 +1141,10 @@ Figure 6.5: ROC curve for our logistic regression model of the indo RCT data (so
 <p>Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, ‘correct’ or ‘accurate’. One intuitive way to do this is to work through different ‘types’ of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.</p>
 <p>If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-38" class="example"><strong>Example 6.13  </strong></span>This example uses the model fitted in Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>.</p>
+<p><span id="exm:unlabeled-div-37" class="example"><strong>Example 6.13  </strong></span>This example uses the model fitted in Example <a href="analysis-for-binary-outcomes.html#exm:logregeg1">6.10</a>.</p>
 <p>The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the <span class="math inline">\(x\)</span> axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-47"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-47-1.png" alt="Diagnostic plots for our model, focussing on calibration." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-46-1.png" alt="Diagnostic plots for our model, focussing on calibration." width="672" />
 <p class="caption">
 Figure 6.6: Diagnostic plots for our model, focussing on calibration.
 </p>

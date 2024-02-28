@@ -447,7 +447,7 @@ and Equation \@ref(eq:powerfun3) rearranges to
     (\#eq:sscont)
 \end{equation}
       
-:::{.example}
+:::{.example #sseg1}
 [from @zhong2009calculate]
     A trial is being planned to test whether there is a difference in the efficacy of ACEII antagonist (a new drug) and ACE inhibitor (the standard drug) for the treatment of primary hypertension (high blood pressure). The primary outcome variable is change in sitting diastolic blood pressure (SDBP, mmHg) compared to a baseline measurement taken at the start of the trial. The trial should have a significance level of $\alpha=0.05$ and a power of $1-\beta = 0.8$, with the same number of participants in each group. The minimum clinically important difference is $\tau_M = 3 \text{ mmHg}$ and the pooled standard deviation is $s = 8 \text{ mmHg}$. Therefore, using equation \@ref(eq:sscont) the sample size should be at least
       

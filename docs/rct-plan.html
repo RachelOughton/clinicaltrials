@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-02-26" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -246,7 +246,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
-<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#the-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
 <ul>
@@ -299,7 +299,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#parametric-likelihood-ratio-test"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
 <li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
 <li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
 <ul>
@@ -491,7 +491,7 @@ where
 <div id="brief-aside-on-notation" class="section level4 unnumbered hasAnchor">
 <h4>Brief aside on notation<a href="rct-plan.html#brief-aside-on-notation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><em>We’ll see a lot of the notation <span class="math inline">\(z_{\alpha/2}\)</span> and similar, so to clarify:</em></p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p><em>In R, we have <span class="math inline">\(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\)</span> and <span class="math inline">\(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\)</span>. <code>qnorm</code> is the quantile and <code>pnorm</code> is the cumulative distribution function. So, for example</em>
 <span class="math display">\[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)\]</span></p>
 <p>We have constructed our whole argument under the assumption that <span class="math inline">\(H_0\)</span> is true, and that the probability of such a value is therefore <span class="math inline">\(\alpha\)</span>. We want this probability to be small, since it constitutes an error; <span class="math inline">\(H_0\)</span> is true, but our value of <span class="math inline">\(D\)</span> (or the difference in means) leads us to reject <span class="math inline">\(H_0\)</span>. This is sometimes called the ‘type I’ error rate. But what if <span class="math inline">\(H_0\)</span> is false?</p>
@@ -583,7 +583,7 @@ where <span class="math inline">\(\tau_M\)</span> is our minimum detectable effe
     \tag{2.4}
 \end{equation}\]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-11" class="example"><strong>Example 2.1  </strong></span><span class="citation">(from <a href="#ref-zhong2009calculate">Zhong 2009</a>)</span>
+<p><span id="exm:sseg1" class="example"><strong>Example 2.1  </strong></span><span class="citation">(from <a href="#ref-zhong2009calculate">Zhong 2009</a>)</span>
 A trial is being planned to test whether there is a difference in the efficacy of ACEII antagonist (a new drug) and ACE inhibitor (the standard drug) for the treatment of primary hypertension (high blood pressure). The primary outcome variable is change in sitting diastolic blood pressure (SDBP, mmHg) compared to a baseline measurement taken at the start of the trial. The trial should have a significance level of <span class="math inline">\(\alpha=0.05\)</span> and a power of <span class="math inline">\(1-\beta = 0.8\)</span>, with the same number of participants in each group. The minimum clinically important difference is <span class="math inline">\(\tau_M = 3 \text{ mmHg}\)</span> and the pooled standard deviation is <span class="math inline">\(s = 8 \text{ mmHg}\)</span>. Therefore, using equation <a href="rct-plan.html#eq:sscont">(2.4)</a> the sample size should be at least</p>
 <p><span class="math display">\[\begin{align*}
       N &amp; = \frac{2\times{8}^2\left(0.842 + 1.96\right)^2}{3^2}\\
