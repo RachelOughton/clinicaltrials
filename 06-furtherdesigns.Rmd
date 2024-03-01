@@ -36,18 +36,20 @@ s^2_{Tot} & = \frac{1}{n-g}\sum\limits_{j=1}^g \sum\limits_{i=1}^{n_j}\left(x_{i
 \end{aligned}
 $$
 
-:::{.example}
-We will demonstrate the ICC using some familiar datasets (having nothing to do with clinical trials!). Firstly the `iris` data, which you may remember is in three distinct groups, grouped by `Species`. The data are plotted in Figure \@ref(fig:iris)
+:::{.example #kroger}
+We will demonstrate the ICC using a dataset that has nothing to do with clinical trials. The `cheese` dataset contains the price per unit and volume of sales of cheese (who knows what kind) at many Kroger stores in the US. We also know which city the Krogers are in, and we have data for 706 stores across 11 cities. It might be reasonable to expect that if we have information about the price and volume for several stores within a particular city, this gives us more information about the price and volume for another store in that same city than for a store in another city. Figure \@ref(fig:cheesedata) shows the price and volume for all stores, coloured by city.
 
-```{r iris, fig.cap = "Sepal length and width from Iris data, coloured by Species"}
-data(iris)
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, col = Species)) + geom_point()
+```{r cheesedata, echo=T, fig.cap = "Price per unit and volume of sales of cheese for 706 Kroger stores."}
+cheese = read.csv("kroger.csv", header=T)
+cheese$city = as.factor(cheese$city)
+ggplot(data=cheese, aes(x=price, y=vol, col=city)) + geom_point()
 ```
 
-We can estimate the within and between variances, and therefore the ICC, for any of the numeric variables. We will choose `Sepal.Length`. It is clear just from looking at the plot that a lot of variation is explained by the species, and we see below that $ICC=0.$
+To calculate the ICC we define two functions, `between.var` and `within.var`, to calculate the between group and within group variance, as explained above.
 
-```{r, echo=T}
+<details><summary> Click to show R functions </summary>
 
+```{r bvwvfun, echo=T}
 # Firstly we define functions for the estimates
 between.var = function(
     data,
@@ -102,18 +104,10 @@ wvar
 icc = bvar/(bvar+wvar)
 icc
 ```
-:::
 
+</details>
 
-:::{.example}
-
-Our second example
-
-```{r, echo=T}
-cheese = read.csv("kroger.csv", header=T)
-cheese$city = as.factor(cheese$city)
-ggplot(data=cheese, aes(x=price, y=vol, col=city)) + geom_point()
-
+```{r icccheese, echo=T}
 wv_price = within.var(cheese$price, cheese$city)
 bv_price = between.var(cheese$price, cheese$city)
 icc = bv_price / (bv_price + wv_price)
@@ -121,7 +115,7 @@ icc
 ```
 :::
 
-We can see that for each district we know a fair amount about the cost of cheese. But, if we had to predict the price of cheese in a new city, for which we have no data, we would have no idea what the mean for that city would be, apart from that it would come from $N\left(\mu,\;\sigma^2_b\right)$, where $\mu$ is the mean price of cheese in the overall population and $\sigma^2_b$ is the between group variance.
+We can see that for each city we know a fair amount about the cost of cheese. But, if we had to predict the price of cheese in a new city, for which we have no data, we would have no idea what the mean for that city would be, apart from that it would come from $N\left(\mu,\;\sigma^2_b\right)$, where $\mu$ is the mean price of cheese in the overall population and $\sigma^2_b$ is the between group variance.
 
 Estimating the ICC when planning a study is an important step, but isn't always easy. For a well-understood (or at least well-documented) condition, it can often be estimated from existing data, which is likely to cover many sites. In non-medical studies like education or social interventions (where cluster RCTs are very common), it can be much more difficult because there is generally less data. Statistical studies are much newer in these areas, though they are becoming increasingly common, and even mandated by some organisations (for example the [Educational Endowment Foundation](https://educationendowmentfoundation.org.uk)).
 
@@ -214,13 +208,12 @@ As well as giving the sample size for a simple t-test (as we've done above) it a
 The plot shows the minimum detectable effect size (MDES, or $\tau_M$, in SD units), since the evaluation team wanted to know what size of effect we could find with our desired power.
 
 
-```{r}
-knitr::include_graphics("images/Screenshot_shiny.png")
-
-```
-
-```{r}
-knitr::include_app(url = "https://racheloughton.shinyapps.io/sample_size/")
+```{r ssapp}
+if(is_html_output()){
+  knitr::include_app(url = "https://racheloughton.shinyapps.io/sample_size/")
+} else {
+  knitr::include_graphics("images/Screenshot_shiny.png")
+}
 ```
 
 :::
@@ -264,11 +257,18 @@ Finally, an allocation is chosen at random from the optimal set, and this is the
 As with the other stages of a cluster RCT, to conduct an effective and accurate analysis we need to take into account the clustered nature of the data. There are several ways to do this, and we will whizz through the main ones now.
 
 :::{.example}
-The data we use will be from an educational trial, contained in `crtData` in the package `eefAnalytics`. The dataset contains 22 schools and 265 pupils in total. Each school was assigned to either `1` (group $T$) or `0` (group $C$). Each pupil took a test before the trial, and again at the end of the trial. We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.
+The data we use will be from an educational trial, contained in `crtData` in the package `eefAnalytics`, shown in Figure \@ref(fig:crtboxplots) . The dataset contains 22 schools and 265 pupils in total. Each school was assigned to either `1` (group $T$) or `0` (group $C$). Each pupil took a test before the trial, and again at the end of the trial. We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.
 
-```{r}
-crt_df = crtData[ ,-6]
-paged_table(crt_df)
+```{r eeftab, fig.cap = "The eefAnalytics dataset."}
+crt_df = crtData[ ,-c(5,6)]
+crt_df$School = as.factor(crt_df$School)
+crt_df$Intervention = as.factor(crt_df$Intervention)
+str(crt_df)
+```
+
+```{r crtboxplots, echo=T, fig.cap = "Box plots of the outcome Posttest for each school, coloured by Intervention."}
+ggplot(data=crt_df, aes(y=Posttest, fill=Intervention, group = School)) + geom_boxplot()
+
 ```
 
 :::
@@ -277,7 +277,7 @@ paged_table(crt_df)
 
 In cluster level analysis, the data is aggregated to the cluster level, so that for each cluster (school, in our  case), there is effectively one data point. The advantage of this approach is that, because the design is conducted at the cluster level, the statistical methodology is relatively simple - for example, a t-test. However, if cluster sizes vary a lot, a cluster-level analysis is often not appropriate because they usually rely on the assumption that the variance of the outcome in each cluster is approximately the same. As we have seen, the larger a group, the smaller the variance of its sample mean. There are methods designed to account for this, such as the weighted t-test, but these methods are generally inefficient and less robust. These methods are generally thought to be appropriate for fewer than 15-20 clusters per treatment arm.
 
-One possibility for our trial would be to collect the mean and SD of scores within each school, and perform a t-test to find out if there is a significant difference between the intervention and control arms. If we wanted to find out whether this depended on, say, gender, we could split the data set and perform seperate t-tests for the different gender groups. This has the advantage that it is simple to implement, but the disadvantage that it is difficult to take into account covariates (apart from in the simple way discussed for eg. gender). With a small study, is likely that there is some imbalance in the design in terms of covariates.
+One possibility for our trial would be to collect the mean and SD of scores within each school, and perform a t-test to find out if there is a significant difference between the intervention and control arms. If we wanted to find out whether this depended on, say, gender, we could split the data set and perform seperate t-tests for the different gender groups. This has the advantage that it is simple to implement, but the disadvantage that it is difficult to take into account covariates (apart from in the simple way discussed for eg. gender). With a small study, it is likely that there is some imbalance in the design in terms of covariates.
 
 The required sample size for this option would be
 
@@ -286,21 +286,22 @@ g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{icc}\right]}{n_g\tau^2_M}\
 $$
 where $n_g$ is the average cluster size and $g$ is the number of clusters per treatment arm. This is the value we worked out in Section \@ref(ss-crt)
 
-:::{r}
+:::{.example}
 We can perform this analysis on our schools data. The first step is to calculate the difference between `posttest` and `pretest` for each pupil.
 
 ```{r, echo=T}
 crt_df$diff = crt_df$Posttest - crt_df$Prettest
 ```
 
-We can then aggregate this to find the mean of `diff` for each school:
+We can then aggregate this to find the mean of `diff` for each school, shown in Table \@ref(tab:eefsum):
 
-```{r, echo=T}
+```{r eefsum}
 crt_summ = crt_df %>%
   group_by(School) %>%
-  summarise(MeanDiff = mean(diff), ng = n(), Group = mean(Intervention))
+  summarise(MeanDiff = mean(diff), ng = n(), Group = unique(Intervention))
 crt_summ$Group = as.factor(crt_summ$Group)
-paged_table(crt_summ)
+knitr::kable(crt_summ[1:10,], booktabs = T, caption = "EEF data with difference calculated (first 10 rows).")
+
 ```
 We can also visualise the mean differences by group
 
@@ -322,24 +323,45 @@ t.test(
 
 This is fairly easy to implement, but it seems rather unsatisfactory. What we need is a linear (in the continuous outcome case at least) model that takes into account the covariates, and makes the most of the available data.
 
-### At the individual level: Random effects models
+### At the individual level: mixed effects models
 
-TIDY THIS UP!!!
+Perhaps the prevalent way of analysing the data from cluster randomized trials is the **mixed effects model** or **random effects model**, or **multilevel models**. In basic terms, mixed effects models are used whenever it cannot be assumed that the outputs are all independent of one another. In the cluster randomized trial setting, this is because outcomes for participants within the same cluster can be expected to be more highly correlated than outcomes for patients from different clusters, but we will see examples of other designs in the next lecture.
 
-The random effects model takes the form 
+To understand mixed effects models, we need to think about the difference between **fixed effects** and **random effects**. These are two different types of factor variables.
+
+#### Fixed effects {-}
+
+These are the sorts of factor variables we're used to dealing with in linear models: we don't assume any relationship between the levels, and we are generally interested in comparing the groups or categories represented by the fixed effect factors. We've seen these throughout the course, most notably with the treatment group variable $G_i$, but also with things like smoking history, sex, disease details. When conducting a clinical trial, we're likely to try to include participants with all levels of the fixed effects we're interested in, so that we can make inferences about the effect of the different levels of those effects. For example, we might want a good balance of male and female participants, so that we can understand the effect of the treatment on both groups.
+
+#### Random effects {-}
+
+Random effects are probably just as common in real life, but we haven't seen them yet. These are factor variables that we think of as being drawn from some underlying model or distribution. For example, this could be GP surgery or school class, or an individual. We expect each GP surgery / school class / individual to behave slightly differently (depending on the extent of the intracluster correlation) but to behave as though from some overall distribution. Unlike fixed effects, random effects are generally things we aren't specifically interested in understanding the effect of, but we want to account for the variation they bring. We're also unable to include all levels of the random effect in our study - for example, a study looking at the effect of an intervention in schools will involve perhaps 50 schools, but we want to apply to results to all schools in the UK (say). We therefore assume that the schools are drawn from some normal distribution (in terms of the outcome we're interested in), and that therefore all the schools we haven't included also belong to this distribution. In Example \@ref(exm:kroger) we aren't trying to compare different cities, and we certainly don't have data for Kroger stores in all cities, but we're assuming that the mean cheese price $\mu_{\text{city}_i}$ in the different cities is drawn from $N\left(\mu,\,\sigma^2_B\right)$, and that within each city the cheese price is drawn from $N\left(\mu_{\text{city}_i},\;\sigma^2_W\right)$.
+
+Including random effects allows us to account for the fact that some schools might be in general a bit better / worse performing, or some individuals might be a bit more / less healthy, because of natural variation. We will see more examples of the use of random effects in the next lecture.
+
+
+#### The mixed effects model {-}
+
+Mixed effects models allows us to combine fixed effects and random effects. We'll look at them next lecture too, because they are useful for many more situations than cluster RCTs, but this is as good a place as any to start!
+
+The mixed effects model takes the form 
 
 \begin{equation}
-x_{ijk} = \alpha + \beta_i + \sum\limits_l \gamma_l z_{ijkl} + u_{ij} + v_{ijk}
+x_{ijk} = \alpha + \beta G_i + \sum\limits_l \gamma_l z_{ijkl} + u_{ij} + v_{ijk}
 (\#eq:remodel)
 \end{equation}
 
 where
 
   * $x_{ijk}$ is the outcome for the $k$-th individual in the $j$-th cluster in the $i$-th treatment arm (usually $i=0$ is the control arm and $i=1$ is the intervention arm)
-  * $\beta_i$ is the intervention effect (with $\beta_0=0$). Our null hypothesis is that $\beta_1$ is also zero)
+  * $\alpha$ is the intercept of the model
+  * $\beta$ is the intervention effect, and $G_i$ the group indicator variable (0 for group $C$, 1 for group $T$). Our null hypothesis is that $\beta$ is also zero)
   * The $z_{ijkl}$ are $L$ different individual level covariates that we wish to take into account, and the $\gamma_l$ are the estimated coefficients.
   * $u_{ij}$ is a random effect relating to the $j$-th cluster in the $i$-th treatment arm. This is the term that accounts for the between-cluster variation. We assume $u_{ij}$ is normally distributed with mean 0 and variance $\sigma^2_B$ (the between-cluster variance).
   * $v_{ijk}$ is a random effect relating to the $k$-th individual in the cluster (ie. an individual level random error term), assumed normally distributed with mean 0 and variance $\sigma^2_W$ (the within-cluster variance).
+
+
+The part of the model that makes this particularly suitable to a cluster randomized trial is $u_{ij}$. Notice that this has no $k$ index, and is therefore the same for all participants within a particular cluster. 
 
 With a random effects model we can take into account the effects of individual-level covariates and also the clustered design of the data. Approximately, our sample size requirements are
 
@@ -347,27 +369,60 @@ $$
 k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{icc}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
 $$
 
+Broadly this follows on from the logic we used to show the reduction in variance from the ANCOVA model in Section \@ref(ancova-var), and you'll notice that the factor of $1-\rho^2$ is the same. The details for cluster randomized trials are given in @teerenstra2012simple.
+
 This is the 'Random effects model' line in [the shiny dashboard](https://racheloughton.shinyapps.io/sample_size/?_ga=2.190583720.2013007057.1679308387-1261352122.1678702192).)
 
 The random effects model is more suitable when there are more than around 15-20 clusters in each arm.
 
-### Analysing for effect modification - Random effects model
 
-In a random effects model, interaction terms can be built into the model specification in \@ref(eq:remodel). This works well for individual level covariates, but less well for cluster-level covariates, especially for a small number of clusters, because it relies on comparisons between the clusters.
+::: {.example}
 
-This would be equivalent to
+We'll now fit a random effects model to the `crtData` dataset from `eefAnalytics`. A good starting point is to plot the data with this in mind, to see what we might expect.
 
-$$
-x_{ijk} = \alpha + \beta_i + \sum\limits_l\left(\gamma_l z_{ijkl} + \lambda_l\beta_i z_{ijkl}\right)+ u_{ij} + v_{ijk},
-$$
-
-Where there is a coefficient $\lambda_l$ for each covariate $z_{\cdot l}$ that is only 'activated' if $\beta_i\neq0$ ie. for the intervention group. Therefore, significant values of $\lambda_l$ will give us an idea of interaction effects between individual-level covariates and the intervention. However, how reliable these estimates are depends on the balance of the design. In particular, if there is strong multicollinearity in the covariates (ie. if some individual level covariates are correlated in the design), the coefficients $\lambda_l$ are also strongly related to one another, and are therefore not easily interpretable.
-
-**This method is not suitable for pair-matched datasets - or is it? p290! Additional fixed effects to account for th strata, if stratified**
-
-
-
-
-```{r}
-dickinson_df = Dickinson_outcome # from cvcrand. Binary outcome cluster trial. Use a GLMM. Could work in a pinch!
+```{r eefplot2, echo=F, fig.cap = "Posttest against Prettest, coloured by Intervention"}
+ggplot(data = crt_df) + aes(x=Prettest, y=Posttest, col = Intervention) + geom_point()
 ```
+From Figure \@ref(fig:eefplot2) it appears there might be a positive relationship between `Prettest` and `Posttest`, and also that the `Posttest` scores might be higher in the intervention group.
+
+We'll do this using the R package `lme4`. The function to specify a linear mixed effects model is called `lmer`, and works very similarly to `lm`. The term `(1|School)` tells R that the variable `School` should be treated as a random effect, not a fixed effect.
+
+```{r, echo=T}
+library(lme4) 
+library(sjPlot)
+lmer_eef1 = lmer(Posttest ~ Prettest + Intervention + (1|School), data=crt_df )
+```
+
+The package `sjPlot` contains functions to work with mixed effect model objects, for example `plot_model`
+
+```{r lmerplot1, echo=T, fig.cap = "CIs for the model coefficients"}
+sjPlot::plot_model(lmer_eef1)
+```
+
+and `tab_model`
+
+```{r lmertab1,  fig.cap = "Summary table of model - note that this is different in PDF and HTML. The HTML has more information!"}
+if(is_html_output()){
+  sjPlot::tab_model(lmer_eef1)
+} else {
+  summary(lmer_eef1)
+}
+```
+
+Perhaps unsurprisingly, the coefficient of the baseline test score is very significant, and the intervention also has a significant effect. This function also estimates the intracluster correlation.
+
+:::
+
+There are various different ways we can include random effects in the model, as shown in Figure \@ref(fig:raneffmodels). In our EEF data example we have used a fixed slope and fixed intercept. 
+
+```{r raneffmodels, fig.cap = "Different ways of including random effects in a mixed effects model."}
+knitr::include_graphics("images/raneffmodels.png")
+```
+
+The mixed effects model can be extended to a **generalized mixed effects model**, which is akin to a generalized linear model. For example, with a binary outcome $X_{ijk}$ we can adopt the model
+
+$$
+\operatorname{logit}\left(\pi_{ijk}\right) = \alpha + \beta G_i + \sum\limits_l \gamma_l z_{ijkl} + u_{ij} + v_{ijk}.
+$$
+
+We will look in the next lecture at some more trial designs for which mixed effects models are useful. 

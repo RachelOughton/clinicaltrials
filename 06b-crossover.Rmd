@@ -1,2 +1,178 @@
-# Crossover and stepped-wedge designs
+# Random effects for individuals
 
+In the last lecture we introduced the mixed effects model as a way to combine fixed effects (the kind we're used to, like sex, disease status etc.) and random effects. For cluster randomized trials this was useful because we could account for the intracluster correlation, where participants within the same school / GP surgery / other cluster are likely to be more similar to one another than to participants within another group. 
+
+In this lecture, we'll think about a couple of examples where the individual is the random effect.
+
+## Crossover trials
+
+In the trials we've thought about so far, each patient has been subject to one, and only one, treatment. Often this is necessary, because the end goal is something relatively final, like a disease being cured, or the circumstance is a one-off, like medication to prevent complications of surgery. By doing things this way, we lose the opportunity to make direct comparisons; we assume that all participants are randomly drawn from some population, and make efforts to ensure the trial is balanced in terms of their characteristics, but we can't truly compare like-for-like.
+
+Crossover trials, also known as AB or AB/BA trials, involve giving each participant both treatments in sequence. These are generally used in contexts where the goal is ongoing management of a condition, for example asthma or diabetes. If we give each participant each of the different treatments in sequence, then we can make a more precise comparison, since we are comparing the outcomes under the different treatments *on the same patient*. You can find more detail of this type of trial in @armitage1982two.
+
+### The AB/BA design
+
+If we gave all patients treatment A first (say for one month) and then treatment B (for the next), then we would be inviting bias and ambiguity into the trial
+
+  * It may be that whichever treatment comes second appears to perform better, for example as patients get used to measurements being taken (it is common for the first few blood pressure measurements in a series to be higher)
+  * If there is some external trend or pattern, this will manifest itself as an effect of the change in treatments.
+  
+Therefore in a crossover trial with two treatments there are two groups, who receive the treatments in different orders:
+
+Group              Period 1         Period 2     
+-----------------  -------------    -----------  
+    **Group 1**    A                B            
+    **Group 2**    B                A       
+    
+Therefore if there is a temporal effect it won't be ascribed to either of the treatments.
+
+### Analysis of the AB/BA design
+
+There are a few things our analysis needs to account for:
+
+  * Measurements for the same participant need to be treated as such, in some way
+  * The possibility of systematic differences between treatment periods needs to be allowed for
+  
+In the model we describe, we assume there are $n_1$ participants in group 1, and $n_2$ in group 2. We will also assume that the outcome is normally distributed. In the treatment of ongoing conditions, this is generally the case. 
+
+We will start by thinking about the outcome for particular individuals. We'll assume that one outcome measurement is taken per patient per trial period. So the outcome for participant $i$ $(i = 1,\ldots,n_1)$ from group 1 is modelled by
+
+\begin{align*}
+x_{i1} & = \mu + \pi_1 + \tau_A + \xi_i + \epsilon_{i1} \text{ in trial period 1}\\
+x_{i2} & = \mu + \pi_2 + \tau_B + \xi_i + \epsilon_{i2} \text{ in trial period 2.}
+\end{align*}
+
+In this model
+
+  * $\pi_j\;\;(j=1,2)$ is the systematic effect of period $j$
+  * $\tau_A,\,\tau_B$ are the systematic effects of treatments A and B
+  * $\mu$ is a general mean
+  * $\xi_i$ represents the tendency for the outcome of participant $i$ to be generally higher or lower than the mean
+  * $\epsilon_{i1},\,\epsilon_{i2}$ are independent $N\left(0,\,\sigma_{\epsilon}^2\right)$ error terms.
+
+Notice that the first three bullet points describe fixed effects, and the fourth $(\xi_i)$ is a random effect. We can assume that $\xi_i \sim N\left(0,\,\sigma_B^2\right)$. Notice that $\xi_i$ appears in the outcome model for participant $i$ for both trial periods. 
+
+We can us the same logic to model the outcome for participant $i$ $\left(i=n_1+1,\,\ldots,\,n_1+n_2\right)$ in group 2
+
+\begin{align*}
+x_{i1} & = \mu + \pi_1 + \tau_B + \xi_i + \epsilon_{i1} \text{ in trial period 1}\\
+x_{i2} & = \mu + \pi_2 + \tau_A + \xi_i + \epsilon_{i2} \text{ in trial period 2.}
+\end{align*}
+
+Because we have been able to treat each participant with both treatments (A and B), we have effectively bundled all the participant specific covariates, along with individual variation we can't really account for, into $\xi_i$. 
+
+We can remove $\xi_i$ from from the analysis by finding the differences for each patient
+
+\begin{align*}
+d_i & = x_{i1} - x_{i2} = \pi + \tau + \eta_i& \text{ for } i=1,\,\ldots,\,n_1\\
+d_i & = x_{i1} - x_{i2} = \pi - \tau + \eta_i& \text{ for } i=n_1+1,\,\ldots,\,n_1+n_2,
+\end{align*}
+
+where
+
+  * $\pi=\pi_1 - \pi_2$ measures the difference between treatment periods
+  * $\tau = \tau_A - \tau_B$ is the treatment effect we are interested in
+  * $\eta_i = \epsilon_{i1} - \epsilon_{i2}$ is another random error, with mean 0 and variance $\sigma^2=2\sigma^2_{\epsilon}$
+  
+We can take expected values of the differences, and find
+
+\begin{align*}
+\operatorname{E}\left(d\right) & = \pi+\tau & \text{ in group 1}\\
+\operatorname{E}\left(d\right) & = \pi-\tau & \text{ in group 2}
+\end{align*}
+
+If there is no treatment effect, ie. $\tau=0$, then we expect the means to be approximately equal.
+
+This means we can test the null hypothesis that $\tau=0$ with a two-sample $t$-test, to compare the two sets of within patient differences. Note, this is not a paired t-test: we are comparing the differences for the $n_1$ participants in group 1 with the differences for the $n_2$ participants in group 2.
+
+An estimate of the treatment effect can be found using 
+$$\frac{1}{2}\left(\bar{d}_1 - \bar{d}_2\right),$$
+where $\bar{d}_k$ is the mean difference in group $k$. We can therefore find a confidence interval by halving the limits of the usual confidence interval for the difference in two means.
+
+Another important point to note is that since we have eliminated the individual participant random effect $\xi_i$ from the analysis, the precision of the result depends only on $\sigma^2_{\epsilon}$, and not on the between-individual variance $\sigma^2_B$. This is especially good news in a scenario in which the measurement varies much more between individuals than within individuals. Intuitively this makes sense: it is best to use a patient as his or her own control.
+
+:::{.example}
+
+For children with nocturnal enuresis (bed-wetting) a drug is available to potentially alleviate the problem, and in this trial the drug is to be compared with a placebo, and the treatment period is two weeks. Children in group A are given the drug first, followed by the placebo. Children in group B are given the placebo first, followed by the drug. The primary outcome variable is the number of dry nights out of the 14 night of each treatment period. The data are shown in Table \@ref(tab:enuresisdata).
+
+```{r enuresisdata}
+idA = 1:17
+period1A = c(8,14,8,9,11,3,13,10,6,0,7,13,8,7,9,10,2)
+period2A = c(5,10,0,7,6,5,12,2,0,0,5,13,10,7,0,6,2)
+diffA = period1A - period2A
+dfA = data.frame(Period1 = period1A, Period2 = period2A, Diff= diffA)
+idB = 18:29
+period1B = c(12,6,13,8,8,4,8,2,8,9,7,7)
+period2B = c(11,8,9,8,9,8,14,4,13,7,10,6)
+diffB = period1B - period2B
+dfB = data.frame(Period1 = period1B, Period2 = period2B, Diff= diffB)
+knitr::kable(
+  list(dfA, dfB),
+  caption = "Data for group A (left) and group B (right)",
+  booktabs = T,
+  valign = 't'
+)
+```
+
+We can use this information to find the mean difference for each group
+
+```{r, echo=T}
+mean(dfA$Diff)
+mean(dfB$Diff)
+```
+Immediately we can see that these back up the notion that the drug is effective (remember the difference for group A is drug minus placebo, the difference for group B is placebo minus drug), and that the number of dry nights tends to be more while taking the drug.
+
+To test the hypothesis more carefully we use a t-test.
+
+```{r, echo=T}
+t.test(x=dfA$Diff, y=dfB$Diff, paired=F, alternative = "two.sided", var.equal=T)
+```
+
+We see that this backs up the hypothesis that the drug reduces nocturnal enuresis.
+
+We could analyse the same dataset without taking into account the crossover design of the trial, simply by performing a t-test of all measurements on the drug against all measurement on the placebo
+
+```{r, echo=T}
+drug_meas = c(dfA$Period1,dfB$Period2)      # Measurements taken while on drug
+placebo_meas = c(dfA$Period2, dfB$Period1)  # Measurements taken while on placebo
+t.test(
+  x=drug_meas, y=placebo_meas, 
+  paired=F, alternative="two.sided", var.equal=T)
+```
+
+We see that although the outcome is still significant at the $\alpha=0.05$ level, the p-value is much larger, because the individual effects have not been taken into account.
+
+:::
+
+## Longitudinal data / repeated measurements
+
+The second situation we will consider is where there are repeated measurements of the same participant: this is often called **longitudinal data**. 
+
+
+```{r}
+# Possible examples:
+
+BtheB # needs reformatting, lots of missing data
+epilepsy # maybe better?
+
+
+sleepstudy 
+(fm1 <- lmer(Reaction ~ Days + (Days|Subject), sleepstudy, subset=Days>=2))
+## independent model - what does this notation mean?
+(fm2 <- lmer(Reaction ~ Days + (1|Subject) + (0+Days|Subject), sleepstudy, subset=Days>=2))
+```
+
+:::{.example}
+Not sure whether to include this @terbinafine - 5 visits usually
+
+```{r}
+
+```
+
+```{r glm-toenail, echo=T}
+library(HSAUR3)
+gm2 <- glmer(outcome~treatment*visit+(1|patientID),
+                 data=toenail,
+                 family=binomial,nAGQ=20)
+```
+:::

@@ -350,7 +350,7 @@ then, following from Equation \@ref(eq:diffexp) we have
 $$
 \operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. $$
 
-#### What's the variance of this estimator?
+#### What's the variance of this estimator? {#ancova-var}
 
 To work out the variance of $\hat{\tau}$ in Equation \@ref(eq:ancovaest) we need to think about bivariate normal variables.
 
@@ -521,7 +521,7 @@ $$
 & = \frac{2\sigma^2}{N}\left(1-\rho^2\right).
 \end{aligned}
 $$
-Notice that unlike our first estimator that used baseline values, in Section \@ref(baseline), the variance of the ANCOVA estimate can never exceed $\frac{2\sigma^2}{N}$; if the baseline and outcome are uncorrelated, ANCOVA will perform as well as a $t$-test.
+Notice that unlike our first estimator that used baseline values, in Section \@ref(baseline), the variance of the ANCOVA estimate can never exceed $\frac{2\sigma^2}{N}$; if the baseline and outcome are uncorrelated, ANCOVA will perform as well as the $t$-tests we covered in Sections \@ref(ttest) and \@ref(baseline).
 
 @borm2007simple discuss how this reduction in $\operatorname{var\left(\hat{\tau}\right)}$ can impact our sample size calculations.
  

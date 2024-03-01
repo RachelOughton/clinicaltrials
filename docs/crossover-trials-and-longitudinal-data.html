@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 Crossover trials and longitudinal data | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 Crossover trials and longitudinal data | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 Crossover trials and longitudinal data | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2024-03-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cluster-rct.html"/>
+<link rel="next" href="computer-practical-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.2</b> One-tailed or two-tailed?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.5" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.5</b> Minimization</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="alloc.html"><a href="alloc.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.6</b> Problems around allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#a-dodgy-way-to-use-baseline-variables"><i class="fa fa-check"></i><b>4.2.1</b> A dodgy way to use baseline variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="6.3.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
+<li class="chapter" data-level="6.4.2" data-path="analysis-for-binary-outcomes.html"><a href="analysis-for-binary-outcomes.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Part III: Survival data</b></span></li>
+<li class="chapter" data-level="7" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html"><i class="fa fa-check"></i><b>7</b> Working with time-to-event data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#censored-times"><i class="fa fa-check"></i><b>7.1</b> Censored times</a></li>
+<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#survhaz"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-weibull-distribution"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
+<li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
+<li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#cox-regression"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Part III: Further designs</b></span></li>
+<li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised trials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>9.1</b> What is a cluster RCT?</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>9.1.1</b> Intracluster correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>9.2</b> Sample size</a></li>
+<li class="chapter" data-level="9.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>9.3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>9.3.1</b> Allocating everyone at once</a></li>
+<li class="chapter" data-level="9.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#covariate-constrained-randomization"><i class="fa fa-check"></i><b>9.3.2</b> Covariate constrained randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>9.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>9.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-mixed-effects-models"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level: mixed effects models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="crossover-trials-and-longitudinal-data.html"><a href="crossover-trials-and-longitudinal-data.html"><i class="fa fa-check"></i><b>10</b> Crossover trials and longitudinal data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="crossover-trials-and-longitudinal-data.html"><a href="crossover-trials-and-longitudinal-data.html#crossover-trials"><i class="fa fa-check"></i><b>10.1</b> Crossover trials</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="crossover-trials-and-longitudinal-data.html"><a href="crossover-trials-and-longitudinal-data.html#the-abba-design"><i class="fa fa-check"></i><b>10.1.1</b> The AB/BA design</a></li>
+<li class="chapter" data-level="10.1.2" data-path="crossover-trials-and-longitudinal-data.html"><a href="crossover-trials-and-longitudinal-data.html#analysis-of-the-abba-design"><i class="fa fa-check"></i><b>10.1.2</b> Analysis of the AB/BA design</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="crossover-trials-and-longitudinal-data.html"><a href="crossover-trials-and-longitudinal-data.html#longitudinal-data-repeated-measurements"><i class="fa fa-check"></i><b>10.2</b> Longitudinal data / repeated measurements</a></li>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
+<li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.1.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocmethods"><i class="fa fa-check"></i><b>A.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.1.3" data-path="computer-practical-1.html"><a href="computer-practical-1.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.1.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#minimisation"><i class="fa fa-check"></i><b>A.1.4</b> Minimisation</a></li>
+<li class="chapter" data-level="A.1.5" data-path="computer-practical-1.html"><a href="computer-practical-1.html#a-simulation-experiment"><i class="fa fa-check"></i><b>A.1.5</b> A simulation experiment!</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1analysis"><i class="fa fa-check"></i><b>A.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
+<li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="crossover-trials-and-longitudinal-data" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Crossover trials and longitudinal data<a href="crossover-trials-and-longitudinal-data.html#crossover-trials-and-longitudinal-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In the last lecture we introduced the mixed effects model as a way to combine fixed effects (the kind we’re used to, like sex, disease status etc.) and random effects. For cluster randomized trials this was useful because we could account for the intracluster correlation, where participants within the same school / GP surgery / other cluster are likely to be more similar to one another than to participants within another group.</p>
+<p>In this lecture, we’ll think about a couple of examples where the individual is the random effect.</p>
+<div id="crossover-trials" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Crossover trials<a href="crossover-trials-and-longitudinal-data.html#crossover-trials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the trials we’ve thought about so far, each patient has been subject to one, and only one, treatment. Often this is necessary, because the end goal is something relatively final, like a disease being cured, or the circumstance is a one-off, like medication to prevent complications of surgery. By doing things this way, we lose the opportunity to make direct comparisons; we assume that all participants are randomly drawn from some population, and make efforts to ensure the trial is balanced in terms of their characteristics, but we can’t truly compare like-for-like.</p>
+<p>Crossover trials, also known as AB or AB/BA trials, involve giving each participant both treatments in sequence. These are generally used in contexts where the goal is ongoing management of a condition, for example asthma or diabetes. If we give each participant each of the different treatments in sequence, then we can make a more precise comparison, since we are comparing the outcomes under the different treatments <em>on the same patient</em>. You can find more detail of this type of trial in <span class="citation">(<a href="#ref-armitage1982two"><strong>armitage1982two?</strong></a>)</span>.</p>
+<div id="the-abba-design" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> The AB/BA design<a href="crossover-trials-and-longitudinal-data.html#the-abba-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we gave all patients treatment A first (say for one month) and then treatment B (for the next), then we would be inviting bias and ambiguity into the trial</p>
+<ul>
+<li>It may be that whichever treatment comes second appears to perform better, for example as patients get used to measurements being taken (it is common for the first few blood pressure measurements in a series to be higher)</li>
+<li>If there is some external trend or pattern, this will manifest itself as an effect of the change in treatments.</li>
+</ul>
+<p>Therefore in a crossover trial with two treatments there are two groups, who receive the treatments in different orders:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Group</th>
+<th align="left">Period 1</th>
+<th align="left">Period 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Group 1</strong></td>
+<td align="left">A</td>
+<td align="left">B</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Group 2</strong></td>
+<td align="left">B</td>
+<td align="left">A</td>
+</tr>
+</tbody>
+</table>
+<p>Therefore if there is a temporal effect it won’t be ascribed to either of the treatments.</p>
+</div>
+<div id="analysis-of-the-abba-design" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Analysis of the AB/BA design<a href="crossover-trials-and-longitudinal-data.html#analysis-of-the-abba-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are a few things our analysis needs to account for:</p>
+<ul>
+<li>Measurements for the same participant need to be treated as such, in some way</li>
+<li>The possibility of systematic differences between treatment periods needs to be allowed for</li>
+</ul>
+<p>In the model we describe, we assume there are <span class="math inline">\(n_1\)</span> participants in group 1, and <span class="math inline">\(n_2\)</span> in group 2. We will also assume that the outcome is normally distributed. In the treatment of ongoing conditions, this is generally the case.</p>
+<p>We will start by thinking about the outcome for particular individuals. We’ll assume that one outcome measurement is taken per patient per trial period. So the outcome for participant <span class="math inline">\(i\)</span> <span class="math inline">\((i = 1,\ldots,n_1)\)</span> from group 1 is modelled by</p>
+<p><span class="math display">\[\begin{align*}
+x_{i1} &amp; = \mu + \pi_1 + \tau_A + \xi_i + \epsilon_{i1}&amp; \text{ in trial period 1}\\
+x_{i2} &amp; = \mu + \pi_2 + \tau_B + \xi_i + \epsilon_{i2}&amp; \text{ in trial period 2.}
+\end{align*}\]</span></p>
+<p>In this model</p>
+<ul>
+<li><span class="math inline">\(\pi_j\;\;(j=1,2)\)</span> is the systematic effect of period <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(\tau_A,\,\tau_B\)</span> are the systematic effects of treatments A and B</li>
+<li><span class="math inline">\(\mu\)</span> is a general mean</li>
+<li><span class="math inline">\(\xi_i\)</span> represents the tendency for the outcome of participant <span class="math inline">\(i\)</span> to be generally higher or lower than the mean</li>
+<li><span class="math inline">\(\epsilon_{i1},\,\epsilon_{i2}\)</span> are independent <span class="math inline">\(N\left(0,\,\sigma_{\epsilon}^2\right)\)</span> error terms.</li>
+</ul>
+<p>Notice that the first three bullet points describe fixed effects, and the fourth <span class="math inline">\((\xi_i)\)</span> is a random effect. We can assume that <span class="math inline">\(\xi_i \sim N\left(0,\,\sigma_B^2\right)\)</span>. Notice that <span class="math inline">\(\xi_i\)</span> appears in the outcome model for participant <span class="math inline">\(i\)</span> for both trial periods.</p>
+<p>We can us the same logic to model the outcome for participant <span class="math inline">\(i\)</span> <span class="math inline">\(\left(i=n_1+1,\,\ldots,\,n_1+n_2\right)\)</span> in group 2</p>
+<p><span class="math display">\[\begin{align*}
+x_{i1} &amp; = \mu + \pi_1 + \tau_B + \xi_i + \epsilon_{i1}&amp; \text{ in trial period 1}\\
+x_{i2} &amp; = \mu + \pi_2 + \tau_A + \xi_i + \epsilon_{i2}&amp; \text{ in trial period 2.}
+\end{align*}\]</span></p>
+<p>Because we have been able to treat each participant with both treatments (A and B), we have effectively bundled all the participant specific covariates, along with individual variation we can’t really account for, into <span class="math inline">\(\xi_i\)</span>.</p>
+<p>We can remove <span class="math inline">\(\xi_i\)</span> from from the analysis by finding the differences for each patient</p>
+<p><span class="math display">\[\begin{align*}
+d_i &amp; = x_{i1} - x_{i2} = \pi + \tau + \eta_i&amp; \text{ for } i=1,\,\ldots,\,n_1\\
+d_i &amp; = x_{i1} - x_{i2} = \pi - \tau + \eta_i&amp; \text{ for } i=n_1+1,\,\ldots,\,n_1+n_2,
+\end{align*}\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\pi=\pi_1 - \pi_2\)</span> measures the difference between treatment periods</li>
+<li><span class="math inline">\(\tau = \tau_A - \tau_B\)</span> is the treatment effect we are interested in</li>
+<li><span class="math inline">\(\eta_i = \epsilon_{i1} - \epsilon_{i2}\)</span> is another random error, with mean 0 and variance <span class="math inline">\(\sigma^2=2\sigma^2_{\epsilon}\)</span></li>
+</ul>
+<p>We can take expected values of the differences, and find</p>
+<p><span class="math display">\[\begin{align*}
+\operatorname{E}\left(d\right) &amp; = \pi+\tau &amp; \text{ in group 1}\\
+\operatorname{E}\left(d\right) &amp; = \pi-\tau &amp; \text{ in group 2}
+\end{align*}\]</span></p>
+<p>If there is no treatment effect, ie. <span class="math inline">\(\tau=0\)</span>, then we expect the means to be approximately equal.</p>
+<p>This means we can test the null hypothesis that <span class="math inline">\(\tau=0\)</span> with a two-sample <span class="math inline">\(t\)</span>-test, to compare the two sets of within patient differences. Note, this is not a paired t-test: we are comparing the differences for the <span class="math inline">\(n_1\)</span> participants in group 1 with the differences for the <span class="math inline">\(n_2\)</span> participants in group 2.</p>
+<p>An estimate of the treatment effect can be found using
+<span class="math display">\[\frac{1}{2}\left(\bar{d}_1 - \bar{d}_2\right),\]</span>
+where <span class="math inline">\(\bar{d}_k\)</span> is the mean difference in group <span class="math inline">\(k\)</span>. We can therefore find a confidence interval by halving the limits of the usual confidence interval for the difference in two means.</p>
+<p>Another important point to note is that since we have eliminated the individual participant random effect <span class="math inline">\(\xi_i\)</span> from the analysis, the precision of the result depends only on <span class="math inline">\(\sigma^2_{\epsilon}\)</span>, and not on the between-individual variance <span class="math inline">\(\sigma^2_B\)</span>. This is especially good news in a scenario in which the measurement varies much more between individuals than within individuals. Intuitively this makes sense: it is best to use a patient as his or her own control.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-49" class="example"><strong>Example 10.1  </strong></span>For children with nocturnal enuresis (bed-wetting) a drug is available to potentially alleviate the problem, and in this trial the drug is to be compared with a placebo, and the treatment period is two weeks. Children in group A are given the drug first, followed by the placebo. Children in group B are given the placebo first, followed by the drug. The primary outcome variable is the number of dry nights out of the 14 night of each treatment period.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="crossover-trials-and-longitudinal-data.html#cb93-1" tabindex="-1"></a>idA <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">17</span></span>
+<span id="cb93-2"><a href="crossover-trials-and-longitudinal-data.html#cb93-2" tabindex="-1"></a>period1A <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">3</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">7</span>,<span class="dv">13</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">2</span>)</span>
+<span id="cb93-3"><a href="crossover-trials-and-longitudinal-data.html#cb93-3" tabindex="-1"></a>period2A <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">12</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">7</span>,<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">2</span>)</span>
+<span id="cb93-4"><a href="crossover-trials-and-longitudinal-data.html#cb93-4" tabindex="-1"></a>diffA <span class="ot">=</span> period1A <span class="sc">-</span> period2A</span>
+<span id="cb93-5"><a href="crossover-trials-and-longitudinal-data.html#cb93-5" tabindex="-1"></a>dfA <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Period1 =</span> period1A, <span class="at">Period2 =</span> period2A, <span class="at">Diff=</span> diffA)</span>
+<span id="cb93-6"><a href="crossover-trials-and-longitudinal-data.html#cb93-6" tabindex="-1"></a>idB <span class="ot">=</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">29</span></span>
+<span id="cb93-7"><a href="crossover-trials-and-longitudinal-data.html#cb93-7" tabindex="-1"></a>period1B <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">6</span>,<span class="dv">13</span>,<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="dv">7</span>)</span>
+<span id="cb93-8"><a href="crossover-trials-and-longitudinal-data.html#cb93-8" tabindex="-1"></a>period2B <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">4</span>,<span class="dv">13</span>,<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">6</span>)</span>
+<span id="cb93-9"><a href="crossover-trials-and-longitudinal-data.html#cb93-9" tabindex="-1"></a>diffB <span class="ot">=</span> period1B <span class="sc">-</span> period2B</span>
+<span id="cb93-10"><a href="crossover-trials-and-longitudinal-data.html#cb93-10" tabindex="-1"></a>dfB <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Period1 =</span> period1B, <span class="at">Period2 =</span> period2B, <span class="at">Diff=</span> diffB)</span>
+<span id="cb93-11"><a href="crossover-trials-and-longitudinal-data.html#cb93-11" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb93-12"><a href="crossover-trials-and-longitudinal-data.html#cb93-12" tabindex="-1"></a>  <span class="fu">list</span>(dfA, dfB),</span>
+<span id="cb93-13"><a href="crossover-trials-and-longitudinal-data.html#cb93-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Data for group A (left) and group B (right)&quot;</span>,</span>
+<span id="cb93-14"><a href="crossover-trials-and-longitudinal-data.html#cb93-14" tabindex="-1"></a>  <span class="at">booktabs =</span> T,</span>
+<span id="cb93-15"><a href="crossover-trials-and-longitudinal-data.html#cb93-15" tabindex="-1"></a>  <span class="at">valign =</span> <span class="st">&#39;t&#39;</span></span>
+<span id="cb93-16"><a href="crossover-trials-and-longitudinal-data.html#cb93-16" tabindex="-1"></a>)</span></code></pre></div>
+<table class="kable_wrapper">
+<caption>
+<span id="tab:enuresisdata">Table 10.1: </span>Data for group A (left) and group B (right)
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Period1</th>
+<th align="right">Period2</th>
+<th align="right">Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">5</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">6</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">-2</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="right">12</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">2</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">5</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="right">-2</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">6</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Period1</th>
+<th align="right">Period2</th>
+<th align="right">Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">11</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">8</td>
+<td align="right">-2</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="right">9</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">9</td>
+<td align="right">-1</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">-4</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">14</td>
+<td align="right">-6</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">-2</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">13</td>
+<td align="right">-5</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">10</td>
+<td align="right">-3</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">6</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="longitudinal-data-repeated-measurements" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Longitudinal data / repeated measurements<a href="crossover-trials-and-longitudinal-data.html#longitudinal-data-repeated-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="example">
+<p><span id="exm:unlabeled-div-50" class="example"><strong>Example 10.2  </strong></span>Not sure whether to include this <span class="citation">De Backer et al. (<a href="#ref-terbinafine">1998</a>)</span> - 5 visits usually</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="crossover-trials-and-longitudinal-data.html#cb94-1" tabindex="-1"></a><span class="fu">library</span>(HSAUR3)</span>
+<span id="cb94-2"><a href="crossover-trials-and-longitudinal-data.html#cb94-2" tabindex="-1"></a>gm2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(outcome<span class="sc">~</span>treatment<span class="sc">*</span>visit<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>patientID),</span>
+<span id="cb94-3"><a href="crossover-trials-and-longitudinal-data.html#cb94-3" tabindex="-1"></a>                 <span class="at">data=</span>toenail,</span>
+<span id="cb94-4"><a href="crossover-trials-and-longitudinal-data.html#cb94-4" tabindex="-1"></a>                 <span class="at">family=</span>binomial,<span class="at">nAGQ=</span><span class="dv">20</span>)</span></code></pre></div>
+</div>
+
+</div>
+</div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-terbinafine" class="csl-entry">
+De Backer, M, C De Vroey, Emmanuel Lesaffre, I Scheys, and P De Keyser. 1998. <span>“Twelve Weeks of Continuous Oral Therapy for Toenail Onychomycosis Caused by Dermatophytes: A Double-Blind Comparative Trial of Terbinafine 250 Mg/Day Versus Itraconazole 200 Mg/Day.”</span> <em>Journal of the American Academy of Dermatology</em> 38 (5): S57–63.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cluster-rct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CT4H_notes.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"bookdown": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
