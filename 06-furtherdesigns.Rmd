@@ -119,8 +119,6 @@ We can see that for each city we know a fair amount about the cost of cheese. Bu
 
 Estimating the ICC when planning a study is an important step, but isn't always easy. For a well-understood (or at least well-documented) condition, it can often be estimated from existing data, which is likely to cover many sites. In non-medical studies like education or social interventions (where cluster RCTs are very common), it can be much more difficult because there is generally less data. Statistical studies are much newer in these areas, though they are becoming increasingly common, and even mandated by some organisations (for example the [Educational Endowment Foundation](https://educationendowmentfoundation.org.uk)).
 
-**FIND ARTICLE ABOUT ESTIMATING ICC**
-
 ## Sample size
 
 The upshot of the non-independence of the sample is that we have less information from $n$ participants in a cluster RCT than we would do for an individual-based RCT where all the participants were independent (at least conditional on some covariates). 
@@ -308,6 +306,7 @@ We can also visualise the mean differences by group
 ```{r crt1bp, fig.cap = "Boxplots of the mean differences for each trial arm", fig.height=2}
 ggplot(data=crt_summ, aes(x=MeanDiff, fill=Group)) + geom_boxplot()
 ```
+
 From Figure \@ref(fig:crt1bp) it certainly looks likely that a significant difference will be found.
 
 ```{r, echo=T}
@@ -383,6 +382,7 @@ We'll now fit a random effects model to the `crtData` dataset from `eefAnalytics
 ```{r eefplot2, echo=F, fig.cap = "Posttest against Prettest, coloured by Intervention"}
 ggplot(data = crt_df) + aes(x=Prettest, y=Posttest, col = Intervention) + geom_point()
 ```
+
 From Figure \@ref(fig:eefplot2) it appears there might be a positive relationship between `Prettest` and `Posttest`, and also that the `Posttest` scores might be higher in the intervention group.
 
 We'll do this using the R package `lme4`. The function to specify a linear mixed effects model is called `lmer`, and works very similarly to `lm`. The term `(1|School)` tells R that the variable `School` should be treated as a random effect, not a fixed effect.

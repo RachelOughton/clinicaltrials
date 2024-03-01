@@ -5041,8 +5041,6 @@ We can see that for each city we know a fair amount about the cost of cheese. Bu
 
 Estimating the ICC when planning a study is an important step, but isn't always easy. For a well-understood (or at least well-documented) condition, it can often be estimated from existing data, which is likely to cover many sites. In non-medical studies like education or social interventions (where cluster RCTs are very common), it can be much more difficult because there is generally less data. Statistical studies are much newer in these areas, though they are becoming increasingly common, and even mandated by some organisations (for example the \href{https://educationendowmentfoundation.org.uk}{Educational Endowment Foundation}).
 
-\textbf{FIND ARTICLE ABOUT ESTIMATING ICC}
-
 \hypertarget{sample-size}{%
 \section{Sample size}\label{sample-size}}
 
@@ -5252,7 +5250,12 @@ School & MeanDiff & ng & Group\\
 
 We can also visualise the mean differences by group
 
+\begin{figure}
+\centering
 \includegraphics{CT4H_notes_files/figure-latex/crt1bp-1.pdf}
+\caption{\label{fig:crt1bp}Boxplots of the mean differences for each trial arm}
+\end{figure}
+
 From Figure \ref{fig:crt1bp} it certainly looks likely that a significant difference will be found.
 
 \begin{Shaded}
@@ -5354,7 +5357,12 @@ The random effects model is more suitable when there are more than around 15-20 
 \begin{example}
 We'll now fit a random effects model to the \texttt{crtData} dataset from \texttt{eefAnalytics}. A good starting point is to plot the data with this in mind, to see what we might expect.
 
+\begin{figure}
+\centering
 \includegraphics{CT4H_notes_files/figure-latex/eefplot2-1.pdf}
+\caption{\label{fig:eefplot2}Posttest against Prettest, coloured by Intervention}
+\end{figure}
+
 From Figure \ref{fig:eefplot2} it appears there might be a positive relationship between \texttt{Prettest} and \texttt{Posttest}, and also that the \texttt{Posttest} scores might be higher in the intervention group.
 
 We'll do this using the R package \texttt{lme4}. The function to specify a linear mixed effects model is called \texttt{lmer}, and works very similarly to \texttt{lm}. The term \texttt{(1\textbar{}School)} tells R that the variable \texttt{School} should be treated as a random effect, not a fixed effect.
