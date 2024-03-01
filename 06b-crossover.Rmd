@@ -146,14 +146,49 @@ We see that although the outcome is still significant at the $\alpha=0.05$ level
 
 ## Longitudinal data / repeated measurements
 
-The second situation we will consider is where there are repeated measurements of the same participant: this is often called **longitudinal data**. 
+The second situation we will consider is where there are repeated measurements of the same participant: this is often called **longitudinal data**. So far we have considered only a baseline and final measurement of the outcome variable, but in practice it is common to measure the outcome at several points throughout the trial duration. 
+
+Clinicians may want to understand not just how the outcome is behaving at the end of the trial, but how it evolves over time. They may also want to understand the variation in the measurement over time; for example, it is reasonable to expect that a particular patient's blood presssure or respiratory function won't be exactly the same every day, even under the same treatment and general conditions.
+
+In general we'll say that we have two treatment groups, C (control) and T (treatment), containing $n_C$ and $n_T$ participants respectively. The $i^{\text{th}}$ participant in group $X$ is observed $k_{Xi}$ times through the course of the trial. Generally (and we'll certainly assume here) the measurements are planned to be at the same times.
+
+:::{.example #epilepsy1}
+The first data set we'll introduce is `epilepsy`, from the package `HSAUR3`. This trial (detailed in @thall1990some) investigates the effect of an anti-epileptic drug called Progabide compared to a placebo (both groups were also receiving chemotherapy). For each patient, the number of seizures was recorded over four contiguous two-week periods. 
+
+To visualise the data, we plot a **spaghetti plot**, as shown in Figure \@ref(fig:epispag). Each line represents a participant, and shows their seizure rate over time.
+
+```{r epispag, fig.cap = "A spaghetti plot of the epilepsy data."}
+ggplot(data = epilepsy, aes(x=period, y=seizure.rate, group = subject, col=treatment), alpha=0.4) + geom_line() +
+  theme_minimal()
+```
+
+We can also plot the mean seizure rate at each time within each group as in Figure \@ref(fig:epimeans)
+
+
+```{r epimeans, fig.cap = "Mean seizure rate for each treatment group over time."}
+epi_means = epilepsy %>% 
+  group_by(period, treatment) %>% # group by timepoint and played
+  mutate(smean = mean(seizure.rate)) 
+epi_means = unique(epi_means[ ,c(1,5,7)])
+ggplot(data=epi_means, aes(x = as.numeric(period), y = smean, col = treatment)) +
+  geom_line() + theme_minimal() + xlab("Period") + ylab("Mean seizure rate")
+```
+
+:::
+
+### Fitting a model 
+
+This means that the measurements are 'clustered' within each participants, in a semi-similar way to the participants being clustered within settings in Chapter \@ref(cluster-rct). Each participant will have certain characteristics that don't change through the duration of the trial, for example their age (at start), sex, disease history etc. We can also assume that, given the values of these covariates, the outcome of each participant has a slight (or mabye more than slight) propensity to be consistently either higher or lower than (or perhaps to be in line with) the mean. Therefore there will be a random effect associated with each participant. Because we are interested in how things evolve with time, we will also include time in the model.
+
+
+
 
 
 ```{r}
 # Possible examples:
+epilepsy # good first one, no missing data
 
 BtheB # needs reformatting, lots of missing data
-epilepsy # maybe better?
 
 
 sleepstudy 
