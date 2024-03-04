@@ -61,7 +61,6 @@ library(magick)
 library(htmlTable)
 library(magrittr)
 library(rstatix)
-library(separationplot)
 library(survival)
 library(mvtnorm)
 library(randomizeR)
@@ -70,6 +69,9 @@ library(eefAnalytics)
 library(shiny)
 library(pROC)
 library(parmsurvfit)
+library(HSAUR3)
+library(sjPlot)
+library(lme4)
 
 ```
 

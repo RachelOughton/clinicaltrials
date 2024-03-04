@@ -310,6 +310,7 @@ This time the p-value is quite far from the one we found using the likelihood ra
 
 :::
 
+\newpage 
 
 ## (Lecture 17) Semi-parametric: the proportional hazards model
 

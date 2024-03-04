@@ -24,7 +24,7 @@
 
 .definition {
   padding: 1em 1em 1em 1em;
-  background: #fcf2cc 5px center/3em no-repeat;
+  background: #d9f2e6 5px center/3em no-repeat;
     border-radius: 15px;    
   margin-bottom: 10px; 
   text-indent: 0px;
@@ -32,9 +32,19 @@
 
 .exercise {
   padding: 1em 1em 1em 1em;
-  background: #fcc372 5px center/3em no-repeat;
+  background: #79d2a6 5px center/3em no-repeat;
     border-radius: 15px;    
   margin-bottom: 10px; 
   text-indent: 0px;
 }
+
+.solution {
+  padding: 1em 1em 1em 1em;
+  background: #d9f2e6 5px center/3em no-repeat;
+    border-radius: 15px;    
+  margin-bottom: 10px; 
+  text-indent: 0px;
+}
+
+
 

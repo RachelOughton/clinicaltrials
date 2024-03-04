@@ -384,6 +384,29 @@ grid.arrange(plot_s1, plot_s2, nrow=2)
 
 ```
 
+
+```{r, fig.cap = "Calibration-based plots for indo RCT data."}
+## what columns do I want?
+# site, risk, rx
+# minus one for mean because outcome is 1 or 2
+indo_sum = indo_rct %>% 
+  group_by(site, risk, rx) %>%
+  summarise(est = mean(as.numeric(outcome))-1, size=length(id), .groups="keep")
+indo_sum = indo_sum[indo_sum$site %in% c("1_UM", "2_IU"),]
+fit_sum = predict(glm_indo, newdata=indo_sum[,1:3], se.fit=T, type="response")
+
+indo_sum$fit = fit_sum$fit
+indo_sum$fit_se = fit_sum$se.fit
+
+ggplot(data=indo_sum, aes(x=risk, col=site)) +
+  geom_point(aes(y=est, size=size), pch=16) + 
+  geom_point(aes(y=fit), pch=4) +
+  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
+  theme_bw()+ggtitle("Control Group")+
+  facet_wrap(vars(rx))
+
+```
+
 These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model. 
 :::
 

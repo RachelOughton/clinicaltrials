@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Analysis for binary outcomes | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Analysis for binary outcomes | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Analysis for binary outcomes | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2024-03-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ss-bin.html"/>
+<link rel="next" href="working-with-time-to-event-data.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.2</b> One-tailed or two-tailed?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.5" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.5</b> Minimization</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="alloc.html"><a href="alloc.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.6</b> Problems around allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#a-dodgy-way-to-use-baseline-variables"><i class="fa fa-check"></i><b>4.2.1</b> A dodgy way to use baseline variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="binary-analysis.html"><a href="binary-analysis.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="binary-analysis.html"><a href="binary-analysis.html#point-estimates-and-hypothesis-tests"><i class="fa fa-check"></i><b>6.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="binary-analysis.html"><a href="binary-analysis.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="binary-analysis.html"><a href="binary-analysis.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="binary-analysis.html"><a href="binary-analysis.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
+<li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Part III: Survival data</b></span></li>
+<li class="chapter" data-level="7" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html"><i class="fa fa-check"></i><b>7</b> Working with time-to-event data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#censored-times"><i class="fa fa-check"></i><b>7.1</b> Censored times</a></li>
+<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#survhaz"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-weibull-distribution"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
+<li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
+<li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#cox-regression"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Part III: Further designs</b></span></li>
+<li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised trials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>9.1</b> What is a cluster RCT?</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>9.1.1</b> Intracluster correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>9.2</b> Sample size</a></li>
+<li class="chapter" data-level="9.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>9.3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>9.3.1</b> Allocating everyone at once</a></li>
+<li class="chapter" data-level="9.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#covariate-constrained-randomization"><i class="fa fa-check"></i><b>9.3.2</b> Covariate constrained randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>9.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>9.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-mixed-effects-models"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level: mixed effects models</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1.html"><a href="computer-practical-1.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
+<li class="chapter" data-level="A.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.1.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#allocmethods"><i class="fa fa-check"></i><b>A.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.1.3" data-path="computer-practical-1.html"><a href="computer-practical-1.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.1.4" data-path="computer-practical-1.html"><a href="computer-practical-1.html#minimisation"><i class="fa fa-check"></i><b>A.1.4</b> Minimisation</a></li>
+<li class="chapter" data-level="A.1.5" data-path="computer-practical-1.html"><a href="computer-practical-1.html#a-simulation-experiment"><i class="fa fa-check"></i><b>A.1.5</b> A simulation experiment!</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#cp1analysis"><i class="fa fa-check"></i><b>A.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
+<li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="binary-analysis" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Analysis for binary outcomes<a href="binary-analysis.html#binary-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For a group of <span class="math inline">\(2n\)</span> participants, we will have allocated <span class="math inline">\(n_C\)</span> to the control group (group <span class="math inline">\(C\)</span>), and <span class="math inline">\(n_T\)</span> to the treatment group (group <span class="math inline">\(T\)</span>). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group <span class="math inline">\(C\)</span> the number of ‘successes’ would be modelled by</p>
+<p><span class="math display">\[R_C \sim \operatorname{Bi}\left(n_C,\,\pi_C\right).\]</span></p>
+<p>Similarly the number of successes in the treatment group can be modelled as
+<span class="math display">\[R_T \sim\operatorname{Bi}\left(n_T,\,\pi_T\right),\]</span>
+and the focus of our analysis is on comparing <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span>. To do this we will require point estimates of both quantities and interval estimates for some measure of the discrepancy between them. We will also need ways to test the null hypothesis that <span class="math inline">\(\pi_C = \pi_T.\)</span></p>
+<div id="point-estimates-and-hypothesis-tests" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Point estimates and Hypothesis tests<a href="binary-analysis.html#point-estimates-and-hypothesis-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First of all, we can tabulate the results of a trial with a binary outcome like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Successes</th>
+<th align="left">Failures</th>
+<th align="left">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Treatment</strong></td>
+<td align="left"><span class="math inline">\(r_T\)</span></td>
+<td align="left"><span class="math inline">\(n_T-r_T\)</span></td>
+<td align="left"><span class="math inline">\(n_T\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Control</strong></td>
+<td align="left"><span class="math inline">\(r_C\)</span></td>
+<td align="left"><span class="math inline">\(n_C-r_C\)</span></td>
+<td align="left"><span class="math inline">\(n_C\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td align="left"><span class="math inline">\(r\)</span></td>
+<td align="left"><span class="math inline">\(n - r\)</span></td>
+<td align="left"><span class="math inline">\(n\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Note that because this is a table of observed values, they are now all in lower case.</p>
+<p>We can estimate <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span> by the sample proportions</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_C &amp;= \frac{r_C}{n_C}\\
+p_T &amp;= \frac{r_T}{n_T}
+\end{aligned}.
+\]</span></p>
+<p>We know from the properties of the binomial distribtion that <span class="math inline">\(\operatorname{E}\left(p_C\right) = \pi_C\)</span> and
+<span class="math display">\[\operatorname{Var}\left(p_C\right) = \frac{\pi_C\left(1-\pi_C\right)}{n_C},\]</span>
+and similarly for <span class="math inline">\(\operatorname{E}\left(p_T\right)\)</span> and <span class="math inline">\(\operatorname{Var}\left(p_T\right)\)</span>.</p>
+<p>If we think in terms of individual participants, we have the variable <span class="math inline">\(Y_{iC}\)</span> for the outcome of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span>, with <span class="math inline">\(Y_{iC}=1\)</span> if the participant’s outcome is ‘success’ and <span class="math inline">\(Y_{iC}=0\)</span> otherwise. Then we have</p>
+<p><span class="math display">\[r_C = \sum\limits_{i=1}^{n_C} y_{iC},\]</span>
+and similarly for group <span class="math inline">\(T\)</span>. Since <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span> are therefore sample means, we can apply the Central Limit Theorem to conclude that <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_P\)</span> can be approximated by normal distributions:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_C &amp; \sim N\left(\pi_C,\, \frac{\pi_C\left(1-\color{red}{\pi_C}\right)}{n_C}\right)\\
+p_T &amp; \sim N\left(\pi_T,\, \frac{\pi_T\left(1-\pi_T\right)}{n_T}\right).
+\end{aligned}
+\]</span></p>
+<p>This means we can test the null hypothesis that <span class="math inline">\(\pi_C = \pi_T\)</span> by referring our observed value of <span class="math inline">\(p_T - p_C\)</span> to a normal distribution with mean 0 and variance</p>
+<p><span class="math display">\[ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\color{red}{\pi_C}\right)}{n_C},\]</span></p>
+<p>which we can approximate by substituting in <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span>.</p>
+<p>However, since under the null hypothesis <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, it would be more appropriate to use this as the common variance. In this case, the variance of <span class="math inline">\(p_T - p_C\)</span> becomes</p>
+<p><span class="math display">\[\pi\left(1-\pi\right)\left(\frac{1}{n_C} + \frac{1}{n_T}\right), \]</span>
+and in calculations we replace <span class="math inline">\(\pi\)</span> with <span class="math inline">\(p = r/n\)</span>.</p>
+<p>Putting all this together, our test statistic is</p>
+<p><span class="math display">\[Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.\]</span></p>
+<div class="example">
+<p><span id="exm:unlabeled-div-24" class="example"><strong>Example 6.1  </strong></span>The data in this example comes from <span class="citation">Marshall (<a href="#ref-strep_tb">1948</a>)</span>, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.</p>
+<pre><code>##               improved
+## arm            FALSE TRUE
+##   Streptomycin    17   38
+##   Control         35   17</code></pre>
+<p>We therefore have</p>
+<p><span class="math display">\[
+\begin{aligned}
+n_C &amp; = 52 \\
+n_T &amp; = 55 \\
+p_C &amp; = \frac{17}{17+35} &amp; = 0.327\\
+p_T &amp; = \frac{38}{38+17} &amp; = 0.691\\
+p &amp; = \frac{38+17}{107} &amp;= 0.514.
+\end{aligned}
+\]</span>
+and can calculate our <span class="math inline">\(Z\)</span> statistic to be</p>
+<p><span class="math display">\[
+\begin{aligned}
+Z &amp; = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52} + \frac{1}{55}\right)}}\\
+&amp; = 3.765.
+\end{aligned}
+\]</span></p>
+<p>Finally, we can find the <span class="math inline">\(p\)</span>-value of this test statistic (making sure to have two tails!)</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="binary-analysis.html#cb13-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">3.765</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## [1] 0.0001665491</code></pre>
+<p>So we can reject the hypothesis that streptomycin has no effect on tuberculosis at the <span class="math inline">\(\alpha=0.05\)</span> level (and indeed many lower levels).</p>
+</div>
+<div id="an-alternative-approach-chi-squared" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> An alternative approach: chi-squared<a href="binary-analysis.html#an-alternative-approach-chi-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another way to approach this would be to conduct a <strong>chi-squared</strong> test.</p>
+<p>In a chi-squared test, we first calculate the <strong>expected</strong> values <span class="math inline">\(\left(E_i\right)\)</span> in each box of the summary table, and compare them to the <strong>observed</strong> values <span class="math inline">\(\left(O_i\right)\)</span> by finding the summary statistic</p>
+<p><span class="math display">\[ X^2 = \sum \frac{\left(o_i - e_i\right)^2}{e_i}.\]</span></p>
+<p>Under the null hypothesis (that <span class="math inline">\(\pi_C = \pi_T\)</span>) this has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probably under the <span class="math inline">\(\chi^2_1\)</span> distribution.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-25" class="example"><strong>Example 6.2  </strong></span>Continuing our streptomycin example, we can calculate a table of expected values by observing that proportion <span class="math inline">\(p=0.514\)</span> of the total number of patients were improved. There are 52 in the control group, therefore we expect <span class="math inline">\(0.514\times 52 = 26.73\)</span> improved patients in the control group, and by the same logic <span class="math inline">\(0.514\times 55 = 28.27\)</span> in the treatment group. Our expected table is therefore</p>
+<pre><code>##               improved
+## arm             FALSE   TRUE
+##   Streptomycin 26.730 28.270
+##   Control      25.272 26.728</code></pre>
+<p>We can therefore calculate the <span class="math inline">\(\chi^2\)</span> statistic by looping through the elements of the tables:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="binary-analysis.html#cb16-1" tabindex="-1"></a>sum_chi_sq <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
+<span id="cb16-2"><a href="binary-analysis.html#cb16-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
+<span id="cb16-3"><a href="binary-analysis.html#cb16-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
+<span id="cb16-4"><a href="binary-analysis.html#cb16-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb16-5"><a href="binary-analysis.html#cb16-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb16-6"><a href="binary-analysis.html#cb16-6" tabindex="-1"></a>    tmp <span class="ot">=</span> ((tab_obs[i,j] <span class="sc">-</span> tab_exp[i,j])<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>tab_exp[i,j]</span>
+<span id="cb16-7"><a href="binary-analysis.html#cb16-7" tabindex="-1"></a>    sum_chi_sq <span class="ot">=</span> sum_chi_sq <span class="sc">+</span> tmp</span>
+<span id="cb16-8"><a href="binary-analysis.html#cb16-8" tabindex="-1"></a>  }</span>
+<span id="cb16-9"><a href="binary-analysis.html#cb16-9" tabindex="-1"></a>}</span>
+<span id="cb16-10"><a href="binary-analysis.html#cb16-10" tabindex="-1"></a>sum_chi_sq</span></code></pre></div>
+<pre><code>## [1] 14.17595</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="binary-analysis.html#cb18-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(sum_chi_sq, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0001664847</code></pre>
+<p>and again we have a very significant result.</p>
+<p>In fact, these two tests are almost equivalent, and we have that <span class="math inline">\(\sqrt{X^2} = Z\)</span>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="binary-analysis.html#cb20-1" tabindex="-1"></a><span class="fu">sqrt</span>(sum_chi_sq)</span></code></pre></div>
+<pre><code>## [1] 3.765097</code></pre>
+</div>
+</div>
+<div id="likelihood-a-more-rigorous-way" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Likelihood: A more rigorous way<a href="binary-analysis.html#likelihood-a-more-rigorous-way" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.</p>
+<p>Earlier we set up notation <span class="math inline">\(y_{iC}\)</span> to be outcome variable (0 or 1, in this case) of the <span class="math inline">\(i\)</span>-th participant in the control group (and so on), and we will use that here.</p>
+<p>The contribution of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span> to the likelihood is</p>
+<p><span class="math display">\[\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{\color{red}{1-}y_{iC}} \]</span>
+(remember we can ignore multiplicative constant terms). Combining all <span class="math inline">\(n_C\)</span> patients in group <span class="math inline">\(C\)</span>, their contribution will be</p>
+<p><span class="math display">\[ \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C},\]</span>
+where <span class="math inline">\(r_C\)</span> is the number of ‘successes’ in group <span class="math inline">\(C\)</span>. Similarly for the treatment group we will have</p>
+<p><span class="math display">\[ \pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.\]</span>
+Gathering these terms together we can find the complete likelihood function</p>
+<p><span class="math display">\[
+\begin{aligned}
+L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) &amp;
+  L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
+  &amp; = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
+\end{aligned}
+\]</span>
+The log-likelihood is therefore</p>
+<p><span class="math display">\[ l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right) = r_C\log\pi_C + \left(n_C-r_C\right)\log\left(1-\pi_C\right) + r_T\log\pi_T + \left(n_T-r_T\right)\log\left(1-\pi_T\right).\]</span>
+If we differentiate with respect to <span class="math inline">\(\pi_C\)</span>, we find</p>
+<p><span class="math display">\[\frac{\mathrm{d} l\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)}{\mathrm{d}\pi_C} = \frac{r_C}{\pi_C} - \frac{n_C-r_C}{1-\pi_C}.\]</span>
+Setting this to zero we find (reassuringly!) that <span class="math inline">\(\hat\pi_C = \frac{r_C}{n_C}\)</span>. We can repeat this exercise for <span class="math inline">\(\pi_T\)</span>. If we assume that there is one common probability <span class="math inline">\(\pi\)</span> of success, we can find <span class="math inline">\(\hat\pi\)</span> by maximising
+<span class="math inline">\(l\left(\pi,\pi \mid {n_C,n_T, r_C, r_T}\right)\)</span> with respect to <span class="math inline">\(\pi\)</span>, and again this works out to be <span class="math inline">\(\frac{r_{C} + r_T}{n}\)</span> as before.</p>
+<p>We can use these to construct a <strong>likelihood ratio test</strong>, by calculating</p>
+<p><span class="math display">\[
+\begin{aligned}
+\lambda_{LR} = &amp; -2\left[l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right) - l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)\right]\\
+=  &amp; 2\left[\underbrace{r_C\log\frac{r_C}{n_C} + \left(n_C-r_C\right)\log\left(1-\frac{r_C}{n_C}\right) + r_T\log\frac{r_T}{n_T} + \left(n_T-r_T\right)\log\left(1-\frac{r_T}{n_T}\right) }_{l\left( \hat\pi_C,\hat\pi_T \mid {n_C,n_T, r_C, r_T}\right)} \right. \\
+&amp;\;\;\;\;\;\; \left. - \underbrace{\Big(r\log\left(p\right) + \left(n-r\right)\log\left(1-p\right)\Big)}_{l\left( \hat\pi,\hat\pi \mid {n_C,n_T, r_C, r_T}\right)}\right]\\
+=&amp; 2\left[\underbrace{r_C \log\left(\frac{r_C}{n_C p}\right)}_{\text{Group }C\text{ success}} + \underbrace{\left(n_C - r_C\right)\log\left(\frac{n_C - r_C}{n_C\left(1-p\right)}\right)}_{\text{Group }C\text{ fail}} \right.\\
+&amp; \;\;\;\;\;\; \left.+ \underbrace{r_T \log\left(\frac{r_T}{n_T p}\right)}_{\text{Group }T\text{ success}} + \underbrace{\left(n_T - r_T\right)\log\left(\frac{n_T - r_T}{n_T\left(1-p\right)}\right)}_{\text{Group }T\text{ fail}}\right]
+\end{aligned}
+\]</span>
+where we use <span class="math inline">\(p,\, r,\, n\)</span> to denote the pooled values (<span class="math inline">\(n = n_C + n_T\)</span> etc.).</p>
+<p>Each term in the final line corresponds to a subgroup of the participants, as labelled, and if we rearrange them slightly we see that this can be re-written as</p>
+<p><span class="math display">\[\lambda_{LR} = 2 \sum\limits_{i\in G} o_i \log\left(\frac{o_i}{e_i}\right),\]</span>
+where <span class="math inline">\(G\)</span> is the set of subgroups (group <span class="math inline">\(C\)</span> success etc.). Under the null hypothesis that <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, and for sufficiently large <span class="math inline">\(n_C,\;n_T\)</span>, <span class="math inline">\(\lambda_{LR}\)</span> has a <span class="math inline">\(\chi^2\)</span> distribution with one degree of freedom.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-26" class="example"><strong>Example 6.3  </strong></span>Continuing with the streptomycin example, we can calculate this new test statistic in R by looping through the subgroups.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="binary-analysis.html#cb22-1" tabindex="-1"></a>sum_LR <span class="ot">=</span> <span class="dv">0</span> <span class="co"># set a running total going </span></span>
+<span id="cb22-2"><a href="binary-analysis.html#cb22-2" tabindex="-1"></a><span class="co"># in the following, tab_obs is the table of observed values and</span></span>
+<span id="cb22-3"><a href="binary-analysis.html#cb22-3" tabindex="-1"></a><span class="co"># tab_exp is the table of expected values</span></span>
+<span id="cb22-4"><a href="binary-analysis.html#cb22-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb22-5"><a href="binary-analysis.html#cb22-5" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb22-6"><a href="binary-analysis.html#cb22-6" tabindex="-1"></a>    tmp <span class="ot">=</span> tab_obs[i,j] <span class="sc">*</span> <span class="fu">log</span>(tab_obs[i,j]<span class="sc">/</span>tab_exp[i,j])</span>
+<span id="cb22-7"><a href="binary-analysis.html#cb22-7" tabindex="-1"></a>    sum_LR <span class="ot">=</span> sum_LR <span class="sc">+</span> tmp</span>
+<span id="cb22-8"><a href="binary-analysis.html#cb22-8" tabindex="-1"></a>  }</span>
+<span id="cb22-9"><a href="binary-analysis.html#cb22-9" tabindex="-1"></a>}</span>
+<span id="cb22-10"><a href="binary-analysis.html#cb22-10" tabindex="-1"></a>teststat_LR <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>sum_LR</span>
+<span id="cb22-11"><a href="binary-analysis.html#cb22-11" tabindex="-1"></a>teststat_LR</span></code></pre></div>
+<pre><code>## [1] 14.5028</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="binary-analysis.html#cb24-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(teststat_LR, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0001399516</code></pre>
+<p>Not surprisingly, this value is quite close to the one we obtained earlier!</p>
+</div>
+</div>
+</div>
+<div id="measures-of-difference-for-binary-data" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Measures of difference for binary data<a href="binary-analysis.html#measures-of-difference-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>An important note: we’re treating <span class="math inline">\(\pi_T&gt;\pi_C\)</span> as good here, as we would when the primary outcome is something positive, like a patient being cured. All the methods can easily be adapted to a situation where <span class="math inline">\(\pi_C&gt;\pi_T\)</span> is desirable.</strong></p>
+<p>In the above example the question we were interested in was ‘is what we’ve observed statistically significant?’ and in our streptomycin example the answer was a resounding ‘Yes!’. However, if we then ask questions like ‘How big is the difference between the effects of each treatment?’ or ‘What is the treatment effect?’, things get a bit less clear.</p>
+<p>In the continuous case, it made sense to simply think about the treatment effect as the difference <span class="math inline">\(\mu_T - \mu_C\)</span> between outcomes. However, in the binary case there are a few different ways we can think of the difference between two proportions <span class="math inline">\(\pi_C\)</span> and <span class="math inline">\(\pi_T\)</span>, and each of them requires a different approach.</p>
+<div id="ard-and-nnt" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Absolute risk difference and Number Needed to Treat<a href="binary-analysis.html#ard-and-nnt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>absolute risk difference</strong> is</p>
+<p><span class="math display">\[\text{ARD} = \pi_T - \pi_C,\]</span>
+and is sometimes used. However, it loses a lot of information that we’d probably like to keep in some how. For example, suppose a treatment increases the proportion cured from <span class="math inline">\(\color{red}{\pi_C=0.01}\)</span> to <span class="math inline">\(\color{red}{\pi_T=0.03}\)</span>. The absolute risk difference is <span class="math inline">\(0.02\)</span> here. For some other treatment that results in an increase from <span class="math inline">\(\color{red}{\pi_C=0.55}\)</span> to <span class="math inline">\(\color{red}{\pi_T = 0.57}\)</span> we have the same absolute risk difference, even though it feels (and is!) a much less significant reduction.</p>
+<p>It is useful though to remember that usually these numbers are about people. If the outcome is ‘cured’ or ‘not cured’, then for some cohort of <span class="math inline">\(N\)</span> patients, <span class="math inline">\(N\times\text{ARD}\)</span> is the number of extra patients you would expect to cure if you used treatment <span class="math inline">\(T\)</span> instead of treatment <span class="math inline">\(C\)</span> (which may be nothing or may some usual course of treatment).</p>
+<p>Linked to this is the <strong>number needed to treat</strong> (NNT), which is defined as</p>
+<p><span class="math display">\[ \text{NNT} = \frac{1}{\pi_T - \pi_C} = \frac{1}{\text{ARD}}. \]</span>
+The NNT is the number of patients you’d need to treat (with treatment <span class="math inline">\(T\)</span> rather than <span class="math inline">\(C\)</span>) before you would bring benefit to one extra patient. The website <a href="https://thennt.com/">TheNNT</a> collects together results from many clinical trials and uses the NNT as a summary. Some of the results are quite surprising, compared to how effective we think medicines are!</p>
+<p><span style="color: red;">Note that the NNT doesn’t tell us how many patients are cured: it is just a measure of how much more effective the treatment is than the control. In both the examples above, with ARD=0.02, we have NNT=50. However, in the first example we would expect around 0-1 patients out of 50 cured under the control and 1-2 out of 50 cured under the treatment. In the second case, we would expect 27-28 cured out of 50 under the control, and 28-29 out of 50 cured under the treatment.</span></p>
+<p>The NNT is popular as a clinical benchmark, and provides useful intuition in terms of the number of people it will help. For example, if <span class="math inline">\(\pi_T = 0.25,\,\pi_C=0.2\)</span>, then <span class="math inline">\(\text{ARD} = 0.05\)</span> and <span class="math inline">\(\text{NNT} = 20.\)</span> After treating 20 patients with treatment <span class="math inline">\(C\)</span> we expect to cure (say) 4, whereas treating 20 patients with treatment <span class="math inline">\(T\)</span> it is expected that we will cure 5. For very small proportions, the NNT can be large even for what appears to be an important difference. For example, if <span class="math inline">\(\pi_C=0.005\)</span> and <span class="math inline">\(\pi_T = 0.015\)</span> then <span class="math inline">\(\text{ARD}=0.01\)</span> and <span class="math inline">\(\text{NNT}=100\)</span>. It might be decided that the necessary changes and costs are not worth it for such a small difference. That said, the NNT is not the easiest statistic to work with, as we shall see!</p>
+<div id="confint-ardnnt" class="section level4 hasAnchor" number="6.2.1.1">
+<h4><span class="header-section-number">6.2.1.1</span> Confidence intervals for ARD and NNT<a href="binary-analysis.html#confint-ardnnt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s suppose we want to work with the ARD, and to make a confidence interval for the treatment difference <span class="math inline">\(\tau_{ARD} = \pi_T - \pi_C\)</span>. Using the same normal approximation as before, we can estimate <span class="math inline">\(\tau_{ARD}\)</span> by <span class="math inline">\(p_T - p_C\)</span>, and <span class="math inline">\(\operatorname{var}\left(p_T - p_C\right)\)</span> by</p>
+<p><span class="math display">\[ \frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}.\]</span>
+Our <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval is therefore given by</p>
+<p><span class="math display">\[\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right) \]</span></p>
+<div class="example">
+<p><span id="exm:unlabeled-div-27" class="example"><strong>Example 6.4  </strong></span>Back to our streptomycin example, we can now construct a <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence interval for the ARD.</p>
+<p>Our estimated treatment effect is (to 3 decimal places)</p>
+<p><span class="math display">\[\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364.\]</span>
+Our estimate of the standard error of <span class="math inline">\(\hat\tau_{ARD}\)</span> is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C} &amp; = \frac{\frac{38}{55}\times \frac{17}{55}}{55} + \frac{\frac{17}{52}\times \frac{35}{52}}{52}\\
+&amp; = \color{red}{0.00811}
+\end{aligned}
+\]</span>
+and therefore a 95% confidence interval for <span class="math inline">\(\tau_{ARD}\)</span> is</p>
+<p><span class="math display">\[\left(0.364 - z_{0.975}\sqrt{0.0811},\; 0.364 + z_{0.975}\sqrt{0.0811}\right) = \left(0.187,\; 0.541\right). \]</span>
+As we should expect from the very low <span class="math inline">\(p\)</span>-value we saw, the 95% confidence interval does not contain zero.</p>
+<p>If we want to think instead in terms of NNT (the number needed to treat), then we need to find the reciprocal of our estimate of <span class="math inline">\(\tau_{ARD}\)</span>:</p>
+<p><span class="math display">\[ \text{NNT} = \frac{1}{\tau_{ARD}} = \frac{1}{0.364} = 2.75.\]</span>
+That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
+<p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{\color{red}{0.187}}\right) = \left(1.85,\; \color{red}{5.33} \right).\]</span>
+Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+</div>
+<div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
+<h4><span class="header-section-number">6.2.1.2</span> What if the difference is not significant?<a href="binary-analysis.html#what-if-the-difference-is-not-significant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In the above section you might have already wondered what happens if the confidence interval for the absolute risk difference (ARD) contains zero. To illustrate this, we will make up some data for a small trial, loosely based on the Streptomycin data we’ve been using.</p>
+<p>The dataset for our made-up trial is</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Successes</th>
+<th align="left">Failures</th>
+<th align="left">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Treatment</strong></td>
+<td align="left">9</td>
+<td align="left">5</td>
+<td align="left">14</td>
+</tr>
+<tr class="even">
+<td><strong>Control</strong></td>
+<td align="left">4</td>
+<td align="left">8</td>
+<td align="left">12</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td align="left">13</td>
+<td align="left">13</td>
+<td align="left">26</td>
+</tr>
+</tbody>
+</table>
+<p>The ARD is now
+<span class="math display">\[\frac{9}{14} - \frac{4}{12} = \frac{3}{13} \approx 0.310 \]</span>
+and our 95% confidence interval for <span class="math inline">\(\tau_{ARD}\)</span> is <span class="math inline">\(\left(-0.0567,\;0.676\right)\)</span>.</p>
+<p>Clearly because of the small size of the trial our confidence interval is very wide (this is not a very good trial!), but the important thing to note is that it now contains zero. It looks very likely that the treatment is effective (the interval only just contains zero) but how many patients might we need to treat before we expect to see an extra success? The expected value of NNT is</p>
+<p><span class="math display">\[ \frac{1}{0.310} = 3.23,\]</span>
+which does not pose a problem. However, our 95% confidence interval now contains the possibility that the ARD is zero, and in this case the NNT is in some sense infinite: no matter how many patients we treat, we don’t expect to see any extra improvements. Therefore, since our confidence interval for ARD contains zero it feels appropriate that our confidence interval for NNT should contain infinity.</p>
+<p>When thinking about a confidence interval for the NNT, we need to think about signs, and what negative and positive values mean. If both the lower and upper limits of the confidence interval for ARD are positive, there is no issue - the treatment is effective, and our NNT confidence interval is another entirely positive interval. If the confidence interval for ARD is entirely negative, we have an entirely negative interval for NNT. A negative value of NNT can be thought of as the ‘number needed to treat to harm one extra person’.</p>
+<p>The tricky situation is when the confidence interval for the ARD is <span class="math inline">\(\left(-L, U\right)\)</span> with <span class="math inline">\(L,U&gt;0\)</span>, ie. an interval containing zero. As we approach zero from <span class="math inline">\(U\)</span>, the upper limit of the CI for <span class="math inline">\(\pi_T - \pi_C\)</span>, the number of patients we need to treat increases, since the treatment effect is getting smaller, until at <span class="math inline">\(\pi_T - \pi_C=0\)</span> the NNT is infinite. Therefore, the part of the CI for NNT corresponding to the positive part of the CI for ARD is</p>
+<p><span class="math display">\[\left(\frac{1}{U},\; \infty\right)\]</span></p>
+<p>As we approach zero from the left in the interval (ie. from <span class="math inline">\(-L\)</span>), the treatment gets less and less effective (and right now we mean effective in a bad way, likely doing harm to the patients compared to the control), and so we need to treat more and more patients to harm one extra patient compared to the control. In this region the NNT is negative, since if we deny some patients the treatment we will benefit a few. Therefore the CI for the NNT corresponding to the negative part of the CI for ARD is</p>
+<p><span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right), \]</span>
+and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
+<span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
+<p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<p class="caption">
+Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
+</p>
+</div>
+<p><span class="citation">Altman (<a href="#ref-altman1998confidence">1998</a>)</span> (<a href="https://www.bmj.com/content/bmj/317/7168/1309.full.pdf">available here</a>) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether what you think of it!</p>
+</div>
+<div id="problems-with-the-confidence-interval-for-the-ard" class="section level4 unnumbered hasAnchor">
+<h4>Problems with the confidence interval for the ARD<a href="binary-analysis.html#problems-with-the-confidence-interval-for-the-ard" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>You may well remember from the dim and distant past that the method we have been using so far (which in this section we’ll be calling the ‘standard’ method) is not so reliable if the proportion is close to zero or one. <span class="citation">Newcombe (<a href="#ref-newcombe1998interval">1998</a>)</span> compared eleven different methods for finding confidence intervals for the difference in proportions (as we are doing when we work with the ARD) and found the standard method to be the worst! The coverage probability turns out to be much lower than the nominal value, with a so-called 95% confidence interval being closer to 90% or even 85%. A further problem with this method (although it will rarely affect us in practice in this setting) is that the limits of the confidence interval aren’t forced to be in <span class="math inline">\(\left[-1,1\right]\)</span>.</p>
+<p>We will give a sketch of the favourite method of <span class="citation">Newcombe (<a href="#ref-newcombe1998interval">1998</a>)</span>, chosen for its ease of implementation and its accuracy, now.</p>
+<p>The first step is to find an interval estimate for a single proportion <span class="math inline">\(\pi\)</span>. As before, this can be written</p>
+<p><span class="math display">\[\left\lbrace \pi \mid \frac{\lvert p - \pi \rvert}{\sqrt{\pi\left(1-\pi\right)/n}} \leq z_{\frac{\alpha}{2}} \right\rbrace = \left\lbrace \pi \mid \left(p - \pi\right)^2 \leq z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n} \right\rbrace. \]</span>
+We can find the limits of the <span class="math inline">\(100\left(1-\alpha\right)\)</span>% level confidence interval by changing the right hand side to an equality</p>
+<p><span class="math display" id="eq:newcombe1">\[\begin{equation}
+\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{n}.
+\tag{6.1}
+\end{equation}\]</span></p>
+<p>In the standard method, we substitute <span class="math inline">\(p\)</span> (the estimated value of <span class="math inline">\(\pi\)</span> from our sample) into the right hand side of Equation <a href="binary-analysis.html#eq:newcombe1">(6.1)</a> for <span class="math inline">\(\pi\)</span>, to get</p>
+<p><span class="math display">\[\left(p - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{p\left(1-p\right)}{n}\]</span></p>
+<p>which we solve to get the limits
+<span class="math display">\[ \pi = p \pm z_{\frac{\alpha}{2}}\sqrt{\frac{p\left(1-p\right)}{n}}.\]</span>
+In Newcombe’s proposed method, we instead keep <span class="math inline">\(\pi\)</span> in the right hand side and solve the quadratic in Equation <a href="binary-analysis.html#eq:newcombe1">(6.1)</a> in terms of <span class="math inline">\(\pi\)</span>.</p>
+<p>The benefit of this new method will be most obvious for a probability that is close to 0 or 1.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-28" class="example"><strong>Example 6.5  </strong></span>Suppose we have 1 success out of 50 patients, so <span class="math inline">\(p=0.02,\;n=50\)</span>.</p>
+<p>The limits of a standard 95% confidence interval will be</p>
+<p><span class="math display">\[\left(0.02 - z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}},\; 0.02 + z_{0.975}\sqrt{\frac{0.02\times{0.98}}{50}}\right) = \left(-0.0188,\;0.0588\right),\]</span>
+whereas the limits to the Newcombe 95% CI will be the roots of</p>
+<p><span class="math display">\[\left(0.02-\pi\right)^2 = z^2_{\alpha/2}\frac{\pi\left(1-\pi\right)}{50}\]</span>
+which work out to be</p>
+<pre><code>## [1] 0.003539259 0.104954436</code></pre>
+<p>Visually, we can represent this as in Figure <a href="binary-analysis.html#fig:newc1">6.2</a> by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows <span class="math inline">\(p_T\)</span>, the estimated proportion, the thinner dashed red lines show the Newcombe 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:newc1"></span>
+<img src="CT4H_notes_files/figure-html/newc1-1.png" alt="LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate $p$ subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard." width="672" />
+<p class="caption">
+Figure 6.2: LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate <span class="math inline">\(p\)</span> subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Newcombe, dotted for standard.
+</p>
+</div>
+<div class="example">
+<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 6.6  </strong></span>Returning to our streptomycin example, our estimate of the probability of success for the treatment group is <span class="math inline">\(p_T = \frac{38}{55},\;n_T = 55\)</span>, and therefore our equation becomes</p>
+<p><span class="math display">\[\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi\left(1-\pi\right)}{55}.\]</span>
+Solving this equation in the usual way (using the quadratic formula) we find the limits</p>
+<pre><code>## [1] 0.5597141 0.7971771</code></pre>
+<p>By contrast, in our standard method we have
+<span class="math display">\[\left(\frac{38}{55} - \pi\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\frac{38}{55}\left(1-\frac{38}{55}\right)}{55}\]</span>
+which is</p>
+<pre><code>## [1] 0.5687797 0.8130385</code></pre>
+<p>We can see this graphically</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<p class="caption">
+Figure 6.3: As before, dashed for Newcombe, dotted for standard
+</p>
+</div>
+<p>Notice that the interval with the new method is now asymmetrical, which is more realistic.</p>
+<p>Similarly for the control proportion <span class="math inline">\(\pi_C\)</span>, we have <span class="math inline">\(p_C = \frac{17}{52},\; n_C=52\)</span>, and our Newcombe interval is</p>
+<pre><code>## [1] 0.2152207 0.4624381</code></pre>
+<p>compared to the standard confidence interval</p>
+<pre><code>## [1] 0.1994256 0.4544205</code></pre>
+<p>Again, we can see this graphically.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Newcombe, dotted for standard" width="672" />
+<p class="caption">
+Figure 6.4: As before, dashed for Newcombe, dotted for standard
+</p>
+</div>
+</div>
+</div>
+<div id="newcombeci" class="section level4 hasAnchor" number="6.2.1.3">
+<h4><span class="header-section-number">6.2.1.3</span> Extending this to <span class="math inline">\(\pi_T - \pi_C\)</span><a href="binary-analysis.html#newcombeci" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You’ll be relieved to hear that there is such a method, and we’ll give a sketch here of how it works.</p>
+<p>The limits of the ‘standard method’ confidence interval at significance level <span class="math inline">\(\alpha\)</span> are given by</p>
+<p><span class="math display" id="eq:ardci">\[\begin{equation}
+\left(p_T - p_C - z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}},\; p_T - p_C + z_{\frac{\alpha}{2}}\sqrt{\frac{p_T\left(1-p_T\right)}{n_T} + \frac{p_C\left(1-p_C\right)}{n_C}}\right).
+\tag{6.2}
+\end{equation}\]</span></p>
+<p>We can rewrite this as</p>
+<p><span class="math display">\[\begin{equation}
+\left(p_T - p_C - \sqrt{\omega^2_T + \omega^2_C},\; p_T - p_C + \sqrt{\omega^2_T + \omega^2_C}\right)
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\omega_T\)</span> and <span class="math inline">\(\omega_C\)</span> are the widths of the separate single-sample ‘standard’ confidence intervals for <span class="math inline">\(p_T\)</span> and <span class="math inline">\(p_C\)</span>. In Newcombe’s method, we proceed in the same way, but instead use the widths of the Newcombe confidence intervals for the individual probabilities <span class="math inline">\(p_T\)</span> and <span class="math inline">\(p_C\)</span>. This is obviously a little more complicated, since the widths (eg. <span class="math inline">\(p_T - l_T\)</span> and <span class="math inline">\(u_T - p_T\)</span>) will now not be the same, since the Newcombe CI is not symmetrical. So, we have</p>
+<p><span class="math display">\[
+\left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2},\; p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right).
+\]</span>
+These differences must be calculated using the individual sample confidence interval method.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-30" class="example"><strong>Example 6.7  </strong></span>Applying this Newcombe method to our Streptomycin example, recall that we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_T &amp; = \frac{38}{55}\\
+p_T - l_T &amp; = \frac{38}{55} - 0.5597 = 0.1312\\
+u_T - p_T &amp; = 0.7972 - \frac{38}{55} = 0.1064\\
+p_C &amp; = \frac{17}{52} \\
+p_C - l_C &amp; = \frac{17}{52}  - 0.2152 = 0.1117\\
+u_C - p_C &amp; = 0.4624 - \frac{17}{52} = 0.1355.
+\end{aligned}
+\]</span>
+Our <span class="math inline">\(95\%\)</span> confidence interval is therefore</p>
+<p><span class="math display">\[
+\begin{aligned}
+\left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2}\right.&amp;,\left. p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right)\\
+\left(\frac{38}{55}-\frac{17}{52} - \sqrt{0.1312^2 + 0.1355^2}\right.&amp;,\left.\frac{38}{55}-\frac{17}{52} + \sqrt{0.1064^2 + 0.1117^2}\right)\\
+\left(0.3640 - 0.1886 \right.&amp;,\left. 0.3640+ 0.1543\right)\\
+\left(0.157 \right.&amp;,\left.0.500\right).
+\end{aligned}
+\]</span>
+This is skewed somewhat lower than our standard CI of <span class="math inline">\(\left(0.187,\;0.541\right).\)</span></p>
+</div>
+</div>
+</div>
+<div id="risk-ratio-rr-and-odds-ratio-or" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Risk Ratio (RR) and Odds ratio (OR)<a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The measures we have looked at so far, particularly the ARD, are quite analagous to the continuous normally distributed case. However, there are yet more commonly used measures of difference for proportions, which need to be dealt with differently, but also afford more opportunities for modelling.</p>
+<p>The <strong>risk ratio</strong> is defined as</p>
+<p><span class="math display">\[\text{RR} = \frac{\pi_T}{\pi_C}\]</span></p>
+<p>The <strong>odds ratio</strong> is defined as
+<span class="math display">\[\text{OR} = \frac{\pi_T/\left(1-\pi_T\right)}{\pi_C/\left(1-\pi_C\right)}\]</span>
+The first thing to note is that for both the risk ratio and the odds ratio, the null value is one (not zero, as for the ARD), and both values must always be positive. We think about things multiplicatively, so for example if <span class="math inline">\(RR=3\)</span> we can say that the event is “3 times more likely” in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>.</p>
+<div id="odds" class="section level4 unnumbered hasAnchor">
+<h4>Odds<a href="binary-analysis.html#odds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Odds and odds ratios are a bit trickier to think about (<a href="https://kids.frontiersin.org/articles/10.3389/frym.2022.926624#:~:text=As%20an%20example%2C%20if%20the,disease%20if%20you%20are%20exposed.">this article</a> explains them really well - it’s aimed at ‘kids and teens’ but don’t let that put you off!). The odds of an event are the probability of it happening over the probability of it not happening. So, if (for some event <span class="math inline">\(A\)</span>), <span class="math inline">\(p\left(A\right)=0.2\)</span>, the odds of <span class="math inline">\(A\)</span> are</p>
+<p><span class="math display">\[\frac{p\left(A\right)}{p\left(A&#39;\right)} = \frac{0.2}{0.8} = \frac{1}{4}, \]</span>
+which we say as “1 to 4” or 1:4. For every one time <span class="math inline">\(A\)</span> occurs, we expect it not to occur four times.</p>
+<p>The <strong>odds ratio</strong> compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).</p>
+<p>With the ARD, we knew that our confidence interval should always be in <span class="math inline">\(\left[-1,\,1\right]\)</span>, and that if we compare treatments in one direction (say <span class="math inline">\(p_T - p_C\)</span>) we would obtain the negative of the interval for the other way (<span class="math inline">\(p_C - p_T\)</span>). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction (<span class="math inline">\(p_T / p_C\)</span>) will give the reciprocal of the other direction (<span class="math inline">\(p_C / p_T\)</span>).</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 6.8  </strong></span>For our Streptomycin example, we estimated the ARD by
+<span class="math display">\[\hat\tau_{ARD}=p_T - p_C = \frac{38}{55} - \frac{17}{52} = 0.364,\]</span>
+or could have alternatively had
+<span class="math display">\[\hat\tau_{ARD}=p_C - p_T = \frac{17}{52} - \frac{38}{55} = - 0.364.\]</span>
+For the risk ratio, we have</p>
+<p><span class="math display">\[\hat{\tau}_{RR} = \frac{p_T}{p_C} = \frac{38/55}{17/52} = 2.113,\]</span>
+or could alternatively have</p>
+<p><span class="math display">\[\hat{\tau}_{RR} = \frac{p_C}{p_T} = \frac{17/52}{38/55} = 0.473 = \frac{1}{2.113}.\]</span>
+We could say that a patient is “more than twice as likely to be cured with streptomycin than by the control”.</p>
+<p>For the odds ratio, we have</p>
+<p><span class="math display">\[\hat{\tau}_{OR} = \frac{p_T/\left(1-p_T\right)}{p_C/\left(1-p_C\right)} = \frac{(38/55)/(17/55)}{(17/52)/(35/52)} = 4.602, \]</span>
+and therefore the odds of recovery are around 4.6 greater for Streptomycin than for the control. Similarly, we could reframe this as</p>
+<p><span class="math display">\[\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \frac{(17/52)/(35/52)}{(38/55)/(17/55)} = 0.217 = \frac{1}{4.602}.\]</span></p>
+</div>
+</div>
+<div id="ci-rr" class="section level4 hasAnchor" number="6.2.2.1">
+<h4><span class="header-section-number">6.2.2.1</span> Confidence intervals for RR and OR<a href="binary-analysis.html#ci-rr" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval <span class="math inline">\(\left(l,\,u\right)\)</span> (with <span class="math inline">\(l,u&gt;1\)</span>) and <span class="math inline">\(\left(\frac{1}{u},\frac{1}{l}\right)\)</span>, since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval</p>
+<p><span class="math display">\[\left(\frac{1}{k},\,k\right) \text{ for some }k&gt;1 \]</span>
+can be thought of as symmetric, in that one treatment may be up to <span class="math inline">\(k\)</span> times more effective than the other, in either direction. Therefore, to build a confidence interval for OR or RR, we will not be following the usual formula</p>
+<p><span class="math display">\[\text{point estimate } \pm{z\times{SE}}.\]</span>
+You may have already been thinking that a log transformation would be useful here, and you’d be correct! The <em>sort-of</em> symmetric intervals we’ve been discussing here actually are symmetric (about zero) on the log scale.</p>
+<p>Firstly we’ll consider the risk ratio. Let’s define</p>
+<p><span class="math display">\[ \phi = \log\left(\frac{\pi_T}{\pi_C}\right).\]</span>
+The natural way to estimate this is with the sample proportions</p>
+<p><span class="math display">\[\log\left(\frac{p_T}{p_C}\right) = \log\left(p_T\right) - \log\left(p_C\right).\]</span>
+These estimated proportions should be approximately normal and independent of one another, and so <span class="math inline">\(\log\left(\frac{p_T}{p_C}\right)\)</span> is approximately normal with mean <span class="math inline">\(\phi\)</span> (the true value) and variance</p>
+<p><span class="math display">\[\operatorname{var}\left(\log\left(p_T\right)\right) + \operatorname{var}\left(\log\left(p_C\right)\right). \]</span>
+We can now apply the Delta method (see section <a href="ss-bin.html#delta-method">5.1</a>) to find that (using Equation <a href="ss-bin.html#eq:delta3">(5.3)</a>)</p>
+<p><span class="math display">\[\operatorname{var}\left[\log\left(p_T\right)\right] = \operatorname{var}\left[\log\left(\frac{r_T}{n_T}\right)\right] \approx \frac{\pi_T\left(1-\pi_T\right)}{n_T}\times{\left(\frac{1}{\pi_T}\right)^2} = \frac{1}{n_T\pi_T} - \frac{1}{n_T}. \]</span>
+Since we estimate <span class="math inline">\(\pi_T\)</span> by <span class="math inline">\(r_T/n_T\)</span> this can be estimated by <span class="math inline">\(r_T^{-1} - n_T^{-1}\)</span>. Notice that we are relying on the derivative of <span class="math inline">\(\log\left(x\right)\)</span> being <span class="math inline">\(x^{-1}\)</span>, so we must always use natural logarithms.</p>
+<p>This leads us to the result that, approximately</p>
+<p><span class="math display">\[\log\left(\frac{p_T}{p_C}\right) \sim N\bigg(\phi,\,\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right) \bigg) \]</span> and so we can generate <span class="math inline">\(100\left(1-\alpha\right)\)</span>% confidence intervals for <span class="math inline">\(\phi\)</span> as <span class="math inline">\(\left(l_{RR},\;u_{RR}\right)\)</span>, where the limits are</p>
+<p><span class="math display">\[
+\log\left(\frac{p_T}{p_C}\right) \pm z_{\frac{\alpha}{2}}\sqrt{\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right)}.
+\]</span>
+This then translates to an interval for the risk ratio itself of <span class="math inline">\(\left(e^{l_{RR}},e^{u_{RR}}\right)\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-32" class="example"><strong>Example 6.9  </strong></span>Returning once again to our streptomycin example, recall that we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+r_T &amp; = 38\\
+n_T &amp; = 55 \\
+r_C &amp; = 17 \\
+n_C &amp; = 52
+\end{aligned}
+\]</span>
+and so the limits of the confidence interval (with <span class="math inline">\(\alpha=0.05\)</span>) on the log scale are</p>
+<p><span class="math display">\[\log\left(\frac{38/55}{17/52}\right) \pm 1.96\sqrt{\color{red}{\left(\frac{1}{38} - \frac{1}{55}\right) + \left(\frac{1}{17} - \frac{1}{52}\right)}} = \log(2.11) \pm 1.96 \times 0.218\]</span></p>
+<p>which gives us <span class="math inline">\(\left(0.320,\,1.176\right)\)</span> on the log scale, and a 95% CI for the risk ratio of <span class="math inline">\(\left(1.377,\,3.243\right)\)</span>.</p>
+</div>
+<p>So, we’ve seen that we can find confidence intervals for each of our four measures of difference. But we probably want to also be able to incorporate baseline measurements, as we
+did for continuous outcome variables.</p>
+</div>
+</div>
+</div>
+<div id="accounting-for-baseline-observations-logistic-regression" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Accounting for baseline observations: logistic regression<a href="binary-analysis.html#accounting-for-baseline-observations-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We saw with the continuous outcomes that it is often advantageous to include baseline measurements of the outcome (if they are known) in our analysis, and this is the same for binary outcomes.</p>
+<p>In this section we use the term ‘baseline observations’ to mean any measurement that was known before the trial started. Unlike with continuous measurements, with a binary outcome, there is not usually a pre-trial value of the primary outcome. A binary outcome is often already relative to pre-trial (for example ‘Have the patient’s symptoms improved?’) or refers to an event that definitely wouldn’t have happened pre-trial (for example ‘Did the patient die within the next 6 months?’ or ‘Was the patient cured?’). However, as we saw with ANCOVA, we can include other sorts of covariates in a linear model, so this is fine.</p>
+<p>The general form of model that we would like for patient <span class="math inline">\(i\)</span> is</p>
+<p><span class="math display">\[\text{outcome}_i = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}} + \text{error}_i,\]</span>
+where <span class="math inline">\(G_i\)</span> is an indicator function taking values 1 if patient <span class="math inline">\(i\)</span> was in group <span class="math inline">\(T\)</span> and 0 if they were in group <span class="math inline">\(C\)</span>, and <span class="math inline">\(\text{baseline}_1,\;\ldots,\;\text{baseline}_p\)</span> are <span class="math inline">\(p\)</span> baseline measurements that we would like to take into account.</p>
+<p>However, this actually creates quite a few problems with binary variables. The outcome for patient <span class="math inline">\(i\)</span> will be either 0 or 1, but the terms in the model above do not guarantee this at all. Adding a normally distributed error term doesn’t really make sense in this context, so we will remove it. We can also make the LHS more continuous by thinking of the mean outcome rather than a single outcome. This makes sense, since if several patients were identical to patient <span class="math inline">\(i\)</span> (in the sense of having the same baseline covariate values and being allocated to the same treatment), we probably wouldn’t expect them all to have exactly the same outcome. Therefore we might instead think in terms of mean outcome, in which case our model becomes</p>
+<p><span class="math display">\[\text{mean outcome}_i = \mu + \tau G_i + \beta_1\times{\text{baseline}_{1i}} + \ldots + \beta_p\times{\text{baseline}_{pi}}.\]</span></p>
+<p>There is one final problem to overcome, which is that the LHS will certainly be in <span class="math inline">\(\left[0,\;1\right]\)</span>, but the RHS could take any value. To address this we need to use a transformation, to take the mean outcome from <span class="math inline">\(\left[0,1\right]\)</span> to <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<p>The transformation that is usually used for a binary variable is the <strong>logit</strong> function, which is the log of the odds,</p>
+<p><span class="math display">\[\operatorname{logit}\left(\pi\right) = \log\frac{\pi}{1-\pi}.\]</span></p>
+<p>As <span class="math inline">\(\pi\)</span> tends to zero, <span class="math inline">\(\operatorname{logit}\left(\pi\right)\)</span> tends to <span class="math inline">\(-\infty\)</span>, and as <span class="math inline">\(\pi\)</span> tends to one, <span class="math inline">\(\operatorname{logit}\left(\pi\right)\)</span> tends to <span class="math inline">\(\infty\)</span>. The derivative of the <span class="math inline">\(\operatorname{logit}\)</span> function is</p>
+<p><span class="math display">\[ \frac{d\operatorname{logit}\left(\pi\right)}{d\pi} = \frac{1}{\pi\left(1-\pi\right)}\]</span>
+which is always positive for <span class="math inline">\(\pi\in\left[0,1\right]\)</span>. This means that we can use it to transform our mean outcome (which we will now call <span class="math inline">\(\pi\)</span>, since the mean outcome is the estimate of the probability of success) in the model</p>
+<p><span class="math display" id="eq:logreg1">\[\begin{equation}
+\operatorname{logit}\left(\pi\right) = \mu + \tau G + \beta_1\times{\text{baseline}_{1}} + \ldots + \beta_p\times{\text{baseline}_{p}}
+\tag{6.3}
+\end{equation}\]</span></p>
+<p>and any value in <span class="math inline">\(\mathbb{R}\)</span> is allowed on both sides. This model is known as <strong>logistic regression</strong>, and belongs to a class of models called <strong>Generalized Linear Models</strong>. If you did Advanced Statistical Modelling III you’ll have seen these before. If you haven’t seen them, and want to know more, <a href="https://www.r-bloggers.com/2015/08/generalised-linear-models-in-r/">this article</a> gives a nice introduction (and some useful R tips!).</p>
+<div id="what-does-this-model-tell-us" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> What does this model tell us?<a href="binary-analysis.html#what-does-this-model-tell-us" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We now have an equation for a model that makes sense, but what is it actually modelling? And what does it tell us about the effect of the treatment?
+Consider the difference between two patients who are the same in every respect except one is assigned to group <span class="math inline">\(C\)</span> (so <span class="math inline">\(G=0\)</span>) and the other to group <span class="math inline">\(T\)</span> (so <span class="math inline">\(G=1\)</span>). The model gives:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{logit}\left(\pi\right) = \log\left(\frac{\pi}{1-\pi}\right) = \log\left(\text{Odds of success}\right) &amp; = \mu + \tau + \beta_1x_1 + \ldots + \beta_px_p &amp; \text{ (group T)}\\
+\operatorname{logit}\left(\pi\right) = \log\left(\frac{\pi}{1-\pi}\right) = \log\left(\text{Odds of success}\right) &amp; = \mu + \beta_1x_1 + \ldots + \beta_px_p &amp; \text{ (group C)}
+\end{aligned}
+\]</span>
+Subtracting one from the other, we find</p>
+<p><span class="math display">\[
+\begin{aligned}
+\log(\text{Odds of success for group T}) - &amp; \log(\text{Odds of success for group C})\\
+&amp;=
+\log\left(\frac{\text{Odds of success for group T}}{\text{Odds of success for group C}}\right) = \log\left(OR\right) \\
+&amp;= \tau.
+\end{aligned}
+\]</span></p>
+<p>That is, <span class="math inline">\(\tau\)</span> is the log of the odds ratio, or <span class="math inline">\(e^\tau\)</span> is the odds ratio adjusted for variables <span class="math inline">\(x_1,\;\ldots,\;x_p\)</span>. Put another way, while the baseline covariates <span class="math inline">\(x_1,\ldots,x_p\)</span> affect the probability of ‘success’ (or whatever our binary outcome’s one means), <span class="math inline">\(\tau\)</span> is a measure of the effect of the treatment compared to control given some set of baseline covariate values.</p>
+</div>
+<div id="fitting-a-logistic-regression-model" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Fitting a logistic regression model<a href="binary-analysis.html#fitting-a-logistic-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Logistic regression models are generally fitted using <em>maximum likelihood</em>. In the notation of Equation <a href="binary-analysis.html#eq:logreg1">(6.3)</a>, the parameters we need to fit are the coefficients <span class="math inline">\(\mu,\;\tau\)</span> and <span class="math inline">\(\beta_1,\ldots,\beta_p\)</span>. To ease notation, we will collect these into a vector <span class="math inline">\(\boldsymbol\beta\)</span>, with <span class="math inline">\(\beta_0=\mu\)</span>, <span class="math inline">\(\beta_1=\tau\)</span> and <span class="math inline">\(\beta_2,\ldots,\beta_{p+1}\)</span> the original <span class="math inline">\(\beta_1,\ldots,\beta_p\)</span>. Sorry this is confusing - we won’t really use the vector <span class="math inline">\(\boldsymbol\beta\)</span> after this, or think about the parameters individually (apart from <span class="math inline">\(\tau\)</span>).</p>
+<p>This notation allows us to write the linear function on the RHS of Equation <a href="binary-analysis.html#eq:logreg1">(6.3)</a> for participant <span class="math inline">\(i\)</span> as</p>
+<p><span class="math display">\[x_i^T\boldsymbol\beta = \sum\limits_{j=0}^{q} x_{ij}\beta_j, \]</span>
+where</p>
+<ul>
+<li><span class="math inline">\(x_{i0}=1\)</span> (so that <span class="math inline">\(\beta_0\)</span> is the intercept <span class="math inline">\(\mu\)</span>)</li>
+<li><span class="math inline">\(x_{i1}=  \begin{cases}  0\text{ if participant }i\text{ is in group }C\\  1\text{ if participant }i\text{ is in group }T  \end{cases}\)</span></li>
+<li><span class="math inline">\(x_{i2},\ldots,x_{iq}\)</span> are the baseline covariates.</li>
+</ul>
+<p>If <span class="math inline">\(\pi_i\)</span> is the probability that the outcome for participant <span class="math inline">\(i\)</span> is 1, where <span class="math inline">\(i=1,\ldots,n\)</span>, then the logistic model specifies these <span class="math inline">\(n\)</span> parameters through the <span class="math inline">\(q+1\)</span> parameters <span class="math inline">\(\beta_j\)</span>, via the <span class="math inline">\(n\)</span> expressions</p>
+<p><span class="math display" id="eq:logit1">\[\begin{equation}
+\operatorname{logit}\left(\pi_i\right) = x_i^T\boldsymbol\beta.
+\tag{6.4}
+\end{equation}\]</span></p>
+<p>Using the Bernoulli distribution, the log-likelihood given data <span class="math inline">\(y_1,\ldots,y_n\)</span> is</p>
+<p><span class="math display">\[\begin{align*}
+\ell\left(\left\lbrace\pi_i \right\rbrace \mid\left\lbrace y_i\right\rbrace\right) &amp; = \sum\limits_{i=1}^n\left[y_i\log(\pi_i) + \left(1-y_i\right)\log\left(1-\pi_i\right)\right]\\
+&amp; = \sum\limits_{i=1}^n\left[y_i\log\left(\frac{\pi_i}{1-\pi_i}\right) + \log\left(1-\pi_i\right)\right],
+\end{align*}\]</span>
+where <span class="math inline">\(y_i=0\)</span> or 1 is the outcome for participant <span class="math inline">\(i\)</span>. Using Equation <a href="binary-analysis.html#eq:logit1">(6.4)</a> we can rewrite this in terms of <span class="math inline">\(\boldsymbol\beta\)</span> as</p>
+<p><span class="math display">\[\ell\left(\left\lbrace\beta_j \right\rbrace\mid{\text{data}}\right) = \sum\limits_{i=1}^n \left[y_i x_i^T\boldsymbol\beta - \log\left(1+e^{x_i^T\boldsymbol\beta}\right)\right].\]</span></p>
+<p>The fitted model is then the one with the values <span class="math inline">\(\beta_j\)</span>, <span class="math inline">\(j=0,\dots,q\)</span>, that maximise this expression (and hence maximise the likelihood itself), which we will label the <span class="math inline">\(\left\lbrace \hat{\beta}_j\right\rbrace\)</span>.</p>
+<p>This is generally done some via some numerical method, and we won’t go into that here. The method used by R will generate the MLE <span class="math inline">\(\hat\beta_j\)</span> for each <span class="math inline">\(\beta_j\)</span>, and also an estimate of the standard error of each <span class="math inline">\(\hat\beta_j\)</span>. In particular there will be an estimate of the standard error of <span class="math inline">\(\hat\beta_1\)</span>, better known as <span class="math inline">\(\hat\tau\)</span>, the estimate of the treatment effect. This is important, because it means we can test the hypothesis that <span class="math inline">\(\tau=0\)</span>, and can form a confidence interval for the adjusted log odds ratio.</p>
+<div class="example">
+<p><span id="exm:logregeg1" class="example"><strong>Example 6.10  </strong></span>This study is detailed in <span class="citation">Elmunzer et al. (<a href="#ref-elmunzer2012randomized">2012</a>)</span>. ERCP, or endoscopic retrograde cholangio-pancreatogram, is a procedure performed by threading an endoscope through the mouth to the opening in the duodenum where bile and pancreatic digestive juices are released into the intestine. ERCP is helpful for treating blockages of flow of bile (gallstones, cancer), or diagnosing cancers of the pancreas, but has a high rate of complications (15-25%). The occurrence of post-ERCP pancreatitis is a common and feared complication, as pancreatitis can result in multisystem organ failure and death, and can occur in ~ 16% of ERCP procedures. This study tests whether the use of anti-inflammatory NSAID therapies at the time of ERCP reduce the rate of this complication. The study had 602 participants.</p>
+<p>The dataset contains 33 variables, but we will focus on a small number:</p>
+<ul>
+<li><span class="math inline">\(X\)</span>: (primary outcome) - incidence of post-ercp pancreatitis 0 (no), 1 (yes).</li>
+<li>Treatment arm <code>rx</code>: 0 (placebo), 1 (treatment)</li>
+<li>Site: 1, 2, 3, 4</li>
+<li>Risk: Risk score (1 to 5). Should be factor but treated as continuous.</li>
+<li>Age: from 19 to 90, mean 45.27, SD 13.30.</li>
+</ul>
+<p>The correlation between <code>risk</code> and <code>age</code> is -0.216, suggesting no problems of collinearity between those two variables.</p>
+<p>Note: an obvious one to include would be <code>gender</code>, but I tried it and it is not at all significant, so I have pre-whittled it down for [even more] simplicity.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="binary-analysis.html#cb31-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;indo_rct&quot;</span>)</span>
+<span id="cb31-2"><a href="binary-analysis.html#cb31-2" tabindex="-1"></a><span class="fu">summary</span>(indo_rct[ ,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">32</span>)])</span></code></pre></div>
+<pre><code>##        id           site          age             risk        outcome                 rx     
+##  Min.   :1001   1_UM  :164   Min.   :19.00   Min.   :1.000   0_no :523   0_placebo     :307  
+##  1st Qu.:1152   2_IU  :413   1st Qu.:35.00   1st Qu.:1.500   1_yes: 79   1_indomethacin:295  
+##  Median :2138   3_UK  : 22   Median :45.00   Median :2.500                                   
+##  Mean   :1939   4_Case:  3   Mean   :45.27   Mean   :2.381                                   
+##  3rd Qu.:2289                3rd Qu.:54.00   3rd Qu.:3.000                                   
+##  Max.   :4003                Max.   :90.00   Max.   :5.500</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="binary-analysis.html#cb33-1" tabindex="-1"></a><span class="do">## Some things to note:</span></span>
+<span id="cb33-2"><a href="binary-analysis.html#cb33-2" tabindex="-1"></a><span class="co"># There are very few patients in group 4, and not many in group 3</span></span>
+<span id="cb33-3"><a href="binary-analysis.html#cb33-3" tabindex="-1"></a><span class="co"># The age range goes from 19 to 90 </span></span>
+<span id="cb33-4"><a href="binary-analysis.html#cb33-4" tabindex="-1"></a><span class="co"># &#39;rx&#39; is the group variable</span></span>
+<span id="cb33-5"><a href="binary-analysis.html#cb33-5" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="binary-analysis.html#cb33-6" tabindex="-1"></a><span class="do">## Checking for collinearity with factor variables</span></span>
+<span id="cb33-7"><a href="binary-analysis.html#cb33-7" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="binary-analysis.html#cb33-8" tabindex="-1"></a><span class="co"># No consistent patterns between age and site or risk and site</span></span>
+<span id="cb33-9"><a href="binary-analysis.html#cb33-9" tabindex="-1"></a>indo_rct<span class="sc">%&gt;%</span></span>
+<span id="cb33-10"><a href="binary-analysis.html#cb33-10" tabindex="-1"></a>  <span class="fu">group_by</span>(site) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-11"><a href="binary-analysis.html#cb33-11" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb33-12"><a href="binary-analysis.html#cb33-12" tabindex="-1"></a>    <span class="at">meanage=</span><span class="fu">mean</span>(age), <span class="at">sdage=</span><span class="fu">sd</span>(age),</span>
+<span id="cb33-13"><a href="binary-analysis.html#cb33-13" tabindex="-1"></a>    <span class="at">meanrisk =</span> <span class="fu">mean</span>(risk), <span class="at">sdrisk=</span><span class="fu">sd</span>(risk)</span>
+<span id="cb33-14"><a href="binary-analysis.html#cb33-14" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   site   meanage sdage meanrisk sdrisk
+##   &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+## 1 1_UM      47.2  14.2     2.06  0.888
+## 2 2_IU      44.4  12.9     2.52  0.846
+## 3 3_UK      45.9  11.6     2.23  0.896
+## 4 4_Case    47.3  22.9     1.67  0.289</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="binary-analysis.html#cb35-1" tabindex="-1"></a><span class="do">## We will try models with age and age^2</span></span>
+<span id="cb35-2"><a href="binary-analysis.html#cb35-2" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="binary-analysis.html#cb35-3" tabindex="-1"></a>glm_indo_agelin <span class="ot">=</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> site <span class="sc">+</span> risk <span class="sc">+</span> rx, <span class="at">data=</span>indo_rct, </span>
+<span id="cb35-4"><a href="binary-analysis.html#cb35-4" tabindex="-1"></a>                      <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb35-5"><a href="binary-analysis.html#cb35-5" tabindex="-1"></a>glm_indo_agesq <span class="ot">=</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> <span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> site <span class="sc">+</span> risk <span class="sc">+</span> rx, <span class="at">data=</span>indo_rct, </span>
+<span id="cb35-6"><a href="binary-analysis.html#cb35-6" tabindex="-1"></a>                     <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb35-7"><a href="binary-analysis.html#cb35-7" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="binary-analysis.html#cb35-8" tabindex="-1"></a><span class="fu">summary</span>(glm_indo_agelin)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = outcome ~ age + site + risk + rx, family = binomial(link = &quot;logit&quot;), 
+##     data = indo_rct)
+## 
+## Coefficients:
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       -1.786293   0.641354  -2.785  0.00535 ** 
+## age               -0.008458   0.009921  -0.853  0.39390    
+## site2_IU          -1.229290   0.269258  -4.565 4.98e-06 ***
+## site3_UK          -1.127935   0.775917  -1.454  0.14603    
+## site4_Case       -13.864394 827.921132  -0.017  0.98664    
+## risk               0.561880   0.142342   3.947 7.90e-05 ***
+## rx1_indomethacin  -0.763269   0.261538  -2.918  0.00352 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 468.01  on 601  degrees of freedom
+## Residual deviance: 427.07  on 595  degrees of freedom
+## AIC: 441.07
+## 
+## Number of Fisher Scoring iterations: 14</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="binary-analysis.html#cb37-1" tabindex="-1"></a><span class="fu">summary</span>(glm_indo_agesq)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = outcome ~ I(age^2) + site + risk + rx, family = binomial(link = &quot;logit&quot;), 
+##     data = indo_rct)
+## 
+## Coefficients:
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)      -1.954e+00  4.930e-01  -3.963 7.39e-05 ***
+## I(age^2)         -9.388e-05  1.081e-04  -0.869  0.38498    
+## site2_IU         -1.231e+00  2.693e-01  -4.571 4.87e-06 ***
+## site3_UK         -1.135e+00  7.759e-01  -1.463  0.14355    
+## site4_Case       -1.385e+01  8.275e+02  -0.017  0.98664    
+## risk              5.593e-01  1.427e-01   3.919 8.88e-05 ***
+## rx1_indomethacin -7.617e-01  2.614e-01  -2.914  0.00357 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 468.01  on 601  degrees of freedom
+## Residual deviance: 427.03  on 595  degrees of freedom
+## AIC: 441.03
+## 
+## Number of Fisher Scoring iterations: 14</code></pre>
+<p>Since neither <code>age</code> nor <code>age^2</code> appear influential, we’ll remove it and keep the other covariates.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="binary-analysis.html#cb39-1" tabindex="-1"></a>glm_indo <span class="ot">=</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> site <span class="sc">+</span> risk <span class="sc">+</span> rx, <span class="at">data=</span>indo_rct, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb39-2"><a href="binary-analysis.html#cb39-2" tabindex="-1"></a><span class="fu">summary</span>(glm_indo)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = outcome ~ site + risk + rx, family = binomial(link = &quot;logit&quot;), 
+##     data = indo_rct)
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       -2.2307     0.3814  -5.848 4.97e-09 ***
+## site2_IU          -1.2204     0.2689  -4.539 5.66e-06 ***
+## site3_UK          -1.1289     0.7755  -1.456  0.14546    
+## site4_Case       -13.8400   833.2426  -0.017  0.98675    
+## risk               0.5846     0.1395   4.191 2.78e-05 ***
+## rx1_indomethacin  -0.7523     0.2610  -2.883  0.00395 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 468.01  on 601  degrees of freedom
+## Residual deviance: 427.81  on 596  degrees of freedom
+## AIC: 439.81
+## 
+## Number of Fisher Scoring iterations: 14</code></pre>
+<p>From the summary we see that <span class="math inline">\(\hat\tau = -0.752\)</span>, with a standard error of 0.261. A 95% CI for <span class="math inline">\(\tau\)</span> is therefore</p>
+<p><span class="math display">\[-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).\]</span>
+This model supports the hypothesis that the treatment difference isn’t zero. We do see however from the Null deviance and the Residual deviance that the model isn’t explaining a huge proportion of the variation.</p>
+</div>
+<p>We can also use the model to estimate the odds of ‘success’ (the outcome 1) for different groups of patients, by fixing the values of the covariates. The linear expression <span class="math inline">\(x^T\hat{\boldsymbol\beta}\)</span> for given values of <span class="math inline">\(x\)</span> gives us as estimate of</p>
+<p><span class="math display">\[\log\left(\frac{p(X=1)}{1-p(X=1)}\right),\]</span>
+where <span class="math inline">\(X\)</span> here is the primary outcome. The exponent of this therefore gives the odds, and this can be rearranged to find the probability,</p>
+<p><span class="math display">\[p\left(X_i=1\right) = \frac{\exp(\text{logit}_i)}{1+\exp(\text{logit}_i)}, \]</span>
+where <span class="math inline">\(\text{logit}_i\)</span> is the fitted value of the linear model (on the logit scale) given all the baseline characteristics of some patient <span class="math inline">\(i\)</span>.
+This will be the probability, according to the model, that a patient with this particular combination of baseline characteristics will have outcome 1.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-33" class="example"><strong>Example 6.11  </strong></span>Continuing with Example <a href="binary-analysis.html#exm:logregeg1">6.10</a>, we can find estimates of the log odds (and therefore the odds) of post-ECRP pancreatitis for various categories of patient.</p>
+<p>For this we will make use of the summary table</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="binary-analysis.html#cb41-1" tabindex="-1"></a><span class="fu">summary</span>(glm_indo)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = outcome ~ site + risk + rx, family = binomial(link = &quot;logit&quot;), 
+##     data = indo_rct)
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       -2.2307     0.3814  -5.848 4.97e-09 ***
+## site2_IU          -1.2204     0.2689  -4.539 5.66e-06 ***
+## site3_UK          -1.1289     0.7755  -1.456  0.14546    
+## site4_Case       -13.8400   833.2426  -0.017  0.98675    
+## risk               0.5846     0.1395   4.191 2.78e-05 ***
+## rx1_indomethacin  -0.7523     0.2610  -2.883  0.00395 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 468.01  on 601  degrees of freedom
+## Residual deviance: 427.81  on 596  degrees of freedom
+## AIC: 439.81
+## 
+## Number of Fisher Scoring iterations: 14</code></pre>
+<p>For example, a patient from site 1, with risk level 3, in the control group would have odds</p>
+<p><span class="math display">\[\exp\left(-2.2307 + 3\times 0.5846\right) = 0.6207, \]</span>
+which translates to a probability of post-ECRP pancreatitis of</p>
+<p><span class="math display">\[\frac{0.6207}{1+0.6207} = 0.383. \]</span></p>
+<p>By contrast, a patient in group <span class="math inline">\(T\)</span>, from site 2, at risk level 1, would have odds</p>
+<p><span class="math display">\[\exp\left(-2.2307 - 1.2204 + 1\times 0.5846 - 0.7523\right) = 0.0268, \]</span>
+which is equivalent to a probability of post-ECRP pancreatitis of</p>
+<p><span class="math display">\[\frac{0.0268}{1+0.0268} = 0.0261.\]</span></p>
+<p>Being more methodical we can collect these into a table, and use <code>predict.glm</code>. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.</p>
+<pre><code>##    site risk             rx logodds odds prob
+## 1  2_IU    1      0_placebo   -2.87 0.06 0.05
+## 2  2_IU    2      0_placebo   -2.28 0.10 0.09
+## 3  2_IU    3      0_placebo   -1.70 0.18 0.15
+## 4  2_IU    4      0_placebo   -1.11 0.33 0.25
+## 5  2_IU    5      0_placebo   -0.53 0.59 0.37
+## 6  1_UM    1      0_placebo   -1.65 0.19 0.16
+## 7  1_UM    2      0_placebo   -1.06 0.35 0.26
+## 8  1_UM    3      0_placebo   -0.48 0.62 0.38
+## 9  1_UM    4      0_placebo    0.11 1.11 0.53
+## 10 1_UM    5      0_placebo    0.69 2.00 0.67
+## 11 2_IU    1 1_indomethacin   -3.62 0.03 0.03
+## 12 2_IU    2 1_indomethacin   -3.03 0.05 0.05
+## 13 2_IU    3 1_indomethacin   -2.45 0.09 0.08
+## 14 2_IU    4 1_indomethacin   -1.86 0.15 0.13
+## 15 2_IU    5 1_indomethacin   -1.28 0.28 0.22
+## 16 1_UM    1 1_indomethacin   -2.40 0.09 0.08
+## 17 1_UM    2 1_indomethacin   -1.81 0.16 0.14
+## 18 1_UM    3 1_indomethacin   -1.23 0.29 0.23
+## 19 1_UM    4 1_indomethacin   -0.64 0.52 0.34
+## 20 1_UM    5 1_indomethacin   -0.06 0.94 0.49</code></pre>
+</div>
+<div id="some-cautions" class="section level4 unnumbered hasAnchor">
+<h4>Some cautions<a href="binary-analysis.html#some-cautions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As with any linear model, we need to ensure that it is appropriate for our dataset. Two key things we need to check for are:</p>
+<ul>
+<li><strong>Collinearity</strong>: we should make sure that none of the independent variables are highly correlated. This is not uncommon in clinical datasets, since measurements are sometimes strongly related. Sometimes therefore, this can mean choosing only one out of a collection of two or more strongly related variables.</li>
+<li><strong>linear effect across the range of the dataset</strong>: a linear model is based on the assumption that the effect of the independent variables is the same across the whole range of the data. This is not always the case. For example, the rate of deterioration with age can be more at older ages. This can be dealt with either by binning age into categories, or by using a transformation, eg. age<span class="math inline">\(^2\)</span>. Note that this would still be a linear model, because it is linear in the coefficients.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="diagnostics-for-logistic-regression" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Diagnostics for logistic regression<a href="binary-analysis.html#diagnostics-for-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many diagnostic techniques for binomial data (see eg. <span class="citation">Collett (<a href="#ref-collett_bin">2003a</a>)</span>) but we will only touch on a small number. Unlike with a linear regression model, we don’t have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of <code>1</code>, we can’t conclude that their probability should have been high. If the ‘true’ probability of <span class="math inline">\(X=1\)</span> for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have <span class="math inline">\(X=0\)</span>.</p>
+<p>This makes diagnostics somewhat trickier.</p>
+<p>Diagnostics for logistic regression fall into two categories: <strong>discrimination</strong> and <strong>calibration</strong>. We will look at each of these in turn, though by no means exhaustively.</p>
+<div id="discrimination" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Discrimination<a href="binary-analysis.html#discrimination" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the <span class="math inline">\(\operatorname{logit}\left(p\right)\)</span> scale. If that value is below some threshold, we classify that participant as 0 If the value is above the threshold, we classify them as 1. Here, we are slightly abandoning the notion that the model is predicting probabilities, and instead testing whether the model can successfully order the patients correctly. Can we set some threshold on the model output that (almost) separates the cohort into its ones and zeros?</p>
+<p>A classic way to asses this is by using Receiver Operating Characteric (ROC) analysis. ROC analysis was developed during the second world war, as radar operators analysed their classification accuracy in distinguishing signal (eg. an enemy plane) from noise. It is still widely used in the field of statistical classification, including in medical diagnostics. ROC analysis can be applied to any binary classifier, not just logistic regression.</p>
+<div id="roc-analysis" class="section level4 hasAnchor" number="6.4.1.1">
+<h4><span class="header-section-number">6.4.1.1</span> ROC analysis<a href="binary-analysis.html#roc-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To understand ROC analysis, we need to revisit two concepts relating to tests or classifiers that you might not have seen since Stats I, and we will introduce (or remind ourselves of) some notation to do this:</p>
+<ul>
+<li><span class="math inline">\(\hat{p}_i\in\left(0,1\right)\)</span> is the fitted value of the logistic regression model for patient <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(X_i=0\)</span> or <span class="math inline">\(1\)</span> is the true outcome for patient <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(t\in\left(0,1\right)\)</span> is the threshold value.</li>
+</ul>
+<p>If <span class="math inline">\(\hat{p}_i&lt;t\)</span> we classify patient <span class="math inline">\(i\)</span> as 0, if <span class="math inline">\(\hat{p}\geq t\)</span> we classify them as 1. The language of ROC analysis is so entrenched in diagnostic/screening tests that I have kept it here for consistency. A ‘positive’ result for us is <span class="math inline">\(X=1\)</span>, and a ‘negative’ result is <span class="math inline">\(X=0\)</span>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 6.1  </strong></span>The <strong>sensitivity</strong> of a test (or classifier) is the probability that it will output positive (or 1) if the true value is positive (or 1):
+<span class="math display">\[p\left(\hat{p}_i \geq t \mid{X_i=1}\right).\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 6.2  </strong></span>The <strong>specificity</strong> of a test (or classifier) is the probability that it will output negative (or 0) if the true value is negative (or 0):</p>
+<p><span class="math display">\[p\left(\hat{p}_i &lt; t \mid{X_i=0}\right) \]</span></p>
+</div>
+<p>We estimate these by the proportions within the dataset.</p>
+<p>These are very commonly used for thinking about diagnostic tests and screening tests, and in these contexts a ‘success’ or ‘positive’ is almost always the presence of some condition or disease. In our context, we need to be mindful that a 1 could be good or bad, depending on the trial.</p>
+<p>The core part of a ROC analysis is to plot <strong>sensitivity</strong> against <strong>1-specificity</strong> for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the <span class="math inline">\(t=0\)</span>, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set <span class="math inline">\(t=0\)</span>, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a <strong>ROC curve</strong>.</p>
+<p>The dashboard below shows the distributions of fitted values for patients with <span class="math inline">\(X=0\)</span> and <span class="math inline">\(X=1\)</span>, with options for good, moderate and poor separation, and the corresponding ROC curve. You can move the threshold to see the sensitivity and specificity at that value. Also note the AUC (area under the curve) which is an overall summary of the model’s predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent.</p>
+<p>If you’re viewing this in PDF you’ll just have a static image, but you can find the dashboard at (<a href="https://racheloughton.shinyapps.io/ROCplots/" class="uri">https://racheloughton.shinyapps.io/ROCplots/</a>).</p>
+<iframe src="https://racheloughton.shinyapps.io/ROCplots/?showcase=0" width="672" height="600px" data-external="1">
+</iframe>
+<p>Note that I’ve used beta distributions for some hypothetical distributions of fitted values for the different groups, but this is just for convenience: ROC analysis makes no distributional assumptions.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-36" class="example"><strong>Example 6.12  </strong></span>Let’s look at the model we fitted in Example <a href="binary-analysis.html#exm:logregeg1">6.10</a>. To draw the ROC curve of this data, we will use the R package <code>pROC</code>.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="binary-analysis.html#cb44-1" tabindex="-1"></a>fit_indo <span class="ot">=</span> <span class="fu">fitted</span>(glm_indo)   <span class="co"># Fitted values from glm_indo</span></span>
+<span id="cb44-2"><a href="binary-analysis.html#cb44-2" tabindex="-1"></a>out_indo <span class="ot">=</span> indo_rct<span class="sc">$</span>outcome   <span class="co"># outcome values (0 or 1)</span></span>
+<span id="cb44-3"><a href="binary-analysis.html#cb44-3" tabindex="-1"></a>roc_indo_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">fit =</span> fit_indo, <span class="at">out =</span> out_indo)</span></code></pre></div>
+<p>The main function in the package <code>pROC</code> is <code>roc</code>, which creates a <code>roc</code> object. and <code>ggroc</code> that sort and plot the data for us:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="binary-analysis.html#cb45-1" tabindex="-1"></a>roc_indo <span class="ot">=</span> <span class="fu">roc</span>(<span class="at">data=</span>roc_indo_df, <span class="at">response =</span> out, <span class="at">predictor=</span>fit)</span></code></pre></div>
+<p>With that object we can do various things, such as plot the ROC curve:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="binary-analysis.html#cb46-1" tabindex="-1"></a><span class="fu">ggroc</span>(roc_indo, <span class="at">legacy.axes=</span>T) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">1</span>, <span class="at">intercept=</span><span class="dv">0</span>, <span class="at">type=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:indoroc1"></span>
+<img src="CT4H_notes_files/figure-html/indoroc1-1.png" alt="ROC curve for our logistic regression model of the indo RCT data (solid line). The dotted line shows the ROC curve we'd expect with random guessing." width="672" />
+<p class="caption">
+Figure 6.5: ROC curve for our logistic regression model of the indo RCT data (solid line). The dotted line shows the ROC curve we’d expect with random guessing.
+</p>
+</div>
+<p>and find the area under the curve for the model</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="binary-analysis.html#cb47-1" tabindex="-1"></a><span class="fu">auc</span>(roc_indo)</span></code></pre></div>
+<pre><code>## Area under the curve: 0.7</code></pre>
+<p>So we see that our model is better than random guessing, but really not all that good! In particular, wherever we put a threshold (if we use the model that way), many people will be mis-classified. It’s also worth noting that here we’re performing the diagnostics on the data we used to fit the model: if we were to use the model on a new set of patients, the fit would likely be slightly worse.</p>
+</div>
+</div>
+</div>
+<div id="calibration" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Calibration<a href="binary-analysis.html#calibration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, ‘correct’ or ‘accurate’. One intuitive way to do this is to work through different ‘types’ of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.</p>
+<p>If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-37" class="example"><strong>Example 6.13  </strong></span>This example uses the model fitted in Example <a href="binary-analysis.html#exm:logregeg1">6.10</a>.</p>
+<p>The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the <span class="math inline">\(x\)</span> axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="binary-analysis.html#cb49-1" tabindex="-1"></a><span class="do">## what columns do I want?</span></span>
+<span id="cb49-2"><a href="binary-analysis.html#cb49-2" tabindex="-1"></a><span class="co"># site, risk, rx</span></span>
+<span id="cb49-3"><a href="binary-analysis.html#cb49-3" tabindex="-1"></a><span class="co"># minus one for mean because outcome is 1 or 2</span></span>
+<span id="cb49-4"><a href="binary-analysis.html#cb49-4" tabindex="-1"></a>indo_sum <span class="ot">=</span> indo_rct <span class="sc">%&gt;%</span> </span>
+<span id="cb49-5"><a href="binary-analysis.html#cb49-5" tabindex="-1"></a>  <span class="fu">group_by</span>(site, risk, rx) <span class="sc">%&gt;%</span></span>
+<span id="cb49-6"><a href="binary-analysis.html#cb49-6" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">est =</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(outcome))<span class="sc">-</span><span class="dv">1</span>, <span class="at">size=</span><span class="fu">length</span>(id), <span class="at">.groups=</span><span class="st">&quot;keep&quot;</span>)</span>
+<span id="cb49-7"><a href="binary-analysis.html#cb49-7" tabindex="-1"></a>indo_sum <span class="ot">=</span> indo_sum[indo_sum<span class="sc">$</span>site <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;1_UM&quot;</span>, <span class="st">&quot;2_IU&quot;</span>),]</span>
+<span id="cb49-8"><a href="binary-analysis.html#cb49-8" tabindex="-1"></a>fit_sum <span class="ot">=</span> <span class="fu">predict</span>(glm_indo, <span class="at">newdata=</span>indo_sum[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">se.fit=</span>T, <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb49-9"><a href="binary-analysis.html#cb49-9" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="binary-analysis.html#cb49-10" tabindex="-1"></a>indo_sum<span class="sc">$</span>fit <span class="ot">=</span> fit_sum<span class="sc">$</span>fit</span>
+<span id="cb49-11"><a href="binary-analysis.html#cb49-11" tabindex="-1"></a>indo_sum<span class="sc">$</span>fit_se <span class="ot">=</span> fit_sum<span class="sc">$</span>se.fit</span>
+<span id="cb49-12"><a href="binary-analysis.html#cb49-12" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="binary-analysis.html#cb49-13" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>indo_sum, <span class="fu">aes</span>(<span class="at">x=</span>risk, <span class="at">col=</span>rx)) <span class="sc">+</span></span>
+<span id="cb49-14"><a href="binary-analysis.html#cb49-14" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>est, <span class="at">size=</span>size), <span class="at">pch=</span><span class="dv">16</span>) <span class="sc">+</span> </span>
+<span id="cb49-15"><a href="binary-analysis.html#cb49-15" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>fit), <span class="at">pch=</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb49-16"><a href="binary-analysis.html#cb49-16" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>risk, <span class="at">xend=</span>risk, <span class="at">y=</span>fit<span class="fl">-1.96</span><span class="sc">*</span>fit_se, <span class="at">yend=</span>fit<span class="fl">+1.96</span><span class="sc">*</span>fit_se))<span class="sc">+</span></span>
+<span id="cb49-17"><a href="binary-analysis.html#cb49-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb49-18"><a href="binary-analysis.html#cb49-18" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">&quot;site&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-46-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
+<p class="caption">
+Figure 6.6: Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).
+</p>
+</div>
+<p>These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model.</p>
+</div>
+<p>We will look some more at this in the upcoming practical class, as well as some further principles of model validation.</p>
+<p>For now, we’re done with Binary data, and in our next few lectures we’ll think about survival, or time-to-event data.</p>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-altman1998confidence" class="csl-entry">
+———. 1998. <span>“Confidence Intervals for the Number Needed to Treat.”</span> <em>Bmj</em> 317 (7168): 1309–12.
+</div>
+<div id="ref-collett_bin" class="csl-entry">
+Collett, David. 2003a. <em>Modelling Binary Data</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+</div>
+<div id="ref-elmunzer2012randomized" class="csl-entry">
+Elmunzer, B Joseph, James M Scheiman, Glen A Lehman, Amitabh Chak, Patrick Mosler, Peter DR Higgins, Rodney A Hayward, et al. 2012. <span>“A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.”</span> <em>New England Journal of Medicine</em> 366 (15): 1414–22.
+</div>
+<div id="ref-strep_tb" class="csl-entry">
+Marshall, Geoffrey. 1948. <span>“STREPTOMYCIN TREATMENT OF PULMONARY TUBERCULOSIS a MEDICAL RESEARCH COUNCIL INVESTIGATION.”</span> <em>British Medical Journal</em>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2091872/pdf/brmedj03701-0007.pdf</a>.
+</div>
+<div id="ref-newcombe1998interval" class="csl-entry">
+Newcombe, Robert G. 1998. <span>“Interval Estimation for the Difference Between Independent Proportions: Comparison of Eleven Methods.”</span> <em>Statistics in Medicine</em> 17 (8): 873–90.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ss-bin.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-time-to-event-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CT4H_notes.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"bookdown": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

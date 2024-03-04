@@ -129,7 +129,7 @@ that is 281 patients per trial arm.
 :::
 
 
-# Analysis for binary outcomes
+# Analysis for binary outcomes {#binary-analysis}
 
 For a group of $2n$ participants, we will have allocated $n_C$ to the control group (group $C$), and $n_T$ to the treatment group (group $T$). The natural statistical model to apply to this situation is therefore a binomial distribution, for example in group $C$ the number of 'successes' would be modelled by
 
@@ -670,7 +670,7 @@ ggplot() + geom_function(fun = fun_LHSc) + xlim(0,0.6) +
 
 
 
-#### Extending this to $\pi_T - \pi_C$
+#### Extending this to $\pi_T - \pi_C$ {#newcombeci}
 
 What the Newcombe interval has given us is a superior method for creating confidence intervals for proportions. But, what we would like is a method for calculating a confidence interval for the difference in two proportions. You'll be relieved to hear that there is such a method, and we'll give a sketch here of how it works.
 
@@ -768,7 +768,7 @@ $$\hat{\tau}_{OR} = \frac{p_C/\left(1-p_C\right)}{p_T/\left(1-p_T\right)} = \fra
 
 :::
 
-#### Confidence intervals for RR and OR
+#### Confidence intervals for RR and OR {#ci-rr}
 
 
 One thing to notice is that symmetry works differently on the RR and OR scale from on the ARD scale. There is an equivalence between an interval $\left(l,\,u\right)$ (with $l,u>1$) and $\left(\frac{1}{u},\frac{1}{l}\right)$, since these intervals would equate to comparing the same two treatments in different directions (assuming the difference was significant and neither interval contains 1). Similarly, on this scale the interval 
@@ -1154,50 +1154,25 @@ This example uses the model fitted in Example \@ref(exm:logregeg1).
   
 The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value. 
 
-```{r, fig.cap = "Diagnostic plots for our model, focussing on calibration."}
+```{r, echo=T, fig.cap = "Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)."}
+## what columns do I want?
+# site, risk, rx
+# minus one for mean because outcome is 1 or 2
+indo_sum = indo_rct %>% 
+  group_by(site, risk, rx) %>%
+  summarise(est = mean(as.numeric(outcome))-1, size=length(id), .groups="keep")
+indo_sum = indo_sum[indo_sum$site %in% c("1_UM", "2_IU"),]
+fit_sum = predict(glm_indo, newdata=indo_sum[,1:3], se.fit=T, type="response")
 
-indo_exp = indo_rct[,c(2,4,32)]
-indo_fact = unique(indo_exp)
-fit_fact = predict(glm_indo, newdata=indo_fact, se.fit=T, type="response")
-indo_fact$fit = fit_fact$fit
-indo_fact$fit_se = fit_fact$se.fit
-indo_fact$est = rep(NA, nrow(indo_fact))
-indo_fact$size = rep(NA, nrow(indo_fact))
-for (i in 1:nrow(indo_fact)){
-  indo_sub = indo_rct[
-    (indo_rct$site == indo_fact$site[i])&(indo_rct$risk == indo_fact$risk[i])&(indo_rct$rx == indo_fact$rx[i]),
-  ] 
-  indo_fact$est[i] = (sum(indo_sub$outcome=="1_yes"))/nrow(indo_sub)
-  indo_fact$size[i] = nrow(indo_sub)
-}
-# indo_fact
-# By group
-plot0 = ggplot(data=indo_fact[indo_fact$rx=="0_placebo",], aes(x=risk, col=site)) +
+indo_sum$fit = fit_sum$fit
+indo_sum$fit_se = fit_sum$se.fit
+
+ggplot(data=indo_sum, aes(x=risk, col=rx)) +
   geom_point(aes(y=est, size=size), pch=16) + 
   geom_point(aes(y=fit), pch=4) +
   geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
-  theme_bw()+ggtitle("Control Group")
-
-plot1 = ggplot(data=indo_fact[indo_fact$rx=="1_indomethacin",], aes(x=risk, col=site)) +
-  geom_point(aes(y=est, size=size), pch=16) + 
-  geom_point(aes(y=fit), pch=4) +
-  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
-  theme_bw() + ggtitle("Treatment Group")
-
-# By site
-
-plot_s1 = ggplot(data=indo_fact[indo_fact$site=="1_UM",], aes(x=risk, col=rx)) +
-  geom_point(aes(y=est, size=size), pch=16) + 
-  geom_point(aes(y=fit), pch=4) +
-  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
-  theme_bw()+ggtitle("Site 1")
-plot_s2 = ggplot(data=indo_fact[indo_fact$site=="2_IU",], aes(x=risk, col=rx)) +
-  geom_point(aes(y=est, size=size), pch=16) + 
-  geom_point(aes(y=fit), pch=4) +
-  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
-  theme_bw()+ggtitle("Site 2")
-
-grid.arrange(plot_s1, plot_s2, nrow=2)
+  theme_bw()+
+  facet_wrap("site") + theme(legend.position = "bottom")
 
 ```
 

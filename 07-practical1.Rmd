@@ -76,11 +76,16 @@ Of the 19 columns, how many are baseline characteristics that we could use in th
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 In this dataset the baseline characteristics are helpfully prefixed by `preOp`, so there are seven baseline characteristics.
 
 ```{r}
 grep("preOp_", names(licorice_gargle), value=T)
 ```
+
+:::
 
 </details>
 
@@ -156,6 +161,8 @@ Create a new data frame `lg_df` with the two new factor variables you just creat
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 These solutions show you one way to create such factor variables, but if you choose different bins that's fine!
 
 One approach is to look at the distribution of the variables. For example for age:
@@ -190,6 +197,7 @@ lg_df = lic_garg[,c(1,2,5,6,7,9,10,8)]
 
 If you've chosen different bins, that's fine! But it will help you if the column names and data frame names are the same as on this page.
 
+:::
 
 </details>
 
@@ -219,9 +227,13 @@ Use the `imbalance` function above to find the imbalance in the allocation recor
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 ```{r, echo=T}
 imbalance(df = lic_garg, alloc = "treat")
 ```
+
+:::
 
 </details>
 
@@ -262,6 +274,8 @@ Generate the balance table and imbalance and comment on them.
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 To allocate the patients, use
 
 ```{r, echo=T}
@@ -287,6 +301,8 @@ To find the imbalance, the command is
 ```{r, echo=T}
 imbalance(lg_srs, alloc = "treat")
 ```
+
+:::
 
 </details>
 
@@ -317,6 +333,8 @@ Can you generate an allocation for the `licorice_gargle` data (remember our data
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 There are 235 rows/participants in `lg_df`, and to keep consistency we would like the levels of our treatment to be `"T"` and `"C"`. Therefore we can do
 
 ```{r, echo=T}
@@ -345,6 +363,9 @@ randbalance(
   ntrt=2, 
   trtseq = c("T", "C"))
 ```
+
+:::
+
 </details>
 
 The package `blockrand` contains a function `plotblockrand`, which outputs PDFs of randomization cards, ready to be printed and put into envelopes!
@@ -389,6 +410,8 @@ Use the function `biased_coin` above to allocate patients to the two groups.  Pr
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 To create a biased coin design with $p=0.9$ (for example), we enter
 
 ```{r, echo=T}
@@ -414,6 +437,8 @@ Finally we can find the imbalance:
 ```{r, echo=T}
 imbalance(lg_bc1, alloc="treat")
 ```
+
+:::
 
 </details>
 
@@ -441,6 +466,8 @@ Use the function `genSeq` to generate a sequence of allocations.
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 ```{r, echo=T}
 library(randomizeR)
 ud_31 = udPar(235, 3, 1, c("0", "1"))
@@ -454,6 +481,8 @@ seq_ud31$M[1,]
 ```
 
 The argument `r` allows you to generate `r` sequences, in which case the matrix `M` has `r` rows.
+
+:::
 
 </details>
 
@@ -488,6 +517,9 @@ Split your group using the code above, choosing two factors to stratify by. How 
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 We'll stick with the group as above. To find the numbers of participants in each group we do 
 
 ```{r, echo=T}
@@ -499,6 +531,8 @@ group_sizes = sapply(
 )
 group_sizes
 ```
+
+:::
 
 </details>
 
@@ -549,6 +583,9 @@ Use the `marg_imbalance` function to find the marginal imbalance. Try this for j
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 The code for this will vary, but the basic idea is to work through the individual data sets individually, and apply the functions from Section \@ref(allocmethods). One way to do this is by creating a for loop. The code below shows how this would work for simple random sampling, but you can change the function to use whichever method you prefer.
 
 ```{r, echo=T}
@@ -567,6 +604,8 @@ alloc_full[order(alloc_full$ID),]
 It would be silly though to do this with SRS - why?
 
 Once you've performed the allocation, you can find the demographic tables, imbalance and marginal imbalance as before (with `alloc_full`, or whatever your is called, as the data frame)
+
+:::
 
 </details>
 
@@ -629,6 +668,8 @@ Adapt the code above to apply the minimisation algorithm to the licorice gargle 
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 Notice in the code above that we only need to start about half way down if we already have a dataset (which we do).
 
 ```{r, echo=T}
@@ -649,6 +690,8 @@ lg_df$treat = res
 
 ## You can now investigate the balance of the design as usual
 ```
+
+:::
 
 </details>
 
@@ -701,6 +744,9 @@ First of all let's explore the dataset:
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 First of all, to access the data, enter
 
 ```{r, echo=T}
@@ -729,7 +775,7 @@ polyps$log_number12m = log10(polyps$number12m)
 
 Since we used the logarithms of the numbers of polyps, our treatment effect is
 $$\log\left(X_T\right) - \log\left(X_C\right) = \log\left(\frac{X_T}{X_C}\right).$$
-
+:::
 
 </details>
 
@@ -740,6 +786,9 @@ Using just the outcome variable (which should be `log_number12m` or something si
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 We can either do this the long way or the short way! For sanity's purposes, we'll do it the long way once, then in subsequent questions I'll only show the short way in the solutions.
 
 **The long way**
@@ -798,6 +847,8 @@ Therefore, the confidence interval for $\frac{X_T}{X_C}$ is
 $$\left(10^{-1.226},\;10^{-0.368}\right) =  \left(0.0594,\;0.429\right).$$
 That is, the number of polyps at 12 months is likely to be somewhere between $0.0594 X_C$ and $0.429 X_C$.
 
+:::
+
 </details>
 
 We'll now move on to comparing the differences between baseline and outcome
@@ -809,6 +860,8 @@ Perform another $t$-test, this time using the difference between outcome and bas
 
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
 
 The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences
 
@@ -839,6 +892,8 @@ t.test(
 
 ```
 
+:::
+
 </details>
 
 Finally we can try fitting an ANCOVA model to the data, using the function `lm`. Remember that the general model function for ANCOVA is....
@@ -849,6 +904,8 @@ Fit an ANCOVA model to the licorice data, and interpret your results. If you are
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
 
 In the ANCOVA model we saw in lectures so far, we fit a linear model with the outcome as dependent / target variable, and the trial group and baseline as independent / explanatory variables. 
 
@@ -863,6 +920,8 @@ Based on this, the effect of the drug sulindac is significant ($p=0.00595$, lowe
 c(-0.7046 - qt(0.975, df=17)*0.1675, -0.7046 + qt(0.975, df=17)*0.1675 ) 
 ```
 
+:::
+
 </details>
 
 Unlike in the $t$-test where we can only compare measurements like-for-like, in ANCOVA we fit a coefficient to the baseline covariate. This means we are no longer limited to comparing the outcome variable to variables on the same scale, but can also include other baseline variables. 
@@ -874,11 +933,16 @@ Fit another linear model, this time including the other baseline variables.
 
 <details><summary>Click for solution</summary>
 
+:::{.solution}
+
 ```{r, echo=T}
 lm_polyp2 = lm(log_number12m ~ treatment + log_baseline + sex + age, data = polyps_df)
 summary(lm_polyp2)
 ```
 In this case it appears that the other two baseline covariates, age and sex, don't have a significant effect on the outcome.
+
+:::
+
 </details>
 
 
@@ -888,6 +952,9 @@ problems.
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 These solutions will demonstrate some methods with the first model.
 First of all, we can add columns with the residuals and fitted values from the model.
 
@@ -900,6 +967,9 @@ ggplot(data=polyps_df, aes(x=resid1, fill=treatment)) + geom_histogram(bins=20)
 ```
 
 None of these ring huge alarm bells, but because the dataset is so small it's quite hard to tell! Arguably the residuals for the `sulindac` group are more spread out than those for the plaecbo, but there are no obvious systematic trends.
+
+:::
+
 </details>
 
 
@@ -914,6 +984,8 @@ Read the help file for this dataset. What does the study aim to investigate? Wha
 
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
 
 We can find this information using commands such as 
 
@@ -935,6 +1007,8 @@ There are 823 participants and 171 variables - many of these are baseline covari
 
 The study's primary outcome variable is gestational age at end of pregnancy, but birth weight was also measured, as well as some clinical measures of periodontal disease and some microbiological and immunological outcomes.
 
+:::
+
 </details>
 
 To make this more managable, we will concentrate on the outcome `Birthweight`.
@@ -945,12 +1019,18 @@ Plot the variable `Birthweight`. Do we need to use any transformations before we
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 ```{r, echo=T}
 
 ggplot(data=opt, aes(x=Birthweight, fill=Group)) + geom_histogram(position="dodge")
 
 ```
 This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won't transform it.
+
+:::
+
 </details>
 
 
@@ -995,6 +1075,9 @@ Perform a $t$-test on the outcome `Birthweight`. What do you find? Can you also 
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 To perform the $t$-test we can use the inbuilt R function
 
 ```{r, echo=T}
@@ -1014,6 +1097,8 @@ We find that the difference in Birthweights between the groups is not even close
 
 We can't do a $t$-test with differences because there is no comparable baseline measurement.
 
+:::
+
 </details>
 
 Now we will move on to ANCOVA.
@@ -1031,6 +1116,9 @@ You might want to explore some correlations in the data set
 
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 The $p$-value from the $t$-test was very high, so it seems unlikely that we'll find a significant treatment effect using ANCOVA unless there are some significant interactions going on between covariates.
 
 The help file says (under 'Background'):
@@ -1047,6 +1135,8 @@ cor(opt_red$Birthweight, opt_red$Age, use = "complete.obs")
 
 though this will only work with numerical variables.
 
+:::
+
 </details>
 
 :::{.exercise}
@@ -1054,6 +1144,8 @@ Fit an ANCOVA model. What do you find?
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
 
 To fit a linear model including every variable as a covariate (apart from the target variable), we can do
 
@@ -1074,6 +1166,9 @@ lm_eg = lm(Birthweight ~ Group + Age + Hypertension, data=opt_red)
 
 
 We see that, as we expected, the `Group` variable is not significant ($p=0.5644$). However, some terms are significant, for example whether or not the participant has diabetes, and how many cigarettes a mother smokes per day.
+
+:::
+
 </details>
 
 :::{.exercise}
@@ -1081,6 +1176,9 @@ Perform some diagnostic checks on your model. Do you have any reason to suspect 
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 There are lots of checks we can do, and we will focus on studying the residuals. If the residuals of our model appear to be homoskedastic, approximately normal with mean 0, and we can't find any trends, then our model is OK.
 
 The first step is to extract the residuals and the fitted values (which are also useful). We will create a new data frame called `opt_diag` with these in, so that we can plot things easily but don't pollute our original dataset (in case we want to fit any more models)
@@ -1123,6 +1221,8 @@ sd(opt_exc$Birthweight, na.rm=T)
 sd(opt_diag$Birthweight, na.rm=T)
 ```
 
+:::
+
 </details>
 
 :::{.exercise}
@@ -1130,7 +1230,12 @@ Given the results of your ANCOVA model, what do you think the risks would be if 
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 In this case, it would be possible for the baseline factors that did turn out to be significant to make it appear that the treatment had a significant effect. This wouldn't be possible with ANCOVA, but it would with a $t$-test in which the other covariates aren't considered.
+
+:::
 
 </details>
 

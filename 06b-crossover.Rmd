@@ -198,10 +198,10 @@ sleepstudy
 ```
 
 :::{.example}
-Not sure whether to include this @terbinafine - 5 visits usually
+Not sure whether to include this @terbinafine - 5 visits usually. @davis1991semi talks about longitudinal data analysis for non-normal response variables.
 
 ```{r}
-
+# respiratory would also work
 ```
 
 ```{r glm-toenail, echo=T}

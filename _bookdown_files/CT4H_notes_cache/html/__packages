@@ -34,3 +34,7 @@ Rfast2
 parmsurvfit
 SimEngine
 HSAUR
+Matrix
+lme4
+sjPlot
+HSAUR3
