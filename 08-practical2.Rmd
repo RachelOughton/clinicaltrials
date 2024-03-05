@@ -804,6 +804,8 @@ Use the `Surv` function now on the `aml` data. The output will contain some nota
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
 We create the survival object for `aml` by
 
 ```{r, echo=T}
@@ -821,8 +823,6 @@ This is a vector of the time values, in the same order as in `aml`. You'll notic
 The next thing we probably want to do is to estimate the survival function, plot the survival curve. 
 The first method we'll use is the Kaplan-Meier estimator.
 
-JUST USE THE COLON DATA!!!
-
 #### Kaplan-Meier
 
 To fit a Kaplan-Meier survival curve, we use the function `survfit`, which is specified using a formula, much like `lm` or `glm`. To fit a Kaplan-Meier estimate with a data frame split by treatment effect, the general form is
@@ -838,6 +838,9 @@ Fit a Kaplan-Meier estimator to the `aml` data. View the table using `summary`. 
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 To fit the Kaplan-Meier estimator we use
 
 ```{r, echo=T}
@@ -851,6 +854,9 @@ summary(km_aml)
 autoplot(km_aml, conf.int=F)
 ```
 We can see from the table that the lower curve is the non-maintained arm - there is only one survivor of this group, and the data finish at $t=45$.
+
+:::
+
 </details>
 
 The function `autoplot` could also give us a 95% CI if we set `conf.int=T` (we didn't go into how this is calculated in lectures) and we see that with the `aml` data the uncertainty is huge.
@@ -869,6 +875,8 @@ Fit an exponential distribution for each treatment group to the `aml` data and p
 
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
 
 To calculate $\hat\lambda_C$ and $\hat\lambda_T$ we need to find $m_C,\;\,m_T\;,t^+_C$ and $t^+_T$.
 
@@ -895,11 +903,9 @@ autoplot(km_aml, conf.int=F) + ylim(0,1) + theme_bw() +
 
 ```
 
+:::
+
 </details>
-
-
-
-
 
 
 ### Comparing survival curves
@@ -922,6 +928,9 @@ Conduct a likelihood ratio test for the `aml` data, with the null hypothesis tha
 
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 We already have the $m_X$ and $t^+_X$ from Exercise \@ref(exr:mlaml), and we can easily find $t^+$ and $m$ from these.
 
 ```{r, echo=T}
@@ -943,6 +952,8 @@ Finally, we refer this to $\chi^2_1$
 ```
 We find that we have just enough evidence to reject $H_0$ at the 95% level.
 
+:::
+
 </details>
 
 
@@ -962,33 +973,57 @@ Use `survdiff` to do a log rank test on the `aml` data. Do you expect the result
 
 
 <details> <summary> Click for solution </summary>
+
+:::{.solution}
+
 To conduct a log rank test we use
 
 ```{r, echo=T}
 survdiff(surv_aml~x, data=aml, rho=0)
 ```
 This is not that close to the result of the likelihood ratio test, probably reflecting the less-than-perfect fit of the exponential survival curve.
+
+:::
+
 </details>
 
 
 #### Cox regression
 
-Finally, we will fit the Cox regression model, so that we can include some baseline covariates. In the `aml` dataset there are no baseline 
-
-```{r, echo=T}
-coxph(formula = Surv(time, status)~x, data=aml)
-```
-
-
+Finally, we will fit the Cox regression model. This is done using the function `coxph` in the package `survival`. Look at the help file and the examples in Section \@ref(coxreg) to understand how to use this function. 
 
 :::{.exercise}
 
-NOT:
-bladder (too complicated with follow ups)
-Veteran (in homework)
-cgd - could restrict to enum=1?
-colon - looks promising. Restrict to Obs and Lev+5FU
+Fit a Cox proportional hazards model to the data. Do you think this is an appropriate model to use? How influential is the treatment?
 
+:::
+
+
+<details><summary> Click for solution </summary>
+
+:::{.solution}
+
+In the `aml` dataset there are no baseline covariates, so our only dependent variable is the treatment group variable `x`.
+
+```{r, echo=T}
+cox_aml = coxph(formula = Surv(time, status)~x, data=aml)
+cox_aml
+```
+
+We've already seen that the survival curves don't cross, so we can be reasonable comfortable fitting this model. To see how the model performs, we can use the summary function:
+
+```{r, echo=T}
+summary(cox_aml)
+```
+
+Although the coefficient of `x` isn't quite significant at the 0.05 level, it appears there is reasonable evidence that the treatment has an effect (though probably not enough to make a clinical decision).
+
+:::
+
+</details>
+
+:::{.exercise}
+**If you're short for time, you can choose to skip this question and move onto the next section**.
 
 The dataset `colon`, also from the `survival` package, contains data from a trial of colon cancer patients, comparing three treatments: observation (`obs`), levamisole (`Lev`) and levamisole + 5-FU (`Lev+5FU`). To simplify things, we will restrict the data to those patients on `Obs` or `Lev+5FU`. The main report of this trial is @moertel1990levamisole.
 
@@ -1001,13 +1036,14 @@ For this data
 
   1. Look at the help file and make sure you understand what the columns mean (note that there are three possible datasets - we're using `bladder`, the simplest)
   2. Fit Kaplan-Meier estimators to the survival curves for the two groups.
-  
-  
-
+  3. Perform some tests to see whether the treatment has a significant effect on the outcome. What do you find?
 
 :::
 
 <details><summary>Click for solution</summary>
+
+:::{.solution}
+
 From the help file we see that `rx` is the treatment group, `stop` is the time variable, `status` gives the censoring status.
 
 ```{r, echo=T}
@@ -1103,9 +1139,7 @@ km_colon_bl = survfit(Surv(time, status) ~ rx + nodes4, data=colondf)
 autoplot(km_colon_bl, conf.int=F)
 ```
 
-
-
-
+:::
 
 </details>
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-04" />
+<meta name="date" content="2024-03-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,7 +304,7 @@ div.csl-indent {
 <li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
-<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#cox-regression"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#coxreg"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
 <li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
 </ul></li>
 </ul></li>
@@ -479,34 +479,19 @@ Click to show R functions
 <h2><span class="header-section-number">9.2</span> Sample size<a href="cluster-rct.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The upshot of the non-independence of the sample is that we have less information from <span class="math inline">\(n\)</span> participants in a cluster RCT than we would do for an individual-based RCT where all the participants were independent (at least conditional on some covariates).</p>
 <p>At one extreme, where ICC=0, there is in fact no intracluster correlation, all the groups have the same mean, and this is the same as a normal RCT. At the other extreme, where ICC=1, all measurements within a cluster are identical, and to achieve the same power as with <span class="math inline">\(n\)</span> particpants in a standard RCT, we would need <span class="math inline">\(n\)</span> clusters (and their size would be irrelevant). Obviously neither of these is ever true! In most studies, the ICC is in <span class="math inline">\(\left(0,\;0.15\right)\)</span>.</p>
-<p>We will work through the sample size (and indeed most other things) for a cluster RCT in which the outcome is continuous (as in Chapter <a href="rct-plan.html#rct-plan">2</a>), but you can equally do a cluster RCT with a binary or time-to-event outcome.</p>
-<p>The first step is to think about how the clustering affects the variance. An estimate of the outcome variance in the control group, ignoring the clustering, is</p>
+<p>We will consider the sample size (and indeed most other things) for a cluster RCT in which the outcome is continuous (as in Chapter <a href="rct-plan.html#rct-plan">2</a>), but you can equally do a cluster RCT with a binary or time-to-event outcome.</p>
+<p>The first step is to think about how the clustering affects the variance of the sample mean for either group. An estimate of the outcome variance in the control group, ignoring the clustering, is</p>
 <p><span class="math display" id="eq:varcrt1">\[\begin{equation}
 \hat{\sigma}^2 = \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}\left(X_{ij} - \bar{X}\right)^2}{n-1},
 \tag{9.1}
 \end{equation}\]</span></p>
 <p>where as before there are <span class="math inline">\(g\)</span> clusters, cluster <span class="math inline">\(j\)</span> has size <span class="math inline">\(n_j\)</span> and <span class="math inline">\(\sum\limits_{j=1}^gn_j=n\)</span> is the total sample size.</p>
 <p>The mean is also calculated without reference to the clustering, so</p>
-<p><span class="math display">\[\bar{X} =  \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}X_{ij}}{n}.\]</span>
-Assuming the clusters are independent, we can find expectations of Equation <a href="cluster-rct.html#eq:varcrt1">(9.1)</a></p>
-<p><span class="math display">\[
-\begin{aligned}
-E\left[\left(n-1\right)\hat{\sigma}^2\right]&amp;= n\sigma^2 - \frac{1}{n}E\left[\left(\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}\left[X_{ij} - E\left(X_{ij}\right)\right]\right)^2\right] \\
-&amp;=n\sigma^2 - \frac{1}{n}\operatorname{var}\left(\sum\limits_{j=1}^g T_j\right)\\
-&amp; = n\sigma^2 - \frac{1}{n}\sum\limits_{j=1}^g\operatorname{var}\left(T_j\right)
-\end{aligned},
-\]</span>
-where <span class="math inline">\(T_j = \sum\limits_{i=1}^{n_j}X_{ij}\)</span> is the sum of responses in cluster <span class="math inline">\(j\)</span>. The variance of <span class="math inline">\(T_j\)</span> can therefore be calculated as</p>
-<p><span class="math display">\[
-\begin{aligned}
-\operatorname{var}\left(T_j\right) &amp; = \sum\limits_{i=1}^{n_j} \operatorname{var}\left(X_{ij}\right) + \sum\limits_{i\neq{l}}\operatorname{cov}\left(X_i,\,X_l\right)\\
-&amp; = n_j \sigma^2 + n_j \left(n_j-1\right)\rho\sigma^2.
-\end{aligned}
-\]</span>
-and so the expected value of Equation <a href="cluster-rct.html#eq:varcrt1">(9.1)</a> is <span class="math inline">\(\sigma^2\left(1-C\rho\right)\)</span>, where</p>
-<p><span class="math display">\[C = \frac{\sum\limits_{j=1}^g n_j\left(n_j-1\right)}{n\left(n-1\right)}.\]</span>
-Notice that if all the groups are the same size <span class="math inline">\(n_g = \frac{n}{g}\)</span> then this simplifies to</p>
-<p><span class="math display">\[C = n\left(n_g - 1\right).\]</span>
+<p><span class="math display">\[\bar{X} =  \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}X_{ij}}{n}.\]</span></p>
+<p>It can be shown that the variance of the overall mean in either group is inflated by a factor of</p>
+<p><span class="math display">\[1 + \rho\left[ \frac{\sum\limits_j n_j^2}{N} - 1 \right]. \]</span></p>
+<p>This quantity is known as the <strong>design effect</strong>. Notice that if all the groups are the same size <span class="math inline">\(n_g = \frac{n}{g}\)</span> then the design effect simplifies to</p>
+<p><span class="math display">\[1 + \rho\left(n_g - 1\right).\]</span>
 We will assume from now on that this is the case.</p>
 <div id="ss-crt" class="section level4 hasAnchor" number="9.2.0.1">
 <h4><span class="header-section-number">9.2.0.1</span> A formula for sample size<a href="cluster-rct.html#ss-crt" class="anchor-section" aria-label="Anchor link to header"></a></h4>

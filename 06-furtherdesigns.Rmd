@@ -127,11 +127,9 @@ The upshot of the non-independence of the sample is that we have less informatio
 
 At one extreme, where ICC=0, there is in fact no intracluster correlation, all the groups have the same mean, and this is the same as a normal RCT. At the other extreme, where ICC=1, all measurements within a cluster are identical, and to achieve the same power as with $n$ particpants in a standard RCT, we would need $n$ clusters (and their size would be irrelevant). Obviously neither of these is ever true! In most studies, the ICC is in $\left(0,\;0.15\right)$.
  
-We will work through the sample size (and indeed most other things) for a cluster RCT in which the outcome is continuous (as in Chapter \@ref(rct-plan)), but you can equally do a cluster RCT with a binary or time-to-event outcome. 
+We will consider the sample size (and indeed most other things) for a cluster RCT in which the outcome is continuous (as in Chapter \@ref(rct-plan)), but you can equally do a cluster RCT with a binary or time-to-event outcome. 
 
-
-
-The first step is to think about how the clustering affects the variance. An estimate of the outcome variance in the control group, ignoring the clustering, is
+The first step is to think about how the clustering affects the variance of the sample mean for either group. An estimate of the outcome variance in the control group, ignoring the clustering, is
 
 \begin{equation}
 \hat{\sigma}^2 = \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}\left(X_{ij} - \bar{X}\right)^2}{n-1},
@@ -143,29 +141,14 @@ where as before there are $g$ clusters, cluster $j$ has size $n_j$ and $\sum\lim
 The mean is also calculated without reference to the clustering, so
 
 $$\bar{X} =  \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}X_{ij}}{n}.$$
-Assuming the clusters are independent, we can find expectations of Equation \@ref(eq:varcrt1)
 
-$$
-\begin{aligned}
-E\left[\left(n-1\right)\hat{\sigma}^2\right]&= n\sigma^2 - \frac{1}{n}E\left[\left(\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}\left[X_{ij} - E\left(X_{ij}\right)\right]\right)^2\right] \\
-&=n\sigma^2 - \frac{1}{n}\operatorname{var}\left(\sum\limits_{j=1}^g T_j\right)\\
-& = n\sigma^2 - \frac{1}{n}\sum\limits_{j=1}^g\operatorname{var}\left(T_j\right)
-\end{aligned},
-$$
-where $T_j = \sum\limits_{i=1}^{n_j}X_{ij}$ is the sum of responses in cluster $j$. The variance of $T_j$ can therefore be calculated as
+It can be shown that the variance of the overall mean in either group is inflated by a factor of 
 
-$$
-\begin{aligned}
-\operatorname{var}\left(T_j\right) & = \sum\limits_{i=1}^{n_j} \operatorname{var}\left(X_{ij}\right) + \sum\limits_{i\neq{l}}\operatorname{cov}\left(X_i,\,X_l\right)\\
-& = n_j \sigma^2 + n_j \left(n_j-1\right)\rho\sigma^2.
-\end{aligned}
-$$
-and so the expected value of Equation \@ref(eq:varcrt1) is $\sigma^2\left(1-C\rho\right)$, where
+$$1 + \rho\left[ \frac{\sum\limits_j n_j^2}{N} - 1 \right]. $$ 
 
-$$C = \frac{\sum\limits_{j=1}^g n_j\left(n_j-1\right)}{n\left(n-1\right)}.$$
-Notice that if all the groups are the same size $n_g = \frac{n}{g}$ then this simplifies to 
+This quantity is known as the **design effect**. Notice that if all the groups are the same size $n_g = \frac{n}{g}$ then the design effect simplifies to 
 
-$$C = n\left(n_g - 1\right).$$
+$$1 + \rho\left(n_g - 1\right).$$
 We will assume from now on that this is the case.
 
 #### A formula for sample size {#ss-crt}

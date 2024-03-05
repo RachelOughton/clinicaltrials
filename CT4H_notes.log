@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  4 MAR 2024 14:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  5 MAR 2024 11:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -905,47 +905,48 @@ File: CT4H_notes_files/figure-latex/cheesedata-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/cheesedata-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/cheesedata-1.pdf  used on input line 4959.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[141] [142 <./CT4H_notes_files/figure-latex/cheesedata-1.pdf>] [143] [144] [145]
-<images/Screenshot_shiny.png, id=1772, 1442.38875pt x 810.02625pt>
+[141] [142 <./CT4H_notes_files/figure-latex/cheesedata-1.pdf>] [143] [144]
+<images/Screenshot_shiny.png, id=1760, 1442.38875pt x 810.02625pt>
 File: images/Screenshot_shiny.png Graphic file (type png)
 <use images/Screenshot_shiny.png>
-Package pdftex.def Info: images/Screenshot_shiny.png  used on input line 5152.
+Package pdftex.def Info: images/Screenshot_shiny.png  used on input line 5137.
 (pdftex.def)             Requested size: 469.7392pt x 263.79924pt.
-[146 <./images/Screenshot_shiny.png>] [147]
-<CT4H_notes_files/figure-latex/crtboxplots-1.pdf, id=1797, 469.755pt x 325.215pt>
+[145] [146 <./images/Screenshot_shiny.png>]
+<CT4H_notes_files/figure-latex/crtboxplots-1.pdf, id=1784, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/crtboxplots-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/crtboxplots-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/crtboxplots-1.pdf  used on input line 5216.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/crtboxplots-1.pdf  used on input line 5201.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[148 <./CT4H_notes_files/figure-latex/crtboxplots-1.pdf>]
-<CT4H_notes_files/figure-latex/crt1bp-1.pdf, id=1811, 469.755pt x 144.54pt>
+[147] [148 <./CT4H_notes_files/figure-latex/crtboxplots-1.pdf>]
+<CT4H_notes_files/figure-latex/crt1bp-1.pdf, id=1808, 469.755pt x 144.54pt>
 File: CT4H_notes_files/figure-latex/crt1bp-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/crt1bp-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/crt1bp-1.pdf  used on input line 5275.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/crt1bp-1.pdf  used on input line 5260.
 (pdftex.def)             Requested size: 469.75386pt x 144.53963pt.
-[149 <./CT4H_notes_files/figure-latex/crt1bp-1.pdf>]
-Overfull \hbox (7.99359pt too wide) in paragraph at lines 5305--5305
+[149]
+Overfull \hbox (7.99359pt too wide) in paragraph at lines 5290--5290
 []\T1/lmtt/m/n/10 ## data:  crt_summ$MeanDiff[crt_summ$Group == 0] and crt_summ$MeanDiff[crt_summ$Group == 1][] 
  []
 
-[150] [151]
-<CT4H_notes_files/figure-latex/eefplot2-1.pdf, id=1849, 469.755pt x 325.215pt>
+[150 <./CT4H_notes_files/figure-latex/crt1bp-1.pdf>] [151]
+<CT4H_notes_files/figure-latex/eefplot2-1.pdf, id=1846, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/eefplot2-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/eefplot2-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/eefplot2-1.pdf  used on input line 5382.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/eefplot2-1.pdf  used on input line 5367.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/lmerplot1-1.pdf, id=1851, 469.755pt x 325.215pt>
+[152 <./CT4H_notes_files/figure-latex/eefplot2-1.pdf>]
+<CT4H_notes_files/figure-latex/lmerplot1-1.pdf, id=1860, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/lmerplot1-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/lmerplot1-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/lmerplot1-1.pdf  used on input line 5408.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/lmerplot1-1.pdf  used on input line 5393.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[152 <./CT4H_notes_files/figure-latex/eefplot2-1.pdf>] [153 <./CT4H_notes_files/figure-latex/lmerplot1-1.pdf>]
-<images/raneffmodels.png, id=1874, 1083.04625pt x 740.7675pt>
+[153 <./CT4H_notes_files/figure-latex/lmerplot1-1.pdf>]
+<images/raneffmodels.png, id=1872, 1083.04625pt x 740.7675pt>
 File: images/raneffmodels.png Graphic file (type png)
 <use images/raneffmodels.png>
-Package pdftex.def Info: images/raneffmodels.png  used on input line 5450.
+Package pdftex.def Info: images/raneffmodels.png  used on input line 5435.
 (pdftex.def)             Requested size: 469.74966pt x 321.29309pt.
-[154] [155 <./images/raneffmodels.png>] (./CT4H_notes.bbl [156
+[154 <./images/raneffmodels.png>] [155] (./CT4H_notes.bbl [156
 
 ] [157
 
@@ -962,17 +963,17 @@ Package rerunfilecheck Info: File `CT4H_notes.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  13572 strings out of 476227
- 221523 string characters out of 5795781
+ 221507 string characters out of 5795781
  1954555 words of memory out of 5000000
  34678 multiletter control sequences out of 15000+600000
  655332 words of font info for 107 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,19n,79p,1526b,728s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on CT4H_notes.pdf (159 pages, 3099077 bytes).
+Output written on CT4H_notes.pdf (159 pages, 3098494 bytes).
 PDF statistics:
- 2157 PDF objects out of 2487 (max. 8388607)
- 1832 compressed objects within 19 object streams
+ 2155 PDF objects out of 2487 (max. 8388607)
+ 1830 compressed objects within 19 object streams
  624 named destinations out of 1000 (max. 500000)
  657 words of extra memory for PDF output out of 10000 (max. 10000000)
 

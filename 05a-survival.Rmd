@@ -361,7 +361,7 @@ Notice that there is no constant in the linear term - if there was, it could jus
 
 There are ways of fitting this model that rely on specifying the hazard function using parametric methods, but the method we will study (and the most widely used) is one developed by @cox1972regression.
 
-### Cox regression
+### Cox regression {#coxreg}
 
 The beauty of Cox regression is that it avoids specifying a form for $h_0\left(t\right)$ altogether. 
 
