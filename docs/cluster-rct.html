@@ -489,9 +489,10 @@ Click to show R functions
 <p>The mean is also calculated without reference to the clustering, so</p>
 <p><span class="math display">\[\bar{X} =  \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}X_{ij}}{n}.\]</span></p>
 <p>It can be shown that the variance of the overall mean in either group is inflated by a factor of</p>
-<p><span class="math display">\[1 + \rho\left[ \frac{\sum\limits_j n_j^2}{N} - 1 \right]. \]</span></p>
+<p><span class="math display">\[1 + \rho_{ICC}\left[ \frac{\sum\limits_j n_j^2}{N} - 1 \right], \]</span>
+where <span class="math inline">\(\rho_{ICC}\)</span> is the intracluster correlation.</p>
 <p>This quantity is known as the <strong>design effect</strong>. Notice that if all the groups are the same size <span class="math inline">\(n_g = \frac{n}{g}\)</span> then the design effect simplifies to</p>
-<p><span class="math display">\[1 + \rho\left(n_g - 1\right).\]</span>
+<p><span class="math display">\[1 + \rho_{ICC}\left(n_g - 1\right).\]</span>
 We will assume from now on that this is the case.</p>
 <div id="ss-crt" class="section level4 hasAnchor" number="9.2.0.1">
 <h4><span class="header-section-number">9.2.0.1</span> A formula for sample size<a href="cluster-rct.html#ss-crt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -503,19 +504,19 @@ n = \frac{2\sigma^2\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M},
 <p>and the reason we were able to do this was because the variance of the treatment effect estimate was <span class="math inline">\(\sigma^2/n\)</span>.
 For a cluster RCT, the variance of the treatment effect is</p>
 <p><span class="math display" id="eq:varte1">\[\begin{equation}
-\frac{\sigma^2}{n} \left[1 + \rho\left(\frac{\sum\limits_{j=1}^g n_j}{n}-1\right)\right]
+\frac{\sigma^2}{n} \left[1 + \rho_{ICC}\left(\frac{\sum\limits_{j=1}^g n_j}{n}-1\right)\right]
 \tag{9.3}
 \end{equation}\]</span></p>
 <p>At the planning stage of a cluster RCT we are unlikely to know the size of each cluster; each individual involved will usually need to give their consent, so knowing the size of the hospital / GP surgery / class is not enough. Instead, usually a [conservative] average cluster size <span class="math inline">\(n_g\)</span> is specified, and this is used. In this case, the variance of the treatment effect in Equation <a href="cluster-rct.html#eq:varte1">(9.3)</a> becomes</p>
 <p><span class="math display" id="eq:varte2">\[\begin{equation}
-\frac{\sigma^2}{n} \left[1 + \rho\left(n_g-1\right)\right] .
+\frac{\sigma^2}{n} \left[1 + \rho_{ICC}\left(n_g-1\right)\right] .
 \tag{9.4}
 \end{equation}\]</span></p>
 <p>Equation <a href="cluster-rct.html#eq:varte2">(9.4)</a> can be combined with Equation <a href="cluster-rct.html#eq:ss1">(9.2)</a> to give the sample size formula for a cluster RCT:</p>
-<p><span class="math display">\[n = \frac{2\sigma^2\left[1 + \rho\left(n_g-1\right)\right]\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M}.
+<p><span class="math display">\[n = \frac{2\sigma^2\left[1 + \rho_{ICC}\left(n_g-1\right)\right]\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M}.
 \]</span>
 Since <span class="math inline">\(n=n_gg\)</span>, this can be rearranged to find the number of clusters of a given size needed, or the size of cluster if a given number of clusters is to be used.</p>
-<p>The sample size (and therefore the real power of the study) depends on two additional quantities that are generally beyond our control, and possibly knowledge: ICC and <span class="math inline">\(n_g\)</span>. It is therefore sensible to conduct some sensitivity analysis, with several scenarios of ICC and <span class="math inline">\(n_g\)</span>, to see what the implications are for the power of the study if things don’t quite go to plan.</p>
+<p>The sample size (and therefore the real power of the study) depends on two additional quantities that are generally beyond our control, and possibly knowledge: <span class="math inline">\(\rho_{ICC}\)</span> and <span class="math inline">\(n_g\)</span>. It is therefore sensible to conduct some sensitivity analysis, with several scenarios of <span class="math inline">\(\rho_{ICC}\)</span> and <span class="math inline">\(n_g\)</span>, to see what the implications are for the power of the study if things don’t quite go to plan.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-46" class="example"><strong>Example 9.2  </strong></span>This is something I wrote for an education study I’m involved in (funded by the EEF) where the treatment is a particular way of engaging 2 year olds in conversation. The outcome variable is each child’s score on the British Picture Vocabulary Scale (BPVS), a test aimed at 3 - 16 year olds designed to assess each child’s vocabulary. We needed to recruit some number of nurseries, but had very little information about the IIC (notice that the age in our study is outside the intended range of the BPVS test!).</p>
 <p>To help the rest of the evaluation team understand the sensitivity of the power of the study to various quantities, I designed <a href="https://racheloughton.shinyapps.io/sample_size/">this dashboard</a>, so that they could play around with the variables and see the effect.</p>
@@ -573,7 +574,7 @@ Figure 9.2: Box plots of the outcome Posttest for each school, coloured by Inter
 <p>One possibility for our trial would be to collect the mean and SD of scores within each school, and perform a t-test to find out if there is a significant difference between the intervention and control arms. If we wanted to find out whether this depended on, say, gender, we could split the data set and perform seperate t-tests for the different gender groups. This has the advantage that it is simple to implement, but the disadvantage that it is difficult to take into account covariates (apart from in the simple way discussed for eg. gender). With a small study, it is likely that there is some imbalance in the design in terms of covariates.</p>
 <p>The required sample size for this option would be</p>
 <p><span class="math display">\[
-g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{icc}\right]}{n_g\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2,
+g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{ICC}\right]}{n_g\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2,
 \]</span>
 where <span class="math inline">\(n_g\)</span> is the average cluster size and <span class="math inline">\(g\)</span> is the number of clusters per treatment arm. This is the value we worked out in Section <a href="cluster-rct.html#ss-crt">9.2.0.1</a></p>
 <div class="example">
@@ -715,7 +716,7 @@ x_{ijk} = \alpha + \beta G_i + \sum\limits_l \gamma_l z_{ijkl} + u_{ij} + v_{ijk
 <p>The part of the model that makes this particularly suitable to a cluster randomized trial is <span class="math inline">\(u_{ij}\)</span>. Notice that this has no <span class="math inline">\(k\)</span> index, and is therefore the same for all participants within a particular cluster.</p>
 <p>With a random effects model we can take into account the effects of individual-level covariates and also the clustered design of the data. Approximately, our sample size requirements are</p>
 <p><span class="math display">\[
-k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{icc}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
+k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{ICC}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
 \]</span></p>
 <p>Broadly this follows on from the logic we used to show the reduction in variance from the ANCOVA model in Section <a href="rct-analysis.html#ancova-var">4.3.1.1</a>, and you’ll notice that the factor of <span class="math inline">\(1-\rho^2\)</span> is the same. The details for cluster randomized trials are given in <span class="citation">Teerenstra et al. (<a href="#ref-teerenstra2012simple">2012</a>)</span>.</p>
 <p>This is the ‘Random effects model’ line in <a href="https://racheloughton.shinyapps.io/sample_size/?_ga=2.190583720.2013007057.1679308387-1261352122.1678702192">the shiny dashboard</a>.)</p>

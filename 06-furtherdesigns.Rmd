@@ -144,11 +144,12 @@ $$\bar{X} =  \frac{\sum\limits_{j=1}^g\sum\limits_{i=1}^{n_j}X_{ij}}{n}.$$
 
 It can be shown that the variance of the overall mean in either group is inflated by a factor of 
 
-$$1 + \rho\left[ \frac{\sum\limits_j n_j^2}{N} - 1 \right]. $$ 
+$$1 + \rho_{ICC}\left[ \frac{\sum\limits_j n_j^2}{N} - 1 \right], $$
+where $\rho_{ICC}$ is the intracluster correlation.
 
 This quantity is known as the **design effect**. Notice that if all the groups are the same size $n_g = \frac{n}{g}$ then the design effect simplifies to 
 
-$$1 + \rho\left(n_g - 1\right).$$
+$$1 + \rho_{ICC}\left(n_g - 1\right).$$
 We will assume from now on that this is the case.
 
 #### A formula for sample size {#ss-crt}
@@ -164,24 +165,24 @@ and the reason we were able to do this was because the variance of the treatment
 For a cluster RCT, the variance of the treatment effect is 
 
 \begin{equation}
-\frac{\sigma^2}{n} \left[1 + \rho\left(\frac{\sum\limits_{j=1}^g n_j}{n}-1\right)\right]
+\frac{\sigma^2}{n} \left[1 + \rho_{ICC}\left(\frac{\sum\limits_{j=1}^g n_j}{n}-1\right)\right]
 (\#eq:varte1)
 \end{equation}
 
 At the planning stage of a cluster RCT we are unlikely to know the size of each cluster; each individual involved will usually need to give their consent, so knowing the size of the hospital / GP surgery / class is not enough. Instead, usually a [conservative] average cluster size $n_g$ is specified, and this is used. In this case, the variance of the treatment effect in Equation \@ref(eq:varte1) becomes
 
 \begin{equation}
-\frac{\sigma^2}{n} \left[1 + \rho\left(n_g-1\right)\right] .
+\frac{\sigma^2}{n} \left[1 + \rho_{ICC}\left(n_g-1\right)\right] .
 (\#eq:varte2)
 \end{equation}
 
 Equation \@ref(eq:varte2) can be combined with Equation \@ref(eq:ss1) to give the sample size formula for a cluster RCT:
 
-$$n = \frac{2\sigma^2\left[1 + \rho\left(n_g-1\right)\right]\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M}.
+$$n = \frac{2\sigma^2\left[1 + \rho_{ICC}\left(n_g-1\right)\right]\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M}.
  $$
  Since $n=n_gg$, this can be rearranged to find the number of clusters of a given size needed, or the size of cluster if a given number of clusters is to be used.
  
- The sample size (and therefore the real power of the study) depends on two additional quantities that are generally beyond our control, and possibly knowledge: ICC and $n_g$. It is therefore sensible to conduct some sensitivity analysis, with several scenarios of ICC and $n_g$, to see what the implications are for the power of the study if things don't quite go to plan.
+ The sample size (and therefore the real power of the study) depends on two additional quantities that are generally beyond our control, and possibly knowledge: $\rho_{ICC}$ and $n_g$. It is therefore sensible to conduct some sensitivity analysis, with several scenarios of $\rho_{ICC}$ and $n_g$, to see what the implications are for the power of the study if things don't quite go to plan.
  
 :::{.example}
 This is something I wrote for an education study I'm involved in (funded by the EEF) where the treatment is a particular way of engaging 2 year olds in conversation. The outcome variable is each child's score on the British Picture Vocabulary Scale (BPVS), a test aimed at 3 - 16 year olds designed to assess each child's vocabulary. We needed to recruit some number of nurseries, but had very little information about the IIC (notice that the age in our study is outside the intended range of the BPVS test!). 
@@ -267,7 +268,7 @@ One possibility for our trial would be to collect the mean and SD of scores with
 The required sample size for this option would be
 
 $$
-g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{icc}\right]}{n_g\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2,
+g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{ICC}\right]}{n_g\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2,
 $$
 where $n_g$ is the average cluster size and $g$ is the number of clusters per treatment arm. This is the value we worked out in Section \@ref(ss-crt)
 
@@ -352,7 +353,7 @@ The part of the model that makes this particularly suitable to a cluster randomi
 With a random effects model we can take into account the effects of individual-level covariates and also the clustered design of the data. Approximately, our sample size requirements are
 
 $$
-k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{icc}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
+k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{ICC}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
 $$
 
 Broadly this follows on from the logic we used to show the reduction in variance from the ANCOVA model in Section \@ref(ancova-var), and you'll notice that the factor of $1-\rho^2$ is the same. The details for cluster randomized trials are given in @teerenstra2012simple.
@@ -381,7 +382,7 @@ lmer_eef1 = lmer(Posttest ~ Prettest + Intervention + (1|School), data=crt_df )
 
 The package `sjPlot` contains functions to work with mixed effect model objects, for example `plot_model`
 
-```{r lmerplot1, echo=T, fig.cap = "CIs for the model coefficients"}
+```{r lmerplot1, echo=T, fig.cap = "CIs for the model coefficients", fig.height=1.4}
 sjPlot::plot_model(lmer_eef1)
 ```
 
@@ -397,8 +398,8 @@ if(is_html_output()){
 
 Perhaps unsurprisingly, the coefficient of the baseline test score is very significant, and the intervention also has a significant effect. This function also estimates the intracluster correlation.
 
-
 :::
+
 
 
 There are various different ways we can include random effects in the model, as shown in Figure \@ref(fig:raneffmodels). In our EEF data example we have used a fixed slope and fixed intercept. 
