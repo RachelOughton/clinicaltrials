@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-05" />
+<meta name="date" content="2024-03-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="cluster-rct.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="computer-practical-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,6 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -274,12 +276,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
 <li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#logreg"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
 <li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diaglogreg"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
 <ul>
 <li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
 <li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
@@ -293,7 +295,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
 <li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
-<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-weibull-distribution"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#weibull"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
 <li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
 </ul></li>
 </ul></li>
@@ -347,6 +349,29 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
 <li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="computer-practical-2.html"><a href="computer-practical-2.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim"><i class="fa fa-check"></i><b>B.1</b> Sample size by simulation (part I)</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>B.1.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="B.1.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>B.1.2</b> Power simulation for ANCOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#analysis-for-binary-data"><i class="fa fa-check"></i><b>B.2</b> Analysis for Binary data</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#confidence-intervals"><i class="fa fa-check"></i><b>B.2.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2logreg"><i class="fa fa-check"></i><b>B.2.2</b> Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2-surv"><i class="fa fa-check"></i><b>B.3</b> Analysis for Survival data</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>B.3.1</b> Fitting a survival curve</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>B.3.2</b> Comparing survival curves</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim2"><i class="fa fa-check"></i><b>B.4</b> Sample size by simulation (part II)</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>B.4.1</b> Minimum detectable effect size</a></li>
+<li class="chapter" data-level="B.4.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#censoring"><i class="fa fa-check"></i><b>B.4.2</b> Censoring</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -418,8 +443,8 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-50" class="solution"><em>Solution</em>. </span>In this dataset the baseline characteristics are helpfully prefixed by <code>preOp</code>, so there are seven baseline characteristics.</p>
-<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;        &quot;preOp_mallampati&quot;
-## [6] &quot;preOp_smoking&quot;    &quot;preOp_pain&quot;</code></pre>
+<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;        &quot;preOp_mallampati&quot; &quot;preOp_smoking&quot;   
+## [7] &quot;preOp_pain&quot;</code></pre>
 </div>
 </details>
 <p>In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure <code>str(licorice_gargle)</code> that all columns are numeric to begin with).</p>
@@ -490,7 +515,7 @@ Click for solution
 <p><span id="unlabeled-div-53" class="solution"><em>Solution</em>. </span>These solutions show you one way to create such factor variables, but if you choose different bins that’s fine!</p>
 <p>One approach is to look at the distribution of the variables. For example for age:</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="computer-practical-1.html#cb105-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>lic_garg) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>preOp_age), <span class="at">binwidth=</span><span class="dv">5</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 <p>Based on this, one reasonable split would be <span class="math inline">\(&lt;50,\;50-70\)</span> and <span class="math inline">\(&gt;70\)</span>, in which case we could do</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="computer-practical-1.html#cb106-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Under 50&quot;</span></span>
 <span id="cb106-2"><a href="computer-practical-1.html#cb106-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;50 to 70&quot;</span></span>
@@ -698,11 +723,10 @@ Click for solution
 <span id="cb127-3"><a href="computer-practical-1.html#cb127-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
 <p>The allocation vector is stored as a row in the matrix <code>M</code> which is a slot in the <code>genSeq</code> object (part of the object). You can access it by</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="computer-practical-1.html#cb128-1" tabindex="-1"></a>seq_ud31<span class="sc">$</span>M[<span class="dv">1</span>,]</span></code></pre></div>
-<pre><code>##   [1] 1 1 1 1 0 1 1 1 0 0 1 1 1 0 0 0 0 0 1 1 0 1 1 0 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 1
-##  [49] 1 0 0 0 1 1 0 0 1 1 0 1 1 0 0 1 0 1 0 0 1 0 1 1 1 0 0 1 1 1 1 0 1 1 1 0 1 0 1 0 1 0 1 1 0 1 0 0
-##  [97] 1 1 1 0 0 0 0 0 0 1 0 1 1 1 1 0 1 1 0 0 1 1 1 1 0 1 0 1 1 1 0 0 0 1 1 1 0 0 1 1 1 0 1 0 1 0 1 1
-## [145] 0 1 0 0 0 0 0 0 1 1 1 0 1 1 1 0 1 0 1 1 0 0 1 0 1 1 1 0 1 0 1 1 1 1 1 1 0 0 1 1 1 1 0 0 1 1 1 1
-## [193] 1 1 0 1 0 1 1 0 0 0 1 0 1 0 1 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 0 1 1 0 0 1 1 0 1 0 0 0 0</code></pre>
+<pre><code>##   [1] 1 1 1 1 0 1 1 1 0 0 1 1 1 0 0 0 0 0 1 1 0 1 1 0 0 1 1 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 1 1 0 0 0 1 1 0 0 1 1 0 1 1 0
+##  [63] 0 1 0 1 0 0 1 0 1 1 1 0 0 1 1 1 1 0 1 1 1 0 1 0 1 0 1 0 1 1 0 1 0 0 1 1 1 0 0 0 0 0 0 1 0 1 1 1 1 0 1 1 0 0 1 1 1 1 0 1 0 1
+## [125] 1 1 0 0 0 1 1 1 0 0 1 1 1 0 1 0 1 0 1 1 0 1 0 0 0 0 0 0 1 1 1 0 1 1 1 0 1 0 1 1 0 0 1 0 1 1 1 0 1 0 1 1 1 1 1 1 0 0 1 1 1 1
+## [187] 0 0 1 1 1 1 1 1 0 1 0 1 1 0 0 0 1 0 1 0 1 1 1 0 0 1 1 0 1 1 0 0 0 1 0 1 0 1 1 0 0 1 1 0 1 0 0 0 0</code></pre>
 <p>The argument <code>r</code> allows you to generate <code>r</code> sequences, in which case the matrix <code>M</code> has <code>r</code> rows.</p>
 </div>
 </details>
@@ -961,9 +985,9 @@ Click for solution
 <p>We have the baseline number of polyps for each patient in the column <code>baseline</code>, and a sensible column to use for the outcome would be <code>number12m</code>. Other baseline variables are <code>sex</code> and <code>age</code>.</p>
 <p>To plot the baseline and outcome variables we can do</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="computer-practical-1.html#cb144-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>baseline)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="computer-practical-1.html#cb145-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>number12m)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-105-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-110-2.png" width="672" /></p>
 <p>These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you’d prefer to use natural logs that’s fine, some of your numbers will be different.</p>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="computer-practical-1.html#cb146-1" tabindex="-1"></a>polyps<span class="sc">$</span>log_baseline <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>baseline)</span>
 <span id="cb146-2"><a href="computer-practical-1.html#cb146-2" tabindex="-1"></a>polyps<span class="sc">$</span>log_number12m <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>number12m)</span></code></pre></div>
@@ -1041,11 +1065,11 @@ Click for solution
 <p><span id="unlabeled-div-77" class="solution"><em>Solution</em>. </span>The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="computer-practical-1.html#cb155-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff <span class="ot">=</span> polyps_df<span class="sc">$</span>number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>baseline</span>
 <span id="cb155-2"><a href="computer-practical-1.html#cb155-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <p>But the outliers look potentially problematic, and the central bulk of each distribution doesn’t look very normal. We could also try the difference of the logged measurements:</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="computer-practical-1.html#cb156-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff_log <span class="ot">=</span> polyps_df<span class="sc">$</span>log_number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>log_baseline</span>
 <span id="cb156-2"><a href="computer-practical-1.html#cb156-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff_log, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 <p>This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won’t have a nice normal curve.</p>
 <p>To do a t-test, we can use R’s in-built function</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="computer-practical-1.html#cb157-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
@@ -1155,11 +1179,11 @@ First of all, we can add columns with the residuals and fitted values from the m
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="computer-practical-1.html#cb165-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>resid1 <span class="ot">=</span> <span class="fu">resid</span>(lm_polyp1)</span>
 <span id="cb165-2"><a href="computer-practical-1.html#cb165-2" tabindex="-1"></a>polyps_df<span class="sc">$</span>fitted1 <span class="ot">=</span> <span class="fu">fitted</span>(lm_polyp1)</span>
 <span id="cb165-3"><a href="computer-practical-1.html#cb165-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>fitted1, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="computer-practical-1.html#cb166-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>log_baseline, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-118-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-123-2.png" width="672" /></p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="computer-practical-1.html#cb167-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>resid1, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-118-3.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-123-3.png" width="672" /></p>
 <p>None of these ring huge alarm bells, but because the dataset is so small it’s quite hard to tell! Arguably the residuals for the <code>sulindac</code> group are more spread out than those for the plaecbo, but there are no obvious systematic trends.</p>
 </div>
 </details>
@@ -1303,7 +1327,7 @@ Click for solution
 <div class="solution">
 <p><span id="unlabeled-div-87" class="solution"><em>Solution</em>. </span></p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="computer-practical-1.html#cb173-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt, <span class="fu">aes</span>(<span class="at">x=</span>Birthweight, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-120-1.png" width="672" />
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-125-1.png" width="672" />
 This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won’t transform it.</p>
 </div>
 </details>
@@ -1477,9 +1501,9 @@ Click for solution
 <span id="cb186-3"><a href="computer-practical-1.html#cb186-3" tabindex="-1"></a>opt_diag<span class="sc">$</span>fitted <span class="ot">=</span> <span class="fu">fitted</span>(lm_full)</span></code></pre></div>
 <p>Some examples of plots are</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="computer-practical-1.html#cb187-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>resid, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="computer-practical-1.html#cb188-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>fitted, <span class="at">y=</span>resid, <span class="at">col=</span>Group)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-127-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-132-2.png" width="672" /></p>
 <p>We could also see if there are any patterns in the data that weren’t included in the model, because one or more entries were <code>NA</code></p>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="computer-practical-1.html#cb189-1" tabindex="-1"></a>exc_ind <span class="ot">=</span> <span class="sc">!</span>(opt_red<span class="sc">$</span>PID <span class="sc">%in%</span> opt_diag<span class="sc">$</span>PID)</span>
 <span id="cb189-2"><a href="computer-practical-1.html#cb189-2" tabindex="-1"></a></span>
@@ -1488,10 +1512,9 @@ Click for solution
 <span id="cb189-5"><a href="computer-practical-1.html#cb189-5" tabindex="-1"></a><span class="fu">nrow</span>(opt_exc) <span class="co"># should be the difference between nrow(opt_red) and nrow(opt_diag)</span></span></code></pre></div>
 <pre><code>## [1] 110</code></pre>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="computer-practical-1.html#cb191-1" tabindex="-1"></a><span class="fu">na.omit</span>(opt_exc) <span class="co"># should be empty, since each row should have at least one NA</span></span></code></pre></div>
-<pre><code>##  [1] PID           Clinic        Group         Age           Black         White         Nat.Am       
-##  [8] Asian         Hisp          Education     Public.Asstce Hypertension  Diabetes      BL.Diab.Type 
-## [15] BMI           Use.Tob       BL.Cig.Day    Use.Alc       BL.Drks.Day   Drug.Add      Prev.preg    
-## [22] N.prev.preg   Birthweight  
+<pre><code>##  [1] PID           Clinic        Group         Age           Black         White         Nat.Am        Asian         Hisp         
+## [10] Education     Public.Asstce Hypertension  Diabetes      BL.Diab.Type  BMI           Use.Tob       BL.Cig.Day    Use.Alc      
+## [19] BL.Drks.Day   Drug.Add      Prev.preg     N.prev.preg   Birthweight  
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
 <p>For example, by comparing summary statistics</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="computer-practical-1.html#cb193-1" tabindex="-1"></a><span class="fu">summary</span>(opt_diag<span class="sc">$</span>Birthweight)</span></code></pre></div>
@@ -1542,7 +1565,7 @@ Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskr
         </div>
       </div>
 <a href="cluster-rct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="computer-practical-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

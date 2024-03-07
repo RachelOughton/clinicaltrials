@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-05" />
+<meta name="date" content="2024-03-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -274,12 +276,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
 <li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#logreg"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
 <li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diaglogreg"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
 <ul>
 <li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
 <li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
@@ -293,7 +295,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
 <li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
-<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-weibull-distribution"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#weibull"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
 <li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
 </ul></li>
 </ul></li>
@@ -347,6 +349,29 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
 <li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="computer-practical-2.html"><a href="computer-practical-2.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim"><i class="fa fa-check"></i><b>B.1</b> Sample size by simulation (part I)</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>B.1.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="B.1.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>B.1.2</b> Power simulation for ANCOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#analysis-for-binary-data"><i class="fa fa-check"></i><b>B.2</b> Analysis for Binary data</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#confidence-intervals"><i class="fa fa-check"></i><b>B.2.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2logreg"><i class="fa fa-check"></i><b>B.2.2</b> Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2-surv"><i class="fa fa-check"></i><b>B.3</b> Analysis for Survival data</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>B.3.1</b> Fitting a survival curve</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>B.3.2</b> Comparing survival curves</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim2"><i class="fa fa-check"></i><b>B.4</b> Sample size by simulation (part II)</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>B.4.1</b> Minimum detectable effect size</a></li>
+<li class="chapter" data-level="B.4.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#censoring"><i class="fa fa-check"></i><b>B.4.2</b> Censoring</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -492,7 +517,7 @@ div.csl-indent {
 <div class="example">
 <p><span id="exm:unlabeled-div-18" class="example"><strong>Example 4.2  </strong></span>Summary statistics of the outcome for each group are shown below.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-11">Table 4.2: </span>Summary statistics for each group.</caption>
+<caption><span id="tab:unnamed-chunk-16">Table 4.2: </span>Summary statistics for each group.</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -1057,7 +1082,7 @@ We do this by first fitting a linear model using ‘lm’, with baseline measure
 \end{cases}
 \]</span>
 Therefore, for a patient assigned Placebo, a value of 7.1779 is added, as well as the intercept and baseline term. This results in a model with two parallel fitted lines.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>For our previous methods we have calculated a confidence interval for the treatment effect <span class="math inline">\(\tau\)</span>, and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of <span class="math inline">\(\hat{\tau}\)</span> is 2.9636. Therefore, to construct a 95/% confidence interval for <span class="math inline">\(\hat{\tau}\)</span>, we use (to 3 decimal places)</p>
 <p><span class="math inline">\(7.178\; \pm\; t_{0.975;13}\times{2.964} = \left(0.775,\; 13.580\right).\)</span></p>
 <p>The model has <span class="math inline">\(n-p=13\)</span> degrees of freedom because there are <span class="math inline">\(n=16\)</span> data points and we are estimating <span class="math inline">\(p=3\)</span> parameters.
@@ -1072,7 +1097,7 @@ Notice that unlike our previous confidence intervals, this doesn’t contain zer
 <span id="cb5-6"><a href="rct-analysis.html#cb5-6" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>)<span class="sc">+</span></span>
 <span id="cb5-7"><a href="rct-analysis.html#cb5-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Baseline&quot;</span>)<span class="sc">+</span></span>
 <span id="cb5-8"><a href="rct-analysis.html#cb5-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Residual&quot;</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it’s difficult really to assess the fit of the model.</p>
 </div>
 </div>
@@ -1217,7 +1242,7 @@ There are two treatment levels (yes or no) and three exercise levels (low, moder
 ## F-statistic: 21.01 on 4 and 55 DF,  p-value: 1.473e-10</code></pre>
 <p>In particular, taking a high level of exercise reduced participants’ stress scores by around 9.6, and the treatment reduced stress scores by around 4.3. Participants’ stress scores increased slightly with age (just under half a point per year!).</p>
 <p>We can plot the residuals to check that the model is a reasonable fit</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>The first thing we notice is that the data are sort of ‘clumped’. This is common in factor models, especially where one or more factors is highly influential. Working from right to left (higher fitted stress score to lower), the highest clump (in blue) are those who do moderate or low levels of exercise and didn’t receive the treatment. The next clump (in red) are those who do moderate or low levels of exercise and did receive the treatment (their stress score is around 4.3 points lower, for the same age). The next clump, in blue, are those who do high levels of exercise and didn’t receive the treatment. Their scores are around 9.6 points lower than the low/moderate exercise groups who didn’t receive treatment. Finally, the lowest scoring group are those who do high levels of exercise and did receive the treatment. We see that some clumps aren’t really centred around zero, and this should raise alarm bells.</p>
 <p>We could also test for interactions, firstly across all factors:</p>
 <pre><code>## 

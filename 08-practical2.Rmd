@@ -5,7 +5,7 @@ In this practical, we will focus on two main areas:
   * Simulation methods for power analysis/determining sample size
   * Analysis methods for Binary and Survival data
   
-We'll start with simulation for sample size, and apply that to a continuous outcome trial. We'll then look at some analysis methods for binary and survival outcome data. Finally, we'll use the the simulation method to determine an appropriate sample size for a survival outcome trial (more fitting, since we wimped out of tackling that problem in lectures!).
+We'll start with simulation for sample size, and apply that to a continuous outcome trial. We'll then look at some analysis methods for binary and survival outcome data. Finally, we'll use the the simulation method to determine an appropriate sample size for a survival outcome trial (more pertinent, since we wimped out of tackling that problem in lectures!).
   
   
 <details> <summary> **R practicalities - click here** </summary>  
@@ -36,7 +36,7 @@ We'll make use of several packages in this section. Installing them all now shou
 **Notice that where there are code snippets that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
 
 ```{r, eval=F, echo=T}
-install.packages(c("HSAUR", "HSAUR3", "pROC", "survival", "ggfortify"))
+install.packages(c("ggplot2", "dplyr", "HSAUR", "HSAUR3", "pROC", "survival", "ggfortify"))
 ```
 
 
@@ -68,7 +68,7 @@ Recall that the sample size formula we found was Equation \@ref(eq:sscont), show
 $$N = \frac{2\sigma^2\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{\tau_M^2},$$
 where $N$ is the number of participants required in each trial arm, $\sigma^2$ is the variance of the outcome $Y$ in each group, and $\tau_M$ is the minimum detectable effect size (or minimum clinically important difference), the smallest difference between $\mu_C$ and $\mu_T$ (the treatment arm means) that we want to be able to detect with significance level $\alpha$ and power $1-\beta$.
 
-These variables give us all we need to simulate trial data. Essentially, the model we put forward is 
+These variables give us all we need to simulate trial data. The model we will use here is 
 
 \begin{equation}
 Y_i= \sim 
@@ -79,11 +79,11 @@ N\left(\mu + \tau_M,\;\sigma^2\right)&\;\text{ if participant }i\text{ is in gro
 (\#eq:simdist)
 \end{equation}
 
-Therefore, to simulate data from a trial like this, we need to specify values for $\mu,\;\tau_M$ and $\sigma^2$. We also need to specify the total number of participants.
+Therefore, to simulate data from a trial like this, we need to specify values for $\mu,\;\tau_M$ and $\sigma^2$. We also need to specify the number of participants.
 
-Then, the steps for each simulation will be 
+The steps for each simulation will be 
 
-  1. Simulate trial data
+  1. Simulate trial data using the distribution in Equation \@ref(eq:simdist)
   2. Conduct an un-paired, two-tailed $t$-test on the data
   3. Note whether $H_0:\;\tau_M=0$ is rejected
   
@@ -135,7 +135,7 @@ ttest_sim(nsim=100, N=113, mu=5, tm=3, sd=8)
 and this is close to what we expect from the formula approach. 
 To see how consistent this result is, we can see what happens over many sets of simulations
 
-```{r, echo=T, cache=T}
+```{r histsim1, echo=T, fig.cap="Histogram of estimated powers from 100 lots of 100 simulations with N=113."}
 sim_vec1 = rep(NA, 100)
 for (i in 1:100){
   sim_vec1[i] = ttest_sim(nsim=100, N=113, mu=5, tm=3, sd=8)
@@ -147,7 +147,7 @@ So although the mean power is around 0.8, as we expect, there is some variation.
 
 To achieve $1-\beta=0.9$ we need to increase $N$. It turns out that around 155 participants in each arm gives a mean power of around 0.9. 
 
-```{r, echo=T, cache=T}
+```{r histsim2, echo=T, fig.cap="Histogram of estimated powers from 100 lots of 100 simulations with N=155."}
 sim_vec2 = rep(NA, 100)
 for (i in 1:100){
   sim_vec2[i] = ttest_sim(nsim=100, N=155, mu=5, tm=3, sd=8)
@@ -163,7 +163,7 @@ It is reasonable however, to choose a number such that we are more than 50% conf
 A useful feature of the simulation approach is that it's much easier to investigate what happens if the real data deviate in some way from the assumptions we've made. 
 
 :::{.exercise #sim-uneqsd}
-Adapt your code (or my code) from Exercise \@ref(exr:ex1sim) to take into account the possibility of the outcome variance being different in the two groups. What is the effect on the estimated power if the outcome standard deviation in group $T$ is 25% larger than the standard deviation in group $C$? 
+Adapt your code (or my code) from Exercise \@ref(exr:ex1sim) to take into account the possibility of the outcome variance being different in the two groups. What is the effect on the estimated power if the outcome standard deviation in group $T$ is 25% larger than the standard deviation in group $C$? What about if the outcome standard deviation is $25\%$ smaller in group $T$ than in group $C$?
 :::
 
 <details> <summary> Click to reveal solution </summary>
@@ -210,7 +210,7 @@ ttest_sim2(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
 ```
 
 
-```{r sim2n, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD"}
+```{r sim2n, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD in group T."}
 sim_vec3 = rep(NA, 100)
 for (i in 1:100){
   sim_vec3[i] = ttest_sim2(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
@@ -220,7 +220,7 @@ ggplot(mapping = aes(sim_vec3)) + geom_histogram(bins=10)
 
 By contrast, if the outcome variance is lower (this is much less likely) then the power will be higher than calculated:
 
-```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with smaller outcome SD"}
+```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T"}
 sim_vec4 = rep(NA, 100)
 for (i in 1:100){
   sim_vec4[i] = ttest_sim2(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=6)
@@ -232,7 +232,7 @@ ggplot(mapping = aes(sim_vec4)) + geom_histogram(bins=10)
 
 </details>
 
-When using simulation in earnest, it is best to recreate as many features of the trial as we can, and this includes the allocation. If we were using a method that guaranteed [close to] exactly equal groups, then the above method is OK. However, this is not always the case. We will think more about this in the next section, but will implement it fairly simply now.
+When using simulation in earnest, it is best to recreate as many features of the trial as we can, and this includes the allocation. If we were using a method that guaranteed [close to] exactly equal groups, then the above method is OK. However, this is not always the case. We will explore this in a fairly simple way.
 
 :::{.exercise #srsttest}
 Recreate the function from Exercise \@ref(exr:sim-uneqsd), where the two groups have different variances. This time, simulate the data sequentially, using simple random sampling as the allocation method. 
@@ -302,7 +302,7 @@ ttest_sim_srs(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
 
 To see the distribution for many simulations, we can do
 
-```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation."}
+```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation."}
 sim_vec5 = rep(NA, 100)
 for (i in 1:100){
   sim_vec5[i] = ttest_sim_srs(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
@@ -335,8 +335,8 @@ where $\epsilon_i\sim N\left(0,\,\sigma^2_{\epsilon}\right)$. Now, we need to ge
 :::{.exercise #srsancova}
 Conduct a power simulation by simulating 100 participants in each group with the distributions above, where
 
-  * $b_i\sim N\left(\mu_B,\,5^2\right)$ for all $i$
-  * $\epsilon_i\sim N\left(0,\,1^2\right)$ for all $i$
+  * $b_i\sim N\left(\mu_B,\,8^2\right)$ for all $i$
+  * $\epsilon_i\sim N\left(0,\,6^2\right)$ for all $i$
   * $\mu = 60$
   * $\rho = 0.65$
   * $\mu_B = 50$
@@ -411,11 +411,11 @@ ancova_sim_srs = function(
 ```
 
 
-```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation."}
+```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis."}
 sim_vec6 = rep(NA, 100)
 for (i in 1:100){
-  ancova_trial_i = ancova_sim_srs(nsim=100, N=155, mu_B=50, mu=60, rho=0.65, tm=2, sd_eps=1, sd_B = 5)
-  sim_vec6[i] = ttest_sim_srs(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
+  sim_vec6[i] = ancova_sim_srs(nsim=100, N=90, mu_B=50, mu=60, 
+                                  rho=0.65, tm=3, sd_eps=6, sd_B = 8)
 }
 ggplot(mapping = aes(sim_vec6)) + geom_histogram(bins=10)
 ```
@@ -584,7 +584,7 @@ To transform this into a CI for the RR itself, we use
 ```{r, echo=T}
 exp(ci_log_rr)
 ```
-This seems like a relatively narrow CI, but the fact that it comes so close to containing one (the 'null value' for the risk ratio) fits with the very large upper limit on the NNT. Although this treatment appears significant, it may be that it has a very minimal effect in practice.
+This seems like a relatively narrow CI, but the fact that it comes so close to containing one (the 'null value' for the risk ratio) fits with the very large upper limit on the NNT / small lower limit on the ARD. Although this treatment appears significant, it may be that it has a very minimal effect in practice.
 
 :::
 
@@ -593,6 +593,8 @@ This seems like a relatively narrow CI, but the fact that it comes so close to c
 ### Logistic regression {#cp2logreg}
 
 We next looked at logistic regression as way to account for the baseline covariates. To fit a logistic regression in R we use the function `glm`. This fits all kinds of generalised linear models, and so we specify that we want a logistic regression by choosing `family = binomial(link='logit')`. 
+
+The code is included in all examples in Sections \@ref(logreg) and \@ref(diaglogreg), so if you aren't sure how to do something they woulg be a good place to look.
 
 :::{.exercise #lrresp1}
 
@@ -627,6 +629,9 @@ resp_df%>%
 
 
 ```
+
+Broadly speaking things look OK.
+
 The first model we fit involves all covariates linearly:
 
 ```{r, echo=T}
@@ -685,7 +690,7 @@ ggroc(roc_resp, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)
 ```
 Next we'll assess the model in terms of calibration. 
 
-```{r, fig.cap = "Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)"}
+```{r, echo=T,  fig.cap = "Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)"}
 ## Group the observations into age groups (I've chosen 10 year bins)
 resp_df$age10 = round(resp_df$age, -1)
 # find mean status (minus 1 because factor levels are 1 and 2) and number of obs
@@ -751,10 +756,11 @@ Finally we can use this to find a CI for the OR itself
 exp(logOR_CI)
 ```
 
+This is further away from the null value (1 for the OR) than any of our previous confidence intervals, showing that including the baseline covariates has reduced our uncertainty in the treatment effect in a helpful way.
 
 :::
 
-<details>
+</details>
 
 
 
@@ -820,7 +826,7 @@ This is a vector of the time values, in the same order as in `aml`. You'll notic
 
 ### Fitting a survival curve
 
-The next thing we probably want to do is to estimate the survival function, plot the survival curve. 
+The next thing we probably want to do is to estimate the survival function and plot the survival curve. 
 The first method we'll use is the Kaplan-Meier estimator.
 
 #### Kaplan-Meier
@@ -957,7 +963,7 @@ We find that we have just enough evidence to reject $H_0$ at the 95% level.
 </details>
 
 
-#### Log-rank test
+#### Log-rank test {#cp2logrank}
 
 The log-rank test is most easily found using the function `survdiff`. This function has an argument `rho` that controls the type of test. If we set `rho=1` then it performs a log-rank test.
 
@@ -1027,14 +1033,14 @@ Although the coefficient of `x` isn't quite significant at the 0.05 level, it ap
 
 The dataset `colon`, also from the `survival` package, contains data from a trial of colon cancer patients, comparing three treatments: observation (`obs`), levamisole (`Lev`) and levamisole + 5-FU (`Lev+5FU`). To simplify things, we will restrict the data to those patients on `Obs` or `Lev+5FU`. The main report of this trial is @moertel1990levamisole.
 
-```{r, echoT=T}
+```{r, echo=T}
 colondf = colon[colon$rx!="Lev",]
 colondf$rx = as.factor(as.character(colondf$rx)) # Removes Lev factor level
 ```
 
 For this data
 
-  1. Look at the help file and make sure you understand what the columns mean (note that there are three possible datasets - we're using `bladder`, the simplest)
+  1. Look at the help file and make sure you understand what the columns mean 
   2. Fit Kaplan-Meier estimators to the survival curves for the two groups.
   3. Perform some tests to see whether the treatment has a significant effect on the outcome. What do you find?
 
@@ -1123,6 +1129,7 @@ But we can also include other baseline covariates
 ```{r, echo=T}
 coxph(formula = Surv(time, status)~rx + sex + age + obstruct + nodes, data=colondf)
 ```
+
 and we see that as well as the treatment arm, the number of lymph nodes with detectable cancer (given by `nodes`) is highly significant, and `sex` is also fairly significant. 
 
 We can visualise this by further subsetting the Kaplan-Meier estimator
@@ -1131,6 +1138,7 @@ We can visualise this by further subsetting the Kaplan-Meier estimator
 km_colon_bl = survfit(Surv(time, status) ~ rx + sex, data=colondf)
 autoplot(km_colon_bl, conf.int=F)
 ```
+
 `nodes` is a numeric output, so in order to get a visual impression of its effect on the survival curve we can bin it. For example, we can choose $\texttt{nodes}\leq 4$ and $\texttt{nodes}>4$.
 
 ```{r, echo=T}
@@ -1147,33 +1155,249 @@ autoplot(km_colon_bl, conf.int=F)
 
 We now combine the work we've done, to implement power simulation for a survival outcome trial.
 
+To simulate survival / time-to-event data as though from a clinical trial, we need to consider two things:
+
+  1. The distribution of the observation/event times (if everyone were observed perfectly)
+  2. The censoring mechanism
+  
+For the first, we are likely to use a probability distribution like the exponential (which we saw in lectures) or the Weibull (which we looked at very briefly). 
+
+For the second, there are two aspects:
+  
+  1. Anyone who is still alive (or hasn't experienced the event) by the end of the trial will be censored at that point
+  2. There will be some censoring during the lifetime of the trial, and this should also be randomly generated.
+  
+In this practical we'll use a Weibull distribution. You can read about the Weibull distribution in Section \@ref(weibull). The main thing you need to know is that the distribution is defined by its **shape** and **scale**. In this practical we'll implement a simplified version of that used by @jiang2012practical, so if you want to think more about the topic that would be a good place to start
+
+### Minimum detectable effect size
+
+One of the first practical issues we need to tackle is the concept of the difference between the treatment and control group outcomes, and the idea of the minimum difference we want to be able to detect. Ideally this should be something clinically meaningful. We also need to work out how to factor this into the simulation. 
+
+@jiang2012practical do this in the following way:
+
+  1. Specify the shape parameter $\gamma$ of the Weibull distribution (there is detail on how to do this, but we'll treat it as someone else's problem)
+  2. Specify the median survival time for the control and treatment groups, $M_C$ and $M_T$. We're assuming that 'the event' is bad, and so we'll assume $M_T>M_C$. This is how the MDES concept enters the simulation, so $M_T$ should be the smallest value of $M_T$ we want to be able to detect (ie. creating the smallest clinically worthwhile improvement from $M_C$).
+  3. Specifying $\gamma$ and $M_C,\,M_T$ gives us the scale parameters $\lambda_C,\,\lambda_T$, and so we have our observation time distribution function for each group.
+  
+### Censoring  
+  
+For the censoring, this is achieved in two ways:
+
+  1. An endpoint $T_{max}$ is specified as part of the trial design, and any observation after $T_{max}$ is censored at $T_{max}$
+  2. Every simulation is censored with a specified drop-out probability $\pi$, using a Bernoulli distribution. The value of the censored observation is kept at the value simulated from the Weibull distribution.
+  
+:::{.exercise #survsim1}
+Write code to simulate a survival trial dataset as described above. Using this function, simulate data for a trial where $\gamma=0.5,\, M_T=7,\,M_C=6,\,\pi=0.1, t_{max}=10$, with approximately 100 participants in each group.
+
+  * Plot the Kaplan-Meier estimated survival curve of your data
+  * What are some of the modelling assumptions/simplifications that have been made?
+  
+Some technical things to note:
+
+  * For the `rweibull` function (and all the other Weibull functions) in R, the scale is $\sigma = \lambda^{-\frac{1}{\gamma}}$.
+  * For the `Surv` function to interpret the time and status as right censored, it seems that the status variable has to be numeric (not factor, which would seem more logical)
+
+<details><summary> *Click for hint 1 (about finding $\lambda_C,\,\lambda_T$)* </summary>
+You can use the fact that the CDF of the Weibull distribution is 
+
+$$F\left(x\mid \lambda,\,\gamma\right) = 
+\begin{cases}
+1 - \exp\left[-\lambda t^{\gamma}\right]&\text{for }t>0\\
+0 & \text{otherwise}.
+\end{cases}
+$$
+
+</details>
+
+<details><summary> *Click for hint 2 (about setting up the simulated data)* </summary>
+Your simulated participant data frame should have three columns (they don't need to have these exact names):
+
+  * Time
+  * Status (censored = 0, complete = 1)
+  * Group (Control or Treatment)
+
+</details>
+
+:::
+
+<details> <summary> Click for solution </summary>
+
+:::{.solution}
+
+As we did in Section \@ref(cp2sim) we'll write functions so that we can do all of this lots of times. 
+Firstly, given a median survival time $M_X$ and a shape parameter $\gamma$ we use the CDF (or you could use the Survival function, which will give the same answer) to find the scale $\lambda_X$ using
+
+$$ \frac{1}{2} = 1 - \exp\left(-\lambda_X M_X^\gamma\right), $$
+which gives
+
+$$\lambda_X = \frac{\ln2}{M_X^{\gamma}}.$$
+
+```{r, echo=T}
+## THIS IS DEFNITELY NOT GIVING THE RIGHT DATA!
+surv_data = function(
+    npart, # number of participants per group (roughly)
+    shape, # shape paramer for Weibull, assumed same for both groups
+    MC,    # median survival time - group C
+    MT,    # median survival time.- group T
+    p_cens, # probability of censoring for each observation
+    t_max   # end point of trial
+){
+  scaleC = log(2)/(MC^shape)
+  scaleT = log(2)/(MT^shape)
+  # transform for R
+  RscaleC = scaleC^(-1/shape)
+  RscaleT = scaleT^(-1/shape)
+  
+  dat_mat = matrix(NA, nrow=2*npart, ncol=3)
+  dat_df = as.data.frame(dat_mat)
+  names(dat_df) = c("time", "status", "group")
+  
+  for (i in 1:(2*npart)){
+    # Using SRS here, but could use something else
+    group_i = sample(c("C", "T"), size=1)
+    # Generate time accordingly
+    if (group_i == "C"){
+      time_i = round(rweibull(1, shape=shape, scale=RscaleC))
+    } else if (group_i == "T"){
+      time_i = round(rweibull(1, shape=shape, scale=RscaleT))
+    }
+    # Determine whether observation i is censored
+    status_i = sample(c(0,1), size=1, prob = c(p_cens, 1-p_cens))
+    if(time_i>t_max){
+      time_i = t_max
+      status_i = 0
+    }
+    # Having a zero time observation messes things up so we fudge it slightly
+    if(time_i == 0){
+      time_i = 1
+      status_i = 1
+    }
+    
+    dat_df[i,] = c(time_i, status_i, group_i)
+  }
+  # Round to 0 dp for a hint of reality
+  dat_df$time = as.numeric(dat_df$time)
+  dat_df$status = as.numeric(dat_df$status)
+  dat_df$group = as.factor(dat_df$group)
+  
+  return(dat_df)
+}
+```
+
+We can use the function to simulate the data described above
 
 ```{r}
-# from https://rileyking.netlify.app/post/bayesian-modeling-of-censored-and-uncensored-fatigue-data-in-r/#part-3---fitting-models-to-weibull-data-with-right-censoring-%5Bfrequentist-perspective%5D
-# function to generate random Weibull data and censor data > 100
-rweibull_cens_mod_fcn <- function(n, shape, scale) {
-  raw_times <- rweibull(n, shape = shape, scale = scale)
-  tibble(failure_time_raw = raw_times) %>%
-    mutate(time = case_when(
-      failure_time_raw < 100 ~ failure_time_raw,
-      TRUE ~ 100
-    )) %>%
-    mutate(censor = case_when(
-      time == 100 ~ 0,
-      TRUE ~ 1
-    )) %>%
-    mutate(censor = censor == 1) %>%
-    mutate(time = time %>% round(digits = 2)) %>%
-    dplyr::select(-failure_time_raw)
-}
+surv_df1 = surv_data(npart=100, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+with(data = surv_df1, Surv(time, status, type = "right"))
+```
 
-# set seed for repeatability
-set.seed(54)
-first_test_fit_tbl <- rweibull_cens_mod_fcn(30, 3, 100)
-first_test_fit_tbl %>%
-  head(10) %>%
-  kable(align = rep("c", 2))
+and plot the estimated survival curve
+
+```{r, echo=T}
+km_df1 = survfit(Surv(time, status) ~ group, data=surv_df1)
+autoplot(km_df1, conf.int = F)
 
 ```
+
+In this sampling scheme it seems it's common to get some very low values, which is probably quite unrealistic.
+
+Some other assumptions / simplifications we're making are:
+
+  * Both groups have the same shape parameter $\gamma$. This ensures the proportional hazards assumption is met, but probably isn't realistic
+  * Censorings during the trial are completely at random (simulated via a Bernoulli distribution). In reality this is very unlikely; it's far more likely that people become lost to follow-up for a reason, and that within the dataset the instances of this are not independent.
+  * Censored data keep the same time as was generated by the Weibull distribution. This will slightly skew our results.
+  
+:::
+
+</details>
+
+Having set up a function to simulate data for one trial, we can run it many times to estimate the power of this trial set up. 
+The extra pieces of information we need for this are:
+
+  * The significance level $\alpha$ - we will assume $\alpha = 0.05$
+  * The test to be used - we will use the log rank test (as in Section \@ref(cp2logrank)).
+  
+:::{.exercise}
+Using the function you wrote in Exercise \@ref(exr:survsim1) and the log-rank test, write a function to estimate the power of a trial set-up.
+
+Assuming the same parameters as in Exercise \@ref(exr:survsim1) and a significance level of $\alpha=0.05$:
+
+  * Estimate the number of participants you need per trial group to achieve a power of 80%.
+  * Suppose the clinicians decided to extend the trial so that $t_{max}=20$. How many participants do you now need (approxiamtely) to achieve a power of 80%?
+
+:::
+
+<details><summary> Click for solution </summary>
+
+:::{.solution}
+
+```{r, echo=T}
+surv_sim = function(
+    nsim,  # number of simulations to run
+    alpha, # the significance level of the test
+    npart, # number of participants per group (roughly)
+    shape, # shape paramer for Weibull, assumed same for both groups
+    MC,    # median survival time - group C
+    MT,    # median survival time.- group T
+    p_cens, # probability of censoring for each observation
+    t_max   # end point of trial
+){
+  H0_reject_vec = rep(NA, nsim)
+  
+  for (i in 1:nsim){
+    df_i = surv_data(npart=npart, shape=shape,MC=MC, MT=MT, p_cens=p_cens, t_max=t_max)
+    log_rank_i = survdiff(Surv(time, status) ~ group, data=df_i, rho=0)
+    p_val = log_rank_i$pvalue
+    H0_reject_vec[i]= ifelse(p_val < alpha, 1, 0)
+  }
+  power.est = mean(H0_reject_vec)
+  power.est
+}
+
+```
+
+We can now use this to find the sample size we need. By experimenting with some values, we find that around 245 participants per trial group gives the appropriate power (assuming we want the mean power a little higher than 0.8).
+
+```{r, echo=T, cache=T}
+surv_sim(nsim=100, alpha=0.05, npart=250, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+
+survsim_vec1 = rep(NA, 100)
+for (i in 1:100){
+  survsim_vec1[i] = surv_sim(nsim=100, alpha=0.05, npart=245, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+}
+ggplot(mapping = aes(survsim_vec1)) + geom_histogram(bins=10)
+
+```
+
+If we extend the trial duration to $t_{max}=20$, the power given by 245 participants is now larger, because there are fewer censored observations:
+
+```{r, echo=T, cache=T}
+surv_sim(nsim=100, alpha=0.05, npart=245, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
+```
+
+Experimenting with some different values for `npart` we find that 
+
+```{r, echo=T, cache=T}
+surv_sim(nsim=100, alpha=0.05, npart=215, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
+survsim_vec2 = rep(NA, 100)
+for (i in 1:100){
+  survsim_vec2[i] = surv_sim(nsim=100, alpha=0.05, npart=215, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
+}
+ggplot(mapping = aes(survsim_vec2)) + geom_histogram(bins=10)
+
+```
+
+:::
+
+</details>
+
+There are of course lots of ways we could refine and extend this, many of them similar to what we discussed in Section \@ref(cp2sim), for example:
+
+  * Running more simulations (100 is really not enough, but was chosen so that the file would compile - feel free to increase it)
+  * Incorporating a better sampling scheme than SRS
+  * Improving the drop-out / censoring modelling
+  * Allowing the shape parameter to vary (though being careful of the implications on analysis)
+  
+This concludes our second (and final) practical.
 
 

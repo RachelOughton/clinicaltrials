@@ -828,7 +828,7 @@ did for continuous outcome variables.
 
 
 
-## Accounting for baseline observations: logistic regression
+## Accounting for baseline observations: logistic regression {#logreg}
 
 We saw with the continuous outcomes that it is often advantageous to include baseline measurements of the outcome (if they are known) in our analysis, and this is the same for binary outcomes. 
 
@@ -1054,7 +1054,7 @@ As with any linear model, we need to ensure that it is appropriate for our datas
 
 
 
-## Diagnostics for logistic regression
+## Diagnostics for logistic regression {#diaglogreg}
 
 There are many diagnostic techniques for binomial data (see eg. @collett_bin) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of `1`, we can't conclude that their probability should have been high. If the 'true' probability of $X=1$ for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have $X=0$. 
 

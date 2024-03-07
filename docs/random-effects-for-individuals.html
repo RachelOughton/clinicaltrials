@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-04" />
+<meta name="date" content="2024-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -293,7 +295,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
 <li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
-<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-weibull-distribution"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#weibull"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
 <li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
 </ul></li>
 </ul></li>
@@ -304,7 +306,7 @@ div.csl-indent {
 <li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
-<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#cox-regression"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#coxreg"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
 <li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
 </ul></li>
 </ul></li>
@@ -337,6 +339,7 @@ div.csl-indent {
 <li class="chapter" data-level="10.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#longitudinal-data-repeated-measurements"><i class="fa fa-check"></i><b>10.2</b> Longitudinal data / repeated measurements</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#fitting-a-model"><i class="fa fa-check"></i><b>10.2.1</b> Fitting a model</a></li>
+<li class="chapter" data-level="10.2.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-empty-model"><i class="fa fa-check"></i><b>10.2.2</b> The empty model</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
@@ -378,7 +381,10 @@ div.csl-indent {
 <li class="chapter" data-level="B.3.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>B.3.1</b> Fitting a survival curve</a></li>
 <li class="chapter" data-level="B.3.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>B.3.2</b> Comparing survival curves</a></li>
 </ul></li>
-<li class="chapter" data-level="B.4" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim2"><i class="fa fa-check"></i><b>B.4</b> Sample size by simulation (part II)</a></li>
+<li class="chapter" data-level="B.4" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim2"><i class="fa fa-check"></i><b>B.4</b> Sample size by simulation (part II)</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>B.4.1</b> Minimum detectable effect size</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -731,10 +737,98 @@ Figure 10.1: A spaghetti plot of the epilepsy data.
 Figure 10.2: Mean seizure rate for each treatment group over time.
 </p>
 </div>
+<p>To make visualisation somewhat clearer, can do a standardised spaghetti plot. In this plot, the observations are standardised within each time point. So, if <span class="math inline">\(x_{it}\)</span> is the outcome for participant <span class="math inline">\(i\)</span> and time <span class="math inline">\(t\)</span>, the standardised spaghetti plot would show</p>
+<p><span class="math display">\[\frac{x_{it} - \bar{x}_t}{s_t} \]</span></p>
+<p>where <span class="math inline">\(\bar{x}_t,\,s_t\)</span> are the sample mean and SD at time <span class="math inline">\(t\)</span>.</p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 </div>
 <div id="fitting-a-model" class="section level3 hasAnchor" number="10.2.1">
 <h3><span class="header-section-number">10.2.1</span> Fitting a model<a href="random-effects-for-individuals.html#fitting-a-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This means that the measurements are ‘clustered’ within each participants, in a semi-similar way to the participants being clustered within settings in Chapter <a href="cluster-rct.html#cluster-rct">9</a>. Each participant will have certain characteristics that don’t change through the duration of the trial, for example their age (at start), sex, disease history etc. We can also assume that, given the values of these covariates, the outcome of each participant has a slight (or mabye more than slight) propensity to be consistently either higher or lower than (or perhaps to be in line with) the mean. Therefore there will be a random effect associated with each participant. Because we are interested in how things evolve with time, we will also include time in the model.</p>
+<p>In longitudinal data the measurements are ‘clustered’ within each participant, in a semi-similar way to the participants being clustered within settings in Chapter <a href="cluster-rct.html#cluster-rct">9</a>. Each participant will have certain characteristics that don’t change through the duration of the trial, for example their age (at start), sex, disease history etc. Some of these characteristics we will record as part of the dataset, but this will not fully explain the correlation within measurements of the same participant.</p>
+<p>We can also assume that, given the values of these covariates, the outcome of each participant has a slight (or mabye more than slight) propensity to be consistently either higher or lower than (or perhaps to be in line with) the mean. Therefore there will be a random effect associated with each participant. Because we are interested in how things evolve with time, we will also include time in the model.</p>
+<p>The questions we want to answer are:</p>
+<ul>
+<li>What is the effect of the covariates (including treatment group) on the outcome?</li>
+<li>What is the effect of time on the outcome?</li>
+<li>Does the relationship between outcome and time vary for different groups of individuals?</li>
+</ul>
+</div>
+<div id="the-empty-model" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> The empty model<a href="random-effects-for-individuals.html#the-empty-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The very simplest mixed effects model we can fit is</p>
+<p><span class="math display" id="eq:lmer0">\[\begin{equation}
+Y_{ij} = \beta_0 + u_{i} + \epsilon_{ij}.
+\tag{10.1}
+\end{equation}\]</span></p>
+<p>In this model, <span class="math inline">\(Y_{ij}\)</span> is the outcome for the <span class="math inline">\(i^{th}\)</span> participant at time <span class="math inline">\(j\)</span>, <span class="math inline">\(\beta_0\)</span> is a fixed effect representing the overall mean of the <span class="math inline">\(Y_{ij}\)</span>, <span class="math inline">\(u_i\)</span> is the adjustment for the mean for participant <span class="math inline">\(i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> is the residual. In this model we assume:</p>
+<p><span class="math display">\[\begin{align*}
+u_{i} &amp; \sim N\left(0,\,\sigma^2_{u}\right)\\
+\epsilon_{ij}&amp; \sim N\left(0,\,\sigma^2\right)\\
+u_i&amp;\perp \epsilon_{ij}.
+\end{align*}\]</span></p>
+<p>This model is actually a one-way analysis of variance (ANOVA) model.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-50" class="example"><strong>Example 10.3  </strong></span>We can fit the empty model for the <code>epilepsy</code> data via</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="random-effects-for-individuals.html#cb102-1" tabindex="-1"></a>epi_0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject), <span class="at">data =</span> epilepsy)</span>
+<span id="cb102-2"><a href="random-effects-for-individuals.html#cb102-2" tabindex="-1"></a><span class="fu">summary</span>(epi_0)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: seizure.rate ~ 1 + (1 | subject)
+##    Data: epilepsy
+## 
+## REML criterion at convergence: 1651.1
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.8126 -0.3264 -0.0797  0.1725  7.3634 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  subject  (Intercept) 121.75   11.03   
+##  Residual              32.49    5.70   
+## Number of obs: 236, groups:  subject, 59
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)    8.263      1.484   5.569</code></pre>
+<p>The estimated average <code>seizure.rate</code> is shown in the <code>Fixed effects</code> section, and is 8.263. The estimated variance of the individual random effect term (<span class="math inline">\(u_i\)</span> above) is 121.75, and the estimated residual variance is 32.49. These are both given in the <code>Random effects</code> section of the summary. We can use these values to estimate the ICC, which is now the correlation between repeated measures of the same individual:</p>
+<p><span class="math display">\[\rho_{ICC} = \frac{s^2_B}{s^2_B + s^2_W} = \frac{121.75}{121.75+32.49} = 0.789.\]</span></p>
+<p>This very high value of the ICC supports our choice of fitting a mixed effects model, rather than including only fixed effects.</p>
+</div>
+<p>Building up the model from this empty model basically involves including more fixed effects and random effects. Since we are concerned with longitudinal data, the obvious first thing to include is time. We can start by including a linear effect of time, so that the model in Equation <a href="random-effects-for-individuals.html#eq:lmer0">(10.1)</a> becomes</p>
+<p><span class="math display" id="eq:lmer1">\[\begin{equation}
+Y_{ij} = \beta_0 + \gamma t_j + u_{i} + \epsilon_{ij}.
+\tag{10.2}
+\end{equation}\]</span></p>
+<p>So that the coefficient <span class="math inline">\(\gamma\)</span> describes the change in outcome with time.</p>
+<p>We might go on to extend the model in Equation <a href="random-effects-for-individuals.html#eq:lmer1">(10.2)</a> by including some baseline covariates <span class="math inline">\(\mathbf{b}_{i}\)</span> for participant <span class="math inline">\(i\)</span> (these would be considered to be the same throughout the trial for participant <span class="math inline">\(i\)</span>). Then our model becomes</p>
+<p><span class="math display" id="eq:lmer2">\[\begin{equation}
+Y_{ij} = \beta_0 + \gamma t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
+\tag{10.3}
+\end{equation}\]</span></p>
+<p>In Equation <a href="random-effects-for-individuals.html#eq:lmer2">(10.3)</a>, the <span class="math inline">\(\mathbf{b}_i\)</span> are being included as fixed effects, in much the same way we’re used to with linear models, and the corresponding vector of coefficients is <span class="math inline">\(\boldsymbol\beta\)</span>.</p>
+<p>We will explore these models by fitting them to our <code>epilepsy</code> data.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="random-effects-for-individuals.html#cb104-1" tabindex="-1"></a><span class="do">## Including just time</span></span>
+<span id="cb104-2"><a href="random-effects-for-individuals.html#cb104-2" tabindex="-1"></a>epilepsy<span class="sc">$</span>period <span class="ot">=</span> <span class="fu">as.numeric</span>(epilepsy<span class="sc">$</span>period)</span>
+<span id="cb104-3"><a href="random-effects-for-individuals.html#cb104-3" tabindex="-1"></a>epi_1 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> period <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
+<span id="cb104-4"><a href="random-effects-for-individuals.html#cb104-4" tabindex="-1"></a></span>
+<span id="cb104-5"><a href="random-effects-for-individuals.html#cb104-5" tabindex="-1"></a><span class="do">## Including more baseline covariates</span></span>
+<span id="cb104-6"><a href="random-effects-for-individuals.html#cb104-6" tabindex="-1"></a>epi_2 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> base <span class="sc">+</span> age <span class="sc">+</span> treatment <span class="sc">+</span> period <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
+<span id="cb104-7"><a href="random-effects-for-individuals.html#cb104-7" tabindex="-1"></a></span>
+<span id="cb104-8"><a href="random-effects-for-individuals.html#cb104-8" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_1)</span>
+<span id="cb104-9"><a href="random-effects-for-individuals.html#cb104-9" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
+<span id="cb104-10"><a href="random-effects-for-individuals.html#cb104-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-72"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-72-1.png" alt="Confidence intervals for fixed effects for the two fitted models." width="672" />
+<p class="caption">
+Figure 10.3: Confidence intervals for fixed effects for the two fitted models.
+</p>
+</div>
+<p>In this example it appears that neither time nor the treatment have a significant effect on the seizure rate.</p>
+<p>The final extension we’ll look at is if we think that different participants might change at different rates, all other things being equal. We can introduce a random effect <span class="math inline">\(\eta_i\)</span> to allow the coefficient of time to vary between participants</p>
+<p><span class="math display" id="eq:lmer3">\[\begin{equation}
+Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
+\tag{10.4}.
+\end{equation}\]</span></p>
 <pre><code>##     treatment base age seizure.rate period subject
 ## 1     placebo   11  31            5      1       1
 ## 110   placebo   11  31            3      2       1
@@ -1004,6 +1098,7 @@ Figure 10.2: Mean seizure rate for each treatment group over time.
 ## 98    No    &gt;6m     BtheB      11     22      9     11     11
 ## 99    No    &lt;6m       TAU      13      5      5      0      6
 ## 100  Yes    &lt;6m       TAU      43     NA     NA     NA     NA</code></pre>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 <pre><code>##     Reaction Days Subject
 ## 1   249.5600    0     308
 ## 2   258.7047    1     308
@@ -1200,25 +1295,24 @@ Figure 10.2: Mean seizure rate for each treatment group over time.
 ## (Intercept)         Days  
 ##      245.10        11.44</code></pre>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: Reaction ~ Days + (1 | Subject) + (0 + Days | Subject)
+## Formula: Reaction ~ Days + (1 | Subject)
 ##    Data: sleepstudy
 ##  Subset: Days &gt;= 2
-## REML criterion at convergence: 1404.626
+## REML criterion at convergence: 1430.02
 ## Random effects:
-##  Groups    Name        Std.Dev.
-##  Subject   (Intercept) 28.843  
-##  Subject.1 Days         6.285  
-##  Residual              25.747  
+##  Groups   Name        Std.Dev.
+##  Subject  (Intercept) 41.80   
+##  Residual             30.22   
 ## Number of obs: 144, groups:  Subject, 18
 ## Fixed Effects:
 ## (Intercept)         Days  
 ##      245.10        11.44</code></pre>
 <div class="example">
-<p><span id="exm:unlabeled-div-50" class="example"><strong>Example 10.3  </strong></span>Not sure whether to include this <span class="citation">De Backer et al. (<a href="#ref-terbinafine">1998</a>)</span> - 5 visits usually. <span class="citation">Davis (<a href="#ref-davis1991semi">1991</a>)</span> talks about longitudinal data analysis for non-normal response variables.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="random-effects-for-individuals.html#cb107-1" tabindex="-1"></a><span class="fu">library</span>(HSAUR3)</span>
-<span id="cb107-2"><a href="random-effects-for-individuals.html#cb107-2" tabindex="-1"></a>gm2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(outcome<span class="sc">~</span>treatment<span class="sc">*</span>visit<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>patientID),</span>
-<span id="cb107-3"><a href="random-effects-for-individuals.html#cb107-3" tabindex="-1"></a>                 <span class="at">data=</span>toenail,</span>
-<span id="cb107-4"><a href="random-effects-for-individuals.html#cb107-4" tabindex="-1"></a>                 <span class="at">family=</span>binomial,<span class="at">nAGQ=</span><span class="dv">20</span>)</span></code></pre></div>
+<p><span id="exm:unlabeled-div-51" class="example"><strong>Example 10.4  </strong></span>Not sure whether to include this <span class="citation">De Backer et al. (<a href="#ref-terbinafine">1998</a>)</span> - 5 visits usually. <span class="citation">Davis (<a href="#ref-davis1991semi">1991</a>)</span> talks about longitudinal data analysis for non-normal response variables.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="random-effects-for-individuals.html#cb110-1" tabindex="-1"></a><span class="fu">library</span>(HSAUR3)</span>
+<span id="cb110-2"><a href="random-effects-for-individuals.html#cb110-2" tabindex="-1"></a>gm2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(outcome<span class="sc">~</span>treatment<span class="sc">*</span>visit<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>patientID),</span>
+<span id="cb110-3"><a href="random-effects-for-individuals.html#cb110-3" tabindex="-1"></a>                 <span class="at">data=</span>toenail,</span>
+<span id="cb110-4"><a href="random-effects-for-individuals.html#cb110-4" tabindex="-1"></a>                 <span class="at">family=</span>binomial,<span class="at">nAGQ=</span><span class="dv">20</span>)</span></code></pre></div>
 </div>
 
 </div>

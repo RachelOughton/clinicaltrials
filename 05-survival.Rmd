@@ -338,7 +338,7 @@ lines(xvec, svec_my_T , type = "l", col=2, lty=2)
 
 :::
 
-### The Weibull distribution
+### The Weibull distribution {#weibull}
 
 Having only one parameter, the exponential distribution is not very flexible, and often doesn't fit data at all well. A related, but more suitable distribution is the **Weibull distribution**.
 
@@ -347,7 +347,7 @@ Having only one parameter, the exponential distribution is not very flexible, an
 The probability density function of a **Weibull** random variable is
 
 $$
-f\left(x\mid \lambda,\,k\right) = 
+f\left(x\mid \lambda,\,\gamma\right) = 
 \begin{cases}
 \lambda\gamma t^{\gamma-1}\exp\left[{-\lambda t^{\gamma}}\right] & \text{for }t\geq{0}\\
 0 & \text{otherwise}.

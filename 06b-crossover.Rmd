@@ -174,14 +174,119 @@ ggplot(data=epi_means, aes(x = as.numeric(period), y = smean, col = treatment)) 
   geom_line() + theme_minimal() + xlab("Period") + ylab("Mean seizure rate")
 ```
 
+To make visualisation somewhat clearer, can do a standardised spaghetti plot. In this plot, the observations are standardised within each time point. So, if $x_{it}$ is the outcome for participant $i$ and time $t$, the standardised spaghetti plot would show
+
+$$\frac{x_{it} - \bar{x}_t}{s_t} $$
+
+where $\bar{x}_t,\,s_t$ are the sample mean and SD at time $t$.
+
+```{r}
+epi_stand = epilepsy
+sr_stand = rep(NA, nrow(epilepsy))
+for (t in 1:4){
+  sr_t = epilepsy$seizure.rate[epilepsy$period == t]
+  sr_stand_t = (sr_t - mean(sr_t))/sd(sr_t)
+  sr_stand[epilepsy$period == t] = sr_stand_t
+}
+epi_stand$sr_stand = sr_stand
+ggplot(data = epi_stand, aes(x=period, y=sr_stand, group = subject, col=treatment), alpha=0.4) + geom_line() +
+  theme_minimal()
+
+```
+
 :::
 
 ### Fitting a model 
 
-This means that the measurements are 'clustered' within each participants, in a semi-similar way to the participants being clustered within settings in Chapter \@ref(cluster-rct). Each participant will have certain characteristics that don't change through the duration of the trial, for example their age (at start), sex, disease history etc. We can also assume that, given the values of these covariates, the outcome of each participant has a slight (or mabye more than slight) propensity to be consistently either higher or lower than (or perhaps to be in line with) the mean. Therefore there will be a random effect associated with each participant. Because we are interested in how things evolve with time, we will also include time in the model.
+In longitudinal data the measurements are 'clustered' within each participant, in a semi-similar way to the participants being clustered within settings in Chapter \@ref(cluster-rct). Each participant will have certain characteristics that don't change through the duration of the trial, for example their age (at start), sex, disease history etc. Some of these characteristics we will record as part of the dataset, but this will not fully explain the correlation within measurements of the same participant. 
+
+We can also assume that, given the values of these covariates, the outcome of each participant has a slight (or mabye more than slight) propensity to be consistently either higher or lower than (or perhaps to be in line with) the mean. Therefore there will be a random effect associated with each participant. Because we are interested in how things evolve with time, we will also include time in the model.
+
+The questions we want to answer are:
+
+  * What is the effect of the covariates (including treatment group) on the outcome?
+  * What is the effect of time on the outcome?
+  * Does the relationship between outcome and time vary for different groups of individuals?
+  
+### The empty model
+
+The very simplest mixed effects model we can fit is 
+
+\begin{equation}
+Y_{ij} = \beta_0 + u_{i} + \epsilon_{ij}.
+(\#eq:lmer0)
+\end{equation}
+
+
+In this model, $Y_{ij}$ is the outcome for the $i^{th}$ participant at time $j$, $\beta_0$ is a fixed effect representing the overall mean of the $Y_{ij}$, $u_i$ is the adjustment for the mean for participant $i$ and $\epsilon_{ij}$ is the residual. In this model we assume:
+
+\begin{align*}
+u_{i} & \sim N\left(0,\,\sigma^2_{u}\right)\\
+\epsilon_{ij}& \sim N\left(0,\,\sigma^2\right)\\
+u_i&\perp \epsilon_{ij}.
+\end{align*}
+
+This model is actually a one-way analysis of variance (ANOVA) model. 
+
+:::{.example}
+We can fit the empty model for the `epilepsy` data via
+
+```{r, echo=T}
+epi_0 <- lmer(seizure.rate ~ 1 + (1 | subject), data = epilepsy)
+summary(epi_0)
+```
+
+The estimated average `seizure.rate` is shown in the `Fixed effects` section, and is 8.263. The estimated variance of the individual random effect term ($u_i$ above) is 121.75, and the estimated residual variance is 32.49. These are both given in the `Random effects` section of the summary. We can use these values to estimate the ICC, which is now the correlation between repeated measures of the same individual:
+
+$$\rho_{ICC} = \frac{s^2_B}{s^2_B + s^2_W} = \frac{121.75}{121.75+32.49} = 0.789.$$
+
+This very high value of the ICC supports our choice of fitting a mixed effects model, rather than including only fixed effects.
+
+:::
+
+Building up the model from this empty model basically involves including more fixed effects and random effects. Since we are concerned with longitudinal data, the obvious first thing to include is time. We can start by including a linear effect of time, so that the model in Equation \@ref(eq:lmer0) becomes
+
+\begin{equation}
+Y_{ij} = \beta_0 + \gamma t_j + u_{i} + \epsilon_{ij}.
+(\#eq:lmer1)
+\end{equation}
+
+So that the coefficient $\gamma$ describes the change in outcome with time. 
+
+We might go on to extend the model in Equation \@ref(eq:lmer1) by including some baseline covariates $\mathbf{b}_{i}$ for participant $i$ (these would be considered to be the same throughout the trial for participant $i$). Then our model becomes
+
+ \begin{equation}
+Y_{ij} = \beta_0 + \gamma t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
+(\#eq:lmer2)
+\end{equation}
+
+In Equation \@ref(eq:lmer2), the $\mathbf{b}_i$ are being included as fixed effects, in much the same way we're used to with linear models, and the corresponding vector of coefficients is $\boldsymbol\beta$.
+
+We will explore these models by fitting them to our `epilepsy` data.
+
+```{r, echo=T, fig.height=1.6, fig.cap = "Confidence intervals for fixed effects for the two fitted models."}
+## Including just time
+epilepsy$period = as.numeric(epilepsy$period)
+epi_1 = lmer(seizure.rate ~ period + (1|subject), data=epilepsy)
+
+## Including more baseline covariates
+epi_2 = lmer(seizure.rate ~ base + age + treatment + period + (1|subject), data=epilepsy)
+
+pm1 = plot_model(epi_1)
+pm2 = plot_model(epi_2)
+grid.arrange(pm1, pm2, nrow=1)
+```
+
+In this example it appears that neither time nor the treatment have a significant effect on the seizure rate.
 
 
 
+The final extension we'll look at is if we think that different participants might change at different rates, all other things being equal. We can introduce a random effect $\eta_i$ to allow the coefficient of time to vary between participants
+
+ \begin{equation}
+Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
+(\#eq:lmer3).
+\end{equation}
 
 
 ```{r}
@@ -190,11 +295,13 @@ epilepsy # good first one, no missing data
 
 BtheB # needs reformatting, lots of missing data
 
+ggpairs(select(BtheB, tidy_select::starts_with("bdi")), aes(col = BtheB$treatment), lower = list(continuous = "smooth"))
+
 
 sleepstudy 
 (fm1 <- lmer(Reaction ~ Days + (Days|Subject), sleepstudy, subset=Days>=2))
 ## independent model - what does this notation mean?
-(fm2 <- lmer(Reaction ~ Days + (1|Subject) + (0+Days|Subject), sleepstudy, subset=Days>=2))
+(fm2 <- lmer(Reaction ~ Days + (1|Subject) , sleepstudy, subset=Days>=2))
 ```
 
 :::{.example}
