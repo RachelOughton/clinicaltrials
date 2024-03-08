@@ -965,7 +965,7 @@ We find that we have just enough evidence to reject $H_0$ at the 95% level.
 
 #### Log-rank test {#cp2logrank}
 
-The log-rank test is most easily found using the function `survdiff`. This function has an argument `rho` that controls the type of test. If we set `rho=1` then it performs a log-rank test.
+The log-rank test is most easily found using the function `survdiff`. This function has an argument `rho` that controls the type of test. If we set `rho=0` then it performs a log-rank test.
 
 The general form is similar to `survfit`:
 

@@ -1284,7 +1284,7 @@ Click for solution
 </div>
 <div id="cp2logrank" class="section level4 hasAnchor" number="12.3.2.2">
 <h4><span class="header-section-number">B.3.2.2</span> Log-rank test<a href="computer-practical-2.html#cp2logrank" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>The log-rank test is most easily found using the function <code>survdiff</code>. This function has an argument <code>rho</code> that controls the type of test. If we set <code>rho=1</code> then it performs a log-rank test.</p>
+<p>The log-rank test is most easily found using the function <code>survdiff</code>. This function has an argument <code>rho</code> that controls the type of test. If we set <code>rho=0</code> then it performs a log-rank test.</p>
 <p>The general form is similar to <code>survfit</code>:</p>
 <div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="computer-practical-2.html#cb286-1" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="sc">&lt;</span>surv_obj<span class="sc">&gt;</span> <span class="er">~</span> <span class="er">&lt;</span>treatment variable<span class="sc">&gt;</span>, <span class="at">data=</span><span class="sc">&lt;</span>dataframe<span class="sc">&gt;</span>, <span class="at">rho=</span><span class="dv">0</span>)</span></code></pre></div>
 <div class="exercise">
