@@ -1,5 +1,21 @@
 # The Bayesian Approach 
 
+In this course we have taken a consistently frequentist approach. The reason for this is mainly pragmatic rather than ideological: the frequentist approach is by far the most commonly used way to design and analyse clinical trials, and some organisations won't even allow a Bayesian analysis.  
+
+We aren't going to cover the whole Bayesian approach in one lecture, but we'll review some of the key differences, how the Bayesian approach to clinical trials works, and some advantages it has over frequentist methods (I'll try to keep my least biased hat on).
+
+You'll have come across Bayesian methods at various points so far in other modules, but to varying extents, so we'll approach things from a fairly basic level.
+
+## The fundamental difference
+
+In the frequentist approach, we view the underlying parameters, for example the treatment effect (whatever form it takes), group means, correlations, variances and so on, as fixed quantities. We view the data as random, and as coming from some distribution governed by these fixed parameters. We might have different candidate values of these, most commonly a null hypothesis value of the treatment effect and an alternative hypothesis value.
+
+This means that all the inferences we make are in terms of how likely or unlikely the data we observe are in terms of this distribution (usually in terms of the Null hypothesis distribution). This leads us to quantities like the $p$-value ("What's the probability of seeing data at least this 'unusual' under $H_0$?") and confidence intervals ("What's the set of possible values ")
+
+
+
+
+
 Introduction - waht is the frequentist set up we've been doing and what can we really say? Deductive vs inductive reasoning.
 
 

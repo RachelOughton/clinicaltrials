@@ -606,7 +606,7 @@ Fit a logistic regression model to the `resp_df` data set, being careful to chec
 
 :::{.solution}
 
-Before we fit the logistic regression we should check for collinearity in the data.
+Before we fit the logistic regression we should check for balance in the data. For example, below we see the mean and SD of age, and the mean of `status0` for the other factor variales.
 
 ```{r, echo=T}
 resp_df%>%

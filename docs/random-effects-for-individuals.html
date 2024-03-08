@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="cluster-rct.html"/>
-<link rel="next" href="the-bayesian-approach.html"/>
+<link rel="next" href="computer-practical-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -343,7 +343,6 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -364,6 +363,29 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
 <li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="computer-practical-2.html"><a href="computer-practical-2.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim"><i class="fa fa-check"></i><b>B.1</b> Sample size by simulation (part I)</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>B.1.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="B.1.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>B.1.2</b> Power simulation for ANCOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#analysis-for-binary-data"><i class="fa fa-check"></i><b>B.2</b> Analysis for Binary data</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#confidence-intervals"><i class="fa fa-check"></i><b>B.2.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2logreg"><i class="fa fa-check"></i><b>B.2.2</b> Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2-surv"><i class="fa fa-check"></i><b>B.3</b> Analysis for Survival data</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>B.3.1</b> Fitting a survival curve</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>B.3.2</b> Comparing survival curves</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim2"><i class="fa fa-check"></i><b>B.4</b> Sample size by simulation (part II)</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>B.4.1</b> Minimum detectable effect size</a></li>
+<li class="chapter" data-level="B.4.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#censoring"><i class="fa fa-check"></i><b>B.4.2</b> Censoring</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -720,7 +742,7 @@ Figure 10.2: Mean seizure rate for each treatment group over time.
 <p>To make visualisation somewhat clearer, can do a standardised spaghetti plot. In this plot, the observations are standardised within each time point. So, if <span class="math inline">\(x_{it}\)</span> is the outcome for participant <span class="math inline">\(i\)</span> and time <span class="math inline">\(t\)</span>, the standardised spaghetti plot would show</p>
 <p><span class="math display">\[\frac{x_{it} - \bar{x}_t}{s_t} \]</span></p>
 <p>where <span class="math inline">\(\bar{x}_t,\,s_t\)</span> are the sample mean and SD at time <span class="math inline">\(t\)</span>.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 </div>
 <div id="fitting-a-model" class="section level3 hasAnchor" number="10.2.1">
 <h3><span class="header-section-number">10.2.1</span> Fitting a model<a href="random-effects-for-individuals.html#fitting-a-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -797,8 +819,8 @@ Y_{ij} = \beta_0 + \gamma t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilo
 <span id="cb104-8"><a href="random-effects-for-individuals.html#cb104-8" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_1)</span>
 <span id="cb104-9"><a href="random-effects-for-individuals.html#cb104-9" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
 <span id="cb104-10"><a href="random-effects-for-individuals.html#cb104-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-77"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-77-1.png" alt="Confidence intervals for fixed effects for the two fitted models." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-72"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-72-1.png" alt="Confidence intervals for fixed effects for the two fitted models." width="672" />
 <p class="caption">
 Figure 10.3: Confidence intervals for fixed effects for the two fitted models.
 </p>
@@ -849,8 +871,8 @@ Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="random-effects-for-individuals.html#cb107-1" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
 <span id="cb107-2"><a href="random-effects-for-individuals.html#cb107-2" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_3)</span>
 <span id="cb107-3"><a href="random-effects-for-individuals.html#cb107-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-78"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-78-1.png" alt="Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-73"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-73-1.png" alt="Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)." width="672" />
 <p class="caption">
 Figure 10.4: Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).
 </p>
@@ -865,6 +887,9 @@ Figure 10.4: Confidence intervals for model with same gradient for all participa
 </div>
 </div>
 </div>
+
+
+
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-armitage1982two" class="csl-entry">
@@ -880,7 +905,7 @@ Thall, Peter F, and Stephen C Vail. 1990. <span>“Some Covariance Models for Lo
         </div>
       </div>
 <a href="cluster-rct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-bayesian-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
