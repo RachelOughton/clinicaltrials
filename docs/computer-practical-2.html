@@ -329,7 +329,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-mixed-effects-models"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level: mixed effects models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>10</b> The Bayesian Approach</a></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -393,7 +392,7 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="computer-practical-2" class="section level1 hasAnchor" number="12">
+<div id="computer-practical-2" class="section level1 hasAnchor" number="11">
 <h1><span class="header-section-number">B</span> Computer Practical 2<a href="computer-practical-2.html#computer-practical-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In this practical, we will focus on two main areas:</p>
 <ul>
@@ -416,7 +415,7 @@ div.csl-indent {
 <p>We’ll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We’ll load them as we go along.</p>
 <p><strong>Notice that where there are code snippets that you want to copy directly, you can hover your cursor in the top right of the code box and a ‘copy’ icon will appear.</strong></p>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="computer-practical-2.html#cb202-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;HSAUR&quot;</span>, <span class="st">&quot;HSAUR3&quot;</span>, <span class="st">&quot;pROC&quot;</span>, <span class="st">&quot;survival&quot;</span>, <span class="st">&quot;ggfortify&quot;</span>))</span></code></pre></div>
-<div id="cp2sim" class="section level2 hasAnchor" number="12.1">
+<div id="cp2sim" class="section level2 hasAnchor" number="11.1">
 <h2><span class="header-section-number">B.1</span> Sample size by simulation (part I)<a href="computer-practical-2.html#cp2sim" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required. We can estimate the power by the proportion of simulated trials in which the null hypothesis was rejected.</p>
 <p>Because the code necessarily works by fixing the number of participants and investigating the effect on the power of the trial, this is often referred to as <em>power-calculation</em>, but it is the same sample size issue, approached from a different angle. <span class="citation">Arnold et al. (<a href="#ref-arnold2011simulation">2011</a>)</span> gives a thorough, readable and interesting case study of the use of power simulation in a cluster randomised trial investigating different sanitation-related interventions in rural communities in Bangladesh.</p>
@@ -427,7 +426,7 @@ div.csl-indent {
 <li><strong>Practice</strong>: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the statistical analysis plan.</li>
 </ol>
 <p>Arguably the first and third advantages could also be true (though aren’t automatically) of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.</p>
-<div id="power-simulation-for-a-t-test" class="section level3 hasAnchor" number="12.1.1">
+<div id="power-simulation-for-a-t-test" class="section level3 hasAnchor" number="11.1.1">
 <h3><span class="header-section-number">B.1.1</span> Power simulation for a t-test<a href="computer-practical-2.html#power-simulation-for-a-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Note: really we should be using more than 100 simulations, but so that the code runs in a sensible amount of time I’ve reduced the number. Feel free to increase it if you want to, but you’ll have to wait a little while for it to run.</strong></p>
 <p>We’ll start by taking a simulation approach to recreate the most ‘vanilla’ scenario, where we have a continuous outcome <span class="math inline">\(Y\)</span> and wish to conduct a <span class="math inline">\(t\)</span>-test on the outcome.</p>
@@ -662,7 +661,7 @@ Figure B.5: Power estimates for 100 sets of 100 simulations with N=155 with larg
 </div>
 </details>
 </div>
-<div id="power-simulation-for-ancova" class="section level3 hasAnchor" number="12.1.2">
+<div id="power-simulation-for-ancova" class="section level3 hasAnchor" number="11.1.2">
 <h3><span class="header-section-number">B.1.2</span> Power simulation for ANCOVA<a href="computer-practical-2.html#power-simulation-for-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Thinking of a somewhat more complex model, we might want to perform a power simulation for an ANCOVA model.</p>
 <p>We’ll write our data-generating model for the outcome <span class="math inline">\(X_i\)</span> as</p>
@@ -767,7 +766,7 @@ Figure B.6: Power estimates for 100 sets of 100 simulations with larger outcome 
 <p>But we don’t have time in this practical!</p>
 </div>
 </div>
-<div id="analysis-for-binary-data" class="section level2 hasAnchor" number="12.2">
+<div id="analysis-for-binary-data" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">B.2</span> Analysis for Binary data<a href="computer-practical-2.html#analysis-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The dataset we’ll use to explore Binary outcome data is the <code>respiratory</code> dataset, from the package <code>HSAUR</code>. In this trial, patients across two centres were randomly assigned to receive treatment or placebo, and their respiratory status was recorded as either ‘poor’ or ‘good’. Measurements were recorded at months 0, 1, 2, 3, 4, but we will keep only month 0 (as a baseline) and month 4 (as a final outcome). We process the data below:</p>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="computer-practical-2.html#cb220-1" tabindex="-1"></a><span class="fu">library</span>(HSAUR)</span>
@@ -787,7 +786,7 @@ Figure B.6: Power estimates for 100 sets of 100 simulations with larger outcome 
 <li>symptom status (poor or good).</li>
 </ul>
 <p>The outcome variable is whether the status of the patient’s symptoms are poor or good after four months of the trial. We will build up through some of the models we studied in Chapter <a href="binary-analysis.html#binary-analysis">6</a>.</p>
-<div id="confidence-intervals" class="section level3 hasAnchor" number="12.2.1">
+<div id="confidence-intervals" class="section level3 hasAnchor" number="11.2.1">
 <h3><span class="header-section-number">B.2.1</span> Confidence Intervals<a href="computer-practical-2.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Our first step will be to fit a Newcombe confidence interval for the absolute risk difference, as we did in Section <a href="binary-analysis.html#newcombeci">6.2.1.3</a>. Recall that the limits of a <span class="math inline">\(100(1-\alpha)\%\)</span> CI for the ARD <span class="math inline">\(\pi_T - \pi_C\)</span> are given by</p>
 <p><span class="math display">\[
@@ -884,7 +883,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="cp2logreg" class="section level3 hasAnchor" number="12.2.2">
+<div id="cp2logreg" class="section level3 hasAnchor" number="11.2.2">
 <h3><span class="header-section-number">B.2.2</span> Logistic regression<a href="computer-practical-2.html#cp2logreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We next looked at logistic regression as way to account for the baseline covariates. To fit a logistic regression in R we use the function <code>glm</code>. This fits all kinds of generalised linear models, and so we specify that we want a logistic regression by choosing <code>family = binomial(link='logit')</code>.</p>
 <p>The code is included in all examples in Sections <a href="binary-analysis.html#logreg">6.3</a> and <a href="binary-analysis.html#diaglogreg">6.4</a>, so if you aren’t sure how to do something they woulg be a good place to look.</p>
@@ -1114,7 +1113,7 @@ Click for solution
 </details>
 </div>
 </div>
-<div id="cp2-surv" class="section level2 hasAnchor" number="12.3">
+<div id="cp2-surv" class="section level2 hasAnchor" number="11.3">
 <h2><span class="header-section-number">B.3</span> Analysis for Survival data<a href="computer-practical-2.html#cp2-surv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The packages we need for this section are <code>survival</code> and <code>ggfortify</code>, so load those now.</p>
 <p>The first dataset we will use is <code>aml</code> - this dataset is from a trial investigating whether the standard course of chemotheraphy should be extended for some additional cycles (‘maintenance’) for patients with Acute Myelogenous Leukemia.</p>
@@ -1155,11 +1154,11 @@ Click for solution
 <p>This is a vector of the time values, in the same order as in <code>aml</code>. You’ll notice that some have a ‘+’ attached. This denotes the censored observations (the notation reflects the fact that the true time of death/the event will be greater than this).</p>
 </div>
 </details>
-<div id="fitting-a-survival-curve" class="section level3 hasAnchor" number="12.3.1">
+<div id="fitting-a-survival-curve" class="section level3 hasAnchor" number="11.3.1">
 <h3><span class="header-section-number">B.3.1</span> Fitting a survival curve<a href="computer-practical-2.html#fitting-a-survival-curve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next thing we probably want to do is to estimate the survival function and plot the survival curve.
 The first method we’ll use is the Kaplan-Meier estimator.</p>
-<div id="kaplan-meier" class="section level4 hasAnchor" number="12.3.1.1">
+<div id="kaplan-meier" class="section level4 hasAnchor" number="11.3.1.1">
 <h4><span class="header-section-number">B.3.1.1</span> Kaplan-Meier<a href="computer-practical-2.html#kaplan-meier" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To fit a Kaplan-Meier survival curve, we use the function <code>survfit</code>, which is specified using a formula, much like <code>lm</code> or <code>glm</code>. To fit a Kaplan-Meier estimate with a data frame split by treatment effect, the general form is</p>
 <div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="computer-practical-2.html#cb260-1" tabindex="-1"></a><span class="fu">survfit</span>(<span class="sc">&lt;</span>surv_obj<span class="sc">&gt;</span> <span class="er">~</span> <span class="er">&lt;</span>treatment var<span class="sc">&gt;</span>, <span class="at">data =</span> <span class="sc">&lt;</span>dataframe<span class="sc">&gt;</span>)</span></code></pre></div>
@@ -1206,7 +1205,7 @@ We can see from the table that the lower curve is the non-maintained arm - there
 </details>
 <p>The function <code>autoplot</code> could also give us a 95% CI if we set <code>conf.int=T</code> (we didn’t go into how this is calculated in lectures) and we see that with the <code>aml</code> data the uncertainty is huge.</p>
 </div>
-<div id="fitting-an-exponential-distribution" class="section level4 hasAnchor" number="12.3.1.2">
+<div id="fitting-an-exponential-distribution" class="section level4 hasAnchor" number="11.3.1.2">
 <h4><span class="header-section-number">B.3.1.2</span> Fitting an exponential distribution<a href="computer-practical-2.html#fitting-an-exponential-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To fit an exponential distribution, we need to estimate <span class="math inline">\(\hat\lambda_C\)</span> and <span class="math inline">\(\hat\lambda_T\)</span>, using</p>
 <p><span class="math display">\[\hat\lambda_X = \frac{m_X}{\sum\limits_{i=1}^{n_X} t_i} = \frac{m_X}{t^+_X}, \]</span>
@@ -1239,10 +1238,10 @@ Click for solution
 </details>
 </div>
 </div>
-<div id="comparing-survival-curves-1" class="section level3 hasAnchor" number="12.3.2">
+<div id="comparing-survival-curves-1" class="section level3 hasAnchor" number="11.3.2">
 <h3><span class="header-section-number">B.3.2</span> Comparing survival curves<a href="computer-practical-2.html#comparing-survival-curves-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Having found the MLEs for the <code>aml</code> dataset, assuming an exponential distribution, we can now immediately conduct a likelihood ratio test.</p>
-<div id="likelihood-ratio-test" class="section level4 hasAnchor" number="12.3.2.1">
+<div id="likelihood-ratio-test" class="section level4 hasAnchor" number="11.3.2.1">
 <h4><span class="header-section-number">B.3.2.1</span> Likelihood ratio test<a href="computer-practical-2.html#likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Recall that our test statistic (which we found in Section <a href="comparing-survival-curves.html#survlrtest">8.1</a>) is</p>
 <p><span class="math display">\[ \lambda_{LR} = 2\left(m_C\log\left(\frac{m_C}{t^+_C}\right) + m_T\log\left(\frac{m_T}{t^+_T}\right) - m\log\left(\frac{m}{t^+}\right)\right),\]</span></p>
@@ -1269,7 +1268,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="cp2logrank" class="section level4 hasAnchor" number="12.3.2.2">
+<div id="cp2logrank" class="section level4 hasAnchor" number="11.3.2.2">
 <h4><span class="header-section-number">B.3.2.2</span> Log-rank test<a href="computer-practical-2.html#cp2logrank" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The log-rank test is most easily found using the function <code>survdiff</code>. This function has an argument <code>rho</code> that controls the type of test. If we set <code>rho=1</code> then it performs a log-rank test.</p>
 <p>The general form is similar to <code>survfit</code>:</p>
@@ -1296,7 +1295,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="cox-regression" class="section level4 hasAnchor" number="12.3.2.3">
+<div id="cox-regression" class="section level4 hasAnchor" number="11.3.2.3">
 <h4><span class="header-section-number">B.3.2.3</span> Cox regression<a href="computer-practical-2.html#cox-regression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Finally, we will fit the Cox regression model. This is done using the function <code>coxph</code> in the package <code>survival</code>. Look at the help file and the examples in Section <a href="comparing-survival-curves.html#coxreg">8.3.2</a> to understand how to use this function.</p>
 <div class="exercise">
@@ -1462,7 +1461,7 @@ Figure B.8: Survival curves for groups C and T in colon study, fitted assuming a
 </div>
 </div>
 </div>
-<div id="cp2sim2" class="section level2 hasAnchor" number="12.4">
+<div id="cp2sim2" class="section level2 hasAnchor" number="11.4">
 <h2><span class="header-section-number">B.4</span> Sample size by simulation (part II)<a href="computer-practical-2.html#cp2sim2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We now combine the work we’ve done, to implement power simulation for a survival outcome trial.</p>
 <p>To simulate survival / time-to-event data as though from a clinical trial, we need to consider two things:</p>
@@ -1477,7 +1476,7 @@ Figure B.8: Survival curves for groups C and T in colon study, fitted assuming a
 <li>There will be some censoring during the lifetime of the trial, and this should also be randomly generated.</li>
 </ol>
 <p>In this practical we’ll use a Weibull distribution. You can read about the Weibull distribution in Section <a href="working-with-time-to-event-data.html#weibull">7.2.3</a>. The main thing you need to know is that the distribution is defined by its <strong>shape</strong> and <strong>scale</strong>. In this practical we’ll implement a simplified version of that used by <span class="citation">Jiang et al. (<a href="#ref-jiang2012practical">2012</a>)</span>, so if you want to think more about the topic that would be a good place to start</p>
-<div id="minimum-detectable-effect-size" class="section level3 hasAnchor" number="12.4.1">
+<div id="minimum-detectable-effect-size" class="section level3 hasAnchor" number="11.4.1">
 <h3><span class="header-section-number">B.4.1</span> Minimum detectable effect size<a href="computer-practical-2.html#minimum-detectable-effect-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One of the first practical issues we need to tackle is the concept of the difference between the treatment and control group outcomes, and the idea of the minimum difference we want to be able to detect. Ideally this should be something clinically meaningful. We also need to work out how to factor this into the simulation.</p>
 <p><span class="citation">Jiang et al. (<a href="#ref-jiang2012practical">2012</a>)</span> do this in the following way:</p>
@@ -1487,7 +1486,7 @@ Figure B.8: Survival curves for groups C and T in colon study, fitted assuming a
 <li>Specifying <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(M_C,\,M_T\)</span> gives us the scale parameters <span class="math inline">\(\lambda_C,\,\lambda_T\)</span>, and so we have our observation time distribution function for each group.</li>
 </ol>
 </div>
-<div id="censoring" class="section level3 hasAnchor" number="12.4.2">
+<div id="censoring" class="section level3 hasAnchor" number="11.4.2">
 <h3><span class="header-section-number">B.4.2</span> Censoring<a href="computer-practical-2.html#censoring" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For the censoring, this is achieved in two ways:</p>
 <ol style="list-style-type: decimal">

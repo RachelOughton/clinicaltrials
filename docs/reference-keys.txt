@@ -274,7 +274,6 @@ covariate-constrained-randomization
 analysing-a-cluster-rct
 at-the-cluster-level
 at-the-individual-level-mixed-effects-models
-the-bayesian-approach
 computer-practical-1
 cp1allocation
 licorice-gargle-dataset

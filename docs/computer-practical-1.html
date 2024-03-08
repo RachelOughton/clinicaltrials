@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="the-bayesian-approach.html"/>
+<link rel="prev" href="cluster-rct.html"/>
 <link rel="next" href="computer-practical-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -329,7 +329,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-mixed-effects-models"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level: mixed effects models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>10</b> The Bayesian Approach</a></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -393,7 +392,7 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="computer-practical-1" class="section level1 hasAnchor" number="11">
+<div id="computer-practical-1" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">A</span> Computer Practical 1<a href="computer-practical-1.html#computer-practical-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This computer practical will cover two main parts:</p>
 <ol style="list-style-type: decimal">
@@ -421,13 +420,13 @@ div.csl-indent {
 <p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&amp;reserved=0">Instructions for how to use codespace</a></p>
 </div>
 </div>
-<div id="cp1allocation" class="section level2 hasAnchor" number="11.1">
+<div id="cp1allocation" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">A.1</span> Allocation<a href="computer-practical-1.html#cp1allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We’ll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We’ll load them as we go along.</p>
 <p><strong>Notice that where there are code snippets like this one that you want to copy directly, you can hover your cursor in the top right of the code box and a ‘copy’ icon will appear.</strong></p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="computer-practical-1.html#cb95-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;medicaldata&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;Minirand&quot;</span>, </span>
 <span id="cb95-2"><a href="computer-practical-1.html#cb95-2" tabindex="-1"></a>                   <span class="st">&quot;blockrand&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;randomizeR&quot;</span>))</span></code></pre></div>
-<div id="licorice-gargle-dataset" class="section level3 hasAnchor" number="11.1.1">
+<div id="licorice-gargle-dataset" class="section level3 hasAnchor" number="10.1.1">
 <h3><span class="header-section-number">A.1.1</span> Licorice gargle dataset<a href="computer-practical-1.html#licorice-gargle-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To work with allocation, we will use the <code>licorice_gargle</code> dataset from the package <code>medicaldata</code>, which you can find by</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="computer-practical-1.html#cb96-1" tabindex="-1"></a><span class="fu">library</span>(medicaldata)</span>
@@ -478,7 +477,7 @@ Click for solution
 <p>will generate bar charts of pre-operative pain (0=No, 1=Yes) coloured by gender (0=Male, 1=Female), for each smoking category (1=Current, 2=Past, 3=Never).</p>
 <p>Are there any ways in which you think this data set would be particularly vulnerable to leading to a biased trial?</p>
 </div>
-<div id="demographic-tables" class="section level4 hasAnchor" number="11.1.1.1">
+<div id="demographic-tables" class="section level4 hasAnchor" number="10.1.1.1">
 <h4><span class="header-section-number">A.1.1.1</span> Demographic tables<a href="computer-practical-1.html#demographic-tables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For every allocation, we’ll want to see a summary table of how the patients are distributed between the groups. In this practical we’ll use a relatively simple method, detailed <a href="https://www.rdocumentation.org/packages/Minirand/versions/0.1.3/topics/randbalance">here</a> from the package <code>Minirand</code>, which is designed to output a table in the R console.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="computer-practical-1.html#cb102-1" tabindex="-1"></a><span class="fu">library</span>(Minirand)</span>
@@ -501,7 +500,7 @@ Click for solution
 ##   1 69 49</code></pre>
 <p>There are also packages with functions to output these demographic tables formatted for use in latex documents, for example <a href="https://journal.r-project.org/archive/2019/RJ-2019-001/RJ-2019-001.pdf"><code>atable</code></a>.</p>
 </div>
-<div id="binning-continuous-variables" class="section level4 hasAnchor" number="11.1.1.2">
+<div id="binning-continuous-variables" class="section level4 hasAnchor" number="10.1.1.2">
 <h4><span class="header-section-number">A.1.1.2</span> Binning continuous variables<a href="computer-practical-1.html#binning-continuous-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Looking at the output above, it’s clear that the two numeric variables <code>preOp_age</code> and <code>preOp_calcBMI</code> are going to complicate things.</p>
 <div class="exercise">
@@ -533,7 +532,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="a-measure-of-imbalance" class="section level4 hasAnchor" number="11.1.1.3">
+<div id="a-measure-of-imbalance" class="section level4 hasAnchor" number="10.1.1.3">
 <h4><span class="header-section-number">A.1.1.3</span> A measure of imbalance<a href="computer-practical-1.html#a-measure-of-imbalance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>It will be useful to have a simple numerical summary of how imbalanced an allocation is. We will define the imbalance as in lectures,</p>
 <p><span class="math display">\[D(n) = \lvert N_T\left(n\right) - N_C\left(n\right) \rvert \]</span>
@@ -563,11 +562,11 @@ Click for solution
 </details>
 </div>
 </div>
-<div id="allocmethods" class="section level3 hasAnchor" number="11.1.2">
+<div id="allocmethods" class="section level3 hasAnchor" number="10.1.2">
 <h3><span class="header-section-number">A.1.2</span> Allocation methods<a href="computer-practical-1.html#allocmethods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we’ll use packages. Feel free to write your own code for the simpler methods if you want to!</p>
 <p>We’ll start by performing each method once with the whole dataset, and then go on to include baseline variables, and finally we’ll perform a simulation study.</p>
-<div id="simple-random-allocation-1" class="section level4 hasAnchor" number="11.1.2.1">
+<div id="simple-random-allocation-1" class="section level4 hasAnchor" number="10.1.2.1">
 <h4><span class="header-section-number">A.1.2.1</span> Simple random allocation<a href="computer-practical-1.html#simple-random-allocation-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In simple random allocation, each participant is allocated to one of the two trial arms with equal probability.</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="computer-practical-1.html#cb112-1" tabindex="-1"></a>srs <span class="ot">=</span> <span class="cf">function</span>(</span>
@@ -611,7 +610,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="randomly-permuted-blocks" class="section level4 hasAnchor" number="11.1.2.2">
+<div id="randomly-permuted-blocks" class="section level4 hasAnchor" number="10.1.2.2">
 <h4><span class="header-section-number">A.1.2.2</span> Randomly permuted blocks<a href="computer-practical-1.html#randomly-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We will do this with the package <code>blockrand</code>.</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="computer-practical-1.html#cb117-1" tabindex="-1"></a><span class="fu">library</span>(blockrand)</span></code></pre></div>
@@ -646,7 +645,7 @@ Click for solution
 </details>
 <p>The package <code>blockrand</code> contains a function <code>plotblockrand</code>, which outputs PDFs of randomization cards, ready to be printed and put into envelopes!</p>
 </div>
-<div id="biased-coin-designs-1" class="section level4 hasAnchor" number="11.1.2.3">
+<div id="biased-coin-designs-1" class="section level4 hasAnchor" number="10.1.2.3">
 <h4><span class="header-section-number">A.1.2.3</span> Biased coin designs<a href="computer-practical-1.html#biased-coin-designs-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can write code for a biased coin design by adapting the <code>srs</code> function above, setting <span class="math inline">\(p=\frac{2}{3}\)</span> by default as per <span class="citation">Efron (<a href="#ref-efron1971forcing">1971</a>)</span>.</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="computer-practical-1.html#cb122-1" tabindex="-1"></a>biased_coin <span class="ot">=</span> <span class="cf">function</span>(</span>
@@ -698,7 +697,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="urn-designs" class="section level4 hasAnchor" number="11.1.2.4">
+<div id="urn-designs" class="section level4 hasAnchor" number="10.1.2.4">
 <h4><span class="header-section-number">A.1.2.4</span> Urn designs<a href="computer-practical-1.html#urn-designs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For the urn design, we will use the function <code>udPar</code> from the package <code>randomizeR</code>. We wrote this in lectures as <span class="math inline">\(UD\left(r,s\right)\)</span>, where</p>
 <ul>
@@ -733,7 +732,7 @@ Click for solution
 </details>
 </div>
 </div>
-<div id="stratifying-the-dataset" class="section level3 hasAnchor" number="11.1.3">
+<div id="stratifying-the-dataset" class="section level3 hasAnchor" number="10.1.3">
 <h3><span class="header-section-number">A.1.3</span> Stratifying the dataset<a href="computer-practical-1.html#stratifying-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataste one stratum might contain only women, aged 50-65, with a history of smoking.</p>
 <p>Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate ‘mini-trials’.</p>
@@ -766,7 +765,7 @@ Click for solution
 <pre><code>## [1] 63 47 32 27 25 41</code></pre>
 </div>
 </details>
-<div id="margimbalance" class="section level4 hasAnchor" number="11.1.3.1">
+<div id="margimbalance" class="section level4 hasAnchor" number="10.1.3.1">
 <h4><span class="header-section-number">A.1.3.1</span> Another measure of imbalance<a href="computer-practical-1.html#margimbalance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To see how well balanced our allocations are in terms of each covariate, we will define a function summing the marginal imbalance</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="computer-practical-1.html#cb133-1" tabindex="-1"></a>marg_imbalance <span class="ot">=</span> <span class="cf">function</span>(</span>
@@ -836,7 +835,7 @@ Click for solution
 </details>
 </div>
 </div>
-<div id="minimisation" class="section level3 hasAnchor" number="11.1.4">
+<div id="minimisation" class="section level3 hasAnchor" number="10.1.4">
 <h3><span class="header-section-number">A.1.4</span> Minimisation<a href="computer-practical-1.html#minimisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If we want to try to achieve balance for all prognostic factors, minimisation is a more suitable method. The function <code>Minirand</code> in the package <code>Minirand</code> implements the minimisation algorithm.</p>
 <p>Much like we did in lectures (and like we would in a real trial), the function <code>Minirand</code> works from the point of view of having already allocated <span class="math inline">\(j-1\)</span> particpants, and being presented with a <span class="math inline">\(j^{th}\)</span>.</p>
@@ -937,7 +936,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="a-simulation-experiment" class="section level3 hasAnchor" number="11.1.5">
+<div id="a-simulation-experiment" class="section level3 hasAnchor" number="10.1.5">
 <h3><span class="header-section-number">A.1.5</span> A simulation experiment!<a href="computer-practical-1.html#a-simulation-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the above, we’ve used each method once and produced summaries like the marginal imbalance. Because they are inherently random, to understand the general behaviour of each method, we’ll conduct a simulation experiment.</p>
 <p>The general process for this is:</p>
@@ -960,10 +959,10 @@ Click for solution
 <p>For the licorice dataset, <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span> say that “Randomization (1:1) to licorice or placebo was assigned by a Web-based system that was accessed just before treatment by an independent researcher who was not involved in data collection; no stratification was used.”</p>
 </div>
 </div>
-<div id="cp1analysis" class="section level2 hasAnchor" number="11.2">
+<div id="cp1analysis" class="section level2 hasAnchor" number="10.2">
 <h2><span class="header-section-number">A.2</span> Analysis<a href="computer-practical-1.html#cp1analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we’ve covered in lectures. Both of these data sets are slightly awkward, as you will see, but that’s perhaps good practice for the real world!</p>
-<div id="polyps-data" class="section level3 hasAnchor" number="11.2.1">
+<div id="polyps-data" class="section level3 hasAnchor" number="10.2.1">
 <h3><span class="header-section-number">A.2.1</span> Polyps data<a href="computer-practical-1.html#polyps-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first dataset concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in <span class="citation">Giardiello et al. (<a href="#ref-giardiello1993treatment">1993</a>)</span>.</p>
 <div class="exercise">
@@ -1189,7 +1188,7 @@ First of all, we can add columns with the residuals and fitted values from the m
 </div>
 </details>
 </div>
-<div id="treatment-for-maternal-periodontal-disease" class="section level3 hasAnchor" number="11.2.2">
+<div id="treatment-for-maternal-periodontal-disease" class="section level3 hasAnchor" number="10.2.2">
 <h3><span class="header-section-number">A.2.2</span> Treatment for maternal periodontal disease<a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This trial is reported in <span class="citation">Michalowicz et al. (<a href="#ref-michalowicz2006treatment">2006</a>)</span>. The data are in <code>opt</code>, which is in the package <code>medicaldata</code>, which you should already have loaded.</p>
 <div class="exercise">
@@ -1565,7 +1564,7 @@ Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskr
           </div>
         </div>
       </div>
-<a href="the-bayesian-approach.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cluster-rct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="computer-practical-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
