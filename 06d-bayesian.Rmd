@@ -1,0 +1,26 @@
+# The Bayesian Approach 
+
+Introduction - waht is the frequentist set up we've been doing and what can we really say? Deductive vs inductive reasoning.
+
+
+Advantages of having a probability distribution about parameters (regions)
+
+
+Prior, likelihood, posterior
+
+
+Different sorts of prior
+- why this can be a good thing
+
+example - can I do streptomycin or some other early example? Or look in books? Don't spend too long on this!
+
+
+
+Debate about whether decision theory should be included (by the fourth group of Bayesians) - argue not for same reasons as Spiegelhalter et.al - can't produce a definitively optimal solution, because there are lots of very different utilities involved.
+
+Look into ethics of randomization - what even does this mean?
+Interim analysis
+
+
+More complex trial designs - check with Nicole about mentioning design for CoP project.
+

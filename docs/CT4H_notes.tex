@@ -121,7 +121,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2024-03-05}
+\date{2024-03-08}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -3296,8 +3296,8 @@ which gives us \(\left(0.320,\,1.176\right)\) on the log scale, and a 95\% CI fo
 So, we've seen that we can find confidence intervals for each of our four measures of difference. But we probably want to also be able to incorporate baseline measurements, as we
 did for continuous outcome variables.
 
-\hypertarget{accounting-for-baseline-observations-logistic-regression}{%
-\section{Accounting for baseline observations: logistic regression}\label{accounting-for-baseline-observations-logistic-regression}}
+\hypertarget{logreg}{%
+\section{Accounting for baseline observations: logistic regression}\label{logreg}}
 
 We saw with the continuous outcomes that it is often advantageous to include baseline measurements of the outcome (if they are known) in our analysis, and this is the same for binary outcomes.
 
@@ -3708,8 +3708,8 @@ As with any linear model, we need to ensure that it is appropriate for our datas
   \textbf{linear effect across the range of the dataset}: a linear model is based on the assumption that the effect of the independent variables is the same across the whole range of the data. This is not always the case. For example, the rate of deterioration with age can be more at older ages. This can be dealt with either by binning age into categories, or by using a transformation, eg. age\(^2\). Note that this would still be a linear model, because it is linear in the coefficients.
 \end{itemize}
 
-\hypertarget{diagnostics-for-logistic-regression}{%
-\section{Diagnostics for logistic regression}\label{diagnostics-for-logistic-regression}}
+\hypertarget{diaglogreg}{%
+\section{Diagnostics for logistic regression}\label{diaglogreg}}
 
 There are many diagnostic techniques for binomial data (see eg. \citet{collett_bin}) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of \texttt{1}, we can't conclude that their probability should have been high. If the `true' probability of \(X=1\) for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have \(X=0\).
 
@@ -4210,8 +4210,8 @@ We can do the same for the \texttt{myeloid} data. Figure \ref{fig:myplotlr} show
 
 \end{example}
 
-\hypertarget{the-weibull-distribution}{%
-\subsection{The Weibull distribution}\label{the-weibull-distribution}}
+\hypertarget{weibull}{%
+\subsection{The Weibull distribution}\label{weibull}}
 
 Having only one parameter, the exponential distribution is not very flexible, and often doesn't fit data at all well. A related, but more suitable distribution is the \textbf{Weibull distribution}.
 
@@ -4219,7 +4219,7 @@ Having only one parameter, the exponential distribution is not very flexible, an
 The probability density function of a \textbf{Weibull} random variable is
 
 \[
-f\left(x\mid \lambda,\,k\right) = 
+f\left(x\mid \lambda,\,\gamma\right) = 
 \begin{cases}
 \lambda\gamma t^{\gamma-1}\exp\left[{-\lambda t^{\gamma}}\right] & \text{for }t\geq{0}\\
 0 & \text{otherwise}.
@@ -5444,6 +5444,521 @@ The mixed effects model can be extended to a \textbf{generalized mixed effects m
 \]
 
 We will look in the next lecture at some more trial designs for which mixed effects models are useful.
+
+\hypertarget{random-effects-for-individuals}{%
+\chapter{Random effects for individuals}\label{random-effects-for-individuals}}
+
+In the last lecture we introduced the mixed effects model as a way to combine fixed effects (the kind we're used to, like sex, disease status etc.) and random effects. For cluster randomized trials this was useful because we could account for the intracluster correlation, where participants within the same school / GP surgery / other cluster are likely to be more similar to one another than to participants within another group.
+
+In this lecture, we'll think about a couple of examples where the individual is the random effect.
+
+\hypertarget{crossover-trials}{%
+\section{Crossover trials}\label{crossover-trials}}
+
+In the trials we've thought about so far, each patient has been subject to one, and only one, treatment. Often this is necessary, because the end goal is something relatively final, like a disease being cured, or the circumstance is a one-off, like medication to prevent complications of surgery. By doing things this way, we lose the opportunity to make direct comparisons; we assume that all participants are randomly drawn from some population, and make efforts to ensure the trial is balanced in terms of their characteristics, but we can't truly compare like-for-like.
+
+Crossover trials, also known as AB or AB/BA trials, involve giving each participant both treatments in sequence. These are generally used in contexts where the goal is ongoing management of a condition, for example asthma or diabetes. If we give each participant each of the different treatments in sequence, then we can make a more precise comparison, since we are comparing the outcomes under the different treatments \emph{on the same patient}. You can find more detail of this type of trial in \citet{armitage1982two}.
+
+\hypertarget{the-abba-design}{%
+\subsection{The AB/BA design}\label{the-abba-design}}
+
+If we gave all patients treatment A first (say for one month) and then treatment B (for the next), then we would be inviting bias and ambiguity into the trial
+
+\begin{itemize}
+\tightlist
+\item
+  It may be that whichever treatment comes second appears to perform better, for example as patients get used to measurements being taken (it is common for the first few blood pressure measurements in a series to be higher)
+\item
+  If there is some external trend or pattern, this will manifest itself as an effect of the change in treatments.
+\end{itemize}
+
+Therefore in a crossover trial with two treatments there are two groups, who receive the treatments in different orders:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Group & Period 1 & Period 2 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Group 1} & A & B \\
+\textbf{Group 2} & B & A \\
+\end{longtable}
+
+Therefore if there is a temporal effect it won't be ascribed to either of the treatments.
+
+\hypertarget{analysis-of-the-abba-design}{%
+\subsection{Analysis of the AB/BA design}\label{analysis-of-the-abba-design}}
+
+There are a few things our analysis needs to account for:
+
+\begin{itemize}
+\tightlist
+\item
+  Measurements for the same participant need to be treated as such, in some way
+\item
+  The possibility of systematic differences between treatment periods needs to be allowed for
+\end{itemize}
+
+In the model we describe, we assume there are \(n_1\) participants in group 1, and \(n_2\) in group 2. We will also assume that the outcome is normally distributed. In the treatment of ongoing conditions, this is generally the case.
+
+We will start by thinking about the outcome for particular individuals. We'll assume that one outcome measurement is taken per patient per trial period. So the outcome for participant \(i\) \((i = 1,\ldots,n_1)\) from group 1 is modelled by
+
+\begin{align*}
+x_{i1} & = \mu + \pi_1 + \tau_A + \xi_i + \epsilon_{i1} \text{ in trial period 1}\\
+x_{i2} & = \mu + \pi_2 + \tau_B + \xi_i + \epsilon_{i2} \text{ in trial period 2.}
+\end{align*}
+
+In this model
+
+\begin{itemize}
+\tightlist
+\item
+  \(\pi_j\;\;(j=1,2)\) is the systematic effect of period \(j\)
+\item
+  \(\tau_A,\,\tau_B\) are the systematic effects of treatments A and B
+\item
+  \(\mu\) is a general mean
+\item
+  \(\xi_i\) represents the tendency for the outcome of participant \(i\) to be generally higher or lower than the mean
+\item
+  \(\epsilon_{i1},\,\epsilon_{i2}\) are independent \(N\left(0,\,\sigma_{\epsilon}^2\right)\) error terms.
+\end{itemize}
+
+Notice that the first three bullet points describe fixed effects, and the fourth \((\xi_i)\) is a random effect. We can assume that \(\xi_i \sim N\left(0,\,\sigma_B^2\right)\). Notice that \(\xi_i\) appears in the outcome model for participant \(i\) for both trial periods.
+
+We can us the same logic to model the outcome for participant \(i\) \(\left(i=n_1+1,\,\ldots,\,n_1+n_2\right)\) in group 2
+
+\begin{align*}
+x_{i1} & = \mu + \pi_1 + \tau_B + \xi_i + \epsilon_{i1} \text{ in trial period 1}\\
+x_{i2} & = \mu + \pi_2 + \tau_A + \xi_i + \epsilon_{i2} \text{ in trial period 2.}
+\end{align*}
+
+Because we have been able to treat each participant with both treatments (A and B), we have effectively bundled all the participant specific covariates, along with individual variation we can't really account for, into \(\xi_i\).
+
+We can remove \(\xi_i\) from from the analysis by finding the differences for each patient
+
+\begin{align*}
+d_i & = x_{i1} - x_{i2} = \pi + \tau + \eta_i& \text{ for } i=1,\,\ldots,\,n_1\\
+d_i & = x_{i1} - x_{i2} = \pi - \tau + \eta_i& \text{ for } i=n_1+1,\,\ldots,\,n_1+n_2,
+\end{align*}
+
+where
+
+\begin{itemize}
+\tightlist
+\item
+  \(\pi=\pi_1 - \pi_2\) measures the difference between treatment periods
+\item
+  \(\tau = \tau_A - \tau_B\) is the treatment effect we are interested in
+\item
+  \(\eta_i = \epsilon_{i1} - \epsilon_{i2}\) is another random error, with mean 0 and variance \(\sigma^2=2\sigma^2_{\epsilon}\)
+\end{itemize}
+
+We can take expected values of the differences, and find
+
+\begin{align*}
+\operatorname{E}\left(d\right) & = \pi+\tau & \text{ in group 1}\\
+\operatorname{E}\left(d\right) & = \pi-\tau & \text{ in group 2}
+\end{align*}
+
+If there is no treatment effect, ie. \(\tau=0\), then we expect the means to be approximately equal.
+
+This means we can test the null hypothesis that \(\tau=0\) with a two-sample \(t\)-test, to compare the two sets of within patient differences. Note, this is not a paired t-test: we are comparing the differences for the \(n_1\) participants in group 1 with the differences for the \(n_2\) participants in group 2.
+
+An estimate of the treatment effect can be found using
+\[\frac{1}{2}\left(\bar{d}_1 - \bar{d}_2\right),\]
+where \(\bar{d}_k\) is the mean difference in group \(k\). We can therefore find a confidence interval by halving the limits of the usual confidence interval for the difference in two means.
+
+Another important point to note is that since we have eliminated the individual participant random effect \(\xi_i\) from the analysis, the precision of the result depends only on \(\sigma^2_{\epsilon}\), and not on the between-individual variance \(\sigma^2_B\). This is especially good news in a scenario in which the measurement varies much more between individuals than within individuals. Intuitively this makes sense: it is best to use a patient as his or her own control.
+
+\begin{example}
+For children with nocturnal enuresis (bed-wetting) a drug is available to potentially alleviate the problem, and in this trial the drug is to be compared with a placebo, and the treatment period is two weeks. Children in group A are given the drug first, followed by the placebo. Children in group B are given the placebo first, followed by the drug. The primary outcome variable is the number of dry nights out of the 14 night of each treatment period. The data are shown in Table \ref{tab:enuresisdata}.
+
+\begin{table}
+\caption{\label{tab:enuresisdata}Data for group A (left) and group B (right)}
+
+\centering
+\begin{tabular}[t]{rrr}
+\toprule
+Period1 & Period2 & Diff\\
+\midrule
+8 & 5 & 3\\
+14 & 10 & 4\\
+8 & 0 & 8\\
+9 & 7 & 2\\
+11 & 6 & 5\\
+\addlinespace
+3 & 5 & -2\\
+13 & 12 & 1\\
+10 & 2 & 8\\
+6 & 0 & 6\\
+0 & 0 & 0\\
+\addlinespace
+7 & 5 & 2\\
+13 & 13 & 0\\
+8 & 10 & -2\\
+7 & 7 & 0\\
+9 & 0 & 9\\
+\addlinespace
+10 & 6 & 4\\
+2 & 2 & 0\\
+\bottomrule
+\end{tabular}
+\centering
+\begin{tabular}[t]{rrr}
+\toprule
+Period1 & Period2 & Diff\\
+\midrule
+12 & 11 & 1\\
+6 & 8 & -2\\
+13 & 9 & 4\\
+8 & 8 & 0\\
+8 & 9 & -1\\
+\addlinespace
+4 & 8 & -4\\
+8 & 14 & -6\\
+2 & 4 & -2\\
+8 & 13 & -5\\
+9 & 7 & 2\\
+\addlinespace
+7 & 10 & -3\\
+7 & 6 & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We can use this information to find the mean difference for each group
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(dfA}\SpecialCharTok{$}\NormalTok{Diff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.823529
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(dfB}\SpecialCharTok{$}\NormalTok{Diff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.25
+\end{verbatim}
+
+Immediately we can see that these back up the notion that the drug is effective (remember the difference for group A is drug minus placebo, the difference for group B is placebo minus drug), and that the number of dry nights tends to be more while taking the drug.
+
+To test the hypothesis more carefully we use a t-test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}\AttributeTok{x=}\NormalTok{dfA}\SpecialCharTok{$}\NormalTok{Diff, }\AttributeTok{y=}\NormalTok{dfB}\SpecialCharTok{$}\NormalTok{Diff, }\AttributeTok{paired=}\NormalTok{F, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{, }\AttributeTok{var.equal=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  dfA$Diff and dfB$Diff
+## t = 3.2925, df = 27, p-value = 0.002773
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  1.535005 6.612054
+## sample estimates:
+## mean of x mean of y 
+##  2.823529 -1.250000
+\end{verbatim}
+
+We see that this backs up the hypothesis that the drug reduces nocturnal enuresis.
+
+We could analyse the same dataset without taking into account the crossover design of the trial, simply by performing a t-test of all measurements on the drug against all measurement on the placebo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{drug\_meas }\OtherTok{=} \FunctionTok{c}\NormalTok{(dfA}\SpecialCharTok{$}\NormalTok{Period1,dfB}\SpecialCharTok{$}\NormalTok{Period2)      }\CommentTok{\# Measurements taken while on drug}
+\NormalTok{placebo\_meas }\OtherTok{=} \FunctionTok{c}\NormalTok{(dfA}\SpecialCharTok{$}\NormalTok{Period2, dfB}\SpecialCharTok{$}\NormalTok{Period1)  }\CommentTok{\# Measurements taken while on placebo}
+\FunctionTok{t.test}\NormalTok{(}
+  \AttributeTok{x=}\NormalTok{drug\_meas, }\AttributeTok{y=}\NormalTok{placebo\_meas, }
+  \AttributeTok{paired=}\NormalTok{F, }\AttributeTok{alternative=}\StringTok{"two.sided"}\NormalTok{, }\AttributeTok{var.equal=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  drug_meas and placebo_meas
+## t = 2.253, df = 56, p-value = 0.0282
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.2408072 4.1040204
+## sample estimates:
+## mean of x mean of y 
+##  8.448276  6.275862
+\end{verbatim}
+
+We see that although the outcome is still significant at the \(\alpha=0.05\) level, the p-value is much larger, because the individual effects have not been taken into account.
+\end{example}
+
+\hypertarget{longitudinal-data-repeated-measurements}{%
+\section{Longitudinal data / repeated measurements}\label{longitudinal-data-repeated-measurements}}
+
+The second situation we will consider is where there are repeated measurements of the same participant: this is often called \textbf{longitudinal data}. So far we have considered only a baseline and final measurement of the outcome variable, but in practice it is common to measure the outcome at several points throughout the trial duration.
+
+Clinicians may want to understand not just how the outcome is behaving at the end of the trial, but how it evolves over time. They may also want to understand the variation in the measurement over time; for example, it is reasonable to expect that a particular patient's blood presssure or respiratory function won't be exactly the same every day, even under the same treatment and general conditions.
+
+In general we'll say that we have two treatment groups, C (control) and T (treatment), containing \(n_C\) and \(n_T\) participants respectively. The \(i^{\text{th}}\) participant in group \(X\) is observed \(k_{Xi}\) times through the course of the trial. Generally (and we'll certainly assume here) the measurements are planned to be at the same times.
+
+\begin{example}
+\protect\hypertarget{exm:epilepsy1}{}\label{exm:epilepsy1}The first data set we'll introduce is \texttt{epilepsy}, from the package \texttt{HSAUR3}. This trial (detailed in \citet{thall1990some}) investigates the effect of an anti-epileptic drug called Progabide compared to a placebo (both groups were also receiving chemotherapy). For each patient, the number of seizures was recorded over four contiguous two-week periods.
+
+To visualise the data, we plot a \textbf{spaghetti plot}, as shown in Figure \ref{fig:epispag}. Each line represents a participant, and shows their seizure rate over time.
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/epispag-1.pdf}
+\caption{\label{fig:epispag}A spaghetti plot of the epilepsy data.}
+\end{figure}
+
+We can also plot the mean seizure rate at each time within each group as in Figure \ref{fig:epimeans}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/epimeans-1.pdf}
+\caption{\label{fig:epimeans}Mean seizure rate for each treatment group over time.}
+\end{figure}
+
+To make visualisation somewhat clearer, can do a standardised spaghetti plot. In this plot, the observations are standardised within each time point. So, if \(x_{it}\) is the outcome for participant \(i\) and time \(t\), the standardised spaghetti plot would show
+
+\[\frac{x_{it} - \bar{x}_t}{s_t} \]
+
+where \(\bar{x}_t,\,s_t\) are the sample mean and SD at time \(t\).
+
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-70-1.pdf}
+\end{example}
+
+\hypertarget{fitting-a-model}{%
+\subsection{Fitting a model}\label{fitting-a-model}}
+
+In longitudinal data the measurements are `clustered' within each participant, in a semi-similar way to the participants being clustered within settings in Chapter \ref{cluster-rct}. Each participant will have certain characteristics that don't change through the duration of the trial, for example their age (at start), sex, disease history etc. Some of these characteristics we will record as part of the dataset, but this will not fully explain the correlation within measurements of the same participant.
+
+We can also assume that, given the values of these covariates, the outcome of each participant has a slight (or mabye more than slight) propensity to be consistently either higher or lower than (or perhaps to be in line with) the mean. Therefore there will be a random effect associated with each participant. Because we are interested in how things evolve with time, we will also include time in the model.
+
+The questions we want to answer are:
+
+\begin{itemize}
+\tightlist
+\item
+  What is the effect of the covariates (including treatment group) on the outcome?
+\item
+  What is the effect of time on the outcome?
+\item
+  Does the relationship between outcome and time vary for different groups of individuals?
+\end{itemize}
+
+\hypertarget{the-empty-model}{%
+\subsection{The empty model}\label{the-empty-model}}
+
+The very simplest mixed effects model we can fit is
+
+\begin{equation}
+Y_{ij} = \beta_0 + u_{i} + \epsilon_{ij}.
+\label{eq:lmer0}
+\end{equation}
+
+In this model, \(Y_{ij}\) is the outcome for the \(i^{th}\) participant at time \(j\), \(\beta_0\) is a fixed effect representing the overall mean of the \(Y_{ij}\), \(u_i\) is the adjustment for the mean for participant \(i\) and \(\epsilon_{ij}\) is the residual. In this model we assume:
+
+\begin{align*}
+u_{i} & \sim N\left(0,\,\sigma^2_{u}\right)\\
+\epsilon_{ij}& \sim N\left(0,\,\sigma^2\right)\\
+u_i&\perp \epsilon_{ij}.
+\end{align*}
+
+This model is actually a one-way analysis of variance (ANOVA) model.
+
+\begin{example}
+We can fit the empty model for the \texttt{epilepsy} data via
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{epi\_0 }\OtherTok{\textless{}{-}} \FunctionTok{lmer}\NormalTok{(seizure.rate }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ subject), }\AttributeTok{data =}\NormalTok{ epilepsy)}
+\FunctionTok{summary}\NormalTok{(epi\_0)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: seizure.rate ~ 1 + (1 | subject)
+##    Data: epilepsy
+## 
+## REML criterion at convergence: 1651.1
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.8126 -0.3264 -0.0797  0.1725  7.3634 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  subject  (Intercept) 121.75   11.03   
+##  Residual              32.49    5.70   
+## Number of obs: 236, groups:  subject, 59
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)    8.263      1.484   5.569
+\end{verbatim}
+
+The estimated average \texttt{seizure.rate} is shown in the \texttt{Fixed\ effects} section, and is 8.263. The estimated variance of the individual random effect term (\(u_i\) above) is 121.75, and the estimated residual variance is 32.49. These are both given in the \texttt{Random\ effects} section of the summary. We can use these values to estimate the ICC, which is now the correlation between repeated measures of the same individual:
+
+\[\rho_{ICC} = \frac{s^2_B}{s^2_B + s^2_W} = \frac{121.75}{121.75+32.49} = 0.789.\]
+
+This very high value of the ICC supports our choice of fitting a mixed effects model, rather than including only fixed effects.
+\end{example}
+
+Building up the model from this empty model basically involves including more fixed effects and random effects. Since we are concerned with longitudinal data, the obvious first thing to include is time. We can start by including a linear effect of time, so that the model in Equation \eqref{eq:lmer0} becomes
+
+\begin{equation}
+Y_{ij} = \beta_0 + \gamma t_j + u_{i} + \epsilon_{ij}.
+\label{eq:lmer1}
+\end{equation}
+
+So that the coefficient \(\gamma\) describes the change in outcome with time.
+
+We might go on to extend the model in Equation \eqref{eq:lmer1} by including some baseline covariates \(\mathbf{b}_{i}\) for participant \(i\) (these would be considered to be the same throughout the trial for participant \(i\)). Then our model becomes
+
+\begin{equation}
+Y_{ij} = \beta_0 + \gamma t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
+\label{eq:lmer2}
+\end{equation}
+
+In Equation \eqref{eq:lmer2}, the \(\mathbf{b}_i\) are being included as fixed effects, in much the same way we're used to with linear models, and the corresponding vector of coefficients is \(\boldsymbol\beta\).
+
+We will explore these models by fitting them to our \texttt{epilepsy} data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Including just time}
+\NormalTok{epilepsy}\SpecialCharTok{$}\NormalTok{period }\OtherTok{=} \FunctionTok{as.numeric}\NormalTok{(epilepsy}\SpecialCharTok{$}\NormalTok{period)}
+\NormalTok{epi\_1 }\OtherTok{=} \FunctionTok{lmer}\NormalTok{(seizure.rate }\SpecialCharTok{\textasciitilde{}}\NormalTok{ period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{subject), }\AttributeTok{data=}\NormalTok{epilepsy)}
+
+\DocumentationTok{\#\# Including more baseline covariates}
+\NormalTok{epi\_2 }\OtherTok{=} \FunctionTok{lmer}\NormalTok{(seizure.rate }\SpecialCharTok{\textasciitilde{}}\NormalTok{ base }\SpecialCharTok{+}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ treatment }\SpecialCharTok{+}\NormalTok{ period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{subject), }\AttributeTok{data=}\NormalTok{epilepsy)}
+
+\NormalTok{pm1 }\OtherTok{=} \FunctionTok{plot\_model}\NormalTok{(epi\_1)}
+\NormalTok{pm2 }\OtherTok{=} \FunctionTok{plot\_model}\NormalTok{(epi\_2)}
+\FunctionTok{grid.arrange}\NormalTok{(pm1, pm2, }\AttributeTok{nrow=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-72-1.pdf}
+\caption{\label{fig:unnamed-chunk-72}Confidence intervals for fixed effects for the two fitted models.}
+\end{figure}
+
+In this example it appears that neither time nor the treatment have a significant effect on the seizure rate.
+
+The final extension we'll look at is if we think that different participants might change at different rates, all other things being equal. We can introduce a random effect \(\eta_i\) to allow the coefficient of time to vary between participants
+
+\begin{equation}
+Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
+\label{eq:lmer3}.
+\end{equation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Including just time}
+\DocumentationTok{\#\# Including more baseline covariates}
+\NormalTok{epi\_3 }\OtherTok{=} \FunctionTok{lmer}\NormalTok{(seizure.rate }\SpecialCharTok{\textasciitilde{}}\NormalTok{ base }\SpecialCharTok{+}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ treatment }\SpecialCharTok{+}\NormalTok{ period }\SpecialCharTok{+}\NormalTok{ (period}\SpecialCharTok{|}\NormalTok{subject), }\AttributeTok{data=}\NormalTok{epilepsy)}
+\FunctionTok{summary}\NormalTok{(epi\_3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: seizure.rate ~ base + age + treatment + period + (period | subject)
+##    Data: epilepsy
+## 
+## REML criterion at convergence: 1581.8
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.8224 -0.3265 -0.0224  0.2306  8.0745 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr 
+##  subject  (Intercept) 49.0650  7.0046        
+##           period       0.2588  0.5088   -1.00
+##  Residual             31.8399  5.6427        
+## Number of obs: 236, groups:  subject, 59
+## 
+## Fixed effects:
+##                    Estimate Std. Error t value
+## (Intercept)        -5.25307    4.45463  -1.179
+## base                0.34338    0.03128  10.976
+## age                 0.15667    0.13409   1.168
+## treatmentProgabide -0.82339    1.64777  -0.500
+## period             -0.48475    0.33514  -1.446
+## 
+## Correlation of Fixed Effects:
+##             (Intr) base   age    trtmnP
+## base        -0.381                     
+## age         -0.914  0.188              
+## trtmntPrgbd -0.280  0.004  0.099       
+## period      -0.221  0.000  0.000  0.000
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help('isSingular')
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pm1 }\OtherTok{=} \FunctionTok{plot\_model}\NormalTok{(epi\_2)}
+\NormalTok{pm2 }\OtherTok{=} \FunctionTok{plot\_model}\NormalTok{(epi\_3)}
+\FunctionTok{grid.arrange}\NormalTok{(pm1, pm2, }\AttributeTok{nrow=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf}
+\caption{\label{fig:unnamed-chunk-73}Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).}
+\end{figure}
+
+We see from the small variance for the random effect \texttt{period} that the gradients don't vary very much at all, and indeed the coefficients of the fixed effects are very similar to those for a fixed gradient.
+
+\hypertarget{summary}{%
+\subsection*{Summary}\label{summary}}
+\addcontentsline{toc}{subsection}{Summary}
+
+In these two lectures we've seen that random effects can be a useful way to take care of correlation between outputs for clusters of measurements.
+
+This clustering can be because participants are from some natural group (eg. a school, a family, a hospital) or it can be because repeated measurements are taken of the same participant. In either case, we'd expect the measurements within one cluster to be more highly correlated than those from different clusters.
+
+\hypertarget{the-bayesian-approach}{%
+\chapter{The Bayesian Approach}\label{the-bayesian-approach}}
+
+Introduction - waht is the frequentist set up we've been doing and what can we really say? Deductive vs inductive reasoning.
+
+Advantages of having a probability distribution about parameters (regions)
+
+Prior, likelihood, posterior
+
+Different sorts of prior
+- why this can be a good thing
+
+example - can I do streptomycin or some other early example? Or look in books? Don't spend too long on this!
+
+Debate about whether decision theory should be included (by the fourth group of Bayesians) - argue not for same reasons as Spiegelhalter et.al - can't produce a definitively optimal solution, because there are lots of very different utilities involved.
+
+Look into ethics of randomization - what even does this mean?
+Interim analysis
+
+More complex trial designs - check with Nicole about mentioning design for CoP project.
 
 \hypertarget{references}{%
 \chapter*{References}\label{references}}

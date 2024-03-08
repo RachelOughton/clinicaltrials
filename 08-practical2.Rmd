@@ -435,7 +435,7 @@ But we don't have time in this practical!
 
 The dataset we'll use to explore Binary outcome data is the `respiratory` dataset, from the package `HSAUR`. In this trial, patients across two centres were randomly assigned to receive treatment or placebo, and their respiratory status was recorded as either 'poor' or 'good'. Measurements were recorded at months 0, 1, 2, 3, 4, but we will keep only month 0 (as a baseline) and month 4 (as a final outcome). We process the data below:
 
-```{r}
+```{r, echo=T}
 library(HSAUR)
 data("respiratory")
 # Keep only months 0 and 4

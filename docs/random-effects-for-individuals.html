@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-06" />
+<meta name="date" content="2024-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="cluster-rct.html"/>
-<link rel="next" href="computer-practical-1.html"/>
+<link rel="next" href="the-bayesian-approach.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -276,12 +276,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
 <li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#accounting-for-baseline-observations-logistic-regression"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#logreg"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
 <li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diagnostics-for-logistic-regression"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diaglogreg"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
 <ul>
 <li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
 <li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
@@ -340,8 +340,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#fitting-a-model"><i class="fa fa-check"></i><b>10.2.1</b> Fitting a model</a></li>
 <li class="chapter" data-level="10.2.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-empty-model"><i class="fa fa-check"></i><b>10.2.2</b> The empty model</a></li>
+<li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -362,28 +364,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="computer-practical-1.html"><a href="computer-practical-1.html#polyps-data"><i class="fa fa-check"></i><b>A.2.1</b> Polyps data</a></li>
 <li class="chapter" data-level="A.2.2" data-path="computer-practical-1.html"><a href="computer-practical-1.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>A.2.2</b> Treatment for maternal periodontal disease</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="computer-practical-2.html"><a href="computer-practical-2.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2</a>
-<ul>
-<li class="chapter" data-level="B.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim"><i class="fa fa-check"></i><b>B.1</b> Sample size by simulation (part I)</a>
-<ul>
-<li class="chapter" data-level="B.1.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>B.1.1</b> Power simulation for a t-test</a></li>
-<li class="chapter" data-level="B.1.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>B.1.2</b> Power simulation for ANCOVA</a></li>
-</ul></li>
-<li class="chapter" data-level="B.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#analysis-for-binary-data"><i class="fa fa-check"></i><b>B.2</b> Analysis for Binary data</a>
-<ul>
-<li class="chapter" data-level="B.2.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#confidence-intervals"><i class="fa fa-check"></i><b>B.2.1</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="B.2.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2logreg"><i class="fa fa-check"></i><b>B.2.2</b> Logistic regression</a></li>
-</ul></li>
-<li class="chapter" data-level="B.3" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2-surv"><i class="fa fa-check"></i><b>B.3</b> Analysis for Survival data</a>
-<ul>
-<li class="chapter" data-level="B.3.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>B.3.1</b> Fitting a survival curve</a></li>
-<li class="chapter" data-level="B.3.2" data-path="computer-practical-2.html"><a href="computer-practical-2.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>B.3.2</b> Comparing survival curves</a></li>
-</ul></li>
-<li class="chapter" data-level="B.4" data-path="computer-practical-2.html"><a href="computer-practical-2.html#cp2sim2"><i class="fa fa-check"></i><b>B.4</b> Sample size by simulation (part II)</a>
-<ul>
-<li class="chapter" data-level="B.4.1" data-path="computer-practical-2.html"><a href="computer-practical-2.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>B.4.1</b> Minimum detectable effect size</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -740,7 +720,7 @@ Figure 10.2: Mean seizure rate for each treatment group over time.
 <p>To make visualisation somewhat clearer, can do a standardised spaghetti plot. In this plot, the observations are standardised within each time point. So, if <span class="math inline">\(x_{it}\)</span> is the outcome for participant <span class="math inline">\(i\)</span> and time <span class="math inline">\(t\)</span>, the standardised spaghetti plot would show</p>
 <p><span class="math display">\[\frac{x_{it} - \bar{x}_t}{s_t} \]</span></p>
 <p>where <span class="math inline">\(\bar{x}_t,\,s_t\)</span> are the sample mean and SD at time <span class="math inline">\(t\)</span>.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 </div>
 <div id="fitting-a-model" class="section level3 hasAnchor" number="10.2.1">
 <h3><span class="header-section-number">10.2.1</span> Fitting a model<a href="random-effects-for-individuals.html#fitting-a-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -817,8 +797,8 @@ Y_{ij} = \beta_0 + \gamma t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilo
 <span id="cb104-8"><a href="random-effects-for-individuals.html#cb104-8" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_1)</span>
 <span id="cb104-9"><a href="random-effects-for-individuals.html#cb104-9" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
 <span id="cb104-10"><a href="random-effects-for-individuals.html#cb104-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-72"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-72-1.png" alt="Confidence intervals for fixed effects for the two fitted models." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-77"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-77-1.png" alt="Confidence intervals for fixed effects for the two fitted models." width="672" />
 <p class="caption">
 Figure 10.3: Confidence intervals for fixed effects for the two fitted models.
 </p>
@@ -829,508 +809,66 @@ Figure 10.3: Confidence intervals for fixed effects for the two fitted models.
 Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
 \tag{10.4}.
 \end{equation}\]</span></p>
-<pre><code>##     treatment base age seizure.rate period subject
-## 1     placebo   11  31            5      1       1
-## 110   placebo   11  31            3      2       1
-## 112   placebo   11  31            3      3       1
-## 114   placebo   11  31            3      4       1
-## 2     placebo   11  30            3      1       2
-## 210   placebo   11  30            5      2       2
-## 212   placebo   11  30            3      3       2
-## 214   placebo   11  30            3      4       2
-## 3     placebo    6  25            2      1       3
-## 310   placebo    6  25            4      2       3
-## 312   placebo    6  25            0      3       3
-## 314   placebo    6  25            5      4       3
-## 4     placebo    8  36            4      1       4
-## 410   placebo    8  36            4      2       4
-## 412   placebo    8  36            1      3       4
-## 414   placebo    8  36            4      4       4
-## 5     placebo   66  22            7      1       5
-## 510   placebo   66  22           18      2       5
-## 512   placebo   66  22            9      3       5
-## 514   placebo   66  22           21      4       5
-## 6     placebo   27  29            5      1       6
-## 61    placebo   27  29            2      2       6
-## 62    placebo   27  29            8      3       6
-## 63    placebo   27  29            7      4       6
-## 7     placebo   12  31            6      1       7
-## 71    placebo   12  31            4      2       7
-## 72    placebo   12  31            0      3       7
-## 73    placebo   12  31            2      4       7
-## 8     placebo   52  42           40      1       8
-## 81    placebo   52  42           20      2       8
-## 82    placebo   52  42           23      3       8
-## 83    placebo   52  42           12      4       8
-## 9     placebo   23  37            5      1       9
-## 91    placebo   23  37            6      2       9
-## 92    placebo   23  37            6      3       9
-## 93    placebo   23  37            5      4       9
-## 10    placebo   10  28           14      1      10
-## 101   placebo   10  28           13      2      10
-## 102   placebo   10  28            6      3      10
-## 103   placebo   10  28            0      4      10
-## 11    placebo   52  36           26      1      11
-## 111   placebo   52  36           12      2      11
-## 113   placebo   52  36            6      3      11
-## 115   placebo   52  36           22      4      11
-## 12    placebo   33  24           12      1      12
-## 121   placebo   33  24            6      2      12
-## 122   placebo   33  24            8      3      12
-## 123   placebo   33  24            4      4      12
-## 13    placebo   18  23            4      1      13
-## 131   placebo   18  23            4      2      13
-## 132   placebo   18  23            6      3      13
-## 133   placebo   18  23            2      4      13
-## 14    placebo   42  36            7      1      14
-## 141   placebo   42  36            9      2      14
-## 142   placebo   42  36           12      3      14
-## 143   placebo   42  36           14      4      14
-## 15    placebo   87  26           16      1      15
-## 151   placebo   87  26           24      2      15
-## 152   placebo   87  26           10      3      15
-## 153   placebo   87  26            9      4      15
-## 16    placebo   50  26           11      1      16
-## 161   placebo   50  26            0      2      16
-## 162   placebo   50  26            0      3      16
-## 163   placebo   50  26            5      4      16
-## 17    placebo   18  28            0      1      17
-## 171   placebo   18  28            0      2      17
-## 172   placebo   18  28            3      3      17
-## 173   placebo   18  28            3      4      17
-## 18    placebo  111  31           37      1      18
-## 181   placebo  111  31           29      2      18
-## 182   placebo  111  31           28      3      18
-## 183   placebo  111  31           29      4      18
-## 19    placebo   18  32            3      1      19
-## 191   placebo   18  32            5      2      19
-## 192   placebo   18  32            2      3      19
-## 193   placebo   18  32            5      4      19
-## 20    placebo   20  21            3      1      20
-## 201   placebo   20  21            0      2      20
-## 202   placebo   20  21            6      3      20
-## 203   placebo   20  21            7      4      20
-## 21    placebo   12  29            3      1      21
-## 211   placebo   12  29            4      2      21
-## 213   placebo   12  29            3      3      21
-## 215   placebo   12  29            4      4      21
-## 22    placebo    9  21            3      1      22
-## 221   placebo    9  21            4      2      22
-## 222   placebo    9  21            3      3      22
-## 223   placebo    9  21            4      4      22
-## 23    placebo   17  32            2      1      23
-## 231   placebo   17  32            3      2      23
-## 232   placebo   17  32            3      3      23
-## 233   placebo   17  32            5      4      23
-## 24    placebo   28  25            8      1      24
-## 241   placebo   28  25           12      2      24
-## 242   placebo   28  25            2      3      24
-## 243   placebo   28  25            8      4      24
-## 25    placebo   55  30           18      1      25
-## 251   placebo   55  30           24      2      25
-## 252   placebo   55  30           76      3      25
-## 253   placebo   55  30           25      4      25
-## 26    placebo    9  40            2      1      26
-## 261   placebo    9  40            1      2      26
-## 262   placebo    9  40            2      3      26
-## 263   placebo    9  40            1      4      26
-## 27    placebo   10  19            3      1      27
-## 271   placebo   10  19            1      2      27
-## 272   placebo   10  19            4      3      27
-## 273   placebo   10  19            2      4      27
-## 28    placebo   47  22           13      1      28
-## 281   placebo   47  22           15      2      28
-## 282   placebo   47  22           13      3      28
-## 283   placebo   47  22           12      4      28
-## 29  Progabide   76  18           11      1      29
-## 291 Progabide   76  18           14      2      29
-## 292 Progabide   76  18            9      3      29
-## 293 Progabide   76  18            8      4      29
-## 30  Progabide   38  32            8      1      30
-## 301 Progabide   38  32            7      2      30
-## 302 Progabide   38  32            9      3      30
-## 303 Progabide   38  32            4      4      30
-## 31  Progabide   19  20            0      1      31
-## 311 Progabide   19  20            4      2      31
-## 313 Progabide   19  20            3      3      31
-## 315 Progabide   19  20            0      4      31
-## 32  Progabide   10  30            3      1      32
-## 321 Progabide   10  30            6      2      32
-## 322 Progabide   10  30            1      3      32
-## 323 Progabide   10  30            3      4      32
-## 33  Progabide   19  18            2      1      33
-## 331 Progabide   19  18            6      2      33
-## 332 Progabide   19  18            7      3      33
-## 333 Progabide   19  18            4      4      33
-## 34  Progabide   24  24            4      1      34
-## 341 Progabide   24  24            3      2      34
-## 342 Progabide   24  24            1      3      34
-## 343 Progabide   24  24            3      4      34
-## 35  Progabide   31  30           22      1      35
-## 351 Progabide   31  30           17      2      35
-## 352 Progabide   31  30           19      3      35
-## 353 Progabide   31  30           16      4      35
-## 36  Progabide   14  35            5      1      36
-## 361 Progabide   14  35            4      2      36
-## 362 Progabide   14  35            7      3      36
-## 363 Progabide   14  35            4      4      36
-## 37  Progabide   11  27            2      1      37
-## 371 Progabide   11  27            4      2      37
-## 372 Progabide   11  27            0      3      37
-## 373 Progabide   11  27            4      4      37
-## 38  Progabide   67  20            3      1      38
-## 381 Progabide   67  20            7      2      38
-## 382 Progabide   67  20            7      3      38
-## 383 Progabide   67  20            7      4      38
-## 39  Progabide   41  22            4      1      39
-## 391 Progabide   41  22           18      2      39
-## 392 Progabide   41  22            2      3      39
-## 393 Progabide   41  22            5      4      39
-## 40  Progabide    7  28            2      1      40
-## 401 Progabide    7  28            1      2      40
-## 402 Progabide    7  28            1      3      40
-## 403 Progabide    7  28            0      4      40
-## 41  Progabide   22  23            0      1      41
-## 411 Progabide   22  23            2      2      41
-## 413 Progabide   22  23            4      3      41
-## 415 Progabide   22  23            0      4      41
-## 42  Progabide   13  40            5      1      42
-## 421 Progabide   13  40            4      2      42
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 70 rows ]</code></pre>
-<pre><code>##     drug length treatment bdi.pre bdi.2m bdi.3m bdi.5m bdi.8m
-## 1     No    &gt;6m       TAU      29      2      2     NA     NA
-## 2    Yes    &gt;6m     BtheB      32     16     24     17     20
-## 3    Yes    &lt;6m       TAU      25     20     NA     NA     NA
-## 4     No    &gt;6m     BtheB      21     17     16     10      9
-## 5    Yes    &gt;6m     BtheB      26     23     NA     NA     NA
-## 6    Yes    &lt;6m     BtheB       7      0      0      0      0
-## 7    Yes    &lt;6m       TAU      17      7      7      3      7
-## 8     No    &gt;6m       TAU      20     20     21     19     13
-## 9    Yes    &lt;6m     BtheB      18     13     14     20     11
-## 10   Yes    &gt;6m     BtheB      20      5      5      8     12
-## 11    No    &gt;6m       TAU      30     32     24     12      2
-## 12   Yes    &lt;6m     BtheB      49     35     NA     NA     NA
-## 13    No    &gt;6m       TAU      26     27     23     NA     NA
-## 14   Yes    &gt;6m       TAU      30     26     36     27     22
-## 15   Yes    &gt;6m     BtheB      23     13     13     12     23
-## 16    No    &lt;6m       TAU      16     13      3      2      0
-## 17    No    &gt;6m     BtheB      30     30     29     NA     NA
-## 18    No    &lt;6m     BtheB      13      8      8      7      6
-## 19    No    &gt;6m       TAU      37     30     33     31     22
-## 20   Yes    &lt;6m     BtheB      35     12     10      8     10
-## 21    No    &gt;6m     BtheB      21      6     NA     NA     NA
-## 22    No    &lt;6m       TAU      26     17     17     20     12
-## 23    No    &gt;6m       TAU      29     22     10     NA     NA
-## 24    No    &gt;6m       TAU      20     21     NA     NA     NA
-## 25    No    &gt;6m       TAU      33     23     NA     NA     NA
-## 26    No    &gt;6m     BtheB      19     12     13     NA     NA
-## 27   Yes    &lt;6m       TAU      12     15     NA     NA     NA
-## 28   Yes    &gt;6m       TAU      47     36     49     34     NA
-## 29   Yes    &gt;6m     BtheB      36      6      0      0      2
-## 30    No    &lt;6m     BtheB      10      8      6      3      3
-## 31    No    &lt;6m       TAU      27      7     15     16      0
-## 32    No    &lt;6m     BtheB      18     10     10      6      8
-## 33   Yes    &lt;6m     BtheB      11      8      3      2     15
-## 34   Yes    &lt;6m     BtheB       6      7     NA     NA     NA
-## 35   Yes    &gt;6m     BtheB      44     24     20     29     14
-## 36    No    &lt;6m       TAU      38     38     NA     NA     NA
-## 37    No    &lt;6m       TAU      21     14     20      1      8
-## 38   Yes    &gt;6m       TAU      34     17      8      9     13
-## 39   Yes    &lt;6m     BtheB       9      7      1     NA     NA
-## 40   Yes    &gt;6m       TAU      38     27     19     20     30
-## 41   Yes    &lt;6m     BtheB      46     40     NA     NA     NA
-## 42    No    &lt;6m       TAU      20     19     18     19     18
-## 43   Yes    &gt;6m       TAU      17     29      2      0      0
-## 44    No    &gt;6m     BtheB      18     20     NA     NA     NA
-## 45   Yes    &gt;6m     BtheB      42      1      8     10      6
-## 46    No    &lt;6m     BtheB      30     30     NA     NA     NA
-## 47   Yes    &lt;6m     BtheB      33     27     16     30     15
-## 48    No    &lt;6m     BtheB      12      1      0      0     NA
-## 49   Yes    &lt;6m     BtheB       2      5     NA     NA     NA
-## 50    No    &gt;6m       TAU      36     42     49     47     40
-## 51    No    &lt;6m       TAU      35     30     NA     NA     NA
-## 52    No    &lt;6m     BtheB      23     20     NA     NA     NA
-## 53    No    &gt;6m       TAU      31     48     38     38     37
-## 54   Yes    &lt;6m     BtheB       8      5      7     NA     NA
-## 55   Yes    &lt;6m       TAU      23     21     26     NA     NA
-## 56   Yes    &lt;6m     BtheB       7      7      5      4      0
-## 57    No    &lt;6m       TAU      14     13     14     NA     NA
-## 58    No    &lt;6m       TAU      40     36     33     NA     NA
-## 59   Yes    &lt;6m     BtheB      23     30     NA     NA     NA
-## 60    No    &gt;6m     BtheB      14      3     NA     NA     NA
-## 61    No    &gt;6m       TAU      22     20     16     24     16
-## 62    No    &gt;6m       TAU      23     23     15     25     17
-## 63    No    &lt;6m       TAU      15      7     13     13     NA
-## 64    No    &gt;6m       TAU       8     12     11     26     NA
-## 65    No    &gt;6m     BtheB      12     18     NA     NA     NA
-## 66    No    &gt;6m       TAU       7      6      2      1     NA
-## 67   Yes    &lt;6m       TAU      17      9      3      1      0
-## 68   Yes    &lt;6m     BtheB      33     18     16     NA     NA
-## 69    No    &lt;6m       TAU      27     20     NA     NA     NA
-## 70    No    &lt;6m     BtheB      27     30     NA     NA     NA
-## 71    No    &lt;6m     BtheB       9      6     10      1      0
-## 72    No    &gt;6m     BtheB      40     30     12     NA     NA
-## 73    No    &gt;6m       TAU      11      8      7     NA     NA
-## 74    No    &lt;6m       TAU       9      8     NA     NA     NA
-## 75    No    &gt;6m       TAU      14     22     21     24     19
-## 76   Yes    &gt;6m     BtheB      28      9     20     18     13
-## 77    No    &gt;6m     BtheB      15      9     13     14     10
-## 78   Yes    &gt;6m     BtheB      22     10      5      5     12
-## 79    No    &lt;6m       TAU      23      9     NA     NA     NA
-## 80    No    &gt;6m       TAU      21     22     24     23     22
-## 81    No    &gt;6m       TAU      27     31     28     22     14
-## 82   Yes    &gt;6m     BtheB      14     15     NA     NA     NA
-## 83    No    &gt;6m       TAU      10     13     12      8     20
-## 84   Yes    &lt;6m       TAU      21      9      6      7      1
-## 85   Yes    &gt;6m     BtheB      46     36     53     NA     NA
-## 86    No    &gt;6m     BtheB      36     14      7     15     15
-## 87   Yes    &gt;6m     BtheB      23     17     NA     NA     NA
-## 88   Yes    &gt;6m       TAU      35      0      6      0      1
-## 89   Yes    &lt;6m     BtheB      33     13     13     10      8
-## 90    No    &lt;6m     BtheB      19      4     27      1      2
-## 91    No    &lt;6m       TAU      16     NA     NA     NA     NA
-## 92   Yes    &lt;6m     BtheB      30     26     28     NA     NA
-## 93   Yes    &lt;6m     BtheB      17      8      7     12     NA
-## 94    No    &gt;6m     BtheB      19      4      3      3      3
-## 95    No    &gt;6m     BtheB      16     11      4      2      3
-## 96   Yes    &gt;6m     BtheB      16     16     10     10      8
-## 97   Yes    &lt;6m       TAU      28     NA     NA     NA     NA
-## 98    No    &gt;6m     BtheB      11     22      9     11     11
-## 99    No    &lt;6m       TAU      13      5      5      0      6
-## 100  Yes    &lt;6m       TAU      43     NA     NA     NA     NA</code></pre>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
-<pre><code>##     Reaction Days Subject
-## 1   249.5600    0     308
-## 2   258.7047    1     308
-## 3   250.8006    2     308
-## 4   321.4398    3     308
-## 5   356.8519    4     308
-## 6   414.6901    5     308
-## 7   382.2038    6     308
-## 8   290.1486    7     308
-## 9   430.5853    8     308
-## 10  466.3535    9     308
-## 11  222.7339    0     309
-## 12  205.2658    1     309
-## 13  202.9778    2     309
-## 14  204.7070    3     309
-## 15  207.7161    4     309
-## 16  215.9618    5     309
-## 17  213.6303    6     309
-## 18  217.7272    7     309
-## 19  224.2957    8     309
-## 20  237.3142    9     309
-## 21  199.0539    0     310
-## 22  194.3322    1     310
-## 23  234.3200    2     310
-## 24  232.8416    3     310
-## 25  229.3074    4     310
-## 26  220.4579    5     310
-## 27  235.4208    6     310
-## 28  255.7511    7     310
-## 29  261.0125    8     310
-## 30  247.5153    9     310
-## 31  321.5426    0     330
-## 32  300.4002    1     330
-## 33  283.8565    2     330
-## 34  285.1330    3     330
-## 35  285.7973    4     330
-## 36  297.5855    5     330
-## 37  280.2396    6     330
-## 38  318.2613    7     330
-## 39  305.3495    8     330
-## 40  354.0487    9     330
-## 41  287.6079    0     331
-## 42  285.0000    1     331
-## 43  301.8206    2     331
-## 44  320.1153    3     331
-## 45  316.2773    4     331
-## 46  293.3187    5     331
-## 47  290.0750    6     331
-## 48  334.8177    7     331
-## 49  293.7469    8     331
-## 50  371.5811    9     331
-## 51  234.8606    0     332
-## 52  242.8118    1     332
-## 53  272.9613    2     332
-## 54  309.7688    3     332
-## 55  317.4629    4     332
-## 56  309.9976    5     332
-## 57  454.1619    6     332
-## 58  346.8311    7     332
-## 59  330.3003    8     332
-## 60  253.8644    9     332
-## 61  283.8424    0     333
-## 62  289.5550    1     333
-## 63  276.7693    2     333
-## 64  299.8097    3     333
-## 65  297.1710    4     333
-## 66  338.1665    5     333
-## 67  332.0265    6     333
-## 68  348.8399    7     333
-## 69  333.3600    8     333
-## 70  362.0428    9     333
-## 71  265.4731    0     334
-## 72  276.2012    1     334
-## 73  243.3647    2     334
-## 74  254.6723    3     334
-## 75  279.0244    4     334
-## 76  284.1912    5     334
-## 77  305.5248    6     334
-## 78  331.5229    7     334
-## 79  335.7469    8     334
-## 80  377.2990    9     334
-## 81  241.6083    0     335
-## 82  273.9472    1     335
-## 83  254.4907    2     335
-## 84  270.8021    3     335
-## 85  251.4519    4     335
-## 86  254.6362    5     335
-## 87  245.4523    6     335
-## 88  235.3110    7     335
-## 89  235.7541    8     335
-## 90  237.2466    9     335
-## 91  312.3666    0     337
-## 92  313.8058    1     337
-## 93  291.6112    2     337
-## 94  346.1222    3     337
-## 95  365.7324    4     337
-## 96  391.8385    5     337
-## 97  404.2601    6     337
-## 98  416.6923    7     337
-## 99  455.8643    8     337
-## 100 458.9167    9     337
-## 101 236.1032    0     349
-## 102 230.3167    1     349
-## 103 238.9256    2     349
-## 104 254.9220    3     349
-## 105 250.7103    4     349
-## 106 269.7744    5     349
-## 107 281.5648    6     349
-## 108 308.1020    7     349
-## 109 336.2806    8     349
-## 110 351.6451    9     349
-## 111 256.2968    0     350
-## 112 243.4543    1     350
-## 113 256.2046    2     350
-## 114 255.5271    3     350
-## 115 268.9165    4     350
-## 116 329.7247    5     350
-## 117 379.4445    6     350
-## 118 362.9184    7     350
-## 119 394.4872    8     350
-## 120 389.0527    9     350
-## 121 250.5265    0     351
-## 122 300.0576    1     351
-## 123 269.8939    2     351
-## 124 280.5891    3     351
-## 125 271.8274    4     351
-## 126 304.6336    5     351
-## 127 287.7466    6     351
-## 128 266.5955    7     351
-## 129 321.5418    8     351
-## 130 347.5655    9     351
-## 131 221.6771    0     352
-## 132 298.1939    1     352
-## 133 326.8785    2     352
-## 134 346.8555    3     352
-## 135 348.7402    4     352
-## 136 352.8287    5     352
-## 137 354.4266    6     352
-## 138 360.4326    7     352
-## 139 375.6406    8     352
-## 140 388.5417    9     352
-## 141 271.9235    0     369
-## 142 268.4369    1     369
-## 143 257.2424    2     369
-## 144 277.6566    3     369
-## 145 314.8222    4     369
-## 146 317.2135    5     369
-## 147 298.1353    6     369
-## 148 348.1229    7     369
-## 149 340.2800    8     369
-## 150 366.5131    9     369
-## 151 225.2640    0     370
-## 152 234.5235    1     370
-## 153 238.9008    2     370
-## 154 240.4730    3     370
-## 155 267.5373    4     370
-## 156 344.1937    5     370
-## 157 281.1481    6     370
-## 158 347.5855    7     370
-## 159 365.1630    8     370
-## 160 372.2288    9     370
-## 161 269.8804    0     371
-## 162 272.4428    1     371
-## 163 277.8989    2     371
-## 164 281.7895    3     371
-## 165 279.1705    4     371
-## 166 284.5120    5     371
-## 167 259.2658    6     371
-## 168 304.6306    7     371
-## 169 350.7807    8     371
-## 170 369.4692    9     371
-## 171 269.4117    0     372
-## 172 273.4740    1     372
-## 173 297.5968    2     372
-## 174 310.6316    3     372
-## 175 287.1726    4     372
-## 176 329.6076    5     372
-## 177 334.4818    6     372
-## 178 343.2199    7     372
-## 179 369.1417    8     372
-## 180 364.1236    9     372</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="random-effects-for-individuals.html#cb105-1" tabindex="-1"></a><span class="do">## Including just time</span></span>
+<span id="cb105-2"><a href="random-effects-for-individuals.html#cb105-2" tabindex="-1"></a><span class="do">## Including more baseline covariates</span></span>
+<span id="cb105-3"><a href="random-effects-for-individuals.html#cb105-3" tabindex="-1"></a>epi_3 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> base <span class="sc">+</span> age <span class="sc">+</span> treatment <span class="sc">+</span> period <span class="sc">+</span> (period<span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
+<span id="cb105-4"><a href="random-effects-for-individuals.html#cb105-4" tabindex="-1"></a><span class="fu">summary</span>(epi_3)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: Reaction ~ Days + (Days | Subject)
-##    Data: sleepstudy
-##  Subset: Days &gt;= 2
-## REML criterion at convergence: 1404.094
+## Formula: seizure.rate ~ base + age + treatment + period + (period | subject)
+##    Data: epilepsy
+## 
+## REML criterion at convergence: 1581.8
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.8224 -0.3265 -0.0224  0.2306  8.0745 
+## 
 ## Random effects:
-##  Groups   Name        Std.Dev. Corr 
-##  Subject  (Intercept) 31.507        
-##           Days         6.766   -0.25
-##  Residual             25.526        
-## Number of obs: 144, groups:  Subject, 18
-## Fixed Effects:
-## (Intercept)         Days  
-##      245.10        11.44</code></pre>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: Reaction ~ Days + (1 | Subject)
-##    Data: sleepstudy
-##  Subset: Days &gt;= 2
-## REML criterion at convergence: 1430.02
-## Random effects:
-##  Groups   Name        Std.Dev.
-##  Subject  (Intercept) 41.80   
-##  Residual             30.22   
-## Number of obs: 144, groups:  Subject, 18
-## Fixed Effects:
-## (Intercept)         Days  
-##      245.10        11.44</code></pre>
-<div class="example">
-<p><span id="exm:unlabeled-div-51" class="example"><strong>Example 10.4  </strong></span>Not sure whether to include this <span class="citation">De Backer et al. (<a href="#ref-terbinafine">1998</a>)</span> - 5 visits usually. <span class="citation">Davis (<a href="#ref-davis1991semi">1991</a>)</span> talks about longitudinal data analysis for non-normal response variables.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="random-effects-for-individuals.html#cb110-1" tabindex="-1"></a><span class="fu">library</span>(HSAUR3)</span>
-<span id="cb110-2"><a href="random-effects-for-individuals.html#cb110-2" tabindex="-1"></a>gm2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(outcome<span class="sc">~</span>treatment<span class="sc">*</span>visit<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>patientID),</span>
-<span id="cb110-3"><a href="random-effects-for-individuals.html#cb110-3" tabindex="-1"></a>                 <span class="at">data=</span>toenail,</span>
-<span id="cb110-4"><a href="random-effects-for-individuals.html#cb110-4" tabindex="-1"></a>                 <span class="at">family=</span>binomial,<span class="at">nAGQ=</span><span class="dv">20</span>)</span></code></pre></div>
+##  Groups   Name        Variance Std.Dev. Corr 
+##  subject  (Intercept) 49.0650  7.0046        
+##           period       0.2588  0.5088   -1.00
+##  Residual             31.8399  5.6427        
+## Number of obs: 236, groups:  subject, 59
+## 
+## Fixed effects:
+##                    Estimate Std. Error t value
+## (Intercept)        -5.25307    4.45463  -1.179
+## base                0.34338    0.03128  10.976
+## age                 0.15667    0.13409   1.168
+## treatmentProgabide -0.82339    1.64777  -0.500
+## period             -0.48475    0.33514  -1.446
+## 
+## Correlation of Fixed Effects:
+##             (Intr) base   age    trtmnP
+## base        -0.381                     
+## age         -0.914  0.188              
+## trtmntPrgbd -0.280  0.004  0.099       
+## period      -0.221  0.000  0.000  0.000
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="random-effects-for-individuals.html#cb107-1" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
+<span id="cb107-2"><a href="random-effects-for-individuals.html#cb107-2" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_3)</span>
+<span id="cb107-3"><a href="random-effects-for-individuals.html#cb107-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-78"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-78-1.png" alt="Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)." width="672" />
+<p class="caption">
+Figure 10.4: Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).
+</p>
 </div>
+<p>We see from the small variance for the random effect <code>period</code> that the gradients don’t vary very much at all, and indeed the coefficients of the fixed effects are very similar to those for a fixed gradient.</p>
+</div>
+<div id="summary" class="section level3 unnumbered hasAnchor">
+<h3>Summary<a href="random-effects-for-individuals.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In these two lectures we’ve seen that random effects can be a useful way to take care of correlation between outputs for clusters of measurements.</p>
+<p>This clustering can be because participants are from some natural group (eg. a school, a family, a hospital) or it can be because repeated measurements are taken of the same participant. In either case, we’d expect the measurements within one cluster to be more highly correlated than those from different clusters.</p>
 
 </div>
 </div>
 </div>
-
-
-
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-armitage1982two" class="csl-entry">
 Armitage, Peter, and Michael Hills. 1982. <span>“The Two-Period Crossover Trial.”</span> <em>Journal of the Royal Statistical Society: Series D (The Statistician)</em> 31 (2): 119–31.
-</div>
-<div id="ref-davis1991semi" class="csl-entry">
-Davis, Charles S. 1991. <span>“Semi-Parametric and Non-Parametric Methods for the Analysis of Repeated Measurements with Applications to Clinical Trials.”</span> <em>Statistics in Medicine</em> 10 (12): 1959–80.
-</div>
-<div id="ref-terbinafine" class="csl-entry">
-De Backer, M, C De Vroey, Emmanuel Lesaffre, I Scheys, and P De Keyser. 1998. <span>“Twelve Weeks of Continuous Oral Therapy for Toenail Onychomycosis Caused by Dermatophytes: A Double-Blind Comparative Trial of Terbinafine 250 Mg/Day Versus Itraconazole 200 Mg/Day.”</span> <em>Journal of the American Academy of Dermatology</em> 38 (5): S57–63.
 </div>
 <div id="ref-thall1990some" class="csl-entry">
 Thall, Peter F, and Stephen C Vail. 1990. <span>“Some Covariance Models for Longitudinal Count Data with Overdispersion.”</span> <em>Biometrics</em>, 657–71.
@@ -1342,7 +880,7 @@ Thall, Peter F, and Stephen C Vail. 1990. <span>“Some Covariance Models for Lo
         </div>
       </div>
 <a href="cluster-rct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-bayesian-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

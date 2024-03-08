@@ -1,0 +1,31 @@
+# Crossover / random effects thoughts
+
+```{r}
+# Possible examples:
+epilepsy # good first one, no missing data
+
+BtheB # needs reformatting, lots of missing data
+
+ggpairs(select(BtheB, tidy_select::starts_with("bdi")), aes(col = BtheB$treatment), lower = list(continuous = "smooth"))
+
+
+sleepstudy 
+(fm1 <- lmer(Reaction ~ Days + (Days|Subject), sleepstudy, subset=Days>=2))
+## independent model - what does this notation mean?
+(fm2 <- lmer(Reaction ~ Days + (1|Subject) , sleepstudy, subset=Days>=2))
+```
+
+:::{.example}
+Not sure whether to include this @terbinafine - 5 visits usually. @davis1991semi talks about longitudinal data analysis for non-normal response variables.
+
+```{r}
+# respiratory would also work
+```
+
+```{r glm-toenail, echo=T}
+library(HSAUR3)
+gm2 <- glmer(outcome~treatment*visit+(1|patientID),
+                 data=toenail,
+                 family=binomial,nAGQ=20)
+```
+:::

@@ -289,32 +289,20 @@ Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\
 \end{equation}
 
 
-```{r}
-# Possible examples:
-epilepsy # good first one, no missing data
-
-BtheB # needs reformatting, lots of missing data
-
-ggpairs(select(BtheB, tidy_select::starts_with("bdi")), aes(col = BtheB$treatment), lower = list(continuous = "smooth"))
-
-
-sleepstudy 
-(fm1 <- lmer(Reaction ~ Days + (Days|Subject), sleepstudy, subset=Days>=2))
-## independent model - what does this notation mean?
-(fm2 <- lmer(Reaction ~ Days + (1|Subject) , sleepstudy, subset=Days>=2))
+```{r, echo=T, fig.height=1.6, fig.cap = "Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)."}
+## Including just time
+## Including more baseline covariates
+epi_3 = lmer(seizure.rate ~ base + age + treatment + period + (period|subject), data=epilepsy)
+summary(epi_3)
+pm1 = plot_model(epi_2)
+pm2 = plot_model(epi_3)
+grid.arrange(pm1, pm2, nrow=1)
 ```
 
-:::{.example}
-Not sure whether to include this @terbinafine - 5 visits usually. @davis1991semi talks about longitudinal data analysis for non-normal response variables.
+We see from the small variance for the random effect `period` that the gradients don't vary very much at all, and indeed the coefficients of the fixed effects are very similar to those for a fixed gradient.
 
-```{r}
-# respiratory would also work
-```
+### Summary {-}
 
-```{r glm-toenail, echo=T}
-library(HSAUR3)
-gm2 <- glmer(outcome~treatment*visit+(1|patientID),
-                 data=toenail,
-                 family=binomial,nAGQ=20)
-```
-:::
+In these two lectures we've seen that random effects can be a useful way to take care of correlation between outputs for clusters of measurements. 
+
+This clustering can be because participants are from some natural group (eg. a school, a family, a hospital) or it can be because repeated measurements are taken of the same participant. In either case, we'd expect the measurements within one cluster to be more highly correlated than those from different clusters.
