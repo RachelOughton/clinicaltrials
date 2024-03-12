@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-08" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -343,6 +343,27 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -547,7 +568,7 @@ where <span class="math inline">\(n,\,m\)</span> are the corresponding totals ov
 This means that <span class="math inline">\(e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j\)</span>.</p>
 <p>If we take the margins of the table (by which we mean <span class="math inline">\(n_j, \,d_j,\,n_{Cj}\)</span> and <span class="math inline">\(n_{Tj}\)</span>) as fixed, then <span class="math inline">\(d_{Cj}\)</span> has a <strong>hypergeometric distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-43" class="definition"><strong>Definition 8.1  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
+<p><span id="def:unlabeled-div-41" class="definition"><strong>Definition 8.1  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
 <p><span class="math display">\[p\left(X=k\mid{K,N,n}\right) = \frac{{\binom{K}{k}}{\binom{N-K}{n-k}}}{{\binom{N}{n}}}. \]</span>
 An example would be an urn containing 50 (<span class="math inline">\(N\)</span>) balls, of which 16 (<span class="math inline">\(K\)</span>) are green and the rest (34, <span class="math inline">\(N-K\)</span>) are red. If we draw 10 (<span class="math inline">\(n\)</span>) balls <strong>without replacement</strong>, <span class="math inline">\(X\)</span> is the random variable whose outcome is <span class="math inline">\(k\)</span>, the number of green balls drawn.</p>
 </div>
@@ -571,7 +592,7 @@ We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in th
 <p>It turns out that this test statistic is always smaller than <span class="math inline">\(\frac{U^2}{V}\)</span>, so this test is slightly more conservative (ie. it has a larger p-value).</p>
 <p>Notice that for both of these test statistics, the actual difference between observed and expected is used, not the absolute difference. Therefore if the differences change in sign over time, the values are likely to cancel out (at least to some extent) and the log-rank test is not appropriate.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-44" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
+<p><span id="exm:unlabeled-div-42" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
 <p>First, the ovarian cancer dataset. To do this, we can tabulate the key values at each time step.</p>
 <pre><code>##    Time n_Cj d_Cj      e_Cj n_Tj d_Tj      e_Tj n_j d_j
 ## 1    59   13    1 0.5000000   13    0 0.5000000  26   1
@@ -728,7 +749,7 @@ From Equation <a href="comparing-survival-curves.html#eq:sfun">(8.4)</a> we see 
 <p><span class="math display">\[S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.\]</span>
 Since the survival function is always between 0 and 1, we can see that the value of <span class="math inline">\(\psi\)</span> determines whether <span class="math inline">\(S_C\left(t\right)&lt;S_T\left(t\right)\)</span> (if <span class="math inline">\(\psi&gt;1\)</span>) or <span class="math inline">\(S_C\left(t\right)&gt;S_T\left(t\right)\)</span> (if <span class="math inline">\(0&lt;\psi&lt;1\)</span>). The important thing is that <strong>the survival curves will not cross</strong>. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. There are some more formal tests that can be conducted to assess the proportional hazards assumption, but we won’t go into them here.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-45" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
+<p><span id="exm:unlabeled-div-43" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
 <p>For the <code>ovarian</code> dataset</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="comparing-survival-curves.html#cb70-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx, <span class="at">data=</span>ovarian)</span></code></pre></div>
 <pre><code>## Call:

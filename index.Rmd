@@ -73,6 +73,7 @@ library(HSAUR3)
 library(sjPlot)
 library(lme4)
 library(GGally)
+library(RColorBrewer)
 ```
 
 # Welcome to Clinical Trials 4H! {-}

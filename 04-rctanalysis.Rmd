@@ -9,7 +9,7 @@ We're now in the post-trial stage. The trial has been run, and we have lots of d
 
 In this chapter we'll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we'll go on to look at other types of data.
 
-::: {.example} 
+::: {.example #captopril1} 
 To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
 
 The baseline and outcome blood pressure measurements (in mmHg) are shown in Table \@ref(tab:captoprildata). We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. @hommel1986effect say that the patients were 'randomly allocated' to their group.
@@ -43,7 +43,7 @@ This is very small dataset, and so in that respect it is quite unusual, but its 
 
 Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (often referred to as $X$) between the groups.
 
-::: {.example}
+::: {.example #captopril2}
 Summary statistics of the outcome for each group are shown below.
 
 ```{r}

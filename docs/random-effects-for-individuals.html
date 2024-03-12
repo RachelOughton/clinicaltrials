@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-08" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="cluster-rct.html"/>
-<link rel="next" href="computer-practical-1.html"/>
+<link rel="next" href="the-bayesian-approach.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -343,6 +343,27 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -496,7 +517,7 @@ d_i &amp; = x_{i1} - x_{i2} = \pi - \tau + \eta_i&amp; \text{ for } i=n_1+1,\,\l
 where <span class="math inline">\(\bar{d}_k\)</span> is the mean difference in group <span class="math inline">\(k\)</span>. We can therefore find a confidence interval by halving the limits of the usual confidence interval for the difference in two means.</p>
 <p>Another important point to note is that since we have eliminated the individual participant random effect <span class="math inline">\(\xi_i\)</span> from the analysis, the precision of the result depends only on <span class="math inline">\(\sigma^2_{\epsilon}\)</span>, and not on the between-individual variance <span class="math inline">\(\sigma^2_B\)</span>. This is especially good news in a scenario in which the measurement varies much more between individuals than within individuals. Intuitively this makes sense: it is best to use a patient as his or her own control.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-49" class="example"><strong>Example 10.1  </strong></span>For children with nocturnal enuresis (bed-wetting) a drug is available to potentially alleviate the problem, and in this trial the drug is to be compared with a placebo, and the treatment period is two weeks. Children in group A are given the drug first, followed by the placebo. Children in group B are given the placebo first, followed by the drug. The primary outcome variable is the number of dry nights out of the 14 night of each treatment period. The data are shown in Table <a href="random-effects-for-individuals.html#tab:enuresisdata">10.1</a>.</p>
+<p><span id="exm:unlabeled-div-47" class="example"><strong>Example 10.1  </strong></span>For children with nocturnal enuresis (bed-wetting) a drug is available to potentially alleviate the problem, and in this trial the drug is to be compared with a placebo, and the treatment period is two weeks. Children in group A are given the drug first, followed by the placebo. Children in group B are given the placebo first, followed by the drug. The primary outcome variable is the number of dry nights out of the 14 night of each treatment period. The data are shown in Table <a href="random-effects-for-individuals.html#tab:enuresisdata">10.1</a>.</p>
 <table class="kable_wrapper">
 <caption>
 <span id="tab:enuresisdata">Table 10.1: </span>Data for group A (left) and group B (right)
@@ -770,7 +791,7 @@ u_i&amp;\perp \epsilon_{ij}.
 \end{align*}\]</span></p>
 <p>This model is actually a one-way analysis of variance (ANOVA) model.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-50" class="example"><strong>Example 10.3  </strong></span>We can fit the empty model for the <code>epilepsy</code> data via</p>
+<p><span id="exm:unlabeled-div-48" class="example"><strong>Example 10.3  </strong></span>We can fit the empty model for the <code>epilepsy</code> data via</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="random-effects-for-individuals.html#cb102-1" tabindex="-1"></a>epi_0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject), <span class="at">data =</span> epilepsy)</span>
 <span id="cb102-2"><a href="random-effects-for-individuals.html#cb102-2" tabindex="-1"></a><span class="fu">summary</span>(epi_0)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
@@ -887,9 +908,6 @@ Figure 10.4: Confidence intervals for model with same gradient for all participa
 </div>
 </div>
 </div>
-
-
-
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-armitage1982two" class="csl-entry">
@@ -905,7 +923,7 @@ Thall, Peter F, and Stephen C Vail. 1990. <span>“Some Covariance Models for Lo
         </div>
       </div>
 <a href="cluster-rct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-bayesian-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

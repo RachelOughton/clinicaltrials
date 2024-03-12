@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10 The Bayesian Approach | Clinical Trials 4H</title>
+  <title>11 The Bayesian Approach | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10 The Bayesian Approach | Clinical Trials 4H" />
+  <meta property="og:title" content="11 The Bayesian Approach | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10 The Bayesian Approach | Clinical Trials 4H" />
+  <meta name="twitter:title" content="11 The Bayesian Approach | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-08" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cluster-rct.html"/>
+<link rel="prev" href="random-effects-for-individuals.html"/>
 <link rel="next" href="computer-practical-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -329,7 +329,41 @@ div.csl-indent {
 <li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-mixed-effects-models"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level: mixed effects models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>10</b> The Bayesian Approach</a></li>
+<li class="chapter" data-level="10" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html"><i class="fa fa-check"></i><b>10</b> Random effects for individuals</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#crossover-trials"><i class="fa fa-check"></i><b>10.1</b> Crossover trials</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-abba-design"><i class="fa fa-check"></i><b>10.1.1</b> The AB/BA design</a></li>
+<li class="chapter" data-level="10.1.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#analysis-of-the-abba-design"><i class="fa fa-check"></i><b>10.1.2</b> Analysis of the AB/BA design</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#longitudinal-data-repeated-measurements"><i class="fa fa-check"></i><b>10.2</b> Longitudinal data / repeated measurements</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#fitting-a-model"><i class="fa fa-check"></i><b>10.2.1</b> Fitting a model</a></li>
+<li class="chapter" data-level="10.2.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-empty-model"><i class="fa fa-check"></i><b>10.2.2</b> The empty model</a></li>
+<li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -393,29 +427,652 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-bayesian-approach" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">10</span> The Bayesian Approach<a href="the-bayesian-approach.html#the-bayesian-approach" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Introduction - waht is the frequentist set up we’ve been doing and what can we really say? Deductive vs inductive reasoning.</p>
-<p>Advantages of having a probability distribution about parameters (regions)</p>
-<p>Prior, likelihood, posterior</p>
-<p>Different sorts of prior
-- why this can be a good thing</p>
-<p>example - can I do streptomycin or some other early example? Or look in books? Don’t spend too long on this!</p>
-<p>Debate about whether decision theory should be included (by the fourth group of Bayesians) - argue not for same reasons as Spiegelhalter et.al - can’t produce a definitively optimal solution, because there are lots of very different utilities involved.</p>
-<p>Look into ethics of randomization - what even does this mean?
-Interim analysis</p>
-<p>More complex trial designs - check with Nicole about mentioning design for CoP project.</p>
+<div id="the-bayesian-approach" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> The Bayesian Approach<a href="the-bayesian-approach.html#the-bayesian-approach" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this course we have taken a consistently frequentist approach. The reason for this is mainly pragmatic rather than ideological: the frequentist approach is by far the most commonly used way to design and analyse clinical trials, and some organisations won’t even allow a Bayesian analysis.</p>
+<p>We aren’t going to cover the whole Bayesian approach in one lecture, but we’ll review some of the key differences, how the Bayesian approach to clinical trials works, and some advantages it has over frequentist methods (I’ll try to keep my least biased hat on). Two excellent sources for this are <span class="citation">Spiegelhalter, Freedman, and Parmar (<a href="#ref-spiegelhalter1994bayesian">1994</a>)</span> (be warned this one is quite long, but the first sections alone are very useful) and <span class="citation">Berry (<a href="#ref-berry2006bayesian">2006</a>)</span>. We’ll also illustrate the theory with some examples.</p>
+<p>You’ll have come across Bayesian methods at various points so far in other modules, but to varying extents, so we’ll approach things from a fairly elementary level.</p>
+<div id="the-fundamental-difference" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> The fundamental difference<a href="the-bayesian-approach.html#the-fundamental-difference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First, we’ll think a bit about exactly what’s happening when we use a frequentist approach to analysing a clinical trial.</p>
+<div id="the-frequentist-approach" class="section level3 unnumbered hasAnchor">
+<h3>The frequentist approach<a href="the-bayesian-approach.html#the-frequentist-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the frequentist approach, we view the underlying parameters <span class="math inline">\(\theta\)</span>, including for example the treatment effect (whatever form it takes), group means, correlations, variances and so on, as fixed quantities. We view the data <span class="math inline">\(X\)</span> as random, and as coming from some distribution governed by these fixed parameters. We might have different candidate values of these, most commonly a null hypothesis value of the treatment effect and an alternative hypothesis value.</p>
+<p>This means that all the inferences we make are in terms of how likely or unlikely the data we observe (<span class="math inline">\(\mathbf{x}\)</span>) are in terms of their having been generated by this distribution (usually in terms of the Null hypothesis distribution). We are led to quantities like</p>
+<ul>
+<li>the <span class="math inline">\(p\)</span>-value: the probability of seeing data at least this ‘unusual’ under <span class="math inline">\(H_0\)</span></li>
+<li><span class="math inline">\(100\left(1-\alpha\right)\%\)</span> confidence interval: the set of values of a parameter that cannot be rejected by a significance test performed at the <span class="math inline">\(100\left(1-\alpha\right)\%\)</span> level.</li>
+<li>Maximum likelihood estimators, or likelihood ratio statistics: thinking in terms of which parameter values make the observed data <span class="math inline">\(\mathbf{x}\)</span> somehow <em>the most likely</em></li>
+</ul>
+<p>Clearly none of these allow us to make direct statements about the treatment effect <span class="math inline">\(\tau\)</span>, for example the probability of it being within a certain range, or about any other parameter.</p>
+</div>
+<div id="the-bayesian-approach-1" class="section level3 unnumbered hasAnchor">
+<h3>The Bayesian approach<a href="the-bayesian-approach.html#the-bayesian-approach-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the notation of parameter(s) <span class="math inline">\(\theta\)</span> and data <span class="math inline">\(\mathbf{x}\)</span>, Bayes theorem is</p>
+<p><span class="math display">\[\begin{align*}
+p\left(\theta\mid{\mathbf{x}}\right) &amp;= \frac{p\left(\mathbf{x}\mid\theta\right)p\left(\theta\right)}{p\left(\mathbf{x}\right)}\\
+&amp;\propto p\left(\mathbf{x}\mid\theta\right)p\left(\theta\right).
+\end{align*}\]</span></p>
+<p>Notice that</p>
+<ul>
+<li><span class="math inline">\(p\left(\mathbf{x}\mid\theta\right)\)</span> is the <strong>likelihood</strong>, the same distribution we need in the frequentist approach</li>
+<li>We also need to specify a <strong>prior</strong> distribution <span class="math inline">\(p\left(\theta\right)\)</span></li>
+<li>We don’t need to specify / find <span class="math inline">\(p\left(\mathbf{x}\right)\)</span> because it doesn’t depend on <span class="math inline">\(\theta\)</span>, and we can find the one constant value that makes the numerator a legitimate probability distribution (ie. integrates to one) by other means.</li>
+</ul>
+<p>Above all, the most exciting thing is that we now have the <strong>posterior</strong> distribution, which is a probability distribution about the parameters <span class="math inline">\(\theta\)</span>, and which therefore allows us to make direct inferences and probability statements about any parameter, including the treatment effect <span class="math inline">\(\tau\)</span>. The Bayesian approach enables us to give a <em>direct answer</em> to the questions people actually ask, such as ‘what’s the probability the treatment effect is larger than 1?’</p>
+</div>
+</div>
+<div id="why-is-this-important" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Why is this important?<a href="the-bayesian-approach.html#why-is-this-important" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="making-probabilistic-statements-about-the-treatment-effect" class="section level3 unnumbered hasAnchor">
+<h3>Making probabilistic statements about the treatment effect<a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Throughout this course we’ve thought in terms of a single null hypothesis where the treatment appears to have no better or worse effect on the participants than the control (generally we have <span class="math inline">\(H_0:\; \tau=0\)</span>, though not always).</p>
+<p>Really however, this is quite a simplistic breakdown of the scenario. In reality, it may be that in addition to the treatment effect in terms of the primary outcome,</p>
+<ul>
+<li>one drug has much worse or more common side effects</li>
+<li>implementing the new treatment would be very expensive in terms of equipment, manufacture, training etc.</li>
+</ul>
+<p>In this case, we might decide that the treatment effect has to be greater than some value <span class="math inline">\(\tau_S\)</span> to be considered clinically superior, and similarly that it has to be less than <span class="math inline">\(\tau_I\)</span> to be considered clinically inferior. This is linked to the idea of the minimum clinically important difference / minimum detectable effect size, except that in the Bayesian paradigm we have much more flexibility to consider other important values too.</p>
+<p>We call the region <span class="math inline">\(\left(\tau_I,\,\tau_S\right)\)</span> the <em>range of equivalence</em>. Figure <a href="the-bayesian-approach.html#fig:spieg-ranges">11.1</a>, taken from <span class="citation">Spiegelhalter, Freedman, and Parmar (<a href="#ref-spiegelhalter1994bayesian">1994</a>)</span>, shows the clinically interesting possibilities for the treatment effect (our <span class="math inline">\(\tau\)</span>, but <span class="math inline">\(\delta\)</span> in <span class="citation">Spiegelhalter, Freedman, and Parmar (<a href="#ref-spiegelhalter1994bayesian">1994</a>)</span>). Given a posterior distribution for <span class="math inline">\(\tau\)</span>, we can calculate the probability of each of these outcomes. However that wouldn’t be possible in a frequentist framework.</p>
+<div class="figure"><span style="display:block;" id="fig:spieg-ranges"></span>
+<img src="images/bayesian_ranges.png" alt="Possible clinically interesting ranges for the treatment effect."  />
+<p class="caption">
+Figure 11.1: Possible clinically interesting ranges for the treatment effect.
+</p>
+</div>
+</div>
+<div id="sequential-analysis" class="section level3 unnumbered hasAnchor">
+<h3>Sequential analysis<a href="the-bayesian-approach.html#sequential-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In a frequentist setting, the result of the analysis (a p-value or confidence interval, say), depends on the trial design, because not only are we thinking about the data we observed, but we also include the notion of “other more extreme outcomes”. What these ‘more extreme outcomes’ are depends on how we’ve specified the trial design.</p>
+<p>For example, suppose we have a binary outcome <span class="math inline">\(X\)</span>, which can be 1 or 0, with unknown (but fixed) parameter <span class="math inline">\(\pi = p\left(X=1\right)\)</span>. We observe 10 realisations (in sequence) and find that our observed data are <span class="math inline">\(0, 0, 1, 0, 0, 1, 0, 0, 0, 1\)</span>. We will write <span class="math inline">\(n_1=3,\,n_0=7\)</span>. What would have been a ‘more extreme outcome’ than this?</p>
+<p>This notion depends on two things:</p>
+<ul>
+<li>The null value of <span class="math inline">\(\pi\)</span>, which we’ll call <span class="math inline">\(\pi_0\)</span> (so <span class="math inline">\(H_0: \pi=\pi_0\)</span>)</li>
+<li>The experimental design, and in particular the point at which we planned to stop making observations.</li>
+</ul>
+<p>If our plan was to take 10 observations and record <span class="math inline">\(n_1\)</span>, then</p>
+<ul>
+<li>for <span class="math inline">\(\pi_0&lt;0.3\)</span>, <span class="math inline">\(n_1 &gt; 3\)</span> would be ‘more extreme’.</li>
+<li>for <span class="math inline">\(\pi_0&gt;0.3\)</span>, <span class="math inline">\(n_1 = 0,1,2\)</span> would all be ‘more extreme’.</li>
+</ul>
+<p>Secondly, it could be that our plan was to keep taking observations until we had <span class="math inline">\(n_1=3\)</span>. If that was our design, then our outcome really is that it took <span class="math inline">\(n_{stop}=10\)</span> observations. In this case, then</p>
+<ul>
+<li>for <span class="math inline">\(\pi_0&lt;0.3\)</span>, then an outcome <span class="math inline">\(n_{stop}&lt;10\)</span> would be ‘more extreme’ (since we expect it to take longer to find three ones)</li>
+<li>for <span class="math inline">\(\pi_0&gt;0.3\)</span> then an outcome of <span class="math inline">\(n_{stop}&gt;10\)</span> would be ‘more extreme’.</li>
+</ul>
+<p>To do an analysis we’ll have to specify some values, but we’ll keep to <span class="math inline">\(\pi_0&gt;0.3\)</span> now.</p>
+<p>For the first type of design (observing 10 in total) we can find the probability of each possible outcome, shown in Table <a href="the-bayesian-approach.html#tab:bin1">11.1</a> for <span class="math inline">\(\pi_0=0.4\)</span> and <span class="math inline">\(\pi_0=0.8\)</span>. To find the p-values associated with our observation <span class="math inline">\(n_1=3\)</span>, we need the cumulative probability for each outcome, and these are shown in Table <a href="the-bayesian-approach.html#tab:bin1">11.1</a>.</p>
+<table class="kable_wrapper">
+<caption>
+<span id="tab:bin1">Table 11.1: </span>Probabilities for all possible outcomes (left) and cumulative probabilities (right) for the design where we make 10 observations
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">pi[0]=0.4</th>
+<th align="right">pi[0]=0.8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">N1=0</td>
+<td align="right">0.006</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">N1=1</td>
+<td align="right">0.040</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=2</td>
+<td align="right">0.121</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">N1=3</td>
+<td align="right">0.215</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=4</td>
+<td align="right">0.251</td>
+<td align="right">0.006</td>
+</tr>
+<tr class="even">
+<td align="left">N1=5</td>
+<td align="right">0.201</td>
+<td align="right">0.026</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=6</td>
+<td align="right">0.111</td>
+<td align="right">0.088</td>
+</tr>
+<tr class="even">
+<td align="left">N1=7</td>
+<td align="right">0.042</td>
+<td align="right">0.201</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=8</td>
+<td align="right">0.011</td>
+<td align="right">0.302</td>
+</tr>
+<tr class="even">
+<td align="left">N1=9</td>
+<td align="right">0.002</td>
+<td align="right">0.268</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=10</td>
+<td align="right">0.000</td>
+<td align="right">0.107</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">pi[0]=0.4</th>
+<th align="right">pi[0]=0.8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">N1=0</td>
+<td align="right">0.006</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">N1=1</td>
+<td align="right">0.046</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=2</td>
+<td align="right">0.167</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">N1=3</td>
+<td align="right">0.382</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=4</td>
+<td align="right">0.633</td>
+<td align="right">0.006</td>
+</tr>
+<tr class="even">
+<td align="left">N1=5</td>
+<td align="right">0.834</td>
+<td align="right">0.033</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=6</td>
+<td align="right">0.945</td>
+<td align="right">0.121</td>
+</tr>
+<tr class="even">
+<td align="left">N1=7</td>
+<td align="right">0.988</td>
+<td align="right">0.322</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=8</td>
+<td align="right">0.998</td>
+<td align="right">0.624</td>
+</tr>
+<tr class="even">
+<td align="left">N1=9</td>
+<td align="right">1.000</td>
+<td align="right">0.893</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=10</td>
+<td align="right">1.000</td>
+<td align="right">1.000</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>So we see that if <span class="math inline">\(\pi_0=0.4\)</span>, our p-value is 0.382, whereas if <span class="math inline">\(\pi_0=0.8\)</span>, our p-value is 0.000864 (rounded in the table). We can’t say anything (much) about other possible values of <span class="math inline">\(\pi_0\)</span>, or make any probabilistic statement about the value of <span class="math inline">\(\pi\)</span>. We can only say that our observation of <span class="math inline">\(n_1=3\)</span> is quite unremarkable if <span class="math inline">\(pi_0=0.4\)</span>, but very unlikely if <span class="math inline">\(\pi_0=0.8\)</span>.</p>
+<p>For our other possible design, where we stop after observing three 1’s, the possible values of <span class="math inline">\(n_{stop}\)</span> are three and above.
+We can find the probability of each possible value by</p>
+<p><span class="math display">\[ \binom{n-1}{2} \pi_0^3\left(1-\pi_0\right)^{n-3}.\]</span>
+The first term comes from the fact that the first two observations of <span class="math inline">\(X=1\)</span> can be distributed anywhere through the first <span class="math inline">\(n-1\)</span> realisations, but to have <span class="math inline">\(n_{stop}=n\)</span> the <span class="math inline">\(n^{th}\)</span> observation must be 1.</p>
+<p>We can make the same tables for [some] possible outcomes of <span class="math inline">\(n_{stop}\)</span>, and these are shown in Table <a href="the-bayesian-approach.html#tab:bin2">11.2</a>.</p>
+<table class="kable_wrapper">
+<caption>
+<span id="tab:bin2">Table 11.2: </span>Probabilities for all possible outcomes (left) and cumulative probabilities (right) when we stop after the third observation of X=1.
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">pi[0]=0.4</th>
+<th align="right">pi[0]=0.8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Nstop=3</td>
+<td align="right">0.064</td>
+<td align="right">0.512</td>
+</tr>
+<tr class="even">
+<td align="left">Nstop=4</td>
+<td align="right">0.115</td>
+<td align="right">0.307</td>
+</tr>
+<tr class="odd">
+<td align="left">Nstop=5</td>
+<td align="right">0.138</td>
+<td align="right">0.123</td>
+</tr>
+<tr class="even">
+<td align="left">Nstop=6</td>
+<td align="right">0.138</td>
+<td align="right">0.041</td>
+</tr>
+<tr class="odd">
+<td align="left">Nstop=7</td>
+<td align="right">0.124</td>
+<td align="right">0.012</td>
+</tr>
+<tr class="even">
+<td align="left">Nstop=8</td>
+<td align="right">0.105</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="left">Nstop=9</td>
+<td align="right">0.084</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Nstop=10</td>
+<td align="right">0.064</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Nstop=11</td>
+<td align="right">0.048</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Nstop=12</td>
+<td align="right">0.035</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Nstop=13</td>
+<td align="right">0.026</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Nstop=14</td>
+<td align="right">0.018</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Nstop=15</td>
+<td align="right">0.013</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">pi[0]=0.4</th>
+<th align="right">pi[0]=0.8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">N1=3</td>
+<td align="right">0.064</td>
+<td align="right">0.512</td>
+</tr>
+<tr class="even">
+<td align="left">N1=4</td>
+<td align="right">0.179</td>
+<td align="right">0.819</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=5</td>
+<td align="right">0.317</td>
+<td align="right">0.942</td>
+</tr>
+<tr class="even">
+<td align="left">N1=6</td>
+<td align="right">0.456</td>
+<td align="right">0.983</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=7</td>
+<td align="right">0.580</td>
+<td align="right">0.995</td>
+</tr>
+<tr class="even">
+<td align="left">N1=8</td>
+<td align="right">0.685</td>
+<td align="right">0.999</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=9</td>
+<td align="right">0.768</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="even">
+<td align="left">N1=10</td>
+<td align="right">0.833</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=11</td>
+<td align="right">0.881</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="even">
+<td align="left">N1=12</td>
+<td align="right">0.917</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=13</td>
+<td align="right">0.942</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="even">
+<td align="left">N1=14</td>
+<td align="right">0.960</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="odd">
+<td align="left">N1=15</td>
+<td align="right">0.973</td>
+<td align="right">1.000</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To find the p-value for our observation <span class="math inline">\(n_{stop}=10\)</span> we need to take one minus the cumulative probability, since it’s all the larger values of <span class="math inline">\(n\)</span> that are ‘more extreme’. So for <span class="math inline">\(\pi_0=0.4\)</span> we have <span class="math inline">\(p=1-0.833 = 0.1873\)</span>, and for <span class="math inline">\(\pi_0=0.8\)</span> we have <span class="math inline">\(p=1-0.9999 = 7.79\times{10^{-5}}\)</span>. For exactly the same sequence of observations, we have two different p-values (for each value of <span class="math inline">\(\pi_0\)</span>) depending on what our plan was. We’ve done one-sided p-values (boo!) for simplicity, but if we included the more extreme values in the other direction we’d still have this issue.</p>
+<p>Notice also that to calculate the p-value (or any other subsequent things like confidence intervals) we had to complete the trial as planned, since only then can we specify all the ‘more extreme’ outcomes.</p>
+<div id="the-bayesian-approach-2" class="section level4 hasAnchor" number="11.2.0.1">
+<h4><span class="header-section-number">11.2.0.1</span> The Bayesian approach<a href="the-bayesian-approach.html#the-bayesian-approach-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Instead of specifying a null value for <span class="math inline">\(\pi\)</span>, we specify a prior distribution. Since we have no context, and therefore no idea what <span class="math inline">\(\pi\)</span> could be, we’ll set</p>
+<p><span class="math display">\[\pi \sim \operatorname{Unif}\,\left[0,\,1\right], \]</span>
+so</p>
+<p><span class="math display">\[
+p\left(\pi\right) =
+\begin{cases}
+1 &amp; \pi \in \left[0,1\right]\\
+0 &amp; \text{otherwise.}
+\end{cases}
+\]</span>
+We also need to specify a likelihood, to say what process is generating the data. It seems pretty reasonable to say that</p>
+<p><span class="math display">\[\begin{align*}
+X\mid\pi &amp; \sim \operatorname{Binom}\left(n,\pi\right)\\
+p\left(X\mid{\pi}\right) &amp; = \binom{n}{X} \pi^X \left(1-\pi\right)^{n-X}
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of observations made, and <span class="math inline">\(\pi\)</span> is the unknown probability parameter. Since the prior is a constant, this means our posterior is</p>
+<p><span class="math display">\[\begin{align*}
+p\left(\pi\mid x\right) &amp; \propto \binom{n}{X} \pi^X \left(1-\pi\right)^{n-X}\\
+&amp;\propto \pi^X \left(1-\pi\right)^{n-X},
+\end{align*}\]</span></p>
+<p>which is a Beta distribution with parameters <span class="math inline">\(\alpha=X+1,\,\beta=n-X+1\)</span>.</p>
+<p>So, we can say that after our observations 0,0,1,0,0,1,0,0,0,1 we have <span class="math inline">\(n=10,\,X=3\)</span> and therefore <span class="math inline">\(\alpha=4,\,\beta=8\)</span>, which has the shape in Figure <a href="the-bayesian-approach.html#fig:betafinal">11.2</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:betafinal"></span>
+<img src="CT4H_notes_files/figure-html/betafinal-1.png" alt="The posterior distribution after all 10 observations" width="672" />
+<p class="caption">
+Figure 11.2: The posterior distribution after all 10 observations
+</p>
+</div>
+<p>However we aren’t limited to this: we can update the posterior after any number of observations. For example, Figure <a href="the-bayesian-approach.html#fig:betaplots">11.3</a> shows the posterior after each of the observations in the sequence we’ve listed them.</p>
+<div class="figure"><span style="display:block;" id="fig:betaplots"></span>
+<img src="CT4H_notes_files/figure-html/betaplots-1.png" alt="Posterior distribution after each observation in sequence, starting with a uniform prior for pi" width="672" />
+<p class="caption">
+Figure 11.3: Posterior distribution after each observation in sequence, starting with a uniform prior for pi
+</p>
+</div>
+<p>If we were to carry on to 100, 500 and 1000 observations, still with a proportion of 0.3, the posterior variance would keep decreasing, as shown in Figure <a href="the-bayesian-approach.html#fig:betaplotmega">11.4</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:betaplotmega"></span>
+<img src="CT4H_notes_files/figure-html/betaplotmega-1.png" alt="Posterior distribution after 100, 500 and 1000 observations (mainting the sample estimate p=0.3)" width="672" />
+<p class="caption">
+Figure 11.4: Posterior distribution after 100, 500 and 1000 observations (mainting the sample estimate p=0.3)
+</p>
+</div>
+<p>In a clinical trial setting, the parameter in question would usually be the treatment effect <span class="math inline">\(\tau\)</span>, whatever form that takes. The important point is that after any number of observations, we can make probabilistic statements about <span class="math inline">\(\tau\)</span> (or any other parameter). This fact is often used to guide the trial process (this is described in a lot more detail in the articles mentioned earlier).</p>
+</div>
+</div>
+</div>
+<div id="how-do-we-choose-a-prior" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> How do we choose a prior?<a href="the-bayesian-approach.html#how-do-we-choose-a-prior" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Having established that there are some big advantages to following the Bayesian route, why doesn’t everyone do that?!</p>
+<p>One of the biggest barriers is that the choice of the prior distribution is inherently (and obviously) subjective: it represents the current understanding about the parameter(s) of interest (excluding any information from the trial), and different people could have different information. The information used to construct the prior could come from various sources: previous related trials, historical databases, animal data etc., but each of these will need some interpretation before it can be applied to the new trial. This subjectivity can be off-putting to people who are used to considering science and statistics to be objective.</p>
+<p>NOTE: There is a lot of hidden subjectivity in the frequentist approach too (choice of hypotheses, choice of model etc.). <span class="citation">Berger and Berry (<a href="#ref-berger1988statistical">1988</a>)</span> is an excellent (and fairly short) article if you want to consider this more.</p>
+<p>All this means that any prior is inherent to one person (or group of people) and might not be acceptable to anyone else (eg. a regulating body). Whereas in the freqentist approach there are accepted ways of doing things (so that the subjectivity is generally hidden), there is no accepted ‘correct’ prior.</p>
+<p>The usual solution to this is to use a selection or ‘community’ of prior distributions. Four of the main types (outlined by <span class="citation">Spiegelhalter, Freedman, and Parmar (<a href="#ref-spiegelhalter1994bayesian">1994</a>)</span>) are….</p>
+<div id="a-reference-prior" class="section level3 unnumbered hasAnchor">
+<h3>A reference prior<a href="the-bayesian-approach.html#a-reference-prior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The idea of the reference prior is to contribute as little information as possible - you can read about how they are derived in <span class="citation">Berger, Bernardo, and Sun (<a href="#ref-berger2009formal">2009</a>)</span>. Sometimes the formulation leads to the prior being <em>improper</em>, meaning it doesn’t integrate to one.</p>
+<p>Although this all sounds quite good (apart from the improper bit), you could argue that these are the least realistic prior. Very extreme values of the treatment effect will be [nearly] equally weighted to ones that are realistic, and this almost certainly doesn’t reflect anyone’s actual beliefs. ‘Proper’ Bayesians look down on these priors.</p>
+</div>
+<div id="a-clinical-prior" class="section level3 unnumbered hasAnchor">
+<h3>A clinical prior<a href="the-bayesian-approach.html#a-clinical-prior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This type of trial is intended to formally represent the opinion of well-informed individuals, often the trial clinicians themselves. Deriving this type of trial therefore involves a thorough elicitation process, where many specific questions are asked to pin down people’s beliefs, and various sources of information can be considered. Figure <a href="the-bayesian-approach.html#fig:spieg-elicit">11.5</a> (taken from <span class="citation">Spiegelhalter, Freedman, and Parmar (<a href="#ref-spiegelhalter1994bayesian">1994</a>)</span>) shows results of prior elicitation with nine clinicians for a trial of CHART, a cancer treatment.</p>
+<div class="figure"><span style="display:block;" id="fig:spieg-elicit"></span>
+<img src="images/spieg_elicit.png" alt="A table showing the results of prior elicitation with 9 clinicians."  />
+<p class="caption">
+Figure 11.5: A table showing the results of prior elicitation with 9 clinicians.
+</p>
+</div>
+<p><span class="citation">Spiegelhalter, Abrams, and Myles (<a href="#ref-spiegelhalter2004bayesian">2004</a>)</span> has a lot of detail about prior elicitation for clinical trials, so this is well worth a read.</p>
+</div>
+<div id="a-sceptical-prior" class="section level3 unnumbered hasAnchor">
+<h3>A sceptical prior<a href="the-bayesian-approach.html#a-sceptical-prior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A sceptical prior is designed to represent the beliefs of someone who doesn’t think the treatment will work, but is theoretically able to be brought round by sufficient data (a <em>reasonable</em> sceptic). A sceptical prior is often symmetric around a treatment effect of zero, with the variance chosen such that <span class="math inline">\(p\left(\tau&gt;\tau_S\right) = \gamma\)</span> (assuming <span class="math inline">\(\tau_S&gt;0\)</span>), for some small value <span class="math inline">\(\gamma\)</span>.</p>
+<p>Sceptical priors are probably the most popular with regulatory bodies, since they have both consistency and caution.</p>
+</div>
+<div id="an-optimistic-enthusiastic-prior" class="section level3 unnumbered hasAnchor">
+<h3>An optimistic / enthusiastic prior<a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An enthusiastic prior is similar to the sceptical prior, but is this time centred on the alternative hypothesis value (usually <span class="math inline">\(\tau_S\)</span>), with <span class="math inline">\(p\left(\tau&lt;0\right) = \gamma\)</span> (remember in this discussion we’re assuming <span class="math inline">\(\tau&gt;0\)</span> is good), for some small value <span class="math inline">\(\gamma\)</span>. The philosophical argument for this prior is that it encourages conservatism in the face of early negative results.</p>
+<p>The more data are observed, the less effect the form of the prior will have on the posterior, but for small trials, or for the early stages of a large trial, the prior distribution is very influential.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-49" class="example"><strong>Example 11.1  </strong></span>To demonstrate the Bayesian approach to a simple RCT we’ll revisit the Captopril example we used in Chapter <a href="rct-analysis.html#rct-analysis">4</a>, starting with Example <a href="rct-analysis.html#exm:captopril1">4.1</a>, and will apply the very simplest Bayesian model in <span class="citation">Spiegelhalter, Freedman, and Parmar (<a href="#ref-spiegelhalter1994bayesian">1994</a>)</span>. The dataset summarises a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. The primary outcome of the trial is blood pressure (measured in mmHg) and for the drug to be effective we need to see a decrease in blood pressure in the treatment group, compared to the control (so here, <span class="math inline">\(\tau&lt;0\)</span> is good).</p>
+<p>The aim of the trial is to learn about the treatment effect <span class="math inline">\(\tau\)</span>, with <span class="math inline">\(\tau = \mu_T - \mu_C\)</span>, the difference between outcome blood pressure for the two groups. After <span class="math inline">\(m\)</span> observations we will have an observed value <span class="math inline">\(\bar{x}_{diff} = \bar{x}_T - \bar{x}_C\)</span>. Our likelihood for this will be</p>
+<p><span class="math display">\[ \bar{x}_{diff}\mid{\tau} \sim N\left(\tau,\,\frac{\sigma^2}{m}\right).\]</span>
+In this example we consider <span class="math inline">\(\sigma^2\)</span> to be known, and we’ll estimate it using the idea that individual responses are assumed to be normally distributed with variance <span class="math inline">\(\frac{\sigma^2}{2}\)</span>. From example <a href="rct-analysis.html#exm:captopril2">4.2</a> a reasonable value for <span class="math inline">\(\sigma\)</span> would be the pooled SD, 7.82 mmHg, so <span class="math inline">\(\sigma^2 = 61.1524\)</span>.</p>
+<p>Our prior distribution will also be normal:</p>
+<p><span class="math display">\[\tau \sim N\left(\tau_0,\,\frac{\sigma^2}{n_0}\right),\]</span>
+where <span class="math inline">\(\tau_0\)</span> is the prior mean, and this prior is equivalent to a normalised likelihood arising from a trial of <span class="math inline">\(n_0\)</span> patients and an observed value of <span class="math inline">\(\tau_0\)</span>.</p>
+<p>Finally, we combine these to find the posterior. Because of the simple way we have set things up, the posterior is also normal:</p>
+<p><span class="math display" id="eq:bayespost">\[\begin{equation}
+\tau\mid{\bar{x}_{diff}} \sim N\left(\frac{n_0\tau_0 + m\bar{x}_{diff}}{n_0 + m},\,\frac{\sigma^2}{n_0+m}\right).
+\tag{11.1}
+\end{equation}\]</span></p>
+<p>As discussed above, we will use a <em>community</em> of priors.</p>
+<p>The <strong>reference prior</strong> in this case is the limit when <span class="math inline">\(n_0 \rightarrow 0\)</span>. Clearly this makes the prior improper (essentially a uniform distribution over the range of <span class="math inline">\(\tau\)</span>), but the resulting posterior is proper.</p>
+<p>The original paper <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> doesn’t give a minimum detectable effect size (there is no sample size calculation since they use every available patient who fits the criteria), so after a bit of googling we will say that <span class="math inline">\(\tau_S=-5\)</span>mmHg, so if <span class="math inline">\(\tau&lt;-5\)</span>mmHG then that makes the treatment clinically superior.</p>
+<p>This allows us to define the sceptical and enthusiastic priors. For the <strong>sceptical prior</strong> <span class="math inline">\(p^s_0\left(\tau\right)\)</span>, we will have <span class="math inline">\(\tau_0=0\)</span>, representing the expectation that the treatment will be ineffective. One approach is to choose <span class="math inline">\(n_0\)</span> such that <span class="math inline">\(p^s_0\left(\tau&lt;-5\right) = \gamma\)</span>, where <span class="math inline">\(\gamma\)</span> is some small number; we will set <span class="math inline">\(\gamma=0.1\)</span>. Using</p>
+<p><span class="math display">\[\Phi\left(\frac{5}{\sigma/\sqrt{n_0}}\right) = 0.9 = \Phi\left(\underbrace{1.28}_{\texttt{qnorm(0.9)}} \right)\]</span>
+we find <span class="math inline">\(n_0 = 4.017\)</span>, so the sceptical prior is</p>
+<p><span class="math display">\[\tau \sim N\left(0, \frac{\sigma^2}{4.017}\right).\]</span></p>
+<p>An <strong>enthusiastic prior</strong> is centred around <span class="math inline">\(\tau_s\)</span> and should have probability <span class="math inline">\(\gamma\)</span> that <span class="math inline">\(\tau&gt;0\)</span>, so we have the same variance (and hence same <span class="math inline">\(n_0\)</span>), but the prior mean will be -5 mmHg. So, the enthusiastic prior is</p>
+<p><span class="math display">\[\tau \sim N\left(-5, \frac{\sigma^2}{4.017}\right).\]</span></p>
+<p>This means we have three posteriors, one for each prior, given by Equation <a href="the-bayesian-approach.html#eq:bayespost">(11.1)</a> and shown in Figure <a href="the-bayesian-approach.html#fig:simplebayes">11.6</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:simplebayes"></span>
+<img src="CT4H_notes_files/figure-html/simplebayes-1.png" alt="Priors (dashed lines) and posteriors (solid lines) for the Captopril data, for three different prior distributions (shown by legend)." width="672" />
+<p class="caption">
+Figure 11.6: Priors (dashed lines) and posteriors (solid lines) for the Captopril data, for three different prior distributions (shown by legend).
+</p>
+</div>
+<p>We see that</p>
+<ol style="list-style-type: decimal">
+<li>Despite the different priors, even with this small dataset the posteriors are quite close.</li>
+<li>With any of the posteriors, we are able to make probabilistic statements about the value of <span class="math inline">\(\tau\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="more-complex-trials" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> More complex trials<a href="the-bayesian-approach.html#more-complex-trials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Another big advantage of the Bayesian approach is that it can be used to model much more complicated trials, and we have great flexibility of trial design because we can make use of conditional probability to specify our model. Even if the posterior distribution is analytically intractable, we can make use of sampling schemes like MCMC to sample from it, so that we can understand its shape very well. If you’ve taken Bayesian Computational Modelling III this will probably fall into place more clearly than if you haven’t. Here we will mostly demonstrate this through an example.</p>
+<div class="example">
+<p><span id="exm:cop" class="example"><strong>Example 11.2  </strong></span>This example is about a study I’m involved in at the moment, sponsored by the College of Policing. It’s not actually a randomized trial, because it wasn’t considered ethical or practical to randomize. Instead, all victims within the participating police regions are in the treatment group, and a large number of similar cases from other police areas are used as controls.</p>
+<p><img src="images/smartwater.png" /><!-- --></p>
+<p>The trial is about a forensic marking device called SmartWater, and about whether it improves outcomes in domestic violence situations where the perpetrator has been ordered to stay away from the victim. Specifically:</p>
+<ul>
+<li>Does it deter perpetrators from reoffending?</li>
+<li>Does it increase the proportion of reoffenders who are brought to justice?</li>
+</ul>
+<p>Victims are given forensic marking kits, containing a gel with which to mark parts of their property (door handles, gates etc.) and a spray canister that they can use to mark the perpetrator from a distance, should they appear nearby. Perpetrators have been informed that forensic equipment was now being used to protect their ex-partner. SmartWater has been used for forensic protection of shops and other premises for a number of years (see headline above), but it’s only very recently that it’s been deployed to protect victims of domestic violence (mostly in West and South Yorkshre) - you can read about it <a href="https://www.bbc.co.uk/news/technology-60414452">here</a>.</p>
+<p>In our trial, several police areas (West Yorkshire, Hampshire, Durham and Staffordshire) will between them deploy several hundred forensic marking kits to victims of domestic violence for whom the perpetrator has a police order to stay away (eg. a restraining order). This group forms the treatment group. A larger group will be identified from other police regions, matched for various characteristics.</p>
+<p>For each participant, the output measures are all binary variables:</p>
+<ul>
+<li><span class="math inline">\(X^{CO}\)</span>: Whether or not there were any police call outs (crimed or non-crimed incidents) in the follow-up period</li>
+<li><span class="math inline">\(X^{Arr}\)</span>: Whether or not there were any arrests in the follow-up period</li>
+<li><span class="math inline">\(X^{Ch}\)</span>: Whether or not there were any charges in the follow-up period</li>
+<li><span class="math inline">\(X^{Conv}\)</span>: Whether or not there were any convictions</li>
+</ul>
+<p>These form a nested structure: if there were no police call outs, there definitely won’t have been any arrests. Similarly, if there were no arrests, there will have been no charges, and so on.</p>
+<p>We will model each of the outcomes as being Bernoulli(<span class="math inline">\(\pi^{Ev}\)</span>) where <span class="math inline">\(\pi^{Ev}\)</span> is the probability of the event in question (call-out, arrest etc.). We might reasonably expect that these probabilities depend on a number of characteristics, and in the real analysis we’ll definitely include some, but here the only one we’ll consider is <span class="math inline">\(G_i\)</span>, whether the participant was in the treatment group (and had been given the forensic marking equipment) or not.</p>
+<p>Because the <span class="math inline">\(\pi^{Ev}\)</span> are on the probability scale, we’ll use the logit transform, so that</p>
+<p><span class="math display">\[
+\pi^{Ev} =
+\begin{cases}
+\operatorname{logit}^{-1}\left( \alpha^{Ev} + \beta^{Ev}G_i\right) &amp; \text{ if }X^{Ev-1}=1\\
+0 &amp; \text{ if } X^{Ev-1}=0
+\end{cases}
+\]</span></p>
+<p>for some parameters <span class="math inline">\(\alpha^{Ev},\,\beta^{Ev}\)</span>, where <span class="math inline">\(X^{Ev-1}\)</span> is the event from the ‘level up’. So, for example, if <span class="math inline">\(X^{CO}=0\)</span> then <span class="math inline">\(\pi^{Arr}=0\)</span>.</p>
+<p>Therefore the structure of the model is as shown in Figure <a href="the-bayesian-approach.html#fig:cop-model">11.7</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:cop-model"></span>
+<img src="images/copmodel.png" alt="The structure of the model for this trial." width="60%" />
+<p class="caption">
+Figure 11.7: The structure of the model for this trial.
+</p>
+</div>
+<p>The study is ongoing, so here we’ll do a simulation study. This uses Stan (<span class="citation">Stan Development Team (<a href="#ref-rstan">2024</a>)</span>), which you’ll have used too if you did Bayesian Computational modelling, but don’t worry if you haven’t seen it before.</p>
+<p>We’ll focus on the first and last levels of the model: call-outs and convictions. This is partly for simplicity, and partly because they’re the incidents for which I have been given ball-park estimates of probabilities in the general population. So, our model is</p>
+<p><span class="math display">\[\begin{align*}
+X_i^{CO}\mid \alpha^{CO},\,\beta^{CO} &amp; \sim \operatorname{Bernoulli}\left(\pi_i^{CO}\right)\\
+\pi^{CO}_i&amp; = \operatorname{logit}^{-1}\left(\alpha^{CO} + \beta^{CO} G_i\right)\\
+X_i^{conv}\mid X_i^{CO},\,\alpha^{conv}, \, \beta^{conv} &amp; \sim \operatorname{Bernoulli}\left(\pi_i^{conv}\right)\\
+\pi^{conv}_i&amp; =
+\begin{cases}
+\operatorname{logit}^{-1}\left(\alpha^{conv} + \beta^{conv} G_i\right)&amp;\text{if }x^{CO}_i=1\\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{align*}\]</span></p>
+<p>We can also specify prior distributions for <span class="math inline">\(\alpha^{CO},\,\beta^{CO},\,\alpha^{conv},\,\beta^{conv}\)</span>, although if we don’t then Stan will assume a non-informative prior. Natural choices for informative priors would be normal distributions, since theoretically these parameters can take any value in <span class="math inline">\(\mathbb{R}\)</span>, but in this example we’ll stick with the default non-informative Stan priors.</p>
+<p>For the simulation study, we’ll fix <span class="math inline">\(\alpha^{CO},\beta^{CO}, \alpha^{conv}\)</span> and <span class="math inline">\(\beta^{conv}\)</span> and simulate from the model described above to produce a group of participants.</p>
+<p>First, with any Stan model it’s sensible to simulate a large dataset, to check that the model can learn the parameters correctly. Figure <a href="the-bayesian-approach.html#fig:check8000">11.8</a> shows the results with 8000 participants (4000 in each group), where in the simulation I specified <span class="math inline">\(\alpha^{CO}=-0.9,\,\beta^{CO}=-1,\,\alpha^{conv}=-2,\,\beta^{conv}=1\)</span>. The <span class="math inline">\(\alpha\)</span> values lead to fairly realistic values of <span class="math inline">\(\pi^{CO} = 0.289\)</span> and <span class="math inline">\(\pi^{conv} = 0.119\)</span>. The <span class="math inline">\(\beta\)</span> values are chosen to give some treatment effect - we’ll experiment with the values a bit later. Notice that we want <span class="math inline">\(\beta^{CO}&lt;0\)</span> (fewer callouts resulting from the deterrent effect) and <span class="math inline">\(\beta^{conv}&gt;0\)</span> (more convictions for those who did have a callout).</p>
+<div class="figure"><span style="display:block;" id="fig:check8000"></span>
+<img src="images/stan_np8000.png" alt="Posterior credible intervals for each parameter with 8000 participants."  />
+<p class="caption">
+Figure 11.8: Posterior credible intervals for each parameter with 8000 participants.
+</p>
+</div>
+<p>Now that we’ve established the model is doing what it’s meant to, we can experiment with some more realistic scenarios.
+There are around 400 people in the intervention group, so let’s see what sorts of treatment differences we can detect with that number of participants. We’ll keep the values of the parameters in the simulation the same for now.</p>
+<p>Figure <a href="the-bayesian-approach.html#fig:par800">11.9</a> shows the posterior densities for the four parameters. We see that the true values are well within the distributions for each parameter. We also see that the two <span class="math inline">\(\beta\)</span> distributions are well away from 0, indicating that with these numbers, we can be confident there is a deterrant effect and an increased conviction effect.</p>
+<div class="figure"><span style="display:block;" id="fig:par800"></span>
+<img src="images/ggpostparam800.png" alt="Posterior densities with 800 participants"  />
+<p class="caption">
+Figure 11.9: Posterior densities with 800 participants
+</p>
+</div>
+<p>These values aren’t especially meaningful to a clinician (or in this case, a criminologist) so a helpful things is to use the posterior samples of the <span class="math inline">\(\alpha^{Ev},\,\beta^{Ev}\)</span> to find the posterior samples of <span class="math inline">\(\pi^{Ev}\)</span> (for cases where <span class="math inline">\(X^{Ev-1}=1\)</span>).
+Figure <a href="the-bayesian-approach.html#fig:check800">11.10</a> shows the posterior densities of the probabilities of callouts and convictions for the two groups.</p>
+<div class="figure"><span style="display:block;" id="fig:check800"></span>
+<img src="images/ggpost800.png" alt="Posterior densities for the probabilities of callout and arrest, with 800 participants." width="100%" />
+<p class="caption">
+Figure 11.10: Posterior densities for the probabilities of callout and arrest, with 800 participants.
+</p>
+</div>
+<p>We could use the posterior samples to calculate the probabilities for various ranges, for example <span class="math inline">\(\beta^{CO}&lt;0\)</span> or <span class="math inline">\(\beta^{conv}&gt;0\)</span>, to help inform decision making.</p>
+<p>One last thing we’ll try is to reduce the treatment effect, to see what the effect is on the posterior densities. We’ll still have 800 participants, and <span class="math inline">\(\alpha^{CO}=-0.9,\,\alpha^{conv}=-2\)</span> but we’ll change to <span class="math inline">\(\beta^{CO}=-0.5,\,\,\beta^{conv}=0.5\)</span>.</p>
+<p>The parameter posteriors samples are shown in Figure <a href="the-bayesian-approach.html#fig:par800-55">11.11</a>, and the distributions of the probabilities in Figure <a href="the-bayesian-approach.html#fig:check800-55">11.12</a></p>
+<div class="figure"><span style="display:block;" id="fig:par800-55"></span>
+<img src="images/ggpostparam800_55.png" alt="Posterior densities with 800 participants, smaller treatment effect."  />
+<p class="caption">
+Figure 11.11: Posterior densities with 800 participants, smaller treatment effect.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:check800-55"></span>
+<img src="images/ggpost800_55.png" alt="Posterior densities for the probabilities of callout and arrest, with 800 participants, smaller treatment effects." width="100%" />
+<p class="caption">
+Figure 11.12: Posterior densities for the probabilities of callout and arrest, with 800 participants, smaller treatment effects.
+</p>
+</div>
+</div>
+<p>Conclusion:</p>
+<ul>
+<li>Bayesian analysis for clinical trials is powerful and flexible:
+<ul>
+<li>It gives us a posterior distribution that enables us to make probabilistic statements about the parameters of interest</li>
+<li>It allows us to model complex trials</li>
+</ul></li>
+</ul>
 
+</div>
 </div>
 
 
 
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-berger2009formal" class="csl-entry">
+Berger, James O, José M Bernardo, and Dongchu Sun. 2009. <span>“The Formal Definition of Reference Priors.”</span>
+</div>
+<div id="ref-berger1988statistical" class="csl-entry">
+Berger, James O, and Donald A Berry. 1988. <span>“Statistical Analysis and the Illusion of Objectivity.”</span> <em>American Scientist</em> 76 (2): 159–65.
+</div>
+<div id="ref-berry2006bayesian" class="csl-entry">
+Berry, Donald A. 2006. <span>“Bayesian Clinical Trials.”</span> <em>Nature Reviews Drug Discovery</em> 5 (1): 27–36.
+</div>
+<div id="ref-hommel1986effect" class="csl-entry">
+Hommel, EHEBMJ, Hans-Henrik Parving, Elisabeth Mathiesen, Berit Edsberg, M Damkjaer Nielsen, and Jørn Giese. 1986. <span>“Effect of Captopril on Kidney Function in Insulin-Dependent Diabetic Patients with Nephropathy.”</span> <em>Br Med J (Clin Res Ed)</em> 293 (6545): 467–70.
+</div>
+<div id="ref-spiegelhalter2004bayesian" class="csl-entry">
+Spiegelhalter, David J, Keith R Abrams, and Jonathan P Myles. 2004. <em>Bayesian Approaches to Clinical Trials and Health-Care Evaluation</em>. Vol. 13. John Wiley &amp; Sons.
+</div>
+<div id="ref-spiegelhalter1994bayesian" class="csl-entry">
+Spiegelhalter, David J, Laurence S Freedman, and Mahesh KB Parmar. 1994. <span>“Bayesian Approaches to Randomized Trials.”</span> <em>Journal of the Royal Statistical Society: Series A (Statistics in Society)</em> 157 (3): 357–87.
+</div>
+<div id="ref-rstan" class="csl-entry">
+Stan Development Team. 2024. <span>“<span>RStan</span>: The <span>R</span> Interface to <span>Stan</span>.”</span> <a href="https://mc-stan.org/">https://mc-stan.org/</a>.
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="cluster-rct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="random-effects-for-individuals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="computer-practical-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

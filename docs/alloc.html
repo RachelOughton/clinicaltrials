@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-08" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -342,6 +342,27 @@ div.csl-indent {
 <li class="chapter" data-level="10.2.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-empty-model"><i class="fa fa-check"></i><b>10.2.2</b> The empty model</a></li>
 <li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
@@ -1029,8 +1050,8 @@ Our calculation from step 4 of the minimisation algorithm is therefore</li>
 &amp; = 2 .
 \end{aligned}
 \]</span>
-Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability <span class="math inline">\(P\in\left(0.5,1\right)\)</span> and update the table before allocating patient 17.
-:::</p>
+Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability <span class="math inline">\(P\in\left(0.5,1\right)\)</span> and update the table before allocating patient 17.</p>
+<p>:::</p>
 <p>One shortcoming of minimisation is that the factors are equally weighted in the algorithm, regardless of the number of patients with that particular factor level. For example, suppose at some later stage of allocation in Example <a href="#exm:mustine"><strong>??</strong></a>, only four patients with stage I or II disease had been recruited, and that one of these had been allocated to group <span class="math inline">\(A\)</span> and three to group <span class="math inline">\(B\)</span>. At the same point, 18 of the recruited number were post-menopausal, and of these 10 had been allocated to group <span class="math inline">\(A\)</span> and 8 to group <span class="math inline">\(B\)</span>. The values contributed to the sum in Equation <a href="alloc.html#eq:minim">(3.1)</a> are <span class="math inline">\(+2\)</span> and <span class="math inline">\(-2\)</span>, so these imbalances effectively cancel one another out, but intuitively it would feel sensible to prioritise equal distribution within the stage I or II women, since proportionally this stratum is less balanced. <span class="citation">Wei (<a href="#ref-wei1978application">1978</a>)</span> proposed an extension of the Urn Design that does exactly this, but we won’t cover this method in our course.</p>
 </div>
 </div>

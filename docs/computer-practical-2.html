@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-08" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -343,6 +343,27 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -406,7 +427,7 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="computer-practical-2" class="section level1 hasAnchor" number="12">
+<div id="computer-practical-2" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">B</span> Computer Practical 2<a href="computer-practical-2.html#computer-practical-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In this practical, we will focus on two main areas:</p>
 <ul>
@@ -429,7 +450,7 @@ div.csl-indent {
 <p>We’ll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We’ll load them as we go along.</p>
 <p><strong>Notice that where there are code snippets that you want to copy directly, you can hover your cursor in the top right of the code box and a ‘copy’ icon will appear.</strong></p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="computer-practical-2.html#cb216-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;HSAUR&quot;</span>, <span class="st">&quot;HSAUR3&quot;</span>, <span class="st">&quot;pROC&quot;</span>, <span class="st">&quot;survival&quot;</span>, <span class="st">&quot;ggfortify&quot;</span>))</span></code></pre></div>
-<div id="cp2sim" class="section level2 hasAnchor" number="12.1">
+<div id="cp2sim" class="section level2 hasAnchor" number="13.1">
 <h2><span class="header-section-number">B.1</span> Sample size by simulation (part I)<a href="computer-practical-2.html#cp2sim" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required. We can estimate the power by the proportion of simulated trials in which the null hypothesis was rejected.</p>
 <p>Because the code necessarily works by fixing the number of participants and investigating the effect on the power of the trial, this is often referred to as <em>power-calculation</em>, but it is the same sample size issue, approached from a different angle. <span class="citation">Arnold et al. (<a href="#ref-arnold2011simulation">2011</a>)</span> gives a thorough, readable and interesting case study of the use of power simulation in a cluster randomised trial investigating different sanitation-related interventions in rural communities in Bangladesh.</p>
@@ -440,7 +461,7 @@ div.csl-indent {
 <li><strong>Practice</strong>: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the statistical analysis plan.</li>
 </ol>
 <p>Arguably the first and third advantages could also be true (though aren’t automatically) of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.</p>
-<div id="power-simulation-for-a-t-test" class="section level3 hasAnchor" number="12.1.1">
+<div id="power-simulation-for-a-t-test" class="section level3 hasAnchor" number="13.1.1">
 <h3><span class="header-section-number">B.1.1</span> Power simulation for a t-test<a href="computer-practical-2.html#power-simulation-for-a-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Note: really we should be using more than 100 simulations, but so that the code runs in a sensible amount of time I’ve reduced the number. Feel free to increase it if you want to, but you’ll have to wait a little while for it to run.</strong></p>
 <p>We’ll start by taking a simulation approach to recreate the most ‘vanilla’ scenario, where we have a continuous outcome <span class="math inline">\(Y\)</span> and wish to conduct a <span class="math inline">\(t\)</span>-test on the outcome.</p>
@@ -477,7 +498,7 @@ N\left(\mu + \tau_M,\;\sigma^2\right)&amp;\;\text{ if participant }i\text{ is in
 Click to reveal solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-100" class="solution"><em>Solution</em>. </span>The sensible first thing to do is to write a function that does this for general <span class="math inline">\(n_{sim},\,N,\,\mu,\,\sigma^2\)</span> and <span class="math inline">\(\tau_M\)</span>. The very simplest way would be the following, where we generate <span class="math inline">\(N\)</span> participants per arm, and their data.</p>
+<p><span id="unlabeled-div-99" class="solution"><em>Solution</em>. </span>The sensible first thing to do is to write a function that does this for general <span class="math inline">\(n_{sim},\,N,\,\mu,\,\sigma^2\)</span> and <span class="math inline">\(\tau_M\)</span>. The very simplest way would be the following, where we generate <span class="math inline">\(N\)</span> participants per arm, and their data.</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="computer-practical-2.html#cb217-1" tabindex="-1"></a>ttest_sim <span class="ot">=</span> <span class="cf">function</span>(</span>
 <span id="cb217-2"><a href="computer-practical-2.html#cb217-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
 <span id="cb217-3"><a href="computer-practical-2.html#cb217-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
@@ -540,7 +561,7 @@ Figure B.2: Histogram of estimated powers from 100 lots of 100 simulations with 
 Click to reveal solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-101" class="solution"><em>Solution</em>. </span>The change we need to make is to include a variance parameter for each group, rather than a common one. Note that we aren’t changing the <code>t.test</code> function to use unequal variances, as it is common practice to keep assuming equal variances, and actually these variances still aren’t <em>that</em> different.</p>
+<p><span id="unlabeled-div-100" class="solution"><em>Solution</em>. </span>The change we need to make is to include a variance parameter for each group, rather than a common one. Note that we aren’t changing the <code>t.test</code> function to use unequal variances, as it is common practice to keep assuming equal variances, and actually these variances still aren’t <em>that</em> different.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="computer-practical-2.html#cb222-1" tabindex="-1"></a>ttest_sim2 <span class="ot">=</span> <span class="cf">function</span>(</span>
 <span id="cb222-2"><a href="computer-practical-2.html#cb222-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
 <span id="cb222-3"><a href="computer-practical-2.html#cb222-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
@@ -586,8 +607,8 @@ Figure B.3: Power estimates for 100 sets of 100 simulations with larger outcome 
 <span id="cb228-3"><a href="computer-practical-2.html#cb228-3" tabindex="-1"></a>  sim_vec4[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">6</span>)</span>
 <span id="cb228-4"><a href="computer-practical-2.html#cb228-4" tabindex="-1"></a>}</span>
 <span id="cb228-5"><a href="computer-practical-2.html#cb228-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec4)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-144"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-144-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-145"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-145-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
 <p class="caption">
 Figure B.4: Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T
 </p>
@@ -607,7 +628,7 @@ Figure B.4: Power estimates for 100 sets of 100 simulations with smaller outcome
 Click for solutions
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-102" class="solution"><em>Solution</em>. </span>For this method, we work through all <span class="math inline">\(2N\)</span> participants sequentially, allocating them with equal probability to group <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>. For readability, in these solutions the simulation of one trial is written as its own function, which is then implemented <code>nsim</code> times.</p>
+<p><span id="unlabeled-div-101" class="solution"><em>Solution</em>. </span>For this method, we work through all <span class="math inline">\(2N\)</span> participants sequentially, allocating them with equal probability to group <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>. For readability, in these solutions the simulation of one trial is written as its own function, which is then implemented <code>nsim</code> times.</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="computer-practical-2.html#cb229-1" tabindex="-1"></a>one_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
 <span id="cb229-2"><a href="computer-practical-2.html#cb229-2" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
 <span id="cb229-3"><a href="computer-practical-2.html#cb229-3" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
@@ -664,8 +685,8 @@ Click for solutions
 <span id="cb231-3"><a href="computer-practical-2.html#cb231-3" tabindex="-1"></a>  sim_vec5[i] <span class="ot">=</span> <span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
 <span id="cb231-4"><a href="computer-practical-2.html#cb231-4" tabindex="-1"></a>}</span>
 <span id="cb231-5"><a href="computer-practical-2.html#cb231-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec5)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-146"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-146-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-147"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-147-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
 <p class="caption">
 Figure B.5: Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation.
 </p>
@@ -675,7 +696,7 @@ Figure B.5: Power estimates for 100 sets of 100 simulations with N=155 with larg
 </div>
 </details>
 </div>
-<div id="power-simulation-for-ancova" class="section level3 hasAnchor" number="12.1.2">
+<div id="power-simulation-for-ancova" class="section level3 hasAnchor" number="13.1.2">
 <h3><span class="header-section-number">B.1.2</span> Power simulation for ANCOVA<a href="computer-practical-2.html#power-simulation-for-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Thinking of a somewhat more complex model, we might want to perform a power simulation for an ANCOVA model.</p>
 <p>We’ll write our data-generating model for the outcome <span class="math inline">\(X_i\)</span> as</p>
@@ -703,7 +724,7 @@ where <span class="math inline">\(\epsilon_i\sim N\left(0,\,\sigma^2_{\epsilon}\
 Click for solutions
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-103" class="solution"><em>Solution</em>. </span>Now that we have a baseline variable to keep track of, we should create a data frame of participants as we generate them.</p>
+<p><span id="unlabeled-div-102" class="solution"><em>Solution</em>. </span>Now that we have a baseline variable to keep track of, we should create a data frame of participants as we generate them.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="computer-practical-2.html#cb232-1" tabindex="-1"></a><span class="do">## Function to simulate one trial (with ANCOVA analysis)</span></span>
 <span id="cb232-2"><a href="computer-practical-2.html#cb232-2" tabindex="-1"></a>ancova_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
 <span id="cb232-3"><a href="computer-practical-2.html#cb232-3" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
@@ -764,8 +785,8 @@ Click for solutions
 <span id="cb233-4"><a href="computer-practical-2.html#cb233-4" tabindex="-1"></a>                                  <span class="at">rho=</span><span class="fl">0.65</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd_eps=</span><span class="dv">6</span>, <span class="at">sd_B =</span> <span class="dv">8</span>)</span>
 <span id="cb233-5"><a href="computer-practical-2.html#cb233-5" tabindex="-1"></a>}</span>
 <span id="cb233-6"><a href="computer-practical-2.html#cb233-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec6)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-148"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-148-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-149"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-149-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
 <p class="caption">
 Figure B.6: Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with <span class="math inline">\(N=75\)</span>, assuming an ANCOVA analysis.
 </p>
@@ -780,7 +801,7 @@ Figure B.6: Power estimates for 100 sets of 100 simulations with larger outcome 
 <p>But we don’t have time in this practical!</p>
 </div>
 </div>
-<div id="analysis-for-binary-data" class="section level2 hasAnchor" number="12.2">
+<div id="analysis-for-binary-data" class="section level2 hasAnchor" number="13.2">
 <h2><span class="header-section-number">B.2</span> Analysis for Binary data<a href="computer-practical-2.html#analysis-for-binary-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The dataset we’ll use to explore Binary outcome data is the <code>respiratory</code> dataset, from the package <code>HSAUR</code>. In this trial, patients across two centres were randomly assigned to receive treatment or placebo, and their respiratory status was recorded as either ‘poor’ or ‘good’. Measurements were recorded at months 0, 1, 2, 3, 4, but we will keep only month 0 (as a baseline) and month 4 (as a final outcome). We process the data below:</p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="computer-practical-2.html#cb234-1" tabindex="-1"></a><span class="fu">library</span>(HSAUR)</span>
@@ -800,7 +821,7 @@ Figure B.6: Power estimates for 100 sets of 100 simulations with larger outcome 
 <li>symptom status (poor or good).</li>
 </ul>
 <p>The outcome variable is whether the status of the patient’s symptoms are poor or good after four months of the trial. We will build up through some of the models we studied in Chapter <a href="binary-analysis.html#binary-analysis">6</a>.</p>
-<div id="confidence-intervals" class="section level3 hasAnchor" number="12.2.1">
+<div id="confidence-intervals" class="section level3 hasAnchor" number="13.2.1">
 <h3><span class="header-section-number">B.2.1</span> Confidence Intervals<a href="computer-practical-2.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Our first step will be to fit a Newcombe confidence interval for the absolute risk difference, as we did in Section <a href="binary-analysis.html#newcombeci">6.2.1.3</a>. Recall that the limits of a <span class="math inline">\(100(1-\alpha)\%\)</span> CI for the ARD <span class="math inline">\(\pi_T - \pi_C\)</span> are given by</p>
 <p><span class="math display">\[
@@ -818,7 +839,7 @@ where <span class="math inline">\(p_X\)</span> is the estimate of <span class="m
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-104" class="solution"><em>Solution</em>. </span>The first thing we need to do is to find the limits of the individual CIs for groups C and T.
+<p><span id="unlabeled-div-103" class="solution"><em>Solution</em>. </span>The first thing we need to do is to find the limits of the individual CIs for groups C and T.
 To do this, we need the data estimates of <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span>.</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="computer-practical-2.html#cb235-1" tabindex="-1"></a>rC <span class="ot">=</span> <span class="fu">sum</span>((resp_df<span class="sc">$</span>status <span class="sc">==</span> <span class="st">&quot;good&quot;</span>)<span class="sc">&amp;</span>(resp_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;placebo&quot;</span>))</span>
 <span id="cb235-2"><a href="computer-practical-2.html#cb235-2" tabindex="-1"></a>nC <span class="ot">=</span> <span class="fu">sum</span>(resp_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;placebo&quot;</span>)</span>
@@ -880,7 +901,7 @@ It is simple to define a function to solve quadratic equations in this form, for
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-105" class="solution"><em>Solution</em>. </span>Recall that the limits of the <span class="math inline">\(100\left(1-\alpha\right)\%\)</span> CI for the log of the risk ratio are given by</p>
+<p><span id="unlabeled-div-104" class="solution"><em>Solution</em>. </span>Recall that the limits of the <span class="math inline">\(100\left(1-\alpha\right)\%\)</span> CI for the log of the risk ratio are given by</p>
 <p><span class="math display">\[ \log\left(\frac{p_T}{p_C}\right) \pm z_{\frac{\alpha}{2}}\sqrt{\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right)}. \]</span></p>
 <p>Therefore for our respiratory data we have</p>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="computer-practical-2.html#cb245-1" tabindex="-1"></a><span class="co"># Find the estimated log OR and the distance to the limits of the CI</span></span>
@@ -897,7 +918,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="cp2logreg" class="section level3 hasAnchor" number="12.2.2">
+<div id="cp2logreg" class="section level3 hasAnchor" number="13.2.2">
 <h3><span class="header-section-number">B.2.2</span> Logistic regression<a href="computer-practical-2.html#cp2logreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We next looked at logistic regression as way to account for the baseline covariates. To fit a logistic regression in R we use the function <code>glm</code>. This fits all kinds of generalised linear models, and so we specify that we want a logistic regression by choosing <code>family = binomial(link='logit')</code>.</p>
 <p>The code is included in all examples in Sections <a href="binary-analysis.html#logreg">6.3</a> and <a href="binary-analysis.html#diaglogreg">6.4</a>, so if you aren’t sure how to do something they woulg be a good place to look.</p>
@@ -909,7 +930,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-106" class="solution"><em>Solution</em>. </span>Before we fit the logistic regression we should check for balance in the data. For example, below we see the mean and SD of age, and the mean of <code>status0</code> for the other factor variales.</p>
+<p><span id="unlabeled-div-105" class="solution"><em>Solution</em>. </span>Before we fit the logistic regression we should check for balance in the data. For example, below we see the mean and SD of age, and the mean of <code>status0</code> for the other factor variales.</p>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="computer-practical-2.html#cb249-1" tabindex="-1"></a>resp_df<span class="sc">%&gt;%</span></span>
 <span id="cb249-2"><a href="computer-practical-2.html#cb249-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
 <span id="cb249-3"><a href="computer-practical-2.html#cb249-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -1023,14 +1044,14 @@ Click for solution
 </div>
 </details>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-107" class="exercise"><strong>Exercise B.8  </strong></span>Perform some diagnostics on the model you fitted in Exercise <a href="computer-practical-2.html#exr:lrresp1">B.7</a>, focussing on the model’s ability to discriminate between outcomes, and also on how well the model calibrates to the observed data.</p>
+<p><span id="exr:unlabeled-div-106" class="exercise"><strong>Exercise B.8  </strong></span>Perform some diagnostics on the model you fitted in Exercise <a href="computer-practical-2.html#exr:lrresp1">B.7</a>, focussing on the model’s ability to discriminate between outcomes, and also on how well the model calibrates to the observed data.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-108" class="solution"><em>Solution</em>. </span>Firstly we’ll use ROC analysis to assess the model in terms of how well it discriminates the participants in terms of their respiratory status at 4 months.</p>
+<p><span id="unlabeled-div-107" class="solution"><em>Solution</em>. </span>Firstly we’ll use ROC analysis to assess the model in terms of how well it discriminates the participants in terms of their respiratory status at 4 months.</p>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="computer-practical-2.html#cb261-1" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
 <span id="cb261-2"><a href="computer-practical-2.html#cb261-2" tabindex="-1"></a>fit_resp <span class="ot">=</span> <span class="fu">fitted</span>(model3)   <span class="co"># Fitted values from model3</span></span>
 <span id="cb261-3"><a href="computer-practical-2.html#cb261-3" tabindex="-1"></a>out_resp <span class="ot">=</span> resp_df<span class="sc">$</span>status   <span class="co"># outcome values (1 or 2)</span></span>
@@ -1045,7 +1066,7 @@ Click for solution
 ## Area under the curve: 0.8054</code></pre>
 <p>We can also plot the ROC curve</p>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="computer-practical-2.html#cb263-1" tabindex="-1"></a><span class="fu">ggroc</span>(roc_resp, <span class="at">legacy.axes=</span>T) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">1</span>, <span class="at">intercept=</span><span class="dv">0</span>, <span class="at">type=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-162-1.png" width="672" />
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-163-1.png" width="672" />
 Next we’ll assess the model in terms of calibration.</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="computer-practical-2.html#cb264-1" tabindex="-1"></a><span class="do">## Group the observations into age groups (I&#39;ve chosen 10 year bins)</span></span>
 <span id="cb264-2"><a href="computer-practical-2.html#cb264-2" tabindex="-1"></a>resp_df<span class="sc">$</span>age10 <span class="ot">=</span> <span class="fu">round</span>(resp_df<span class="sc">$</span>age, <span class="sc">-</span><span class="dv">1</span>)</span>
@@ -1072,8 +1093,8 @@ Next we’ll assess the model in terms of calibration.</p>
 <span id="cb264-23"><a href="computer-practical-2.html#cb264-23" tabindex="-1"></a></span>
 <span id="cb264-24"><a href="computer-practical-2.html#cb264-24" tabindex="-1"></a>obs_plot <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">data=</span>resp_df, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>fit)) <span class="sc">+</span></span>
 <span id="cb264-25"><a href="computer-practical-2.html#cb264-25" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data=</span>resp_df, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">ymin =</span> fit <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>fit_se, <span class="at">ymax =</span> fit <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>fit_se, <span class="at">fill =</span> treatment), <span class="at">alpha=</span><span class="fl">0.3</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-163"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-163-1.png" alt="Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-164"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-164-1.png" alt="Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)" width="672" />
 <p class="caption">
 Figure B.7: Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)
 </p>
@@ -1084,14 +1105,14 @@ Figure B.7: Observations and fitted model for combinations of centre (1: top and
 </details>
 <p>Having performed some diagnostics, we can proceed to use our model to provide information about the effect of the treatment to improve respiratory symptoms.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-109" class="exercise"><strong>Exercise B.9  </strong></span>Compute a 95% CI for the odd ratio for this trial, using the model you built in Exercise <a href="computer-practical-2.html#exr:lrresp1">B.7</a>.</p>
+<p><span id="exr:unlabeled-div-108" class="exercise"><strong>Exercise B.9  </strong></span>Compute a 95% CI for the odd ratio for this trial, using the model you built in Exercise <a href="computer-practical-2.html#exr:lrresp1">B.7</a>.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-110" class="solution"><em>Solution</em>. </span>We can find the details of the coefficients via</p>
+<p><span id="unlabeled-div-109" class="solution"><em>Solution</em>. </span>We can find the details of the coefficients via</p>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="computer-practical-2.html#cb265-1" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1127,12 +1148,12 @@ Click for solution
 </details>
 </div>
 </div>
-<div id="cp2-surv" class="section level2 hasAnchor" number="12.3">
+<div id="cp2-surv" class="section level2 hasAnchor" number="13.3">
 <h2><span class="header-section-number">B.3</span> Analysis for Survival data<a href="computer-practical-2.html#cp2-surv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The packages we need for this section are <code>survival</code> and <code>ggfortify</code>, so load those now.</p>
 <p>The first dataset we will use is <code>aml</code> - this dataset is from a trial investigating whether the standard course of chemotheraphy should be extended for some additional cycles (‘maintenance’) for patients with Acute Myelogenous Leukemia.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-111" class="exercise"><strong>Exercise B.10  </strong></span>Look at the help file for the <code>aml</code> dataset and make sure you understand what each variable is doing.
+<p><span id="exr:unlabeled-div-110" class="exercise"><strong>Exercise B.10  </strong></span>Look at the help file for the <code>aml</code> dataset and make sure you understand what each variable is doing.
 R might ask which <code>aml</code> dataset you want - in this case, choose the one from the <code>survival</code> package.</p>
 </div>
 <details>
@@ -1140,7 +1161,7 @@ R might ask which <code>aml</code> dataset you want - in this case, choose the o
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-112" class="solution"><em>Solution</em>. </span>The data set <code>aml</code> has three columns</p>
+<p><span id="unlabeled-div-111" class="solution"><em>Solution</em>. </span>The data set <code>aml</code> has three columns</p>
 <ul>
 <li><code>time</code> - survival or censoring time for each patient. This is the last time at which that patient was recorded.</li>
 <li><code>status</code> - censoring status. By convention, this is 1 if a death is observed (ie. for complete data) and 0 for censored data (ie. the time in the <code>time</code> column was the last time that patient was seen, and they were still alive)</li>
@@ -1154,25 +1175,25 @@ Click for solution
 <p>or if you prefer,</p>
 <div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="computer-practical-2.html#cb271-1" tabindex="-1"></a>surv_obj <span class="ot">=</span> <span class="fu">Surv</span>(<span class="sc">&lt;</span>dataframe<span class="sc">$</span>time variable<span class="sc">&gt;</span>, <span class="sc">&lt;</span>dataframe<span class="sc">$</span>censoring status variable<span class="sc">&gt;</span>)</span></code></pre></div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-113" class="exercise"><strong>Exercise B.11  </strong></span>Use the <code>Surv</code> function now on the <code>aml</code> data. The output will contain some notation you probably haven’t seen before - can you work out what it means?</p>
+<p><span id="exr:unlabeled-div-112" class="exercise"><strong>Exercise B.11  </strong></span>Use the <code>Surv</code> function now on the <code>aml</code> data. The output will contain some notation you probably haven’t seen before - can you work out what it means?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-114" class="solution"><em>Solution</em>. </span>We create the survival object for <code>aml</code> by</p>
+<p><span id="unlabeled-div-113" class="solution"><em>Solution</em>. </span>We create the survival object for <code>aml</code> by</p>
 <div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="computer-practical-2.html#cb272-1" tabindex="-1"></a>surv_aml <span class="ot">=</span> <span class="fu">with</span>(<span class="at">data=</span>aml, <span class="fu">Surv</span>(time,status))</span>
 <span id="cb272-2"><a href="computer-practical-2.html#cb272-2" tabindex="-1"></a>surv_aml</span></code></pre></div>
 <pre><code>##  [1]   9   13   13+  18   23   28+  31   34   45+  48  161+   5    5    8    8   12   16+  23   27   30   33   43   45</code></pre>
 <p>This is a vector of the time values, in the same order as in <code>aml</code>. You’ll notice that some have a ‘+’ attached. This denotes the censored observations (the notation reflects the fact that the true time of death/the event will be greater than this).</p>
 </div>
 </details>
-<div id="fitting-a-survival-curve" class="section level3 hasAnchor" number="12.3.1">
+<div id="fitting-a-survival-curve" class="section level3 hasAnchor" number="13.3.1">
 <h3><span class="header-section-number">B.3.1</span> Fitting a survival curve<a href="computer-practical-2.html#fitting-a-survival-curve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next thing we probably want to do is to estimate the survival function and plot the survival curve.
 The first method we’ll use is the Kaplan-Meier estimator.</p>
-<div id="kaplan-meier" class="section level4 hasAnchor" number="12.3.1.1">
+<div id="kaplan-meier" class="section level4 hasAnchor" number="13.3.1.1">
 <h4><span class="header-section-number">B.3.1.1</span> Kaplan-Meier<a href="computer-practical-2.html#kaplan-meier" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To fit a Kaplan-Meier survival curve, we use the function <code>survfit</code>, which is specified using a formula, much like <code>lm</code> or <code>glm</code>. To fit a Kaplan-Meier estimate with a data frame split by treatment effect, the general form is</p>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="computer-practical-2.html#cb274-1" tabindex="-1"></a><span class="fu">survfit</span>(<span class="sc">&lt;</span>surv_obj<span class="sc">&gt;</span> <span class="er">~</span> <span class="er">&lt;</span>treatment var<span class="sc">&gt;</span>, <span class="at">data =</span> <span class="sc">&lt;</span>dataframe<span class="sc">&gt;</span>)</span></code></pre></div>
@@ -1185,7 +1206,7 @@ The first method we’ll use is the Kaplan-Meier estimator.</p>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-115" class="solution"><em>Solution</em>. </span>To fit the Kaplan-Meier estimator we use</p>
+<p><span id="unlabeled-div-114" class="solution"><em>Solution</em>. </span>To fit the Kaplan-Meier estimator we use</p>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="computer-practical-2.html#cb275-1" tabindex="-1"></a>km_aml <span class="ot">=</span> <span class="fu">survfit</span>(surv_aml <span class="sc">~</span> x, <span class="at">data=</span>aml)</span></code></pre></div>
 <p>We can then look at the summary table and plot the data by</p>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="computer-practical-2.html#cb276-1" tabindex="-1"></a><span class="fu">summary</span>(km_aml)</span></code></pre></div>
@@ -1213,13 +1234,13 @@ Click for solution
 ##    43      2       1   0.0972  0.0919       0.0153        0.620
 ##    45      1       1   0.0000     NaN           NA           NA</code></pre>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="computer-practical-2.html#cb278-1" tabindex="-1"></a><span class="fu">autoplot</span>(km_aml, <span class="at">conf.int=</span>F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-172-1.png" width="672" />
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-173-1.png" width="672" />
 We can see from the table that the lower curve is the non-maintained arm - there is only one survivor of this group, and the data finish at <span class="math inline">\(t=45\)</span>.</p>
 </div>
 </details>
 <p>The function <code>autoplot</code> could also give us a 95% CI if we set <code>conf.int=T</code> (we didn’t go into how this is calculated in lectures) and we see that with the <code>aml</code> data the uncertainty is huge.</p>
 </div>
-<div id="fitting-an-exponential-distribution" class="section level4 hasAnchor" number="12.3.1.2">
+<div id="fitting-an-exponential-distribution" class="section level4 hasAnchor" number="13.3.1.2">
 <h4><span class="header-section-number">B.3.1.2</span> Fitting an exponential distribution<a href="computer-practical-2.html#fitting-an-exponential-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To fit an exponential distribution, we need to estimate <span class="math inline">\(\hat\lambda_C\)</span> and <span class="math inline">\(\hat\lambda_T\)</span>, using</p>
 <p><span class="math display">\[\hat\lambda_X = \frac{m_X}{\sum\limits_{i=1}^{n_X} t_i} = \frac{m_X}{t^+_X}, \]</span>
@@ -1232,7 +1253,7 @@ where <span class="math inline">\(n_X\)</span> is the number of observations <sp
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-116" class="solution"><em>Solution</em>. </span>To calculate <span class="math inline">\(\hat\lambda_C\)</span> and <span class="math inline">\(\hat\lambda_T\)</span> we need to find <span class="math inline">\(m_C,\;\,m_T\;,t^+_C\)</span> and <span class="math inline">\(t^+_T\)</span>.</p>
+<p><span id="unlabeled-div-115" class="solution"><em>Solution</em>. </span>To calculate <span class="math inline">\(\hat\lambda_C\)</span> and <span class="math inline">\(\hat\lambda_T\)</span> we need to find <span class="math inline">\(m_C,\;\,m_T\;,t^+_C\)</span> and <span class="math inline">\(t^+_T\)</span>.</p>
 <div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="computer-practical-2.html#cb279-1" tabindex="-1"></a>mC_aml <span class="ot">=</span> <span class="fu">sum</span>((aml<span class="sc">$</span>status<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(aml<span class="sc">$</span>x<span class="sc">==</span><span class="st">&quot;Nonmaintained&quot;</span>))</span>
 <span id="cb279-2"><a href="computer-practical-2.html#cb279-2" tabindex="-1"></a>mT_aml <span class="ot">=</span> <span class="fu">sum</span>((aml<span class="sc">$</span>status<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(aml<span class="sc">$</span>x<span class="sc">==</span><span class="st">&quot;Maintained&quot;</span>))</span>
 <span id="cb279-3"><a href="computer-practical-2.html#cb279-3" tabindex="-1"></a>tsum_aml_C <span class="ot">=</span> <span class="fu">sum</span>(aml<span class="sc">$</span>time[aml<span class="sc">$</span>x<span class="sc">==</span><span class="st">&quot;Nonmaintained&quot;</span>])</span>
@@ -1247,15 +1268,15 @@ Click for solution
 <span id="cb280-5"><a href="computer-practical-2.html#cb280-5" tabindex="-1"></a><span class="fu">autoplot</span>(km_aml, <span class="at">conf.int=</span>F) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb280-6"><a href="computer-practical-2.html#cb280-6" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun=</span>exp_st, <span class="at">args=</span><span class="fu">list</span>(<span class="at">lambda =</span> lamhat_aml_C), <span class="at">col=</span><span class="st">&quot;darkturquoise&quot;</span>) <span class="sc">+</span></span>
 <span id="cb280-7"><a href="computer-practical-2.html#cb280-7" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun=</span>exp_st, <span class="at">args=</span><span class="fu">list</span>(<span class="at">lambda =</span> lamhat_aml_T), <span class="at">col=</span><span class="st">&quot;red&quot;</span>) </span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-175-1.png" width="672" /></p>
 </div>
 </details>
 </div>
 </div>
-<div id="comparing-survival-curves-1" class="section level3 hasAnchor" number="12.3.2">
+<div id="comparing-survival-curves-1" class="section level3 hasAnchor" number="13.3.2">
 <h3><span class="header-section-number">B.3.2</span> Comparing survival curves<a href="computer-practical-2.html#comparing-survival-curves-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Having found the MLEs for the <code>aml</code> dataset, assuming an exponential distribution, we can now immediately conduct a likelihood ratio test.</p>
-<div id="likelihood-ratio-test" class="section level4 hasAnchor" number="12.3.2.1">
+<div id="likelihood-ratio-test" class="section level4 hasAnchor" number="13.3.2.1">
 <h4><span class="header-section-number">B.3.2.1</span> Likelihood ratio test<a href="computer-practical-2.html#likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Recall that our test statistic (which we found in Section <a href="comparing-survival-curves.html#survlrtest">8.1</a>) is</p>
 <p><span class="math display">\[ \lambda_{LR} = 2\left(m_C\log\left(\frac{m_C}{t^+_C}\right) + m_T\log\left(\frac{m_T}{t^+_T}\right) - m\log\left(\frac{m}{t^+}\right)\right),\]</span></p>
@@ -1268,7 +1289,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-117" class="solution"><em>Solution</em>. </span>We already have the <span class="math inline">\(m_X\)</span> and <span class="math inline">\(t^+_X\)</span> from Exercise <a href="computer-practical-2.html#exr:mlaml">B.13</a>, and we can easily find <span class="math inline">\(t^+\)</span> and <span class="math inline">\(m\)</span> from these.</p>
+<p><span id="unlabeled-div-116" class="solution"><em>Solution</em>. </span>We already have the <span class="math inline">\(m_X\)</span> and <span class="math inline">\(t^+_X\)</span> from Exercise <a href="computer-practical-2.html#exr:mlaml">B.13</a>, and we can easily find <span class="math inline">\(t^+\)</span> and <span class="math inline">\(m\)</span> from these.</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="computer-practical-2.html#cb281-1" tabindex="-1"></a>m_aml <span class="ot">=</span> mT_aml <span class="sc">+</span> mC_aml</span>
 <span id="cb281-2"><a href="computer-practical-2.html#cb281-2" tabindex="-1"></a>tsum_aml <span class="ot">=</span> tsum_aml_T <span class="sc">+</span> tsum_aml_C</span></code></pre></div>
 <p>and we can use these to compute <span class="math inline">\(\lambda_{LR}\)</span>:</p>
@@ -1282,7 +1303,7 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="cp2logrank" class="section level4 hasAnchor" number="12.3.2.2">
+<div id="cp2logrank" class="section level4 hasAnchor" number="13.3.2.2">
 <h4><span class="header-section-number">B.3.2.2</span> Log-rank test<a href="computer-practical-2.html#cp2logrank" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The log-rank test is most easily found using the function <code>survdiff</code>. This function has an argument <code>rho</code> that controls the type of test. If we set <code>rho=0</code> then it performs a log-rank test.</p>
 <p>The general form is similar to <code>survfit</code>:</p>
@@ -1295,7 +1316,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-118" class="solution"><em>Solution</em>. </span>To conduct a log rank test we use</p>
+<p><span id="unlabeled-div-117" class="solution"><em>Solution</em>. </span>To conduct a log rank test we use</p>
 <div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="computer-practical-2.html#cb287-1" tabindex="-1"></a><span class="fu">survdiff</span>(surv_aml<span class="sc">~</span>x, <span class="at">data=</span>aml, <span class="at">rho=</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## Call:
 ## survdiff(formula = surv_aml ~ x, data = aml, rho = 0)
@@ -1309,18 +1330,18 @@ Click for solution
 </div>
 </details>
 </div>
-<div id="cox-regression" class="section level4 hasAnchor" number="12.3.2.3">
+<div id="cox-regression" class="section level4 hasAnchor" number="13.3.2.3">
 <h4><span class="header-section-number">B.3.2.3</span> Cox regression<a href="computer-practical-2.html#cox-regression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Finally, we will fit the Cox regression model. This is done using the function <code>coxph</code> in the package <code>survival</code>. Look at the help file and the examples in Section <a href="comparing-survival-curves.html#coxreg">8.3.2</a> to understand how to use this function.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-119" class="exercise"><strong>Exercise B.16  </strong></span>Fit a Cox proportional hazards model to the data. Do you think this is an appropriate model to use? How influential is the treatment?</p>
+<p><span id="exr:unlabeled-div-118" class="exercise"><strong>Exercise B.16  </strong></span>Fit a Cox proportional hazards model to the data. Do you think this is an appropriate model to use? How influential is the treatment?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-120" class="solution"><em>Solution</em>. </span>In the <code>aml</code> dataset there are no baseline covariates, so our only dependent variable is the treatment group variable <code>x</code>.</p>
+<p><span id="unlabeled-div-119" class="solution"><em>Solution</em>. </span>In the <code>aml</code> dataset there are no baseline covariates, so our only dependent variable is the treatment group variable <code>x</code>.</p>
 <div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="computer-practical-2.html#cb289-1" tabindex="-1"></a>cox_aml <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(time, status)<span class="sc">~</span>x, <span class="at">data=</span>aml)</span>
 <span id="cb289-2"><a href="computer-practical-2.html#cb289-2" tabindex="-1"></a>cox_aml</span></code></pre></div>
 <pre><code>## Call:
@@ -1354,7 +1375,7 @@ Click for solution
 </div>
 </details>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-121" class="exercise"><strong>Exercise B.17  </strong></span><strong>If you’re short for time, you can choose to skip this question and move onto the next section</strong>.</p>
+<p><span id="exr:unlabeled-div-120" class="exercise"><strong>Exercise B.17  </strong></span><strong>If you’re short for time, you can choose to skip this question and move onto the next section</strong>.</p>
 <p>The dataset <code>colon</code>, also from the <code>survival</code> package, contains data from a trial of colon cancer patients, comparing three treatments: observation (<code>obs</code>), levamisole (<code>Lev</code>) and levamisole + 5-FU (<code>Lev+5FU</code>). To simplify things, we will restrict the data to those patients on <code>Obs</code> or <code>Lev+5FU</code>. The main report of this trial is <span class="citation">Moertel et al. (<a href="#ref-moertel1990levamisole">1990</a>)</span>.</p>
 <div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="computer-practical-2.html#cb293-1" tabindex="-1"></a>colondf <span class="ot">=</span> colon[colon<span class="sc">$</span>rx<span class="sc">!=</span><span class="st">&quot;Lev&quot;</span>,]</span>
 <span id="cb293-2"><a href="computer-practical-2.html#cb293-2" tabindex="-1"></a>colondf<span class="sc">$</span>rx <span class="ot">=</span> <span class="fu">as.factor</span>(<span class="fu">as.character</span>(colondf<span class="sc">$</span>rx)) <span class="co"># Removes Lev factor level</span></span></code></pre></div>
@@ -1370,7 +1391,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-122" class="solution"><em>Solution</em>. </span>From the help file we see that <code>rx</code> is the treatment group, <code>stop</code> is the time variable, <code>status</code> gives the censoring status.</p>
+<p><span id="unlabeled-div-121" class="solution"><em>Solution</em>. </span>From the help file we see that <code>rx</code> is the treatment group, <code>stop</code> is the time variable, <code>status</code> gives the censoring status.</p>
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="computer-practical-2.html#cb294-1" tabindex="-1"></a><span class="fu">str</span>(colondf)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    1238 obs. of  16 variables:
 ##  $ id      : num  1 1 2 2 3 3 4 4 5 5 ...
@@ -1392,7 +1413,7 @@ Click for solution
 <p>We can therefore fit (and plot) the Kaplan-Meier estimator split by treatment group.</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="computer-practical-2.html#cb296-1" tabindex="-1"></a>km_colon <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> rx, <span class="at">data=</span>colondf)</span>
 <span id="cb296-2"><a href="computer-practical-2.html#cb296-2" tabindex="-1"></a><span class="fu">autoplot</span>(km_colon, <span class="at">conf.int=</span>F) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
 <p>Next we can find the MLE for each treatment group</p>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="computer-practical-2.html#cb297-1" tabindex="-1"></a>mC_colon <span class="ot">=</span> <span class="fu">sum</span>((colondf<span class="sc">$</span>status<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(colondf<span class="sc">$</span>rx<span class="sc">==</span><span class="st">&quot;Obs&quot;</span>))</span>
 <span id="cb297-2"><a href="computer-practical-2.html#cb297-2" tabindex="-1"></a>mT_colon <span class="ot">=</span> <span class="fu">sum</span>((colondf<span class="sc">$</span>status<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(colondf<span class="sc">$</span>rx<span class="sc">==</span><span class="st">&quot;Lev+5FU&quot;</span>))</span>
@@ -1464,18 +1485,18 @@ Figure B.8: Survival curves for groups C and T in colon study, fitted assuming a
 <p>We can visualise this by further subsetting the Kaplan-Meier estimator</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="computer-practical-2.html#cb310-1" tabindex="-1"></a>km_colon_bl <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> rx <span class="sc">+</span> sex, <span class="at">data=</span>colondf)</span>
 <span id="cb310-2"><a href="computer-practical-2.html#cb310-2" tabindex="-1"></a><span class="fu">autoplot</span>(km_colon_bl, <span class="at">conf.int=</span>F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
 <p><code>nodes</code> is a numeric output, so in order to get a visual impression of its effect on the survival curve we can bin it. For example, we can choose <span class="math inline">\(\texttt{nodes}\leq 4\)</span> and <span class="math inline">\(\texttt{nodes}&gt;4\)</span>.</p>
 <div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="computer-practical-2.html#cb311-1" tabindex="-1"></a>colondf<span class="sc">$</span>nodes4 <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(colondf), <span class="cf">function</span>(i){<span class="fu">ifelse</span>(colondf<span class="sc">$</span>nodes[i]<span class="sc">&gt;</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)})</span>
 <span id="cb311-2"><a href="computer-practical-2.html#cb311-2" tabindex="-1"></a>km_colon_bl <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> rx <span class="sc">+</span> nodes4, <span class="at">data=</span>colondf)</span>
 <span id="cb311-3"><a href="computer-practical-2.html#cb311-3" tabindex="-1"></a><span class="fu">autoplot</span>(km_colon_bl, <span class="at">conf.int=</span>F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
 </div>
 </details>
 </div>
 </div>
 </div>
-<div id="cp2sim2" class="section level2 hasAnchor" number="12.4">
+<div id="cp2sim2" class="section level2 hasAnchor" number="13.4">
 <h2><span class="header-section-number">B.4</span> Sample size by simulation (part II)<a href="computer-practical-2.html#cp2sim2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We now combine the work we’ve done, to implement power simulation for a survival outcome trial.</p>
 <p>To simulate survival / time-to-event data as though from a clinical trial, we need to consider two things:</p>
@@ -1490,7 +1511,7 @@ Figure B.8: Survival curves for groups C and T in colon study, fitted assuming a
 <li>There will be some censoring during the lifetime of the trial, and this should also be randomly generated.</li>
 </ol>
 <p>In this practical we’ll use a Weibull distribution. You can read about the Weibull distribution in Section <a href="working-with-time-to-event-data.html#weibull">7.2.3</a>. The main thing you need to know is that the distribution is defined by its <strong>shape</strong> and <strong>scale</strong>. In this practical we’ll implement a simplified version of that used by <span class="citation">Jiang et al. (<a href="#ref-jiang2012practical">2012</a>)</span>, so if you want to think more about the topic that would be a good place to start</p>
-<div id="minimum-detectable-effect-size" class="section level3 hasAnchor" number="12.4.1">
+<div id="minimum-detectable-effect-size" class="section level3 hasAnchor" number="13.4.1">
 <h3><span class="header-section-number">B.4.1</span> Minimum detectable effect size<a href="computer-practical-2.html#minimum-detectable-effect-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One of the first practical issues we need to tackle is the concept of the difference between the treatment and control group outcomes, and the idea of the minimum difference we want to be able to detect. Ideally this should be something clinically meaningful. We also need to work out how to factor this into the simulation.</p>
 <p><span class="citation">Jiang et al. (<a href="#ref-jiang2012practical">2012</a>)</span> do this in the following way:</p>
@@ -1500,7 +1521,7 @@ Figure B.8: Survival curves for groups C and T in colon study, fitted assuming a
 <li>Specifying <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(M_C,\,M_T\)</span> gives us the scale parameters <span class="math inline">\(\lambda_C,\,\lambda_T\)</span>, and so we have our observation time distribution function for each group.</li>
 </ol>
 </div>
-<div id="censoring" class="section level3 hasAnchor" number="12.4.2">
+<div id="censoring" class="section level3 hasAnchor" number="13.4.2">
 <h3><span class="header-section-number">B.4.2</span> Censoring<a href="computer-practical-2.html#censoring" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For the censoring, this is achieved in two ways:</p>
 <ol style="list-style-type: decimal">
@@ -1547,7 +1568,7 @@ Figure B.8: Survival curves for groups C and T in colon study, fitted assuming a
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-123" class="solution"><em>Solution</em>. </span>As we did in Section <a href="computer-practical-2.html#cp2sim">B.1</a> we’ll write functions so that we can do all of this lots of times.
+<p><span id="unlabeled-div-122" class="solution"><em>Solution</em>. </span>As we did in Section <a href="computer-practical-2.html#cp2sim">B.1</a> we’ll write functions so that we can do all of this lots of times.
 Firstly, given a median survival time <span class="math inline">\(M_X\)</span> and a shape parameter <span class="math inline">\(\gamma\)</span> we use the CDF (or you could use the Survival function, which will give the same answer) to find the scale <span class="math inline">\(\lambda_X\)</span> using</p>
 <p><span class="math display">\[ \frac{1}{2} = 1 - \exp\left(-\lambda_X M_X^\gamma\right), \]</span>
 which gives</p>
@@ -1612,7 +1633,7 @@ which gives</p>
 <p>and plot the estimated survival curve</p>
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="computer-practical-2.html#cb314-1" tabindex="-1"></a>km_df1 <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> group, <span class="at">data=</span>surv_df1)</span>
 <span id="cb314-2"><a href="computer-practical-2.html#cb314-2" tabindex="-1"></a><span class="fu">autoplot</span>(km_df1, <span class="at">conf.int =</span> F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-197-1.png" width="672" /></p>
 <p>In this sampling scheme it seems it’s common to get some very low values, which is probably quite unrealistic.</p>
 <p>Some other assumptions / simplifications we’re making are:</p>
 <ul>
@@ -1629,7 +1650,7 @@ The extra pieces of information we need for this are:</p>
 <li>The test to be used - we will use the log rank test (as in Section <a href="computer-practical-2.html#cp2logrank">B.3.2.2</a>).</li>
 </ul>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-124" class="exercise"><strong>Exercise B.19  </strong></span>Using the function you wrote in Exercise <a href="computer-practical-2.html#exr:survsim1">B.18</a> and the log-rank test, write a function to estimate the power of a trial set-up.</p>
+<p><span id="exr:unlabeled-div-123" class="exercise"><strong>Exercise B.19  </strong></span>Using the function you wrote in Exercise <a href="computer-practical-2.html#exr:survsim1">B.18</a> and the log-rank test, write a function to estimate the power of a trial set-up.</p>
 <p>Assuming the same parameters as in Exercise <a href="computer-practical-2.html#exr:survsim1">B.18</a> and a significance level of <span class="math inline">\(\alpha=0.05\)</span>:</p>
 <ul>
 <li>Estimate the number of participants you need per trial group to achieve a power of 80%.</li>
@@ -1641,7 +1662,7 @@ The extra pieces of information we need for this are:</p>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-125" class="solution"><em>Solution</em>. </span></p>
+<p><span id="unlabeled-div-124" class="solution"><em>Solution</em>. </span></p>
 <div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="computer-practical-2.html#cb315-1" tabindex="-1"></a>surv_sim <span class="ot">=</span> <span class="cf">function</span>(</span>
 <span id="cb315-2"><a href="computer-practical-2.html#cb315-2" tabindex="-1"></a>    nsim,  <span class="co"># number of simulations to run</span></span>
 <span id="cb315-3"><a href="computer-practical-2.html#cb315-3" tabindex="-1"></a>    alpha, <span class="co"># the significance level of the test</span></span>
@@ -1671,7 +1692,7 @@ Click for solution
 <span id="cb318-3"><a href="computer-practical-2.html#cb318-3" tabindex="-1"></a>  survsim_vec1[i] <span class="ot">=</span> <span class="fu">surv_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">npart=</span><span class="dv">245</span>, <span class="at">shape=</span><span class="dv">2</span>,<span class="at">MC=</span><span class="dv">6</span>, <span class="at">MT=</span><span class="dv">7</span>, <span class="at">p_cens=</span><span class="fl">0.1</span>, <span class="at">t_max=</span><span class="dv">10</span>)</span>
 <span id="cb318-4"><a href="computer-practical-2.html#cb318-4" tabindex="-1"></a>}</span>
 <span id="cb318-5"><a href="computer-practical-2.html#cb318-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(survsim_vec1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-199-1.png" width="672" /></p>
 <p>If we extend the trial duration to <span class="math inline">\(t_{max}=20\)</span>, the power given by 245 participants is now larger, because there are fewer censored observations:</p>
 <div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="computer-practical-2.html#cb319-1" tabindex="-1"></a><span class="fu">surv_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">npart=</span><span class="dv">245</span>, <span class="at">shape=</span><span class="dv">2</span>,<span class="at">MC=</span><span class="dv">6</span>, <span class="at">MT=</span><span class="dv">7</span>, <span class="at">p_cens=</span><span class="fl">0.1</span>, <span class="at">t_max=</span><span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## [1] 0.93</code></pre>
@@ -1683,7 +1704,7 @@ Click for solution
 <span id="cb323-3"><a href="computer-practical-2.html#cb323-3" tabindex="-1"></a>  survsim_vec2[i] <span class="ot">=</span> <span class="fu">surv_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">npart=</span><span class="dv">215</span>, <span class="at">shape=</span><span class="dv">2</span>,<span class="at">MC=</span><span class="dv">6</span>, <span class="at">MT=</span><span class="dv">7</span>, <span class="at">p_cens=</span><span class="fl">0.1</span>, <span class="at">t_max=</span><span class="dv">20</span>)</span>
 <span id="cb323-4"><a href="computer-practical-2.html#cb323-4" tabindex="-1"></a>}</span>
 <span id="cb323-5"><a href="computer-practical-2.html#cb323-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(survsim_vec2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
 </div>
 </details>
 <p>There are of course lots of ways we could refine and extend this, many of them similar to what we discussed in Section <a href="computer-practical-2.html#cp2sim">B.1</a>, for example:</p>

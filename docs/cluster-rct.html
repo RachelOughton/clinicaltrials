@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-08" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -343,6 +343,27 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -557,7 +578,7 @@ For a cluster RCT, the variance of the treatment effect is</p>
 Since <span class="math inline">\(n=n_gg\)</span>, this can be rearranged to find the number of clusters of a given size needed, or the size of cluster if a given number of clusters is to be used.</p>
 <p>The sample size (and therefore the real power of the study) depends on two additional quantities that are generally beyond our control, and possibly knowledge: <span class="math inline">\(\rho_{ICC}\)</span> and <span class="math inline">\(n_g\)</span>. It is therefore sensible to conduct some sensitivity analysis, with several scenarios of <span class="math inline">\(\rho_{ICC}\)</span> and <span class="math inline">\(n_g\)</span>, to see what the implications are for the power of the study if things don’t quite go to plan.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-46" class="example"><strong>Example 9.2  </strong></span>This is something I wrote for an education study I’m involved in (funded by the EEF) where the treatment is a particular way of engaging 2 year olds in conversation. The outcome variable is each child’s score on the British Picture Vocabulary Scale (BPVS), a test aimed at 3 - 16 year olds designed to assess each child’s vocabulary. We needed to recruit some number of nurseries, but had very little information about the IIC (notice that the age in our study is outside the intended range of the BPVS test!).</p>
+<p><span id="exm:unlabeled-div-44" class="example"><strong>Example 9.2  </strong></span>This is something I wrote for an education study I’m involved in (funded by the EEF) where the treatment is a particular way of engaging 2 year olds in conversation. The outcome variable is each child’s score on the British Picture Vocabulary Scale (BPVS), a test aimed at 3 - 16 year olds designed to assess each child’s vocabulary. We needed to recruit some number of nurseries, but had very little information about the IIC (notice that the age in our study is outside the intended range of the BPVS test!).</p>
 <p>To help the rest of the evaluation team understand the sensitivity of the power of the study to various quantities, I designed <a href="https://racheloughton.shinyapps.io/sample_size/">this dashboard</a>, so that they could play around with the variables and see the effect.</p>
 <p>As well as giving the sample size for a simple t-test (as we’ve done above) it also shows the size for a random effects model (similar to ANCOVA, more on this soon), which is why the baseline-outcome correlation (about which we also know very little!) is included.</p>
 <p>The plot shows the minimum detectable effect size (MDES, or <span class="math inline">\(\tau_M\)</span>, in SD units), since the evaluation team wanted to know what size of effect we could find with our desired power.</p>
@@ -593,7 +614,7 @@ There are a couple of proposals for how to deal with allocation in this scenario
 <h2><span class="header-section-number">9.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As with the other stages of a cluster RCT, to conduct an effective and accurate analysis we need to take into account the clustered nature of the data. There are several ways to do this, and we will whizz through the main ones now.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-47" class="example"><strong>Example 9.3  </strong></span>The data we use will be from an educational trial, contained in <code>crtData</code> in the package <code>eefAnalytics</code>, shown in Figure <a href="cluster-rct.html#fig:crtboxplots">9.2</a> . The dataset contains 22 schools and 265 pupils in total. Each school was assigned to either <code>1</code> (group <span class="math inline">\(T\)</span>) or <code>0</code> (group <span class="math inline">\(C\)</span>). Each pupil took a test before the trial, and again at the end of the trial. We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.</p>
+<p><span id="exm:unlabeled-div-45" class="example"><strong>Example 9.3  </strong></span>The data we use will be from an educational trial, contained in <code>crtData</code> in the package <code>eefAnalytics</code>, shown in Figure <a href="cluster-rct.html#fig:crtboxplots">9.2</a> . The dataset contains 22 schools and 265 pupils in total. Each school was assigned to either <code>1</code> (group <span class="math inline">\(T\)</span>) or <code>0</code> (group <span class="math inline">\(C\)</span>). Each pupil took a test before the trial, and again at the end of the trial. We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.</p>
 <pre><code>## &#39;data.frame&#39;:    265 obs. of  4 variables:
 ##  $ School      : Factor w/ 22 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Posttest    : num  16 13 18 14 25 13 23 26 16 8 ...
@@ -617,7 +638,7 @@ g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{ICC}\right]}{n_g\tau^2_M}\
 \]</span>
 where <span class="math inline">\(n_g\)</span> is the average cluster size and <span class="math inline">\(g\)</span> is the number of clusters per treatment arm. This is the value we worked out in Section <a href="cluster-rct.html#ss-crt">9.2.0.1</a></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-48" class="example"><strong>Example 9.4  </strong></span>We can perform this analysis on our schools data. The first step is to calculate the difference between <code>posttest</code> and <code>pretest</code> for each pupil.</p>
+<p><span id="exm:unlabeled-div-46" class="example"><strong>Example 9.4  </strong></span>We can perform this analysis on our schools data. The first step is to calculate the difference between <code>posttest</code> and <code>pretest</code> for each pupil.</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="cluster-rct.html#cb89-1" tabindex="-1"></a>crt_df<span class="sc">$</span>diff <span class="ot">=</span> crt_df<span class="sc">$</span>Posttest <span class="sc">-</span> crt_df<span class="sc">$</span>Prettest</span></code></pre></div>
 <p>We can then aggregate this to find the mean of <code>diff</code> for each school, shown in Table <a href="cluster-rct.html#tab:eefsum">9.1</a>:</p>
 <table>

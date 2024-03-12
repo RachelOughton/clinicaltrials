@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  8 MAR 2024 10:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.8)  12 MAR 2024 22:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -522,7 +522,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \openout5 = `CT4H_notes.toc'.
 
 [4]
-<images/rowanhouse_map.png, id=312, 886.31125pt x 700.6175pt>
+<images/rowanhouse_map.png, id=332, 886.31125pt x 700.6175pt>
 File: images/rowanhouse_map.png Graphic file (type png)
 <use images/rowanhouse_map.png>
 Package pdftex.def Info: images/rowanhouse_map.png  used on input line 172.
@@ -541,12 +541,12 @@ Chapter 1.
 [8
 
 ]
-<CT4H_notes_files/figure-latex/unnamed-chunk-3-1.pdf, id=362, 722.7pt x 289.08pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-3-1.pdf, id=382, 722.7pt x 289.08pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 274.
 (pdftex.def)             Requested size: 469.76045pt x 187.90417pt.
-<images/sliding_doors.jpeg, id=364, 334.24875pt x 477.785pt>
+<images/sliding_doors.jpeg, id=384, 334.24875pt x 477.785pt>
 File: images/sliding_doors.jpeg Graphic file (type jpg)
 <use images/sliding_doors.jpeg>
 Package pdftex.def Info: images/sliding_doors.jpeg  used on input line 287.
@@ -561,7 +561,7 @@ Chapter 2.
 [16
 
 ]
-<CT4H_notes_files/figure-latex/t31-onesided-1.pdf, id=449, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/t31-onesided-1.pdf, id=469, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/t31-onesided-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/t31-onesided-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/t31-onesided-1.pdf  used on input line 517.
@@ -572,12 +572,12 @@ Overfull \hbox (1.94731pt too wide) has occurred while \output is active
  []
 
 [18 <./CT4H_notes_files/figure-latex/t31-onesided-1.pdf>]
-<CT4H_notes_files/figure-latex/t31-twosided-1.pdf, id=478, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/t31-twosided-1.pdf, id=498, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/t31-twosided-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/t31-twosided-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/t31-twosided-1.pdf  used on input line 534.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<images/starbucks.jpg, id=480, 642.4pt x 427.5975pt>
+<images/starbucks.jpg, id=500, 642.4pt x 427.5975pt>
 File: images/starbucks.jpg Graphic file (type jpg)
 <use images/starbucks.jpg>
 Package pdftex.def Info: images/starbucks.jpg  used on input line 545.
@@ -593,7 +593,7 @@ Overfull \hbox (1.94731pt too wide) has occurred while \output is active
  []
 
 [22]
-<CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf, id=515, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf, id=535, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 648.
@@ -605,17 +605,17 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <14.4> on input line 656.
 [23 <./CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf>]
-<CT4H_notes_files/figure-latex/accepth0-1.pdf, id=535, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/accepth0-1.pdf, id=555, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/accepth0-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/accepth0-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/accepth0-1.pdf  used on input line 681.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/accepth0-1-1.pdf, id=537, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/accepth0-1-1.pdf, id=557, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/accepth0-1-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/accepth0-1-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/accepth0-1-1.pdf  used on input line 691.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/powercurve-1.pdf, id=543, 578.16pt x 289.08pt>
+<CT4H_notes_files/figure-latex/powercurve-1.pdf, id=563, 578.16pt x 289.08pt>
 File: CT4H_notes_files/figure-latex/powercurve-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/powercurve-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/powercurve-1.pdf  used on input line 717.
@@ -640,55 +640,55 @@ Chapter 3.
 [29
 
 ] [30] [31] [32] [33] [34]
-<CT4H_notes_files/figure-latex/srs-alloc-1.pdf, id=674, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/srs-alloc-1.pdf, id=694, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/srs-alloc-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/srs-alloc-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/srs-alloc-1.pdf  used on input line 1025.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/srsalloc200-1.pdf, id=677, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/srsalloc200-1.pdf, id=697, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/srsalloc200-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/srsalloc200-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/srsalloc200-1.pdf  used on input line 1035.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [35 <./CT4H_notes_files/figure-latex/srs-alloc-1.pdf>] [36 <./CT4H_notes_files/figure-latex/srsalloc200-1.pdf>] [37] [38]
-<CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf, id=727, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf, id=747, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf  used on input line 1165.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf, id=729, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf, id=749, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf  used on input line 1173.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/p-nearlyone-1.pdf, id=731, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/p-nearlyone-1.pdf, id=751, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/p-nearlyone-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/p-nearlyone-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/p-nearlyone-1.pdf  used on input line 1181.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [39] [40 <./CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf>] [41 <./CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf>] [42 <./CT4H_notes_files/figure-latex/p-nearlyone-1.pdf>] [43]
-<CT4H_notes_files/figure-latex/urn11-1.pdf, id=776, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/urn11-1.pdf, id=796, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/urn11-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/urn11-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/urn11-1.pdf  used on input line 1252.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/urn18-1.pdf, id=777, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/urn18-1.pdf, id=797, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/urn18-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/urn18-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/urn18-1.pdf  used on input line 1258.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/urn81-1.pdf, id=778, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/urn81-1.pdf, id=798, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/urn81-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/urn81-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/urn81-1.pdf  used on input line 1264.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [44] [45 <./CT4H_notes_files/figure-latex/urn11-1.pdf>] [46 <./CT4H_notes_files/figure-latex/urn18-1.pdf>] [47 <./CT4H_notes_files/figure-latex/urn81-1.pdf>] [48] [49] [50]
-<images/licorice.jpg, id=875, 198.7425pt x 246.9225pt>
+<images/licorice.jpg, id=895, 198.7425pt x 246.9225pt>
 File: images/licorice.jpg Graphic file (type jpg)
 <use images/licorice.jpg>
 Package pdftex.def Info: images/licorice.jpg  used on input line 1455.
 (pdftex.def)             Requested size: 198.742pt x 246.92188pt.
-<CT4H_notes_files/figure-latex/unnamed-chunk-10-1.pdf, id=876, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-10-1.pdf, id=896, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 1472.
@@ -698,7 +698,7 @@ Chapter 4.
 [53
 
 ] [54]
-<CT4H_notes_files/figure-latex/ttestcapt-1.pdf, id=919, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/ttestcapt-1.pdf, id=941, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/ttestcapt-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/ttestcapt-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/ttestcapt-1.pdf  used on input line 1586.
@@ -706,25 +706,25 @@ Package pdftex.def Info: CT4H_notes_files/figure-latex/ttestcapt-1.pdf  used on 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1594.
 [55] [56 <./CT4H_notes_files/figure-latex/ttestcapt-1.pdf>] [57] [58] [59]
-<CT4H_notes_files/figure-latex/hommel-1.pdf, id=968, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/hommel-1.pdf, id=990, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/hommel-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/hommel-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/hommel-1.pdf  used on input line 1836.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [60] [61 <./CT4H_notes_files/figure-latex/hommel-1.pdf>] [62]
-<CT4H_notes_files/figure-latex/bvnplot-1.pdf, id=1003, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/bvnplot-1.pdf, id=1025, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/bvnplot-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/bvnplot-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/bvnplot-1.pdf  used on input line 1934.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [63 <./CT4H_notes_files/figure-latex/bvnplot-1.pdf>] [64] [65] [66]
-<CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf, id=1045, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf, id=1067, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf  used on input line 2129.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [67 <./CT4H_notes_files/figure-latex/unnamed-chunk-14-1.pdf>]
-<CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf, id=1056, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf, id=1079, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf  used on input line 2155.
@@ -736,7 +736,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Overfull \vbox (101.36961pt too high) has occurred while \output is active []
 
 [71]
-<CT4H_notes_files/figure-latex/unnamed-chunk-19-1.pdf, id=1097, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-19-1.pdf, id=1119, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-19-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-19-1.pdf  used on input line 2431.
@@ -755,29 +755,29 @@ Chapter 6.
 [81
 
 ] [82] [83] [84] [85] [86] [87]
-<CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf, id=1221, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf, id=1243, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf  used on input line 2990.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [88 <./CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf>]
-<CT4H_notes_files/figure-latex/unnamed-chunk-30-1.pdf, id=1234, 469.755pt x 252.945pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-30-1.pdf, id=1256, 469.755pt x 252.945pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-30-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-30-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-30-1.pdf  used on input line 3037.
 (pdftex.def)             Requested size: 469.75386pt x 252.94438pt.
 [89] [90 <./CT4H_notes_files/figure-latex/unnamed-chunk-30-1.pdf>]
-<CT4H_notes_files/figure-latex/newc1-1.pdf, id=1264, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/newc1-1.pdf, id=1286, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/newc1-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/newc1-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/newc1-1.pdf  used on input line 3091.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/unnamed-chunk-34-1.pdf, id=1265, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-34-1.pdf, id=1287, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-34-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-34-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-34-1.pdf  used on input line 3118.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/unnamed-chunk-37-1.pdf, id=1266, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-37-1.pdf, id=1288, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-37-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-37-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-37-1.pdf  used on input line 3140.
@@ -810,13 +810,13 @@ Overfull \hbox (2.7436pt too wide) in paragraph at lines 3543--3543
  []
 
 [102] [103] [104] [105] [106]
-<CT4H_notes_files/figure-latex/indoroc1-1.pdf, id=1411, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/indoroc1-1.pdf, id=1433, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/indoroc1-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/indoroc1-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/indoroc1-1.pdf  used on input line 3797.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [107] [108 <./CT4H_notes_files/figure-latex/indoroc1-1.pdf>]
-<CT4H_notes_files/figure-latex/unnamed-chunk-46-1.pdf, id=1431, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-46-1.pdf, id=1454, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-46-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-46-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-46-1.pdf  used on input line 3853.
@@ -825,7 +825,7 @@ Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-46-1.pdf  u
 
 ]
 Chapter 7.
-<CT4H_notes_files/figure-latex/censor-1.pdf, id=1456, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/censor-1.pdf, id=1478, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/censor-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/censor-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/censor-1.pdf  used on input line 3883.
@@ -833,7 +833,7 @@ Package pdftex.def Info: CT4H_notes_files/figure-latex/censor-1.pdf  used on inp
 [112
 
 ] [113 <./CT4H_notes_files/figure-latex/censor-1.pdf>]
-<images/survival_eg.png, id=1478, 1006.76125pt x 724.7075pt>
+<images/survival_eg.png, id=1500, 1006.76125pt x 724.7075pt>
 File: images/survival_eg.png Graphic file (type png)
 <use images/survival_eg.png>
 Package pdftex.def Info: images/survival_eg.png  used on input line 3925.
@@ -842,7 +842,7 @@ Package pdftex.def Info: images/survival_eg.png  used on input line 3925.
 
 LaTeX Warning: Reference `fig:kmov' on page 117 undefined on input line 4076.
 
-<CT4H_notes_files/figure-latex/kmov-1.pdf, id=1511, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/kmov-1.pdf, id=1533, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/kmov-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/kmov-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/kmov-1.pdf  used on input line 4078.
@@ -862,29 +862,29 @@ Underfull \vbox (badness 3525) has occurred while \output is active []
 
 LaTeX Warning: Reference `fig:kmov' on page 119 undefined on input line 4089.
 
-<CT4H_notes_files/figure-latex/ovarian-1.pdf, id=1531, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/ovarian-1.pdf, id=1553, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/ovarian-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/ovarian-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/ovarian-1.pdf  used on input line 4093.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/myeloid-1.pdf, id=1536, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/myeloid-1.pdf, id=1558, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/myeloid-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/myeloid-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/myeloid-1.pdf  used on input line 4101.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [119 <./CT4H_notes_files/figure-latex/ovarian-1.pdf>] [120 <./CT4H_notes_files/figure-latex/myeloid-1.pdf>] [121]
-<CT4H_notes_files/figure-latex/ovplotlr-1.pdf, id=1575, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/ovplotlr-1.pdf, id=1597, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/ovplotlr-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/ovplotlr-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/ovplotlr-1.pdf  used on input line 4199.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/myplotlr-1.pdf, id=1577, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/myplotlr-1.pdf, id=1599, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/myplotlr-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/myplotlr-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/myplotlr-1.pdf  used on input line 4207.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [122] [123 <./CT4H_notes_files/figure-latex/ovplotlr-1.pdf>] [124 <./CT4H_notes_files/figure-latex/myplotlr-1.pdf>]
-<CT4H_notes_files/figure-latex/weibmy-1.pdf, id=1612, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/weibmy-1.pdf, id=1634, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/weibmy-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/weibmy-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/weibmy-1.pdf  used on input line 4274.
@@ -900,25 +900,25 @@ Chapter 9.
 [141
 
 ]
-<CT4H_notes_files/figure-latex/cheesedata-1.pdf, id=1750, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/cheesedata-1.pdf, id=1772, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/cheesedata-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/cheesedata-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/cheesedata-1.pdf  used on input line 4959.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [142] [143 <./CT4H_notes_files/figure-latex/cheesedata-1.pdf>] [144] [145]
-<images/Screenshot_shiny.png, id=1785, 1442.38875pt x 810.02625pt>
+<images/Screenshot_shiny.png, id=1807, 1442.38875pt x 810.02625pt>
 File: images/Screenshot_shiny.png Graphic file (type png)
 <use images/Screenshot_shiny.png>
 Package pdftex.def Info: images/Screenshot_shiny.png  used on input line 5138.
 (pdftex.def)             Requested size: 469.7392pt x 263.79924pt.
 [146] [147 <./images/Screenshot_shiny.png>]
-<CT4H_notes_files/figure-latex/crtboxplots-1.pdf, id=1809, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/crtboxplots-1.pdf, id=1831, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/crtboxplots-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/crtboxplots-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/crtboxplots-1.pdf  used on input line 5202.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [148] [149 <./CT4H_notes_files/figure-latex/crtboxplots-1.pdf>]
-<CT4H_notes_files/figure-latex/crt1bp-1.pdf, id=1832, 469.755pt x 144.54pt>
+<CT4H_notes_files/figure-latex/crt1bp-1.pdf, id=1854, 469.755pt x 144.54pt>
 File: CT4H_notes_files/figure-latex/crt1bp-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/crt1bp-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/crt1bp-1.pdf  used on input line 5261.
@@ -929,18 +929,18 @@ Overfull \hbox (7.99359pt too wide) in paragraph at lines 5291--5291
  []
 
 [151 <./CT4H_notes_files/figure-latex/crt1bp-1.pdf>] [152]
-<CT4H_notes_files/figure-latex/eefplot2-1.pdf, id=1870, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/eefplot2-1.pdf, id=1892, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/eefplot2-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/eefplot2-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/eefplot2-1.pdf  used on input line 5368.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [153 <./CT4H_notes_files/figure-latex/eefplot2-1.pdf>]
-<CT4H_notes_files/figure-latex/lmerplot1-1.pdf, id=1884, 469.755pt x 100.375pt>
+<CT4H_notes_files/figure-latex/lmerplot1-1.pdf, id=1906, 469.755pt x 100.375pt>
 File: CT4H_notes_files/figure-latex/lmerplot1-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/lmerplot1-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/lmerplot1-1.pdf  used on input line 5394.
 (pdftex.def)             Requested size: 469.75386pt x 100.37474pt.
-<images/raneffmodels.png, id=1886, 1083.04625pt x 740.7675pt>
+<images/raneffmodels.png, id=1908, 1083.04625pt x 740.7675pt>
 File: images/raneffmodels.png Graphic file (type png)
 <use images/raneffmodels.png>
 Package pdftex.def Info: images/raneffmodels.png  used on input line 5436.
@@ -950,29 +950,29 @@ Chapter 10.
 [157
 
 ] [158] [159] [160]
-<CT4H_notes_files/figure-latex/epispag-1.pdf, id=1941, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/epispag-1.pdf, id=1963, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/epispag-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/epispag-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/epispag-1.pdf  used on input line 5724.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/epimeans-1.pdf, id=1943, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/epimeans-1.pdf, id=1965, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/epimeans-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/epimeans-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/epimeans-1.pdf  used on input line 5732.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/unnamed-chunk-70-1.pdf, id=1944, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-70-1.pdf, id=1966, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-70-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-70-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-70-1.pdf  used on input line 5742.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [161] [162 <./CT4H_notes_files/figure-latex/epispag-1.pdf>] [163 <./CT4H_notes_files/figure-latex/epimeans-1.pdf>] [164 <./CT4H_notes_files/figure-latex/unnamed-chunk-70-1.pdf>] [165]
-<CT4H_notes_files/figure-latex/unnamed-chunk-72-1.pdf, id=1998, 469.755pt x 115.43124pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-72-1.pdf, id=2020, 469.755pt x 115.43124pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-72-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-72-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-72-1.pdf  used on input line 5860.
 (pdftex.def)             Requested size: 469.75386pt x 115.43095pt.
 [166 <./CT4H_notes_files/figure-latex/unnamed-chunk-72-1.pdf>]
-<CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf, id=2011, 469.755pt x 115.43124pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf, id=2033, 469.755pt x 115.43124pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf  used on input line 5928.
@@ -984,11 +984,85 @@ Underfull \vbox (badness 3449) has occurred while \output is active []
 Chapter 11.
 [169
 
-] (./CT4H_notes.bbl [170
+]
+<images/bayesian_ranges.png, id=2072, 616.3025pt x 427.5975pt>
+File: images/bayesian_ranges.png Graphic file (type png)
+<use images/bayesian_ranges.png>
+Package pdftex.def Info: images/bayesian_ranges.png  used on input line 6026.
+(pdftex.def)             Requested size: 469.76775pt x 325.93007pt.
+[170] [171 <./images/bayesian_ranges.png>] [172] [173]
+<CT4H_notes_files/figure-latex/betafinal-1.pdf, id=2105, 469.755pt x 325.215pt>
+File: CT4H_notes_files/figure-latex/betafinal-1.pdf Graphic file (type pdf)
+<use CT4H_notes_files/figure-latex/betafinal-1.pdf>
+Package pdftex.def Info: CT4H_notes_files/figure-latex/betafinal-1.pdf  used on input line 6215.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<CT4H_notes_files/figure-latex/betaplots-1.pdf, id=2107, 469.755pt x 325.215pt>
+File: CT4H_notes_files/figure-latex/betaplots-1.pdf Graphic file (type pdf)
+<use CT4H_notes_files/figure-latex/betaplots-1.pdf>
+Package pdftex.def Info: CT4H_notes_files/figure-latex/betaplots-1.pdf  used on input line 6223.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<CT4H_notes_files/figure-latex/betaplotmega-1.pdf, id=2109, 469.755pt x 144.54pt>
+File: CT4H_notes_files/figure-latex/betaplotmega-1.pdf Graphic file (type pdf)
+<use CT4H_notes_files/figure-latex/betaplotmega-1.pdf>
+Package pdftex.def Info: CT4H_notes_files/figure-latex/betaplotmega-1.pdf  used on input line 6231.
+(pdftex.def)             Requested size: 469.75386pt x 144.53963pt.
+[174] [175 <./CT4H_notes_files/figure-latex/betafinal-1.pdf>] [176 <./CT4H_notes_files/figure-latex/betaplots-1.pdf> <./CT4H_notes_files/figure-latex/betaplotmega-1.pdf>]
+<images/spieg_elicit.png, id=2153, 731.73375pt x 347.2975pt>
+File: images/spieg_elicit.png Graphic file (type png)
+<use images/spieg_elicit.png>
+Package pdftex.def Info: images/spieg_elicit.png  used on input line 6266.
+(pdftex.def)             Requested size: 469.75949pt x 222.95854pt.
+[177 <./images/spieg_elicit.png>] [178]
+<CT4H_notes_files/figure-latex/simplebayes-1.pdf, id=2188, 469.755pt x 325.215pt>
+File: CT4H_notes_files/figure-latex/simplebayes-1.pdf Graphic file (type pdf)
+<use CT4H_notes_files/figure-latex/simplebayes-1.pdf>
+Package pdftex.def Info: CT4H_notes_files/figure-latex/simplebayes-1.pdf  used on input line 6330.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[179 <./CT4H_notes_files/figure-latex/simplebayes-1.pdf>]
+<images/smartwater.png, id=2202, 637.38126pt x 591.20876pt>
+File: images/smartwater.png Graphic file (type png)
+<use images/smartwater.png>
+Package pdftex.def Info: images/smartwater.png  used on input line 6357.
+(pdftex.def)             Requested size: 469.75824pt x 435.72852pt.
+[180 <./images/smartwater.png>]
+<images/copmodel.png, id=2212, 474.77374pt x 665.48625pt>
+File: images/copmodel.png Graphic file (type png)
+<use images/copmodel.png>
+Package pdftex.def Info: images/copmodel.png  used on input line 6406.
+(pdftex.def)             Requested size: 281.86723pt x 395.09087pt.
+[181] [182 <./images/copmodel.png>]
+<images/stan_np8000.png, id=2228, 481.8pt x 481.8pt>
+File: images/stan_np8000.png Graphic file (type png)
+<use images/stan_np8000.png>
+Package pdftex.def Info: images/stan_np8000.png  used on input line 6432.
+(pdftex.def)             Requested size: 469.77148pt x 469.77148pt.
+[183 <./images/stan_np8000.png>]
+<images/ggpostparam800.png, id=2236, 481.8pt x 481.8pt>
+File: images/ggpostparam800.png Graphic file (type png)
+<use images/ggpostparam800.png>
+Package pdftex.def Info: images/ggpostparam800.png  used on input line 6443.
+(pdftex.def)             Requested size: 469.77148pt x 469.77148pt.
+<images/ggpost800.pdf, id=2238, 867.24pt x 433.62pt>
+File: images/ggpost800.pdf Graphic file (type pdf)
+<use images/ggpost800.pdf>
+Package pdftex.def Info: images/ggpost800.pdf  used on input line 6451.
+(pdftex.def)             Requested size: 469.75827pt x 234.87912pt.
+[184 <./images/ggpostparam800.png>]
+<images/ggpostparam800_55.png, id=2248, 481.8pt x 481.8pt>
+File: images/ggpostparam800_55.png Graphic file (type png)
+<use images/ggpostparam800_55.png>
+Package pdftex.def Info: images/ggpostparam800_55.png  used on input line 6462.
+(pdftex.def)             Requested size: 469.77148pt x 469.77148pt.
+<images/ggpost800_55.png, id=2249, 963.6pt x 481.8pt>
+File: images/ggpost800_55.png Graphic file (type png)
+<use images/ggpost800_55.png>
+Package pdftex.def Info: images/ggpost800_55.png  used on input line 6467.
+(pdftex.def)             Requested size: 469.75679pt x 234.87839pt.
+[185 <./images/ggpost800.pdf>] [186 <./images/ggpostparam800_55.png>] [187 <./images/ggpost800_55.png>] (./CT4H_notes.bbl [188
 
-] [171
+] [189
 
-] [172]) [173] (./CT4H_notes.aux)
+] [190]) [191] (./CT4H_notes.aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-11-09>
@@ -997,21 +1071,21 @@ L3 programming layer <2023-11-09>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `CT4H_notes.out' has not changed.
-(rerunfilecheck)             Checksum: A9A41AE9E47842773ED4B003BCC0DC4A;11099.
+(rerunfilecheck)             Checksum: 0D65C83C2DE8D3E1E856613C50CF9CBA;11823.
  ) 
 Here is how much of TeX's memory you used:
- 13685 strings out of 476227
- 224551 string characters out of 5795781
+ 13914 strings out of 476227
+ 230456 string characters out of 5795781
  1954555 words of memory out of 5000000
- 34743 multiletter control sequences out of 15000+600000
- 655332 words of font info for 107 fonts, out of 8000000 for 9000
+ 34899 multiletter control sequences out of 15000+600000
+ 655974 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,19n,79p,1526b,728s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on CT4H_notes.pdf (173 pages, 3149384 bytes).
+</Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on CT4H_notes.pdf (191 pages, 5445980 bytes).
 PDF statistics:
- 2315 PDF objects out of 2487 (max. 8388607)
- 1965 compressed objects within 20 object streams
- 672 named destinations out of 1000 (max. 500000)
- 714 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2572 PDF objects out of 2984 (max. 8388607)
+ 2174 compressed objects within 22 object streams
+ 744 named destinations out of 1000 (max. 500000)
+ 811 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-03-08" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -343,6 +343,27 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1.html"><a href="computer-practical-1.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1</a>
 <ul>
@@ -411,7 +432,7 @@ div.csl-indent {
 <p>We’re now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation <span class="math inline">\(\tau\)</span> to denote the treatment effect.</p>
 <p>In this chapter we’ll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we’ll go on to look at other types of data.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 4.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
+<p><span id="exm:captopril1" class="example"><strong>Example 4.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
 <p>The baseline and outcome blood pressure measurements (in mmHg) are shown in Table <a href="rct-analysis.html#tab:captoprildata">4.1</a>. We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> say that the patients were ‘randomly allocated’ to their group.</p>
 <table>
 <caption><span id="tab:captoprildata">Table 4.1: </span>Data for the Captopril trial from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span>.</caption>
@@ -529,7 +550,7 @@ div.csl-indent {
 <h2><span class="header-section-number">4.1</span> Confidence intervals and P-values<a href="rct-analysis.html#ttest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (often referred to as <span class="math inline">\(X\)</span>) between the groups.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 4.2  </strong></span>Summary statistics of the outcome for each group are shown below.</p>
+<p><span id="exm:captopril2" class="example"><strong>Example 4.2  </strong></span>Summary statistics of the outcome for each group are shown below.</p>
 <table>
 <caption><span id="tab:unnamed-chunk-11">Table 4.2: </span>Summary statistics for each group.</caption>
 <thead>
@@ -599,7 +620,7 @@ Figure 4.1: The distribution <span class="math inline">\(t_{14}\)</span>, with <
 which contains all possible values of treatment effect <span class="math inline">\(\tau\)</span> that are compatible with our data. That is, suppose the true treatment effect is <span class="math inline">\(\tau^*\)</span>, and we test the hypothesis that <span class="math inline">\(\tau = \tau^*\)</span>. For all values of <span class="math inline">\(\tau^*\)</span> inside this range, our data are not sufficiently unlikely to reject the hypothesis at the 0.05 level. However, for all values of <span class="math inline">\(\tau^*\)</span> outside this range, our data are sufficiently unlikely to reject that hypothesis. We can rearrange this to give a 95% confidence interval for <span class="math inline">\(\tau\)</span>,</p>
 <p><span class="math display">\[\left\lbrace \tau \mid \bar{x}_C - \bar{x}_T - t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}} \leq \tau \leq \bar{x}_C - \bar{x}_T + t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}}  \right\rbrace \]</span></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-19" class="example"><strong>Example 4.3  </strong></span>Continuing our example, we have</p>
+<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 4.3  </strong></span>Continuing our example, we have</p>
 <p><span class="math display">\[\left\lbrace \tau \mid \frac{\lvert 6.53 - \tau \rvert}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \leq t_{14;0.975} = 2.145 \right\rbrace \]</span></p>
 <p>Here, <span class="math inline">\(t_{14;0.975} = 2.145\)</span> is the <span class="math inline">\(t\)</span>-value for a significance level of <span class="math inline">\(0.05\)</span>, so if we were working to a different significance level we would change this.</p>
 <p>Rearranging as above, this works out to be the interval</p>
@@ -627,7 +648,7 @@ which contains all possible values of treatment effect <span class="math inline"
 </ol>
 <p>We will demonstrate these by returning to our Captopril example.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 4.4  </strong></span>Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren’t identical, they are sufficiently similar not to suspect any systematic imbalance. In a study this small there is likely to be some difference.</p>
+<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 4.4  </strong></span>Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren’t identical, they are sufficiently similar not to suspect any systematic imbalance. In a study this small there is likely to be some difference.</p>
 <p>Secondly, since we are interested in whether the use of Captopril has reduced blood pressure for each individual, and these individuals had different baseline values, it makes sense to compare not just the outcome but the difference from baseline to outcome for each individual. We can see individual data in Table <a href="rct-analysis.html#tab:captoprildiff">4.3</a> and summary statistics in Table <a href="rct-analysis.html#tab:captoprildiffsumm">4.4</a>.</p>
 <table>
 <caption><span id="tab:captoprildiff">Table 4.3: </span>Data for the Captopril trial, with differences shown.</caption>
@@ -1064,7 +1085,7 @@ where <span class="math inline">\(SSE\)</span> is the residual sum of squares, <
 <p>As well as generating a fitted value <span class="math inline">\(\hat{\tau}\)</span>, we (or rather R!) will also find the standard error of <span class="math inline">\(\hat\tau\)</span>, and we can use this to generate a confidence interval for the treatment effect <span class="math inline">\(\tau\)</span>.</p>
 <p>The technique described above is a well-established statistical method known as <strong>ANCOVA</strong> (short for the <strong>An</strong>alysis of <strong>Cova</strong>riance), which can be implemented in R and many other statistical software packages. Notice that it is really just a linear model (the like of which you have seen many times) with at least one factor variable, and with a particular focus (application-wise) on the coefficient of the treatment group variable.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-21" class="example"><strong>Example 4.5  </strong></span>Let’s now implement ANCOVA on our Captopril data in R.
+<p><span id="exm:unlabeled-div-19" class="example"><strong>Example 4.5  </strong></span>Let’s now implement ANCOVA on our Captopril data in R.
 We do this by first fitting a linear model using ‘lm’, with baseline measurement and arm as predictor variables and outcome as the predictand.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="rct-analysis.html#cb3-1" tabindex="-1"></a>lm_capt <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> baseline <span class="sc">+</span> arm, <span class="at">data =</span> df_hommel)</span>
 <span id="cb3-2"><a href="rct-analysis.html#cb3-2" tabindex="-1"></a><span class="fu">summary</span>(lm_capt)</span></code></pre></div>
@@ -1141,7 +1162,7 @@ that is, neither of these quantities are unbiased estimators of <span class="mat
 <p><span class="math display">\[ x_i = \mu + \tau G_i+ \gamma b_i + \lambda b_i G_i + \epsilon_i . \]</span>
 The term <span class="math inline">\(\lambda b_i G_i\)</span> is 0 if participant <span class="math inline">\(i\)</span> is in group <span class="math inline">\(C\)</span> and <span class="math inline">\(\lambda b_i\)</span> if participant <span class="math inline">\(i\)</span> is in group <span class="math inline">\(T\)</span>. Therefore, for participants in group <span class="math inline">\(C\)</span>, the gradient is still <span class="math inline">\(\gamma\)</span>, but for participants in group <span class="math inline">\(T\)</span> it is now <span class="math inline">\(\gamma + \lambda\)</span>. We can test whether this interaction term should be included (that is, whether we should fit an unequal slopes model) by including it in a model and analysing the results.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-22" class="example"><strong>Example 4.6  </strong></span>Continuing once again with the Captopril dataset, we now fit the model</p>
+<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 4.6  </strong></span>Continuing once again with the Captopril dataset, we now fit the model</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="rct-analysis.html#cb6-1" tabindex="-1"></a>lm_capt_int <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> arm <span class="sc">+</span> baseline <span class="sc">+</span> baseline<span class="sc">:</span>arm, <span class="at">data =</span> df_hommel)</span>
 <span id="cb6-2"><a href="rct-analysis.html#cb6-2" tabindex="-1"></a><span class="fu">summary</span>(lm_capt_int)</span></code></pre></div>
 <pre><code>## 
@@ -1173,7 +1194,7 @@ The term <span class="math inline">\(\lambda b_i G_i\)</span> is 0 if participan
 <p><span class="math display">\[ \hat\tau = \left(\bar{x}_T - \bar{x}_C\right) - \hat\gamma\left(\bar{b}_T - \bar{b}_C\right), \]</span>
 and the inclusion of the coefficient <span class="math inline">\(\gamma\)</span> means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation (hence they are sometimes known as <em>baseline covariates</em>, not to be confused with ‘the baseline’, which would generally mean the same measurement as the primary outcome, but before treatment). This is because they cannot, at that point, have been affected by the treatment, or have had an influence on the post-trial outcome measurement. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-23" class="example"><strong>Example 4.7  </strong></span>The data for this example is taken from <span class="citation">Kassambara (<a href="#ref-datarium">2019</a>)</span>. In this study, 60 patients take part in a trial investigating the effect of a new treatment and exercise on their stress score, after adjusting for age.
+<p><span id="exm:unlabeled-div-21" class="example"><strong>Example 4.7  </strong></span>The data for this example is taken from <span class="citation">Kassambara (<a href="#ref-datarium">2019</a>)</span>. In this study, 60 patients take part in a trial investigating the effect of a new treatment and exercise on their stress score, after adjusting for age.
 There are two treatment levels (yes or no) and three exercise levels (low, moderate and high) and 10 participants for each combination of treatment and exercise levels. Because in ANCOVA we fit a coefficient to every covariate, we can include exercise (another factor variable) and age (a continuous variable) in this analysis.</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
