@@ -80,6 +80,8 @@ library(RColorBrewer)
 
 This page contains the notes for Clinical Trials IV. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
 
+In case you're reading the PDF, the notes are best viewed in HTML (the link is [https://racheloughton.github.io/clinicaltrials/](https://racheloughton.github.io/clinicaltrials/)). The PDF will be up-to-date, but the formatting is designed for HTML.
+
 ## Practical details {-}
 
 ### Lectures {-}

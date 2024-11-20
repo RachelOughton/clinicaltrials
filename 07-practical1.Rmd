@@ -9,7 +9,12 @@ This computer practical will cover two main parts:
   
 ## Health warning! {-}
 
-This practical, particularly the allocation section, is designed to help you investigate the behaviour of the various methods we've been looking at. There are lots of things that you could do in a real trial. For example, you wouldn't be able to plot the baseline covariates, since you wouldn't have them all at the start of the allocation process. 
+This practical, particularly the allocation section, is designed to help you investigate the behaviour of the various methods we've been looking at. There are lots of things we do here that you couldn't do in a real trial. For example, you wouldn't be able to plot the baseline covariates, since you wouldn't have them all at the start of the allocation process. You also wouldn't be re-do the allocation lots of times, because in most cases the participants join the trial (and are allocated) sequentially. 
+
+The main aims of this practical are:
+
+  - To learn how to implement various allocation methods
+  - To investigate the statistical properties of the various methods
   
 ### Preliminaries {-}
   
